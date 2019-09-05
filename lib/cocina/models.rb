@@ -1,8 +1,21 @@
 require "cocina/models/version"
-
 require "zeitwerk"
-loader = Zeitwerk::Loader.for_gem
-loader.setup # ready!
+
+class CocinaModelsInflector < Zeitwerk::Inflector
+  def camelize(basename, _abspath)
+    case basename
+    when "dro"
+      "DRO"
+    else
+      super
+    end
+  end
+end
+
+loader = Zeitwerk::Loader.new
+loader.inflector = CocinaModelsInflector.new
+loader.push_dir(File.absolute_path("#{__FILE__}/../.."))
+loader.setup
 
 module Cocina
   module Models
