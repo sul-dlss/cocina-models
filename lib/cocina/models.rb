@@ -1,11 +1,15 @@
-require "cocina/models/version"
-require "zeitwerk"
+# frozen_string_literal: true
+
+require 'cocina/models/version'
+require 'zeitwerk'
+require 'dry-struct'
+require 'dry-types'
 
 class CocinaModelsInflector < Zeitwerk::Inflector
   def camelize(basename, _abspath)
     case basename
-    when "dro"
-      "DRO"
+    when 'dro'
+      'DRO'
     else
       super
     end
