@@ -1,4 +1,5 @@
 # Cocina::Models
+[![Gem Version](https://badge.fury.io/rb/cocina-models.svg)](https://badge.fury.io/rb/cocina-models)
 
 This is the models for transporting digital repository objects using the Cocina application profile.
 
