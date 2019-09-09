@@ -10,6 +10,8 @@ class CocinaModelsInflector < Zeitwerk::Inflector
     case basename
     when 'dro'
       'DRO'
+    when 'version'
+      'VERSION'
     else
       super
     end
