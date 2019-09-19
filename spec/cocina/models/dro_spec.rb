@@ -34,6 +34,24 @@ RSpec.describe Cocina::Models::DRO do
           version: 3,
           access: {
             embargoReleaseDate: '2009-12-14T07:00:00Z'
+          },
+          administrative: {
+            releaseTags: [
+              {
+                who: 'Justin',
+                what: 'collection',
+                date: '2018-11-23T00:44:52Z',
+                to: 'Searchworks',
+                release: 'true'
+              },
+              {
+                who: 'Other Justin',
+                what: 'self',
+                date: '2017-10-20T15:42:15Z',
+                to: 'Searchworks',
+                release: 'false'
+              }
+            ]
           }
         }
       end
@@ -44,6 +62,11 @@ RSpec.describe Cocina::Models::DRO do
         expect(item.label).to eq 'My object'
 
         expect(item.access.embargoReleaseDate).to eq DateTime.parse('2009-12-14T07:00:00Z')
+        expect(item.administrative.releaseTags).to all(be_kind_of(Cocina::Models::DRO::ReleaseTag))
+        tag = item.administrative.releaseTags.first
+        expect(tag.date).to eq DateTime.parse '2018-11-23T00:44:52Z'
+        expect(tag.to).to eq 'Searchworks'
+        expect(tag.release).to be true
       end
     end
   end
@@ -84,6 +107,24 @@ RSpec.describe Cocina::Models::DRO do
             "version": 3,
             "access": {
               "embargoReleaseDate":"2009-12-14T07:00:00Z"
+            },
+            "administrative": {
+              "releaseTags": [
+                {
+                  "who":"Justin",
+                  "what":"collection",
+                  "date":"2018-11-23T00:44:52Z",
+                  "to":"",
+                  "release":"true"
+                },
+                {
+                  "who":"Other Justin",
+                  "what":"self",
+                  "date":"2017-10-20T15:42:15Z",
+                  "to":"",
+                  "release":"false"
+                }
+              ]
             }
           }
         JSON
