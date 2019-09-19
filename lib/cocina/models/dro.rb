@@ -10,7 +10,7 @@ module Cocina
       attribute :type, Types::Strict::String
       attribute :label, Types::Strict::String
       attribute :access, Dry::Struct.meta(omittable: true) do
-        attribute :embargoReleaseDate, Types::Params::Date
+        attribute :embargoReleaseDate, Types::Params::DateTime
       end
 
       def self.from_dynamic(d)
