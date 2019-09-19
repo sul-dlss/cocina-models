@@ -1,0 +1,21 @@
+# This is the configuration used to check the rubocop source code.
+
+inherit_from: .rubocop_todo.yml
+require:
+  - rubocop-rspec
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/cocina/**/*
+
+Metrics/LineLength:
+  Max: 100
+
+Metrics/MethodLength:
+  Max: 13
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Max: 7

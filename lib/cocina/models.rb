@@ -5,6 +5,7 @@ require 'zeitwerk'
 require 'dry-struct'
 require 'dry-types'
 
+# Help Zeitwerk find some of our classes
 class CocinaModelsInflector < Zeitwerk::Inflector
   def camelize(basename, _abspath)
     case basename

@@ -71,7 +71,6 @@ RSpec.describe Cocina::Models::DRO do
         expect(dro.administrative).to be_kind_of Cocina::Models::DRO::Administrative
         expect(dro.identification).to be_kind_of Cocina::Models::DRO::Identification
         expect(dro.structural).to be_kind_of Cocina::Models::DRO::Structural
-
       end
     end
 
