@@ -31,7 +31,7 @@ RSpec.describe Cocina::Models::DRO do
           type: 'item',
           label: 'My object',
           access: {
-            embargoReleaseDate: '2009-12-14'
+            embargoReleaseDate: '2009-12-14T07:00:00Z'
           }
         }
       end
@@ -41,7 +41,7 @@ RSpec.describe Cocina::Models::DRO do
         expect(item.type).to eq 'item'
         expect(item.label).to eq 'My object'
 
-        expect(item.access.embargoReleaseDate).to eq Date.parse('2009-12-14')
+        expect(item.access.embargoReleaseDate).to eq DateTime.parse('2009-12-14T07:00:00Z')
       end
     end
   end
@@ -76,7 +76,7 @@ RSpec.describe Cocina::Models::DRO do
             "type":"item",
             "label":"my item",
             "access": {
-              "embargoReleaseDate":"2009-12-14"
+              "embargoReleaseDate":"2009-12-14T07:00:00Z"
             }
           }
         JSON
@@ -87,7 +87,7 @@ RSpec.describe Cocina::Models::DRO do
                                           label: 'my item',
                                           type: 'item')
         access_attributes = dro.attributes[:access].attributes
-        expect(access_attributes).to eq(embargoReleaseDate: Date.parse('2009-12-14'))
+        expect(access_attributes).to eq(embargoReleaseDate: DateTime.parse('2009-12-14T07:00:00Z'))
       end
     end
   end
