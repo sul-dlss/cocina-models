@@ -20,7 +20,7 @@ RSpec.describe Cocina::Models::DRO do
         expect(item.type).to eq 'item'
         expect(item.label).to eq 'My object'
 
-        expect(item.access).to be_nil
+        expect(item.access).to be_kind_of Cocina::Models::DRO::Access
       end
     end
 
@@ -64,7 +64,11 @@ RSpec.describe Cocina::Models::DRO do
         expect(dro.attributes).to include(externalIdentifier: 'druid:12343234',
                                           label: 'my item',
                                           type: 'item')
-        expect(dro.access).to be_nil
+        expect(dro.access).to be_kind_of Cocina::Models::DRO::Access
+        expect(dro.administrative).to be_kind_of Cocina::Models::DRO::Administrative
+        expect(dro.identification).to be_kind_of Cocina::Models::DRO::Identification
+        expect(dro.structural).to be_kind_of Cocina::Models::DRO::Structural
+
       end
     end
 
