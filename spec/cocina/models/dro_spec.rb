@@ -11,7 +11,8 @@ RSpec.describe Cocina::Models::DRO do
         {
           externalIdentifier: 'druid:ab123cd4567',
           type: 'item',
-          label: 'My object'
+          label: 'My object',
+          version: 3
         }
       end
 
@@ -30,6 +31,7 @@ RSpec.describe Cocina::Models::DRO do
           externalIdentifier: 'druid:ab123cd4567',
           type: 'item',
           label: 'My object',
+          version: 3,
           access: {
             embargoReleaseDate: '2009-12-14T07:00:00Z'
           }
@@ -55,7 +57,8 @@ RSpec.describe Cocina::Models::DRO do
           {
             "externalIdentifier":"druid:12343234",
             "type":"item",
-            "label":"my item"
+            "label":"my item",
+            "version": 3
           }
         JSON
       end
@@ -79,6 +82,7 @@ RSpec.describe Cocina::Models::DRO do
             "externalIdentifier":"druid:12343234",
             "type":"item",
             "label":"my item",
+            "version": 3,
             "access": {
               "embargoReleaseDate":"2009-12-14T07:00:00Z"
             }
