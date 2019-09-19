@@ -9,13 +9,24 @@ module Cocina
       attribute :externalIdentifier, Types::Strict::String
       attribute :type, Types::Strict::String
       attribute :label, Types::Strict::String
+      attribute :access, Dry::Struct.meta(omittable: true) do
+        attribute :embargoReleaseDate, Types::Params::Date
+      end
 
       def self.from_dynamic(d)
-        DRO.new(
+        params = {
           externalIdentifier: d['externalIdentifier'],
           type: d['type'],
           label: d['label']
-        )
+        }
+        if d['access']
+          access = {
+            embargoReleaseDate: d['access']['embargoReleaseDate']
+          }
+          params[:access] = access
+        end
+
+        DRO.new(params)
       end
 
       def self.from_json(json)
