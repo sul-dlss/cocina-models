@@ -48,10 +48,9 @@ module Cocina
           label: dyn['label'],
           version: dyn['version']
         }
-        if dyn['access']
-          access = {
-            embargoReleaseDate: dyn['access']['embargoReleaseDate']
-          }
+        if (access_params = dyn['access'])
+          access = {}
+          access[:embargoReleaseDate] = access_params['embargoReleaseDate'] if access_params['embargoReleaseDate']
           params[:access] = access
         end
 

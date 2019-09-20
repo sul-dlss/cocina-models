@@ -86,6 +86,29 @@ RSpec.describe Cocina::Models::DRO do
     end
   end
 
+  describe '.from_dynamic' do
+    subject(:item) { described_class.from_dynamic(properties) }
+
+    context 'with empty subschemas' do
+      let(:properties) do
+        {
+          'externalIdentifier' => 'druid:kv840rx2720',
+          'type' => 'object',
+          'label' => 'Examination of the memorial of the owners and underwriters ...',
+          'version' => 1,
+          'access' => {},
+          'administrative' => { 'releaseTags' => [] },
+          'identification' => {},
+          'structural' => {}
+        }
+      end
+
+      it 'has properties' do
+        expect(item.externalIdentifier).to eq 'druid:kv840rx2720'
+      end
+    end
+  end
+
   describe '.from_json' do
     subject(:dro) { described_class.from_json(json) }
 

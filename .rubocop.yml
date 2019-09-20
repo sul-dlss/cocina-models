@@ -9,7 +9,7 @@ Metrics/BlockLength:
     - spec/cocina/**/*
 
 Metrics/LineLength:
-  Max: 100
+  Max: 114
 
 Metrics/MethodLength:
   Max: 13
