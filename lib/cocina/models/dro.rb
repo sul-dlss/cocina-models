@@ -35,7 +35,7 @@ module Cocina
       attribute :externalIdentifier, Types::Strict::String
       attribute :type, Types::Strict::String
       attribute :label, Types::Strict::String
-      attribute :version, Types::Strict::Integer
+      attribute :version, Types::Coercible::Integer
       attribute(:access, Access.default { Access.new })
       attribute(:administrative, Administrative.default { Administrative.new })
       attribute(:identification, Identification.default { Identification.new })
