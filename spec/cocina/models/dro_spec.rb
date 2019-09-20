@@ -25,6 +25,21 @@ RSpec.describe Cocina::Models::DRO do
       end
     end
 
+    context 'with a string version' do
+      let(:properties) do
+        {
+          externalIdentifier: 'druid:ab123cd4567',
+          type: 'item',
+          label: 'My object',
+          version: '3'
+        }
+      end
+
+      it 'coerces to integer' do
+        expect(item.version).to eq 3
+      end
+    end
+
     context 'with a all properties' do
       let(:properties) do
         {
