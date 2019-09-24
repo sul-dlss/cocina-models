@@ -152,14 +152,14 @@ RSpec.describe Cocina::Models::DRO do
                   "who":"Justin",
                   "what":"collection",
                   "date":"2018-11-23T00:44:52Z",
-                  "to":"",
+                  "to":"Searchworks",
                   "release":"true"
                 },
                 {
                   "who":"Other Justin",
                   "what":"self",
                   "date":"2017-10-20T15:42:15Z",
-                  "to":"",
+                  "to":"Searchworks",
                   "release":"false"
                 }
               ]
@@ -172,8 +172,11 @@ RSpec.describe Cocina::Models::DRO do
         expect(dro.attributes).to include(externalIdentifier: 'druid:12343234',
                                           label: 'my item',
                                           type: 'item')
-        access_attributes = dro.attributes[:access].attributes
+        access_attributes = dro.access.attributes
         expect(access_attributes).to eq(embargoReleaseDate: DateTime.parse('2009-12-14T07:00:00Z'))
+
+        tags = dro.administrative.releaseTags
+        expect(tags).to all(be_instance_of Cocina::Models::DRO::ReleaseTag)
       end
     end
   end

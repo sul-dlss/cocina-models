@@ -14,16 +14,36 @@ module Cocina
         attribute :date, Types::Params::DateTime
         attribute :who, Types::Strict::String
         attribute :release, Types::Params::Bool
+
+        def self.from_dynamic(dyn)
+          ReleaseTag.new(to: dyn['to'],
+                         what: dyn['what'],
+                         date: dyn['date'],
+                         who: dyn['who'],
+                         release: dyn['release'])
+        end
       end
 
       # Subschema for access concerns
       class Access < Dry::Struct
         attribute :embargoReleaseDate, Types::Params::DateTime.meta(omittable: true)
+
+        def self.from_dynamic(dyn)
+          params = {}
+          params[:embargoReleaseDate] = dyn['embargoReleaseDate'] if dyn['embargoReleaseDate']
+          Access.new(params)
+        end
       end
 
       # Subschema for administrative concerns
       class Administrative < Dry::Struct
         attribute :releaseTags, Types::Strict::Array.of(ReleaseTag).meta(omittable: true)
+
+        def self.from_dynamic(dyn)
+          params = {}
+          params[:releaseTags] = dyn['releaseTags'].map { |rt| ReleaseTag.from_dynamic(rt) } if dyn['releaseTags']
+          Administrative.new(params)
+        end
       end
 
       class Identification < Dry::Struct
@@ -48,11 +68,9 @@ module Cocina
           label: dyn['label'],
           version: dyn['version']
         }
-        if (access_params = dyn['access'])
-          access = {}
-          access[:embargoReleaseDate] = access_params['embargoReleaseDate'] if access_params['embargoReleaseDate']
-          params[:access] = access
-        end
+
+        params[:access] = Access.from_dynamic(dyn['access']) if dyn['access']
+        params[:administrative] = Administrative.from_dynamic(dyn['administrative']) if dyn['administrative']
 
         DRO.new(params)
       end
