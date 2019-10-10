@@ -3,6 +3,8 @@
 require 'spec_helper'
 
 RSpec.describe Cocina::Models::DRO do
+  let(:item_type) { 'http://sdr.sul.stanford.edu/models/sdr3-object.jsonld' }
+
   describe 'initialization' do
     subject(:item) { described_class.new(properties) }
 
@@ -10,7 +12,7 @@ RSpec.describe Cocina::Models::DRO do
       let(:properties) do
         {
           externalIdentifier: 'druid:ab123cd4567',
-          type: 'item',
+          type: item_type,
           label: 'My object',
           version: 3
         }
@@ -18,7 +20,7 @@ RSpec.describe Cocina::Models::DRO do
 
       it 'has properties' do
         expect(item.externalIdentifier).to eq 'druid:ab123cd4567'
-        expect(item.type).to eq 'item'
+        expect(item.type).to eq item_type
         expect(item.label).to eq 'My object'
 
         expect(item.access).to be_kind_of Cocina::Models::DRO::Access
@@ -29,7 +31,7 @@ RSpec.describe Cocina::Models::DRO do
       let(:properties) do
         {
           externalIdentifier: 'druid:ab123cd4567',
-          type: 'item',
+          type: item_type,
           label: 'My object',
           version: '3'
         }
@@ -44,7 +46,7 @@ RSpec.describe Cocina::Models::DRO do
       let(:properties) do
         {
           externalIdentifier: 'druid:ab123cd4567',
-          type: 'item',
+          type: item_type,
           label: 'My object',
           version: 3,
           access: {
@@ -73,7 +75,7 @@ RSpec.describe Cocina::Models::DRO do
 
       it 'has properties' do
         expect(item.externalIdentifier).to eq 'druid:ab123cd4567'
-        expect(item.type).to eq 'item'
+        expect(item.type).to eq item_type
         expect(item.label).to eq 'My object'
 
         expect(item.access.embargoReleaseDate).to eq DateTime.parse('2009-12-14T07:00:00Z')
@@ -93,7 +95,7 @@ RSpec.describe Cocina::Models::DRO do
       let(:properties) do
         {
           'externalIdentifier' => 'druid:kv840rx2720',
-          'type' => 'object',
+          'type' => item_type,
           'label' => 'Examination of the memorial of the owners and underwriters ...',
           'version' => 1,
           'access' => {},
@@ -117,7 +119,7 @@ RSpec.describe Cocina::Models::DRO do
         <<~JSON
           {
             "externalIdentifier":"druid:12343234",
-            "type":"item",
+            "type":"#{item_type}",
             "label":"my item",
             "version": 3
           }
@@ -127,7 +129,7 @@ RSpec.describe Cocina::Models::DRO do
       it 'has the attributes' do
         expect(dro.attributes).to include(externalIdentifier: 'druid:12343234',
                                           label: 'my item',
-                                          type: 'item')
+                                          type: item_type)
         expect(dro.access).to be_kind_of Cocina::Models::DRO::Access
         expect(dro.administrative).to be_kind_of Cocina::Models::DRO::Administrative
         expect(dro.identification).to be_kind_of Cocina::Models::DRO::Identification
@@ -140,7 +142,7 @@ RSpec.describe Cocina::Models::DRO do
         <<~JSON
           {
             "externalIdentifier":"druid:12343234",
-            "type":"item",
+            "type":"#{item_type}",
             "label":"my item",
             "version": 3,
             "access": {
@@ -171,7 +173,7 @@ RSpec.describe Cocina::Models::DRO do
       it 'has the attributes' do
         expect(dro.attributes).to include(externalIdentifier: 'druid:12343234',
                                           label: 'my item',
-                                          type: 'item')
+                                          type: item_type)
         access_attributes = dro.access.attributes
         expect(access_attributes).to eq(embargoReleaseDate: DateTime.parse('2009-12-14T07:00:00Z'))
 
