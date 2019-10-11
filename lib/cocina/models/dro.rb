@@ -6,6 +6,23 @@ module Cocina
   module Models
     # A digital repository object.  See https://github.com/sul-dlss-labs/taco/blob/master/maps/DRO.json
     class DRO < Dry::Struct
+      TYPES = %w[
+        http://sdr.sul.stanford.edu/models/sdr3-object.jsonld
+        http://sdr.sul.stanford.edu/models/sdr3-3d.jsonld
+        http://sdr.sul.stanford.edu/models/sdr3-agreement.jsonl
+        http://sdr.sul.stanford.edu/models/sdr3-book.jsonld
+        http://sdr.sul.stanford.edu/models/sdr3-document.jsonld
+        http://sdr.sul.stanford.edu/models/sdr3-geo.jsonld
+        http://sdr.sul.stanford.edu/models/sdr3-image.jsonld
+        http://sdr.sul.stanford.edu/models/sdr3-page.jsonld
+        http://sdr.sul.stanford.edu/models/sdr3-photograph.jsonld
+        http://sdr.sul.stanford.edu/models/sdr3-manuscript.jsonld
+        http://sdr.sul.stanford.edu/models/sdr3-map.jsonld
+        http://sdr.sul.stanford.edu/models/sdr3-media.jsonld
+        http://sdr.sul.stanford.edu/models/sdr3-track.jsonld
+        http://sdr.sul.stanford.edu/models/sdr3-webarchive-binary.jsonld
+        http://sdr.sul.stanford.edu/models/sdr3-webarchive-seed.jsonld
+      ].freeze
       # Subschema for release tags
       class ReleaseTag < Dry::Struct
         attribute :to, Types::Strict::String
@@ -53,7 +70,7 @@ module Cocina
       end
 
       attribute :externalIdentifier, Types::Strict::String
-      attribute :type, Types::Strict::String
+      attribute :type, Types::String.enum(*TYPES)
       attribute :label, Types::Strict::String
       attribute :version, Types::Coercible::Integer
       attribute(:access, Access.default { Access.new })
