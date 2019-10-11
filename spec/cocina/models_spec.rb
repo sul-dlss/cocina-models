@@ -34,6 +34,19 @@ RSpec.describe Cocina::Models do
       it { is_expected.to be_kind_of Cocina::Models::DRO }
     end
 
+    context 'with an AdminPolicy type' do
+      let(:data) do
+        {
+          'type' => 'http://cocina.sul.stanford.edu/models/admin_policy.jsonld',
+          'externalIdentifier' => 'foo',
+          'label' => 'bar',
+          'version' => 5
+        }
+      end
+
+      it { is_expected.to be_kind_of Cocina::Models::AdminPolicy }
+    end
+
     context 'with an invalid type' do
       let(:data) do
         { 'type' => 'foo' }
