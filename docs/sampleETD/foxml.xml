@@ -1,0 +1,3475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<foxml:digitalObject VERSION="1.1" PID="druid:xn109qc9773"
+xmlns:foxml="info:fedora/fedora-system:def/foxml#"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="info:fedora/fedora-system:def/foxml# http://www.fedora.info/definitions/1/0/foxml1-1.xsd">
+<foxml:objectProperties>
+<foxml:property NAME="info:fedora/fedora-system:def/model#state" VALUE="Active"/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#label" VALUE="From Superteacher to &apos;Bad Teacher&apos;: Goals 2000, Comic Book Films, and Changing Depictions of Educators in the Movies"/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#ownerId" VALUE="etd.stanford.edu"/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#createdDate" VALUE="2015-05-30T21:13:02.166Z"/>
+<foxml:property NAME="info:fedora/fedora-system:def/view#lastModifiedDate" VALUE="2017-06-01T09:20:22.821Z"/>
+</foxml:objectProperties>
+<foxml:datastream ID="AUDIT" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+<foxml:datastreamVersion ID="AUDIT.0" LABEL="Audit Trail for this object" CREATED="2015-05-30T21:13:02.166Z" MIMETYPE="text/xml" FORMAT_URI="info:fedora/fedora-system:format/xml.fedora.audit">
+<foxml:xmlContent>
+<audit:auditTrail xmlns:audit="info:fedora/fedora-system:def/audit#">
+<audit:record ID="AUDREC1">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>events</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:13:02.327Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC2">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>DC</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:13:02.548Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC3">
+<audit:process type="Fedora API-M"/>
+<audit:action>setDatastreamVersionable</audit:action>
+<audit:componentID>DC</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:13:02.548Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC4">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>embargoMetadata</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:13:02.649Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC5">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>readers</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:13:02.740Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC6">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>RELS-EXT</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:13:02.834Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC7">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>workflow</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:13:02.929Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC8">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>properties</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:13:03.035Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC9">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>RELS-EXT</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:13:03.358Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC10">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyObject</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:13:17.524Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC11">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>workflow</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:13:17.587Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC12">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyObject</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:19:30.836Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC13">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>workflow</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:19:30.886Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC14">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>properties</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:19:30.986Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC15">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyObject</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:22:50.242Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC16">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>workflow</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:22:50.302Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC17">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>properties</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:22:50.392Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC18">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyObject</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:24:02.032Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC19">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>workflow</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:24:02.088Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC20">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>properties</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:24:02.183Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC21">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyObject</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:24:19.906Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC22">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>workflow</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:24:19.964Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC23">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>properties</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:24:20.099Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC24">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyObject</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:25:06.758Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC25">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>workflow</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:25:06.834Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC26">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>properties</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:25:06.940Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC27">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyObject</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:25:25.751Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC28">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>properties</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:25:25.811Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC29">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyObject</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:25:42.709Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC30">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>properties</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:25:42.775Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC31">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyObject</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:47:02.743Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC32">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>workflow</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:47:02.801Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC33">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyObject</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:54:49.522Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC34">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>workflow</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:54:49.577Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC35">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyObject</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:55:12.033Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC36">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>workflow</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:55:12.081Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC37">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>properties</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T21:55:12.173Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC38">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyObject</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T22:01:15.811Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC39">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>workflow</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T22:01:15.875Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC40">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyObject</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T22:05:20.719Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC41">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>workflow</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T22:05:20.781Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC42">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>properties</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T22:05:20.888Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC43">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyObject</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T22:05:21.703Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC44">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>properties</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-05-30T22:05:21.761Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC45">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyObject</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-06-01T17:43:51.162Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC46">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>DC</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-06-01T17:43:51.225Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC47">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>properties</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-06-01T17:43:51.338Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC48">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyObject</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-06-01T20:01:14.652Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC49">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>DC</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-06-01T20:01:14.718Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC50">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>embargoMetadata</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-06-01T20:01:14.820Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC51">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>properties</audit:componentID>
+<audit:responsibility>etd.stanford.edu</audit:responsibility>
+<audit:date>2015-06-01T20:01:14.943Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC52">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyObject</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>robots@sul-lyberservices-prod.stanford.edu</audit:responsibility>
+<audit:date>2015-06-02T12:40:27.113Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC53">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>identityMetadata</audit:componentID>
+<audit:responsibility>robots@sul-lyberservices-prod.stanford.edu</audit:responsibility>
+<audit:date>2015-06-02T12:40:27.307Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC54">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>contentMetadata</audit:componentID>
+<audit:responsibility>robots@sul-lyberservices-prod.stanford.edu</audit:responsibility>
+<audit:date>2015-06-03T19:42:46.280Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC55">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>rightsMetadata</audit:componentID>
+<audit:responsibility>robots@sul-lyberservices-prod.stanford.edu</audit:responsibility>
+<audit:date>2015-06-03T19:42:46.422Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC56">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>identityMetadata</audit:componentID>
+<audit:responsibility>robots@sul-lyberservices-prod.stanford.edu</audit:responsibility>
+<audit:date>2015-06-03T19:42:46.624Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC57">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>descMetadata</audit:componentID>
+<audit:responsibility>robots@sul-lyberservices-prod.stanford.edu</audit:responsibility>
+<audit:date>2015-06-03T19:51:40.611Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC58">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>technicalMetadata</audit:componentID>
+<audit:responsibility>robots@sul-lyberservices-prod.stanford.edu</audit:responsibility>
+<audit:date>2015-06-03T19:53:14.360Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC59">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>technicalMetadata</audit:componentID>
+<audit:responsibility>robots@sul-lyberservices-prod.stanford.edu</audit:responsibility>
+<audit:date>2015-06-03T19:53:14.542Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC60">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>events</audit:componentID>
+<audit:responsibility>robots@sul-lyberservices-prod.stanford.edu</audit:responsibility>
+<audit:date>2015-06-03T19:53:37.262Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC61">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>identityMetadata</audit:componentID>
+<audit:responsibility>robots@sul-lyberservices-prod.stanford.edu</audit:responsibility>
+<audit:date>2015-06-03T19:53:37.466Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC62">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>workflows</audit:componentID>
+<audit:responsibility>robots@sul-lyberservices-prod.stanford.edu</audit:responsibility>
+<audit:date>2015-06-03T19:53:37.611Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC63">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>versionMetadata</audit:componentID>
+<audit:responsibility>robots@sul-lyberservices-prod.stanford.edu</audit:responsibility>
+<audit:date>2015-06-03T19:53:37.767Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC64">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>provenanceMetadata</audit:componentID>
+<audit:responsibility>robots@sul-lyberservices-prod.stanford.edu</audit:responsibility>
+<audit:date>2015-06-03T21:41:22.377Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC65">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>identityMetadata</audit:componentID>
+<audit:responsibility>dor-services-prod.stanford.edu</audit:responsibility>
+<audit:date>2017-02-07T13:26:35.661Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC66">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>versionMetadata</audit:componentID>
+<audit:responsibility>robots@sul-lyberservices-prod.stanford.edu</audit:responsibility>
+<audit:date>2017-06-01T09:17:37.942Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC67">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>rightsMetadata</audit:componentID>
+<audit:responsibility>robots@sul-lyberservices-prod.stanford.edu</audit:responsibility>
+<audit:date>2017-06-01T09:17:39.137Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC68">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>events</audit:componentID>
+<audit:responsibility>robots@sul-lyberservices-prod.stanford.edu</audit:responsibility>
+<audit:date>2017-06-01T09:17:39.291Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC69">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>embargoMetadata</audit:componentID>
+<audit:responsibility>robots@sul-lyberservices-prod.stanford.edu</audit:responsibility>
+<audit:date>2017-06-01T09:17:39.392Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC70">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>versionMetadata</audit:componentID>
+<audit:responsibility>robots@sul-lyberservices-prod.stanford.edu</audit:responsibility>
+<audit:date>2017-06-01T09:17:40.565Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC71">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>technicalMetadata</audit:componentID>
+<audit:responsibility>robots@sul-lyberservices-prod.stanford.edu</audit:responsibility>
+<audit:date>2017-06-01T09:19:07.141Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC72">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>provenanceMetadata</audit:componentID>
+<audit:responsibility>robots@sul-lyberservices-prod.stanford.edu</audit:responsibility>
+<audit:date>2017-06-01T09:20:22.821Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+</audit:auditTrail>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="DC" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+<foxml:datastreamVersion ID="DC1.0" LABEL="Dublin Core Record for this object" CREATED="2015-05-30T21:13:02.166Z" MIMETYPE="text/xml" FORMAT_URI="http://www.openarchives.org/OAI/2.0/oai_dc/" SIZE="496">
+<foxml:xmlContent>
+<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+  <dc:title>From Superteacher to &apos;Bad Teacher&apos;: Goals 2000, Comic Book Films, and Changing Depictions of Educators in the Movies</dc:title>
+  <dc:identifier>druid:xn109qc9773</dc:identifier>
+</oai_dc:dc>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="DC.3" LABEL="Dublin Core Record for this object" CREATED="2015-06-01T20:01:14.718Z" MIMETYPE="text/xml" FORMAT_URI="http://www.openarchives.org/OAI/2.0/oai_dc/" SIZE="596">
+<foxml:xmlContent>
+<oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+  <dc:title>From Superteacher to &apos;Bad Teacher&apos;: Goals 2000, Comic Book Films, and Changing Depictions of Educators in the Movies</dc:title>
+  <dc:creator>Grant, Derisa Janelle Mescha</dc:creator>
+  <dc:identifier>druid:xn109qc9773</dc:identifier>
+  <dc:identifier>0000003882</dc:identifier>
+</oai_dc:dc>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="readers" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+<foxml:datastreamVersion ID="readers.0" LABEL="Readers" CREATED="2015-05-30T21:13:02.740Z" MIMETYPE="text/xml" SIZE="782">
+<foxml:xmlContent>
+<readers>
+  <reader>
+    <name>Labaree, David</name>
+    <finalreader>Yes</finalreader>
+    <prefix></prefix>
+    <readerrole>Advisor</readerrole>
+    <type>int</type>
+    <sunetid>dlabaree</sunetid>
+    <suffix></suffix>
+    <univid>05282346</univid>
+  </reader>
+  <reader>
+    <name>McDermott, Raymond</name>
+    <finalreader>No</finalreader>
+    <prefix></prefix>
+    <readerrole>Reader</readerrole>
+    <type>int</type>
+    <sunetid>rpmcd</sunetid>
+    <suffix></suffix>
+    <univid>09939158</univid>
+  </reader>
+  <reader>
+    <name>Willinsky, John</name>
+    <finalreader>No</finalreader>
+    <prefix></prefix>
+    <readerrole>Reader</readerrole>
+    <type>int</type>
+    <sunetid>willinsk</sunetid>
+    <suffix></suffix>
+    <univid>09692122</univid>
+  </reader>
+</readers>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="RELS-EXT" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+<foxml:datastreamVersion ID="RELS-EXT.0" LABEL="" CREATED="2015-05-30T21:13:02.834Z" MIMETYPE="text/xml" SIZE="271">
+<foxml:xmlContent>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <rdf:Description rdf:about="info:fedora/druid:xn109qc9773">
+    <hasModel xmlns="info:fedora/fedora-system:def/model#" rdf:resource="info:fedora/afmodel:Etd"></hasModel>
+  </rdf:Description>
+</rdf:RDF>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="RELS-EXT.1" LABEL="" CREATED="2015-05-30T21:13:03.358Z" MIMETYPE="text/xml" SIZE="607">
+<foxml:xmlContent>
+<rdf:RDF xmlns:fedora="info:fedora/fedora-system:def/relations-external#" xmlns:fedora-model="info:fedora/fedora-system:def/model#" xmlns:hydra="http://projecthydra.org/ns/relations#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <rdf:Description rdf:about="info:fedora/druid:xn109qc9773">
+    <fedora-model:hasModel rdf:resource="info:fedora/afmodel:Etd"></fedora-model:hasModel>
+    <hydra:isGovernedBy rdf:resource="info:fedora/druid:bx911tp9024"></hydra:isGovernedBy>
+    <fedora:isMemberOf rdf:resource="info:fedora/druid:sw909tc7852"></fedora:isMemberOf>
+  </rdf:Description>
+</rdf:RDF>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="workflow" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+<foxml:datastreamVersion ID="workflow.11" LABEL="" CREATED="2015-05-30T22:05:20.781Z" MIMETYPE="text/xml" SIZE="373">
+<foxml:xmlContent>
+<fields>
+  <abstract_provided>true</abstract_provided>
+  <cc_license_selected>true</cc_license_selected>
+  <citation_verified>true</citation_verified>
+  <dissertation_uploaded>true</dissertation_uploaded>
+  <permission_files_uploaded>false</permission_files_uploaded>
+  <permissions_provided>true</permissions_provided>
+  <rights_selected>true</rights_selected>
+</fields>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="properties" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+<foxml:datastreamVersion ID="properties.12" LABEL="" CREATED="2015-06-01T20:01:14.943Z" MIMETYPE="text/xml" SIZE="2990">
+<foxml:xmlContent>
+<fields>
+  <abstract>Since 1939, 46 eddies, or fictional movies about primary or secondary schooling that foreground a teacher, have been released in the United States. From the 1950s through the 1990s, eddies often featured two interconnected and dominant tropes: the separation of home and school, and a “superteacher,” or a dedicated educator who uses unconventional teaching methods. However, many of the eddies made after 2000 blur or wholly erase the boundary between home and school, and nearly half of the 15 eddies made after 2000 feature unsavory or morally ambiguous teacher protagonists. This dissertation explores the contexts surrounding the genre’s shift in tropes, and asserts that changes in eddies coincide with broader changes within the film industry, as well as with changes in educational policy and rhetoric. Specifically, generic changes in eddies coincide with the rise of the comic book film in the early 2000s, and President Bill Clinton’s 1994 Goals 2000: Educate America Act, through which the Clinton administration framed education reform as a systemic problem requiring federal interventions and gained the public’s support for federally led reforms. By the early 2000s, caped crusaders had begun proving lucrative at the box office, and the federal government had gained unprecedented traction in schools. Concurrently, the cinematic teacher–with no mask, no cape, and no federal authority—was increasingly depicted as a drug addict, a coward, or a cheater who brought the dysfunction of her home life into the classroom. </abstract>
+  <cclicense>4</cclicense>
+  <cclicensetype>CC Attribution Non-Commercial license</cclicensetype>
+  <containscopyright>false</containscopyright>
+  <degree>Ph.D.</degree>
+  <degreeconfyr>2015</degreeconfyr>
+  <department>Education</department>
+  <dissertation_id>0000003882</dissertation_id>
+  <documentaccess>No</documentaccess>
+  <embargo>2 years</embargo>
+  <etd_type>Dissertation</etd_type>
+  <external_visibility>20</external_visibility>
+  <major>Education</major>
+  <name>Grant, Derisa Janelle Mescha</name>
+  <prefix></prefix>
+  <provost>Patricia J. Gumport</provost>
+  <ps_career>Graduate</ps_career>
+  <ps_plan>Education</ps_plan>
+  <ps_program>Education</ps_program>
+  <ps_subplan>Sociology of Education</ps_subplan>
+  <readeractiondttm>06/01/2015 10:43:34</readeractiondttm>
+  <readerapproval>Approved</readerapproval>
+  <readercomment></readercomment>
+  <regactiondttm>06/01/2015 13:00:59</regactiondttm>
+  <regapproval>Approved</regapproval>
+  <regcomment>Congratulations!</regcomment>
+  <schoolname>Graduate School of Education</schoolname>
+  <sub>deadline: 2015-06-03</sub>
+  <submit_date>1433023521</submit_date>
+  <suffix></suffix>
+  <sulicense>true</sulicense>
+  <sunetid>derisa</sunetid>
+  <term>1156</term>
+  <title>From Superteacher to &apos;Bad Teacher&apos;: Goals 2000, Comic Book Films, and Changing Depictions of Educators in the Movies</title>
+  <univid>05490655</univid>
+</fields>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="identityMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+<foxml:datastreamVersion ID="identityMetadata.0" LABEL="identityMetadata" CREATED="2015-06-02T12:40:27.307Z" MIMETYPE="text/xml" SIZE="543">
+<foxml:xmlContent>
+<identityMetadata>
+  <objectId>druid:xn109qc9773</objectId>
+  <objectType>item</objectType>
+  <objectLabel></objectLabel>
+  <objectCreator>DOR</objectCreator>
+  <citationTitle></citationTitle>
+  <citationCreator></citationCreator>
+  <otherId name="dissertationid">0000003882</otherId>
+  <otherId name="catkey">11059134</otherId>
+  <otherId name="uuid">8ba18264-0924-11e5-b7c6-0050569b52d5</otherId>
+  <agreementId>druid:ct692vv3660</agreementId>
+  <objectAdminClass>ETDs</objectAdminClass>
+  <tag>ETD : Dissertation</tag>
+</identityMetadata>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="identityMetadata.1" LABEL="Identity Metadata" CREATED="2015-06-03T19:42:46.624Z" MIMETYPE="application/xml" SIZE="543">
+<foxml:xmlContent>
+<identityMetadata>
+  <objectId>druid:xn109qc9773</objectId>
+  <objectType>item</objectType>
+  <objectLabel></objectLabel>
+  <objectCreator>DOR</objectCreator>
+  <citationTitle></citationTitle>
+  <citationCreator></citationCreator>
+  <otherId name="dissertationid">0000003882</otherId>
+  <otherId name="catkey">11059134</otherId>
+  <otherId name="uuid">8ba18264-0924-11e5-b7c6-0050569b52d5</otherId>
+  <agreementId>druid:ct692vv3660</agreementId>
+  <objectAdminClass>ETDs</objectAdminClass>
+  <tag>ETD : Dissertation</tag>
+</identityMetadata>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="identityMetadata.2" LABEL="Identity Metadata" CREATED="2015-06-03T19:53:37.466Z" MIMETYPE="application/xml" SIZE="579">
+<foxml:xmlContent>
+<identityMetadata>
+  <objectId>druid:xn109qc9773</objectId>
+  <objectType>item</objectType>
+  <objectLabel></objectLabel>
+  <objectCreator>DOR</objectCreator>
+  <citationTitle></citationTitle>
+  <citationCreator></citationCreator>
+  <otherId name="dissertationid">0000003882</otherId>
+  <otherId name="catkey">11059134</otherId>
+  <otherId name="uuid">8ba18264-0924-11e5-b7c6-0050569b52d5</otherId>
+  <agreementId>druid:ct692vv3660</agreementId>
+  <objectAdminClass>ETDs</objectAdminClass>
+  <tag>ETD : Dissertation</tag>
+  <tag>Remediated By : 4.20.1</tag>
+</identityMetadata>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="identityMetadata.3" LABEL="Identity Metadata" CREATED="2017-02-07T13:26:35.661Z" MIMETYPE="application/xml" SIZE="677">
+<foxml:xmlContent>
+<identityMetadata>
+  <objectId>druid:xn109qc9773</objectId>
+  <objectType>item</objectType>
+  <objectLabel></objectLabel>
+  <objectCreator>DOR</objectCreator>
+  <citationTitle></citationTitle>
+  <citationCreator></citationCreator>
+  <otherId name="dissertationid">0000003882</otherId>
+  <otherId name="catkey">11059134</otherId>
+  <otherId name="uuid">8ba18264-0924-11e5-b7c6-0050569b52d5</otherId>
+  <agreementId>druid:ct692vv3660</agreementId>
+  <objectAdminClass>ETDs</objectAdminClass>
+  <tag>ETD : Dissertation</tag>
+  <tag>Remediated By : 4.20.1</tag>
+  <release to="Searchworks" what="self" when="2017-02-07T13:26:34Z" who="blalbrit">true</release>
+</identityMetadata>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="contentMetadata" STATE="A" CONTROL_GROUP="M" VERSIONABLE="true">
+<foxml:datastreamVersion ID="contentMetadata.0" LABEL="Content Metadata" CREATED="2015-06-03T19:42:46.280Z" MIMETYPE="application/xml" SIZE="960">
+  <contentMetadata type="file" objectId="druid:xn109qc9773">
+  <resource type="main-original" id="main">
+  <attr name="label">Body of dissertation (as submitted)</attr>
+  <file shelve="yes" preserve="yes" publish="no" mimetype="application/pdf" size="12980739" id="DGrant_Final Dissertation.pdf">
+  <checksum type="md5">31c8e76232d24046056f4fbb0a0df347</checksum>
+  <checksum type="sha1">0bdcbae41e6501d0ac07a9288b32b4be34c6dfee</checksum>
+  </file>
+  </resource>
+  <resource type="main-augmented" objectId="druid:wx870md5645" id="main">
+  <attr name="label">Body of dissertation</attr>
+  <file shelve="yes" preserve="yes" publish="yes" mimetype="application/pdf" size="12946346" id="DGrant_Final Dissertation-augmented.pdf">
+  <checksum type="md5">a180de60192f73d5faba11fc7fc2619f</checksum>
+  <checksum type="sha1">82a2300c8439d584bd44c851e1991b1e6dfb298d</checksum>
+  </file>
+  </resource>
+  </contentMetadata>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="rightsMetadata" STATE="A" CONTROL_GROUP="M" VERSIONABLE="true">
+<foxml:datastreamVersion ID="rightsMetadata.0" LABEL="Rights Metadata" CREATED="2015-06-03T19:42:46.422Z" MIMETYPE="application/xml" SIZE="568">
+  <rightsMetadata objectId="druid:xn109qc9773">
+  <copyright>
+  <human>(c) Copyright 2015 by Derisa Janelle Mescha Grant</human>
+  </copyright>
+  <access type="discover">
+  <machine>
+  <world/>
+  </machine>
+  </access>
+  <access type="read">
+  <machine>
+  <group>stanford</group>
+  </machine>
+  </access>
+  <use>
+  <machine type="creativeCommons">by-nc</machine>
+  <human type="creativeCommons">CC Attribution Non-Commercial license</human>
+  </use>
+  </rightsMetadata>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="rightsMetadata.1" LABEL="Rights Metadata" CREATED="2017-06-01T09:17:39.137Z" MIMETYPE="application/xml" SIZE="495">
+  <rightsMetadata objectId="druid:xn109qc9773">
+  <copyright>
+  <human>(c) Copyright 2015 by Derisa Janelle Mescha Grant</human>
+  </copyright>
+  <access type="discover">
+  <machine>
+  <world/>
+  </machine>
+  </access>
+  <access type="read">
+  <machine>
+  <group>stanford</group>
+  </machine>
+  </access>
+  <use>
+  <machine type="creativeCommons">by-nc</machine>
+  <human type="creativeCommons">CC Attribution Non-Commercial license</human>
+  </use>
+  </rightsMetadata>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="descMetadata" STATE="A" CONTROL_GROUP="M" VERSIONABLE="true">
+<foxml:datastreamVersion ID="descMetadata.0" LABEL="Descriptive Metadata" CREATED="2015-06-03T19:51:40.611Z" MIMETYPE="text/xml" SIZE="4504">
+  <mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.loc.gov/mods/v3" version="3.4" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd">
+  <titleInfo>
+  <title>From superteacher to 'bad teacher'</title>
+  <subTitle>
+  goals 2000, comic book films, and changing depictions of educators in the movies
+  </subTitle>
+  </titleInfo>
+  <name type="personal" usage="primary">
+  <namePart>Grant, Derisa.</namePart>
+  </name>
+  <name type="personal">
+  <namePart>Labaree, David F.</namePart>
+  <namePart type="date">1947-</namePart>
+  <role>
+  <roleTerm type="text">primary advisor.</roleTerm>
+  </role>
+  <role>
+  <roleTerm authority="marcrelator" type="code">ths</roleTerm>
+  </role>
+  </name>
+  <name type="personal">
+  <namePart>McDermott, Ray</namePart>
+  <role>
+  <roleTerm type="text">advisor.</roleTerm>
+  </role>
+  <role>
+  <roleTerm authority="marcrelator" type="code">ths</roleTerm>
+  </role>
+  </name>
+  <name type="personal">
+  <namePart>Willinsky, John</namePart>
+  <namePart type="date">1950-</namePart>
+  <role>
+  <roleTerm type="text">advisor.</roleTerm>
+  </role>
+  <role>
+  <roleTerm authority="marcrelator" type="code">ths</roleTerm>
+  </role>
+  </name>
+  <name type="corporate">
+  <namePart>Stanford University</namePart>
+  <namePart>Graduate School of Education.</namePart>
+  </name>
+  <typeOfResource>text</typeOfResource>
+  <genre authority="marcgt">theses</genre>
+  <originInfo>
+  <place>
+  <placeTerm type="code" authority="marccountry">xx</placeTerm>
+  </place>
+  <dateIssued>2015</dateIssued>
+  <issuance>monographic</issuance>
+  </originInfo>
+  <language>
+  <languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+  </language>
+  <physicalDescription>
+  <form authority="marcform">electronic</form>
+  <form authority="gmd">electronic resource</form>
+  <form authority="marccategory">electronic resource</form>
+  <form authority="marcsmd">remote</form>
+  <extent>1 online resource.</extent>
+  </physicalDescription>
+  <abstract>
+  Since 1939, 46 eddies, or fictional movies about primary or secondary schooling that foreground a teacher, have been released in the United States. From the 1950s through the 1990s, eddies often featured two interconnected and dominant tropes: the separation of home and school, and a "superteacher, " or a dedicated educator who uses unconventional teaching methods. However, many of the eddies made after 2000 blur or wholly erase the boundary between home and school, and nearly half of the 15 eddies made after 2000 feature unsavory or morally ambiguous teacher protagonists. This dissertation explores the contexts surrounding the genre's shift in tropes, and asserts that changes in eddies coincide with broader changes within the film industry, as well as with changes in educational policy and rhetoric. Specifically, generic changes in eddies coincide with the rise of the comic book film in the early 2000s, and President Bill Clinton's 1994 Goals 2000: Educate America Act, through which the Clinton administration framed education reform as a systemic problem requiring federal interventions and gained the public's support for federally led reforms. By the early 2000s, caped crusaders had begun proving lucrative at the box office, and the federal government had gained unprecedented traction in schools. Concurrently, the cinematic teacher--with no mask, no cape, and no federal authority—was increasingly depicted as a drug addict, a coward, or a cheater who brought the dysfunction of her home life into the classroom.
+  </abstract>
+  <note type="statement of responsibility" altRepGroup="00">Derisa Grant.</note>
+  <note>Submitted to the Graduate School of Education.</note>
+  <note type="thesis">Thesis (Ph.D.)--Stanford University, 2015.</note>
+  <location>
+  <url displayLabel="electronic resource" usage="primary display">http://purl.stanford.edu/xn109qc9773</url>
+  </location>
+  <recordInfo>
+  <recordContentSource authority="marcorg">CSt</recordContentSource>
+  <recordCreationDate encoding="marc">150601</recordCreationDate>
+  <recordIdentifier>a11059134</recordIdentifier>
+  <recordOrigin>
+  Converted from MARCXML to MODS version 3.4 using MARC21slim2MODS3-4_SDR.xsl (Version 1.2.5 2013/08/11)
+  </recordOrigin>
+  </recordInfo>
+  </mods>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="technicalMetadata" STATE="A" CONTROL_GROUP="M" VERSIONABLE="true">
+<foxml:datastreamVersion ID="technicalMetadata.0" LABEL="Technical Metadata" CREATED="2015-06-03T19:53:14.360Z" MIMETYPE="text/xml" SIZE="34877">
+  <technicalMetadata xmlns:jhove="http://hul.harvard.edu/ois/xml/ns/jhove" xmlns:mix="http://www.loc.gov/mix/v10" xmlns:textmd="info:lc/xmlns/textMD-v3" objectId="druid:xn109qc9773" datetime="2015-06-03T19:53:13Z">
+  <file id="DGrant_Final Dissertation.pdf">
+  <jhove:reportingModule release="1.7" date="2012-08-12">PDF-hul</jhove:reportingModule>
+  <jhove:format>PDF</jhove:format>
+  <jhove:version>1.4</jhove:version>
+  <jhove:status>Well-Formed and valid</jhove:status>
+  <jhove:sigMatch>
+  <jhove:module>PDF-hul</jhove:module>
+  </jhove:sigMatch>
+  <jhove:mimeType>application/pdf</jhove:mimeType>
+  <jhove:properties>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2900</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2880</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2884</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2868</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2932</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2868</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2124</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2748</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2916</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2804</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2804</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2872</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1836</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1828</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1832</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1728</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1840</mix:imageWidth>
+  <mix:imageHeight>1952</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1104</mix:imageWidth>
+  <mix:imageHeight>1264</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2568</mix:imageWidth>
+  <mix:imageHeight>1244</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1992</mix:imageWidth>
+  <mix:imageHeight>2588</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1968</mix:imageWidth>
+  <mix:imageHeight>2576</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1968</mix:imageWidth>
+  <mix:imageHeight>2308</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  </jhove:properties>
+  </file>
+  <file id="DGrant_Final Dissertation-augmented.pdf">
+  <jhove:reportingModule release="1.7" date="2012-08-12">PDF-hul</jhove:reportingModule>
+  <jhove:format>PDF</jhove:format>
+  <jhove:version>1.4</jhove:version>
+  <jhove:status>Well-Formed and valid</jhove:status>
+  <jhove:sigMatch>
+  <jhove:module>PDF-hul</jhove:module>
+  </jhove:sigMatch>
+  <jhove:mimeType>application/pdf</jhove:mimeType>
+  <jhove:properties>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>88</mix:imageWidth>
+  <mix:imageHeight>31</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>88</mix:imageWidth>
+  <mix:imageHeight>31</mix:imageHeight>
+  <mix:PhotometricInterpretation>
+  <mix:colorSpace>1</mix:colorSpace>
+  </mix:PhotometricInterpretation>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2900</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2880</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2884</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2868</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2932</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2868</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2124</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2748</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2916</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2804</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2804</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2872</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1836</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1828</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1832</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1728</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1840</mix:imageWidth>
+  <mix:imageHeight>1952</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1104</mix:imageWidth>
+  <mix:imageHeight>1264</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2568</mix:imageWidth>
+  <mix:imageHeight>1244</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1992</mix:imageWidth>
+  <mix:imageHeight>2588</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1968</mix:imageWidth>
+  <mix:imageHeight>2576</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1968</mix:imageWidth>
+  <mix:imageHeight>2308</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  </jhove:properties>
+  </file>
+  </technicalMetadata>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="technicalMetadata.1" LABEL="Technical Metadata" CREATED="2015-06-03T19:53:14.542Z" MIMETYPE="text/xml" SIZE="34877">
+  <technicalMetadata xmlns:jhove="http://hul.harvard.edu/ois/xml/ns/jhove" xmlns:mix="http://www.loc.gov/mix/v10" xmlns:textmd="info:lc/xmlns/textMD-v3" objectId="druid:xn109qc9773" datetime="2015-06-03T19:53:13Z">
+  <file id="DGrant_Final Dissertation.pdf">
+  <jhove:reportingModule release="1.7" date="2012-08-12">PDF-hul</jhove:reportingModule>
+  <jhove:format>PDF</jhove:format>
+  <jhove:version>1.4</jhove:version>
+  <jhove:status>Well-Formed and valid</jhove:status>
+  <jhove:sigMatch>
+  <jhove:module>PDF-hul</jhove:module>
+  </jhove:sigMatch>
+  <jhove:mimeType>application/pdf</jhove:mimeType>
+  <jhove:properties>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2900</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2880</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2884</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2868</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2932</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2868</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2124</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2748</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2916</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2804</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2804</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2872</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1836</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1828</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1832</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1728</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1840</mix:imageWidth>
+  <mix:imageHeight>1952</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1104</mix:imageWidth>
+  <mix:imageHeight>1264</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2568</mix:imageWidth>
+  <mix:imageHeight>1244</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1992</mix:imageWidth>
+  <mix:imageHeight>2588</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1968</mix:imageWidth>
+  <mix:imageHeight>2576</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1968</mix:imageWidth>
+  <mix:imageHeight>2308</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  </jhove:properties>
+  </file>
+  <file id="DGrant_Final Dissertation-augmented.pdf">
+  <jhove:reportingModule release="1.7" date="2012-08-12">PDF-hul</jhove:reportingModule>
+  <jhove:format>PDF</jhove:format>
+  <jhove:version>1.4</jhove:version>
+  <jhove:status>Well-Formed and valid</jhove:status>
+  <jhove:sigMatch>
+  <jhove:module>PDF-hul</jhove:module>
+  </jhove:sigMatch>
+  <jhove:mimeType>application/pdf</jhove:mimeType>
+  <jhove:properties>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>88</mix:imageWidth>
+  <mix:imageHeight>31</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>88</mix:imageWidth>
+  <mix:imageHeight>31</mix:imageHeight>
+  <mix:PhotometricInterpretation>
+  <mix:colorSpace>1</mix:colorSpace>
+  </mix:PhotometricInterpretation>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2900</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2880</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2884</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2868</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2932</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2868</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2124</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2748</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2916</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2804</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2804</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2872</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1836</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1828</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1832</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1728</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1840</mix:imageWidth>
+  <mix:imageHeight>1952</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1104</mix:imageWidth>
+  <mix:imageHeight>1264</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2568</mix:imageWidth>
+  <mix:imageHeight>1244</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1992</mix:imageWidth>
+  <mix:imageHeight>2588</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1968</mix:imageWidth>
+  <mix:imageHeight>2576</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1968</mix:imageWidth>
+  <mix:imageHeight>2308</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  </jhove:properties>
+  </file>
+  </technicalMetadata>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="technicalMetadata.2" LABEL="Technical Metadata" CREATED="2017-06-01T09:19:07.141Z" MIMETYPE="text/xml" SIZE="34877">
+  <technicalMetadata xmlns:jhove="http://hul.harvard.edu/ois/xml/ns/jhove" xmlns:mix="http://www.loc.gov/mix/v10" xmlns:textmd="info:lc/xmlns/textMD-v3" objectId="druid:xn109qc9773" datetime="2015-06-03T19:53:13Z">
+  <file id="DGrant_Final Dissertation.pdf">
+  <jhove:reportingModule release="1.7" date="2012-08-12">PDF-hul</jhove:reportingModule>
+  <jhove:format>PDF</jhove:format>
+  <jhove:version>1.4</jhove:version>
+  <jhove:status>Well-Formed and valid</jhove:status>
+  <jhove:sigMatch>
+  <jhove:module>PDF-hul</jhove:module>
+  </jhove:sigMatch>
+  <jhove:mimeType>application/pdf</jhove:mimeType>
+  <jhove:properties>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2900</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2880</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2884</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2868</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2932</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2868</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2124</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2748</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2916</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2804</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2804</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2872</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1836</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1828</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1832</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1728</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1840</mix:imageWidth>
+  <mix:imageHeight>1952</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1104</mix:imageWidth>
+  <mix:imageHeight>1264</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2568</mix:imageWidth>
+  <mix:imageHeight>1244</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1992</mix:imageWidth>
+  <mix:imageHeight>2588</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1968</mix:imageWidth>
+  <mix:imageHeight>2576</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1968</mix:imageWidth>
+  <mix:imageHeight>2308</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  </jhove:properties>
+  </file>
+  <file id="DGrant_Final Dissertation-augmented.pdf">
+  <jhove:reportingModule release="1.7" date="2012-08-12">PDF-hul</jhove:reportingModule>
+  <jhove:format>PDF</jhove:format>
+  <jhove:version>1.4</jhove:version>
+  <jhove:status>Well-Formed and valid</jhove:status>
+  <jhove:sigMatch>
+  <jhove:module>PDF-hul</jhove:module>
+  </jhove:sigMatch>
+  <jhove:mimeType>application/pdf</jhove:mimeType>
+  <jhove:properties>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>88</mix:imageWidth>
+  <mix:imageHeight>31</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>88</mix:imageWidth>
+  <mix:imageHeight>31</mix:imageHeight>
+  <mix:PhotometricInterpretation>
+  <mix:colorSpace>1</mix:colorSpace>
+  </mix:PhotometricInterpretation>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2900</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2880</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2884</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2868</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2932</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2868</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2152</mix:imageWidth>
+  <mix:imageHeight>2124</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2748</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2916</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2804</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2804</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2204</mix:imageWidth>
+  <mix:imageHeight>2872</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1836</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1828</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1832</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2552</mix:imageWidth>
+  <mix:imageHeight>1728</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1840</mix:imageWidth>
+  <mix:imageHeight>1952</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1104</mix:imageWidth>
+  <mix:imageHeight>1264</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>2568</mix:imageWidth>
+  <mix:imageHeight>1244</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1992</mix:imageWidth>
+  <mix:imageHeight>2588</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1968</mix:imageWidth>
+  <mix:imageHeight>2576</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  <mix:mix>
+  <mix:BasicDigitalObjectInformation> </mix:BasicDigitalObjectInformation>
+  <mix:BasicImageInformation>
+  <mix:BasicImageCharacteristics>
+  <mix:imageWidth>1968</mix:imageWidth>
+  <mix:imageHeight>2308</mix:imageHeight>
+  </mix:BasicImageCharacteristics>
+  </mix:BasicImageInformation>
+  <mix:ImageAssessmentMetadata>
+  <mix:ImageColorEncoding>
+  <mix:bitsPerSample>
+  <mix:bitsPerSampleValue>8</mix:bitsPerSampleValue>
+  <mix:bitsPerSampleUnit>integer</mix:bitsPerSampleUnit>
+  </mix:bitsPerSample>
+  </mix:ImageColorEncoding>
+  </mix:ImageAssessmentMetadata>
+  </mix:mix>
+  </jhove:properties>
+  </file>
+  </technicalMetadata>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="workflows" STATE="A" CONTROL_GROUP="E" VERSIONABLE="true">
+<foxml:datastreamVersion ID="workflows.0" LABEL="Workflows" CREATED="2015-06-03T19:53:37.611Z" MIMETYPE="application/xml">
+<foxml:contentLocation TYPE="URL" REF="https://lyberservices-prod.stanford.edu/workflow/dor/objects/druid:xn109qc9773/workflows"/>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="provenanceMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+<foxml:datastreamVersion ID="provenanceMetadata.0" LABEL="Provenance Metadata" CREATED="2015-06-03T21:41:22.377Z" MIMETYPE="text/xml" SIZE="265">
+<foxml:xmlContent>
+<provenanceMetadata objectId="druid:xn109qc9773">
+  <agent name="DOR">
+    <what object="druid:xn109qc9773">
+      <event when="2015-06-03T14:41:22-07:00" who="DOR-accessionWF">DOR Common Accessioning completed</event>
+    </what>
+  </agent>
+</provenanceMetadata>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="provenanceMetadata.1" LABEL="Provenance Metadata" CREATED="2017-06-01T09:20:22.821Z" MIMETYPE="text/xml" SIZE="265">
+<foxml:xmlContent>
+<provenanceMetadata objectId="druid:xn109qc9773">
+  <agent name="DOR">
+    <what object="druid:xn109qc9773">
+      <event when="2017-06-01T02:20:22-07:00" who="DOR-accessionWF">DOR Common Accessioning completed</event>
+    </what>
+  </agent>
+</provenanceMetadata>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="events" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+<foxml:datastreamVersion ID="events.2" LABEL="" CREATED="2017-06-01T09:17:39.291Z" MIMETYPE="text/xml" SIZE="563">
+<foxml:xmlContent>
+<events>
+  <event type="remediation" when="2015-06-03T12:53:35-07:00" who="Dor::Processable 3.5.0">Replace individual *WF datastreams with unified workflows datastream</event>
+  <event type="remediation" when="2015-06-03T12:53:36-07:00" who="Dor::Identifiable 3.6.1">Record Remediation Version</event>
+  <event type="remediation" when="2015-06-03T12:53:36-07:00" who="Dor::Versionable 3.12.2">Add missing versionMetadata</event>
+  <event type="embargo" when="2017-06-01T09:17:38Z" who="application:accessionWF:embargo-release">Embargo released</event>
+</events>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="embargoMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+<foxml:datastreamVersion ID="embargoMetadata.2" LABEL="" CREATED="2017-06-01T09:17:39.392Z" MIMETYPE="text/xml" SIZE="412">
+<foxml:xmlContent>
+<embargoMetadata>
+  <status>released</status>
+  <releaseDate>2017-06-01T07:00:00Z</releaseDate>
+  <twentyPctVisibilityStatus>embargoed</twentyPctVisibilityStatus>
+  <twentyPctVisibilityReleaseDate>2020-06-01T07:00:00Z</twentyPctVisibilityReleaseDate>
+  <releaseAccess>
+    <access type="read">
+      <machine>
+        <group>stanford</group>
+      </machine>
+    </access>
+  </releaseAccess>
+</embargoMetadata>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="versionMetadata" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+<foxml:datastreamVersion ID="versionMetadata.2" LABEL="Version Metadata" CREATED="2017-06-01T09:17:40.565Z" MIMETYPE="text/xml" SIZE="264">
+<foxml:xmlContent>
+<versionMetadata objectId="druid:xn109qc9773">
+  <version tag="1.0.0" versionId="1">
+    <description>Initial Version</description>
+  </version>
+  <version tag="1.0.1" versionId="2">
+    <description>embargo released</description>
+  </version>
+</versionMetadata>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+</foxml:digitalObject>

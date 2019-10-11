@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Cocina::Models::DRO do
-  let(:item_type) { 'http://sdr.sul.stanford.edu/models/sdr3-object.jsonld' }
+  let(:item_type) { 'http://cocina.sul.stanford.edu/models/object.jsonld' }
 
   describe 'initialization' do
     subject(:item) { described_class.new(properties) }

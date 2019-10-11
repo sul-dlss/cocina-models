@@ -4,13 +4,13 @@ require 'json'
 
 module Cocina
   module Models
-    # A digital repository collection.  See https://github.com/sul-dlss-labs/taco/blob/master/maps/Collection.json
+    # A digital repository collection.  See http://sul-dlss.github.io/cocina-models/maps/Collection.json
     class Collection < Dry::Struct
-      COLLECTION_TYPES = %w[http://sdr.sul.stanford.edu/models/sdr3-collection.jsonld
-                            http://sdr.sul.stanford.edu/models/sdr3-curated-collection.jsonld
-                            http://sdr.sul.stanford.edu/models/sdr3-user-collection.jsonld
-                            http://sdr.sul.stanford.edu/models/sdr3-exhibit.jsonld
-                            http://sdr.sul.stanford.edu/models/sdr3-series.jsonld].freeze
+      COLLECTION_TYPES = %w[http://cocina.sul.stanford.edu/models/collection.jsonld
+                            http://cocina.sul.stanford.edu/models/curated-collection.jsonld
+                            http://cocina.sul.stanford.edu/models/user-collection.jsonld
+                            http://cocina.sul.stanford.edu/models/exhibit.jsonld
+                            http://cocina.sul.stanford.edu/models/series.jsonld].freeze
 
       # Subschema for access concerns
       class Access < Dry::Struct

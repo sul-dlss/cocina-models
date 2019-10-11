@@ -1,8 +1,7 @@
-# Cocina::Models
 [![Gem Version](https://badge.fury.io/rb/cocina-models.svg)](https://badge.fury.io/rb/cocina-models)
 
-This is the models for transporting digital repository objects using the Cocina application profile.
+# Cocina::Models
 
-This is a work in progress and will eventually implement the full Cocina data model. See https://github.com/sul-dlss/taco-truck/blob/master/COCINA.md#cocina-data-models--shapes
+This is a Ruby implementation of the SDR data model (named "COCINA"). The data being modeled includes digital repository objects.
 
-See also https://github.com/sul-dlss-labs/taco/tree/master/maps
+This is a work in progress that will ultimately implement the full [COCINA data model](http://sul-dlss.github.io/cocina-models/). See also [architecture documentation](https://sul-dlss.github.io/taco-truck/COCINA.html#cocina-data-models--shapes).
