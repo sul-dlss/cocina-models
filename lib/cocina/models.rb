@@ -41,6 +41,8 @@ module Cocina
         DRO.from_dynamic(dyn)
       when *Collection::TYPES
         Collection.from_dynamic(dyn)
+      when *AdminPolicy::TYPES
+        AdminPolicy.from_dynamic(dyn)
       else
         raise UnknownTypeError, "Unknown type: '#{dyn.fetch('type')}'"
       end
