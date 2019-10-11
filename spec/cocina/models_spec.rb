@@ -4,4 +4,54 @@ RSpec.describe Cocina::Models do
   it 'has a version number' do
     expect(Cocina::Models::VERSION).not_to be nil
   end
+
+  describe '.build' do
+    subject(:build) { described_class.build(data) }
+
+    context 'with a collection type' do
+      let(:data) do
+        {
+          'type' => 'http://cocina.sul.stanford.edu/models/exhibit.jsonld',
+          'externalIdentifier' => 'foo',
+          'label' => 'bar',
+          'version' => 5
+        }
+      end
+
+      it { is_expected.to be_kind_of Cocina::Models::Collection }
+    end
+
+    context 'with a DRO type' do
+      let(:data) do
+        {
+          'type' => 'http://cocina.sul.stanford.edu/models/image.jsonld',
+          'externalIdentifier' => 'foo',
+          'label' => 'bar',
+          'version' => 5
+        }
+      end
+
+      it { is_expected.to be_kind_of Cocina::Models::DRO }
+    end
+
+    context 'with an invalid type' do
+      let(:data) do
+        { 'type' => 'foo' }
+      end
+
+      it 'raises an error' do
+        expect { build }.to raise_error Cocina::Models::UnknownTypeError, "Unknown type: 'foo'"
+      end
+    end
+
+    context 'without a type' do
+      let(:data) do
+        {}
+      end
+
+      it 'raises an error' do
+        expect { build }.to raise_error KeyError
+      end
+    end
+  end
 end

@@ -6,11 +6,11 @@ module Cocina
   module Models
     # A digital repository collection.  See http://sul-dlss.github.io/cocina-models/maps/Collection.json
     class Collection < Dry::Struct
-      COLLECTION_TYPES = %w[http://cocina.sul.stanford.edu/models/collection.jsonld
-                            http://cocina.sul.stanford.edu/models/curated-collection.jsonld
-                            http://cocina.sul.stanford.edu/models/user-collection.jsonld
-                            http://cocina.sul.stanford.edu/models/exhibit.jsonld
-                            http://cocina.sul.stanford.edu/models/series.jsonld].freeze
+      TYPES = %w[http://cocina.sul.stanford.edu/models/collection.jsonld
+                 http://cocina.sul.stanford.edu/models/curated-collection.jsonld
+                 http://cocina.sul.stanford.edu/models/user-collection.jsonld
+                 http://cocina.sul.stanford.edu/models/exhibit.jsonld
+                 http://cocina.sul.stanford.edu/models/series.jsonld].freeze
 
       # Subschema for access concerns
       class Access < Dry::Struct
@@ -35,7 +35,7 @@ module Cocina
       end
 
       attribute :externalIdentifier, Types::Strict::String
-      attribute :type, Types::String.enum(*COLLECTION_TYPES)
+      attribute :type, Types::String.enum(*TYPES)
       attribute :label, Types::Strict::String
       attribute :version, Types::Coercible::Integer
       attribute(:access, Access.default { Access.new })
