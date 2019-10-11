@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Cocina::Models::Collection do
-  let(:collection_type) { 'http://sdr.sul.stanford.edu/models/sdr3-collection.jsonld' }
+  let(:collection_type) { 'http://cocina.sul.stanford.edu/models/collection.jsonld' }
 
   describe 'initialization' do
     subject(:collection) { described_class.new(properties) }

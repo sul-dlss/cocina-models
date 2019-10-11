@@ -4,24 +4,24 @@ require 'json'
 
 module Cocina
   module Models
-    # A digital repository object.  See https://github.com/sul-dlss-labs/taco/blob/master/maps/DRO.json
+    # A digital repository object.  See http://sul-dlss.github.io/cocina-models/maps/DRO.json
     class DRO < Dry::Struct
       TYPES = %w[
-        http://sdr.sul.stanford.edu/models/sdr3-object.jsonld
-        http://sdr.sul.stanford.edu/models/sdr3-3d.jsonld
-        http://sdr.sul.stanford.edu/models/sdr3-agreement.jsonl
-        http://sdr.sul.stanford.edu/models/sdr3-book.jsonld
-        http://sdr.sul.stanford.edu/models/sdr3-document.jsonld
-        http://sdr.sul.stanford.edu/models/sdr3-geo.jsonld
-        http://sdr.sul.stanford.edu/models/sdr3-image.jsonld
-        http://sdr.sul.stanford.edu/models/sdr3-page.jsonld
-        http://sdr.sul.stanford.edu/models/sdr3-photograph.jsonld
-        http://sdr.sul.stanford.edu/models/sdr3-manuscript.jsonld
-        http://sdr.sul.stanford.edu/models/sdr3-map.jsonld
-        http://sdr.sul.stanford.edu/models/sdr3-media.jsonld
-        http://sdr.sul.stanford.edu/models/sdr3-track.jsonld
-        http://sdr.sul.stanford.edu/models/sdr3-webarchive-binary.jsonld
-        http://sdr.sul.stanford.edu/models/sdr3-webarchive-seed.jsonld
+        http://cocina.sul.stanford.edu/models/object.jsonld
+        http://cocina.sul.stanford.edu/models/3d.jsonld
+        http://cocina.sul.stanford.edu/models/agreement.jsonl
+        http://cocina.sul.stanford.edu/models/book.jsonld
+        http://cocina.sul.stanford.edu/models/document.jsonld
+        http://cocina.sul.stanford.edu/models/geo.jsonld
+        http://cocina.sul.stanford.edu/models/image.jsonld
+        http://cocina.sul.stanford.edu/models/page.jsonld
+        http://cocina.sul.stanford.edu/models/photograph.jsonld
+        http://cocina.sul.stanford.edu/models/manuscript.jsonld
+        http://cocina.sul.stanford.edu/models/map.jsonld
+        http://cocina.sul.stanford.edu/models/media.jsonld
+        http://cocina.sul.stanford.edu/models/track.jsonld
+        http://cocina.sul.stanford.edu/models/webarchive-binary.jsonld
+        http://cocina.sul.stanford.edu/models/webarchive-seed.jsonld
       ].freeze
       # Subschema for release tags
       class ReleaseTag < Dry::Struct

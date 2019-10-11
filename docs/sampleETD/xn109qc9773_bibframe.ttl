@@ -1,0 +1,95 @@
+:xn109qc9773_work a bf:Work , bf:Text ;
+    rdfs:label "From superteacher to 'bad teacher': goals 2000, comic book films, and changing depictions of educators in the movies" ;
+    bf:title [ a bf:Title ;
+        bf:mainTitle "From superteacher to 'bad teacher'" ;
+        bf:subTitle "goals 2000, comic book films, and changing depictions of educators in the movies"
+    ] ;
+    bf:contribution [ a bf:Contribution ;
+        bf:agent [ a bf:Agent , bf:Person ;
+            rdfs:label "Grant, Derisa"
+        ] ;
+    ] ;
+    bf:contribution [ a bf:Contribution ;
+        bf:agent [ a bf:Agent , bf:Person ;
+            rdfs:label "Labaree, David F., 1947-"
+        ] ;
+        bf:role [ a bf:Role ;
+            rdfs:label "primary advisor"
+        ] ;
+        bf:role <http://id.loc.gov/vocabulary/relators/ths>
+    ] ;
+    bf:contribution [ a bf:Contribution ;
+        bf:agent [ a bf:Agent , bf:Person ;
+            rdfs:label "McDermott, Ray"
+        ] ;
+        bf:role [ a bf:Role ;
+            rdfs:label "advisor"
+        ] ;
+        bf:role <http://id.loc.gov/vocabulary/relators/ths>
+    ] ;
+    bf:contribution [ a bf:Contribution ;
+        bf:agent [ a bf:Agent , bf:Person ;
+            rdfs:label "Willinsky, John, 1950-"
+        ] ;
+        bf:role [ a bf:Role ;
+            rdfs:label "advisor"
+        ] ;
+        bf:role <http://id.loc.gov/vocabulary/relators/ths>
+    ] ;
+    bf:contribution [ a bf:Contribution ;
+        bf:agent [ a bf:Agent , bf:Organization ;
+            rdfs:label "Stanford University. Graduate School of Education"
+        ]
+    ]
+    bf:genreForm [ a bf:GenreForm ;
+        rdfs:label "theses" ;
+        bf:source [ a bf:Source ;
+            bf:code "marcgt"
+        ]
+    ] ;
+    bf:language <http://id.loc.gov/vocabulary/iso639-2/eng> ;
+    bf:summary [ a bf:Summary ;
+        rdfs:label "Since 1939, 46 eddies, or fictional movies about primary or secondary schooling that foreground a teacher..."
+    ] ;
+    bf:dissertation [ a bf:Dissertation ;
+        rdfs:label "Thesis (Ph.D.)--Stanford University, 2015."
+    ]
+] .
+
+:xn109qc9773_instance a bf:Instance ;
+    rdfs:label "From superteacher to 'bad teacher': goals 2000, comic book films, and changing depictions of educators in the movies" ;
+    bf:title [ a bf:Title ;
+        bf:mainTitle "From superteacher to 'bad teacher'" ;
+        bf:subTitle "goals 2000, comic book films, and changing depictions of educators in the movies"
+    ] ;
+    bf:provisionActivity [ a bf:ProvisionActivity , a bf:Publication ;
+        bf:date "2015" ;
+        bf:place [ a bf:Place ;
+            bf:code "xx" ;
+            bf:source [ a bf:Source ;
+                bf:code "marccountry"
+            ] ;
+        ] ;
+        bf:issuance <http://id.loc.gov/vocabulary/issuance/mono>
+    ] ;
+    bf:carrier [ a bf:Carrier ;
+        rdfs:label "digital"
+    ] ;
+    bf:extent [ a bf:Extent ;
+        rdfs:label "1 online resource"
+    ] ;
+    bf:note [ a bf:Note ;
+        rdfs:label "Submitted to the Graduate School of Education."
+    ] ;
+    bf:responsibilityStatement "Derisa Grant."
+] .
+
+:xn109qc9773_item [ a bf:Item ;
+    bf:electronicLocator [ a rdf:Resource ;
+        rdf:value <http://purl.stanford.edu/xn109qc9773> ;
+        bf:note [ a bf:Note ;
+            rdfs:label "primary display" ;
+            bf:noteType "URL usage"
+        ]
+    ]
+] .

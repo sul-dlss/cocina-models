@@ -1,0 +1,158 @@
+{   "version": "1.0",
+    "lastUpdated": "2018-11-13",
+    "druid": "xn109qc9773",
+    "descriptiveMetadata": {
+        "title": [{
+            "primary": "TRUE",
+            "titleParts": [
+                {"mainTitle": "From superteacher to 'bad teacher'"},
+                {"subTitle": "goals 2000, comic book films, and changing depictions of educators in the movies"}
+            ],
+            "titleFull": "From superteacher to 'bad teacher': goals 2000, comic book films, and changing depictions of educators in the movies",
+            "titleBrief": "From superteacher to 'bad teacher'"
+        }],
+        "origin": [
+            {
+                "primary": "TRUE",
+                "event": "creation",
+                "agent": [{
+                    "type": "personal",
+                    "name": {
+                        "nameFromSource": "Grant, Derisa",
+                        "lastName": "Grant",
+                        "firstName": "Derisa"
+                    }
+                }]
+            },
+            {
+                "event": "creation",
+                "agent": [{
+                    "type": "personal",
+                    "name": {
+                        "nameFromSource": "Labaree, David F.",
+                        "lastName": "Labaree",
+                        "firstName": "David F.",
+                        "nameDate": {
+                            "type": "life",
+                            "startDate": "1947",
+                            "endDate": "open"
+                        }
+                    }
+                }],
+                "role": [
+                    {"roleTerm": "primary advisor"},
+                    {
+                        "roleTerm": "thesis advisor",
+                        "roleAuthority": "marcrelator",
+                        "roleValueURI": "http://id.loc.gov/vocabulary/relators/ths"
+                    }
+                ]
+            },
+            {
+                "event": "creation",
+                "agent": [{
+                    "type": "personal",
+                    "name": {
+                        "nameFromSource": "McDermott, Ray",
+                        "lastName": "McDermott",
+                        "firstName": "Ray"
+                    }
+                }],
+                "role": [
+                    {"roleTerm": "advisor"},
+                    {
+                        "roleTerm": "thesis advisor",
+                        "roleAuthority": "marcrelator",
+                        "roleValueURI": "http://id.loc.gov/vocabulary/relators/ths"
+                    }
+                ]
+            },
+            {
+                "event": "creation",
+                "agent": [{
+                    "type": "personal",
+                    "name": {
+                        "nameFromSource": "Willinsky, John",
+                        "lastName": "Willinsky",
+                        "firstName": "John",
+                        "nameDate": {
+                            "type": "life",
+                            "startDate": "1950",
+                            "endDate": "open"
+                        }
+                    }
+                }],
+                "role": [
+                    {"roleTerm": "advisor"},
+                    {
+                        "roleTerm": "thesis advisor",
+                        "roleAuthority": "marcrelator",
+                        "roleValueURI": "http://id.loc.gov/vocabulary/relators/ths"
+                    }
+                ]
+            },
+            {
+                "event": "creation",
+                "agent": [{
+                    "type": "corporate",
+                    "name": {"nameParts": [
+                        "Stanford University",
+                        "Graduate School of Education"
+                    ]}
+                }]
+            },
+            {
+                "event": "publication",
+                "place": [{
+                    "code": "xx",
+                    "authority": "marccountry"
+                }],
+                "date": {"singleDate": "2015"},
+                "periodicity": [{
+                    "value": "monographic",
+                    "vocabulary": "MODS issuance"
+                }]
+            }
+        ],
+        "typeOfResource": [{
+            "typeOfResourceTerm": "text",
+            "authority": "MODS typeOfResource"
+        }],
+        "genre": [{
+            "genreTerm": "theses",
+            "authority": "marcgt"
+        }],
+        "language": [{
+            "languageTerm": "English",
+            "languageAuthority": "iso639-2b",
+            "languageValueURI": "http://id.loc.gov/vocabulary/iso639-2/eng"
+        }],
+        "form": {
+            "appliesTo": "resource",
+            "medium": "digital",
+            "extent": {
+                "extentStatement": "1 online resource",
+                "extentNumber": 1,
+                "extentUnit": "online resource"
+            }
+        },
+        "access": ["online"],
+        "abstract": "Since 1939, 46 eddies, or fictional movies about primary or secondary schooling that foreground a teacher, have been released in the United States. From the 1950s through the 1990s, eddies often featured two interconnected and dominant tropes: the separation of home and school, and a superteacher, or a dedicated educator who uses unconventional teaching methods. However, many of the eddies made after 2000 blur or wholly erase the boundary between home and school, and nearly half of the 15 eddies made after 2000 feature unsavory or morally ambiguous teacher protagonists. This dissertation explores the contexts surrounding the genre's shift in tropes, and asserts that changes in eddies coincide with broader changes within the film industry, as well as with changes in educational policy and rhetoric. Specifically, generic changes in eddies coincide with the rise of the comic book film in the early 2000s, and President Bill Clinton's 1994 Goals 2000: Educate America Act, through which the Clinton administration framed education reform as a systemic problem requiring federal interventions and gained the public's support for federally led reforms. By the early 2000s, caped crusaders had begun proving lucrative at the box office, and the federal government had gained unprecedented traction in schools. Concurrently, the cinematic teacher--with no mask, no cape, and no federal authority&#x2014;was increasingly depicted as a drug addict, a coward, or a cheater who brought the dysfunction of her home life into the classroom.",
+        "note": [
+            {"value": "Submitted to the Graduate School of Education."},
+            {
+                "type": "thesis",
+                "value": "Thesis (Ph.D.)--Stanford University, 2015."
+            },
+            {
+                "type": "statementOfResponsibility",
+                "value": "Derisa Grant."
+            }
+        ],
+        "accessURL": [{
+            "type": "purl",
+            "url": "http://purl.stanford.edu/xn109qc9773",
+            "primary": "TRUE"
+        }]
+    }
+}
