@@ -66,7 +66,15 @@ module Cocina
       class Identification < Dry::Struct
       end
 
+      # Structural sub-schema for the DRO
       class Structural < Dry::Struct
+        attribute :contains, Types::Strict::Array.of(Types::Coercible::String).meta(omittable: true)
+
+        def self.from_dynamic(dyn)
+          params = {}
+          params[:contains] = dyn['contains'] if dyn['contains']
+          Structural.new(params)
+        end
       end
 
       attribute :externalIdentifier, Types::Strict::String
@@ -88,6 +96,7 @@ module Cocina
 
         params[:access] = Access.from_dynamic(dyn['access']) if dyn['access']
         params[:administrative] = Administrative.from_dynamic(dyn['administrative']) if dyn['administrative']
+        params[:structural] = Structural.from_dynamic(dyn['structural']) if dyn['structural']
 
         DRO.new(params)
       end
