@@ -121,6 +121,13 @@
       "type": "object",
       "required": ["isContainedBy"],
       "properties": {
+        "contains": {
+          "description": "Files that are members of the fileset.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "isContainedBy": {
           "description": "Parent DRO that is represented by the files in this Fileset.",
           "type": "string"

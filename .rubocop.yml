@@ -12,7 +12,7 @@ Metrics/LineLength:
   Max: 114
 
 Metrics/MethodLength:
-  Max: 13
+  Max: 14
 
 RSpec/MultipleExpectations:
   Enabled: false
