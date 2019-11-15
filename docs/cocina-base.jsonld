@@ -1,0 +1,24 @@
+{
+  "@context": {
+        "type": "@type",
+        "id": "@id",
+        "@vocab": "http://cocina.sul.stanford.edu/contexts/cocina-base.jsonld",
+        "cocina": "http://cocina.sul.stanford.edu/models/",
+        "Book": {"@id": "cocina:Book"}
+        "3D": {"@id": "cocina:3D"}
+        "Agreement": {"@id": "cocina:Agreement"}
+        "Document": {"@id": "cocina:Document"}
+        "Collection": {"@id": "cocina:Collection"}
+        "Fileset": {"@id": "cocina:Fileset"}
+        "Geo": {"@id": "cocina:Geo"}
+        "Image": {"@id": "cocina:Image"}
+        "Page": {"@id": "cocina:Page"}
+        "Photograph": {"@id": "cocina:Photograph"}
+        "Manuscript": {"@id": "cocina:Manuscript"}
+        "Map": {"@id": "cocina:Map"}
+        "Media": {"@id": "cocina:Media"}
+        "Track": {"@id": "cocina:Track"}
+        "WebarchiveBinary": {"@id": "cocina:WebarchiveBinary"}
+        "WebarchiveSeed": {"@id": "cocina:WebarchiveSeed"}
+  }
+}
