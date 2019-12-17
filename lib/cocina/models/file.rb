@@ -6,8 +6,8 @@ module Cocina
   module Models
     # Metadata for a file.  See http://sul-dlss.github.io/cocina-models/maps/File.json
     class File < Dry::Struct
-      TYPES = %w[
-        http://cocina.sul.stanford.edu/models/file.jsonld
+      TYPES = [
+        Vocab.file
       ].freeze
 
       class Identification < Dry::Struct

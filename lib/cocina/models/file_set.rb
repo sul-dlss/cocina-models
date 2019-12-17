@@ -6,8 +6,8 @@ module Cocina
   module Models
     # Metadata for a File Set.  See http://sul-dlss.github.io/cocina-models/maps/Fileset.json
     class FileSet < Dry::Struct
-      TYPES = %w[
-        http://cocina.sul.stanford.edu/models/fileset.jsonld
+      TYPES = [
+        Vocab.fileset
       ].freeze
 
       class Identification < Dry::Struct
