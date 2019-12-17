@@ -198,4 +198,25 @@ RSpec.describe Cocina::Models::DRO do
       end
     end
   end
+
+  describe '.image?' do
+    subject(:item) { described_class.new(properties) }
+
+    let(:properties) do
+      {
+        externalIdentifier: 'druid:ab123cd4567',
+        type: item_type,
+        label: 'My object',
+        version: 3
+      }
+    end
+
+    it { is_expected.not_to be_image }
+
+    context 'when it has the image type' do
+      let(:item_type) { 'http://cocina.sul.stanford.edu/models/image.jsonld' }
+
+      it { is_expected.to be_image }
+    end
+  end
 end

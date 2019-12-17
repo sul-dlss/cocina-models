@@ -6,11 +6,13 @@ module Cocina
   module Models
     # A digital repository collection.  See http://sul-dlss.github.io/cocina-models/maps/Collection.json
     class Collection < Dry::Struct
-      TYPES = %w[http://cocina.sul.stanford.edu/models/collection.jsonld
-                 http://cocina.sul.stanford.edu/models/curated-collection.jsonld
-                 http://cocina.sul.stanford.edu/models/user-collection.jsonld
-                 http://cocina.sul.stanford.edu/models/exhibit.jsonld
-                 http://cocina.sul.stanford.edu/models/series.jsonld].freeze
+      TYPES = [
+        Vocab.collection,
+        Vocab.curated_collection,
+        Vocab.user_collection,
+        Vocab.exhibit,
+        Vocab.series
+      ].freeze
 
       # Subschema for access concerns
       class Access < Dry::Struct

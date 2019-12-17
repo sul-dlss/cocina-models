@@ -6,23 +6,24 @@ module Cocina
   module Models
     # A digital repository object.  See http://sul-dlss.github.io/cocina-models/maps/DRO.json
     class DRO < Dry::Struct
-      TYPES = %w[
-        http://cocina.sul.stanford.edu/models/object.jsonld
-        http://cocina.sul.stanford.edu/models/3d.jsonld
-        http://cocina.sul.stanford.edu/models/agreement.jsonl
-        http://cocina.sul.stanford.edu/models/book.jsonld
-        http://cocina.sul.stanford.edu/models/document.jsonld
-        http://cocina.sul.stanford.edu/models/geo.jsonld
-        http://cocina.sul.stanford.edu/models/image.jsonld
-        http://cocina.sul.stanford.edu/models/page.jsonld
-        http://cocina.sul.stanford.edu/models/photograph.jsonld
-        http://cocina.sul.stanford.edu/models/manuscript.jsonld
-        http://cocina.sul.stanford.edu/models/map.jsonld
-        http://cocina.sul.stanford.edu/models/media.jsonld
-        http://cocina.sul.stanford.edu/models/track.jsonld
-        http://cocina.sul.stanford.edu/models/webarchive-binary.jsonld
-        http://cocina.sul.stanford.edu/models/webarchive-seed.jsonld
+      TYPES = [
+        Vocab.object,
+        Vocab.three_dimensional,
+        Vocab.agreement,
+        Vocab.book,
+        Vocab.document,
+        Vocab.geo,
+        Vocab.image,
+        Vocab.page,
+        Vocab.photograph,
+        Vocab.manuscript,
+        Vocab.map,
+        Vocab.media,
+        Vocab.track,
+        Vocab.webarchive_binary,
+        Vocab.webarchive_seed
       ].freeze
+
       # Subschema for release tags
       class ReleaseTag < Dry::Struct
         attribute :to, Types::Strict::String
@@ -103,6 +104,10 @@ module Cocina
 
       def self.from_json(json)
         from_dynamic(JSON.parse(json))
+      end
+
+      def image?
+        type == Vocab.image
       end
     end
   end

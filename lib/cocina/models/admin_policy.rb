@@ -6,7 +6,9 @@ module Cocina
   module Models
     # An admin policy object.
     class AdminPolicy < Dry::Struct
-      TYPES = %w[http://cocina.sul.stanford.edu/models/admin_policy.jsonld].freeze
+      TYPES = [
+        Vocab.admin_policy
+      ].freeze
 
       # Subschema for access concerns
       class Access < Dry::Struct
