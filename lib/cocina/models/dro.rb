@@ -105,6 +105,10 @@ module Cocina
       def self.from_json(json)
         from_dynamic(JSON.parse(json))
       end
+
+      def image?
+        type == Vocab.image
+      end
     end
   end
 end
