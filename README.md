@@ -7,4 +7,6 @@
 
 This is a Ruby implementation of the SDR data model (named "COCINA"). The data being modeled includes digital repository objects.
 
+It provides a way for consumers to validate objects against models using dry-struct and dry-types gems.
+
 This is a work in progress that will ultimately implement the full [COCINA data model](http://sul-dlss.github.io/cocina-models/). See also [architecture documentation](https://sul-dlss.github.io/taco-truck/COCINA.html#cocina-data-models--shapes).
