@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/sul-dlss/cocina-models.svg?branch=master)](https://travis-ci.org/sul-dlss/cocina-models)
 [![Gem Version](https://badge.fury.io/rb/cocina-models.svg)](https://badge.fury.io/rb/cocina-models)
 
 # Cocina::Models
