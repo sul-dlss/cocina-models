@@ -17,3 +17,7 @@ after_script:
 
 notifications:
   email: false
+
+env:
+  global:
+    - CC_TEST_REPORTER_ID=882e943342bed5285a6078be9a41b7738ae7ebd17458c08414581cbece99b8e6
