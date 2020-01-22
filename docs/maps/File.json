@@ -144,6 +144,10 @@
           "description": "If this resource should be sent to Preservation.",
           "type": "boolean"
         },
+        "shelve": {
+          "description": "If this resource should be sent to Stacks.",
+          "type": "boolean"
+        },
         "remediatedBy": {
           "description": "The Agent (User, Group, Application, Department, other) that remediated this File in SDR.",
           "type": "array",
