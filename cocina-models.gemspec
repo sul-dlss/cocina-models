@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Data models for the SDR'
   spec.description   = 'SDR data models that can be validated'
-  spec.homepage      = 'https://github.com/sul-dlss-labs/cocina-models'
+  spec.homepage      = 'https://github.com/sul-dlss/cocina-models'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
