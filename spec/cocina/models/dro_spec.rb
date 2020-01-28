@@ -60,6 +60,7 @@ RSpec.describe Cocina::Models::DRO do
             embargoReleaseDate: '2009-12-14T07:00:00Z'
           },
           administrative: {
+            hasAdminPolicy: 'druid:mx123cd4567',
             releaseTags: [
               {
                 who: 'Justin',
@@ -93,6 +94,7 @@ RSpec.describe Cocina::Models::DRO do
 
         expect(item.access.embargoReleaseDate).to eq DateTime.parse('2009-12-14T07:00:00Z')
 
+        expect(item.administrative.hasAdminPolicy).to eq 'druid:mx123cd4567'
         expect(item.administrative.releaseTags).to all(be_kind_of(Cocina::Models::DRO::ReleaseTag))
         tag = item.administrative.releaseTags.first
         expect(tag.date).to eq DateTime.parse '2018-11-23T00:44:52Z'
@@ -165,6 +167,7 @@ RSpec.describe Cocina::Models::DRO do
               "embargoReleaseDate":"2009-12-14T07:00:00Z"
             },
             "administrative": {
+              "hasAdminPolicy":"druid:mx123cd4567",
               "releaseTags": [
                 {
                   "who":"Justin",
@@ -198,6 +201,8 @@ RSpec.describe Cocina::Models::DRO do
                                           type: item_type)
         access_attributes = dro.access.attributes
         expect(access_attributes).to eq(embargoReleaseDate: DateTime.parse('2009-12-14T07:00:00Z'))
+
+        expect(dro.administrative.hasAdminPolicy).to eq 'druid:mx123cd4567'
 
         tags = dro.administrative.releaseTags
         expect(tags).to all(be_instance_of Cocina::Models::DRO::ReleaseTag)

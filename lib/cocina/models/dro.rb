@@ -58,10 +58,14 @@ module Cocina
       # Subschema for administrative concerns
       class Administrative < Dry::Struct
         attribute :releaseTags, Types::Strict::Array.of(ReleaseTag).meta(omittable: true)
+        # Allowing hasAdminPolicy to be omittable for now (until rolled out to consumers),
+        # but I think it's actually required for every DRO
+        attribute :hasAdminPolicy, Types::Coercible::String.optional.default(nil)
 
         def self.from_dynamic(dyn)
           params = {}
           params[:releaseTags] = dyn['releaseTags'].map { |rt| ReleaseTag.from_dynamic(rt) } if dyn['releaseTags']
+          params[:hasAdminPolicy] = dyn['hasAdminPolicy']
           Administrative.new(params)
         end
       end
