@@ -3,21 +3,28 @@
 require 'spec_helper'
 
 RSpec.describe Cocina::Models::AdminPolicy do
+  subject(:admin_policy) { described_class.new(properties) }
+
+  let(:properties) do
+    {
+      externalIdentifier: 'druid:ab123cd4567',
+      type: type,
+      label: 'My admin_policy',
+      version: 3
+    }
+  end
   let(:type) { 'http://cocina.sul.stanford.edu/models/admin_policy.jsonld' }
 
+  describe 'model check methods' do
+    it { is_expected.to be_admin_policy }
+    it { is_expected.not_to be_collection }
+    it { is_expected.not_to be_dro }
+    it { is_expected.not_to be_file }
+    it { is_expected.not_to be_file_set }
+  end
+
   describe 'initialization' do
-    subject(:admin_policy) { described_class.new(properties) }
-
-    context 'with a minimal set' do
-      let(:properties) do
-        {
-          externalIdentifier: 'druid:ab123cd4567',
-          type: type,
-          label: 'My admin_policy',
-          version: 3
-        }
-      end
-
+    context 'with a minimal set, defined above' do
       it 'has properties' do
         expect(admin_policy.externalIdentifier).to eq 'druid:ab123cd4567'
         expect(admin_policy.type).to eq type

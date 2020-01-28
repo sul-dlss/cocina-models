@@ -3,21 +3,28 @@
 require 'spec_helper'
 
 RSpec.describe Cocina::Models::FileSet do
+  subject(:item) { described_class.new(properties) }
+
   let(:file_set_type) { 'http://cocina.sul.stanford.edu/models/fileset.jsonld' }
+  let(:properties) do
+    {
+      externalIdentifier: 'druid:ab123cd4567',
+      type: file_set_type,
+      label: 'My file',
+      version: 3
+    }
+  end
+
+  describe 'model check methods' do
+    it { is_expected.not_to be_admin_policy }
+    it { is_expected.not_to be_collection }
+    it { is_expected.not_to be_dro }
+    it { is_expected.not_to be_file }
+    it { is_expected.to be_file_set }
+  end
 
   describe 'initialization' do
-    subject(:item) { described_class.new(properties) }
-
-    context 'with a minimal set' do
-      let(:properties) do
-        {
-          externalIdentifier: 'druid:ab123cd4567',
-          type: file_set_type,
-          label: 'My file',
-          version: 3
-        }
-      end
-
+    context 'with a minimal set, as defined above' do
       it 'has properties' do
         expect(item.externalIdentifier).to eq 'druid:ab123cd4567'
         expect(item.type).to eq file_set_type

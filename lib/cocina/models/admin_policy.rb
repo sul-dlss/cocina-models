@@ -6,6 +6,8 @@ module Cocina
   module Models
     # An admin policy object.
     class AdminPolicy < Dry::Struct
+      include Checkable
+
       TYPES = [
         Vocab.admin_policy
       ].freeze
