@@ -59,6 +59,8 @@ RSpec.describe Cocina::Models::AdminPolicy do
           access: {
           },
           administrative: {
+            default_object_rights: '<rightsMetadata></rightsMetadata>',
+            registration_workflow: 'wasCrawlPreassemblyWF'
           }
         }
       end
@@ -67,6 +69,8 @@ RSpec.describe Cocina::Models::AdminPolicy do
         expect(admin_policy.externalIdentifier).to eq 'druid:ab123cd4567'
         expect(admin_policy.type).to eq type
         expect(admin_policy.label).to eq 'My admin_policy'
+        expect(admin_policy.administrative.default_object_rights).to eq '<rightsMetadata></rightsMetadata>'
+        expect(admin_policy.administrative.registration_workflow).to eq 'wasCrawlPreassemblyWF'
       end
     end
   end
@@ -82,7 +86,10 @@ RSpec.describe Cocina::Models::AdminPolicy do
           'label' => 'Examination of the memorial of the owners and underwriters ...',
           'version' => 1,
           'access' => {},
-          'administrative' => {},
+          'administrative' => {
+            'default_object_rights' => '<rightsMetadata></rightsMetadata>',
+            'registration_workflow' => 'wasCrawlPreassemblyWF'
+          },
           'identification' => {},
           'structural' => {}
         }
@@ -90,6 +97,8 @@ RSpec.describe Cocina::Models::AdminPolicy do
 
       it 'has properties' do
         expect(admin_policy.externalIdentifier).to eq 'druid:kv840rx2720'
+        expect(admin_policy.administrative.default_object_rights).to eq '<rightsMetadata></rightsMetadata>'
+        expect(admin_policy.administrative.registration_workflow).to eq 'wasCrawlPreassemblyWF'
       end
     end
   end
@@ -131,6 +140,8 @@ RSpec.describe Cocina::Models::AdminPolicy do
             "access": {
             },
             "administrative": {
+              "default_object_rights":"<rightsMetadata></rightsMetadata>",
+              "registration_workflow":"wasCrawlPreassemblyWF"
             }
           }
         JSON
@@ -140,6 +151,8 @@ RSpec.describe Cocina::Models::AdminPolicy do
         expect(admin_policy.attributes).to include(externalIdentifier: 'druid:12343234',
                                                    label: 'my admin_policy',
                                                    type: type)
+
+        expect(admin_policy.administrative).to be_kind_of Cocina::Models::AdminPolicy::Administrative
       end
     end
   end

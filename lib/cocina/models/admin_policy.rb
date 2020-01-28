@@ -22,8 +22,45 @@ module Cocina
 
       # Subschema for administrative concerns
       class Administrative < Dry::Struct
-        def self.from_dynamic(_dyn)
-          params = {}
+        # This was copied from the ActiveFedora defaults: Dor::AdminPolicyObject.new.defaultObjectRights.content
+        DEFAULT_OBJECT_RIGHTS = <<~XML
+          <?xml version="1.0" encoding="UTF-8"?>
+
+          <rightsMetadata>
+             <access type="discover">
+                <machine>
+                   <world/>
+                </machine>
+             </access>
+             <access type="read">
+                <machine>
+                   <world/>
+                </machine>
+             </access>
+             <use>
+                <human type="useAndReproduction"/>
+                <human type="creativeCommons"/>
+                <machine type="creativeCommons" uri=""/>
+                <human type="openDataCommons"/>
+                <machine type="openDataCommons" uri=""/>
+             </use>
+             <copyright>
+                <human/>
+             </copyright>
+          </rightsMetadata>
+        XML
+
+        # An XML blob that is to be used temporarily until we model rights
+        attribute :default_object_rights, Types::Strict::String.optional.default(DEFAULT_OBJECT_RIGHTS)
+
+        # which workflow to start when registering (used by Web Archive apos to start wasCrawlPreassemblyWF)
+        attribute :registration_workflow, Types::String.optional.default(nil)
+
+        def self.from_dynamic(dyn)
+          params = {
+            default_object_rights: dyn['default_object_rights'],
+            registration_workflow: dyn['registration_workflow']
+          }
           Administrative.new(params)
         end
       end
@@ -52,8 +89,7 @@ module Cocina
         }
 
         # params[:access] = Access.from_dynamic(dyn['access']) if dyn['access']
-        # params[:administrative] = Administrative.from_dynamic(dyn['administrative']) if dyn['administrative']
-
+        params[:administrative] = Administrative.from_dynamic(dyn['administrative']) if dyn['administrative']
         AdminPolicy.new(params)
       end
 
