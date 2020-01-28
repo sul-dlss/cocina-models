@@ -6,6 +6,8 @@ module Cocina
   module Models
     # A digital repository object.  See http://sul-dlss.github.io/cocina-models/maps/DRO.json
     class DRO < Dry::Struct
+      include Checkable
+
       TYPES = [
         Vocab.object,
         Vocab.three_dimensional,

@@ -6,6 +6,8 @@ module Cocina
   module Models
     # Metadata for a File Set.  See http://sul-dlss.github.io/cocina-models/maps/Fileset.json
     class FileSet < Dry::Struct
+      include Checkable
+
       TYPES = [
         Vocab.fileset
       ].freeze

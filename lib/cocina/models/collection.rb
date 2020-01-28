@@ -6,6 +6,8 @@ module Cocina
   module Models
     # A digital repository collection.  See http://sul-dlss.github.io/cocina-models/maps/Collection.json
     class Collection < Dry::Struct
+      include Checkable
+
       TYPES = [
         Vocab.collection,
         Vocab.curated_collection,

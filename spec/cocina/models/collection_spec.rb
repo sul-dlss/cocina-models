@@ -3,21 +3,28 @@
 require 'spec_helper'
 
 RSpec.describe Cocina::Models::Collection do
+  subject(:collection) { described_class.new(properties) }
+
   let(:collection_type) { 'http://cocina.sul.stanford.edu/models/collection.jsonld' }
+  let(:properties) do
+    {
+      externalIdentifier: 'druid:ab123cd4567',
+      type: collection_type,
+      label: 'My collection',
+      version: 3
+    }
+  end
+
+  describe 'model check methods' do
+    it { is_expected.not_to be_admin_policy }
+    it { is_expected.to be_collection }
+    it { is_expected.not_to be_dro }
+    it { is_expected.not_to be_file }
+    it { is_expected.not_to be_file_set }
+  end
 
   describe 'initialization' do
-    subject(:collection) { described_class.new(properties) }
-
-    context 'with a minimal set' do
-      let(:properties) do
-        {
-          externalIdentifier: 'druid:ab123cd4567',
-          type: collection_type,
-          label: 'My collection',
-          version: 3
-        }
-      end
-
+    context 'with a minimal set, defined above' do
       it 'has properties' do
         expect(collection.externalIdentifier).to eq 'druid:ab123cd4567'
         expect(collection.type).to eq collection_type
