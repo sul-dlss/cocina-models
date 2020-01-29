@@ -5,7 +5,9 @@ require 'spec_helper'
 RSpec.describe Cocina::Models::DRO do
   subject(:item) { described_class.new(properties) }
 
-  let(:item_type) { 'http://cocina.sul.stanford.edu/models/object.jsonld' }
+  let(:item_type) { Cocina::Models::Vocab.object }
+  let(:fileset_type) { Cocina::Models::Vocab.fileset }
+
   let(:properties) do
     {
       externalIdentifier: 'druid:ab123cd4567',
@@ -80,8 +82,12 @@ RSpec.describe Cocina::Models::DRO do
           },
           structural: {
             contains: [
-              'fileset#1',
-              'fileset#2'
+              Cocina::Models::FileSet.new(type: fileset_type,
+                                          version: 3,
+                                          externalIdentifier: '12343234_1', label: 'Resource #1'),
+              Cocina::Models::FileSet.new(type: fileset_type,
+                                          version: 3,
+                                          externalIdentifier: '12343234_2', label: 'Resource #2')
             ]
           }
         }
@@ -101,7 +107,7 @@ RSpec.describe Cocina::Models::DRO do
         expect(tag.to).to eq 'Searchworks'
         expect(tag.release).to be true
 
-        expect(item.structural.contains).to eq ['fileset#1', 'fileset#2']
+        expect(item.structural.contains).to all(be_instance_of(Cocina::Models::FileSet))
       end
     end
   end
@@ -187,8 +193,16 @@ RSpec.describe Cocina::Models::DRO do
             },
             "structural": {
               "contains": [
-                "fileset#1",
-                "fileset#2"
+                {
+                  "type":"#{fileset_type}",
+                  "version":3,
+                  "externalIdentifier":"12343234_1", "label":"Resource #1"
+                },
+                {
+                  "type":"#{fileset_type}",
+                  "version":3,
+                  "externalIdentifier":"12343234_2", "label":"fileset#2"
+                }
               ]
             }
           }
@@ -206,7 +220,7 @@ RSpec.describe Cocina::Models::DRO do
 
         tags = dro.administrative.releaseTags
         expect(tags).to all(be_instance_of Cocina::Models::DRO::ReleaseTag)
-        expect(dro.structural.contains).to eq ['fileset#1', 'fileset#2']
+        expect(dro.structural.contains).to all(be_instance_of(Cocina::Models::FileSet))
       end
     end
   end

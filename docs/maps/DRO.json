@@ -240,7 +240,7 @@
           "description": "Filesets that contain the digital representations (Files) of the DRO.",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "Fileset.json"
           }
         },
         "hasAgreement": {

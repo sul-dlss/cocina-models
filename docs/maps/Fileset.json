@@ -125,7 +125,7 @@
           "description": "Files that are members of the fileset.",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "File.json"
           }
         },
         "isContainedBy": {

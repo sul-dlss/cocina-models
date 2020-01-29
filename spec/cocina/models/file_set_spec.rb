@@ -58,8 +58,18 @@ RSpec.describe Cocina::Models::FileSet do
           },
           structural: {
             contains: [
-              'file#1',
-              'file#2'
+              Cocina::Models::File.new(
+                type: Cocina::Models::Vocab.file,
+                label: 'file#1',
+                version: 3,
+                externalIdentifier: 'file#1'
+              ),
+              Cocina::Models::File.new(
+                type: Cocina::Models::Vocab.file,
+                label: 'file#2',
+                version: 3,
+                externalIdentifier: 'file#2'
+              )
             ]
           }
         }
@@ -70,7 +80,7 @@ RSpec.describe Cocina::Models::FileSet do
         expect(item.type).to eq file_set_type
         expect(item.label).to eq 'My file'
 
-        expect(item.structural.contains).to eq ['file#1', 'file#2']
+        expect(item.structural.contains).to all(be_instance_of(Cocina::Models::File))
       end
     end
   end
@@ -132,8 +142,18 @@ RSpec.describe Cocina::Models::FileSet do
             "version": 3,
             "structural": {
               "contains": [
-                "file#1",
-                "file#2"
+                {
+                  "type":"#{Cocina::Models::Vocab.file}",
+                  "label":"file#1",
+                  "version":3,
+                  "externalIdentifier":"file#1"
+                },
+                {
+                  "type":"#{Cocina::Models::Vocab.file}",
+                  "label":"file#2",
+                  "version":3,
+                  "externalIdentifier":"file#2"
+                }
               ]
             }
           }
@@ -145,7 +165,7 @@ RSpec.describe Cocina::Models::FileSet do
                                           label: 'nrs_19180211_0003.tiff',
                                           type: file_set_type)
 
-        expect(dro.structural.contains).to eq ['file#1', 'file#2']
+        expect(dro.structural.contains).to all(be_kind_of Cocina::Models::File)
       end
     end
   end

@@ -17,11 +17,11 @@ module Cocina
 
       # Structural sub-schema for the FileSet
       class Structural < Dry::Struct
-        attribute :contains, Types::Strict::Array.of(Types::Coercible::String).meta(omittable: true)
+        attribute :contains, Types::Strict::Array.of(Cocina::Models::File).meta(omittable: true)
 
         def self.from_dynamic(dyn)
           params = {}
-          params[:contains] = dyn['contains'] if dyn['contains']
+          params[:contains] = dyn['contains'].map { |f| Cocina::Models::File.from_dynamic(f) } if dyn['contains']
           Structural.new(params)
         end
       end
