@@ -26,8 +26,11 @@ module Cocina
 
       # Subschema for administrative concerns
       class Administrative < Dry::Struct
-        def self.from_dynamic(_dyn)
+        attribute :releaseTags, Types::Strict::Array.of(ReleaseTag).meta(omittable: true)
+
+        def self.from_dynamic(dyn)
           params = {}
+          params[:releaseTags] = dyn['releaseTags'].map { |rt| ReleaseTag.from_dynamic(rt) } if dyn['releaseTags']
           Administrative.new(params)
         end
       end
@@ -56,7 +59,7 @@ module Cocina
         }
 
         # params[:access] = Access.from_dynamic(dyn['access']) if dyn['access']
-        # params[:administrative] = Administrative.from_dynamic(dyn['administrative']) if dyn['administrative']
+        params[:administrative] = Administrative.from_dynamic(dyn['administrative']) if dyn['administrative']
 
         Collection.new(params)
       end

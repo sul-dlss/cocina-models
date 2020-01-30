@@ -59,6 +59,22 @@ RSpec.describe Cocina::Models::Collection do
           access: {
           },
           administrative: {
+            releaseTags: [
+              {
+                who: 'Justin',
+                what: 'collection',
+                date: '2018-11-23T00:44:52Z',
+                to: 'Searchworks',
+                release: 'true'
+              },
+              {
+                who: 'Other Justin',
+                what: 'self',
+                date: '2017-10-20T15:42:15Z',
+                to: 'Earthworks',
+                release: 'false'
+              }
+            ]
           }
         }
       end
@@ -67,6 +83,12 @@ RSpec.describe Cocina::Models::Collection do
         expect(collection.externalIdentifier).to eq 'druid:ab123cd4567'
         expect(collection.type).to eq collection_type
         expect(collection.label).to eq 'My collection'
+
+        expect(collection.administrative.releaseTags).to all(be_kind_of(Cocina::Models::ReleaseTag))
+        tag = collection.administrative.releaseTags.first
+        expect(tag.date).to eq DateTime.parse '2018-11-23T00:44:52Z'
+        expect(tag.to).to eq 'Searchworks'
+        expect(tag.release).to be true
       end
     end
   end
@@ -131,6 +153,22 @@ RSpec.describe Cocina::Models::Collection do
             "access": {
             },
             "administrative": {
+              "releaseTags": [
+                {
+                  "who":"Justin",
+                  "what":"collection",
+                  "date":"2018-11-23T00:44:52Z",
+                  "to":"Searchworks",
+                  "release":true
+                },
+                {
+                  "who":"Other Justin",
+                  "what":"self",
+                  "date":"2017-10-20T15:42:15Z",
+                  "to":"Searchworks",
+                  "release":false
+                }
+              ]
             }
           }
         JSON
@@ -140,6 +178,8 @@ RSpec.describe Cocina::Models::Collection do
         expect(collection.attributes).to include(externalIdentifier: 'druid:12343234',
                                                  label: 'my collection',
                                                  type: collection_type)
+        tags = collection.administrative.releaseTags
+        expect(tags).to all(be_instance_of Cocina::Models::ReleaseTag)
       end
     end
   end
