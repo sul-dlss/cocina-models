@@ -64,12 +64,12 @@
       "properties": {
         "height": {
           "description": "Height in pixels",
-          "type": "integer",
+          "type": "integer"
         },
         "width": {
           "description": "Width in pixels",
-          "type": "integer",
-        },
+          "type": "integer"
+        }
       }
     },
     "size": {
