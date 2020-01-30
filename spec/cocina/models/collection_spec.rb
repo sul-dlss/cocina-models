@@ -59,6 +59,7 @@ RSpec.describe Cocina::Models::Collection do
           access: {
           },
           administrative: {
+            hasAdminPolicy: 'druid:mx123cd4567',
             releaseTags: [
               {
                 who: 'Justin',
@@ -84,6 +85,7 @@ RSpec.describe Cocina::Models::Collection do
         expect(collection.type).to eq collection_type
         expect(collection.label).to eq 'My collection'
 
+        expect(collection.administrative.hasAdminPolicy).to eq 'druid:mx123cd4567'
         expect(collection.administrative.releaseTags).to all(be_kind_of(Cocina::Models::ReleaseTag))
         tag = collection.administrative.releaseTags.first
         expect(tag.date).to eq DateTime.parse '2018-11-23T00:44:52Z'
@@ -153,6 +155,7 @@ RSpec.describe Cocina::Models::Collection do
             "access": {
             },
             "administrative": {
+              "hasAdminPolicy":"druid:mx123cd4567",
               "releaseTags": [
                 {
                   "who":"Justin",
@@ -178,6 +181,9 @@ RSpec.describe Cocina::Models::Collection do
         expect(collection.attributes).to include(externalIdentifier: 'druid:12343234',
                                                  label: 'my collection',
                                                  type: collection_type)
+
+        expect(collection.administrative.hasAdminPolicy).to eq 'druid:mx123cd4567'
+
         tags = collection.administrative.releaseTags
         expect(tags).to all(be_instance_of Cocina::Models::ReleaseTag)
       end
