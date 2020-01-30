@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "title": "Release Tag",
+  "description": "A tag that indicates the item or collection should be released.",
+  "type": "object",
+  "required": ["to", "what", "date", "who", "release"],
+  "properties": {
+    "to": {
+      "description": "What platform is it released to",
+      "type": "string",
+      "enum": [
+        "Searchworks",
+        "Earthworks"
+      ]
+    },
+    "what": {
+      "description": "What is being released. This item or the whole collection.",
+      "type": "string",
+      "enum": [
+        "self",
+        "collection"
+      ]
+    },
+    "date": {
+      "description": "When did this action happen",
+      "type": "string",
+      "format": "date-time"
+    },
+    "who": {
+      "description": "Who did this release",
+      "type": "string",
+    },
+    "release": {
+      "description": "Should it be released or withdrawn. Release is coded as true and withdraw as false",
+      "type": "boolean"
+    },
+  }
+}
