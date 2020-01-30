@@ -19,7 +19,7 @@
     },
     "depositor": {
       "description": "The Agent (User, Group, Application, Department, other) that deposited the File into SDR.",
-      "$ref": "Agent.json"
+      "$ref": "/Agent"
     },
     "externalIdentifier": {
       "description": "Identifier for the resource within the SDR architecture but outside of the repository. UUID. Constant across resource versions. What clients will use calling the repository. Same as `identification.identifier`",
@@ -153,7 +153,7 @@
           "description": "The Agent (User, Group, Application, Department, other) that remediated this File in SDR.",
           "type": "array",
           "items": {
-            "$ref": "Agent.json"
+            "$ref": "/Agent"
           }
         }
       }
@@ -188,7 +188,7 @@
         },
         "isTargetOf": {
           "description": "An Annotation instance that applies to this File.",
-          "type": ["string", "null"]
+          "type": "string"
         }
       }
     }

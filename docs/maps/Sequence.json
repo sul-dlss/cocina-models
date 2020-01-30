@@ -28,11 +28,9 @@
     "members": {
       "description": "Identifiers for Members in their stated Order for the Sequence.",
       "type": "array",
-      "items": [
-        {
-          "type": "string"
-        }
-      ]
+      "items": {
+        "type": "string"
+      }
     }
   }
 }

@@ -41,7 +41,7 @@
     },
     "depositor": {
       "description": "The Agent (User, Group, Application, Department, other) that deposited the DRO into SDR.",
-      "$ref": "Agent.json"
+      "$ref": "/Agent"
     },
     "externalIdentifier": {
       "description": "Identifier for the resource within the SDR architecture but outside of the repository. DRUID or UUID depending on resource type. Constant across resource versions. What clients will use calling the repository. Same as `identification.identifier`",
@@ -148,7 +148,7 @@
           "description": "The Agent (User, Group, Application, Department, other) that remediated a DRO in SDR.",
           "type": "array",
           "items": {
-            "$ref": "Agent.json"
+            "$ref": "/Agent"
           }
         }
       }
@@ -227,7 +227,7 @@
           "description": "Agents who are required to approve deposit or management of this resource in SDR.",
           "type": "array",
           "items": {
-            "$ref": "Agent.json"
+            "$ref": "/Agent"
           }
         }
       }
@@ -241,7 +241,7 @@
           "description": "Filesets that contain the digital representations (Files) of the DRO.",
           "type": "array",
           "items": {
-            "$ref": "Fileset.json"
+            "$ref": "/Fileset"
           }
         },
         "hasAgreement": {
@@ -251,20 +251,20 @@
         "hasMember": {
           "description": "Component or 'children' digital repository objects that are a part or portion of this 'parent' or aggregate DRO.",
           "type": "array",
-          "items": [{
+          "items": {
             "type": "string"
-          }]
+          }
         },
         "isTargetOf": {
           "description": "An Annotation instance that applies to the DRO.",
-          "type": ["string", "null"]
+          "type": "string"
         },
         "hasMemberOrders": {
           "description": "Provided sequences or orderings of members of the Object, including some metadata about each sequence (i.e. sequence label, sequence type, if the sequence is primary, etc.).",
           "type": "array",
-          "items": [{
-            "$ref": "Sequence.json"
-          }]
+          "items": {
+            "$ref": "/Sequence"
+          }
         }
       }
     }

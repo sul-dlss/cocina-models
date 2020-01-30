@@ -19,7 +19,7 @@
     },
     "depositor": {
       "description": "The Agent (User, Group, Application, Department, other) that deposited the Fileset into SDR.",
-      "$ref": "Agent.json"
+      "$ref": "/Agent"
     },
     "label": {
       "description": "Primary processing label (can be same as title) for a Fileset.",
@@ -97,7 +97,7 @@
           "description": "The Agent (User, Group, Application, Department, other) that remediated a Fileset in SDR.",
           "type": "array",
           "items": {
-            "$ref": "Agent.json"
+            "$ref": "/Agent"
           }
         }
       }
@@ -126,7 +126,7 @@
           "description": "Files that are members of the fileset.",
           "type": "array",
           "items": {
-            "$ref": "File.json"
+            "$ref": "/File"
           }
         },
         "isContainedBy": {
@@ -135,7 +135,7 @@
         },
         "isTargetOf": {
           "description": "An Annotation instance that applies to this Fileset.",
-          "type": ["string", "null"]
+          "type": "string"
         }
       }
     }

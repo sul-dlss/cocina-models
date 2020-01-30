@@ -1,0 +1,9 @@
+{
+ "description": "Hello world prmd API",
+ "id": "hello-prmd",
+ "links": [{
+   "href": "https://api.hello.com",
+   "rel": "self"
+ }],
+ "title": "Hello Prmd"
+}
