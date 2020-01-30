@@ -125,6 +125,13 @@
           "description": "Administrative or Internal project this resource is a part of.",
           "type": "string"
         },
+        "releaseTags": {
+          "description": "Tags for release",
+          "type": "array",
+          "items": {
+            "$ref": "ReleaseTag.json"
+          }
+        },
         "sdrPreserve": {
           "description": "If this resource should be sent to Preservation.",
           "type": "boolean"

@@ -101,7 +101,7 @@ RSpec.describe Cocina::Models::DRO do
         expect(item.access.embargoReleaseDate).to eq DateTime.parse('2009-12-14T07:00:00Z')
 
         expect(item.administrative.hasAdminPolicy).to eq 'druid:mx123cd4567'
-        expect(item.administrative.releaseTags).to all(be_kind_of(Cocina::Models::DRO::ReleaseTag))
+        expect(item.administrative.releaseTags).to all(be_kind_of(Cocina::Models::ReleaseTag))
         tag = item.administrative.releaseTags.first
         expect(tag.date).to eq DateTime.parse '2018-11-23T00:44:52Z'
         expect(tag.to).to eq 'Searchworks'
@@ -180,14 +180,14 @@ RSpec.describe Cocina::Models::DRO do
                   "what":"collection",
                   "date":"2018-11-23T00:44:52Z",
                   "to":"Searchworks",
-                  "release":"true"
+                  "release":true
                 },
                 {
                   "who":"Other Justin",
                   "what":"self",
                   "date":"2017-10-20T15:42:15Z",
                   "to":"Searchworks",
-                  "release":"false"
+                  "release":false
                 }
               ]
             },
@@ -219,7 +219,7 @@ RSpec.describe Cocina::Models::DRO do
         expect(dro.administrative.hasAdminPolicy).to eq 'druid:mx123cd4567'
 
         tags = dro.administrative.releaseTags
-        expect(tags).to all(be_instance_of Cocina::Models::DRO::ReleaseTag)
+        expect(tags).to all(be_instance_of Cocina::Models::ReleaseTag)
         expect(dro.structural.contains).to all(be_instance_of(Cocina::Models::FileSet))
       end
     end
