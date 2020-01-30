@@ -1,5 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-06/schema#",
+  "id": "http://cocina.sul.stanford.edu/schemas/Agent",
   "title": "Agent",
   "description": "An Agent - Person, Group, Organization, or other Acting body.",
   "type": "object",

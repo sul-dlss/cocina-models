@@ -1,5 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-06/schema#",
+  "id": "http://cocina.sul.stanford.edu/schemas/Fileset",
   "title": "Fileset",
   "description": "Relevant groupings of Files. Also called a File Grouping.",
   "type": "object",
