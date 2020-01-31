@@ -25,6 +25,16 @@ RSpec.describe Cocina::Models::DRO do
     it { is_expected.not_to be_file_set }
   end
 
+  describe Cocina::Models::DRO::Administrative do
+    let(:instance) { described_class.new }
+
+    describe '#releaseTags' do
+      subject { instance.releaseTags }
+
+      it { is_expected.to be_empty }
+    end
+  end
+
   describe 'initialization' do
     context 'with a minimal set, as defined above' do
       it 'has properties' do
