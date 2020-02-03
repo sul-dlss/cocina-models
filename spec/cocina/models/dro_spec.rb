@@ -81,6 +81,7 @@ RSpec.describe Cocina::Models::DRO do
             ]
           },
           structural: {
+            isMemberOf: 'druid:bc777df7777',
             contains: [
               Cocina::Models::FileSet.new(type: fileset_type,
                                           version: 3,
@@ -108,6 +109,7 @@ RSpec.describe Cocina::Models::DRO do
         expect(tag.release).to be true
 
         expect(item.structural.contains).to all(be_instance_of(Cocina::Models::FileSet))
+        expect(item.structural.isMemberOf).to eq 'druid:bc777df7777'
       end
     end
   end
@@ -203,7 +205,8 @@ RSpec.describe Cocina::Models::DRO do
                   "version":3,
                   "externalIdentifier":"12343234_2", "label":"fileset#2"
                 }
-              ]
+              ],
+              "isMemberOf":"druid:bc777df7777"
             }
           }
         JSON
@@ -221,6 +224,7 @@ RSpec.describe Cocina::Models::DRO do
         tags = dro.administrative.releaseTags
         expect(tags).to all(be_instance_of Cocina::Models::ReleaseTag)
         expect(dro.structural.contains).to all(be_instance_of(Cocina::Models::FileSet))
+        expect(dro.structural.isMemberOf).to eq 'druid:bc777df7777'
       end
     end
   end

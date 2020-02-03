@@ -254,6 +254,10 @@
             "type": "string"
           }]
         },
+        "isMemberOf": {
+          "description": "Collection that this DRO is a member of",
+          "type": "string"
+        },
         "isTargetOf": {
           "description": "An Annotation instance that applies to the DRO.",
           "type": ["string", "null"]
