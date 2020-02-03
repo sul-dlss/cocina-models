@@ -12,6 +12,20 @@ module Cocina
         Vocab.file
       ].freeze
 
+      # Represents the administration of the file
+      class Administrative < Dry::Struct
+        attribute :sdrPreserve, Types::Params::Bool.optional.default(false)
+        attribute :shelve, Types::Params::Bool.optional.default(false)
+
+        def self.from_dynamic(dyn)
+          params = {
+            sdrPreserve: dyn['sdrPreserve'],
+            shelve: dyn['shelve']
+          }
+          Administrative.new(params)
+        end
+      end
+
       class Identification < Dry::Struct
       end
 
@@ -48,6 +62,7 @@ module Cocina
         end
       end
 
+      attribute(:administrative, Administrative.default { Administrative.new })
       attribute :externalIdentifier, Types::Strict::String
       attribute :type, Types::String.enum(*TYPES)
       attribute :label, Types::Strict::String
@@ -69,6 +84,7 @@ module Cocina
           size: dyn['size'],
           use: dyn['use']
         }
+        params[:administrative] = Administrative.from_dynamic(dyn['administrative']) if dyn['administrative']
         params[:presentation] = Presentation.from_dynamic(dyn['presentation']) if dyn['presentation']
         if dyn['hasMessageDigests']
           params[:hasMessageDigests] = dyn['hasMessageDigests'].map { |p| Fixity.from_dynamic(p) }
