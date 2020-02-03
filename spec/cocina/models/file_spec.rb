@@ -50,6 +50,9 @@ RSpec.describe Cocina::Models::File do
     context 'with a all properties' do
       let(:properties) do
         {
+          access: {
+            access: 'citation-only'
+          },
           externalIdentifier: 'druid:ab123cd4567',
           type: file_type,
           label: 'My file',
@@ -72,6 +75,8 @@ RSpec.describe Cocina::Models::File do
       end
 
       it 'has properties' do
+        expect(item.access.access).to eq 'citation-only'
+
         expect(item.externalIdentifier).to eq 'druid:ab123cd4567'
         expect(item.type).to eq file_type
         expect(item.label).to eq 'My file'
@@ -143,7 +148,9 @@ RSpec.describe Cocina::Models::File do
       let(:json) do
         <<~JSON
           {
-
+            "access": {
+              "access":"world"
+            },
             "administrative":{
               "sdrPreserve":false,
               "shelve":true
@@ -176,6 +183,8 @@ RSpec.describe Cocina::Models::File do
         expect(dro.attributes).to include(externalIdentifier: 'druid:12343234',
                                           label: 'nrs_19180211_0003.tiff',
                                           type: file_type)
+
+        expect(dro.access.access).to eq 'world'
 
         digests = dro.hasMessageDigests
         expect(digests).to all(be_instance_of Cocina::Models::File::Fixity)
