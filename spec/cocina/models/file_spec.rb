@@ -55,6 +55,8 @@ RSpec.describe Cocina::Models::File do
           label: 'My file',
           version: 3,
           administrative: {
+            shelve: true,
+            sdrPreserve: false
           },
           hasMessageDigests: [
             {
@@ -78,6 +80,9 @@ RSpec.describe Cocina::Models::File do
         fixity = item.hasMessageDigests.first
         expect(fixity.type).to eq 'md5'
         expect(fixity.digest).to eq 'd57db4241d7da0eecba5b33abf13f448'
+
+        expect(item.administrative.shelve).to be true
+        expect(item.administrative.sdrPreserve).to be false
       end
     end
   end
@@ -138,6 +143,11 @@ RSpec.describe Cocina::Models::File do
       let(:json) do
         <<~JSON
           {
+
+            "administrative":{
+              "sdrPreserve":false,
+              "shelve":true
+            },
             "externalIdentifier":"druid:12343234",
             "type":"#{file_type}",
             "label":"nrs_19180211_0003.tiff",
@@ -175,6 +185,9 @@ RSpec.describe Cocina::Models::File do
         expect(dro.presentation.width).to eq 4437
         expect(dro.size).to eq 25_243_531
         expect(dro.use).to eq 'original'
+
+        expect(dro.administrative.shelve).to be true
+        expect(dro.administrative.sdrPreserve).to be false
       end
     end
   end
