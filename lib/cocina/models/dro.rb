@@ -58,9 +58,11 @@ module Cocina
       # Structural sub-schema for the DRO
       class Structural < Dry::Struct
         attribute :contains, Types::Strict::Array.of(FileSet).meta(omittable: true)
+        attribute :isMemberOf, Types::Strict::String.meta(omittable: true)
 
         def self.from_dynamic(dyn)
           params = {}
+          params[:isMemberOf] = dyn['isMemberOf'] if dyn['isMemberOf']
           params[:contains] = dyn['contains'].map { |fs| FileSet.from_dynamic(fs) } if dyn['contains']
           Structural.new(params)
         end
