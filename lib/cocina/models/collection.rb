@@ -26,7 +26,7 @@ module Cocina
 
       # Subschema for administrative concerns
       class Administrative < Dry::Struct
-        attribute :releaseTags, Types::Strict::Array.of(ReleaseTag).meta(omittable: true)
+        attribute :releaseTags, Types::Strict::Array.of(ReleaseTag).default([].freeze)
         # Allowing hasAdminPolicy to be omittable for now (until rolled out to consumers),
         # but I think it's actually required for every DRO
         attribute :hasAdminPolicy, Types::Coercible::String.optional.default(nil)

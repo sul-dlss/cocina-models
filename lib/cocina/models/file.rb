@@ -69,8 +69,8 @@ module Cocina
       attribute :filename, Types::String.optional.default(nil)
       attribute :use, Types::String.enum('original', 'preservation', 'access').optional.default(nil)
       attribute :size, Types::Coercible::Integer.optional.default(nil)
-      attribute :hasMessageDigests, Types::Strict::Array.of(Fixity).default([])
-      attribute :presentation, Presentation.optional.default(Presentation.new)
+      attribute :hasMessageDigests, Types::Strict::Array.of(Fixity).default([].freeze)
+      attribute(:presentation, Presentation.optional.default { Presentation.new })
       attribute :version, Types::Coercible::Integer
       attribute(:identification, Identification.default { Identification.new })
       attribute(:structural, Structural.default { Structural.new })
