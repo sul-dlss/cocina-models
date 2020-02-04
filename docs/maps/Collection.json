@@ -1,5 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-06/schema#",
+  "id": "http://cocina.sul.stanford.edu/schemas/Collection",
   "title": "Digital Repository Collection",
   "description": "A group of Digital Repository Objects that indicate some type of conceptual grouping within the domain that is worth reusing across the system.",
   "type": "object",
@@ -30,7 +31,7 @@
     },
     "depositor": {
       "description": "The Agent (User, Group, Application, Department, other) that deposited the Collection into SDR.",
-      "$ref": "Agent.json"
+      "$ref": "/Agent"
     },
     "externalIdentifier": {
       "description": "Identifier for the resource within the SDR architecture but outside of the repository. DRUID or UUID depending on resource type. Constant across resource versions. What clients will use calling the repository. Same as `identification.identifier`",
@@ -140,7 +141,7 @@
           "description": "The Agent (User, Group, Application, Department, other) that remediated a Collection in SDR.",
           "type": "array",
           "items": {
-            "$ref": "Agent.json"
+            "$ref": "/Agent"
           }
         }
       }
@@ -219,22 +220,20 @@
         "hasMember": {
           "description": "Component digital repository objects or collections that are a part of this collection.",
           "type": "array",
-          "items": [{
+          "items": {
             "type": "string"
-          }]
+          }
         },
         "isTargetOf": {
           "description": "An Annotation instance that applies to the Collection.",
-          "type": ["string", "null"]
+          "type": "string"
         },
         "hasMemberOrders": {
           "description": "Provided sequences or orderings of members of the Collection, including some metadata about each sequence (i.e. sequence label, sequence type, if the sequence is primary, etc.).",
           "type": "array",
-          "items": [
-            {
-              "$ref": "Sequence.json"
-            }
-          ]
+          "items": {
+              "$ref": "/Sequence"
+          }
         }
       }
     }
