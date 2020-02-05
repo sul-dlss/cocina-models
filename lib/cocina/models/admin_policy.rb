@@ -56,11 +56,16 @@ module Cocina
         # which workflow to start when registering (used by Web Archive apos to start wasCrawlPreassemblyWF)
         attribute :registration_workflow, Types::String.optional.default(nil)
 
+        # Allowing hasAdminPolicy to be omittable for now (until rolled out to consumers),
+        # but I think it's actually required for every Admin Policy
+        attribute :hasAdminPolicy, Types::Coercible::String.optional.default(nil)
+
         def self.from_dynamic(dyn)
           params = {
             default_object_rights: dyn['default_object_rights'],
             registration_workflow: dyn['registration_workflow']
           }
+          params[:hasAdminPolicy] = dyn['hasAdminPolicy']
           Administrative.new(params)
         end
       end
