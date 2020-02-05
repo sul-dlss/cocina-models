@@ -103,7 +103,7 @@
       "required": ["access", "download"],
       "properties": {
         "access": {
-          "description": "Access level for the File.",
+          "description": "Access level for the File. If \"dark\" this won't go into public xml contentMetadata.",
           "type": "string",
           "enum": ["world", "stanford", "location-based", "citation-only", "dark"]
         },

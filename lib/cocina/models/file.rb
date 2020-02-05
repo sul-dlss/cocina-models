@@ -12,12 +12,29 @@ module Cocina
         Vocab.file
       ].freeze
 
+      # Represents access controls on the file
+      class Access < Dry::Struct
+        attribute :access, Types::String.default('dark')
+                                        .enum('world', 'stanford', 'location-based', 'citation-only', 'dark')
+
+        def self.from_dynamic(dyn)
+          return unless dyn
+
+          params = {}
+          params[:access] = dyn['access'] if dyn['access']
+
+          Access.new(params)
+        end
+      end
+
       # Represents the administration of the file
       class Administrative < Dry::Struct
         attribute :sdrPreserve, Types::Params::Bool.optional.default(false)
         attribute :shelve, Types::Params::Bool.optional.default(false)
 
         def self.from_dynamic(dyn)
+          return unless dyn
+
           params = {
             sdrPreserve: dyn['sdrPreserve'],
             shelve: dyn['shelve']
@@ -53,6 +70,8 @@ module Cocina
         attribute :width, Types::Coercible::Integer.optional.default(nil)
 
         def self.from_dynamic(dyn)
+          return unless dyn
+
           params = {
             height: dyn['height'],
             width: dyn['width']
@@ -62,6 +81,7 @@ module Cocina
         end
       end
 
+      attribute(:access, Access.optional.default { Access.new })
       attribute(:administrative, Administrative.default { Administrative.new })
       attribute :externalIdentifier, Types::Strict::String
       attribute :type, Types::String.enum(*TYPES)
@@ -84,11 +104,10 @@ module Cocina
           size: dyn['size'],
           use: dyn['use']
         }
-        params[:administrative] = Administrative.from_dynamic(dyn['administrative']) if dyn['administrative']
-        params[:presentation] = Presentation.from_dynamic(dyn['presentation']) if dyn['presentation']
-        if dyn['hasMessageDigests']
-          params[:hasMessageDigests] = dyn['hasMessageDigests'].map { |p| Fixity.from_dynamic(p) }
-        end
+        params[:administrative] = Administrative.from_dynamic(dyn['administrative'])
+        params[:presentation] = Presentation.from_dynamic(dyn['presentation'])
+        params[:access] = Access.from_dynamic(dyn['access'])
+        params[:hasMessageDigests] = Array(dyn['hasMessageDigests']).map { |p| Fixity.from_dynamic(p) }
         File.new(params)
       end
 
