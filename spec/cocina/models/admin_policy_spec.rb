@@ -49,7 +49,7 @@ RSpec.describe Cocina::Models::AdminPolicy do
       end
     end
 
-    context 'with a all properties' do
+    context 'with all properties' do
       let(:properties) do
         {
           externalIdentifier: 'druid:ab123cd4567',
@@ -60,7 +60,8 @@ RSpec.describe Cocina::Models::AdminPolicy do
           },
           administrative: {
             default_object_rights: '<rightsMetadata></rightsMetadata>',
-            registration_workflow: 'wasCrawlPreassemblyWF'
+            registration_workflow: 'wasCrawlPreassemblyWF',
+            hasAdminPolicy: 'druid:mx123cd4567'
           }
         }
       end
@@ -69,6 +70,7 @@ RSpec.describe Cocina::Models::AdminPolicy do
         expect(admin_policy.externalIdentifier).to eq 'druid:ab123cd4567'
         expect(admin_policy.type).to eq type
         expect(admin_policy.label).to eq 'My admin_policy'
+        expect(admin_policy.administrative.hasAdminPolicy).to eq 'druid:mx123cd4567'
         expect(admin_policy.administrative.default_object_rights).to eq '<rightsMetadata></rightsMetadata>'
         expect(admin_policy.administrative.registration_workflow).to eq 'wasCrawlPreassemblyWF'
       end
@@ -88,7 +90,8 @@ RSpec.describe Cocina::Models::AdminPolicy do
           'access' => {},
           'administrative' => {
             'default_object_rights' => '<rightsMetadata></rightsMetadata>',
-            'registration_workflow' => 'wasCrawlPreassemblyWF'
+            'registration_workflow' => 'wasCrawlPreassemblyWF',
+            'hasAdminPolicy' => 'druid:mx123cd4567'
           },
           'identification' => {},
           'structural' => {}
@@ -97,6 +100,7 @@ RSpec.describe Cocina::Models::AdminPolicy do
 
       it 'has properties' do
         expect(admin_policy.externalIdentifier).to eq 'druid:kv840rx2720'
+        expect(admin_policy.administrative.hasAdminPolicy).to eq 'druid:mx123cd4567'
         expect(admin_policy.administrative.default_object_rights).to eq '<rightsMetadata></rightsMetadata>'
         expect(admin_policy.administrative.registration_workflow).to eq 'wasCrawlPreassemblyWF'
       end
@@ -141,7 +145,8 @@ RSpec.describe Cocina::Models::AdminPolicy do
             },
             "administrative": {
               "default_object_rights":"<rightsMetadata></rightsMetadata>",
-              "registration_workflow":"wasCrawlPreassemblyWF"
+              "registration_workflow":"wasCrawlPreassemblyWF",
+              "hasAdminPolicy":"druid:mx123cd4567"
             }
           }
         JSON
@@ -153,6 +158,7 @@ RSpec.describe Cocina::Models::AdminPolicy do
                                                    type: type)
 
         expect(admin_policy.administrative).to be_kind_of Cocina::Models::AdminPolicy::Administrative
+        expect(admin_policy.administrative.hasAdminPolicy).to eq 'druid:mx123cd4567'
       end
     end
   end
