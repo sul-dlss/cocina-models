@@ -134,7 +134,7 @@
           "description": "Tags for release",
           "type": "array",
           "items": {
-            "$ref": "ReleaseTag.json"
+            "$ref": "/ReleaseTag"
           }
         },
         "sdrPreserve": {

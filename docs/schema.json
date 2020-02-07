@@ -45,6 +45,7 @@
         "version",
         "administrative",
         "access",
+        "description",
         "identification",
         "structural"
       ],
@@ -83,6 +84,10 @@
         "depositor": {
           "description": "The Agent (User, Group, Application, Department, other) that deposited the Collection into SDR.",
           "$ref": "#/definitions/Agent"
+        },
+        "description": {
+          "description": "Descriptive metadata for the DRO.",
+          "$ref": "#/definitions/Description"
         },
         "externalIdentifier": {
           "description": "Identifier for the resource within the SDR architecture but outside of the repository. DRUID or UUID depending on resource type. Constant across resource versions. What clients will use calling the repository. Same as `identification.identifier`",
@@ -237,6 +242,15 @@
               "type": [
                 "string"
               ]
+            },
+            "releaseTags": {
+              "description": "Tags for release",
+              "type": [
+                "array"
+              ],
+              "items": {
+                "$ref": "#/definitions/ReleaseTag"
+              }
             },
             "sdrPreserve": {
               "description": "If this resource should be sent to Preservation.",
@@ -415,6 +429,7 @@
         "version",
         "administrative",
         "access",
+        "description",
         "identification",
         "structural"
       ],
@@ -624,6 +639,15 @@
                 "string"
               ]
             },
+            "releaseTags": {
+              "description": "Tags for release",
+              "type": [
+                "array"
+              ],
+              "items": {
+                "$ref": "#/definitions/ReleaseTag"
+              }
+            },
             "sdrPreserve": {
               "description": "If this resource should be sent to Preservation.",
               "type": [
@@ -640,6 +664,10 @@
               }
             }
           }
+        },
+        "description": {
+          "description": "Descriptive metadata for the DRO.",
+          "$ref": "#/definitions/Description"
         },
         "identification": {
           "description": "Identifying information for the DRO.",
@@ -798,6 +826,12 @@
                 ]
               }
             },
+            "isMemberOf": {
+              "description": "Collection that this DRO is a member of",
+              "type": [
+                "string"
+              ]
+            },
             "isTargetOf": {
               "description": "An Annotation instance that applies to the DRO.",
               "type": [
@@ -813,6 +847,28 @@
                 "$ref": "#/definitions/Sequence"
               }
             }
+          }
+        }
+      }
+    },
+    "Description": {
+      "$schema": "http://json-schema.org/draft-06/schema#",
+      "title": "Description",
+      "description": "The description of a work",
+      "type": [
+        "object"
+      ],
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "description": "The title of the item.",
+          "type": [
+            "array"
+          ],
+          "items": {
+            "$ref": "#/definitions/Title"
           }
         }
       }
@@ -983,7 +1039,7 @@
           ],
           "properties": {
             "access": {
-              "description": "Access level for the File.",
+              "description": "Access level for the File. If \"dark\" this won't go into public xml contentMetadata.",
               "type": [
                 "string"
               ],
@@ -1359,6 +1415,62 @@
         }
       }
     },
+    "ReleaseTag": {
+      "$schema": "http://json-schema.org/draft-06/schema#",
+      "title": "Release Tag",
+      "description": "A tag that indicates the item or collection should be released.",
+      "type": [
+        "object"
+      ],
+      "required": [
+        "to",
+        "what",
+        "date",
+        "who",
+        "release"
+      ],
+      "properties": {
+        "to": {
+          "description": "What platform is it released to",
+          "type": [
+            "string"
+          ],
+          "enum": [
+            "Searchworks",
+            "Earthworks"
+          ]
+        },
+        "what": {
+          "description": "What is being released. This item or the whole collection.",
+          "type": [
+            "string"
+          ],
+          "enum": [
+            "self",
+            "collection"
+          ]
+        },
+        "date": {
+          "description": "When did this action happen",
+          "type": [
+            "string"
+          ],
+          "format": "date-time"
+        },
+        "who": {
+          "description": "Who did this release",
+          "type": [
+            "string"
+          ]
+        },
+        "release": {
+          "description": "Should it be released or withdrawn. Release is coded as true and withdraw as false",
+          "type": [
+            "boolean"
+          ]
+        }
+      }
+    },
     "Sequence": {
       "$schema": "http://json-schema.org/draft-06/schema#",
       "title": "Resource Sequence",
@@ -1413,6 +1525,32 @@
           }
         }
       }
+    },
+    "Title": {
+      "$schema": "http://json-schema.org/draft-06/schema#",
+      "title": "Title",
+      "description": "A title of a work",
+      "type": [
+        "object"
+      ],
+      "required": [
+        "titleFull",
+        "primary"
+      ],
+      "properties": {
+        "primary": {
+          "description": "Is this the primary title for the object",
+          "type": [
+            "boolean"
+          ]
+        },
+        "titleFull": {
+          "description": "The full title for the object",
+          "type": [
+            "string"
+          ]
+        }
+      }
     }
   },
   "properties": {
@@ -1425,14 +1563,23 @@
     "DRO": {
       "$ref": "#/definitions/DRO"
     },
+    "Description": {
+      "$ref": "#/definitions/Description"
+    },
     "File": {
       "$ref": "#/definitions/File"
     },
     "Fileset": {
       "$ref": "#/definitions/Fileset"
     },
+    "ReleaseTag": {
+      "$ref": "#/definitions/ReleaseTag"
+    },
     "Sequence": {
       "$ref": "#/definitions/Sequence"
+    },
+    "Title": {
+      "$ref": "#/definitions/Title"
     }
   },
   "description": "Hello world prmd API",
