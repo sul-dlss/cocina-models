@@ -1,5 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-06/schema#",
+  "id": "http://cocina.sul.stanford.edu/schemas/ReleaseTag",
   "title": "Release Tag",
   "description": "A tag that indicates the item or collection should be released.",
   "type": "object",
@@ -28,11 +29,11 @@
     },
     "who": {
       "description": "Who did this release",
-      "type": "string",
+      "type": "string"
     },
     "release": {
       "description": "Should it be released or withdrawn. Release is coded as true and withdraw as false",
       "type": "boolean"
-    },
+    }
   }
 }

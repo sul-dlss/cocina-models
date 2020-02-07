@@ -36,12 +36,14 @@ A group of Digital Repository Objects that indicate some type of conceptual grou
 | **administrative:isDescribedBy** | *string* | PURL/XML file that is a traditional representation of the metadata for the Collection. | `"example"` |
 | **administrative:lastUpdated** | *date-time* | When the resource in SDR was last updated. | `"2015-01-01T12:00:00Z"` |
 | **administrative:partOfProject** | *string* | Administrative or Internal project this resource is a part of. | `"example"` |
+| **administrative:releaseTags** | *array* | Tags for release | `[{"to":"Searchworks","what":"self","date":"2015-01-01T12:00:00Z","who":"example","release":true}]` |
 | **administrative:remediatedBy** | *array* | The Agent (User, Group, Application, Department, other) that remediated a Collection in SDR. | `[{"name":"example","sunetID":"example"}]` |
 | **administrative:sdrPreserve** | *boolean* | If this resource should be sent to Preservation. | `true` |
 | **citation** | *string* | Citation for the resource, including identifier, label, version, and a persistent URL to the object with SDR at the very least. | `"example"` |
 | **dedupeIdentifier** | *string* | Identifier retrieved from identification.sourceId that stands for analog or source identifier that this resource is a digital representation of. | `"example"` |
 | **depositor:name** | *string* | Primary label or name for an Agent. | `"example"` |
 | **depositor:sunetID** | *string* | Stanford University NetID for the Agent. | `"example"` |
+| **description:title** | *array* | The title of the item. | `[{"primary":true,"titleFull":"example"}]` |
 | **externalIdentifier** | *string* | Identifier for the resource within the SDR architecture but outside of the repository. DRUID or UUID depending on resource type. Constant across resource versions. What clients will use calling the repository. Same as `identification.identifier` | `"example"` |
 | **followingVersion** | *string* | Following version for the Collection within SDR. | `"example"` |
 | **identification:DOI** | *string* | Digital Object Identifier (DOI) for the Collection within this repository. | `"example"` |
@@ -90,12 +92,14 @@ Domain-defined abstraction of a 'work'. Digital Repository Objects' abstraction 
 | **administrative:isDescribedBy** | *string* | Pointer to the PURL/XML file that is a traditional representation of the metadata for the DRO. | `"example"` |
 | **administrative:lastUpdated** | *date-time* | When the resource in SDR was last updated. | `"2015-01-01T12:00:00Z"` |
 | **administrative:partOfProject** | *string* | Administrative or Internal project this resource is a part of. | `"example"` |
+| **administrative:releaseTags** | *array* | Tags for release | `[{"to":"Searchworks","what":"self","date":"2015-01-01T12:00:00Z","who":"example","release":true}]` |
 | **administrative:remediatedBy** | *array* | The Agent (User, Group, Application, Department, other) that remediated a DRO in SDR. | `[{"name":"example","sunetID":"example"}]` |
 | **administrative:sdrPreserve** | *boolean* | If this resource should be sent to Preservation. | `true` |
 | **citation** | *string* | Citation for the resource, including identifier, label, version, and a persistent URL to the object with SDR at the very least. | `"example"` |
 | **dedupeIdentifier** | *string* | Identifier retrieved from identification.sourceId that stands for analog or source identifier that this resource is a digital representation of. | `"example"` |
 | **depositor:name** | *string* | Primary label or name for an Agent. | `"example"` |
 | **depositor:sunetID** | *string* | Stanford University NetID for the Agent. | `"example"` |
+| **description:title** | *array* | The title of the item. | `[{"primary":true,"titleFull":"example"}]` |
 | **externalIdentifier** | *string* | Identifier for the resource within the SDR architecture but outside of the repository. DRUID or UUID depending on resource type. Constant across resource versions. What clients will use calling the repository. Same as `identification.identifier` | `"example"` |
 | **followingVersion** | *string* | Following version for the Object within SDR. | `"example"` |
 | **identification:catalogLinks/catalog** | *string* | Catalog that is the source of the linked record. | `"example"` |
@@ -118,8 +122,21 @@ Domain-defined abstraction of a 'work'. Digital Repository Objects' abstraction 
 | **structural:hasAgreement** | *string* | Agreement that covers the deposit of the DRO into SDR. | `"example"` |
 | **structural:hasMember** | *array* | Component or 'children' digital repository objects that are a part or portion of this 'parent' or aggregate DRO. | `[null]` |
 | **structural:hasMemberOrders** | *array* | Provided sequences or orderings of members of the Object, including some metadata about each sequence (i.e. sequence label, sequence type, if the sequence is primary, etc.). | `[{"@context":"example","@type":"http://cocina.sul.stanford.edu/models/sequence.jsonld","label":"example","startMember":"example","members":[null]}]` |
+| **structural:isMemberOf** | *string* | Collection that this DRO is a member of | `"example"` |
 | **structural:isTargetOf** | *string* | An Annotation instance that applies to the DRO. | `"example"` |
 | **version** | *integer* | Version for the DRO within SDR. | `42` |
+
+
+## <a name="resource-Description">Description</a>
+
+
+The description of a work
+
+### Attributes
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **title** | *array* | The title of the item. | `[{"primary":true,"titleFull":"example"}]` |
 
 
 ## <a name="resource-File">File</a>
@@ -133,7 +150,7 @@ Binaries that are the basis of what our domain manages. Binaries here do not inc
 | ------- | ------- | ------- | ------- |
 | **@context** | *string* | URI for the JSON-LD context definitions. | `"example"` |
 | **@type** | *string* | The content type of the File.<br/> **one of:**`"http://cocina.sul.stanford.edu/models/file.jsonld"` | `"http://cocina.sul.stanford.edu/models/file.jsonld"` |
-| **access:access** | *string* | Access level for the File.<br/> **one of:**`"world"` or `"stanford"` or `"location-based"` or `"citation-only"` or `"dark"` | `"world"` |
+| **access:access** | *string* | Access level for the File. If "dark" this won't go into public xml contentMetadata.<br/> **one of:**`"world"` or `"stanford"` or `"location-based"` or `"citation-only"` or `"dark"` | `"world"` |
 | **access:download** | *string* | Download level for the File binary.<br/> **one of:**`"world"` or `"stanford"` or `"location-based"` or `"citation-only"` or `"dark"` | `"world"` |
 | **administrative:created** | *date-time* | When the resource in SDR was created. | `"2015-01-01T12:00:00Z"` |
 | **administrative:deleted** | *boolean* | If the resource has been deleted (but not purged). | `true` |
@@ -202,6 +219,22 @@ Relevant groupings of Files. Also called a File Grouping.
 | **version** | *integer* | Version for the Fileset within SDR. | `42` |
 
 
+## <a name="resource-ReleaseTag">Release Tag</a>
+
+
+A tag that indicates the item or collection should be released.
+
+### Attributes
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **date** | *date-time* | When did this action happen | `"2015-01-01T12:00:00Z"` |
+| **release** | *boolean* | Should it be released or withdrawn. Release is coded as true and withdraw as false | `true` |
+| **to** | *string* | What platform is it released to<br/> **one of:**`"Searchworks"` or `"Earthworks"` | `"Searchworks"` |
+| **what** | *string* | What is being released. This item or the whole collection.<br/> **one of:**`"self"` or `"collection"` | `"self"` |
+| **who** | *string* | Who did this release | `"example"` |
+
+
 ## <a name="resource-Sequence">Resource Sequence</a>
 
 
@@ -216,5 +249,18 @@ A sequence or ordering of resources within a Collection or Object.
 | **label** | *string* | Label for the sequence or ordering. | `"example"` |
 | **members** | *array* | Identifiers for Members in their stated Order for the Sequence. | `[null]` |
 | **startMember** | *string* | Identifier for the first member of the sequence. | `"example"` |
+
+
+## <a name="resource-Title">Title</a>
+
+
+A title of a work
+
+### Attributes
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **primary** | *boolean* | Is this the primary title for the object | `true` |
+| **titleFull** | *string* | The full title for the object | `"example"` |
 
 
