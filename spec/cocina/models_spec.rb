@@ -14,7 +14,10 @@ RSpec.describe Cocina::Models do
           'type' => 'http://cocina.sul.stanford.edu/models/exhibit.jsonld',
           'externalIdentifier' => 'foo',
           'label' => 'bar',
-          'version' => 5
+          'version' => 5,
+          'description' => {
+            'title' => []
+          }
         }
       end
 
@@ -27,7 +30,10 @@ RSpec.describe Cocina::Models do
           'type' => 'http://cocina.sul.stanford.edu/models/image.jsonld',
           'externalIdentifier' => 'foo',
           'label' => 'bar',
-          'version' => 5
+          'version' => 5,
+          'description' => {
+            'title' => []
+          }
         }
       end
 
@@ -40,7 +46,10 @@ RSpec.describe Cocina::Models do
           'type' => 'http://cocina.sul.stanford.edu/models/admin_policy.jsonld',
           'externalIdentifier' => 'foo',
           'label' => 'bar',
-          'version' => 5
+          'version' => 5,
+          'description' => {
+            'title' => []
+          }
         }
       end
 

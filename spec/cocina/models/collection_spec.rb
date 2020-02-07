@@ -11,7 +11,10 @@ RSpec.describe Cocina::Models::Collection do
       externalIdentifier: 'druid:ab123cd4567',
       type: collection_type,
       label: 'My collection',
-      version: 3
+      version: 3,
+      description: {
+        title: []
+      }
     }
   end
 
@@ -50,7 +53,10 @@ RSpec.describe Cocina::Models::Collection do
           externalIdentifier: 'druid:ab123cd4567',
           type: collection_type,
           label: 'My collection',
-          version: '3'
+          version: '3',
+          description: {
+            title: []
+          }
         }
       end
 
@@ -86,6 +92,14 @@ RSpec.describe Cocina::Models::Collection do
                 release: 'false'
               }
             ]
+          },
+          description: {
+            title: [
+              {
+                primary: true,
+                titleFull: 'My collection'
+              }
+            ]
           }
         }
       end
@@ -117,6 +131,9 @@ RSpec.describe Cocina::Models::Collection do
           'version' => 1,
           'access' => {},
           'administrative' => {},
+          'description' => {
+            'title' => []
+          },
           'identification' => {},
           'structural' => {}
         }
@@ -138,7 +155,10 @@ RSpec.describe Cocina::Models::Collection do
             "externalIdentifier":"druid:12343234",
             "type":"#{collection_type}",
             "label":"my collection",
-            "version": 3
+            "version": 3,
+            "description": {
+              "title": []
+            }
           }
         JSON
       end
@@ -182,6 +202,14 @@ RSpec.describe Cocina::Models::Collection do
                   "release":false
                 }
               ]
+            },
+            "description": {
+              "title": [
+                {
+                  "primary": true,
+                  "titleFull":"my collection"
+                }
+              ]
             }
           }
         JSON
@@ -196,6 +224,9 @@ RSpec.describe Cocina::Models::Collection do
 
         tags = collection.administrative.releaseTags
         expect(tags).to all(be_instance_of Cocina::Models::ReleaseTag)
+
+        expect(collection.description.title.first.attributes).to eq(primary: true,
+                                                                    titleFull: 'my collection')
       end
     end
   end
