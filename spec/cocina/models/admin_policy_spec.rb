@@ -10,7 +10,10 @@ RSpec.describe Cocina::Models::AdminPolicy do
       externalIdentifier: 'druid:ab123cd4567',
       type: type,
       label: 'My admin_policy',
-      version: 3
+      version: 3,
+      description: {
+        title: []
+      }
     }
   end
   let(:type) { 'http://cocina.sul.stanford.edu/models/admin_policy.jsonld' }
@@ -40,7 +43,10 @@ RSpec.describe Cocina::Models::AdminPolicy do
           externalIdentifier: 'druid:ab123cd4567',
           type: type,
           label: 'My admin_policy',
-          version: '3'
+          version: '3',
+          description: {
+            title: []
+          }
         }
       end
 
@@ -62,6 +68,14 @@ RSpec.describe Cocina::Models::AdminPolicy do
             default_object_rights: '<rightsMetadata></rightsMetadata>',
             registration_workflow: 'wasCrawlPreassemblyWF',
             hasAdminPolicy: 'druid:mx123cd4567'
+          },
+          description: {
+            title: [
+              {
+                primary: true,
+                titleFull: 'My admin_policy'
+              }
+            ]
           }
         }
       end
@@ -93,6 +107,9 @@ RSpec.describe Cocina::Models::AdminPolicy do
             'registration_workflow' => 'wasCrawlPreassemblyWF',
             'hasAdminPolicy' => 'druid:mx123cd4567'
           },
+          'description' => {
+            'title' => []
+          },
           'identification' => {},
           'structural' => {}
         }
@@ -117,7 +134,10 @@ RSpec.describe Cocina::Models::AdminPolicy do
             "externalIdentifier":"druid:12343234",
             "type":"#{type}",
             "label":"my admin_policy",
-            "version": 3
+            "version": 3,
+            "description": {
+              "title": []
+            }
           }
         JSON
       end
@@ -147,6 +167,14 @@ RSpec.describe Cocina::Models::AdminPolicy do
               "default_object_rights":"<rightsMetadata></rightsMetadata>",
               "registration_workflow":"wasCrawlPreassemblyWF",
               "hasAdminPolicy":"druid:mx123cd4567"
+            },
+            "description": {
+              "title": [
+                {
+                  "primary": true,
+                  "titleFull":"my admin_policy"
+                }
+              ]
             }
           }
         JSON
@@ -159,6 +187,8 @@ RSpec.describe Cocina::Models::AdminPolicy do
 
         expect(admin_policy.administrative).to be_kind_of Cocina::Models::AdminPolicy::Administrative
         expect(admin_policy.administrative.hasAdminPolicy).to eq 'druid:mx123cd4567'
+        expect(admin_policy.description.title.first.attributes).to eq(primary: true,
+                                                                      titleFull: 'my admin_policy')
       end
     end
   end

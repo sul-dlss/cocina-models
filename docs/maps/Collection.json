@@ -4,7 +4,7 @@
   "title": "Digital Repository Collection",
   "description": "A group of Digital Repository Objects that indicate some type of conceptual grouping within the domain that is worth reusing across the system.",
   "type": "object",
-  "required": ["@context", "@type", "externalIdentifier", "label", "internalIdentifier", "version", "administrative", "access", "identification", "structural"],
+  "required": ["@context", "@type", "externalIdentifier", "label", "internalIdentifier", "version", "administrative", "access", "description", "identification", "structural"],
   "properties": {
     "@context": {
       "description": "URI for the JSON-LD context definitions.",
@@ -32,6 +32,10 @@
     "depositor": {
       "description": "The Agent (User, Group, Application, Department, other) that deposited the Collection into SDR.",
       "$ref": "/Agent"
+    },
+    "description": {
+      "description": "Descriptive metadata for the DRO.",
+      "$ref": "/Description"
     },
     "externalIdentifier": {
       "description": "Identifier for the resource within the SDR architecture but outside of the repository. DRUID or UUID depending on resource type. Constant across resource versions. What clients will use calling the repository. Same as `identification.identifier`",

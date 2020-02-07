@@ -13,7 +13,10 @@ RSpec.describe Cocina::Models::DRO do
       externalIdentifier: 'druid:ab123cd4567',
       type: item_type,
       label: 'My object',
-      version: 3
+      version: 3,
+      description: {
+        title: []
+      }
     }
   end
 
@@ -52,7 +55,10 @@ RSpec.describe Cocina::Models::DRO do
           externalIdentifier: 'druid:ab123cd4567',
           type: item_type,
           label: 'My object',
-          version: '3'
+          version: '3',
+          description: {
+            title: []
+          }
         }
       end
 
@@ -87,6 +93,14 @@ RSpec.describe Cocina::Models::DRO do
                 date: '2017-10-20T15:42:15Z',
                 to: 'Searchworks',
                 release: 'false'
+              }
+            ]
+          },
+          description: {
+            title: [
+              {
+                primary: true,
+                titleFull: 'My object'
               }
             ]
           },
@@ -136,6 +150,9 @@ RSpec.describe Cocina::Models::DRO do
           'version' => 1,
           'access' => {},
           'administrative' => { 'releaseTags' => [] },
+          'description' => {
+            'title' => []
+          },
           'identification' => {},
           'structural' => {}
         }
@@ -157,7 +174,10 @@ RSpec.describe Cocina::Models::DRO do
             "externalIdentifier":"druid:12343234",
             "type":"#{item_type}",
             "label":"my item",
-            "version": 3
+            "version": 3,
+            "description": {
+              "title": []
+            }
           }
         JSON
       end
@@ -203,6 +223,14 @@ RSpec.describe Cocina::Models::DRO do
                 }
               ]
             },
+            "description": {
+              "title": [
+                {
+                  "primary": true,
+                  "titleFull":"my object"
+                }
+              ]
+            },
             "structural": {
               "contains": [
                 {
@@ -235,6 +263,8 @@ RSpec.describe Cocina::Models::DRO do
         expect(tags).to all(be_instance_of Cocina::Models::ReleaseTag)
         expect(dro.structural.contains).to all(be_instance_of(Cocina::Models::FileSet))
         expect(dro.structural.isMemberOf).to eq 'druid:bc777df7777'
+        expect(dro.description.title.first.attributes).to eq(primary: true,
+                                                             titleFull: 'my object')
       end
     end
   end
@@ -247,7 +277,10 @@ RSpec.describe Cocina::Models::DRO do
         externalIdentifier: 'druid:ab123cd4567',
         type: item_type,
         label: 'My object',
-        version: 3
+        version: 3,
+        description: {
+          title: []
+        }
       }
     end
 

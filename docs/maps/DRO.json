@@ -4,7 +4,7 @@
   "title": "Digital Repository Object",
   "description": "Domain-defined abstraction of a 'work'. Digital Repository Objects' abstraction is describable for our domain’s purposes, i.e. for management needs within our system.",
   "type": "object",
-  "required": ["@context", "@type", "externalIdentifier", "label", "internalIdentifier", "version", "administrative", "access", "identification", "structural"],
+  "required": ["@context", "@type", "externalIdentifier", "label", "internalIdentifier", "version", "administrative", "access", "description", "identification", "structural"],
   "properties": {
     "@context": {
       "description": "URI for the JSON-LD context definitions.",
@@ -159,6 +159,10 @@
           }
         }
       }
+    },
+    "description": {
+      "description": "Descriptive metadata for the DRO.",
+      "$ref": "/Description"
     },
     "identification": {
       "description": "Identifying information for the DRO.",

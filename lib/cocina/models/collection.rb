@@ -51,6 +51,9 @@ module Cocina
       attribute :version, Types::Coercible::Integer
       attribute(:access, Access.default { Access.new })
       attribute(:administrative, Administrative.default { Administrative.new })
+      # Allowing description to be omittable for now (until rolled out to consumers),
+      # but I think it's actually required for every DRO
+      attribute :description, Description.optional.default(nil)
       attribute(:identification, Identification.default { Identification.new })
       attribute(:structural, Structural.default { Structural.new })
 
@@ -64,7 +67,7 @@ module Cocina
 
         # params[:access] = Access.from_dynamic(dyn['access']) if dyn['access']
         params[:administrative] = Administrative.from_dynamic(dyn['administrative']) if dyn['administrative']
-
+        params[:description] = Description.from_dynamic(dyn.fetch('description'))
         Collection.new(params)
       end
 
