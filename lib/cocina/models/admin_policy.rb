@@ -87,17 +87,7 @@ module Cocina
       attribute(:structural, Structural.default { Structural.new })
 
       def self.from_dynamic(dyn)
-        params = {
-          externalIdentifier: dyn['externalIdentifier'],
-          type: dyn['type'],
-          label: dyn['label'],
-          version: dyn['version']
-        }
-
-        # params[:access] = Access.from_dynamic(dyn['access']) if dyn['access']
-        params[:administrative] = Administrative.from_dynamic(dyn['administrative']) if dyn['administrative']
-        params[:description] = Description.from_dynamic(dyn.fetch('description'))
-        AdminPolicy.new(params)
+        AdminPolicyBuilder.build(self, dyn)
       end
 
       def self.from_json(json)
