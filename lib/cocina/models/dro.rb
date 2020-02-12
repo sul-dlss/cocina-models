@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'json'
-
 module Cocina
   module Models
     # A digital repository object.  See http://sul-dlss.github.io/cocina-models/maps/DRO.json
@@ -55,10 +53,14 @@ module Cocina
       # Identification sub-schema for the DRO
       class Identification < Dry::Struct
         attribute :sourceId, Types::Strict::String.meta(omittable: true)
-
+        attribute :catalogLinks, Types::Strict::Array.of(CatalogLink).meta(omittable: true)
         def self.from_dynamic(dyn)
           params = {}
           params[:sourceId] = dyn['sourceId'] if dyn['sourceId']
+          if dyn['catalogLinks']
+            params[:catalogLinks] = dyn['catalogLinks']
+                                    .map { |link| CatalogLink.from_dynamic(link) }
+          end
           params
         end
       end
@@ -99,9 +101,9 @@ module Cocina
 
         params[:access] = Access.from_dynamic(dyn['access']) if dyn['access']
         params[:administrative] = Administrative.from_dynamic(dyn['administrative']) if dyn['administrative']
-        params[:structural] = Structural.from_dynamic(dyn['structural']) if dyn['structural']
-        params[:identification] = Identification.from_dynamic(dyn['identification']) if dyn['identification']
         params[:description] = Description.from_dynamic(dyn.fetch('description'))
+        params[:identification] = Identification.from_dynamic(dyn['identification']) if dyn['identification']
+        params[:structural] = Structural.from_dynamic(dyn['structural']) if dyn['structural']
         DRO.new(params)
       end
       # rubocop:enable Metrics/AbcSize

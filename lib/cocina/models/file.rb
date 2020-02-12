@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'json'
-
 module Cocina
   module Models
     # Metadata for a file.  See http://sul-dlss.github.io/cocina-models/maps/File.json
