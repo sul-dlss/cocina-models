@@ -52,7 +52,15 @@ module Cocina
         end
       end
 
+      # Identification sub-schema for the DRO
       class Identification < Dry::Struct
+        attribute :sourceId, Types::Strict::String.meta(omittable: true)
+
+        def self.from_dynamic(dyn)
+          params = {}
+          params[:sourceId] = dyn['sourceId'] if dyn['sourceId']
+          params
+        end
       end
 
       # Structural sub-schema for the DRO
@@ -80,6 +88,7 @@ module Cocina
       attribute(:identification, Identification.default { Identification.new })
       attribute(:structural, Structural.default { Structural.new })
 
+      # rubocop:disable Metrics/AbcSize
       def self.from_dynamic(dyn)
         params = {
           externalIdentifier: dyn['externalIdentifier'],
@@ -91,9 +100,11 @@ module Cocina
         params[:access] = Access.from_dynamic(dyn['access']) if dyn['access']
         params[:administrative] = Administrative.from_dynamic(dyn['administrative']) if dyn['administrative']
         params[:structural] = Structural.from_dynamic(dyn['structural']) if dyn['structural']
+        params[:identification] = Identification.from_dynamic(dyn['identification']) if dyn['identification']
         params[:description] = Description.from_dynamic(dyn.fetch('description'))
         DRO.new(params)
       end
+      # rubocop:enable Metrics/AbcSize
 
       def self.from_json(json)
         from_dynamic(JSON.parse(json))
