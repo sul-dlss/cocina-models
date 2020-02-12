@@ -2,44 +2,25 @@
 
 require 'spec_helper'
 
-RSpec.describe Cocina::Models::Collection do
+RSpec.describe Cocina::Models::RequestCollection do
   subject(:collection) { described_class.new(properties) }
 
   let(:collection_type) { Cocina::Models::Vocab.collection }
-  let(:properties) do
-    {
-      externalIdentifier: 'druid:ab123cd4567',
-      type: collection_type,
-      label: 'My collection',
-      version: 3,
-      description: {
-        title: []
-      }
-    }
-  end
-
-  describe 'model check methods' do
-    it { is_expected.not_to be_admin_policy }
-    it { is_expected.to be_collection }
-    it { is_expected.not_to be_dro }
-    it { is_expected.not_to be_file }
-    it { is_expected.not_to be_file_set }
-  end
-
-  describe Cocina::Models::Collection::Administrative do
-    let(:instance) { described_class.new }
-
-    describe '#releaseTags' do
-      subject { instance.releaseTags }
-
-      it { is_expected.to be_empty }
-    end
-  end
 
   describe 'initialization' do
-    context 'with a minimal set, defined above' do
+    context 'with a minimal set' do
+      let(:properties) do
+        {
+          type: collection_type,
+          label: 'My collection',
+          version: 3,
+          description: {
+            title: []
+          }
+        }
+      end
+
       it 'has properties' do
-        expect(collection.externalIdentifier).to eq 'druid:ab123cd4567'
         expect(collection.type).to eq collection_type
         expect(collection.label).to eq 'My collection'
 
@@ -50,7 +31,6 @@ RSpec.describe Cocina::Models::Collection do
     context 'with a string version' do
       let(:properties) do
         {
-          externalIdentifier: 'druid:ab123cd4567',
           type: collection_type,
           label: 'My collection',
           version: '3',
@@ -68,7 +48,6 @@ RSpec.describe Cocina::Models::Collection do
     context 'with a all properties' do
       let(:properties) do
         {
-          externalIdentifier: 'druid:ab123cd4567',
           type: collection_type,
           label: 'My collection',
           version: 3,
@@ -111,7 +90,6 @@ RSpec.describe Cocina::Models::Collection do
       end
 
       it 'has properties' do
-        expect(collection.externalIdentifier).to eq 'druid:ab123cd4567'
         expect(collection.type).to eq collection_type
         expect(collection.label).to eq 'My collection'
 
@@ -135,7 +113,6 @@ RSpec.describe Cocina::Models::Collection do
     context 'with empty subschemas' do
       let(:properties) do
         {
-          'externalIdentifier' => 'druid:kv840rx2720',
           'type' => collection_type,
           'label' => 'Examination of the memorial of the owners and underwriters ...',
           'version' => 1,
@@ -150,7 +127,7 @@ RSpec.describe Cocina::Models::Collection do
       end
 
       it 'has properties' do
-        expect(collection.externalIdentifier).to eq 'druid:kv840rx2720'
+        expect(collection.label).to eq 'Examination of the memorial of the owners and underwriters ...'
       end
     end
   end
@@ -162,7 +139,6 @@ RSpec.describe Cocina::Models::Collection do
       let(:json) do
         <<~JSON
           {
-            "externalIdentifier":"druid:12343234",
             "type":"#{collection_type}",
             "label":"my collection",
             "version": 3,
@@ -174,8 +150,7 @@ RSpec.describe Cocina::Models::Collection do
       end
 
       it 'has the attributes' do
-        expect(collection.attributes).to include(externalIdentifier: 'druid:12343234',
-                                                 label: 'my collection',
+        expect(collection.attributes).to include(label: 'my collection',
                                                  type: collection_type)
         expect(collection.access).to be_kind_of Cocina::Models::Collection::Access
         expect(collection.administrative).to be_kind_of Cocina::Models::Collection::Administrative
@@ -188,7 +163,6 @@ RSpec.describe Cocina::Models::Collection do
       let(:json) do
         <<~JSON
           {
-            "externalIdentifier":"druid:12343234",
             "type":"#{collection_type}",
             "label":"my collection",
             "version": 3,
@@ -234,8 +208,7 @@ RSpec.describe Cocina::Models::Collection do
       end
 
       it 'has the attributes' do
-        expect(collection.attributes).to include(externalIdentifier: 'druid:12343234',
-                                                 label: 'my collection',
+        expect(collection.attributes).to include(label: 'my collection',
                                                  type: collection_type)
 
         expect(collection.administrative.hasAdminPolicy).to eq 'druid:mx123cd4567'

@@ -12,6 +12,10 @@ class CocinaModelsInflector < Zeitwerk::Inflector
     case basename
     when 'dro'
       'DRO'
+    when 'dro_builder'
+      'DROBuilder'
+    when 'request_dro'
+      'RequestDRO'
     when 'version'
       'VERSION'
     else
