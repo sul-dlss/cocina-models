@@ -100,6 +100,12 @@ RSpec.describe Cocina::Models::Collection do
                 titleFull: 'My collection'
               }
             ]
+          },
+          identification: {
+            sourceId: 'source:999',
+            catalogLinks: [
+              { catalog: 'symphony', catalogRecordId: '44444' }
+            ]
           }
         }
       end
@@ -115,6 +121,10 @@ RSpec.describe Cocina::Models::Collection do
         expect(tag.date).to eq DateTime.parse '2018-11-23T00:44:52Z'
         expect(tag.to).to eq 'Searchworks'
         expect(tag.release).to be true
+
+        link = collection.identification.catalogLinks.first
+        expect(link.catalog).to eq 'symphony'
+        expect(link.catalogRecordId).to eq '44444'
       end
     end
   end
@@ -210,6 +220,14 @@ RSpec.describe Cocina::Models::Collection do
                   "titleFull":"my collection"
                 }
               ]
+            },
+            "identification": {
+              "catalogLinks":[
+                {
+                  "catalog":"symphony",
+                  "catalogRecordId":"44444"
+                }
+              ]
             }
           }
         JSON
@@ -227,6 +245,10 @@ RSpec.describe Cocina::Models::Collection do
 
         expect(collection.description.title.first.attributes).to eq(primary: true,
                                                                     titleFull: 'my collection')
+
+        link = collection.identification.catalogLinks.first
+        expect(link.catalog).to eq 'symphony'
+        expect(link.catalogRecordId).to eq '44444'
       end
     end
   end

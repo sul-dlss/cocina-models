@@ -105,7 +105,10 @@ RSpec.describe Cocina::Models::DRO do
             ]
           },
           identification: {
-            sourceId: 'source:999'
+            sourceId: 'source:999',
+            catalogLinks: [
+              { catalog: 'symphony', catalogRecordId: '44444' }
+            ]
           },
           structural: {
             isMemberOf: 'druid:bc777df7777',
@@ -136,6 +139,9 @@ RSpec.describe Cocina::Models::DRO do
         expect(tag.release).to be true
 
         expect(item.identification.sourceId).to eq 'source:999'
+        link = item.identification.catalogLinks.first
+        expect(link.catalog).to eq 'symphony'
+        expect(link.catalogRecordId).to eq '44444'
 
         expect(item.structural.contains).to all(be_instance_of(Cocina::Models::FileSet))
         expect(item.structural.isMemberOf).to eq 'druid:bc777df7777'
@@ -237,7 +243,13 @@ RSpec.describe Cocina::Models::DRO do
               ]
             },
             "identification": {
-              "sourceId":"source:9999"
+              "sourceId":"source:9999",
+              "catalogLinks":[
+                {
+                  "catalog":"symphony",
+                  "catalogRecordId":"44444"
+                }
+              ]
             },
             "structural": {
               "contains": [
@@ -271,6 +283,9 @@ RSpec.describe Cocina::Models::DRO do
         expect(tags).to all(be_instance_of Cocina::Models::ReleaseTag)
 
         expect(dro.identification.sourceId).to eq 'source:9999'
+        link = dro.identification.catalogLinks.first
+        expect(link.catalog).to eq 'symphony'
+        expect(link.catalogRecordId).to eq '44444'
 
         expect(dro.structural.contains).to all(be_instance_of(Cocina::Models::FileSet))
         expect(dro.structural.isMemberOf).to eq 'druid:bc777df7777'

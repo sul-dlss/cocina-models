@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'json'
-
 module Cocina
   module Models
     # A digital repository collection.  See http://sul-dlss.github.io/cocina-models/maps/Collection.json
@@ -39,7 +37,18 @@ module Cocina
         end
       end
 
+      # Identification sub-schema for the Collection
       class Identification < Dry::Struct
+        attribute :catalogLinks, Types::Strict::Array.of(CatalogLink).meta(omittable: true)
+
+        def self.from_dynamic(dyn)
+          params = {}
+          if dyn['catalogLinks']
+            params[:catalogLinks] = dyn['catalogLinks']
+                                    .map { |link| CatalogLink.from_dynamic(link) }
+          end
+          params
+        end
       end
 
       class Structural < Dry::Struct
@@ -68,6 +77,7 @@ module Cocina
         # params[:access] = Access.from_dynamic(dyn['access']) if dyn['access']
         params[:administrative] = Administrative.from_dynamic(dyn['administrative']) if dyn['administrative']
         params[:description] = Description.from_dynamic(dyn.fetch('description'))
+        params[:identification] = Identification.from_dynamic(dyn['identification']) if dyn['identification']
         Collection.new(params)
       end
 

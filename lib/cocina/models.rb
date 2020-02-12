@@ -4,6 +4,7 @@ require 'cocina/models/version'
 require 'zeitwerk'
 require 'dry-struct'
 require 'dry-types'
+require 'json'
 
 # Help Zeitwerk find some of our classes
 class CocinaModelsInflector < Zeitwerk::Inflector
