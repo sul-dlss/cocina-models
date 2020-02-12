@@ -90,23 +90,9 @@ module Cocina
       attribute(:identification, Identification.default { Identification.new })
       attribute(:structural, Structural.default { Structural.new })
 
-      # rubocop:disable Metrics/AbcSize
       def self.from_dynamic(dyn)
-        params = {
-          externalIdentifier: dyn['externalIdentifier'],
-          type: dyn['type'],
-          label: dyn['label'],
-          version: dyn['version']
-        }
-
-        params[:access] = Access.from_dynamic(dyn['access']) if dyn['access']
-        params[:administrative] = Administrative.from_dynamic(dyn['administrative']) if dyn['administrative']
-        params[:description] = Description.from_dynamic(dyn.fetch('description'))
-        params[:identification] = Identification.from_dynamic(dyn['identification']) if dyn['identification']
-        params[:structural] = Structural.from_dynamic(dyn['structural']) if dyn['structural']
-        DRO.new(params)
+        DROBuilder.build(self, dyn)
       end
-      # rubocop:enable Metrics/AbcSize
 
       def self.from_json(json)
         from_dynamic(JSON.parse(json))
