@@ -33,7 +33,7 @@ module Cocina
                                           .enum('world', 'stanford', 'location-based', 'citation-only', 'dark')
         end
 
-        attribute :embargo, Embargo.optional.default(nil)
+        attribute :embargo, Embargo.optional.meta(omittable: true)
       end
 
       # Subschema for administrative concerns
