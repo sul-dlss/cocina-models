@@ -5,7 +5,7 @@ module Cocina
     # A request to create a digital repository collection.
     # This is the same as Collection, except it doesn't have externalIdentifier.
     # See http://sul-dlss.github.io/cocina-models/maps/Collection.json
-    class RequestCollection < Dry::Struct
+    class RequestCollection < Struct
       attribute :type, Types::String.enum(*Collection::TYPES)
       attribute :label, Types::Strict::String
       attribute :version, Types::Coercible::Integer
@@ -18,7 +18,7 @@ module Cocina
       attribute(:structural, Collection::Structural.default { Collection::Structural.new })
 
       def self.from_dynamic(dyn)
-        CollectionBuilder.build(self, dyn)
+        RequestCollection.new(dyn)
       end
 
       def self.from_json(json)

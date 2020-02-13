@@ -3,7 +3,7 @@
 module Cocina
   module Models
     # An admin policy object.
-    class AdminPolicy < Dry::Struct
+    class AdminPolicy < Struct
       include Checkable
 
       TYPES = [
@@ -11,15 +11,11 @@ module Cocina
       ].freeze
 
       # Subschema for access concerns
-      class Access < Dry::Struct
-        def self.from_dynamic(_dyn)
-          params = {}
-          Access.new(params)
-        end
+      class Access < Struct
       end
 
       # Subschema for administrative concerns
-      class Administrative < Dry::Struct
+      class Administrative < Struct
         # This was copied from the ActiveFedora defaults: Dor::AdminPolicyObject.new.defaultObjectRights.content
         DEFAULT_OBJECT_RIGHTS = <<~XML
           <?xml version="1.0" encoding="UTF-8"?>
@@ -57,21 +53,12 @@ module Cocina
         # Allowing hasAdminPolicy to be omittable for now (until rolled out to consumers),
         # but I think it's actually required for every Admin Policy
         attribute :hasAdminPolicy, Types::Coercible::String.optional.default(nil)
-
-        def self.from_dynamic(dyn)
-          params = {
-            default_object_rights: dyn['default_object_rights'],
-            registration_workflow: dyn['registration_workflow']
-          }
-          params[:hasAdminPolicy] = dyn['hasAdminPolicy']
-          Administrative.new(params)
-        end
       end
 
-      class Identification < Dry::Struct
+      class Identification < Struct
       end
 
-      class Structural < Dry::Struct
+      class Structural < Struct
       end
 
       attribute :externalIdentifier, Types::Strict::String
@@ -87,7 +74,7 @@ module Cocina
       attribute(:structural, Structural.default { Structural.new })
 
       def self.from_dynamic(dyn)
-        AdminPolicyBuilder.build(self, dyn)
+        AdminPolicy.new(dyn)
       end
 
       def self.from_json(json)
