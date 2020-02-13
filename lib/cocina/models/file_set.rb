@@ -3,25 +3,19 @@
 module Cocina
   module Models
     # Metadata for a File Set.  See http://sul-dlss.github.io/cocina-models/maps/Fileset.json
-    class FileSet < Dry::Struct
+    class FileSet < Struct
       include Checkable
 
       TYPES = [
         Vocab.fileset
       ].freeze
 
-      class Identification < Dry::Struct
+      class Identification < Struct
       end
 
       # Structural sub-schema for the FileSet
-      class Structural < Dry::Struct
+      class Structural < Struct
         attribute :contains, Types::Strict::Array.of(Cocina::Models::File).meta(omittable: true)
-
-        def self.from_dynamic(dyn)
-          params = {}
-          params[:contains] = dyn['contains'].map { |f| Cocina::Models::File.from_dynamic(f) } if dyn['contains']
-          Structural.new(params)
-        end
       end
 
       attribute :externalIdentifier, Types::Strict::String
@@ -32,21 +26,7 @@ module Cocina
       attribute(:structural, Structural.default { Structural.new })
 
       def self.from_dynamic(dyn)
-        params = {
-          externalIdentifier: dyn['externalIdentifier'],
-          type: dyn['type'],
-          label: dyn['label'],
-          version: dyn['version'],
-          size: dyn['size'],
-          use: dyn['use']
-        }
-        params[:presentation] = Presentation.from_dynamic(dyn['presentation']) if dyn['presentation']
-        if dyn['hasMessageDigests']
-          params[:hasMessageDigests] = dyn['hasMessageDigests'].map { |p| Fixity.from_dynamic(p) }
-        end
-        params[:structural] = Structural.from_dynamic(dyn['structural']) if dyn['structural']
-
-        FileSet.new(params)
+        FileSet.new(dyn)
       end
 
       def self.from_json(json)

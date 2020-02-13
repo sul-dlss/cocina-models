@@ -36,6 +36,11 @@ module Cocina
     # Raised when the type attribute is not valid.
     class UnknownTypeError < Error; end
 
+    # Base class for Cocina Structs
+    class Struct < Dry::Struct
+      transform_keys(&:to_sym)
+    end
+
     # @param [Hash] dyn a ruby hash representation of the JSON serialization of a collection or DRO
     # @return [DRO,Collection]
     # @raises [UnknownTypeError] if a valid type is not found in the data

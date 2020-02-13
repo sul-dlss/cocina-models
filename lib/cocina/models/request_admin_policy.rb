@@ -4,7 +4,7 @@ module Cocina
   module Models
     # An request to create an AdminPolicy object.
     # This is the same as AdminPolicy, except it doesn't have externalIdentifier.
-    class RequestAdminPolicy < Dry::Struct
+    class RequestAdminPolicy < Struct
       attribute :type, Types::String.enum(*AdminPolicy::TYPES)
       attribute :label, Types::Strict::String
       attribute :version, Types::Coercible::Integer
@@ -17,7 +17,7 @@ module Cocina
       attribute(:structural, AdminPolicy::Structural.default { AdminPolicy::Structural.new })
 
       def self.from_dynamic(dyn)
-        AdminPolicyBuilder.build(self, dyn)
+        RequestAdminPolicy.new(dyn)
       end
 
       def self.from_json(json)
