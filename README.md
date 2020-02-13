@@ -22,10 +22,10 @@ cd docs
 prmd combine --meta meta.json  maps/ > schema.json
 
 # Check it’s all good
-$ prmd verify schema.json
+prmd verify schema.json
 
 # Build docs
-$ prmd doc schema.json > schema.md
+prmd doc schema.json > schema.md
 ```
 
 Then check in the resulting changes to `docs/schema.json` and `docs/schema.md`

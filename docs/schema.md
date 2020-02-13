@@ -81,7 +81,8 @@ Domain-defined abstraction of a 'work'. Digital Repository Objects' abstraction 
 | **access:access** | *string* | Access level for the DRO.<br/> **one of:**`"world"` or `"stanford"` or `"location-based"` or `"citation-only"` or `"dark"` | `"world"` |
 | **access:copyright** | *string* | The human readable copyright statement that applies to the DRO. | `"example"` |
 | **access:download** | *string* | Download level for the DRO metadata.<br/> **one of:**`"world"` or `"stanford"` or `"location-based"` or `"citation-only"` or `"dark"` | `"world"` |
-| **access:embargoReleaseDate** | *date-time* | Date when the DRO is released from an embargo, if an embargo exists. | `"2015-01-01T12:00:00Z"` |
+| **access:embargo:access** | *string* | Access level for the DRO when released from embargo.<br/> **one of:**`"world"` or `"stanford"` or `"location-based"` or `"citation-only"` or `"dark"` | `"world"` |
+| **access:embargo:releaseDate** | *date-time* | Date when the DRO is released from an embargo. | `"2015-01-01T12:00:00Z"` |
 | **access:license** | *string* | The license governing reuse of the DRO. Should be an IRI for known licenses (i.e. CC, RightsStatement.org URI, etc.). | `"example"` |
 | **access:reuseAndReproductionStatement** | *string* | The human readable reuse and reproduction statement that applies to the DRO. | `"example"` |
 | **access:termsOfUse** | *string* | License or terms of use governing reuse of the DRO. Should be a text statement. | `"example"` |

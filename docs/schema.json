@@ -557,12 +557,37 @@
                 "dark"
               ]
             },
-            "embargoReleaseDate": {
-              "description": "Date when the DRO is released from an embargo, if an embargo exists.",
+            "embargo": {
+              "description": "Embargo metadata",
               "type": [
-                "string"
+                "object"
               ],
-              "format": "date-time"
+              "required": [
+                "releaseDate",
+                "access"
+              ],
+              "properties": {
+                "releaseDate": {
+                  "description": "Date when the DRO is released from an embargo.",
+                  "type": [
+                    "string"
+                  ],
+                  "format": "date-time"
+                },
+                "access": {
+                  "description": "Access level for the DRO when released from embargo.",
+                  "type": [
+                    "string"
+                  ],
+                  "enum": [
+                    "world",
+                    "stanford",
+                    "location-based",
+                    "citation-only",
+                    "dark"
+                  ]
+                }
+              }
             },
             "license": {
               "description": "The license governing reuse of the DRO. Should be an IRI for known licenses (i.e. CC, RightsStatement.org URI, etc.).",
