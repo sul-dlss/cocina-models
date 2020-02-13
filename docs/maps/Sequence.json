@@ -31,6 +31,16 @@
       "items": {
         "type": "string"
       }
+    },
+    "viewingDirection": {
+      "description": "The direction that a sequence of canvases should be displayed to the user",
+      "type": "string",
+      "enum": [
+        "left-to-right",
+        "right-to-left",
+        "top-to-bottom",
+        "bottom-to-top"
+      ]
     }
   }
 }
