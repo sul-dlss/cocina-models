@@ -73,6 +73,7 @@ RSpec.describe Cocina::Models::Collection do
           label: 'My collection',
           version: 3,
           access: {
+            access: 'stanford'
           },
           administrative: {
             hasAdminPolicy: 'druid:mx123cd4567',
@@ -114,6 +115,8 @@ RSpec.describe Cocina::Models::Collection do
         expect(collection.externalIdentifier).to eq 'druid:ab123cd4567'
         expect(collection.type).to eq collection_type
         expect(collection.label).to eq 'My collection'
+
+        expect(collection.access.access).to eq 'stanford'
 
         expect(collection.administrative.hasAdminPolicy).to eq 'druid:mx123cd4567'
         expect(collection.administrative.releaseTags).to all(be_kind_of(Cocina::Models::ReleaseTag))
@@ -193,6 +196,7 @@ RSpec.describe Cocina::Models::Collection do
             "label":"my collection",
             "version": 3,
             "access": {
+              "access": "world"
             },
             "administrative": {
               "hasAdminPolicy":"druid:mx123cd4567",
@@ -237,6 +241,7 @@ RSpec.describe Cocina::Models::Collection do
         expect(collection.attributes).to include(externalIdentifier: 'druid:12343234',
                                                  label: 'my collection',
                                                  type: collection_type)
+        expect(collection.access.access).to eq 'world'
 
         expect(collection.administrative.hasAdminPolicy).to eq 'druid:mx123cd4567'
 

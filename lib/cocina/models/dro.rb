@@ -34,6 +34,8 @@ module Cocina
         end
 
         attribute :embargo, Embargo.optional.meta(omittable: true)
+        attribute :access, Types::String.default('dark')
+                                        .enum('world', 'stanford', 'location-based', 'citation-only', 'dark')
       end
 
       # Subschema for administrative concerns
