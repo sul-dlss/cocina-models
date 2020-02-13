@@ -77,8 +77,9 @@ RSpec.describe Cocina::Models::DRO do
           access: {
             embargo: {
               releaseDate: '2009-12-14T07:00:00Z',
-              access: 'stanford'
-            }
+              access: 'world'
+            },
+            access: 'stanford'
           },
           administrative: {
             hasAdminPolicy: 'druid:mx123cd4567',
@@ -132,8 +133,9 @@ RSpec.describe Cocina::Models::DRO do
         expect(item.type).to eq item_type
         expect(item.label).to eq 'My object'
 
+        expect(item.access.access).to eq 'stanford'
         expect(item.access.embargo.releaseDate).to eq DateTime.parse('2009-12-14T07:00:00Z')
-        expect(item.access.embargo.access).to eq 'stanford'
+        expect(item.access.embargo.access).to eq 'world'
 
         expect(item.administrative.hasAdminPolicy).to eq 'druid:mx123cd4567'
         expect(item.administrative.releaseTags).to all(be_kind_of(Cocina::Models::ReleaseTag))
@@ -217,6 +219,7 @@ RSpec.describe Cocina::Models::DRO do
             "label":"my item",
             "version": 3,
             "access": {
+              "access": "dark",
               "embargo": {
                 "releaseDate":"2009-12-14T07:00:00Z"
               }
@@ -280,6 +283,9 @@ RSpec.describe Cocina::Models::DRO do
         expect(dro.attributes).to include(externalIdentifier: 'druid:12343234',
                                           label: 'my item',
                                           type: item_type)
+
+        expect(dro.access.access).to eq 'dark'
+
         embargo_attributes = dro.access.embargo.attributes
         expect(embargo_attributes).to eq(releaseDate: DateTime.parse('2009-12-14T07:00:00Z'), access: 'dark')
 
