@@ -26,7 +26,14 @@ module Cocina
 
       # Subschema for access concerns
       class Access < Struct
-        attribute :embargoReleaseDate, Types::Params::DateTime.meta(omittable: true)
+        # Subschema for embargo concerns
+        class Embargo < Struct
+          attribute :releaseDate, Types::Params::DateTime
+          attribute :access, Types::String.default('dark')
+                                          .enum('world', 'stanford', 'location-based', 'citation-only', 'dark')
+        end
+
+        attribute :embargo, Embargo.optional.default(nil)
       end
 
       # Subschema for administrative concerns
