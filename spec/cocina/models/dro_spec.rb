@@ -122,6 +122,9 @@ RSpec.describe Cocina::Models::DRO do
               Cocina::Models::FileSet.new(type: fileset_type,
                                           version: 3,
                                           externalIdentifier: '12343234_2', label: 'Resource #2')
+            ],
+            hasMemberOrders: [
+              { viewingDirection: 'right-to-left' }
             ]
           }
         }
@@ -149,6 +152,7 @@ RSpec.describe Cocina::Models::DRO do
 
         expect(item.structural.contains).to all(be_instance_of(Cocina::Models::FileSet))
         expect(item.structural.isMemberOf).to eq 'druid:bc777df7777'
+        expect(item.structural.hasMemberOrders.first.viewingDirection).to eq 'right-to-left'
       end
     end
   end
@@ -270,7 +274,10 @@ RSpec.describe Cocina::Models::DRO do
                   "externalIdentifier":"12343234_2", "label":"fileset#2"
                 }
               ],
-              "isMemberOf":"druid:bc777df7777"
+              "isMemberOf":"druid:bc777df7777",
+              "hasMemberOrders":[
+                { "viewingDirection":"left-to-right"}
+              ]
             }
           }
         JSON
@@ -295,6 +302,7 @@ RSpec.describe Cocina::Models::DRO do
 
         expect(dro.structural.contains).to all(be_instance_of(Cocina::Models::FileSet))
         expect(dro.structural.isMemberOf).to eq 'druid:bc777df7777'
+        expect(dro.structural.hasMemberOrders.first.viewingDirection).to eq 'left-to-right'
         expect(dro.description.title.first.attributes).to eq(primary: true,
                                                              titleFull: 'my object')
       end
