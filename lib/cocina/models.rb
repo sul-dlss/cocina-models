@@ -48,11 +48,28 @@ module Cocina
     def self.build(dyn)
       case dyn.fetch('type')
       when *DRO::TYPES
-        DRO.from_dynamic(dyn)
+        DRO.new(dyn)
       when *Collection::TYPES
-        Collection.from_dynamic(dyn)
+        Collection.new(dyn)
       when *AdminPolicy::TYPES
-        AdminPolicy.from_dynamic(dyn)
+        AdminPolicy.new(dyn)
+      else
+        raise UnknownTypeError, "Unknown type: '#{dyn.fetch('type')}'"
+      end
+    end
+
+    # @param [Hash] dyn a ruby hash representation of the JSON serialization of a request for a Collection or DRO
+    # @return [RequestDRO,RequestCollection,RequestAdminPolicy]
+    # @raises [UnknownTypeError] if a valid type is not found in the data
+    # @raises [KeyError] if a type field cannot be found in the data
+    def self.build_request(dyn)
+      case dyn.fetch('type')
+      when *DRO::TYPES
+        RequestDRO.new(dyn)
+      when *Collection::TYPES
+        RequestCollection.new(dyn)
+      when *AdminPolicy::TYPES
+        RequestAdminPolicy.new(dyn)
       else
         raise UnknownTypeError, "Unknown type: '#{dyn.fetch('type')}'"
       end
