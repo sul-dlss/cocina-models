@@ -13,7 +13,7 @@ module Cocina
       attribute(:administrative, Collection::Administrative.default { Collection::Administrative.new })
       # Allowing description to be omittable for now (until rolled out to consumers),
       # but I think it's actually required for every DRO
-      attribute :description, Description.optional.default(nil)
+      attribute :description, Description.optional.meta(omittable: true)
       attribute(:identification, Collection::Identification.default { Collection::Identification.new })
       attribute(:structural, Collection::Structural.default { Collection::Structural.new })
 
