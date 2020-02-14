@@ -94,12 +94,12 @@ RSpec.describe Cocina::Models::RequestDRO do
           structural: {
             isMemberOf: 'druid:bc777df7777',
             contains: [
-              Cocina::Models::FileSet.new(type: fileset_type,
-                                          version: 3,
-                                          externalIdentifier: '12343234_1', label: 'Resource #1'),
-              Cocina::Models::FileSet.new(type: fileset_type,
-                                          version: 3,
-                                          externalIdentifier: '12343234_2', label: 'Resource #2')
+              Cocina::Models::RequestFileSet.new(type: fileset_type,
+                                                 version: 3,
+                                                 label: 'Resource #1'),
+              Cocina::Models::RequestFileSet.new(type: fileset_type,
+                                                 version: 3,
+                                                 label: 'Resource #2')
             ]
           }
         }
@@ -124,7 +124,7 @@ RSpec.describe Cocina::Models::RequestDRO do
         expect(link.catalog).to eq 'symphony'
         expect(link.catalogRecordId).to eq '44444'
 
-        expect(item.structural.contains).to all(be_instance_of(Cocina::Models::FileSet))
+        expect(item.structural.contains).to all(be_instance_of(Cocina::Models::RequestFileSet))
         expect(item.structural.isMemberOf).to eq 'druid:bc777df7777'
       end
     end
@@ -178,7 +178,7 @@ RSpec.describe Cocina::Models::RequestDRO do
         expect(dro.access).to be_kind_of Cocina::Models::DRO::Access
         expect(dro.administrative).to be_kind_of Cocina::Models::DRO::Administrative
         expect(dro.identification).to be_kind_of Cocina::Models::DRO::Identification
-        expect(dro.structural).to be_kind_of Cocina::Models::DRO::Structural
+        expect(dro.structural).to be_kind_of Cocina::Models::RequestDRO::Structural
       end
     end
 
@@ -266,7 +266,7 @@ RSpec.describe Cocina::Models::RequestDRO do
         expect(link.catalog).to eq 'symphony'
         expect(link.catalogRecordId).to eq '44444'
 
-        expect(dro.structural.contains).to all(be_instance_of(Cocina::Models::FileSet))
+        expect(dro.structural.contains).to all(be_instance_of(Cocina::Models::RequestFileSet))
         expect(dro.structural.isMemberOf).to eq 'druid:bc777df7777'
         expect(dro.description.title.first.attributes).to eq(primary: true,
                                                              titleFull: 'my object')
