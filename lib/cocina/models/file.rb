@@ -46,13 +46,13 @@ module Cocina
       attribute :type, Types::String.enum(*TYPES)
       attribute :label, Types::Strict::String
       attribute :filename, Types::String.optional.default(nil)
-      attribute :use, Types::String.enum('original', 'preservation', 'access').optional.default(nil)
+      attribute :use, Types::String.enum('original', 'preservation', 'access').optional.meta(omittable: true)
       attribute :size, Types::Coercible::Integer.optional.default(nil)
       attribute :hasMessageDigests, Types::Strict::Array.of(Fixity).default([].freeze)
-      attribute(:presentation, Presentation.optional.default { Presentation.new })
+      attribute(:presentation, Presentation.optional.meta(omittable: true))
       attribute :version, Types::Coercible::Integer
-      attribute(:identification, Identification.default { Identification.new })
-      attribute(:structural, Structural.default { Structural.new })
+      attribute(:identification, Identification.optional.meta(omittable: true))
+      attribute(:structural, Structural.optional.meta(omittable: true))
 
       def self.from_dynamic(dyn)
         File.new(dyn)

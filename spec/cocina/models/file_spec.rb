@@ -121,7 +121,7 @@ RSpec.describe Cocina::Models::File do
   end
 
   describe '.from_json' do
-    subject(:dro) { described_class.from_json(json) }
+    subject(:file) { described_class.from_json(json) }
 
     context 'with a minimal object' do
       let(:json) do
@@ -136,11 +136,9 @@ RSpec.describe Cocina::Models::File do
       end
 
       it 'has the attributes' do
-        expect(dro.attributes).to include(externalIdentifier: 'druid:12343234',
-                                          label: 'my item',
-                                          type: file_type)
-        expect(dro.identification).to be_kind_of Cocina::Models::File::Identification
-        expect(dro.structural).to be_kind_of Cocina::Models::File::Structural
+        expect(file.attributes).to include(externalIdentifier: 'druid:12343234',
+                                           label: 'my item',
+                                           type: file_type)
       end
     end
 
@@ -180,23 +178,23 @@ RSpec.describe Cocina::Models::File do
       end
 
       it 'has the attributes' do
-        expect(dro.attributes).to include(externalIdentifier: 'druid:12343234',
-                                          label: 'nrs_19180211_0003.tiff',
-                                          type: file_type)
+        expect(file.attributes).to include(externalIdentifier: 'druid:12343234',
+                                           label: 'nrs_19180211_0003.tiff',
+                                           type: file_type)
 
-        expect(dro.access.access).to eq 'world'
+        expect(file.access.access).to eq 'world'
 
-        digests = dro.hasMessageDigests
+        digests = file.hasMessageDigests
         expect(digests).to all(be_instance_of Cocina::Models::File::Fixity)
         expect(digests.first.type).to eq 'md5'
 
-        expect(dro.presentation.height).to eq 5679
-        expect(dro.presentation.width).to eq 4437
-        expect(dro.size).to eq 25_243_531
-        expect(dro.use).to eq 'original'
+        expect(file.presentation.height).to eq 5679
+        expect(file.presentation.width).to eq 4437
+        expect(file.size).to eq 25_243_531
+        expect(file.use).to eq 'original'
 
-        expect(dro.administrative.shelve).to be true
-        expect(dro.administrative.sdrPreserve).to be false
+        expect(file.administrative.shelve).to be true
+        expect(file.administrative.sdrPreserve).to be false
       end
     end
   end
