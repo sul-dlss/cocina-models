@@ -49,6 +49,7 @@ module Cocina
       attribute :use, Types::String.enum('original', 'preservation', 'access').optional.meta(omittable: true)
       attribute :size, Types::Coercible::Integer.optional.default(nil)
       attribute :hasMessageDigests, Types::Strict::Array.of(Fixity).default([].freeze)
+      attribute :hasMimeType, Types::String.optional.meta(omittable: true)
       attribute(:presentation, Presentation.optional.meta(omittable: true))
       attribute :version, Types::Coercible::Integer
       attribute(:identification, Identification.optional.meta(omittable: true))
