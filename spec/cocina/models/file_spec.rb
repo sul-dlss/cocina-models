@@ -159,7 +159,7 @@ RSpec.describe Cocina::Models::File do
             "label":"nrs_19180211_0003.tiff",
             "size":25243531,
             "version": 3,
-            "use": "original",
+            "use": "transcription",
             "presentation": {
               "height":5679,
               "width":4437
@@ -192,7 +192,7 @@ RSpec.describe Cocina::Models::File do
         expect(file.presentation.height).to eq 5679
         expect(file.presentation.width).to eq 4437
         expect(file.size).to eq 25_243_531
-        expect(file.use).to eq 'original'
+        expect(file.use).to eq 'transcription'
 
         expect(file.administrative.shelve).to be true
         expect(file.administrative.sdrPreserve).to be false

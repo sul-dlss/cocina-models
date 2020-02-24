@@ -46,7 +46,7 @@ module Cocina
       attribute :type, Types::String.enum(*TYPES)
       attribute :label, Types::Strict::String
       attribute :filename, Types::String.optional.default(nil)
-      attribute :use, Types::String.enum('original', 'preservation', 'access').optional.meta(omittable: true)
+      attribute :use, Types::String.enum('transcription').optional.meta(omittable: true)
       attribute :size, Types::Coercible::Integer.optional.default(nil)
       attribute :hasMessageDigests, Types::Strict::Array.of(Fixity).default([].freeze)
       attribute :hasMimeType, Types::String.optional.meta(omittable: true)
