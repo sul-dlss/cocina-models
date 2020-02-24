@@ -70,7 +70,8 @@ RSpec.describe Cocina::Models::File do
               type: 'sha1',
               digest: '600a43324ea40ae1ba0c7ffa83965830d384c086'
             }
-          ]
+          ],
+          hasMimeType: 'image/jp2'
         }
       end
 
