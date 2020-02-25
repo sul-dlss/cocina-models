@@ -103,6 +103,7 @@ RSpec.describe Cocina::Models::Collection do
             ]
           },
           identification: {
+            agreementId: 'druid:666',
             sourceId: 'source:999',
             catalogLinks: [
               { catalog: 'symphony', catalogRecordId: '44444' }
@@ -124,6 +125,8 @@ RSpec.describe Cocina::Models::Collection do
         expect(tag.date).to eq DateTime.parse '2018-11-23T00:44:52Z'
         expect(tag.to).to eq 'Searchworks'
         expect(tag.release).to be true
+
+        expect(collection.identification.agreementId).to eq 'druid:666'
 
         link = collection.identification.catalogLinks.first
         expect(link.catalog).to eq 'symphony'

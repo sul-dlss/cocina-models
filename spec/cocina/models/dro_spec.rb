@@ -109,6 +109,7 @@ RSpec.describe Cocina::Models::DRO do
             ]
           },
           identification: {
+            agreementId: 'druid:666',
             sourceId: 'source:999',
             catalogLinks: [
               { catalog: 'symphony', catalogRecordId: '44444' }
@@ -147,6 +148,7 @@ RSpec.describe Cocina::Models::DRO do
         expect(tag.to).to eq 'Searchworks'
         expect(tag.release).to be true
 
+        expect(item.identification.agreementId).to eq 'druid:666'
         expect(item.identification.sourceId).to eq 'source:999'
         link = item.identification.catalogLinks.first
         expect(link.catalog).to eq 'symphony'
