@@ -21,6 +21,7 @@ module Cocina
       # Allowing description to be omittable for now (until rolled out to consumers),
       # but I think it's actually required for every DRO
       attribute :description, Description.optional.meta(omittable: true)
+      attribute :geographic, DRO::Geographic.optional.meta(omittable: true)
       attribute(:identification, DRO::Identification.default { DRO::Identification.new })
       attribute(:structural, Structural.default { Structural.new })
 
