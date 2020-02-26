@@ -103,6 +103,7 @@ Domain-defined abstraction of a 'work'. Digital Repository Objects' abstraction 
 | **description:title** | *array* | The title of the item. | `[{"primary":true,"titleFull":"example"}]` |
 | **externalIdentifier** | *string* | Identifier for the resource within the SDR architecture but outside of the repository. DRUID or UUID depending on resource type. Constant across resource versions. What clients will use calling the repository. Same as `identification.identifier` | `"example"` |
 | **followingVersion** | *string* | Following version for the Object within SDR. | `"example"` |
+| **geographic:iso19139** | *string* | Geographic ISO 19139 XML metadata | `"example"` |
 | **identification:catalogLinks/catalog** | *string* | Catalog that is the source of the linked record. | `"example"` |
 | **identification:catalogLinks/catalogRecordId** | *string* | Record identifier that is unique within the context of the linked record's catalog. | `"example"` |
 | **identification:catalogLinks/deliverMetadata** | *boolean* | If the linked record should be automatically updated when the DRO descriptive metadata changes. | `true` |

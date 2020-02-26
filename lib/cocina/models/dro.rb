@@ -60,6 +60,11 @@ module Cocina
         attribute :hasMemberOrders, Types::Strict::Array.of(Sequence).meta(omittable: true)
       end
 
+      # Geographic sub-schema for the DRO
+      class Geographic < Struct
+        attribute :iso19139, Types::Strict::String
+      end
+
       attribute :externalIdentifier, Types::Strict::String
       attribute :type, Types::String.enum(*TYPES)
       attribute :label, Types::Strict::String
@@ -69,6 +74,7 @@ module Cocina
       # Allowing description to be omittable for now (until rolled out to consumers),
       # but I think it's actually required for every DRO
       attribute :description, Description.optional.meta(omittable: true)
+      attribute :geographic, Geographic.optional.meta(omittable: true)
       attribute(:identification, Identification.default { Identification.new })
       attribute(:structural, Structural.default { Structural.new })
 

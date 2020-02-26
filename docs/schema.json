@@ -694,6 +694,23 @@
           "description": "Descriptive metadata for the DRO.",
           "$ref": "#/definitions/Description"
         },
+        "geographic": {
+          "description": "Geographic metadata for the DRO.",
+          "type": [
+            "object"
+          ],
+          "required": [
+            "iso19139"
+          ],
+          "properties": {
+            "iso19139": {
+              "description": "Geographic ISO 19139 XML metadata",
+              "type": [
+                "string"
+              ]
+            }
+          }
+        },
         "identification": {
           "description": "Identifying information for the DRO.",
           "type": [

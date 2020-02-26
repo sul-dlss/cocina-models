@@ -85,6 +85,9 @@ RSpec.describe Cocina::Models::RequestDRO do
               }
             ]
           },
+          geographic: {
+            iso19139: '<geoXML></geoXML>'
+          },
           identification: {
             sourceId: 'source:999',
             catalogLinks: [
@@ -118,6 +121,8 @@ RSpec.describe Cocina::Models::RequestDRO do
         expect(tag.date).to eq DateTime.parse '2018-11-23T00:44:52Z'
         expect(tag.to).to eq 'Searchworks'
         expect(tag.release).to be true
+
+        expect(item.geographic.iso19139).to eq '<geoXML></geoXML>'
 
         expect(item.identification.sourceId).to eq 'source:999'
         link = item.identification.catalogLinks.first
