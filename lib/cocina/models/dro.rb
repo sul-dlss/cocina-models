@@ -55,6 +55,7 @@ module Cocina
       # Structural sub-schema for the DRO
       class Structural < Struct
         attribute :contains, Types::Strict::Array.of(FileSet).meta(omittable: true)
+        attribute :hasAgreement, Types::Strict::String.meta(omittable: true)
         attribute :isMemberOf, Types::Strict::String.meta(omittable: true)
         attribute :hasMemberOrders, Types::Strict::Array.of(Sequence).meta(omittable: true)
       end

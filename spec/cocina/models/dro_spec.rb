@@ -16,6 +16,9 @@ RSpec.describe Cocina::Models::DRO do
       version: 3,
       description: {
         title: []
+      },
+      structural: {
+        hasAgreement: ''
       }
     }
   end
@@ -58,6 +61,9 @@ RSpec.describe Cocina::Models::DRO do
           version: '3',
           description: {
             title: []
+          },
+          structural: {
+            hasAgreement: ''
           }
         }
       end
@@ -115,6 +121,7 @@ RSpec.describe Cocina::Models::DRO do
             ]
           },
           structural: {
+            hasAgreement: 'druid:666',
             isMemberOf: 'druid:bc777df7777',
             contains: [
               Cocina::Models::FileSet.new(type: fileset_type,
@@ -152,6 +159,7 @@ RSpec.describe Cocina::Models::DRO do
         expect(link.catalog).to eq 'symphony'
         expect(link.catalogRecordId).to eq '44444'
 
+        expect(item.structural.hasAgreement).to eq 'druid:666'
         expect(item.structural.contains).to all(be_instance_of(Cocina::Models::FileSet))
         expect(item.structural.isMemberOf).to eq 'druid:bc777df7777'
         expect(item.structural.hasMemberOrders.first.viewingDirection).to eq 'right-to-left'
@@ -175,7 +183,7 @@ RSpec.describe Cocina::Models::DRO do
             'title' => []
           },
           'identification' => {},
-          'structural' => {}
+          'structural' => { 'hasAgreement' => '' }
         }
       end
 
@@ -198,6 +206,9 @@ RSpec.describe Cocina::Models::DRO do
             "version": 3,
             "description": {
               "title": []
+            },
+            "structural": {
+              "hasAgreement": ""
             }
           }
         JSON
@@ -265,6 +276,7 @@ RSpec.describe Cocina::Models::DRO do
               ]
             },
             "structural": {
+              "hasAgreement":"druid:666",
               "contains": [
                 {
                   "type":"#{fileset_type}",
@@ -307,6 +319,7 @@ RSpec.describe Cocina::Models::DRO do
         expect(link.catalogRecordId).to eq '44444'
 
         expect(dro.structural.contains).to all(be_instance_of(Cocina::Models::FileSet))
+        expect(dro.structural.hasAgreement).to eq 'druid:666'
         expect(dro.structural.isMemberOf).to eq 'druid:bc777df7777'
         expect(dro.structural.hasMemberOrders.first.viewingDirection).to eq 'left-to-right'
         expect(dro.description.title.first.attributes).to eq(primary: true,
@@ -326,6 +339,9 @@ RSpec.describe Cocina::Models::DRO do
         version: 3,
         description: {
           title: []
+        },
+        structural: {
+          hasAgreement: ''
         }
       }
     end
