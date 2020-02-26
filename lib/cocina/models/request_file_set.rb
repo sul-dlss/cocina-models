@@ -14,7 +14,7 @@ module Cocina
       attribute :label, Types::Strict::String
       attribute :version, Types::Coercible::Integer
       attribute(:identification, FileSet::Identification.default { FileSet::Identification.new })
-      attribute(:structural, FileSet::Structural.default { FileSet::Structural.new })
+      attribute(:structural, Structural.default { Structural.new })
     end
   end
 end
