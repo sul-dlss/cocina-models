@@ -33,6 +33,9 @@ RSpec.describe Cocina::Models do
           'version' => 5,
           'description' => {
             'title' => []
+          },
+          'structural' => {
+            'hasAgreement' => ''
           }
         }
       end

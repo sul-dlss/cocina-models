@@ -48,7 +48,6 @@ module Cocina
 
       # Identification sub-schema for the DRO
       class Identification < Struct
-        attribute :agreementId, Types::Strict::String.meta(omittable: true)
         attribute :sourceId, Types::Strict::String.meta(omittable: true)
         attribute :catalogLinks, Types::Strict::Array.of(CatalogLink).meta(omittable: true)
       end
@@ -56,6 +55,7 @@ module Cocina
       # Structural sub-schema for the DRO
       class Structural < Struct
         attribute :contains, Types::Strict::Array.of(FileSet).meta(omittable: true)
+        attribute :hasAgreement, Types::Strict::String.meta(omittable: true)
         attribute :isMemberOf, Types::Strict::String.meta(omittable: true)
         attribute :hasMemberOrders, Types::Strict::Array.of(Sequence).meta(omittable: true)
       end

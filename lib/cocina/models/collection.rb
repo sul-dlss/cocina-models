@@ -30,7 +30,6 @@ module Cocina
 
       # Identification sub-schema for the Collection
       class Identification < Struct
-        attribute :agreementId, Types::Strict::String.meta(omittable: true)
         attribute :catalogLinks, Types::Strict::Array.of(CatalogLink).meta(omittable: true)
       end
 
