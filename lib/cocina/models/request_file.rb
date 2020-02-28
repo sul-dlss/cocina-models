@@ -15,10 +15,10 @@ module Cocina
       attribute :size, Types::Coercible::Integer.optional.default(nil)
       attribute :hasMessageDigests, Types::Strict::Array.of(File::Fixity).default([].freeze)
       attribute :hasMimeType, Types::String.optional.meta(omittable: true)
-      attribute(:presentation, File::Presentation.optional.meta(omittable: true))
+      attribute :presentation, File::Presentation.optional.meta(omittable: true)
       attribute :version, Types::Coercible::Integer
-      attribute(:identification, File::Identification.optional.meta(omittable: true))
-      attribute(:structural, File::Structural.optional.meta(omittable: true))
+      attribute :identification, File::Identification.optional.meta(omittable: true)
+      attribute :structural, File::Structural.optional.meta(omittable: true)
 
       def self.from_dynamic(dyn)
         new(dyn)
