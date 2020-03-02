@@ -180,7 +180,7 @@
                 "string"
               ]
             },
-            "reuseAndReproductionStatement": {
+            "useAndReproductionStatement": {
               "description": "The human readable reuse and reproduction statement that applies to the Collection.",
               "type": [
                 "string"
@@ -595,7 +595,7 @@
                 "string"
               ]
             },
-            "reuseAndReproductionStatement": {
+            "useAndReproductionStatement": {
               "description": "The human readable reuse and reproduction statement that applies to the DRO.",
               "type": [
                 "string"

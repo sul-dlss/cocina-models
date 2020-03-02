@@ -56,7 +56,10 @@ RSpec.describe Cocina::Models::RequestDRO do
             embargo: {
               releaseDate: '2009-12-14T07:00:00Z',
               access: 'stanford'
-            }
+            },
+            access: 'stanford',
+            copyright: 'All rights reserved unless otherwise indicated.',
+            useAndReproductionStatement: 'Property rights reside with the repository...'
           },
           administrative: {
             hasAdminPolicy: 'druid:mx123cd4567',
@@ -112,6 +115,9 @@ RSpec.describe Cocina::Models::RequestDRO do
         expect(item.type).to eq item_type
         expect(item.label).to eq 'My object'
 
+        expect(item.access.access).to eq 'stanford'
+        expect(item.access.copyright).to eq 'All rights reserved unless otherwise indicated.'
+        expect(item.access.useAndReproductionStatement).to eq 'Property rights reside with the repository...'
         expect(item.access.embargo.releaseDate).to eq DateTime.parse('2009-12-14T07:00:00Z')
         expect(item.access.embargo.access).to eq 'stanford'
 
