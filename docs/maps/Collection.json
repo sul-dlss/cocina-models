@@ -89,7 +89,7 @@
           "description": "The license governing reuse of the Collection. Should be an IRI for known licenses (i.e. CC, RightsStatement.org URI, etc.).",
           "type": "string"
         },
-        "reuseAndReproductionStatement": {
+        "useAndReproductionStatement": {
           "description": "The human readable reuse and reproduction statement that applies to the Collection.",
           "type": "string"
         },

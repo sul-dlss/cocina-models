@@ -37,7 +37,7 @@ module Cocina
         attribute :access, Types::String.default('dark')
                                         .enum('world', 'stanford', 'location-based', 'citation-only', 'dark')
         attribute :copyright, Types::Strict::String.meta(omittable: true)
-        attribute :reuseAndReproductionStatement, Types::Strict::String.meta(omittable: true)
+        attribute :useAndReproductionStatement, Types::Strict::String.meta(omittable: true)
       end
 
       # Subschema for administrative concerns
