@@ -5,10 +5,13 @@ module Cocina
     # An admin policy object.
     class AdminPolicy < Struct
       include Checkable
+      include AdminPolicyAttributes
 
       TYPES = [
         Vocab.admin_policy
       ].freeze
+
+      attribute :externalIdentifier, Types::Strict::String
 
       # Subschema for access concerns
       class Access < Struct
@@ -60,9 +63,6 @@ module Cocina
 
       class Structural < Struct
       end
-
-      include AdminPolicyAttributes
-      attribute :externalIdentifier, Types::Strict::String
 
       def self.from_dynamic(dyn)
         AdminPolicy.new(dyn)

@@ -4,6 +4,9 @@ inherit_from: .rubocop_todo.yml
 require:
   - rubocop-rspec
 
+Layout/ClassStructure:
+  Enabled: true
+
 Metrics/BlockLength:
   Exclude:
     - spec/cocina/**/*

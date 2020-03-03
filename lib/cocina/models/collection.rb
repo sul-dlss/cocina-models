@@ -6,6 +6,7 @@ module Cocina
     # See http://sul-dlss.github.io/cocina-models/maps/Collection.json
     class Collection < Struct
       include Checkable
+      include CollectionAttributes
 
       TYPES = [
         Vocab.collection,
@@ -14,6 +15,8 @@ module Cocina
         Vocab.series,
         Vocab.user_collection
       ].freeze
+
+      attribute :externalIdentifier, Types::Strict::String
 
       # Subschema for access concerns
       class Access < Struct
@@ -36,9 +39,6 @@ module Cocina
 
       class Structural < Struct
       end
-
-      include CollectionAttributes
-      attribute :externalIdentifier, Types::Strict::String
 
       def self.from_dynamic(dyn)
         Collection.new(dyn)

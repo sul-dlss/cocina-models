@@ -6,10 +6,14 @@ module Cocina
     # See http://sul-dlss.github.io/cocina-models/maps/Fileset.json
     class FileSet < Struct
       include Checkable
+      include FileSetAttributes
 
       TYPES = [
         Vocab.fileset
       ].freeze
+
+      attribute :externalIdentifier, Types::Strict::String
+      attribute(:structural, Structural.default { Structural.new })
 
       class Identification < Struct
       end
@@ -18,10 +22,6 @@ module Cocina
       class Structural < Struct
         attribute :contains, Types::Strict::Array.of(Cocina::Models::File).meta(omittable: true)
       end
-
-      include FileSetAttributes
-      attribute :externalIdentifier, Types::Strict::String
-      attribute(:structural, Structural.default { Structural.new })
 
       def self.from_dynamic(dyn)
         FileSet.new(dyn)

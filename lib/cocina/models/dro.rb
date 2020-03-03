@@ -6,6 +6,7 @@ module Cocina
     # See http://sul-dlss.github.io/cocina-models/maps/DRO.json
     class DRO < Struct
       include Checkable
+      include DroAttributes
 
       TYPES = [
         Vocab.object,
@@ -24,6 +25,9 @@ module Cocina
         Vocab.webarchive_binary,
         Vocab.webarchive_seed
       ].freeze
+
+      attribute :externalIdentifier, Types::Strict::String
+      attribute(:structural, Structural.default { Structural.new })
 
       # Subschema for access concerns
       class Access < Struct
@@ -67,10 +71,6 @@ module Cocina
         attribute :isMemberOf, Types::Strict::String.meta(omittable: true)
         attribute :hasMemberOrders, Types::Strict::Array.of(Sequence).meta(omittable: true)
       end
-
-      include DroAttributes
-      attribute :externalIdentifier, Types::Strict::String
-      attribute(:structural, Structural.default { Structural.new })
 
       def self.from_dynamic(dyn)
         DRO.new(dyn)

@@ -6,10 +6,13 @@ module Cocina
     # See http://sul-dlss.github.io/cocina-models/maps/File.json
     class File < Struct
       include Checkable
+      include FileAttributes
 
       TYPES = [
         Vocab.file
       ].freeze
+
+      attribute :externalIdentifier, Types::Strict::String
 
       # Represents access controls on the file
       class Access < Struct
@@ -40,9 +43,6 @@ module Cocina
 
       class Structural < Struct
       end
-
-      include FileAttributes
-      attribute :externalIdentifier, Types::Strict::String
 
       def self.from_dynamic(dyn)
         File.new(dyn)
