@@ -2,19 +2,10 @@
 
 module Cocina
   module Models
-    # An request to create an AdminPolicy object.
-    # This is the same as AdminPolicy, except it doesn't have externalIdentifier.
+    # A request to create an AdminPolicy object.
+    # This is the same as an AdminPolicy, but without externalIdentifier (as that wouldn't have been created yet).
     class RequestAdminPolicy < Struct
-      attribute :type, Types::String.enum(*AdminPolicy::TYPES)
-      attribute :label, Types::Strict::String
-      attribute :version, Types::Coercible::Integer
-      attribute(:access, AdminPolicy::Access.default { AdminPolicy::Access.new })
-      attribute(:administrative, AdminPolicy::Administrative.default { AdminPolicy::Administrative.new })
-      # Allowing description to be omittable for now (until rolled out to consumers),
-      # but I think it's actually required for every DRO
-      attribute :description, Description.optional.meta(omittable: true)
-      attribute(:identification, AdminPolicy::Identification.default { AdminPolicy::Identification.new })
-      attribute(:structural, AdminPolicy::Structural.default { AdminPolicy::Structural.new })
+      include AdminPolicyAttributes
 
       def self.from_dynamic(dyn)
         RequestAdminPolicy.new(dyn)

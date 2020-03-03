@@ -2,7 +2,8 @@
 
 module Cocina
   module Models
-    # Metadata for a File Set.  See http://sul-dlss.github.io/cocina-models/maps/Fileset.json
+    # Metadata for a file set.
+    # See http://sul-dlss.github.io/cocina-models/maps/Fileset.json
     class FileSet < Struct
       include Checkable
 
@@ -13,16 +14,13 @@ module Cocina
       class Identification < Struct
       end
 
-      # Structural sub-schema for the FileSet
+      # Structural sub-schema that contains File (unlike the RequestFileSet which contains RequestFile)
       class Structural < Struct
         attribute :contains, Types::Strict::Array.of(Cocina::Models::File).meta(omittable: true)
       end
 
+      include FileSetAttributes
       attribute :externalIdentifier, Types::Strict::String
-      attribute :type, Types::String.enum(*TYPES)
-      attribute :label, Types::Strict::String
-      attribute :version, Types::Coercible::Integer
-      attribute(:identification, Identification.default { Identification.new })
       attribute(:structural, Structural.default { Structural.new })
 
       def self.from_dynamic(dyn)

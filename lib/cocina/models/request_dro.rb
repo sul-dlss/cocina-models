@@ -2,10 +2,12 @@
 
 module Cocina
   module Models
-    # A Request to create a digital repository object. (to create) object.
-    # This is same as a DRO, but without externalIdentifier (as that wouldn't have been created yet)
+    # A request to create a digital repository object.
+    # This is the same as a DRO, but without externalIdentifier (as that wouldn't have been created yet)
     # See http://sul-dlss.github.io/cocina-models/maps/DRO.json
     class RequestDRO < Struct
+      include DroAttributes
+
       # Structural sub-schema that contains RequestFileSet (unlike the DRO which contains FileSet)
       class Structural < Struct
         attribute :contains, Types::Strict::Array.of(RequestFileSet).meta(omittable: true)
@@ -13,16 +15,6 @@ module Cocina
         attribute :hasMemberOrders, Types::Strict::Array.of(Sequence).meta(omittable: true)
       end
 
-      attribute :type, Types::String.enum(*DRO::TYPES)
-      attribute :label, Types::Strict::String
-      attribute :version, Types::Coercible::Integer
-      attribute(:access, DRO::Access.default { DRO::Access.new })
-      attribute(:administrative, DRO::Administrative.default { DRO::Administrative.new })
-      # Allowing description to be omittable for now (until rolled out to consumers),
-      # but I think it's actually required for every DRO
-      attribute :description, Description.optional.meta(omittable: true)
-      attribute :geographic, DRO::Geographic.optional.meta(omittable: true)
-      attribute(:identification, DRO::Identification.default { DRO::Identification.new })
       attribute(:structural, Structural.default { Structural.new })
 
       def self.from_dynamic(dyn)
