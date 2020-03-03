@@ -61,17 +61,8 @@ module Cocina
       class Structural < Struct
       end
 
+      include AdminPolicyAttributes
       attribute :externalIdentifier, Types::Strict::String
-      attribute :type, Types::String.enum(*TYPES)
-      attribute :label, Types::Strict::String
-      attribute :version, Types::Coercible::Integer
-      attribute(:access, Access.default { Access.new })
-      attribute(:administrative, Administrative.default { Administrative.new })
-      # Allowing description to be omittable for now (until rolled out to consumers),
-      # but I think it's actually required for every DRO
-      attribute :description, Description.optional.meta(omittable: true)
-      attribute(:identification, Identification.default { Identification.new })
-      attribute(:structural, Structural.default { Structural.new })
 
       def self.from_dynamic(dyn)
         AdminPolicy.new(dyn)
