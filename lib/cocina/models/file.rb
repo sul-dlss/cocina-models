@@ -2,7 +2,8 @@
 
 module Cocina
   module Models
-    # Metadata for a file.  See http://sul-dlss.github.io/cocina-models/maps/File.json
+    # Metadata for a file.
+    # See http://sul-dlss.github.io/cocina-models/maps/File.json
     class File < Struct
       include Checkable
 
@@ -22,16 +23,13 @@ module Cocina
         attribute :shelve, Types::Params::Bool.optional.default(false)
       end
 
-      class Identification < Struct
-      end
-
-      class Structural < Struct
-      end
-
-      # Represents a digest value for a file
+      # Represents a digest (checksum) value for a file
       class Fixity < Struct
         attribute :type, Types::String.enum('md5', 'sha1')
         attribute :digest, Types::Strict::String
+      end
+
+      class Identification < Struct
       end
 
       # Represents some technical aspect of the file
@@ -40,20 +38,11 @@ module Cocina
         attribute :width, Types::Coercible::Integer.optional.default(nil)
       end
 
-      attribute(:access, Access.optional.default { Access.new })
-      attribute(:administrative, Administrative.default { Administrative.new })
+      class Structural < Struct
+      end
+
+      include FileAttributes
       attribute :externalIdentifier, Types::Strict::String
-      attribute :type, Types::String.enum(*TYPES)
-      attribute :label, Types::Strict::String
-      attribute :filename, Types::String.optional.default(nil)
-      attribute :use, Types::String.enum('transcription').optional.meta(omittable: true)
-      attribute :size, Types::Coercible::Integer.optional.default(nil)
-      attribute :hasMessageDigests, Types::Strict::Array.of(Fixity).default([].freeze)
-      attribute :hasMimeType, Types::String.optional.meta(omittable: true)
-      attribute :presentation, Presentation.optional.meta(omittable: true)
-      attribute :version, Types::Coercible::Integer
-      attribute :identification, Identification.optional.meta(omittable: true)
-      attribute :structural, Structural.optional.meta(omittable: true)
 
       def self.from_dynamic(dyn)
         File.new(dyn)
