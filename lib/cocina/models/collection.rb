@@ -2,16 +2,17 @@
 
 module Cocina
   module Models
-    # A digital repository collection.  See http://sul-dlss.github.io/cocina-models/maps/Collection.json
+    # A digital repository collection.
+    # See http://sul-dlss.github.io/cocina-models/maps/Collection.json
     class Collection < Struct
       include Checkable
 
       TYPES = [
         Vocab.collection,
         Vocab.curated_collection,
-        Vocab.user_collection,
         Vocab.exhibit,
-        Vocab.series
+        Vocab.series,
+        Vocab.user_collection
       ].freeze
 
       # Subschema for access concerns
@@ -36,17 +37,8 @@ module Cocina
       class Structural < Struct
       end
 
+      include CollectionAttributes
       attribute :externalIdentifier, Types::Strict::String
-      attribute :type, Types::String.enum(*TYPES)
-      attribute :label, Types::Strict::String
-      attribute :version, Types::Coercible::Integer
-      attribute(:access, Access.default { Access.new })
-      attribute(:administrative, Administrative.default { Administrative.new })
-      # Allowing description to be omittable for now (until rolled out to consumers),
-      # but I think it's actually required for every DRO
-      attribute :description, Description.optional.meta(omittable: true)
-      attribute(:identification, Identification.default { Identification.new })
-      attribute(:structural, Structural.default { Structural.new })
 
       def self.from_dynamic(dyn)
         Collection.new(dyn)

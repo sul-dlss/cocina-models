@@ -3,19 +3,10 @@
 module Cocina
   module Models
     # A request to create a digital repository collection.
-    # This is the same as Collection, except it doesn't have externalIdentifier.
+    # This is the same as a Collection, but without externalIdentifier (as that wouldn't have been created yet).
     # See http://sul-dlss.github.io/cocina-models/maps/Collection.json
     class RequestCollection < Struct
-      attribute :type, Types::String.enum(*Collection::TYPES)
-      attribute :label, Types::Strict::String
-      attribute :version, Types::Coercible::Integer
-      attribute(:access, Collection::Access.default { Collection::Access.new })
-      attribute(:administrative, Collection::Administrative.default { Collection::Administrative.new })
-      # Allowing description to be omittable for now (until rolled out to consumers),
-      # but I think it's actually required for every DRO
-      attribute :description, Description.optional.meta(omittable: true)
-      attribute(:identification, Collection::Identification.default { Collection::Identification.new })
-      attribute(:structural, Collection::Structural.default { Collection::Structural.new })
+      include CollectionAttributes
 
       def self.from_dynamic(dyn)
         RequestCollection.new(dyn)
