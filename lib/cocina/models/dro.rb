@@ -2,7 +2,8 @@
 
 module Cocina
   module Models
-    # A digital repository object.  See http://sul-dlss.github.io/cocina-models/maps/DRO.json
+    # A digital repository object.
+    # See http://sul-dlss.github.io/cocina-models/maps/DRO.json
     class DRO < Struct
       include Checkable
 
@@ -54,7 +55,12 @@ module Cocina
         attribute :catalogLinks, Types::Strict::Array.of(CatalogLink).meta(omittable: true)
       end
 
-      # Structural sub-schema for the DRO
+      # Geographic sub-schema for the DRO
+      class Geographic < Struct
+        attribute :iso19139, Types::Strict::String
+      end
+
+      # Structural sub-schema for the DRO (uses FileSet, unlike RequestDRO which uses RequestFileSet)
       class Structural < Struct
         attribute :contains, Types::Strict::Array.of(FileSet).meta(omittable: true)
         attribute :hasAgreement, Types::Strict::String.meta(omittable: true)
@@ -62,22 +68,8 @@ module Cocina
         attribute :hasMemberOrders, Types::Strict::Array.of(Sequence).meta(omittable: true)
       end
 
-      # Geographic sub-schema for the DRO
-      class Geographic < Struct
-        attribute :iso19139, Types::Strict::String
-      end
-
+      include DroAttributes
       attribute :externalIdentifier, Types::Strict::String
-      attribute :type, Types::String.enum(*TYPES)
-      attribute :label, Types::Strict::String
-      attribute :version, Types::Coercible::Integer
-      attribute(:access, Access.default { Access.new })
-      attribute(:administrative, Administrative.default { Administrative.new })
-      # Allowing description to be omittable for now (until rolled out to consumers),
-      # but I think it's actually required for every DRO
-      attribute :description, Description.optional.meta(omittable: true)
-      attribute :geographic, Geographic.optional.meta(omittable: true)
-      attribute(:identification, Identification.default { Identification.new })
       attribute(:structural, Structural.default { Structural.new })
 
       def self.from_dynamic(dyn)
