@@ -50,7 +50,7 @@ module Cocina
         # which workflow to start when registering (used by Web Archive apos to start wasCrawlPreassemblyWF)
         attribute :registration_workflow, Types::String.optional.default(nil)
 
-        # Allowing hasAdminPolicy to be omittable for now (until rolled out to consumers),
+        # TODO: Allowing hasAdminPolicy to be omittable for now (until rolled out to consumers),
         # but I think it's actually required for every Admin Policy
         attribute :hasAdminPolicy, Types::Coercible::String.optional.default(nil)
       end
