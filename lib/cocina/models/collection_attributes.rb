@@ -8,7 +8,7 @@ module Cocina
       def self.included(obj)
         obj.attribute(:access, Collection::Access.default { Collection::Access.new })
         obj.attribute(:administrative, Collection::Administrative.default { Collection::Administrative.new })
-        # Allowing description to be omittable for now (until rolled out to consumers),
+        # TODO: Allowing description to be omittable for now (until rolled out to consumers),
         # but I think it's actually required for every Collection
         obj.attribute :description, Description.optional.meta(omittable: true)
         obj.attribute(:identification, Collection::Identification.default { Collection::Identification.new })
