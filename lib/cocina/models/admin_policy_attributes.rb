@@ -7,7 +7,7 @@ module Cocina
       def self.included(obj)
         obj.attribute(:access, AdminPolicy::Access.default { AdminPolicy::Access.new })
         obj.attribute(:administrative, AdminPolicy::Administrative.default { AdminPolicy::Administrative.new })
-        # Allowing description to be omittable for now (until rolled out to consumers),
+        # TODO: Allowing description to be omittable for now (until rolled out to consumers),
         # but I think it's actually required for every admin policy
         obj.attribute :description, Description.optional.meta(omittable: true)
         obj.attribute(:identification, AdminPolicy::Identification.default { AdminPolicy::Identification.new })
