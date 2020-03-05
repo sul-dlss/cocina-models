@@ -9,7 +9,7 @@ module Cocina
       # we use 'when' other places, but that's reserved word, so 'date' it is!
       attribute :date, Types::Params::DateTime
       attribute :who, Types::Strict::String
-      attribute :release, Types::Params::Bool
+      attribute :release, Types::Params::Bool # will coerce 'true' to true
 
       def self.from_dynamic(dyn)
         ReleaseTag.new(dyn)

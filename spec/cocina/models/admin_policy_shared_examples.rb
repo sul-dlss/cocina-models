@@ -76,32 +76,6 @@ RSpec.shared_examples 'it has admin_policy attributes' do
         expect(admin_policy.description.title.first.attributes).to eq(primary: true,
                                                                       titleFull: 'My admin_policy')
       end
-
-      context 'with a string description title primary boolean property' do
-        let(:properties) do
-          required_properties.merge(
-            administrative: {
-              default_object_rights: '<rightsMetadata></rightsMetadata>',
-              registration_workflow: 'wasCrawlPreassemblyWF',
-              hasAdminPolicy: 'druid:mx123cd4567'
-            },
-            description: {
-              title: [
-                {
-                  primary: 'true',
-                  titleFull: 'My admin_policy'
-                }
-              ]
-            }
-          )
-        end
-
-        it 'raises a Dry::Struct::Error' do
-          err_msg = '[Cocina::Models::Description::Title.new] "true" (String) ' \
-                    'has invalid type for :primary violates constraints (type?(FalseClass, "true") failed)'
-          expect { admin_policy }.to raise_error(Dry::Struct::Error, err_msg)
-        end
-      end
     end
 
     context 'with empty optional properties that have default values' do
@@ -168,9 +142,7 @@ RSpec.shared_examples 'it has admin_policy attributes' do
     let(:admin_policy) { described_class.from_json(json) }
 
     context 'with minimal required properties' do
-      let(:json) do
-        required_properties.to_json
-      end
+      let(:json) { required_properties.to_json }
 
       it 'populates required attributes passed in' do
         if required_properties[:externalIdentifier]
