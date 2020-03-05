@@ -94,27 +94,6 @@ RSpec.shared_examples 'it has file attributes' do
         expect(item.size).to eq 666
         expect(item.use).to eq 'transcription'
       end
-
-      context 'with a string administrative boolean property' do
-        let(:properties) do
-          {
-            administrative: {
-              shelve: 'true',
-              sdrPreserve: 'false'
-            },
-            externalIdentifier: 'druid:ab123cd4567',
-            label: 'My file',
-            type: file_type,
-            version: '3'
-          }
-        end
-
-        it 'coerces to boolean' do
-          expect(item.administrative).to be_kind_of(Cocina::Models::File::Administrative)
-          expect(item.administrative.shelve).to be true
-          expect(item.administrative.sdrPreserve).to be false
-        end
-      end
     end
 
     context 'with empty optional properties that have default values' do
