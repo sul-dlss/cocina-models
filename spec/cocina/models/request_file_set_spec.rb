@@ -1,72 +1,68 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+load 'spec/cocina/models/file_set_shared_examples.rb'
 
 RSpec.describe Cocina::Models::RequestFileSet do
-  subject(:item) { described_class.new(properties) }
+  let(:file_set_type) { Cocina::Models::Vocab.fileset }
+  let(:required_properties) do
+    {
+      label: 'My fileset',
+      type: file_set_type,
+      version: 3
+    }
+  end
+  let(:struct_class) { Cocina::Models::RequestFileSet::Structural }
+  let(:struct_contains_class) { Cocina::Models::RequestFile }
 
-  let(:file_set_type) { 'http://cocina.sul.stanford.edu/models/fileset.jsonld' }
+  it_behaves_like 'it has file_set attributes'
 
-  describe 'initialization' do
-    context 'with a minimal set' do
+  describe Cocina::Models::RequestFileSet::Structural do
+    context 'with RequestFile as contained class' do
+      let(:instance) { described_class.new(properties) }
       let(:properties) do
         {
-          type: file_set_type,
-          label: 'My file',
-          version: 3
+          contains: [
+            struct_contains_class.new(
+              label: 'requestfile#1',
+              type: Cocina::Models::Vocab.file,
+              version: 1
+            )
+          ]
         }
       end
 
-      it 'has properties' do
-        expect(item.type).to eq file_set_type
-        expect(item.label).to eq 'My file'
+      it 'populates passed attrbutes for RequestFile' do
+        expect(instance.contains).to all(be_kind_of(struct_contains_class))
+        file1 = instance.contains.first
+        expect(file1.type).to eq Cocina::Models::Vocab.file
+        expect(file1.label).to eq 'requestfile#1'
+        expect(file1.version).to eq 1
       end
     end
 
-    context 'with a string version' do
+    context 'with File as contained class' do
+      let(:instance) { described_class.new(properties) }
       let(:properties) do
         {
-          type: file_set_type,
-          label: 'My file',
-          version: '3'
+          contains: [
+            Cocina::Models::File.new(
+              externalIdentifier: 'file#1',
+              label: 'file#1',
+              type: Cocina::Models::Vocab.file,
+              version: 1
+            )
+          ]
         }
       end
 
-      it 'coerces to integer' do
-        expect(item.version).to eq 3
-      end
-    end
-
-    context 'with a all properties' do
-      let(:properties) do
-        {
-          type: file_set_type,
-          label: 'My file',
-          version: 3,
-          administrative: {
-          },
-          structural: {
-            contains: [
-              {
-                type: Cocina::Models::Vocab.file,
-                label: 'file#1',
-                version: 3
-              },
-              {
-                type: Cocina::Models::Vocab.file,
-                label: 'file#2',
-                version: 3
-              }
-            ]
-          }
-        }
-      end
-
-      it 'has properties' do
-        expect(item.type).to eq file_set_type
-        expect(item.label).to eq 'My file'
-
-        expect(item.structural.contains).to all(be_instance_of(Cocina::Models::RequestFile))
+      # I expected a Dry::Struct::Error to be raised
+      it 'coerces it to RequestFile' do
+        expect(instance.contains).to all(be_kind_of(struct_contains_class))
+        file1 = instance.contains.first
+        expect(file1.type).to eq Cocina::Models::Vocab.file
+        expect(file1.label).to eq 'file#1'
+        expect(file1.version).to eq 1
       end
     end
   end
