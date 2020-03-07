@@ -34,19 +34,19 @@ module Cocina
                                           .enum('world', 'stanford', 'location-based', 'citation-only', 'dark')
         end
 
-        attribute :embargo, Embargo.optional.meta(omittable: true)
         attribute :access, Types::String.default('dark')
                                         .enum('world', 'stanford', 'location-based', 'citation-only', 'dark')
         attribute :copyright, Types::Strict::String.meta(omittable: true)
+        attribute :embargo, Embargo.optional.meta(omittable: true)
         attribute :useAndReproductionStatement, Types::Strict::String.meta(omittable: true)
       end
 
       # Subschema for administrative concerns
       class Administrative < Struct
-        attribute :releaseTags, Types::Strict::Array.of(ReleaseTag).meta(omittable: true).default([].freeze)
-        # Allowing hasAdminPolicy to be omittable for now (until rolled out to consumers),
+        # TODO: Allowing hasAdminPolicy to be omittable for now (until rolled out to consumers),
         # but I think it's actually required for every DRO
         attribute :hasAdminPolicy, Types::Coercible::String.optional.default(nil)
+        attribute :releaseTags, Types::Strict::Array.of(ReleaseTag).meta(omittable: true).default([].freeze)
       end
 
       # Identification sub-schema for the DRO

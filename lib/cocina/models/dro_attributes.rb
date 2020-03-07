@@ -8,7 +8,7 @@ module Cocina
       def self.included(obj)
         obj.attribute(:access, DRO::Access.default { DRO::Access.new })
         obj.attribute(:administrative, DRO::Administrative.default { DRO::Administrative.new })
-        # Allowing description to be omittable for now (until rolled out to consumers),
+        # TODO: Allowing description to be omittable for now (until rolled out to consumers),
         # but I think it's actually required for every DRO
         obj.attribute :description, Description.optional.meta(omittable: true)
         obj.attribute :geographic, DRO::Geographic.optional.meta(omittable: true)
