@@ -10,10 +10,6 @@ module Cocina
       attribute :date, Types::Params::DateTime
       attribute :who, Types::Strict::String
       attribute :release, Types::Params::Bool # will coerce 'true' to true
-
-      def self.from_dynamic(dyn)
-        ReleaseTag.new(dyn)
-      end
     end
   end
 end

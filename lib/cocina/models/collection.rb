@@ -39,14 +39,6 @@ module Cocina
 
       include CollectionAttributes
       attribute :externalIdentifier, Types::Strict::String
-
-      def self.from_dynamic(dyn)
-        Collection.new(dyn)
-      end
-
-      def self.from_json(json)
-        from_dynamic(JSON.parse(json))
-      end
     end
   end
 end

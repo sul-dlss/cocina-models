@@ -63,14 +63,6 @@ module Cocina
 
       include AdminPolicyAttributes
       attribute :externalIdentifier, Types::Strict::String
-
-      def self.from_dynamic(dyn)
-        AdminPolicy.new(dyn)
-      end
-
-      def self.from_json(json)
-        from_dynamic(JSON.parse(json))
-      end
     end
   end
 end

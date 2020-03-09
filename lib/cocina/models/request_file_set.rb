@@ -13,14 +13,6 @@ module Cocina
 
       include FileSetAttributes
       attribute(:structural, Structural.default { Structural.new })
-
-      def self.from_dynamic(dyn)
-        RequestFileSet.new(dyn)
-      end
-
-      def self.from_json(json)
-        from_dynamic(JSON.parse(json))
-      end
     end
   end
 end

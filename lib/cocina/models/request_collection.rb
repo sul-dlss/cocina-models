@@ -7,14 +7,6 @@ module Cocina
     # See http://sul-dlss.github.io/cocina-models/maps/Collection.json
     class RequestCollection < Struct
       include CollectionAttributes
-
-      def self.from_dynamic(dyn)
-        RequestCollection.new(dyn)
-      end
-
-      def self.from_json(json)
-        from_dynamic(JSON.parse(json))
-      end
     end
   end
 end
