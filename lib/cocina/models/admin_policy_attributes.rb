@@ -14,7 +14,7 @@ module Cocina
         obj.attribute :label, Types::Strict::String
         obj.attribute(:structural, AdminPolicy::Structural.default { AdminPolicy::Structural.new })
         obj.attribute :type, Types::String.enum(*AdminPolicy::TYPES)
-        obj.attribute :version, Types::Coercible::Integer
+        obj.attribute :version, Types::Strict::Integer
       end
     end
   end

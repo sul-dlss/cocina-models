@@ -6,7 +6,7 @@ module Cocina
     class Description < Struct
       # Title element.  See http://sul-dlss.github.io/cocina-models/maps/Title.json
       class Title < Struct
-        attribute :primary, Types::Params::Bool # will coerce 'true' to true
+        attribute :primary, Types::Strict::Bool
         attribute :titleFull, Types::Strict::String
       end
 

@@ -34,40 +34,4 @@ RSpec.describe Cocina::Models::File do
     it { is_expected.to be_file }
     it { is_expected.not_to be_file_set }
   end
-
-  describe Cocina::Models::File::Administrative do
-    let(:instance) { described_class.new(properties) }
-
-    context 'with boolean properties as strings' do
-      let(:properties) do
-        {
-          shelve: 'true',
-          sdrPreserve: 'false'
-        }
-      end
-
-      it 'coerces to boolean' do
-        expect(instance.shelve).to be true
-        expect(instance.sdrPreserve).to be false
-      end
-    end
-  end
-
-  describe Cocina::Models::File::Presentation do
-    let(:instance) { described_class.new(properties) }
-
-    context 'with height and width as strings' do
-      let(:properties) do
-        {
-          height: '666',
-          width: '777'
-        }
-      end
-
-      it 'coerces to integer' do
-        expect(instance.height).to eq 666
-        expect(instance.width).to eq 777
-      end
-    end
-  end
 end

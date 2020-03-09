@@ -39,14 +39,6 @@ RSpec.shared_examples 'it has collection attributes' do
       end
     end
 
-    context 'with a string version property' do
-      let(:properties) { required_properties.merge(version: required_properties[:version].to_s) }
-
-      it 'coerces to integer' do
-        expect(instance.version).to eq required_properties[:version]
-      end
-    end
-
     context 'with all specifiable properties' do
       let(:properties) do
         required_properties.merge(

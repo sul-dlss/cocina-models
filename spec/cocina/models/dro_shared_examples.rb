@@ -49,14 +49,6 @@ RSpec.shared_examples 'it has dro attributes' do
       end
     end
 
-    context 'with a string version property' do
-      let(:properties) { required_properties.merge(version: required_properties[:version].to_s) }
-
-      it 'coerces to integer' do
-        expect(instance.version).to eq required_properties[:version]
-      end
-    end
-
     context 'with all specifiable properties' do
       let(:properties) do
         required_properties.merge(
@@ -77,14 +69,14 @@ RSpec.shared_examples 'it has dro attributes' do
                 what: 'collection',
                 date: '2018-11-23T00:44:52Z',
                 to: 'Searchworks',
-                release: 'true'
+                release: true
               },
               {
                 who: 'Other Justin',
                 what: 'self',
                 date: '2017-10-20T15:42:15Z',
                 to: 'Searchworks',
-                release: 'false'
+                release: false
               }
             ]
           },

@@ -26,7 +26,7 @@ module Cocina
         attribute :releaseTags, Types::Strict::Array.of(ReleaseTag).default([].freeze)
         # TODO: Allowing hasAdminPolicy to be omittable for now (until rolled out to consumers),
         # but I think it's actually required for every Collection
-        attribute :hasAdminPolicy, Types::Coercible::String.optional.default(nil)
+        attribute :hasAdminPolicy, Types::Strict::String.optional.default(nil)
       end
 
       # Identification sub-schema for the Collection

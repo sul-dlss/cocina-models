@@ -15,7 +15,7 @@ module Cocina
         obj.attribute(:identification, DRO::Identification.default { DRO::Identification.new })
         obj.attribute :label, Types::Strict::String
         obj.attribute :type, Types::String.enum(*DRO::TYPES)
-        obj.attribute :version, Types::Coercible::Integer
+        obj.attribute :version, Types::Strict::Integer
       end
     end
   end

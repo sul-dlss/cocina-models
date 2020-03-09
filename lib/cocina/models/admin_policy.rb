@@ -52,7 +52,7 @@ module Cocina
 
         # TODO: Allowing hasAdminPolicy to be omittable for now (until rolled out to consumers),
         # but I think it's actually required for every Admin Policy
-        attribute :hasAdminPolicy, Types::Coercible::String.optional.default(nil)
+        attribute :hasAdminPolicy, Types::Strict::String.optional.default(nil)
       end
 
       class Identification < Struct
