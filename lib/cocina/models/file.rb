@@ -43,14 +43,6 @@ module Cocina
 
       include FileAttributes
       attribute :externalIdentifier, Types::Strict::String
-
-      def self.from_dynamic(dyn)
-        File.new(dyn)
-      end
-
-      def self.from_json(json)
-        from_dynamic(JSON.parse(json))
-      end
     end
   end
 end

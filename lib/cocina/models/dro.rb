@@ -72,14 +72,6 @@ module Cocina
       attribute :externalIdentifier, Types::Strict::String
       attribute(:structural, Structural.default { Structural.new })
 
-      def self.from_dynamic(dyn)
-        DRO.new(dyn)
-      end
-
-      def self.from_json(json)
-        from_dynamic(JSON.parse(json))
-      end
-
       def image?
         type == Vocab.image
       end
