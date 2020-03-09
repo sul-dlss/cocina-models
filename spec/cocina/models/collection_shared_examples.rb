@@ -276,7 +276,7 @@ RSpec.shared_examples 'it has collection attributes' do
         expect(instance.administrative.hasAdminPolicy).to eq 'druid:mx123cd4567'
 
         tags = instance.administrative.releaseTags
-        expect(tags).to all(be_instance_of Cocina::Models::ReleaseTag)
+        expect(tags).to all(be_instance_of(Cocina::Models::ReleaseTag))
 
         expect(instance.description.title.first.attributes).to eq(primary: true,
                                                                   titleFull: 'my collection')
