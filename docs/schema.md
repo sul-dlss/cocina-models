@@ -28,8 +28,8 @@ A group of Digital Repository Objects that indicate some type of conceptual grou
 | **access:download** | *string* | Download level for the Collection metadata.<br/> **one of:**`"world"` or `"stanford"` or `"location-based"` or `"citation-only"` or `"dark"` | `"world"` |
 | **access:embargoReleaseDate** | *date-time* | Date when the Collection is released from an embargo, if an embargo exists. | `"2015-01-01T12:00:00Z"` |
 | **access:license** | *string* | The license governing reuse of the Collection. Should be an IRI for known licenses (i.e. CC, RightsStatement.org URI, etc.). | `"example"` |
-| **access:useAndReproductionStatement** | *string* | The human readable reuse and reproduction statement that applies to the Collection. | `"example"` |
 | **access:termsOfUse** | *string* | License or terms of use governing reuse of the Collection. Should be a text statement. | `"example"` |
+| **access:useAndReproductionStatement** | *string* | The human readable reuse and reproduction statement that applies to the Collection. | `"example"` |
 | **administrative:created** | *date-time* | When the resource in SDR was created. | `"2015-01-01T12:00:00Z"` |
 | **administrative:deleted** | *boolean* | If the resource has been deleted (but not purged). | `true` |
 | **administrative:gravestoneMessage** | *string* | Message describing why the object was deleted. | `"example"` |
@@ -83,9 +83,10 @@ Domain-defined abstraction of a 'work'. Digital Repository Objects' abstraction 
 | **access:download** | *string* | Download level for the DRO metadata.<br/> **one of:**`"world"` or `"stanford"` or `"location-based"` or `"citation-only"` or `"dark"` | `"world"` |
 | **access:embargo:access** | *string* | Access level for the DRO when released from embargo.<br/> **one of:**`"world"` or `"stanford"` or `"location-based"` or `"citation-only"` or `"dark"` | `"world"` |
 | **access:embargo:releaseDate** | *date-time* | Date when the DRO is released from an embargo. | `"2015-01-01T12:00:00Z"` |
+| **access:embargo:useAndReproductionStatement** | *string* | The human readable reuse and reproduction statement that applies to the DRO when released from embargo. | `"example"` |
 | **access:license** | *string* | The license governing reuse of the DRO. Should be an IRI for known licenses (i.e. CC, RightsStatement.org URI, etc.). | `"example"` |
-| **access:useAndReproductionStatement** | *string* | The human readable reuse and reproduction statement that applies to the DRO. | `"example"` |
 | **access:termsOfUse** | *string* | License or terms of use governing reuse of the DRO. Should be a text statement. | `"example"` |
+| **access:useAndReproductionStatement** | *string* | The human readable reuse and reproduction statement that applies to the DRO. | `"example"` |
 | **access:visibility** | *integer* | Percentage of the DRO that is visibility during an embargo period | `42` |
 | **administrative:created** | *date-time* | When the resource in SDR was created. | `"2015-01-01T12:00:00Z"` |
 | **administrative:deleted** | *boolean* | If the resource has been deleted (but not purged). | `true` |
@@ -265,5 +266,3 @@ A title of a work
 | ------- | ------- | ------- | ------- |
 | **primary** | *boolean* | Is this the primary title for the object | `true` |
 | **titleFull** | *string* | The full title for the object | `"example"` |
-
-

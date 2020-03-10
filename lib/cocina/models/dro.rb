@@ -32,6 +32,7 @@ module Cocina
           attribute :releaseDate, Types::Params::DateTime
           attribute :access, Types::String.default('dark')
                                           .enum('world', 'stanford', 'location-based', 'citation-only', 'dark')
+          attribute :useAndReproductionStatement, Types::Strict::String.meta(omittable: true)
         end
 
         attribute :access, Types::String.default('dark')

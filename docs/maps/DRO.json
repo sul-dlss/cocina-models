@@ -100,6 +100,10 @@
               "description": "Access level for the DRO when released from embargo.",
               "type": "string",
               "enum": ["world", "stanford", "location-based", "citation-only", "dark"]
+            },
+            "useAndReproductionStatement": {
+              "description": "The human readable reuse and reproduction statement that applies to the DRO when released from embargo.",
+              "type": "string"
             }
           }
         },
