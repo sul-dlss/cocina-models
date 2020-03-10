@@ -55,7 +55,8 @@ RSpec.shared_examples 'it has dro attributes' do
           access: {
             embargo: {
               releaseDate: '2009-12-14T07:00:00Z',
-              access: 'world'
+              access: 'world',
+              useAndReproductionStatement: 'These materials are in the public domain.'
             },
             access: 'stanford',
             copyright: 'All rights reserved unless otherwise indicated.',
@@ -125,6 +126,7 @@ RSpec.shared_examples 'it has dro attributes' do
         embargo = access.embargo
         expect(embargo.releaseDate).to eq DateTime.parse('2009-12-14T07:00:00Z')
         expect(embargo.access).to eq 'world'
+        expect(embargo.useAndReproductionStatement).to eq 'These materials are in the public domain.'
 
         admin = instance.administrative
         expect(admin.hasAdminPolicy).to eq 'druid:mx123cd4567'
