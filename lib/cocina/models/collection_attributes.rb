@@ -15,7 +15,7 @@ module Cocina
         obj.attribute :label, Types::Strict::String
         obj.attribute(:structural, Collection::Structural.default { Collection::Structural.new })
         obj.attribute :type, Types::String.enum(*Collection::TYPES)
-        obj.attribute :version, Types::Coercible::Integer
+        obj.attribute :version, Types::Strict::Integer
       end
     end
   end

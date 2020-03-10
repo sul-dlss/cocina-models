@@ -19,8 +19,8 @@ module Cocina
 
       # Represents the administration of the file
       class Administrative < Struct
-        attribute :sdrPreserve, Types::Params::Bool.optional.default(false)
-        attribute :shelve, Types::Params::Bool.optional.default(false)
+        attribute :sdrPreserve, Types::Strict::Bool.optional.default(false)
+        attribute :shelve, Types::Strict::Bool.optional.default(false)
       end
 
       # Represents a digest (checksum) value for a file
@@ -34,8 +34,8 @@ module Cocina
 
       # Represents some technical aspect of the file
       class Presentation < Struct
-        attribute :height, Types::Coercible::Integer.optional.default(nil)
-        attribute :width, Types::Coercible::Integer.optional.default(nil)
+        attribute :height, Types::Strict::Integer.optional.default(nil)
+        attribute :width, Types::Strict::Integer.optional.default(nil)
       end
 
       class Structural < Struct

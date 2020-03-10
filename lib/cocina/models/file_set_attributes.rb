@@ -9,7 +9,7 @@ module Cocina
         obj.attribute(:identification, FileSet::Identification.default { FileSet::Identification.new })
         obj.attribute :label, Types::Strict::String
         obj.attribute :type, Types::String.enum(*FileSet::TYPES)
-        obj.attribute :version, Types::Coercible::Integer
+        obj.attribute :version, Types::Strict::Integer
       end
     end
   end

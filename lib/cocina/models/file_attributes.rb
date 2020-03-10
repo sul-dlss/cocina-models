@@ -14,11 +14,11 @@ module Cocina
         obj.attribute :hasMessageDigests, Types::Strict::Array.of(File::Fixity).default([].freeze)
         obj.attribute :hasMimeType, Types::String.optional.meta(omittable: true)
         obj.attribute :presentation, File::Presentation.optional.meta(omittable: true)
-        obj.attribute :size, Types::Coercible::Integer.optional.default(nil)
+        obj.attribute :size, Types::Strict::Integer.optional.default(nil)
         obj.attribute :structural, File::Structural.optional.meta(omittable: true)
         obj.attribute :type, Types::String.enum(*File::TYPES)
         obj.attribute :use, Types::String.enum('transcription').optional.meta(omittable: true)
-        obj.attribute :version, Types::Coercible::Integer
+        obj.attribute :version, Types::Strict::Integer
       end
     end
   end
