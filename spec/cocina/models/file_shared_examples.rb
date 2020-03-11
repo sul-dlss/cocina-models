@@ -26,7 +26,7 @@ RSpec.shared_examples 'it has file attributes' do
       it 'populates non-passed required attributes with default values' do
         expect(item.administrative).to be_kind_of(Cocina::Models::File::Administrative)
         expect(item.administrative.shelve).to be false
-        expect(item.administrative.sdrPreserve).to be false
+        expect(item.administrative.sdrPreserve).to be true
 
         expect(item.hasMessageDigests).to eq []
       end
