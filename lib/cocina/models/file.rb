@@ -19,7 +19,7 @@ module Cocina
 
       # Represents the administration of the file
       class Administrative < Struct
-        attribute :sdrPreserve, Types::Strict::Bool.optional.default(false)
+        attribute :sdrPreserve, Types::Strict::Bool.optional.default(true)
         attribute :shelve, Types::Strict::Bool.optional.default(false)
       end
 
