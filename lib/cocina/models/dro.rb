@@ -48,6 +48,7 @@ module Cocina
         # but I think it's actually required for every DRO
         attribute :hasAdminPolicy, Types::Strict::String.optional.default(nil)
         attribute :releaseTags, Types::Strict::Array.of(ReleaseTag).meta(omittable: true).default([].freeze)
+        attribute :partOfProject, Types::Strict::String.meta(omittable: true)
       end
 
       # Identification sub-schema for the DRO

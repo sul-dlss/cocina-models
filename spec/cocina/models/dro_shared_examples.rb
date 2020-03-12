@@ -79,7 +79,8 @@ RSpec.shared_examples 'it has dro attributes' do
                 to: 'Searchworks',
                 release: false
               }
-            ]
+            ],
+            partOfProject: 'Google Books'
           },
           description: {
             title: [
@@ -135,6 +136,7 @@ RSpec.shared_examples 'it has dro attributes' do
         expect(tag.date).to eq DateTime.parse '2018-11-23T00:44:52Z'
         expect(tag.to).to eq 'Searchworks'
         expect(tag.release).to be true
+        expect(admin.partOfProject).to eq('Google Books')
 
         desc = instance.description
         expect(desc.title).to all(be_kind_of(Cocina::Models::Description::Title))
