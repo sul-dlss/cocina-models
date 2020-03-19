@@ -166,9 +166,74 @@ components:
       type: object
       properties:
         title:
+          description: Titles of the resource.
+          type: array
+          minItems: 1
+          items:
+            allOf:
+            - $ref: "#/components/schemas/value"
+            - anyOf:
+              - required:
+                - value
+              - required:
+                - structuredValue
+        contributor:
+          description: Agents contributing in some way to the creation and history of the
+            resource.
           type: array
           items:
-            $ref: '#/components/schemas/Title'
+            $ref: "#/components/schemas/contributor"
+        event:
+          description: Events in the history of the resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/event"
+        form:
+          description: Characteristics of the resource's physical, digital, and intellectual
+            form and genre.
+          type: array
+          items:
+            $ref: "#/components/schemas/value"
+        language:
+          description: Languages, scripts, and notations used in all or part of a resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/value"
+        note:
+          description: Additional information relevant to a resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/value"
+        identifier:
+          description: Unique strings associated with the resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/value"
+        purl:
+          description: Stanford persistent URL associated with the resource.
+          type: string
+          format: uri
+        url:
+          description: URLs where the resource may be accessed in full or part.
+          type: array
+          items:
+            $ref: "#/components/schemas/value"
+        marcEncodedData:
+          description: Data about the resource represented in MARC fixed fields and codes.
+          type: array
+          items:
+            $ref: "#/components/schemas/value"
+        adminMetadata:
+          description: Information about this description of the resource.
+          type: object
+          allOf:
+          - $ref: "#/components/schemas/event"
+          - $ref: "#/components/schemas/contributor"
+          - properties:
+              language:
+                $ref: "#/components/schemas/value"
+              note:
+                $ref: "#/components/schemas/value"
       required:
         - title
     DRO:
@@ -639,3 +704,130 @@ components:
       required:
         - primary
         - titleFull
+    value:
+      description: Default value model for descriptive elements.
+      type: object
+      allOf:
+      - $ref: "#/components/schemas/basicValue"
+      - $ref: "#/components/schemas/structuredValue"
+      - $ref: "#/components/schemas/appliesTo"
+    basicValue:
+      description: Value model for descriptive elements without recursive properties.
+      type: object
+      properties:
+        value:
+          description: String value of the descriptive element.
+          type: string
+        type:
+          description: Type of value provided by the descriptive element.
+          type: string
+        status:
+          description: Status of the descriptive element relative to other instances
+            of the element.
+          type: string
+        code:
+          description: Code value of the descriptive element.
+          type: string
+        URI:
+          description: URI value of the descriptive element.
+          type: string
+          format: uri
+        standard:
+          description: Descriptive or content standard to which the value conforms.
+          type: array
+          items:
+            type: string
+        encoding:
+          description: Encoding schema, standard, or syntax to which the value conforms.
+          type: array
+          items:
+            type: string
+        source:
+          $ref: "#/components/schemas/source"
+    structuredValue:
+      description: Value model for descriptive elements structured as typed values.
+      type: object
+      properties:
+        structuredValue:
+          type: array
+          items:
+            $ref: "#/components/schemas/basicValue"
+    appliesTo:
+      description: Property model for indicating the parts, aspects, or versions of
+        the resource to which a descriptive element is applicable.
+      type: object
+      properties:
+        appliesTo:
+          type: array
+          items:
+            $ref: "#/components/schemas/basicValue"
+    source:
+      description: Property model for indicating the vocabulary, authority, or other
+        origin for a term, code, or identifier.
+      type: object
+      properties:
+        code:
+          description: Code representing the value source.
+          type: string
+        URI:
+          description: URI for the value source.
+          type: string
+          format: uri
+        value:
+          description: String describing the value source.
+          type: string
+    contributor:
+      description: Property model for describing agents contributing in some way to
+        the creation and history of the resource
+      type: object
+      properties:
+        name:
+          description: Names associated with a contributor.
+          type: array
+          items:
+            $ref: "#/components/schemas/value"
+        type:
+          description: Entity type of the contributor (person, organization, etc.).
+          type: string
+        status:
+          description: Status of the contributor relative to other parallel contributors.
+          type: string
+        role:
+          description: Relationships of the contributor to the resource or to an event
+            in its history.
+          type: array
+          items:
+            $ref: "#/components/schemas/value"
+    event:
+      description: Property model for describing events in the history of the resource.
+      type: object
+      properties:
+        type:
+          description: Description of the event (creation, publication, etc.).
+          type: string
+        date:
+          description: Dates associated with the event.
+          type: array
+          items:
+            $ref: "#/components/schemas/value"
+        contributor:
+          description: Contributors associated with the event.
+          type: array
+          items:
+            $ref: "#/components/schemas/contributor"
+        location:
+          description: Locations associated with the event.
+          type: array
+          items:
+            $ref: "#/components/schemas/value"
+        note:
+          description: Other information about the event.
+          type: array
+          items:
+            $ref: "#/components/schemas/value"
+        structuredValue:
+          description: Structured information about the event (such as the parts of
+            a publication statement).
+          type: array
+          items:
+            $ref: "#/components/schemas/structuredValue"
