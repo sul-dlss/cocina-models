@@ -2,81 +2,37 @@
 
 module Cocina
   module Models
-    # A digital repository object.
-    # See http://sul-dlss.github.io/cocina-models/maps/DRO.json
     class DRO < Struct
       include Checkable
 
-      TYPES = [
-        Vocab.object,
-        Vocab.three_dimensional,
-        Vocab.agreement,
-        Vocab.book,
-        Vocab.document,
-        Vocab.geo,
-        Vocab.image,
-        Vocab.page,
-        Vocab.photograph,
-        Vocab.manuscript,
-        Vocab.map,
-        Vocab.media,
-        Vocab.track,
-        Vocab.webarchive_binary,
-        Vocab.webarchive_seed
-      ].freeze
+      TYPES = ['http://cocina.sul.stanford.edu/models/object.jsonld',
+               'http://cocina.sul.stanford.edu/models/3d.jsonld',
+               'http://cocina.sul.stanford.edu/models/agreement.jsonld',
+               'http://cocina.sul.stanford.edu/models/book.jsonld',
+               'http://cocina.sul.stanford.edu/models/document.jsonld',
+               'http://cocina.sul.stanford.edu/models/geo.jsonld',
+               'http://cocina.sul.stanford.edu/models/image.jsonld',
+               'http://cocina.sul.stanford.edu/models/page.jsonld',
+               'http://cocina.sul.stanford.edu/models/photograph.jsonld',
+               'http://cocina.sul.stanford.edu/models/manuscript.jsonld',
+               'http://cocina.sul.stanford.edu/models/map.jsonld',
+               'http://cocina.sul.stanford.edu/models/media.jsonld',
+               'http://cocina.sul.stanford.edu/models/track.jsonld',
+               'http://cocina.sul.stanford.edu/models/webarchive-binary.jsonld',
+               'http://cocina.sul.stanford.edu/models/webarchive-seed.jsonld'].freeze
 
-      # Subschema for access concerns
-      class Access < Struct
-        # Subschema for embargo concerns
-        class Embargo < Struct
-          attribute :releaseDate, Types::Params::DateTime
-          attribute :access, Types::String.default('dark')
-                                          .enum('world', 'stanford', 'location-based', 'citation-only', 'dark')
-          attribute :useAndReproductionStatement, Types::Strict::String.meta(omittable: true)
-        end
-
-        attribute :access, Types::String.default('dark')
-                                        .enum('world', 'stanford', 'location-based', 'citation-only', 'dark')
-        attribute :copyright, Types::Strict::String.meta(omittable: true)
-        attribute :embargo, Embargo.optional.meta(omittable: true)
-        attribute :useAndReproductionStatement, Types::Strict::String.meta(omittable: true)
-      end
-
-      # Subschema for administrative concerns
-      class Administrative < Struct
-        # TODO: Allowing hasAdminPolicy to be omittable for now (until rolled out to consumers),
-        # but I think it's actually required for every DRO
-        attribute :hasAdminPolicy, Types::Strict::String.optional.default(nil)
-        attribute :releaseTags, Types::Strict::Array.of(ReleaseTag).meta(omittable: true).default([].freeze)
-        attribute :partOfProject, Types::Strict::String.meta(omittable: true)
-      end
-
-      # Identification sub-schema for the DRO
-      class Identification < Struct
-        attribute :sourceId, Types::Strict::String.meta(omittable: true)
-        attribute :catalogLinks, Types::Strict::Array.of(CatalogLink).meta(omittable: true)
-      end
-
-      # Geographic sub-schema for the DRO
-      class Geographic < Struct
-        attribute :iso19139, Types::Strict::String
-      end
-
-      # Structural sub-schema for the DRO (uses FileSet, unlike RequestDRO which uses RequestFileSet)
-      class Structural < Struct
-        attribute :contains, Types::Strict::Array.of(FileSet).meta(omittable: true)
-        attribute :hasAgreement, Types::Strict::String.meta(omittable: true)
-        attribute :isMemberOf, Types::Strict::String.meta(omittable: true)
-        attribute :hasMemberOrders, Types::Strict::Array.of(Sequence).meta(omittable: true)
-      end
-
-      include DroAttributes
+      # example: item
+      attribute :type, Types::Strict::String.enum(*DRO::TYPES)
+      # example: druid:bc123df4567
       attribute :externalIdentifier, Types::Strict::String
-      attribute(:structural, Structural.default { Structural.new })
-
-      def image?
-        type == Vocab.image
-      end
+      attribute :label, Types::Strict::String
+      attribute :version, Types::Strict::Integer
+      attribute(:access, Access.default { Access.new })
+      attribute(:administrative, Administrative.default { Administrative.new })
+      attribute :description, Description.optional.meta(omittable: true)
+      attribute(:identification, Identification.default { Identification.new })
+      attribute(:structural, DROStructural.default { DROStructural.new })
+      attribute :geographic, Geographic.optional.meta(omittable: true)
     end
   end
 end

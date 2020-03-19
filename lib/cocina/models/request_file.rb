@@ -2,14 +2,25 @@
 
 module Cocina
   module Models
-    # a request to create a File object.
-    # This is the same as a File, but without externalIdentifier (as that wouldn't have been created yet)
-    # See http://sul-dlss.github.io/cocina-models/maps/File.json
     class RequestFile < Struct
-      include FileAttributes
-      # externalIdentifier is used when submitting files to the SDR API to identify the file so that the
-      # uploaded files can be associated with the DRO.
+      include Checkable
+
+      TYPES = ['http://cocina.sul.stanford.edu/models/file.jsonld'].freeze
+
+      attribute :type, Types::Strict::String.enum(*RequestFile::TYPES)
+      attribute :label, Types::Strict::String
+      attribute :filename, Types::Strict::String
+      attribute :size, Types::Strict::Integer.meta(omittable: true)
+      attribute :version, Types::Strict::Integer
+      attribute :hasMimeType, Types::Strict::String.meta(omittable: true)
       attribute :externalIdentifier, Types::Strict::String.meta(omittable: true)
+      attribute :use, Types::Strict::String.meta(omittable: true)
+      attribute :hasMessageDigests, Types::Strict::Array.of(MessageDigest).default([].freeze)
+      attribute(:access, Access.default { Access.new })
+      attribute(:administrative, FileAdministrative.default { FileAdministrative.new })
+      attribute :identification, FileIdentification.optional.meta(omittable: true)
+      attribute :structural, FileStructural.optional.meta(omittable: true)
+      attribute :presentation, Presentation.optional.meta(omittable: true)
     end
   end
 end

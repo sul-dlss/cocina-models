@@ -2,9 +2,10 @@
 
 module Cocina
   module Models
-    # Metadata for a catalog link
     class CatalogLink < Struct
+      # example: symphony
       attribute :catalog, Types::Strict::String
+      # example: 11403803
       attribute :catalogRecordId, Types::Strict::String
     end
   end

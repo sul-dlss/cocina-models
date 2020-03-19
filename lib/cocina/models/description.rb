@@ -2,15 +2,8 @@
 
 module Cocina
   module Models
-    # Descriptive metadata.  See http://sul-dlss.github.io/cocina-models/maps/Description.json
     class Description < Struct
-      # Title element.  See http://sul-dlss.github.io/cocina-models/maps/Title.json
-      class Title < Struct
-        attribute :primary, Types::Strict::Bool
-        attribute :titleFull, Types::Strict::String
-      end
-
-      attribute :title, Types::Strict::Array.of(Title)
+      attribute :title, Types::Strict::Array.of(Title).default([].freeze)
     end
   end
 end

@@ -28,9 +28,6 @@ RSpec.shared_examples 'it has file_set attributes' do
       end
 
       it 'populates non-passed required attributes with default values' do
-        expect(instance.identification).to be_kind_of Cocina::Models::FileSet::Identification
-        expect(instance.identification.attributes.size).to eq 0
-
         expect(instance.structural).to be_kind_of struct_class
         expect(instance.structural.attributes.size).to eq 0
       end
@@ -45,12 +42,14 @@ RSpec.shared_examples 'it has file_set attributes' do
               struct_contains_class.new(
                 type: Cocina::Models::Vocab.file,
                 label: 'file#1',
+                filename: 'file1.txt',
                 version: 1,
                 externalIdentifier: 'file#1'
               ),
               struct_contains_class.new(
                 type: Cocina::Models::Vocab.file,
                 label: 'file#2',
+                filename: 'file2.txt',
                 version: 2,
                 externalIdentifier: 'file#2'
               )
@@ -60,7 +59,7 @@ RSpec.shared_examples 'it has file_set attributes' do
       end
 
       it 'populates all attributes passed in' do
-        expect(instance.identification).to be_kind_of Cocina::Models::FileSet::Identification
+        expect(instance.identification).to be_kind_of Cocina::Models::FileSetIdentification
         expect(instance.identification.attributes.size).to eq 0
 
         expect(instance.structural).to be_kind_of struct_class
@@ -91,7 +90,7 @@ RSpec.shared_examples 'it has file_set attributes' do
       end
 
       it 'uses default values' do
-        expect(instance.identification).to be_kind_of Cocina::Models::FileSet::Identification
+        expect(instance.identification).to be_kind_of Cocina::Models::FileSetIdentification
         expect(instance.identification.attributes.size).to eq 0
 
         expect(instance.structural).to be_kind_of struct_class

@@ -35,7 +35,7 @@ RSpec.describe Cocina::Models::Collection do
     it { is_expected.not_to be_file_set }
   end
 
-  describe Cocina::Models::Collection::Administrative do
+  describe Cocina::Models::Administrative do
     let(:instance) { described_class.new }
 
     describe ':hasAdminPolicy default is nil' do

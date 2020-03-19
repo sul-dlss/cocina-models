@@ -2,10 +2,20 @@
 
 module Cocina
   module Models
-    # A request to create an AdminPolicy object.
-    # This is the same as an AdminPolicy, but without externalIdentifier (as that wouldn't have been created yet).
     class RequestAdminPolicy < Struct
-      include AdminPolicyAttributes
+      include Checkable
+
+      TYPES = ['http://cocina.sul.stanford.edu/models/admin_policy.jsonld'].freeze
+
+      # example: item
+      attribute :type, Types::Strict::String.enum(*RequestAdminPolicy::TYPES)
+      attribute :label, Types::Strict::String
+      attribute :version, Types::Strict::Integer
+      attribute(:access, AdminPolicyAccess.default { AdminPolicyAccess.new })
+      attribute(:administrative, AdminPolicyAdministrative.default { AdminPolicyAdministrative.new })
+      attribute(:identification, AdminPolicyIdentification.default { AdminPolicyIdentification.new })
+      attribute(:structural, AdminPolicyStructural.default { AdminPolicyStructural.new })
+      attribute :description, Description.optional.meta(omittable: true)
     end
   end
 end

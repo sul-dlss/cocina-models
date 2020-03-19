@@ -13,8 +13,20 @@ RSpec.describe Cocina::Models::DRO do
       version: 2
     }
   end
-  let(:struct_class) { Cocina::Models::DRO::Structural }
+  let(:struct_class) { Cocina::Models::DROStructural }
   let(:struct_contains_class) { Cocina::Models::FileSet }
+  let(:struct_contains_properties) do
+    [
+      { type: file_set_type,
+        version: 1,
+        externalIdentifier: '12343234_1',
+        label: 'Resource #1' },
+      { type: file_set_type,
+        version: 2,
+        externalIdentifier: '12343234_2',
+        label: 'Resource #2' }
+    ]
+  end
 
   it_behaves_like 'it has dro attributes'
 
@@ -37,7 +49,7 @@ RSpec.describe Cocina::Models::DRO do
     it { is_expected.not_to be_file_set }
   end
 
-  describe Cocina::Models::DRO::Administrative do
+  describe Cocina::Models::Administrative do
     let(:instance) { described_class.new }
 
     describe '#releaseTags' do
@@ -47,7 +59,7 @@ RSpec.describe Cocina::Models::DRO do
     end
   end
 
-  describe Cocina::Models::DRO::Structural do
+  describe Cocina::Models::DROStructural do
     let(:instance) { described_class.new(properties) }
 
     context 'with FileSet as contained class' do
@@ -93,30 +105,30 @@ RSpec.describe Cocina::Models::DRO do
     end
   end
 
-  describe '.image?' do
-    subject(:item) { described_class.new(properties) }
-
-    let(:properties) do
-      {
-        externalIdentifier: 'druid:ab123cd4567',
-        type: item_type,
-        label: 'My object',
-        version: 3,
-        description: {
-          title: []
-        },
-        structural: {
-          hasAgreement: ''
-        }
-      }
-    end
-
-    it { is_expected.not_to be_image }
-
-    context 'when it has the image type' do
-      let(:item_type) { 'http://cocina.sul.stanford.edu/models/image.jsonld' }
-
-      it { is_expected.to be_image }
-    end
-  end
+  # describe '.image?' do
+  #   subject(:item) { described_class.new(properties) }
+  #
+  #   let(:properties) do
+  #     {
+  #       externalIdentifier: 'druid:ab123cd4567',
+  #       type: item_type,
+  #       label: 'My object',
+  #       version: 3,
+  #       description: {
+  #         title: []
+  #       },
+  #       structural: {
+  #         hasAgreement: ''
+  #       }
+  #     }
+  #   end
+  #
+  #   it { is_expected.not_to be_image }
+  #
+  #   context 'when it has the image type' do
+  #     let(:item_type) { 'http://cocina.sul.stanford.edu/models/image.jsonld' }
+  #
+  #     it { is_expected.to be_image }
+  #   end
+  # end
 end

@@ -12,10 +12,12 @@ class CocinaModelsInflector < Zeitwerk::Inflector
     case basename
     when 'dro'
       'DRO'
-    when 'dro_builder'
-      'DROBuilder'
     when 'request_dro'
       'RequestDRO'
+    when 'dro_structural'
+      'DROStructural'
+    when 'request_dro_structural'
+      'RequestDROStructural'
     when 'version'
       'VERSION'
     else
@@ -39,6 +41,12 @@ module Cocina
     # Base class for Cocina Structs
     class Struct < Dry::Struct
       transform_keys(&:to_sym)
+      schema schema.strict
+    end
+
+    # DRY Types
+    module Types
+      include Dry.Types()
     end
 
     # @param [Hash] dyn a ruby hash representation of the JSON serialization of a collection or DRO

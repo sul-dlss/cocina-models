@@ -10,6 +10,8 @@ require 'spec_helper'
 # - struct_class: the class used for the structural attribute (different between DRO and RequestDRO)
 # - struct_contains_class: the class used for the members of the contains attribute
 #     in the structural attribute (in practice, Cocina::Models::DRO or Cocina::Models::RequestDRO)
+# - struct_contains_properties: properties for the contains properties
+#     (for a Cocina::Models::RequestFileSet or Cocina::Models::FileSet)
 RSpec.shared_examples 'it has dro attributes' do
   let(:instance) { described_class.new(properties) }
   let(:item_type) { Cocina::Models::Vocab.object }
@@ -30,18 +32,18 @@ RSpec.shared_examples 'it has dro attributes' do
 
       it 'populates non-passed required attributes with default values' do
         access = instance.access
-        expect(access).to be_kind_of Cocina::Models::DRO::Access
+        expect(access).to be_kind_of Cocina::Models::Access
         expect(access.access).to eq 'dark'
         expect(access.copyright).to be_nil
         expect(access.embargo).to be_nil
         expect(access.useAndReproductionStatement).to be_nil
 
         administrative = instance.administrative
-        expect(administrative).to be_kind_of Cocina::Models::DRO::Administrative
+        expect(administrative).to be_kind_of Cocina::Models::Administrative
         expect(administrative.hasAdminPolicy).to be_nil
         expect(administrative.releaseTags).to eq []
 
-        expect(instance.identification).to be_kind_of Cocina::Models::DRO::Identification
+        expect(instance.identification).to be_kind_of Cocina::Models::Identification
         expect(instance.identification.attributes.size).to eq 0
 
         expect(instance.structural).to be_kind_of struct_class
@@ -102,16 +104,7 @@ RSpec.shared_examples 'it has dro attributes' do
           structural: {
             hasAgreement: 'druid:666',
             isMemberOf: 'druid:bc777df7777',
-            contains: [
-              Cocina::Models::FileSet.new(type: file_set_type,
-                                          version: 1,
-                                          externalIdentifier: '12343234_1',
-                                          label: 'Resource #1'),
-              Cocina::Models::FileSet.new(type: file_set_type,
-                                          version: 2,
-                                          externalIdentifier: '12343234_2',
-                                          label: 'Resource #2')
-            ],
+            contains: struct_contains_properties,
             hasMemberOrders: [
               { viewingDirection: 'right-to-left' }
             ]
@@ -139,7 +132,7 @@ RSpec.shared_examples 'it has dro attributes' do
         expect(admin.partOfProject).to eq('Google Books')
 
         desc = instance.description
-        expect(desc.title).to all(be_kind_of(Cocina::Models::Description::Title))
+        expect(desc.title).to all(be_kind_of(Cocina::Models::Title))
         expect(desc.title.size).to eq 1
         title = desc.title.first
         expect(title.primary).to be true
@@ -155,7 +148,7 @@ RSpec.shared_examples 'it has dro attributes' do
 
         structural = instance.structural
         expect(structural).to be_kind_of struct_class
-        expect(structural.hasAgreement).to eq 'druid:666' if struct_class == Cocina::Models::DRO
+        expect(structural.hasAgreement).to eq 'druid:666' if struct_class == Cocina::Models::DROStructural
         expect(structural.isMemberOf).to eq 'druid:bc777df7777'
         contains = structural.contains
         expect(contains).to all(be_kind_of(struct_contains_class))
@@ -188,18 +181,18 @@ RSpec.shared_examples 'it has dro attributes' do
 
       it 'uses default values' do
         access = instance.access
-        expect(access).to be_kind_of Cocina::Models::DRO::Access
+        expect(access).to be_kind_of Cocina::Models::Access
         expect(access.access).to eq 'dark'
         expect(access.copyright).to be_nil
         expect(access.embargo).to be_nil
         expect(access.useAndReproductionStatement).to be_nil
 
         administrative = instance.administrative
-        expect(administrative).to be_kind_of Cocina::Models::DRO::Administrative
+        expect(administrative).to be_kind_of Cocina::Models::Administrative
         expect(administrative.hasAdminPolicy).to be_nil
         expect(administrative.releaseTags).to eq []
 
-        expect(instance.identification).to be_kind_of Cocina::Models::DRO::Identification
+        expect(instance.identification).to be_kind_of Cocina::Models::Identification
         expect(instance.identification.attributes.size).to eq 0
 
         expect(instance.structural).to be_kind_of struct_class

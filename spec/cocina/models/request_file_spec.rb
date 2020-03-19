@@ -8,6 +8,7 @@ RSpec.describe Cocina::Models::RequestFile do
   let(:required_properties) do
     {
       label: 'My file',
+      filename: 'my_file.txt',
       type: file_type,
       version: 3
     }

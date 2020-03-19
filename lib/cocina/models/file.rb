@@ -2,47 +2,25 @@
 
 module Cocina
   module Models
-    # Metadata for a file.
-    # See http://sul-dlss.github.io/cocina-models/maps/File.json
     class File < Struct
       include Checkable
 
-      TYPES = [
-        Vocab.file
-      ].freeze
+      TYPES = ['http://cocina.sul.stanford.edu/models/file.jsonld'].freeze
 
-      # Represents access controls on the file
-      class Access < Struct
-        attribute :access, Types::String.default('dark')
-                                        .enum('world', 'stanford', 'location-based', 'citation-only', 'dark')
-      end
-
-      # Represents the administration of the file
-      class Administrative < Struct
-        attribute :sdrPreserve, Types::Strict::Bool.optional.default(true)
-        attribute :shelve, Types::Strict::Bool.optional.default(false)
-      end
-
-      # Represents a digest (checksum) value for a file
-      class Fixity < Struct
-        attribute :type, Types::String.enum('md5', 'sha1')
-        attribute :digest, Types::Strict::String
-      end
-
-      class Identification < Struct
-      end
-
-      # Represents some technical aspect of the file
-      class Presentation < Struct
-        attribute :height, Types::Strict::Integer.optional.default(nil)
-        attribute :width, Types::Strict::Integer.optional.default(nil)
-      end
-
-      class Structural < Struct
-      end
-
-      include FileAttributes
+      attribute :type, Types::Strict::String.enum(*File::TYPES)
       attribute :externalIdentifier, Types::Strict::String
+      attribute :label, Types::Strict::String
+      attribute :filename, Types::Strict::String.meta(omittable: true)
+      attribute :size, Types::Strict::Integer.meta(omittable: true)
+      attribute :version, Types::Strict::Integer
+      attribute :hasMimeType, Types::Strict::String.meta(omittable: true)
+      attribute :use, Types::Strict::String.meta(omittable: true)
+      attribute :hasMessageDigests, Types::Strict::Array.of(MessageDigest).default([].freeze)
+      attribute(:access, Access.default { Access.new })
+      attribute(:administrative, FileAdministrative.default { FileAdministrative.new })
+      attribute :identification, FileIdentification.optional.meta(omittable: true)
+      attribute(:structural, FileStructural.default { FileStructural.new })
+      attribute :presentation, Presentation.optional.meta(omittable: true)
     end
   end
 end

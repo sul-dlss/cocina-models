@@ -12,12 +12,22 @@ RSpec.describe Cocina::Models::RequestDRO do
       version: 7
     }
   end
-  let(:struct_class) { Cocina::Models::RequestDRO::Structural }
+  let(:struct_class) { Cocina::Models::RequestDROStructural }
   let(:struct_contains_class) { Cocina::Models::RequestFileSet }
+  let(:struct_contains_properties) do
+    [
+      { type: file_set_type,
+        version: 1,
+        label: 'Resource #1' },
+      { type: file_set_type,
+        version: 2,
+        label: 'Resource #2' }
+    ]
+  end
 
   it_behaves_like 'it has dro attributes'
 
-  describe Cocina::Models::RequestDRO::Structural do
+  describe Cocina::Models::RequestDROStructural do
     context 'with RequestFileSet as contained class' do
       let(:instance) { described_class.new(properties) }
       let(:properties) do
@@ -38,31 +48,6 @@ RSpec.describe Cocina::Models::RequestDRO do
         expect(file1.type).to eq Cocina::Models::Vocab.fileset
         expect(file1.label).to eq 'requestfileset#1'
         expect(file1.version).to eq 1
-      end
-    end
-
-    context 'with FileSet as contained class' do
-      let(:instance) { described_class.new(properties) }
-      let(:properties) do
-        {
-          contains: [
-            Cocina::Models::FileSet.new(
-              externalIdentifier: 'fileset#2',
-              label: 'fileset#2',
-              type: Cocina::Models::Vocab.fileset,
-              version: 2
-            )
-          ]
-        }
-      end
-
-      # I expected a Dry::Struct::Error to be raised
-      it 'coerces it to RequestFileSet' do
-        expect(instance.contains).to all(be_kind_of(struct_contains_class))
-        fileset1 = instance.contains.first
-        expect(fileset1.type).to eq Cocina::Models::Vocab.fileset
-        expect(fileset1.label).to eq 'fileset#2'
-        expect(fileset1.version).to eq 2
       end
     end
   end
