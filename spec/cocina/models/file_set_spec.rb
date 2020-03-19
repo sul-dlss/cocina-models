@@ -13,7 +13,7 @@ RSpec.describe Cocina::Models::FileSet do
       version: 3
     }
   end
-  let(:struct_class) { Cocina::Models::FileSet::Structural }
+  let(:struct_class) { Cocina::Models::FileSetStructural }
   let(:struct_contains_class) { Cocina::Models::File }
 
   it_behaves_like 'it has file_set attributes'
@@ -37,7 +37,7 @@ RSpec.describe Cocina::Models::FileSet do
     it { is_expected.to be_file_set }
   end
 
-  describe Cocina::Models::FileSet::Structural do
+  describe Cocina::Models::FileSetStructural do
     let(:instance) { described_class.new(properties) }
 
     context 'with File as contained class' do

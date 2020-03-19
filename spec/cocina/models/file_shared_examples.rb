@@ -24,7 +24,7 @@ RSpec.shared_examples 'it has file attributes' do
       end
 
       it 'populates non-passed required attributes with default values' do
-        expect(item.administrative).to be_kind_of(Cocina::Models::File::Administrative)
+        expect(item.administrative).to be_kind_of(Cocina::Models::FileAdministrative)
         expect(item.administrative.shelve).to be false
         expect(item.administrative.sdrPreserve).to be true
 
@@ -42,7 +42,6 @@ RSpec.shared_examples 'it has file attributes' do
             shelve: true,
             sdrPreserve: true
           },
-          filename: 'filename!!',
           hasMessageDigests: [
             {
               type: 'md5',
@@ -62,24 +61,22 @@ RSpec.shared_examples 'it has file attributes' do
       end
 
       it 'populates all optional attributes passed in' do
-        expect(item.access).to be_kind_of(Cocina::Models::File::Access)
+        expect(item.access).to be_kind_of(Cocina::Models::Access)
         expect(item.access.access).to eq 'citation-only'
 
-        expect(item.administrative).to be_kind_of(Cocina::Models::File::Administrative)
+        expect(item.administrative).to be_kind_of(Cocina::Models::FileAdministrative)
         expect(item.administrative.shelve).to be true
         expect(item.administrative.sdrPreserve).to be true
 
-        expect(item.filename).to eq 'filename!!'
-
         expect(item.hasMessageDigests).to be_kind_of(Array)
-        expect(item.hasMessageDigests).to all(be_kind_of(Cocina::Models::File::Fixity))
+        expect(item.hasMessageDigests).to all(be_kind_of(Cocina::Models::MessageDigest))
         fixity = item.hasMessageDigests.first
         expect(fixity.type).to eq 'md5'
         expect(fixity.digest).to eq 'd57db4241d7da0eecba5b33abf13f448'
 
         expect(item.hasMimeType).to eq 'image/jp2'
 
-        expect(item.presentation).to be_kind_of(Cocina::Models::File::Presentation)
+        expect(item.presentation).to be_kind_of(Cocina::Models::Presentation)
         expect(item.presentation.height).to eq 5
         expect(item.presentation.width).to eq 8
 
@@ -92,19 +89,15 @@ RSpec.shared_examples 'it has file attributes' do
       let(:properties) do
         required_properties.merge(
           access: {},
-          filename: nil,
-          hasMessageDigests: [],
-          size: nil
+          hasMessageDigests: []
         )
       end
 
       it 'uses default values' do
-        expect(item.access).to be_kind_of(Cocina::Models::File::Access)
+        expect(item.access).to be_kind_of(Cocina::Models::Access)
         expect(item.access.access).to eq 'dark'
 
-        expect(item.filename).to eq nil
         expect(item.hasMessageDigests).to eq []
-        expect(item.size).to eq nil
       end
     end
   end

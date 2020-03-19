@@ -2,17 +2,17 @@
 
 module Cocina
   module Models
-    # A request to create a FileSet object.
-    # This is the same as a FileSet, but without externalIdentifier (as that wouldn't have been created yet)
-    # See http://sul-dlss.github.io/cocina-models/maps/FileSet.json
     class RequestFileSet < Struct
-      # Structural sub-schema that contains RequestFile (unlike the one in FileSet which contains File)
-      class Structural < Struct
-        attribute :contains, Types::Strict::Array.of(RequestFile).meta(omittable: true)
-      end
+      include Checkable
 
-      include FileSetAttributes
-      attribute(:structural, Structural.default { Structural.new })
+      TYPES = ['http://cocina.sul.stanford.edu/models/fileset.jsonld'].freeze
+
+      attribute :type, Types::Strict::String.enum(*RequestFileSet::TYPES)
+      attribute :label, Types::Strict::String
+      attribute :version, Types::Strict::Integer
+      attribute :access, Access.optional.meta(omittable: true)
+      attribute(:identification, FileSetIdentification.default { FileSetIdentification.new })
+      attribute(:structural, RequestFileSetStructural.default { RequestFileSetStructural.new })
     end
   end
 end

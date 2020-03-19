@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'spec_helper'
+
 RSpec.describe Cocina::Models do
   it 'has a version number' do
     expect(Cocina::Models::VERSION).not_to be nil

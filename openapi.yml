@@ -1,0 +1,641 @@
+openapi: 3.0.0
+info:
+  description: Specification for Cocina Models
+  version: 1.0.0
+  title: Cocina Models
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+paths:
+  /v1/noop:
+    get:
+      summary: noop
+      responses:
+        '200':
+          description: noop
+components:
+  schemas:
+    Access:
+      type: object
+      properties:
+        access:
+          type: string
+          enum:
+            - 'world'
+            - 'stanford'
+            - 'location-based'
+            - 'citation-only'
+            - 'dark'
+          default: 'dark'
+        copyright:
+          description: The human readable copyright statement that applies
+          example: Copyright World Trade Organization
+          type: string
+        useAndReproductionStatement:
+          description: The human readable use and reproduction statement that applies
+          example: Property rights reside with the repository. Literary rights reside with the creators of the documents or their heirs. To obtain permission to publish or reproduce, please contact the Public Services Librarian of the Dept. of Special Collections (http://library.stanford.edu/spc).
+          type: string
+        embargo:
+          $ref: '#/components/schemas/Embargo'
+    Administrative:
+      type: object
+      properties:
+        hasAdminPolicy:
+          $ref: '#/components/schemas/Druid'
+        releaseTags:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReleaseTag'
+        partOfProject:
+          description: Administrative or Internal project this resource is a part of
+          example: Google Books
+          type: string
+      required:
+        - releaseTags
+    AdminPolicy:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - 'http://cocina.sul.stanford.edu/models/admin_policy.jsonld'
+          example: item
+        externalIdentifier:
+          $ref: '#/components/schemas/Druid'
+        label:
+          type: string
+        version:
+          type: integer
+        access:
+          $ref: '#/components/schemas/AdminPolicyAccess'
+        administrative:
+          $ref: '#/components/schemas/AdminPolicyAdministrative'
+        identification:
+          $ref: '#/components/schemas/AdminPolicyIdentification'
+        structural:
+          $ref: '#/components/schemas/AdminPolicyStructural'
+        description:
+          $ref: '#/components/schemas/Description'
+      required:
+        - externalIdentifier
+        - label
+        - type
+        - version
+        - access
+        - administrative
+        - identification
+        - structural
+    AdminPolicyAccess:
+      type: object
+    AdminPolicyAdministrative:
+      type: object
+      required:
+        - defaultObjectRights
+      properties:
+        defaultObjectRights:
+          type: string
+          default: <?xml version="1.0" encoding="UTF-8"?><rightsMetadata><access type="discover"><machine><world/></machine></access><access type="read"><machine><world/></machine></access><use><human type="useAndReproduction"/><human type="creativeCommons"/><machine type="creativeCommons" uri=""/><human type="openDataCommons"/><machine type="openDataCommons" uri=""/></use><copyright><human/></copyright></rightsMetadata>
+        registrationWorkflow:
+          type: string
+        hasAdminPolicy:
+          type: string
+    AdminPolicyIdentification:
+      type: object
+    AdminPolicyStructural:
+      type: object
+    CatalogLink:
+      type: object
+      required:
+        - catalog
+        - catalogRecordId
+      properties:
+        catalog:
+          type: string
+          example: symphony
+        catalogRecordId:
+          type: string
+          example: 11403803
+    Collection:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - 'http://cocina.sul.stanford.edu/models/collection.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/curated-collection.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/user-collection.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/exhibit.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/series.jsonld'
+          example: item
+        externalIdentifier:
+          $ref: '#/components/schemas/Druid'
+        label:
+          type: string
+        version:
+          type: integer
+        access:
+          $ref: '#/components/schemas/Access'
+        administrative:
+          $ref: '#/components/schemas/Administrative'
+        description:
+          $ref: '#/components/schemas/Description'
+        identification:
+          $ref: '#/components/schemas/CollectionIdentification'
+        structural:
+          $ref: '#/components/schemas/CollectionStructural'
+      required:
+        - externalIdentifier
+        - label
+        - type
+        - version
+        - access
+        - administrative
+        - identification
+        - structural
+    CollectionIdentification:
+      type: object
+      properties:
+        catalogLinks:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogLink'
+    CollectionStructural:
+      type: object
+      properties: {}
+    Description:
+      type: object
+      properties:
+        title:
+          type: array
+          items:
+            $ref: '#/components/schemas/Title'
+      required:
+        - title
+    DRO:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - 'http://cocina.sul.stanford.edu/models/object.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/3d.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/agreement.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/book.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/document.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/geo.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/image.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/page.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/photograph.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/manuscript.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/map.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/media.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/track.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/webarchive-binary.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/webarchive-seed.jsonld'
+          example: item
+        externalIdentifier:
+          $ref: '#/components/schemas/Druid'
+        label:
+          type: string
+        version:
+          type: integer
+        access:
+          $ref: '#/components/schemas/Access'
+        administrative:
+          $ref: '#/components/schemas/Administrative'
+        description:
+          $ref: '#/components/schemas/Description'
+        identification:
+          $ref: '#/components/schemas/Identification'
+        structural:
+          $ref: '#/components/schemas/DROStructural'
+        geographic:
+          $ref: '#/components/schemas/Geographic'
+      required:
+        - externalIdentifier
+        - label
+        - type
+        - version
+        - access
+        - administrative
+        - identification
+        - structural
+    DROStructural:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileSet'
+        hasMemberOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sequence'
+        isMemberOf:
+          $ref: '#/components/schemas/Druid'
+        hasAgreement:
+          type: string
+    Druid:
+      type: string
+      pattern: '^druid:[b-df-hjkmnp-tv-z]{2}[0-9]{3}[b-df-hjkmnp-tv-z]{2}[0-9]{4}$'
+      example: 'druid:bc123df4567'
+    Embargo:
+      type: object
+      properties:
+        releaseDate:
+          type: string
+          format: date-time
+          example: '2029-06-22T07:00:00.000+00:00'
+        access:
+          type: string
+          enum:
+            - world
+            - stanford
+            - location-based
+            - citation-only
+            - dark
+        useAndReproductionStatement:
+          description: The human readable use and reproduction statement that applies when the embargo expires.
+          example: These materials are in the public domain.
+          type: string
+      required:
+        - releaseDate
+        - access
+    File:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - 'http://cocina.sul.stanford.edu/models/file.jsonld'
+        externalIdentifier:
+          type: string
+        label:
+          type: string
+        filename:
+          type: string
+        size:
+          type: integer
+        version:
+          type: integer
+        hasMimeType:
+          type: string
+        use:
+          type: string
+        hasMessageDigests:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageDigest'
+        access:
+          $ref: '#/components/schemas/Access'
+        administrative:
+          $ref: '#/components/schemas/FileAdministrative'
+        identification:
+          $ref: '#/components/schemas/FileIdentification'
+        structural:
+          $ref: '#/components/schemas/FileStructural'
+        presentation:
+          $ref: '#/components/schemas/Presentation'
+      required:
+        - externalIdentifier
+        - label
+        - type
+        - version
+        - access
+        - structural
+        - administrative
+        - hasMessageDigests
+    FileAdministrative:
+      type: object
+      properties:
+        sdrPreserve:
+          type: boolean
+          default: true
+        shelve:
+          type: boolean
+          default: false
+      required:
+        - sdrPreserve
+        - shelve
+    FileIdentification:
+      type: object
+    FileSet:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - 'http://cocina.sul.stanford.edu/models/fileset.jsonld'
+        externalIdentifier:
+          type: string
+        label:
+          type: string
+        version:
+          type: integer
+        access:
+          $ref: '#/components/schemas/Access'
+        identification:
+          $ref: '#/components/schemas/FileSetIdentification'
+        structural:
+          $ref: '#/components/schemas/FileSetStructural'
+      required:
+        - externalIdentifier
+        - label
+        - type
+        - version
+        - access
+        - identification
+        - structural
+    FileSetIdentification:
+      type: object
+    FileSetStructural:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+    FileStructural:
+      type: object
+      properties: {}
+    Geographic:
+      type: object
+      properties:
+        iso19139:
+          type: string
+      required:
+        - iso19139
+    Identification:
+      type: object
+      properties:
+        sourceId:
+          type: string
+          example: 'sul:PC0170_s3_Fiesta_Bowl_2012-01-02_210609_2026'
+        catalogLinks:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogLink'
+    MessageDigest:
+      description: The output of the message digest algorithm.
+      type: object
+      properties:
+        type:
+          description: The algorithm that was used
+          type: string
+          enum:
+            - md5
+            - sha1
+        digest:
+          description: The digest value Base64 encoded
+          type: string
+      required:
+        - type
+        - digest
+    Presentation:
+      type: object
+      properties:
+        height:
+          type: integer
+        width:
+          type: integer
+    ReleaseTag:
+      type: object
+      required:
+        - release
+      properties:
+        who:
+          type: string
+          example: petucket
+        what:
+          type: string
+          enum:
+            - self
+            - collection
+          example: self
+        date:
+          type: string
+          format: date-time
+        to:
+          type: string
+          example: Searchworks
+        release:
+          type: boolean
+    RequestAdminPolicy:
+      description: Same as an AdminPolicy, but doesn't have an externalIdentifier as one will be created
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - 'http://cocina.sul.stanford.edu/models/admin_policy.jsonld'
+          example: item
+        label:
+          type: string
+        version:
+          type: integer
+        access:
+          $ref: '#/components/schemas/AdminPolicyAccess'
+        administrative:
+          $ref: '#/components/schemas/AdminPolicyAdministrative'
+        identification:
+          $ref: '#/components/schemas/AdminPolicyIdentification'
+        structural:
+          $ref: '#/components/schemas/AdminPolicyStructural'
+        description:
+          $ref: '#/components/schemas/Description'
+      required:
+        - label
+        - type
+        - version
+        - access
+        - administrative
+        - identification
+        - structural
+    RequestCollection:
+      description: Same as a Collection, but doesn't have an externalIdentifier as one will be created
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - 'http://cocina.sul.stanford.edu/models/collection.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/curated-collection.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/user-collection.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/exhibit.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/series.jsonld'
+          example: item
+        label:
+          type: string
+        version:
+          type: integer
+        access:
+          $ref: '#/components/schemas/Access'
+        administrative:
+          $ref: '#/components/schemas/Administrative'
+        description:
+          $ref: '#/components/schemas/Description'
+        identification:
+          $ref: '#/components/schemas/CollectionIdentification'
+        structural:
+          $ref: '#/components/schemas/CollectionStructural'
+      required:
+        - label
+        - type
+        - version
+        - access
+        - administrative
+        - structural
+        - identification
+    RequestDRO:
+      description: Same as a DRO, but doesn't have an externalIdentifier as one will be created
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - 'http://cocina.sul.stanford.edu/models/object.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/3d.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/agreement.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/book.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/document.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/geo.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/image.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/page.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/photograph.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/manuscript.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/map.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/media.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/track.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/webarchive-binary.jsonld'
+            - 'http://cocina.sul.stanford.edu/models/webarchive-seed.jsonld'
+          example: item
+        label:
+          type: string
+        version:
+          type: integer
+        access:
+          $ref: '#/components/schemas/Access'
+        administrative:
+          $ref: '#/components/schemas/Administrative'
+        description:
+          $ref: '#/components/schemas/Description'
+        identification:
+          $ref: '#/components/schemas/Identification'
+        structural:
+          $ref: '#/components/schemas/RequestDROStructural'
+        geographic:
+          $ref: '#/components/schemas/Geographic'
+      required:
+        - label
+        - type
+        - version
+        - access
+        - administrative
+        - identification
+        - structural
+    RequestDROStructural:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestFileSet'
+        hasMemberOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sequence'
+        isMemberOf:
+          $ref: '#/components/schemas/Druid'
+        hasAgreement:
+          type: string
+    RequestFile:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - 'http://cocina.sul.stanford.edu/models/file.jsonld'
+        label:
+          type: string
+        filename:
+          type: string
+        size:
+          type: integer
+        version:
+          type: integer
+        hasMimeType:
+          type: string
+        externalIdentifier:
+          type: string
+        use:
+          type: string
+        hasMessageDigests:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageDigest'
+        access:
+          $ref: '#/components/schemas/Access'
+        administrative:
+          $ref: '#/components/schemas/FileAdministrative'
+        identification:
+          $ref: '#/components/schemas/FileIdentification'
+        structural:
+          $ref: '#/components/schemas/FileStructural'
+        presentation:
+          $ref: '#/components/schemas/Presentation'
+      required:
+        - label
+        - type
+        - version
+        - filename
+        - access
+        - administrative
+        - hasMessageDigests
+    RequestFileSet:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - 'http://cocina.sul.stanford.edu/models/fileset.jsonld'
+        label:
+          type: string
+        version:
+          type: integer
+        access:
+          $ref: '#/components/schemas/Access'
+        identification:
+          $ref: '#/components/schemas/FileSetIdentification'
+        structural:
+          $ref: '#/components/schemas/RequestFileSetStructural'
+      required:
+        - label
+        - type
+        - version
+        - structural
+        - identification
+    RequestFileSetStructural:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestFile'
+    Sequence:
+      type: object
+      properties:
+        viewingDirection:
+          type: string
+          enum:
+            - right-to-left
+            - left-to-right
+    Title:
+      type: object
+      properties:
+        primary:
+          type: boolean
+        titleFull:
+          type: string
+      required:
+        - primary
+        - titleFull

@@ -2,43 +2,26 @@
 
 module Cocina
   module Models
-    # A digital repository collection.
-    # See http://sul-dlss.github.io/cocina-models/maps/Collection.json
     class Collection < Struct
       include Checkable
 
-      TYPES = [
-        Vocab.collection,
-        Vocab.curated_collection,
-        Vocab.exhibit,
-        Vocab.series,
-        Vocab.user_collection
-      ].freeze
+      TYPES = ['http://cocina.sul.stanford.edu/models/collection.jsonld',
+               'http://cocina.sul.stanford.edu/models/curated-collection.jsonld',
+               'http://cocina.sul.stanford.edu/models/user-collection.jsonld',
+               'http://cocina.sul.stanford.edu/models/exhibit.jsonld',
+               'http://cocina.sul.stanford.edu/models/series.jsonld'].freeze
 
-      # Subschema for access concerns
-      class Access < Struct
-        attribute :access, Types::String.default('dark')
-                                        .enum('world', 'stanford', 'location-based', 'citation-only', 'dark')
-      end
-
-      # Subschema for administrative concerns
-      class Administrative < Struct
-        attribute :releaseTags, Types::Strict::Array.of(ReleaseTag).default([].freeze)
-        # TODO: Allowing hasAdminPolicy to be omittable for now (until rolled out to consumers),
-        # but I think it's actually required for every Collection
-        attribute :hasAdminPolicy, Types::Strict::String.optional.default(nil)
-      end
-
-      # Identification sub-schema for the Collection
-      class Identification < Struct
-        attribute :catalogLinks, Types::Strict::Array.of(CatalogLink).meta(omittable: true)
-      end
-
-      class Structural < Struct
-      end
-
-      include CollectionAttributes
+      # example: item
+      attribute :type, Types::Strict::String.enum(*Collection::TYPES)
+      # example: druid:bc123df4567
       attribute :externalIdentifier, Types::Strict::String
+      attribute :label, Types::Strict::String
+      attribute :version, Types::Strict::Integer
+      attribute(:access, Access.default { Access.new })
+      attribute(:administrative, Administrative.default { Administrative.new })
+      attribute :description, Description.optional.meta(omittable: true)
+      attribute(:identification, CollectionIdentification.default { CollectionIdentification.new })
+      attribute(:structural, CollectionStructural.default { CollectionStructural.new })
     end
   end
 end

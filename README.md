@@ -11,6 +11,17 @@ It provides a way for consumers to validate objects against models using dry-str
 
 This is a work in progress that will ultimately implement the full [COCINA data model](http://sul-dlss.github.io/cocina-models/). See also [architecture documentation](https://sul-dlss.github.io/taco-truck/COCINA.html#cocina-data-models--shapes).
 
+## Generate models from openapi.yml
+
+### All
+```
+exe/generator generate
+```
+
+### Single model
+```
+exe/generator generate_schema DRO
+```
 
 ## Generate Documentation
 

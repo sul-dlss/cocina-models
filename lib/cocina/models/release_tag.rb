@@ -2,14 +2,15 @@
 
 module Cocina
   module Models
-    # Subschema for release tags
     class ReleaseTag < Struct
-      attribute :to, Types::Strict::String.enum('Searchworks', 'Earthworks')
-      attribute :what, Types::Strict::String.enum('self', 'collection')
-      # we use 'when' other places, but that's reserved word, so 'date' it is!
-      attribute :date, Types::Params::DateTime
-      attribute :who, Types::Strict::String
-      attribute :release, Types::Strict::Bool
+      # example: petucket
+      attribute :who, Types::Strict::String.meta(omittable: true)
+      # example: self
+      attribute :what, Types::Strict::String.enum('self', 'collection').meta(omittable: true)
+      attribute :date, Types::Params::DateTime.meta(omittable: true)
+      # example: Searchworks
+      attribute :to, Types::Strict::String.meta(omittable: true)
+      attribute :release, Types::Strict::Bool.default(false)
     end
   end
 end

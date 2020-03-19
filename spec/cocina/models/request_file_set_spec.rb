@@ -12,12 +12,12 @@ RSpec.describe Cocina::Models::RequestFileSet do
       version: 3
     }
   end
-  let(:struct_class) { Cocina::Models::RequestFileSet::Structural }
+  let(:struct_class) { Cocina::Models::RequestFileSetStructural }
   let(:struct_contains_class) { Cocina::Models::RequestFile }
 
   it_behaves_like 'it has file_set attributes'
 
-  describe Cocina::Models::RequestFileSet::Structural do
+  describe Cocina::Models::RequestFileSetStructural do
     context 'with RequestFile as contained class' do
       let(:instance) { described_class.new(properties) }
       let(:properties) do
@@ -25,6 +25,7 @@ RSpec.describe Cocina::Models::RequestFileSet do
           contains: [
             struct_contains_class.new(
               label: 'requestfile#1',
+              filename: 'requestfile.txt',
               type: Cocina::Models::Vocab.file,
               version: 1
             )
@@ -49,6 +50,7 @@ RSpec.describe Cocina::Models::RequestFileSet do
             Cocina::Models::File.new(
               externalIdentifier: 'file#1',
               label: 'file#1',
+              filename: 'file1.txt',
               type: Cocina::Models::Vocab.file,
               version: 1
             )
