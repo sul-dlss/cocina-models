@@ -21,11 +21,14 @@ module Cocina
                'http://cocina.sul.stanford.edu/models/webarchive-binary.jsonld',
                'http://cocina.sul.stanford.edu/models/webarchive-seed.jsonld'].freeze
 
+      # The content type of the DRO. Selected from an established set of values.
       # example: item
       attribute :type, Types::Strict::String.enum(*DRO::TYPES)
       # example: druid:bc123df4567
       attribute :externalIdentifier, Types::Strict::String
+      # Primary processing label (can be same as title) for a DRO.
       attribute :label, Types::Strict::String
+      # Version for the DRO within SDR.
       attribute :version, Types::Strict::Integer
       attribute(:access, Access.default { Access.new })
       attribute(:administrative, Administrative.default { Administrative.new })
