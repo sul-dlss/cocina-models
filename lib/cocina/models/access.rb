@@ -3,6 +3,7 @@
 module Cocina
   module Models
     class Access < Struct
+      # Access level
       attribute :access, Types::Strict::String.default('dark').enum('world', 'stanford', 'location-based', 'citation-only', 'dark').meta(omittable: true)
       # The human readable copyright statement that applies
       # example: Copyright World Trade Organization
