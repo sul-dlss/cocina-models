@@ -9,7 +9,8 @@ RSpec.describe Cocina::Models::RequestAdminPolicy do
     {
       type: type,
       label: 'My admin_policy',
-      version: 3
+      version: 3,
+      administrative: {}
     }
   end
 

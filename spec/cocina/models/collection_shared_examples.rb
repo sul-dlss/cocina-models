@@ -26,16 +26,6 @@ RSpec.shared_examples 'it has collection attributes' do
       it 'populates non-passed required attributes with default values' do
         expect(instance.access).to be_kind_of(Cocina::Models::Access)
         expect(instance.access.access).to eq 'dark'
-
-        expect(instance.administrative).to be_kind_of(Cocina::Models::Administrative)
-        expect(instance.administrative.releaseTags).to eq []
-        expect(instance.administrative.hasAdminPolicy).to be_nil
-
-        expect(instance.identification).to be_kind_of(Cocina::Models::CollectionIdentification)
-        expect(instance.identification.catalogLinks).to be_nil
-
-        expect(instance.structural).to be_kind_of(Cocina::Models::CollectionStructural)
-        expect(instance.structural.attributes.size).to eq 0
       end
     end
 
@@ -97,32 +87,6 @@ RSpec.shared_examples 'it has collection attributes' do
         link = instance.identification.catalogLinks.first
         expect(link.catalog).to eq 'symphony'
         expect(link.catalogRecordId).to eq '44444'
-      end
-    end
-
-    context 'with empty properties that have default values' do
-      let(:properties) do
-        required_properties.merge(
-          access: {},
-          administrative: nil,
-          identification: nil,
-          structural: {}
-        )
-      end
-
-      it 'uses default values' do
-        expect(instance.access).to be_kind_of(Cocina::Models::Access)
-        expect(instance.access.access).to eq 'dark'
-
-        expect(instance.administrative).to be_kind_of(Cocina::Models::Administrative)
-        expect(instance.administrative.releaseTags).to eq []
-        expect(instance.administrative.hasAdminPolicy).to be_nil
-
-        expect(instance.identification).to be_kind_of(Cocina::Models::CollectionIdentification)
-        expect(instance.identification.catalogLinks).to be_nil
-
-        expect(instance.structural).to be_kind_of(Cocina::Models::CollectionStructural)
-        expect(instance.structural.attributes.size).to eq 0
       end
     end
   end

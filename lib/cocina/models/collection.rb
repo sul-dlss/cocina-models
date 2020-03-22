@@ -21,10 +21,14 @@ module Cocina
       # Version for the Collection within SDR.
       attribute :version, Types::Strict::Integer
       attribute(:access, Access.default { Access.new })
-      attribute(:administrative, Administrative.default { Administrative.new })
+      attribute :administrative, Administrative.optional.meta(omittable: true)
       attribute :description, Description.optional.meta(omittable: true)
-      attribute(:identification, CollectionIdentification.default { CollectionIdentification.new })
-      attribute(:structural, CollectionStructural.default { CollectionStructural.new })
+      attribute :identification, CollectionIdentification.optional.meta(omittable: true)
+
+      def self.new(attributes = default_attributes, safe = false, validate = true, &block)
+        Validator.validate(self, attributes.with_indifferent_access) if validate
+        super(attributes, safe, &block)
+      end
     end
   end
 end

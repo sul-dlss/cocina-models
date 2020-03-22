@@ -14,16 +14,17 @@ module Cocina
 
       def generate
         <<~RUBY
-          # frozen_string_literal: true
+                    # frozen_string_literal: true
 
-          module Cocina
-          module Models
-            # A digital repository object.  See http://sul-dlss.github.io/cocina-models/maps/DRO.json
-            class Vocab
+                    module Cocina
+                      module Models
+                        # A digital repository object.  See http://sul-dlss.github.io/cocina-models/maps/DRO.json
+                        class Vocab
+
           #{vocab_methods}
 
-            end
-          end
+                        end
+                      end
           end
         RUBY
       end
@@ -49,10 +50,11 @@ module Cocina
         # Note special handling of 3d
         vocabs.map do |vocab|
           name = vocab[38, vocab.size - 45].gsub('-', '_').gsub('3d', 'three_dimensional')
-          <<-RUBY
-    def self.#{name}
-      '#{vocab}'
-    end
+          <<~RUBY
+            def self.#{name}
+              "#{vocab}"
+            end
+
           RUBY
         end.join("\n")
       end

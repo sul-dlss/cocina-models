@@ -18,14 +18,16 @@ module Cocina
           # frozen_string_literal: true
 
           module Cocina
-          module Models
-            class #{name} < Struct
+            module Models
+              class #{name} < Struct
 
-              #{types}
+                #{types}
 
-              #{model_attributes}
+                #{model_attributes}
+
+                #{validate}
+              end
             end
-          end
           end
         RUBY
       end
@@ -56,12 +58,26 @@ module Cocina
 
         types_list = type_properties_doc.enum.map { |item| "'#{item}'" }.join(",\n ")
 
-        # "TYPES = [#{types_list}].freeze"
         <<~RUBY
           include Checkable
 
           TYPES = [#{types_list}].freeze
         RUBY
+      end
+
+      def validate
+        return '' unless validatable?
+
+        <<~RUBY
+          def self.new(attributes = default_attributes, safe = false, validate = true, &block)
+            Validator.validate(self, attributes.with_indifferent_access) if validate
+            super(attributes, safe, &block)
+                end
+        RUBY
+      end
+
+      def validatable?
+        !schema_doc.node_context.document.paths["/validate/#{schema_doc.name}"].nil?
       end
     end
   end

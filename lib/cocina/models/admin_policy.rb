@@ -13,11 +13,13 @@ module Cocina
       attribute :externalIdentifier, Types::Strict::String
       attribute :label, Types::Strict::String
       attribute :version, Types::Strict::Integer
-      attribute(:access, AdminPolicyAccess.default { AdminPolicyAccess.new })
       attribute(:administrative, AdminPolicyAdministrative.default { AdminPolicyAdministrative.new })
-      attribute(:identification, AdminPolicyIdentification.default { AdminPolicyIdentification.new })
-      attribute(:structural, AdminPolicyStructural.default { AdminPolicyStructural.new })
       attribute :description, Description.optional.meta(omittable: true)
+
+      def self.new(attributes = default_attributes, safe = false, validate = true, &block)
+        Validator.validate(self, attributes.with_indifferent_access) if validate
+        super(attributes, safe, &block)
+      end
     end
   end
 end

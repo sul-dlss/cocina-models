@@ -55,7 +55,6 @@ RSpec.shared_examples 'it has file attributes' do
           hasMimeType: 'image/jp2',
           presentation: { height: 5, width: 8 },
           size: 666,
-          structural: {},
           use: 'transcription'
         )
       end

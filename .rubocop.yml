@@ -11,6 +11,7 @@ Layout/LineLength:
 
 Metrics/BlockLength:
   Exclude:
+    - cocina-models.gemspec
     - spec/cocina/**/*
 
 Metrics/MethodLength:

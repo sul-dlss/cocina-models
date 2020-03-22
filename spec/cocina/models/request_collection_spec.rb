@@ -9,7 +9,8 @@ RSpec.describe Cocina::Models::RequestCollection do
     {
       type: collection_type,
       label: 'My collection',
-      version: 3
+      version: 3,
+      access: {}
     }
   end
 

@@ -30,12 +30,17 @@ module Cocina
       attribute :label, Types::Strict::String
       # Version for the DRO within SDR.
       attribute :version, Types::Strict::Integer
-      attribute(:access, Access.default { Access.new })
-      attribute(:administrative, Administrative.default { Administrative.new })
+      attribute(:access, DROAccess.default { DROAccess.new })
+      attribute :administrative, Administrative.optional.meta(omittable: true)
       attribute :description, Description.optional.meta(omittable: true)
-      attribute(:identification, Identification.default { Identification.new })
-      attribute(:structural, DROStructural.default { DROStructural.new })
+      attribute :identification, Identification.optional.meta(omittable: true)
+      attribute :structural, DROStructural.optional.meta(omittable: true)
       attribute :geographic, Geographic.optional.meta(omittable: true)
+
+      def self.new(attributes = default_attributes, safe = false, validate = true, &block)
+        Validator.validate(self, attributes.with_indifferent_access) if validate
+        super(attributes, safe, &block)
+      end
     end
   end
 end

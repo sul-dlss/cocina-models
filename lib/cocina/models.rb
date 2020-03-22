@@ -5,15 +5,22 @@ require 'zeitwerk'
 require 'dry-struct'
 require 'dry-types'
 require 'json'
+require 'openapi_parser'
+require 'active_support/core_ext/hash/indifferent_access'
+require 'yaml'
 
 # Help Zeitwerk find some of our classes
 class CocinaModelsInflector < Zeitwerk::Inflector
+  # rubocop:disable Metrics/CyclomaticComplexity
+  # rubocop:disable Metrics/MethodLength
   def camelize(basename, _abspath)
     case basename
     when 'dro'
       'DRO'
     when 'request_dro'
       'RequestDRO'
+    when 'dro_access'
+      'DROAccess'
     when 'dro_structural'
       'DROStructural'
     when 'request_dro_structural'
@@ -24,6 +31,8 @@ class CocinaModelsInflector < Zeitwerk::Inflector
       super
     end
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
+  # rubocop:enable Metrics/MethodLength
 end
 
 loader = Zeitwerk::Loader.new
@@ -38,6 +47,9 @@ module Cocina
     # Raised when the type attribute is not valid.
     class UnknownTypeError < Error; end
 
+    # Raised when an error occurs validating against openapi.
+    class ValidationError < Error; end
+
     # Base class for Cocina Structs
     class Struct < Dry::Struct
       transform_keys(&:to_sym)
@@ -50,37 +62,43 @@ module Cocina
     end
 
     # @param [Hash] dyn a ruby hash representation of the JSON serialization of a collection or DRO
-    # @return [DRO,Collection]
+    # @param [boolean] validate
+    # @return [DRO,Collection,AdminPolicy]
     # @raises [UnknownTypeError] if a valid type is not found in the data
     # @raises [KeyError] if a type field cannot be found in the data
-    def self.build(dyn)
-      case dyn.fetch('type')
-      when *DRO::TYPES
-        DRO.new(dyn)
-      when *Collection::TYPES
-        Collection.new(dyn)
-      when *AdminPolicy::TYPES
-        AdminPolicy.new(dyn)
-      else
-        raise UnknownTypeError, "Unknown type: '#{dyn.fetch('type')}'"
-      end
+    # @raises [ValidationError] if hash representation fails openapi validation
+    def self.build(dyn, validate: true)
+      clazz = case dyn.fetch('type')
+              when *DRO::TYPES
+                DRO
+              when *Collection::TYPES
+                Collection
+              when *AdminPolicy::TYPES
+                AdminPolicy
+              else
+                raise UnknownTypeError, "Unknown type: '#{dyn.fetch('type')}'"
+              end
+      clazz.new(dyn, validate: validate)
     end
 
     # @param [Hash] dyn a ruby hash representation of the JSON serialization of a request for a Collection or DRO
+    # @param [boolean] validate
     # @return [RequestDRO,RequestCollection,RequestAdminPolicy]
     # @raises [UnknownTypeError] if a valid type is not found in the data
     # @raises [KeyError] if a type field cannot be found in the data
-    def self.build_request(dyn)
-      case dyn.fetch('type')
-      when *DRO::TYPES
-        RequestDRO.new(dyn)
-      when *Collection::TYPES
-        RequestCollection.new(dyn)
-      when *AdminPolicy::TYPES
-        RequestAdminPolicy.new(dyn)
-      else
-        raise UnknownTypeError, "Unknown type: '#{dyn.fetch('type')}'"
-      end
+    # @raises [ValidationError] if hash representation fails openapi validation
+    def self.build_request(dyn, validate: true)
+      clazz = case dyn.fetch('type')
+              when *DRO::TYPES
+                RequestDRO
+              when *Collection::TYPES
+                RequestCollection
+              when *AdminPolicy::TYPES
+                RequestAdminPolicy
+              else
+                raise UnknownTypeError, "Unknown type: '#{dyn.fetch('type')}'"
+              end
+      clazz.new(dyn, validate: validate)
     end
   end
 end

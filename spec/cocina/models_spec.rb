@@ -14,31 +14,40 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'http://cocina.sul.stanford.edu/models/exhibit.jsonld',
-          'externalIdentifier' => 'foo',
+          'externalIdentifier' => 'druid:bc123df4567',
           'label' => 'bar',
           'version' => 5,
-          'description' => {
-            'title' => []
-          }
+          'access' => {}
         }
       end
 
       it { is_expected.to be_kind_of Cocina::Models::Collection }
     end
 
-    context 'with a DRO type' do
+    context 'with an invalid DRO (openapi)' do
       let(:data) do
         {
           'type' => 'http://cocina.sul.stanford.edu/models/image.jsonld',
           'externalIdentifier' => 'foo',
           'label' => 'bar',
           'version' => 5,
-          'description' => {
-            'title' => []
-          },
-          'structural' => {
-            'hasAgreement' => ''
-          }
+          'access' => {}
+        }
+      end
+
+      it 'raises' do
+        expect { build }.to raise_error(Cocina::Models::ValidationError)
+      end
+    end
+
+    context 'with a DRO type' do
+      let(:data) do
+        {
+          'type' => 'http://cocina.sul.stanford.edu/models/image.jsonld',
+          'externalIdentifier' => 'druid:bc123df4567',
+          'label' => 'bar',
+          'version' => 5,
+          'access' => {}
         }
       end
 
@@ -49,12 +58,10 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'http://cocina.sul.stanford.edu/models/admin_policy.jsonld',
-          'externalIdentifier' => 'foo',
+          'externalIdentifier' => 'druid:bc123df4567',
           'label' => 'bar',
           'version' => 5,
-          'description' => {
-            'title' => []
-          }
+          'administrative' => {}
         }
       end
 
@@ -91,9 +98,7 @@ RSpec.describe Cocina::Models do
           'type' => 'http://cocina.sul.stanford.edu/models/exhibit.jsonld',
           'label' => 'bar',
           'version' => 5,
-          'description' => {
-            'title' => []
-          }
+          'access' => {}
         }
       end
 
@@ -106,9 +111,7 @@ RSpec.describe Cocina::Models do
           'type' => 'http://cocina.sul.stanford.edu/models/image.jsonld',
           'label' => 'bar',
           'version' => 5,
-          'description' => {
-            'title' => []
-          }
+          'access' => {}
         }
       end
 
@@ -121,9 +124,7 @@ RSpec.describe Cocina::Models do
           'type' => 'http://cocina.sul.stanford.edu/models/admin_policy.jsonld',
           'label' => 'bar',
           'version' => 5,
-          'description' => {
-            'title' => []
-          }
+          'administrative' => {}
         }
       end
 

@@ -9,10 +9,11 @@ RSpec.describe Cocina::Models::AdminPolicy do
   # but I think it's actually required for every admin policy
   let(:required_properties) do
     {
-      externalIdentifier: 'druid:ab123cd4567',
+      externalIdentifier: 'druid:bc123df4567',
       label: 'My admin_policy',
       type: type,
-      version: 3
+      version: 3,
+      administrative: {}
     }
   end
 
@@ -21,9 +22,8 @@ RSpec.describe Cocina::Models::AdminPolicy do
   context 'when externalIdentifier is missing' do
     let(:admin_policy) { described_class.new(required_properties.reject { |k, _v| k == :externalIdentifier }) }
 
-    it 'raises a Dry::Struct::Error' do
-      err_msg = '[Cocina::Models::AdminPolicy.new] :externalIdentifier is missing in Hash input'
-      expect { admin_policy }.to raise_error(Dry::Struct::Error, err_msg)
+    it 'raises a Cocina::Models::ValidationError' do
+      expect { admin_policy }.to raise_error(Cocina::Models::ValidationError)
     end
   end
 

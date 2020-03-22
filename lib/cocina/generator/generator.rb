@@ -42,7 +42,7 @@ module Cocina
         FileUtils.rm_f(filepath)
 
         create_file filepath, vocab.generate
-        run("rubocop -x #{filepath}")
+        run("rubocop -a #{filepath}")
       end
 
       private
@@ -69,9 +69,10 @@ module Cocina
       def clean_output
         FileUtils.mkdir_p(options[:output])
         files = Dir.glob("#{options[:output]}/*.rb")
-        # Leave version.rb and checkable.rb
+        # Leave alone
         files.delete("#{options[:output]}/version.rb")
         files.delete("#{options[:output]}/checkable.rb")
+        files.delete("#{options[:output]}/validator.rb")
         FileUtils.rm_f(files)
       end
     end

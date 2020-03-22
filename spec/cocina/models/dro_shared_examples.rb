@@ -32,22 +32,11 @@ RSpec.shared_examples 'it has dro attributes' do
 
       it 'populates non-passed required attributes with default values' do
         access = instance.access
-        expect(access).to be_kind_of Cocina::Models::Access
+        expect(access).to be_kind_of Cocina::Models::DROAccess
         expect(access.access).to eq 'dark'
         expect(access.copyright).to be_nil
         expect(access.embargo).to be_nil
         expect(access.useAndReproductionStatement).to be_nil
-
-        administrative = instance.administrative
-        expect(administrative).to be_kind_of Cocina::Models::Administrative
-        expect(administrative.hasAdminPolicy).to be_nil
-        expect(administrative.releaseTags).to eq []
-
-        expect(instance.identification).to be_kind_of Cocina::Models::Identification
-        expect(instance.identification.attributes.size).to eq 0
-
-        expect(instance.structural).to be_kind_of struct_class
-        expect(instance.structural.attributes.size).to eq 0
       end
     end
 
@@ -166,37 +155,6 @@ RSpec.shared_examples 'it has dro attributes' do
           expect(fileset2.externalIdentifier).to eq '12343234_2'
         end
         expect(structural.hasMemberOrders.first.viewingDirection).to eq 'right-to-left'
-      end
-    end
-
-    context 'with empty properties that have default values' do
-      let(:properties) do
-        required_properties.merge(
-          access: {},
-          administrative: {},
-          identification: {},
-          structural: {}
-        )
-      end
-
-      it 'uses default values' do
-        access = instance.access
-        expect(access).to be_kind_of Cocina::Models::Access
-        expect(access.access).to eq 'dark'
-        expect(access.copyright).to be_nil
-        expect(access.embargo).to be_nil
-        expect(access.useAndReproductionStatement).to be_nil
-
-        administrative = instance.administrative
-        expect(administrative).to be_kind_of Cocina::Models::Administrative
-        expect(administrative.hasAdminPolicy).to be_nil
-        expect(administrative.releaseTags).to eq []
-
-        expect(instance.identification).to be_kind_of Cocina::Models::Identification
-        expect(instance.identification.attributes.size).to eq 0
-
-        expect(instance.structural).to be_kind_of struct_class
-        expect(instance.structural.attributes.size).to eq 0
       end
     end
   end

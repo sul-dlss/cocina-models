@@ -18,8 +18,6 @@ module Cocina
       attribute :hasMessageDigests, Types::Strict::Array.of(MessageDigest).default([].freeze)
       attribute(:access, Access.default { Access.new })
       attribute(:administrative, FileAdministrative.default { FileAdministrative.new })
-      attribute :identification, FileIdentification.optional.meta(omittable: true)
-      attribute :structural, FileStructural.optional.meta(omittable: true)
       attribute :presentation, Presentation.optional.meta(omittable: true)
     end
   end

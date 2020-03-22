@@ -7,10 +7,11 @@ RSpec.describe Cocina::Models::Collection do
   let(:collection_type) { Cocina::Models::Vocab.collection }
   let(:required_properties) do
     {
-      externalIdentifier: 'druid:ab123cd4567',
+      externalIdentifier: 'druid:bc123df4567',
       type: collection_type,
       label: 'My collection',
-      version: 3
+      version: 3,
+      access: {}
     }
   end
 
@@ -19,9 +20,8 @@ RSpec.describe Cocina::Models::Collection do
   context 'when externalIdentifier is missing' do
     let(:instance) { described_class.new(required_properties.reject { |k, _v| k == :externalIdentifier }) }
 
-    it 'raises a Dry::Struct::Error' do
-      err_msg = '[Cocina::Models::Collection.new] :externalIdentifier is missing in Hash input'
-      expect { instance }.to raise_error(Dry::Struct::Error, err_msg)
+    it 'raises a Cocina::Models::ValidationError' do
+      expect { instance }.to raise_error(Cocina::Models::ValidationError)
     end
   end
 
@@ -44,10 +44,10 @@ RSpec.describe Cocina::Models::Collection do
       it { is_expected.to be_nil }
     end
 
-    describe ':releaseTags default is empty array' do
+    describe ':releaseTags default is nil' do
       subject { instance.releaseTags }
 
-      it { is_expected.to eq [] }
+      it { is_expected.to be_nil }
     end
   end
 end
