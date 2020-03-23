@@ -26,11 +26,13 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'activesupport'
   spec.add_dependency 'dry-struct', '~> 1.0'
   spec.add_dependency 'dry-types', '~> 1.1'
-  spec.add_dependency 'openapi3_parser'
+  spec.add_dependency 'openapi3_parser' # Parsing openapi doc
+  spec.add_dependency 'openapi_parser' # Validating openapi requests
   spec.add_dependency 'thor'
   spec.add_dependency 'zeitwerk', '~> 2.1'
 
   spec.add_development_dependency 'bundler', '~> 2.0'
+  spec.add_development_dependency 'committee'
   spec.add_development_dependency 'rake', '~> 12.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'rubocop', '~> 0.74.0'

@@ -9,7 +9,8 @@ RSpec.describe Cocina::Models::RequestDRO do
     {
       label: 'My object',
       type: item_type,
-      version: 7
+      version: 7,
+      access: {}
     }
   end
   let(:struct_class) { Cocina::Models::RequestDROStructural }
@@ -18,10 +19,12 @@ RSpec.describe Cocina::Models::RequestDRO do
     [
       { type: file_set_type,
         version: 1,
-        label: 'Resource #1' },
+        label: 'Resource #1',
+        structural: {} },
       { type: file_set_type,
         version: 2,
-        label: 'Resource #2' }
+        label: 'Resource #2',
+        structural: {} }
     ]
   end
 

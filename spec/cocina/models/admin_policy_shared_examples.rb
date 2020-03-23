@@ -27,19 +27,10 @@ RSpec.shared_examples 'it has admin_policy attributes' do
       end
 
       it 'populates non-passed required attributes with default values' do
-        expect(admin_policy.access).to be_kind_of(Cocina::Models::AdminPolicyAccess)
-        expect(admin_policy.access.attributes.size).to eq 0
-
         expect(admin_policy.administrative).to be_kind_of(Cocina::Models::AdminPolicyAdministrative)
         expect(admin_policy.administrative.defaultObjectRights).to eq admin_policy_default_rights
         expect(admin_policy.administrative.registrationWorkflow).to be_nil
         expect(admin_policy.administrative.hasAdminPolicy).to be_nil
-
-        expect(admin_policy.identification).to be_kind_of(Cocina::Models::AdminPolicyIdentification)
-        expect(admin_policy.identification.attributes.size).to eq 0
-
-        expect(admin_policy.structural).to be_kind_of(Cocina::Models::AdminPolicyStructural)
-        expect(admin_policy.structural.attributes.size).to eq 0
       end
     end
 
@@ -67,19 +58,8 @@ RSpec.shared_examples 'it has admin_policy attributes' do
         expect(admin_policy.administrative.defaultObjectRights).to eq '<rightsMetadata></rightsMetadata>'
         expect(admin_policy.administrative.registrationWorkflow).to eq 'wasCrawlPreassemblyWF'
 
-        # expect(admin_policy.description.title.first.attributes).to eq(primary: true,
-        #                                                               titleFull: 'My admin_policy')
-      end
-    end
-
-    context 'with empty optional properties that have default values' do
-      let(:properties) { required_properties.merge(administrative: nil) }
-
-      it 'uses default values' do
-        expect(admin_policy.administrative).to be_kind_of(Cocina::Models::AdminPolicyAdministrative)
-        expect(admin_policy.administrative.defaultObjectRights).to eq admin_policy_default_rights
-        expect(admin_policy.administrative.registrationWorkflow).to be_nil
-        expect(admin_policy.administrative.hasAdminPolicy).to be_nil
+        expect(admin_policy.description.title.first.attributes).to eq(primary: true,
+                                                                      titleFull: 'My admin_policy')
       end
     end
   end

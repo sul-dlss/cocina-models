@@ -7,12 +7,79 @@ info:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 paths:
-  /v1/noop:
-    get:
-      summary: noop
+  /validate/DRO:
+    post:
+      summary: Validate a DRO
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DRO'
       responses:
         '200':
           description: noop
+  /validate/RequestDRO:
+    post:
+      summary: Validate a Request DRO
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestDRO'
+      responses:
+        '200':
+          description: noop
+  /validate/Collection:
+    post:
+      summary: Validate a Collection
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Collection'
+      responses:
+        '200':
+          description: noop
+  /validate/RequestCollection:
+    post:
+      summary: Validate a Request Collection
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestCollection'
+      responses:
+        '200':
+          description: noop
+  /validate/AdminPolicy:
+    post:
+      summary: Validate an AdminPolicy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminPolicy'
+      responses:
+        '200':
+          description: noop
+  /validate/RequestAdminPolicy:
+    post:
+      summary: Validate a Request AdminPolicy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestAdminPolicy'
+      responses:
+        '200':
+          description: noop
+
 components:
   schemas:
     Access:
@@ -29,16 +96,6 @@ components:
             - 'citation-only'
             - 'dark'
           default: 'dark'
-        copyright:
-          description: The human readable copyright statement that applies
-          example: Copyright World Trade Organization
-          type: string
-        useAndReproductionStatement:
-          description: The human readable use and reproduction statement that applies
-          example: Property rights reside with the repository. Literary rights reside with the creators of the documents or their heirs. To obtain permission to publish or reproduce, please contact the Public Services Librarian of the Dept. of Special Collections (http://library.stanford.edu/spc).
-          type: string
-        embargo:
-          $ref: '#/components/schemas/Embargo'
     Administrative:
       type: object
       properties:
@@ -53,8 +110,6 @@ components:
           description: Administrative or Internal project this resource is a part of
           example: Google Books
           type: string
-      required:
-        - releaseTags
     AdminPolicy:
       type: object
       properties:
@@ -69,14 +124,8 @@ components:
           type: string
         version:
           type: integer
-        access:
-          $ref: '#/components/schemas/AdminPolicyAccess'
         administrative:
           $ref: '#/components/schemas/AdminPolicyAdministrative'
-        identification:
-          $ref: '#/components/schemas/AdminPolicyIdentification'
-        structural:
-          $ref: '#/components/schemas/AdminPolicyStructural'
         description:
           $ref: '#/components/schemas/Description'
       required:
@@ -84,16 +133,9 @@ components:
         - label
         - type
         - version
-        - access
         - administrative
-        - identification
-        - structural
-    AdminPolicyAccess:
-      type: object
     AdminPolicyAdministrative:
       type: object
-      required:
-        - defaultObjectRights
       properties:
         defaultObjectRights:
           type: string
@@ -102,11 +144,6 @@ components:
           type: string
         hasAdminPolicy:
           type: string
-    AdminPolicyIdentification:
-      type: object
-    AdminPolicyStructural:
-      description: Structural metadata
-      type: object
     CatalogLink:
       type: object
       required:
@@ -151,17 +188,12 @@ components:
           $ref: '#/components/schemas/Description'
         identification:
           $ref: '#/components/schemas/CollectionIdentification'
-        structural:
-          $ref: '#/components/schemas/CollectionStructural'
       required:
         - externalIdentifier
         - label
         - type
         - version
         - access
-        - administrative
-        - identification
-        - structural
     CollectionIdentification:
       type: object
       properties:
@@ -169,10 +201,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CatalogLink'
-    CollectionStructural:
-      description: Structural metadata
-      type: object
-      properties: {}
     Description:
       description: Descriptive metadata
       type: object
@@ -216,7 +244,7 @@ components:
           description: Version for the DRO within SDR.
           type: integer
         access:
-          $ref: '#/components/schemas/Access'
+          $ref: '#/components/schemas/DROAccess'
         administrative:
           $ref: '#/components/schemas/Administrative'
         description:
@@ -233,9 +261,28 @@ components:
         - type
         - version
         - access
-        - administrative
-        - identification
-        - structural
+    DROAccess:
+      type: object
+      properties:
+        access:
+          type: string
+          enum:
+            - 'world'
+            - 'stanford'
+            - 'location-based'
+            - 'citation-only'
+            - 'dark'
+          default: 'dark'
+        copyright:
+          description: The human readable copyright statement that applies
+          example: Copyright World Trade Organization
+          type: string
+        useAndReproductionStatement:
+          description: The human readable use and reproduction statement that applies
+          example: Property rights reside with the repository. Literary rights reside with the creators of the documents or their heirs. To obtain permission to publish or reproduce, please contact the Public Services Librarian of the Dept. of Special Collections (http://library.stanford.edu/spc).
+          type: string
+        embargo:
+          $ref: '#/components/schemas/Embargo'
     DROStructural:
       description: Structural metadata
       type: object
@@ -321,10 +368,6 @@ components:
           $ref: '#/components/schemas/Access'
         administrative:
           $ref: '#/components/schemas/FileAdministrative'
-        identification:
-          $ref: '#/components/schemas/FileIdentification'
-        structural:
-          $ref: '#/components/schemas/FileStructural'
         presentation:
           $ref: '#/components/schemas/Presentation'
       required:
@@ -333,7 +376,6 @@ components:
         - type
         - version
         - access
-        - structural
         - administrative
         - hasMessageDigests
     FileAdministrative:
@@ -348,8 +390,6 @@ components:
       required:
         - sdrPreserve
         - shelve
-    FileIdentification:
-      type: object
     FileSet:
       description: Relevant groupings of Files. Also called a File Grouping.
       type: object
@@ -367,10 +407,6 @@ components:
         version:
           description: Version for the Fileset within SDR.
           type: integer
-        access:
-          $ref: '#/components/schemas/Access'
-        identification:
-          $ref: '#/components/schemas/FileSetIdentification'
         structural:
           $ref: '#/components/schemas/FileSetStructural'
       required:
@@ -378,11 +414,6 @@ components:
         - label
         - type
         - version
-        - access
-        - identification
-        - structural
-    FileSetIdentification:
-      type: object
     FileSetStructural:
       description: Structural metadata
       type: object
@@ -391,10 +422,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/File'
-    FileStructural:
-      description: Structural metadata
-      type: object
-      properties: {}
     Geographic:
       description: Geographic metadata
       type: object
@@ -480,24 +507,15 @@ components:
           type: string
         version:
           type: integer
-        access:
-          $ref: '#/components/schemas/AdminPolicyAccess'
         administrative:
           $ref: '#/components/schemas/AdminPolicyAdministrative'
-        identification:
-          $ref: '#/components/schemas/AdminPolicyIdentification'
-        structural:
-          $ref: '#/components/schemas/AdminPolicyStructural'
         description:
           $ref: '#/components/schemas/Description'
       required:
         - label
         - type
         - version
-        - access
         - administrative
-        - identification
-        - structural
     RequestCollection:
       description: Same as a Collection, but doesn't have an externalIdentifier as one will be created
       type: object
@@ -523,16 +541,11 @@ components:
           $ref: '#/components/schemas/Description'
         identification:
           $ref: '#/components/schemas/CollectionIdentification'
-        structural:
-          $ref: '#/components/schemas/CollectionStructural'
       required:
         - label
         - type
         - version
         - access
-        - administrative
-        - structural
-        - identification
     RequestDRO:
       description: Same as a DRO, but doesn't have an externalIdentifier as one will be created
       type: object
@@ -561,7 +574,7 @@ components:
         version:
           type: integer
         access:
-          $ref: '#/components/schemas/Access'
+          $ref: '#/components/schemas/DROAccess'
         administrative:
           $ref: '#/components/schemas/Administrative'
         description:
@@ -577,9 +590,6 @@ components:
         - type
         - version
         - access
-        - administrative
-        - identification
-        - structural
     RequestDROStructural:
       description: Structural metadata
       type: object
@@ -625,10 +635,6 @@ components:
           $ref: '#/components/schemas/Access'
         administrative:
           $ref: '#/components/schemas/FileAdministrative'
-        identification:
-          $ref: '#/components/schemas/FileIdentification'
-        structural:
-          $ref: '#/components/schemas/FileStructural'
         presentation:
           $ref: '#/components/schemas/Presentation'
       required:
@@ -650,10 +656,6 @@ components:
           type: string
         version:
           type: integer
-        access:
-          $ref: '#/components/schemas/Access'
-        identification:
-          $ref: '#/components/schemas/FileSetIdentification'
         structural:
           $ref: '#/components/schemas/RequestFileSetStructural'
       required:
@@ -661,7 +663,6 @@ components:
         - type
         - version
         - structural
-        - identification
     RequestFileSetStructural:
       description: Structural metadata
       type: object

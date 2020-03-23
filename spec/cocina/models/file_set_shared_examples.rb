@@ -26,17 +26,11 @@ RSpec.shared_examples 'it has file_set attributes' do
         expect(instance.type).to eq required_properties[:type]
         expect(instance.version).to eq required_properties[:version]
       end
-
-      it 'populates non-passed required attributes with default values' do
-        expect(instance.structural).to be_kind_of struct_class
-        expect(instance.structural.attributes.size).to eq 0
-      end
     end
 
     context 'with all specifiable properties' do
       let(:properties) do
         required_properties.merge(
-          identification: {},
           structural: {
             contains: [
               struct_contains_class.new(
@@ -59,9 +53,6 @@ RSpec.shared_examples 'it has file_set attributes' do
       end
 
       it 'populates all attributes passed in' do
-        expect(instance.identification).to be_kind_of Cocina::Models::FileSetIdentification
-        expect(instance.identification.attributes.size).to eq 0
-
         expect(instance.structural).to be_kind_of struct_class
         struct_contains = instance.structural.contains
         expect(struct_contains).to all(be_kind_of(struct_contains_class))
@@ -78,23 +69,6 @@ RSpec.shared_examples 'it has file_set attributes' do
           expect(file1.externalIdentifier).to eq 'file#1'
           expect(file2.externalIdentifier).to eq 'file#2'
         end
-      end
-    end
-
-    context 'with empty properties that have default values' do
-      let(:properties) do
-        required_properties.merge(
-          identification: {},
-          structural: {}
-        )
-      end
-
-      it 'uses default values' do
-        expect(instance.identification).to be_kind_of Cocina::Models::FileSetIdentification
-        expect(instance.identification.attributes.size).to eq 0
-
-        expect(instance.structural).to be_kind_of struct_class
-        expect(instance.structural.attributes.size).to eq 0
       end
     end
   end

@@ -7,10 +7,11 @@ RSpec.describe Cocina::Models::DRO do
   let(:item_type) { Cocina::Models::Vocab.object }
   let(:required_properties) do
     {
-      externalIdentifier: 'druid:ab123cd4567',
+      externalIdentifier: 'druid:bc123df4567',
       label: 'My object',
       type: item_type,
-      version: 2
+      version: 2,
+      access: {}
     }
   end
   let(:struct_class) { Cocina::Models::DROStructural }
@@ -33,9 +34,8 @@ RSpec.describe Cocina::Models::DRO do
   context 'when externalIdentifier is missing' do
     let(:fileset) { described_class.new(required_properties.reject { |k, _v| k == :externalIdentifier }) }
 
-    it 'raises a Dry::Struct::Error' do
-      err_msg = '[Cocina::Models::DRO.new] :externalIdentifier is missing in Hash input'
-      expect { fileset }.to raise_error(Dry::Struct::Error, err_msg)
+    it 'raises a Cocina::Models::ValidationError' do
+      expect { fileset }.to raise_error(Cocina::Models::ValidationError)
     end
   end
 
@@ -47,16 +47,6 @@ RSpec.describe Cocina::Models::DRO do
     it { is_expected.to be_dro }
     it { is_expected.not_to be_file }
     it { is_expected.not_to be_file_set }
-  end
-
-  describe Cocina::Models::Administrative do
-    let(:instance) { described_class.new }
-
-    describe '#releaseTags' do
-      subject { instance.releaseTags }
-
-      it { is_expected.to be_empty }
-    end
   end
 
   describe Cocina::Models::DROStructural do
