@@ -31,6 +31,19 @@ RSpec.describe Cocina::Models::DRO do
 
   it_behaves_like 'it has dro attributes'
 
+  context 'when no access values are passed in' do
+    let(:instance) { described_class.new(required_properties) }
+    let(:access) { instance.access }
+
+    it 'populates non-passed required attributes with default values' do
+      expect(access).to be_kind_of Cocina::Models::DROAccess
+      expect(access.access).to eq 'dark'
+      expect(access.copyright).to be_nil
+      expect(access.embargo).to be_nil
+      expect(access.useAndReproductionStatement).to be_nil
+    end
+  end
+
   context 'when externalIdentifier is missing' do
     let(:fileset) { described_class.new(required_properties.reject { |k, _v| k == :externalIdentifier }) }
 

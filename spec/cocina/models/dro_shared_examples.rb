@@ -29,15 +29,6 @@ RSpec.shared_examples 'it has dro attributes' do
         expect(instance.type).to eq required_properties[:type]
         expect(instance.version).to eq required_properties[:version]
       end
-
-      it 'populates non-passed required attributes with default values' do
-        access = instance.access
-        expect(access).to be_kind_of Cocina::Models::DROAccess
-        expect(access.access).to eq 'dark'
-        expect(access.copyright).to be_nil
-        expect(access.embargo).to be_nil
-        expect(access.useAndReproductionStatement).to be_nil
-      end
     end
 
     context 'with all specifiable properties' do
