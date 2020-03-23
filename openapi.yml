@@ -547,7 +547,7 @@ components:
         - version
         - access
     RequestDRO:
-      description: Same as a DRO, but doesn't have an externalIdentifier as one will be created
+      description: A request to create a DRO.  This has the same general structure as a DRO but doesn't have externalIdentifier and doesn't require the access subschema. If no access subschema is provided, these values will be inherited from the AdminPolicy.
       type: object
       properties:
         type:
@@ -589,7 +589,6 @@ components:
         - label
         - type
         - version
-        - access
     RequestDROStructural:
       description: Structural metadata
       type: object

@@ -9,8 +9,7 @@ RSpec.describe Cocina::Models::RequestDRO do
     {
       label: 'My object',
       type: item_type,
-      version: 7,
-      access: {}
+      version: 7
     }
   end
   let(:struct_class) { Cocina::Models::RequestDROStructural }
@@ -29,6 +28,24 @@ RSpec.describe Cocina::Models::RequestDRO do
   end
 
   it_behaves_like 'it has dro attributes'
+
+  describe '#access' do
+    context 'when no access values are passed in' do
+      subject(:access) { instance.access }
+
+      let(:instance) { described_class.new(required_properties) }
+
+      it { is_expected.to be_nil }
+    end
+
+    context 'when access values are passed in' do
+      subject(:access) { instance.access }
+
+      let(:instance) { described_class.new(required_properties.merge(access: {})) }
+
+      it { is_expected.to be_kind_of Cocina::Models::DROAccess }
+    end
+  end
 
   describe Cocina::Models::RequestDROStructural do
     context 'with RequestFileSet as contained class' do
