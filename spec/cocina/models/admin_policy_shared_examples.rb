@@ -11,9 +11,9 @@ RSpec.shared_examples 'it has admin_policy attributes' do
   let(:type) { Cocina::Models::Vocab.admin_policy }
   # see block comment for info about required_properties
   let(:properties) { required_properties }
-  # rubocop:disable Layout/LineLength
+  # rubocop:disable Metrics/LineLength
   let(:admin_policy_default_rights) { '<?xml version="1.0" encoding="UTF-8"?><rightsMetadata><access type="discover"><machine><world/></machine></access><access type="read"><machine><world/></machine></access><use><human type="useAndReproduction"/><human type="creativeCommons"/><machine type="creativeCommons" uri=""/><human type="openDataCommons"/><machine type="openDataCommons" uri=""/></use><copyright><human/></copyright></rightsMetadata>' }
-  # rubocop:enable Layout/LineLength
+  # rubocop:enable Metrics/LineLength
 
   describe 'initialization' do
     context 'with minimal required properties provided' do
