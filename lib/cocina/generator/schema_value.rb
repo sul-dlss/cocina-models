@@ -4,11 +4,11 @@ module Cocina
   module Generator
     # Class for generating from an openapi value
     class SchemaValue < SchemaBase
-      # rubocop:disable Layout/LineLength
+      # rubocop:disable Metrics/LineLength
       def generate
         "#{description}#{example}attribute :#{name.camelize(:lower)}, Types::#{dry_datatype}#{default}#{enum}#{omittable}"
       end
-      # rubocop:enable Layout/LineLength
+      # rubocop:enable Metrics/LineLength
 
       private
 
