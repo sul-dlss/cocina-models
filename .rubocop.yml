@@ -22,6 +22,10 @@ RSpec/MultipleExpectations:
 
 RSpec/ExampleLength:
   Max: 18
+  Exclude:
+    - spec/cocina/models/description_spec.rb
+    - spec/cocina/models/dro_shared_examples.rb
+
 
 Style/Documentation:
   Exclude:

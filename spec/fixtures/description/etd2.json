@@ -1,0 +1,532 @@
+{
+  "title": [
+    {
+      "value": "Adaptive Guidance for Online Learning Environments",
+      "status": "primary"
+    }
+  ],
+  "contributor": [
+    {
+      "name": [
+        {
+          "value": "Bassen, Jonathan Spencer",
+          "type": "inverted name"
+        }
+      ],
+      "type": "person",
+      "status": "primary",
+      "role": [
+        {
+          "value": "author",
+          "code": "aut",
+          "uri": "http://id.loc.gov/vocabulary/relators/aut",
+          "source": {
+            "code": "marcrelator",
+            "uri": "http://id.loc.gov/vocabulary/relators/"
+          }
+        },
+        {
+          "value": "author",
+          "uri": "http://rdaregistry.info/Elements/a/P50195",
+          "source": {
+            "uri": "http://www.rdaregistry.info/Elements/a/"
+          }
+        }
+      ]
+    },
+    {
+      "name": [
+        {
+          "value": "Mitchell, John",
+          "type": "inverted name"
+        }
+      ],
+      "type": "person",
+      "role": [
+        {
+          "value": "Advisor",
+          "source": {
+            "value": "ETD reader roles"
+          }
+        },
+        {
+          "value": "degree supervisor",
+          "code": "dgs",
+          "uri": "http://id.loc.gov/vocabulary/relators/dgs",
+          "source": {
+            "code": "marcrelator",
+            "uri": "http://id.loc.gov/vocabulary/relators/"
+          }
+        },
+        {
+          "value": "degree supervisor",
+          "uri": "http://rdaregistry.info/Elements/a/P50091",
+          "source": {
+            "uri": "http://www.rdaregistry.info/Elements/a/"
+          }
+        }
+      ]
+    },
+    {
+      "name": [
+        {
+          "value": "Piech, Chris",
+          "type": "inverted name"
+        }
+      ],
+      "type": "person",
+      "role": [
+        {
+          "value": "Reader",
+          "source": {
+            "value": "ETD reader roles"
+          }
+        },
+        {
+          "value": "thesis advisor",
+          "code": "ths",
+          "uri": "http://id.loc.gov/vocabulary/relators/ths",
+          "source": {
+            "code": "marcrelator",
+            "uri": "http://id.loc.gov/vocabulary/relators/"
+          }
+        },
+        {
+          "value": "degree committee member",
+          "uri": "http://rdaregistry.info/Elements/a/P50257",
+          "source": {
+            "uri": "http://www.rdaregistry.info/Elements/a/"
+          }
+        }
+      ]
+    },
+    {
+      "name": [
+        {
+          "value": "Thille, Candace",
+          "type": "inverted name"
+        }
+      ],
+      "type": "person",
+      "role": [
+        {
+          "value": "Reader",
+          "source": {
+            "value": "ETD reader roles"
+          }
+        },
+        {
+          "value": "thesis advisor",
+          "code": "ths",
+          "uri": "http://id.loc.gov/vocabulary/relators/ths",
+          "source": {
+            "code": "marcrelator",
+            "uri": "http://id.loc.gov/vocabulary/relators/"
+          }
+        },
+        {
+          "value": "degree committee member",
+          "uri": "http://rdaregistry.info/Elements/a/P50257",
+          "source": {
+            "uri": "http://www.rdaregistry.info/Elements/a/"
+          }
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "type": "thesis submission",
+      "date": [
+        {
+          "value": "2020"
+        }
+      ],
+      "contributor": [
+        {
+          "name": [
+            {
+              "structuredValue": [
+                {
+                  "value": "Stanford University",
+                  "type": "university",
+                  "uri": "http://id.loc.gov/authorities/names/n79054636",
+                  "source": {
+                    "code": "lcnaf",
+                    "uri": "http://id.loc.gov/authorities/names/"
+                  }
+                },
+                {
+                  "value": "School of Engineering",
+                  "type": "school"
+                },
+                {
+                  "value": "Computer Science",
+                  "type": "department"
+                }
+              ]
+            }
+          ],
+          "type": "organization",
+          "role": [
+            {
+              "value": "degree granting institution",
+              "code": "dgg",
+              "uri": "http://id.loc.gov/vocabulary/relators/dgg",
+              "source": {
+                "code": "marcrelator",
+                "uri": "http://id.loc.gov/vocabulary/relators/"
+              }
+            },
+            {
+              "value": "degree granting institution",
+              "uri": "http://rdaregistry.info/Elements/a/P50003",
+              "source": {
+                "uri": "http://www.rdaregistry.info/Elements/a/"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "degree conferral",
+      "date": [
+        {
+          "value": "2020",
+          "encoding": [ "edtf", "w3cdtf", "marc", "iso8601" ]
+        }
+      ],
+      "note": [
+        {
+          "value": "Ph.D.",
+          "type": "degree type"
+        }
+      ],
+      "contributor": [
+        {
+          "name": [
+            {
+              "value": "Stanford University",
+              "uri": "http://id.loc.gov/authorities/names/n79054636",
+              "source": {
+                "code": "lcnaf",
+                "uri": "http://id.loc.gov/authorities/names/"
+              }
+            }
+          ],
+          "type": "organization",
+          "role": [
+            {
+              "value": "degree granting institution",
+              "code": "dgg",
+              "uri": "http://id.loc.gov/vocabulary/relators/dgg",
+              "source": {
+                "code": "marcrelator",
+                "uri": "http://id.loc.gov/vocabulary/relators/"
+              }
+            },
+            {
+              "value": "degree granting institution",
+              "uri": "http://rdaregistry.info/Elements/a/P50003",
+              "source": {
+                "uri": "http://www.rdaregistry.info/Elements/a/"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "publication",
+      "date": [
+        {
+          "value": "2020",
+          "encoding": [ "edtf", "w3cdtf", "marc", "iso8601" ]
+        }
+      ],
+      "location": [
+        {
+          "value": "Stanford (Calif.)",
+          "uri": "http://id.loc.gov/authorities/names/n50046557",
+          "source": {
+            "code": "lcnaf",
+            "uri": "http://id.loc.gov/authorities/names/"
+          }
+        },
+        {
+          "value": "California",
+          "code": "cau",
+          "uri": "http://id.loc.gov/vocabulary/countries/cau",
+          "source": {
+            "code": "marccountry",
+            "uri": "http://id.loc.gov/vocabulary/countries/"
+          }
+        }
+      ],
+      "contributor": [
+        {
+          "name": [
+            {
+              "value": "Stanford University",
+              "uri": "http://id.loc.gov/authorities/names/n79054636",
+              "source": {
+                "code": "lcnaf",
+                "uri": "http://id.loc.gov/authorities/names/"
+              }
+            }
+          ],
+          "type": "organization",
+          "role": [
+            {
+              "value": "publisher",
+              "code": "pbl",
+              "uri": "http://id.loc.gov/vocabulary/relators/pbl",
+              "source": {
+                "code": "marcrelator",
+                "uri": "http://id.loc.gov/vocabulary/relators/"
+              }
+            },
+            {
+              "value": "publisher",
+              "uri": "http://rdaregistry.info/Elements/a/P50203",
+              "source": {
+                "uri": "http://www.rdaregistry.info/Elements/a/"
+              }
+            }
+          ]
+        }
+      ],
+      "note": [
+        {
+          "value": "monographic",
+          "type": "issuance",
+          "uri": "http://id.loc.gov/vocabulary/issuance/mono",
+          "source": {
+            "uri": "http://id.loc.gov/vocabulary/issuance/"
+          }
+        }
+      ],
+      "structuredValue": [
+        {
+          "value": "[Stanford, California]",
+          "type": "publication statement place",
+          "standard": [ "RDA" ]
+        },
+        {
+          "value": "[Stanford University]",
+          "type": "publication statement publisher",
+          "standard": [ "RDA" ]
+        },
+        {
+          "value": "2020",
+          "type": "publication statement date",
+          "standard": [ "RDA" ]
+        }
+      ]
+    },
+    {
+      "type": "copyright",
+      "date": [
+        {
+          "value": "2020",
+          "encoding": [ "edtf", "w3cdtf", "marc", "iso8601" ]
+        }
+      ],
+      "structuredValue": [
+        {
+          "value": "©2020",
+          "type": "copyright statement",
+          "standard": [ "RDA" ]
+        }
+      ]
+    }
+  ],
+  "form": [
+    {
+      "value": "computer",
+      "type": "media",
+      "uri": "http://id.loc.gov/vocabulary/mediaTypes/c",
+      "source": {
+        "code": "rdamedia",
+        "uri": "http://id.loc.gov/vocabulary/mediaTypes/"
+      }
+    },
+    {
+      "value": "online resource",
+      "type": "carrier",
+      "uri": "http://id.loc.gov/vocabulary/carriers/cr",
+      "source": {
+        "code": "rdacarrier",
+        "uri": "http://id.loc.gov/vocabulary/carriers/"
+      }
+    },
+    {
+      "value": "1 online resource",
+      "type": "extent",
+      "standard": [ "RDA" ]
+    },
+    {
+      "value": "text",
+      "type": "resource type",
+      "source": {
+        "value": "MODS resource type"
+      }
+    },
+    {
+      "value": "text",
+      "type": "content type",
+      "uri": "http://id.loc.gov/vocabulary/contentTypes/txt",
+      "source": {
+        "code": "rdacontent",
+        "uri": "http://id.loc.gov/vocabulary/contentTypes/"
+      }
+    },
+    {
+      "value": "thesis",
+      "type": "genre",
+      "uri": "http://id.loc.gov/vocabulary/marcgt/the",
+      "source": {
+        "code": "marcgt",
+        "uri": "http://id.loc.gov/vocabulary/marcgt/"
+      }
+    }
+  ],
+  "language": [
+    {
+      "value": "English",
+      "code": "eng",
+      "uri": "http://id.loc.gov/vocabulary/iso639-2/eng",
+      "source": {
+        "code": "iso239-2b",
+        "uri": "http://id.loc.gov/vocabulary/iso639-2"
+      }
+    }
+  ],
+  "note": [
+    {
+      "value": "In the last decade, online learning platforms have dramatically increased access to educational materials, and replaced and supplemented traditional co-located instruction. Throughout this shift, instructors have struggled with how best to create and deploy materials to online platforms and understand their effectiveness when scaled across hundreds or thousands of learners. To address these complementary problems, this thesis introduces new systems and methods for both learning analytics and adaptive instruction. In OARS, we demonstrate a real-time learning analytics system deployed across more than ten online courses with tens of thousands of learners. We then report on the value of learning analytics from the perspective of course instructors. Learning from these perspectives, we next introduce a system for adaptively scheduling educational activities through reinforcement learning (RL). Without any skill labels, this model learns how to assign educational activities in a way that maximizes learning gains while minimizing redundant work. Finally, in a randomized controlled experiment, we show that our RL scheduling algorithm helped to improve the educational experience for online learners by reducing the number of learning activities required to produce the same learning gains.",
+      "type": "summary"
+    },
+    {
+      "value": "Submitted to the Department of Computer Science."
+    },
+    {
+      "type": "thesis",
+      "structuredValue": [
+        {
+          "value": "Thesis",
+          "type": "note"
+        },
+        {
+          "value": "Ph.D.",
+          "type": "degree"
+        },
+        {
+          "value": "Stanford University",
+          "type": "university"
+        },
+        {
+          "value": "2020",
+          "type": "date"
+        }
+      ]
+    },
+    {
+      "value": "Jonathan Spencer Bassen.",
+      "type": "statement of responsibility",
+      "standard": [ "RDA" ]
+    }
+  ],
+  "identifier": [
+    {
+      "value": "0000007516",
+      "type": "ETD ID"
+    }
+  ],
+  "purl": "http://purl.stanford.edu/qk672zk2803",
+  "url": [
+    {
+      "value": "https://etd.stanford.edu/view/0000007516",
+      "type": "ETD"
+    }
+  ],
+  "marcEncodedData": [
+    {
+      "value": "     nam a       3i",
+      "type": "leader"
+    },
+    {
+      "value": "dorqk672zk2803",
+      "type": "001"
+    },
+    {
+      "value": "m        d",
+      "type": "006"
+    },
+    {
+      "value": "cr un",
+      "type": "007"
+    },
+    {
+      "value": "200312t20202020cau     om    000 0 eng d",
+      "type": "008"
+    }
+  ],
+  "adminMetadata": {
+    "event": [
+      {
+        "type": "creation",
+        "date": [
+          {
+            "value": "2020-03-23",
+            "encoding": [ "w3cdtf" ]
+          }
+        ]
+      }
+    ],
+    "contributor": [
+      {
+        "name": [
+          {
+            "value": "ETD application"
+          }
+        ],
+        "role": [
+          {
+            "value": "data source"
+          }
+        ]
+      },
+      {
+        "name": [
+          {
+            "code": "CSt"
+          }
+        ],
+        "role": [
+          {
+            "value": "original cataloging agency"
+          }
+        ]
+      },
+      {
+        "name": [
+          {
+            "code": "CSt"
+          }
+        ],
+        "role": [
+          {
+            "value": "transcribing agency"
+          }
+        ]
+      }
+    ],
+    "language": [
+      {
+        "code": "eng"
+      }
+    ]
+  }
+}

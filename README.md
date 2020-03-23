@@ -7,11 +7,13 @@
 
 This is a Ruby implementation of the SDR data model (named "COCINA"). The data being modeled includes digital repository objects.
 
-It provides a way for consumers to validate objects against models using dry-struct and dry-types gems.
+Validation is performed by openapi (using OpenAPIParser). Modeling is provided by dry-struct and dry-types. Together, these provide a way for consumers to validate objects against models and to manipulate thos objects.
 
 This is a work in progress that will ultimately implement the full [COCINA data model](http://sul-dlss.github.io/cocina-models/). See also [architecture documentation](https://sul-dlss.github.io/taco-truck/COCINA.html#cocina-data-models--shapes).
 
 ## Generate models from openapi.yml
+
+Note that only a small subset of openapi is supported. If you are using a new openapi feature or pattern, verify that the model will be generated as expected.
 
 ### All
 ```

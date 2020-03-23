@@ -44,6 +44,28 @@ module Cocina
 
         "# example: #{schema_doc.example}\n"
       end
+
+      def dry_datatype(doc)
+        case doc.type
+        when 'integer'
+          'Strict::Integer'
+        when 'string'
+          string_dry_datatype(doc)
+        when 'boolean'
+          'Strict::Bool'
+        else
+          raise "#{schema_doc.type} not supported"
+        end
+      end
+
+      def string_dry_datatype(doc)
+        case doc.format
+        when 'date-time'
+          'Params::DateTime'
+        else
+          'Strict::String'
+        end
+      end
     end
   end
 end
