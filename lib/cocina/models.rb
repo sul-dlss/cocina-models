@@ -78,7 +78,7 @@ module Cocina
               else
                 raise UnknownTypeError, "Unknown type: '#{dyn.fetch('type')}'"
               end
-      clazz.new(dyn, validate: validate)
+      clazz.new(dyn, false, validate)
     end
 
     # @param [Hash] dyn a ruby hash representation of the JSON serialization of a request for a Collection or DRO
@@ -98,7 +98,7 @@ module Cocina
               else
                 raise UnknownTypeError, "Unknown type: '#{dyn.fetch('type')}'"
               end
-      clazz.new(dyn, validate: validate)
+      clazz.new(dyn, false, validate)
     end
   end
 end

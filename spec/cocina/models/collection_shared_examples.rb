@@ -57,8 +57,7 @@ RSpec.shared_examples 'it has collection attributes' do
           description: {
             title: [
               {
-                primary: true,
-                titleFull: 'My collection'
+                value: 'My collection'
               }
             ]
           },
@@ -81,8 +80,7 @@ RSpec.shared_examples 'it has collection attributes' do
         expect(tag.to).to eq 'Searchworks'
         expect(tag.release).to be true
 
-        # expect(instance.description.title.first.attributes).to eq(primary: true,
-        #                                                           titleFull: 'My collection')
+        expect(instance.description.title.first.value).to eq('My collection')
 
         link = instance.identification.catalogLinks.first
         expect(link.catalog).to eq 'symphony'

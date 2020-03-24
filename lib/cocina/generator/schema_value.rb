@@ -6,33 +6,11 @@ module Cocina
     class SchemaValue < SchemaBase
       # rubocop:disable Metrics/LineLength
       def generate
-        "#{description}#{example}attribute :#{name.camelize(:lower)}, Types::#{dry_datatype}#{default}#{enum}#{omittable}"
+        "#{description}#{example}attribute :#{name.camelize(:lower)}, Types::#{dry_datatype(schema_doc)}#{default}#{enum}#{omittable}"
       end
       # rubocop:enable Metrics/LineLength
 
       private
-
-      def dry_datatype
-        case schema_doc.type
-        when 'integer'
-          'Strict::Integer'
-        when 'string'
-          string_dry_datatype
-        when 'boolean'
-          'Strict::Bool'
-        else
-          raise "#{schema_doc.type} not supported"
-        end
-      end
-
-      def string_dry_datatype
-        case schema_doc.format
-        when 'date-time'
-          'Params::DateTime'
-        else
-          'Strict::String'
-        end
-      end
 
       def enum
         return '' unless schema_doc.enum

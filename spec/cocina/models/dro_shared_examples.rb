@@ -67,8 +67,8 @@ RSpec.shared_examples 'it has dro attributes' do
           description: {
             title: [
               {
-                primary: true,
-                titleFull: 'My object'
+                value: 'My object',
+                status: 'primary'
               }
             ]
           },
@@ -112,11 +112,11 @@ RSpec.shared_examples 'it has dro attributes' do
         expect(admin.partOfProject).to eq('Google Books')
 
         desc = instance.description
-        expect(desc.title).to all(be_kind_of(Cocina::Models::Title))
+        expect(desc.title).to all(be_kind_of(Cocina::Models::DescriptiveValueRequired))
         expect(desc.title.size).to eq 1
-        title = desc.title.first
-        expect(title.primary).to be true
-        expect(title.titleFull).to eq 'My object'
+        title = desc.title
+        expect(title.first.value).to eq 'My object'
+        expect(title.first.status).to eq 'primary'
 
         expect(instance.geographic.iso19139).to eq '<geoXML>here</geoXML>'
 

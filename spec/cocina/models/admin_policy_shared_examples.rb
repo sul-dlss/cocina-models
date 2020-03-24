@@ -45,8 +45,7 @@ RSpec.shared_examples 'it has admin_policy attributes' do
           description: {
             title: [
               {
-                primary: true,
-                titleFull: 'My admin_policy'
+                value: 'My admin_policy'
               }
             ]
           }
@@ -58,8 +57,7 @@ RSpec.shared_examples 'it has admin_policy attributes' do
         expect(admin_policy.administrative.defaultObjectRights).to eq '<rightsMetadata></rightsMetadata>'
         expect(admin_policy.administrative.registrationWorkflow).to eq 'wasCrawlPreassemblyWF'
 
-        expect(admin_policy.description.title.first.attributes).to eq(primary: true,
-                                                                      titleFull: 'My admin_policy')
+        expect(admin_policy.description.title.first.value).to eq('My admin_policy')
       end
     end
   end

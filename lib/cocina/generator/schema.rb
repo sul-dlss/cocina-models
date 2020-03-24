@@ -5,12 +5,7 @@ module Cocina
     # Class for generating from an openapi schema
     class Schema < SchemaBase
       def schema_properties
-        @schema_properties ||= schema_doc.properties.map do |key, properties_doc|
-          property_class_for(properties_doc).new(properties_doc,
-                                                 key: key,
-                                                 required: schema_doc.requires?(properties_doc),
-                                                 parent: self)
-        end
+        @schema_properties ||= (properties + all_of_properties).uniq(&:key)
       end
 
       def generate
@@ -54,7 +49,7 @@ module Cocina
 
       def types
         type_properties_doc = schema_doc.properties['type']
-        return '' if type_properties_doc.nil?
+        return '' if type_properties_doc.nil? || type_properties_doc.enum.nil?
 
         types_list = type_properties_doc.enum.map { |item| "'#{item}'" }.join(",\n ")
 
@@ -70,7 +65,7 @@ module Cocina
 
         <<~RUBY
           def self.new(attributes = default_attributes, safe = false, validate = true, &block)
-            Validator.validate(self, attributes.with_indifferent_access) if validate
+            Validator.validate(self, attributes.with_indifferent_access) if validate && name
             super(attributes, safe, &block)
                 end
         RUBY
@@ -78,6 +73,32 @@ module Cocina
 
       def validatable?
         !schema_doc.node_context.document.paths["/validate/#{schema_doc.name}"].nil?
+      end
+
+      def properties
+        schema_properties_for(schema_doc)
+      end
+
+      def all_of_properties
+        all_of_properties_for(schema_doc)
+      end
+
+      def all_of_properties_for(doc)
+        return [] if doc.all_of.nil?
+
+        doc.all_of.map do |all_of_schema|
+          # All of for this + recurse
+          schema_properties_for(all_of_schema) + all_of_properties_for(all_of_schema)
+        end.flatten
+      end
+
+      def schema_properties_for(doc)
+        doc.properties.map do |key, properties_doc|
+          property_class_for(properties_doc).new(properties_doc,
+                                                 key: key,
+                                                 required: doc.requires?(properties_doc),
+                                                 parent: self)
+        end
       end
     end
   end
