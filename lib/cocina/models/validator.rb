@@ -4,7 +4,6 @@ module Cocina
   module Models
     # Perform validation against openapi
     class Validator
-      # rubocop:disable Style/ClassVars
       def self.validate(clazz, attributes)
         method_name = clazz.name.split('::').last
         request_operation = root.request_operation(:post, "/validate/#{method_name}")
