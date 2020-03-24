@@ -18,13 +18,6 @@ jobs:
         ./cc-test-reporter before-build
 
     - run:
-        name: Setup Code Climate test-reporter
-        command: |
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-          chmod +x ./cc-test-reporter
-          ./cc-test-reporter before-build
-
-    - run:
         name: upload test coverage report to Code Climate
         command: ./cc-test-reporter after-build --coverage-input-type simplecov --exit-code $?
 
@@ -40,9 +33,6 @@ jobs:
           echo $result
           exit 1
           }
-    # Save test results for timing analysis
-    - store_test_results:
-        path: test_results
 
 workflows:
   version: 2
