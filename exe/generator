@@ -4,6 +4,6 @@
 require 'bundler/setup'
 $LOAD_PATH.unshift 'lib'
 
-require 'cocina/generator'
+require 'cocina/models'
 
 Cocina::Generator::Generator.start(ARGV)
