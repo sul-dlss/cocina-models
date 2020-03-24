@@ -1,11 +1,21 @@
 version: 2.1
 executors:
+  docker-publisher:
+    docker:
+    - image: circleci/buildpack-deps:stretch
 jobs:
   test:
     docker:
     - image: circleci/ruby:2.7.0-node
     steps:
     - checkout
+
+    - run:
+      name: Setup Code Climate test-reporter
+      command: |
+        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        chmod +x ./cc-test-reporter
+        ./cc-test-reporter before-build
 
     - run:
         name: Setup Code Climate test-reporter
