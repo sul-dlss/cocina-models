@@ -320,7 +320,7 @@ components:
               required:
                 - value
             - type: object
-            - required:
+              required:
                 - structuredValue
     Description:
       type: object
