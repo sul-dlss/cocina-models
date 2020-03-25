@@ -5,9 +5,12 @@ require 'zeitwerk'
 require 'dry-struct'
 require 'dry-types'
 require 'json'
-require 'openapi_parser'
-require 'active_support/core_ext/hash/indifferent_access'
 require 'yaml'
+require 'openapi_parser'
+require 'openapi3_parser'
+require 'active_support/core_ext/hash/indifferent_access'
+require 'active_support/core_ext/string'
+require 'thor'
 
 # Help Zeitwerk find some of our classes
 class CocinaModelsInflector < Zeitwerk::Inflector
