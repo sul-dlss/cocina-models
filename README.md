@@ -43,3 +43,9 @@ prmd doc schema.json > schema.md
 ```
 
 Then check in the resulting changes to `docs/schema.json` and `docs/schema.md`
+
+## Using this gem
+
+If you are using this gem in an application that has an API that accepts Cocina models (e.g., SDR API, Dor-Services-App), make sure that the `openapi.yml` for the application includes the schemas that match the schemas in this `openapi.yml`.
+
+This can be accomplished by cutting and pasting these schemas. By convention, these schemas are listed first in the `openapi.yml` of the associated projects, followed by the application-specific schemas.
