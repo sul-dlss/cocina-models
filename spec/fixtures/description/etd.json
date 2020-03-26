@@ -522,7 +522,12 @@
       {
         "name": [
           {
-            "code": "CSt"
+            "code": "CSt",
+            "uri": "http://id.loc.gov/vocabulary/organizations/cst",
+            "source": {
+              "code": "marcorg",
+              "uri": "http://id.loc.gov/vocabulary/organizations/"
+            }
           }
         ],
         "role": [
@@ -534,7 +539,12 @@
       {
         "name": [
           {
-            "code": "CSt"
+            "code": "CSt",
+            "uri": "http://id.loc.gov/vocabulary/organizations/cst",
+            "source": {
+              "code": "marcorg",
+              "uri": "http://id.loc.gov/vocabulary/organizations/"
+            }
           }
         ],
         "role": [
@@ -546,7 +556,13 @@
     ],
     "language": [
       {
-        "code": "eng"
+        "value": "English",
+        "code": "eng",
+        "uri": "http://id.loc.gov/vocabulary/iso639-2/eng",
+        "source": {
+          "code": "iso239-2b",
+          "uri": "http://id.loc.gov/vocabulary/iso639-2"
+        }
       }
     ]
   }
