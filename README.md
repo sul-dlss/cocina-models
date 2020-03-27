@@ -26,6 +26,12 @@ exe/generator generate
 exe/generator generate_schema DRO
 ```
 
+## Testing
+
+The generator is tested via its output when run against `openapi.yml`, viz., the Cocina model classes. Thus, `generate` should be run after any changes to `openapi.yml`.
+
+Beyond what is necessary to test the generator, the Cocina model classes are not tested, i.e., they are assumed to be as specified in `openapi.yml`.
+
 ## Generate Documentation
 
 ```

@@ -5,40 +5,6 @@ require 'spec_helper'
 RSpec.describe Cocina::Models::Description do
   let(:item) { described_class.new(properties) }
 
-  context 'with minimal required properties provided' do
-    let(:properties) do
-      {
-        title: [{
-          value: 'Tractatus Logico-Philosophicus'
-        }]
-      }
-    end
-
-    it 'populates required attributes passed in' do
-      expect(item.title.first.value).to eq('Tractatus Logico-Philosophicus')
-    end
-  end
-
-  context 'with optional properties provided' do
-    let(:properties) do
-      {
-        title: [{
-          value: 'Tractatus Logico-Philosophicus'
-        }],
-        adminMetadata: {
-          language: [{ value: 'eng' }],
-          note: [{ value: 'I think I did this right.' }]
-        }
-
-      }
-    end
-
-    it 'populates required attributes passed in' do
-      expect(item.adminMetadata.language.first.value).to eq('eng')
-      expect(item.adminMetadata.note.first.value).to eq('I think I did this right.')
-    end
-  end
-
   context 'with an etd' do
     let(:properties) { JSON.parse(File.read('spec/fixtures/description/etd.json')) }
 
