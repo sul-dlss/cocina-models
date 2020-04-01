@@ -32,24 +32,6 @@ The generator is tested via its output when run against `openapi.yml`, viz., the
 
 Beyond what is necessary to test the generator, the Cocina model classes are not tested, i.e., they are assumed to be as specified in `openapi.yml`.
 
-## Generate Documentation
-
-```
-gem install prmd
-cd docs
-
-# Combine into a single schema
-prmd combine --meta meta.json  maps/ > schema.json
-
-# Check it’s all good
-prmd verify schema.json
-
-# Build docs
-prmd doc schema.json > schema.md
-```
-
-Then check in the resulting changes to `docs/schema.json` and `docs/schema.md`
-
 ## Using this gem
 
 If you are using this gem in an application that has an API that accepts Cocina models (e.g., SDR API, Dor-Services-App), make sure that the `openapi.yml` for the application includes the schemas that match the schemas in this `openapi.yml`.
