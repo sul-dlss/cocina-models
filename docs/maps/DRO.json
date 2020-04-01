@@ -84,7 +84,7 @@
         "download": {
           "description": "Download level for the DRO metadata.",
           "type": "string",
-          "enum": ["world", "stanford", "location-based", "citation-only", "dark"]
+          "enum": ["world", "stanford", "location-based", "none"]
         },
         "embargo": {
           "description": "Embargo metadata",
