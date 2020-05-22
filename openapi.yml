@@ -959,6 +959,11 @@ components:
       type: object
       additionalProperties: false
       properties:
+        members:
+          description: "Identifiers for Members in their stated Order for the Sequence."
+          type: array
+          items:
+            type: string
         viewingDirection:
           description: The direction that a sequence of canvases should be displayed to the user
           type: string
