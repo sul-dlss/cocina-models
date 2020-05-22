@@ -597,7 +597,6 @@ components:
               type: array
               items:
                 $ref: "#/components/schemas/DescriptiveValue"
-
     File:
       description: Binaries that are the basis of what our domain manages. Binaries here do not include metadata files generated for the domain's own management purposes.
       type: object
@@ -860,7 +859,7 @@ components:
         description:
           $ref: '#/components/schemas/Description'
         identification:
-          $ref: '#/components/schemas/Identification'
+          $ref: '#/components/schemas/RequestIdentification'
         structural:
           $ref: '#/components/schemas/RequestDROStructural'
         geographic:
@@ -869,6 +868,7 @@ components:
         - label
         - type
         - version
+        - identification
     RequestDROStructural:
       description: Structural metadata
       type: object
@@ -954,6 +954,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RequestFile'
+    RequestIdentification:
+      description: Same as a Identification, but requires a sourceId.
+      type: object
+      additionalProperties: false
+      properties:
+        sourceId:
+          type: string
+          example: 'sul:PC0170_s3_Fiesta_Bowl_2012-01-02_210609_2026'
+        catalogLinks:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogLink'
+      required:
+        - sourceId
     Sequence:
       description: A sequence or ordering of resources within a Collection or Object.
       type: object

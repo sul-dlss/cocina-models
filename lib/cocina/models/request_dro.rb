@@ -28,7 +28,7 @@ module Cocina
       attribute :access, DROAccess.optional.meta(omittable: true)
       attribute :administrative, Administrative.optional.meta(omittable: true)
       attribute :description, Description.optional.meta(omittable: true)
-      attribute :identification, Identification.optional.meta(omittable: true)
+      attribute(:identification, RequestIdentification.default { RequestIdentification.new })
       attribute :structural, RequestDROStructural.optional.meta(omittable: true)
       attribute :geographic, Geographic.optional.meta(omittable: true)
 
