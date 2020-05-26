@@ -14,7 +14,7 @@ module Cocina
       # Primary processing label (can be same as title) for a File.
       attribute :label, Types::Strict::String
       # Filename for a file. Can be same as label.
-      attribute :filename, Types::Strict::String.meta(omittable: true)
+      attribute :filename, Types::Strict::String
       # Size of the File (binary) in bytes.
       attribute :size, Types::Strict::Integer.meta(omittable: true)
       # Version for the File within SDR.
