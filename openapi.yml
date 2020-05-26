@@ -642,6 +642,7 @@ components:
       required:
         - externalIdentifier
         - label
+        - filename
         - type
         - version
         - access
