@@ -306,6 +306,10 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Source"
+        identifier:
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
     DescriptiveBasicValue:
       description: Basic value model for descriptive elements.
       type: object
