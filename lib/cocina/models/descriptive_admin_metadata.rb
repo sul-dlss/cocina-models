@@ -7,6 +7,7 @@ module Cocina
       attribute :event, Types::Strict::Array.of(Event).meta(omittable: true)
       attribute :language, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :note, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
+      attribute :standard, Types::Strict::Array.of(Source).meta(omittable: true)
     end
   end
 end

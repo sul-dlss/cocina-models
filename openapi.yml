@@ -301,7 +301,11 @@ components:
         note:
           type: array
           items:
-            $ref: "#/components/schemas/DescriptiveValue"
+            $ref: "#/components/schemas/DescriptiveValue",
+        standard:
+          type: array
+          items:
+            $ref: "#/components/schemas/Source"
     DescriptiveBasicValue:
       description: Value model for descriptive elements without recursive properties.
       type: object
