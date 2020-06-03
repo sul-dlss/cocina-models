@@ -9,6 +9,8 @@ module Cocina
       attribute :uri, Types::Strict::String.meta(omittable: true)
       # String describing the value source.
       attribute :value, Types::Strict::String.meta(omittable: true)
+      # Other information related to the value source.
+      attribute :note, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
     end
   end
 end

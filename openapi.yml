@@ -1024,3 +1024,8 @@ components:
         value:
           description: String describing the value source.
           type: string
+        note:
+          description: Other information related to the value source.
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
