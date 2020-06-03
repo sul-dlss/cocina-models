@@ -1009,8 +1009,8 @@ components:
             - right-to-left
             - left-to-right
     Source:
-      description: Property model for indicating the vocabulary, authority, or other
-        origin for a term, code, or identifier.
+      description: Property model for indicating the vocabulary, authority,
+        standard, syntax, or encoding for a value.
       type: object
       additionalProperties: false
       properties:
