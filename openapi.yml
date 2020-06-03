@@ -420,6 +420,11 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
+        subject:
+          description: Terms associated with the intellectual content of the resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
         purl:
           description: Stanford persistent URL associated with the resource.
           type: string

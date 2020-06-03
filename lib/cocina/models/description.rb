@@ -10,6 +10,7 @@ module Cocina
       attribute :language, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :note, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :identifier, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
+      attribute :subject, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       # Stanford persistent URL associated with the resource.
       attribute :purl, Types::Strict::String.meta(omittable: true)
       attribute :url, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
