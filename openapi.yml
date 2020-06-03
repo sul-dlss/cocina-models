@@ -328,12 +328,12 @@ components:
           description: Descriptive or content standard to which the value conforms.
           type: array
           items:
-            type: string
+            type: "#/components/schemas/Source"
         encoding:
           description: Encoding schema, standard, or syntax to which the value conforms.
           type: array
           items:
-            type: string
+            type: "#/components/schemas/Source"
         source:
           $ref: "#/components/schemas/Source"
         displayLabel:

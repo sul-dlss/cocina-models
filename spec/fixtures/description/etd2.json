@@ -194,7 +194,11 @@
       "date": [
         {
           "value": "2020",
-          "encoding": [ "edtf", "w3cdtf", "marc", "iso8601" ]
+          "encoding": [
+            {
+              "code": "w3cdtf"
+            }
+          ]
         }
       ],
       "note": [
@@ -242,7 +246,11 @@
       "date": [
         {
           "value": "2020",
-          "encoding": [ "edtf", "w3cdtf", "marc", "iso8601" ]
+          "encoding": [
+            {
+              "code": "w3cdtf"
+            }
+          ]
         }
       ],
       "location": [
@@ -311,17 +319,29 @@
         {
           "value": "[Stanford, California]",
           "type": "publication statement place",
-          "standard": [ "RDA" ]
+          "standard": [
+            {
+              "code": "rda"
+            }
+          ]
         },
         {
           "value": "[Stanford University]",
           "type": "publication statement publisher",
-          "standard": [ "RDA" ]
+          "standard": [
+            {
+              "code": "rda"
+            }
+          ]
         },
         {
           "value": "2020",
           "type": "publication statement date",
-          "standard": [ "RDA" ]
+          "standard": [
+            {
+              "code": "rda"
+            }
+          ]
         }
       ]
     },
@@ -330,14 +350,22 @@
       "date": [
         {
           "value": "2020",
-          "encoding": [ "edtf", "w3cdtf", "marc", "iso8601" ]
+          "encoding": [ 
+            {
+              "code": "w3cdtf"
+            }
+          ]
         }
       ],
       "structuredValue": [
         {
           "value": "©2020",
           "type": "copyright statement",
-          "standard": [ "RDA" ]
+          "standard": [
+            {
+              "code": "rda"
+            }
+          ]
         }
       ]
     }
@@ -364,7 +392,11 @@
     {
       "value": "1 online resource",
       "type": "extent",
-      "standard": [ "RDA" ]
+      "standard": [
+        {
+          "code": "rda"
+        }
+      ]
     },
     {
       "value": "text",
@@ -435,7 +467,11 @@
     {
       "value": "Jonathan Spencer Bassen.",
       "type": "statement of responsibility",
-      "standard": [ "RDA" ]
+      "standard": [
+        {
+          "code": "rda"
+        }
+      ]
     }
   ],
   "identifier": [
@@ -480,7 +516,11 @@
         "date": [
           {
             "value": "2020-03-23",
-            "encoding": [ "w3cdtf" ]
+            "encoding": [
+              {
+                "code": "w3cdtf"
+              }
+            ]
           }
         ]
       }
