@@ -9,6 +9,7 @@ module Cocina
       # Status of the contributor relative to other parallel contributors.
       attribute :status, Types::Strict::String.meta(omittable: true)
       attribute :role, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
+      attribute :identifier, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
     end
   end
 end

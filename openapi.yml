@@ -271,6 +271,11 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
+        identifier:
+          description: Identifiers and URIs associated with the agent entity.
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
     DescriptiveAdminMetadata:
       description: Information about this description of the resource.
       type: object
