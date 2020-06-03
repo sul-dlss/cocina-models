@@ -448,6 +448,11 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
+        relatedItem:
+          description: Other resources associated with the described resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/Description"
         marcEncodedData:
           description: Data about the resource represented in MARC fixed fields and codes.
           type: array

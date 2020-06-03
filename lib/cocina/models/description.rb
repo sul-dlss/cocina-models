@@ -14,6 +14,7 @@ module Cocina
       # Stanford persistent URL associated with the resource.
       attribute :purl, Types::Strict::String.meta(omittable: true)
       attribute :url, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
+      attribute :relatedItem, Types::Strict::Array.of(Description).meta(omittable: true)
       attribute :marcEncodedData, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :adminMetadata, DescriptiveAdminMetadata.optional.meta(omittable: true)
 
