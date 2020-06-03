@@ -272,7 +272,12 @@ components:
           items:
             $ref: "#/components/schemas/DescriptiveValue"
         identifier:
-          description: Identifiers and URIs associated with the agent entity.
+          description: Identifiers and URIs associated with the contributor entity.
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
+        note:
+          description: Other information associated with the contributor.
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"

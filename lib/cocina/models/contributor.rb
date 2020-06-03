@@ -10,6 +10,7 @@ module Cocina
       attribute :status, Types::Strict::String.meta(omittable: true)
       attribute :role, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :identifier, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
+      attribute :note, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
     end
   end
 end
