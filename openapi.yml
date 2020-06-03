@@ -326,6 +326,9 @@ components:
             type: string
         source:
           $ref: "#/components/schemas/Source"
+        displayLabel:
+          description: The preferred display label to use for the descriptive element in access systems.
+          type: string
     DescriptiveStructuredValue:
       description: Value model for descriptive elements structured as typed values.
       type: object
