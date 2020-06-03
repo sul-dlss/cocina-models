@@ -337,6 +337,8 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
+        structuredValue:
+          $ref: "#/components/schemas/DescriptiveStructuredValue"
     DescriptiveStructuredValue:
       description: Value model for descriptive elements structured as typed values.
       type: object
@@ -345,14 +347,13 @@ components:
         structuredValue:
           type: array
           items:
-            $ref: "#/components/schemas/DescriptiveBasicValue"
+            $ref: "#/components/schemas/DescriptiveValue"
     DescriptiveValue:
       description: Default value model for descriptive elements.
       type: object
       additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/DescriptiveBasicValue"
-        - $ref: "#/components/schemas/DescriptiveStructuredValue"
         - $ref: "#/components/schemas/AppliesTo"
     DescriptiveValueRequired:
       type: object
