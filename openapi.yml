@@ -250,7 +250,7 @@ components:
             $ref: '#/components/schemas/CatalogLink'
     Contributor:
       description: Property model for describing agents contributing in some way to
-        the creation and history of the resource
+        the creation and history of the resource.
       type: object
       additionalProperties: false
       properties:
@@ -307,7 +307,7 @@ components:
           items:
             $ref: "#/components/schemas/Source"
     DescriptiveBasicValue:
-      description: Value model for descriptive elements without recursive properties.
+      description: Basic value model for descriptive elements.
       type: object
       additionalProperties: false
       properties:
@@ -365,7 +365,7 @@ components:
           items:
             $ref: "#/components/schemas/DescriptiveValue"
     DescriptiveStructuredValue:
-      description: Value model for descriptive elements structured as typed values.
+      description: Value model for descriptive elements structured as typed, ordered values.
       type: object
       additionalProperties: false
       properties:
@@ -420,7 +420,8 @@ components:
           items:
             $ref: "#/components/schemas/DescriptiveValue"
         language:
-          description: Languages, scripts, and notations used in all or part of a resource.
+          description: Languages, scripts, symbolic systems, and notations used in all or
+            part of a resource.
           type: array
           items:
             $ref: "#/components/schemas/Language"
@@ -430,7 +431,7 @@ components:
           items:
             $ref: "#/components/schemas/DescriptiveValue"
         identifier:
-          description: Unique strings associated with the resource.
+          description: Unique strings (including URIs) associated with the resource.
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
