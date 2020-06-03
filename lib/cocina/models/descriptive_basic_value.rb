@@ -18,6 +18,7 @@ module Cocina
       attribute :source, Source.optional.meta(omittable: true)
       attribute :displayLabel, Types::Strict::String.meta(omittable: true)
       attribute :qualifier, Types::Strict::String.meta(omittable: true)
+      attribute :note, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
     end
   end
 end

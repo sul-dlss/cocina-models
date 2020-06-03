@@ -332,6 +332,11 @@ components:
         qualifier:
           description: A term providing information about the circumstances of the statement (e.g., approximate dates).
           type: string
+        note:
+          description: Other information related to the descriptive element.
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
     DescriptiveStructuredValue:
       description: Value model for descriptive elements structured as typed values.
       type: object
