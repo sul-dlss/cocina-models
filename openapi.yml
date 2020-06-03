@@ -339,6 +339,17 @@ components:
             $ref: "#/components/schemas/DescriptiveValue"
         structuredValue:
           $ref: "#/components/schemas/DescriptiveStructuredValue"
+        parallelValue:
+          $ref: "#/components/schemas/DescriptiveParallelValue"
+    DescriptiveParallelValue:
+      description: Value model for multiple representations of the same information (e.g. in different languages).
+      type: object
+      additionalProperties: false
+      properties:
+        parallelValue:
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
     DescriptiveStructuredValue:
       description: Value model for descriptive elements structured as typed values.
       type: object

@@ -20,6 +20,7 @@ module Cocina
       attribute :qualifier, Types::Strict::String.meta(omittable: true)
       attribute :note, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
+      attribute :parallelValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
     end
   end
 end
