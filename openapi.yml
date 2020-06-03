@@ -329,6 +329,9 @@ components:
         displayLabel:
           description: The preferred display label to use for the descriptive element in access systems.
           type: string
+        qualifier:
+          description: A term providing information about the circumstances of the statement (e.g., approximate dates).
+          type: string
     DescriptiveStructuredValue:
       description: Value model for descriptive elements structured as typed values.
       type: object
