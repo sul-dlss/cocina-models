@@ -68,7 +68,7 @@ RSpec.describe Cocina::Models::Description do
 
       expect(item.purl).to eq('http://purl.stanford.edu/hj456dt5655')
 
-      url = item.url.first
+      url = item.access.url.first
       expect(url.value).to eq('https://etd.stanford.edu/view/0000005406')
       expect(url.type).to eq('ETD')
 

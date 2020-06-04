@@ -350,7 +350,7 @@
       "date": [
         {
           "value": "2020",
-          "encoding": [ 
+          "encoding": [
             {
               "code": "w3cdtf"
             }
@@ -481,12 +481,14 @@
     }
   ],
   "purl": "http://purl.stanford.edu/qk672zk2803",
-  "url": [
-    {
-      "value": "https://etd.stanford.edu/view/0000007516",
-      "type": "ETD"
-    }
-  ],
+  "access": {
+    "url": [
+      {
+        "value": "https://etd.stanford.edu/view/0000007516",
+        "type": "ETD"
+      }
+    ]
+  },
   "marcEncodedData": [
     {
       "value": "     nam a       3i",

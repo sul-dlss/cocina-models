@@ -493,12 +493,14 @@
     }
   ],
   "purl": "http://purl.stanford.edu/hj456dt5655",
-  "url": [
-    {
-      "value": "https://etd.stanford.edu/view/0000005406",
-      "type": "ETD"
-    }
-  ],
+  "access": {
+    "url": [
+      {
+        "value": "https://etd.stanford.edu/view/0000005406",
+        "type": "ETD"
+      }
+    ]
+  },
   "marcEncodedData": [
     {
       "value": "     nam a       3i",
