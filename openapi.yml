@@ -851,6 +851,7 @@ components:
       properties:
         type:
           description: The relationship of the related resource to the described resource.
+          type: string
         title:
           description: Titles of the related resource.
           type: array
