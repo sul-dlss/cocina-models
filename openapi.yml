@@ -333,6 +333,8 @@ components:
           description: Stanford persistent URL associated with the resource.
           type: string
           format: uri
+        access:
+          $ref: "#/components/schemas/DescriptiveAccessMetadata"
         url:
           description: URLs where the resource may be accessed in full or part.
           type: array
@@ -352,6 +354,31 @@ components:
           $ref: "#/components/schemas/DescriptiveAdminMetadata"
       required:
         - title
+    DescriptiveAccessMetadata:
+      description: Information about how to access the digital and physical versions of the object.
+      type: object
+      additionalProperties: false
+      properties:
+        url:
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
+        physicalLocation:
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
+        accessContact:
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
+        digitalRepository:
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
+        note:
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
     DescriptiveAdminMetadata:
       description: Information about this description of the resource.
       type: object
