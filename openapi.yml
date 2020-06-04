@@ -320,7 +320,7 @@ components:
           items:
             $ref: "#/components/schemas/DescriptiveValue"
         identifier:
-          description: Unique strings (including URIs) associated with the resource.
+          description: Identifiers and URIs associated with the resource.
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
@@ -350,56 +350,68 @@ components:
       required:
         - title
     DescriptiveAccessMetadata:
-      description: Information about how to access the digital and physical versions of the object.
+      description: Information about how to access digital and physical versions of the object.
       type: object
       additionalProperties: false
       properties:
         url:
+          description: URLs where the resource may be accessed in full or part.
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
         physicalLocation:
+          description: Location of a physical version of the resource.
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
         accessContact:
+          description: The library, organization, or person responsible for access to the resource.
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
         digitalRepository:
+          description: The digital repositories that hold the resource.
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
         note:
+          description: Other information related to accessing the resource.
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
     DescriptiveAdminMetadata:
-      description: Information about this description of the resource.
+      description: Information about this resource description.
       type: object
       additionalProperties: false
       properties:
         contributor:
+          description: Contributors to this resource description.
           type: array
           items:
             $ref: "#/components/schemas/Contributor"
         event:
+          description: Events in the history of this resource description.
           type: array
           items:
             $ref: "#/components/schemas/Event"
         language:
+          description: Languages, scripts, symbolic systems, and notations used
+            in this resource description.
           type: array
           items:
             $ref: "#/components/schemas/Language"
         note:
+          description: Other information related to this resource description.
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue",
         standard:
+          description: Descriptive or content standards to which this resource description conforms.
           type: array
           items:
             $ref: "#/components/schemas/Source"
         identifier:
+          description: Identifiers associated with this resource description.
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
@@ -420,7 +432,7 @@ components:
               description: Type of value provided by the descriptive element.
               type: string
             status:
-              description: Status of the descriptive element relative to other instances
+              description: Status of the descriptive element value relative to other instances
                 of the element.
               type: string
             code:
@@ -431,12 +443,12 @@ components:
               type: string
               format: uri
             standard:
-              description: Descriptive or content standard to which the value conforms.
+              description: Descriptive or content standards to which the value conforms.
               type: array
               items:
                 type: "#/components/schemas/Source"
             encoding:
-              description: Encoding schema, standard, or syntax to which the value conforms.
+              description: Encoding schemas, standards, or syntax to which the value conforms.
               type: array
               items:
                 type: "#/components/schemas/Source"
@@ -801,6 +813,8 @@ components:
             additionalProperties: false
             properties:
               script:
+                description: An alphabet or other notation used to represent a
+                  language or other symbolic system associated with the resource.
                 $ref: '#/components/schemas/DescriptiveValue'
     MessageDigest:
       description: The output of the message digest algorithm.
