@@ -314,51 +314,52 @@ components:
       description: Basic value model for descriptive elements.
       type: object
       additionalProperties: false
-      properties:
-        value:
-          description: String value of the descriptive element.
-          type: string
-        type:
-          description: Type of value provided by the descriptive element.
-          type: string
-        status:
-          description: Status of the descriptive element relative to other instances
-            of the element.
-          type: string
-        code:
-          description: Code value of the descriptive element.
-          type: string
-        uri:
-          description: URI value of the descriptive element.
-          type: string
-          format: uri
-        standard:
-          description: Descriptive or content standard to which the value conforms.
-          type: array
-          items:
-            type: "#/components/schemas/Source"
-        encoding:
-          description: Encoding schema, standard, or syntax to which the value conforms.
-          type: array
-          items:
-            type: "#/components/schemas/Source"
-        source:
-          $ref: "#/components/schemas/Source"
-        displayLabel:
-          description: The preferred display label to use for the descriptive element in access systems.
-          type: string
-        qualifier:
-          description: A term providing information about the circumstances of the statement (e.g., approximate dates).
-          type: string
-        note:
-          description: Other information related to the descriptive element.
-          type: array
-          items:
-            $ref: "#/components/schemas/DescriptiveValue"
-        structuredValue:
-          $ref: "#/components/schemas/DescriptiveStructuredValue"
-        parallelValue:
-          $ref: "#/components/schemas/DescriptiveParallelValue"
+      allOf:
+        - $ref: "#/components/schemas/DescriptiveStructuredValue"
+        - $ref: "#/components/schemas/DescriptiveParallelValue"
+        - type: object
+          additionalProperties: false
+          properties:
+            value:
+              description: String value of the descriptive element.
+              type: string
+            type:
+              description: Type of value provided by the descriptive element.
+              type: string
+            status:
+              description: Status of the descriptive element relative to other instances
+                of the element.
+              type: string
+            code:
+              description: Code value of the descriptive element.
+              type: string
+            uri:
+              description: URI value of the descriptive element.
+              type: string
+              format: uri
+            standard:
+              description: Descriptive or content standard to which the value conforms.
+              type: array
+              items:
+                type: "#/components/schemas/Source"
+            encoding:
+              description: Encoding schema, standard, or syntax to which the value conforms.
+              type: array
+              items:
+                type: "#/components/schemas/Source"
+            source:
+              $ref: "#/components/schemas/Source"
+            displayLabel:
+              description: The preferred display label to use for the descriptive element in access systems.
+              type: string
+            qualifier:
+              description: A term providing information about the circumstances of the statement (e.g., approximate dates).
+              type: string
+            note:
+              description: Other information related to the descriptive element.
+              type: array
+              items:
+                $ref: "#/components/schemas/DescriptiveValue"
     DescriptiveParallelValue:
       description: Value model for multiple representations of the same information (e.g. in different languages).
       type: object
