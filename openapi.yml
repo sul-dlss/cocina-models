@@ -335,11 +335,11 @@ components:
           format: uri
         access:
           $ref: "#/components/schemas/DescriptiveAccessMetadata"
-        relatedItem:
+        relatedResource:
           description: Other resources associated with the described resource.
           type: array
           items:
-            $ref: "#/components/schemas/Description"
+            $ref: "#/components/schemas/RelatedResource"
         marcEncodedData:
           description: Data about the resource represented in MARC fixed fields and codes.
           type: array
@@ -844,6 +844,62 @@ components:
         width:
           description: Width in pixels
           type: integer
+    RelatedResource:
+      description: Other resource associated with the described resource.
+      type: object
+      additionalProperties: false
+      properties:
+        type:
+          description: The relationship of the related resource to the described resource.
+        title:
+          description: Titles of the related resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
+        contributor:
+          description: Agents contributing in some way to the creation and history of the
+            related resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/Contributor"
+        event:
+          description: Events in the history of the related resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/Event"
+        form:
+          description: Characteristics of the related resource's physical, digital, and intellectual
+            form and genre.
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
+        language:
+          description: Languages, scripts, symbolic systems, and notations used in all or
+            part of a related resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/Language"
+        note:
+          description: Additional information relevant to a related resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
+        identifier:
+          description: Identifiers and URIs associated with the related resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
+        subject:
+          description: Terms associated with the intellectual content of the related resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
+        purl:
+          description: Stanford persistent URL associated with the related resource.
+          type: string
+          format: uri
+        access:
+          $ref: "#/components/schemas/DescriptiveAccessMetadata"
     ReleaseTag:
       description: A tag that indicates the item or collection should be released.
       type: object
