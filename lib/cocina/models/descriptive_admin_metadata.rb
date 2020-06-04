@@ -5,7 +5,7 @@ module Cocina
     class DescriptiveAdminMetadata < Struct
       attribute :contributor, Types::Strict::Array.of(Contributor).meta(omittable: true)
       attribute :event, Types::Strict::Array.of(Event).meta(omittable: true)
-      attribute :language, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
+      attribute :language, Types::Strict::Array.of(Language).meta(omittable: true)
       attribute :note, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :standard, Types::Strict::Array.of(Source).meta(omittable: true)
       attribute :identifier, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)

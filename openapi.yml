@@ -297,7 +297,7 @@ components:
         language:
           type: array
           items:
-            $ref: "#/components/schemas/DescriptiveValue"
+            $ref: "#/components/schemas/Language"
         note:
           type: array
           items:
