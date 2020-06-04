@@ -446,12 +446,12 @@ components:
               description: Descriptive or content standards to which the value conforms.
               type: array
               items:
-                type: "#/components/schemas/Source"
+                $ref: "#/components/schemas/Source"
             encoding:
               description: Encoding schemas, standards, or syntax to which the value conforms.
               type: array
               items:
-                type: "#/components/schemas/Source"
+                $ref: "#/components/schemas/Source"
             source:
               $ref: "#/components/schemas/Source"
             displayLabel:
@@ -805,17 +805,17 @@ components:
     Language:
       description: Languages, scripts, symbolic systems, and notations used in all
         or part of a resource.
-        type: object
-        additionalProperties: false
-        allOf:
-          - $ref: '#/components/schemas/DescriptiveValue'
-          - type: object
-            additionalProperties: false
-            properties:
-              script:
-                description: An alphabet or other notation used to represent a
-                  language or other symbolic system associated with the resource.
-                $ref: '#/components/schemas/DescriptiveValue'
+      type: object
+      additionalProperties: false
+      allOf:
+        - $ref: '#/components/schemas/DescriptiveValue'
+        - type: object
+          additionalProperties: false
+          properties:
+            script:
+              description: An alphabet or other notation used to represent a
+                language or other symbolic system associated with the resource.
+              $ref: '#/components/schemas/DescriptiveValue'
     MessageDigest:
       description: The output of the message digest algorithm.
       type: object
