@@ -404,7 +404,7 @@ components:
           description: Other information related to this resource description.
           type: array
           items:
-            $ref: "#/components/schemas/DescriptiveValue",
+            $ref: "#/components/schemas/DescriptiveValue"
         standard:
           description: Descriptive or content standards to which this resource description conforms.
           type: array
