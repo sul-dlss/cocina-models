@@ -281,6 +281,77 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
+    Description:
+      type: object
+      additionalProperties: false
+      properties:
+        title:
+          description: Titles of the resource.
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/DescriptiveValueRequired"
+        contributor:
+          description: Agents contributing in some way to the creation and history of the
+            resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/Contributor"
+        event:
+          description: Events in the history of the resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/Event"
+        form:
+          description: Characteristics of the resource's physical, digital, and intellectual
+            form and genre.
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
+        language:
+          description: Languages, scripts, symbolic systems, and notations used in all or
+            part of a resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/Language"
+        note:
+          description: Additional information relevant to a resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
+        identifier:
+          description: Unique strings (including URIs) associated with the resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
+        subject:
+          description: Terms associated with the intellectual content of the resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
+        purl:
+          description: Stanford persistent URL associated with the resource.
+          type: string
+          format: uri
+        url:
+          description: URLs where the resource may be accessed in full or part.
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
+        relatedItem:
+          description: Other resources associated with the described resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/Description"
+        marcEncodedData:
+          description: Data about the resource represented in MARC fixed fields and codes.
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
+        adminMetadata:
+          $ref: "#/components/schemas/DescriptiveAdminMetadata"
+      required:
+        - title
     DescriptiveAdminMetadata:
       description: Information about this description of the resource.
       type: object
@@ -397,77 +468,6 @@ components:
             - type: object
               required:
                 - structuredValue
-    Description:
-      type: object
-      additionalProperties: false
-      properties:
-        title:
-          description: Titles of the resource.
-          type: array
-          minItems: 1
-          items:
-            $ref: "#/components/schemas/DescriptiveValueRequired"
-        contributor:
-          description: Agents contributing in some way to the creation and history of the
-            resource.
-          type: array
-          items:
-            $ref: "#/components/schemas/Contributor"
-        event:
-          description: Events in the history of the resource.
-          type: array
-          items:
-            $ref: "#/components/schemas/Event"
-        form:
-          description: Characteristics of the resource's physical, digital, and intellectual
-            form and genre.
-          type: array
-          items:
-            $ref: "#/components/schemas/DescriptiveValue"
-        language:
-          description: Languages, scripts, symbolic systems, and notations used in all or
-            part of a resource.
-          type: array
-          items:
-            $ref: "#/components/schemas/Language"
-        note:
-          description: Additional information relevant to a resource.
-          type: array
-          items:
-            $ref: "#/components/schemas/DescriptiveValue"
-        identifier:
-          description: Unique strings (including URIs) associated with the resource.
-          type: array
-          items:
-            $ref: "#/components/schemas/DescriptiveValue"
-        subject:
-          description: Terms associated with the intellectual content of the resource.
-          type: array
-          items:
-            $ref: "#/components/schemas/DescriptiveValue"
-        purl:
-          description: Stanford persistent URL associated with the resource.
-          type: string
-          format: uri
-        url:
-          description: URLs where the resource may be accessed in full or part.
-          type: array
-          items:
-            $ref: "#/components/schemas/DescriptiveValue"
-        relatedItem:
-          description: Other resources associated with the described resource.
-          type: array
-          items:
-            $ref: "#/components/schemas/Description"
-        marcEncodedData:
-          description: Data about the resource represented in MARC fixed fields and codes.
-          type: array
-          items:
-            $ref: "#/components/schemas/DescriptiveValue"
-        adminMetadata:
-          $ref: "#/components/schemas/DescriptiveAdminMetadata"
-      required:
-        - title
     DRO:
       description: Domain-defined abstraction of a 'work'. Digital Repository Objects' abstraction is describable for our domain’s purposes, i.e. for management needs within our system.
       type: object
