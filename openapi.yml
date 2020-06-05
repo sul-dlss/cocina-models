@@ -1169,9 +1169,15 @@ components:
           type: string
         uri:
           description: URI for the standard or encoding.
+          type: string
+          format: uri
         value:
           description: String describing the standard or encoding.
+          type: string
         note:
           description: Other information related to the standard or encoding.
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
         source:
           $ref: "#/components/schemas/Source"
