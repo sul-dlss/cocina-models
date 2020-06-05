@@ -142,6 +142,8 @@ components:
           description: Administrative or Internal project this resource is a part of
           example: Google Books
           type: string
+      required:
+        - hasAdminPolicy
     AdminPolicy:
       type: object
       additionalProperties: false
@@ -162,11 +164,11 @@ components:
         description:
           $ref: '#/components/schemas/Description'
       required:
+        - administrative
         - externalIdentifier
         - label
         - type
         - version
-        - administrative
     AdminPolicyAdministrative:
       type: object
       additionalProperties: false
@@ -178,6 +180,8 @@ components:
           type: string
         hasAdminPolicy:
           type: string
+      required:
+        - hasAdminPolicy
     AppliesTo:
       description: Property model for indicating the parts, aspects, or versions of the resource to which a
         descriptive element is applicable.
@@ -461,11 +465,12 @@ components:
         geographic:
           $ref: '#/components/schemas/Geographic'
       required:
+        - access
+        - administrative
         - externalIdentifier
         - label
         - type
         - version
-        - access
     DROAccess:
       type: object
       additionalProperties: false
@@ -790,10 +795,10 @@ components:
         description:
           $ref: '#/components/schemas/Description'
       required:
+        - administrative
         - label
         - type
         - version
-        - administrative
     RequestCollection:
       description: Same as a Collection, but doesn't have an externalIdentifier as one will be created
       type: object
@@ -821,10 +826,11 @@ components:
         identification:
           $ref: '#/components/schemas/CollectionIdentification'
       required:
+        - access
+        - administrative
         - label
         - type
         - version
-        - access
     RequestDRO:
       description: A request to create a DRO.  This has the same general structure as a DRO but doesn't have externalIdentifier and doesn't require the access subschema. If no access subschema is provided, these values will be inherited from the AdminPolicy.
       type: object
@@ -866,10 +872,12 @@ components:
         geographic:
           $ref: '#/components/schemas/Geographic'
       required:
+        - access
+        - administrative
+        - identification
         - label
         - type
         - version
-        - identification
     RequestDROStructural:
       description: Structural metadata
       type: object

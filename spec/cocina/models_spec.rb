@@ -47,7 +47,8 @@ RSpec.describe Cocina::Models do
           'externalIdentifier' => 'druid:bc123df4567',
           'label' => 'bar',
           'version' => 5,
-          'access' => {}
+          'access' => {},
+          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
         }
       end
 
@@ -61,7 +62,7 @@ RSpec.describe Cocina::Models do
           'externalIdentifier' => 'druid:bc123df4567',
           'label' => 'bar',
           'version' => 5,
-          'administrative' => {}
+          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
         }
       end
 
@@ -98,7 +99,8 @@ RSpec.describe Cocina::Models do
           'type' => 'http://cocina.sul.stanford.edu/models/exhibit.jsonld',
           'label' => 'bar',
           'version' => 5,
-          'access' => {}
+          'access' => {},
+          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
         }
       end
 
@@ -112,7 +114,8 @@ RSpec.describe Cocina::Models do
           'label' => 'bar',
           'version' => 5,
           'access' => {},
-          'identification' => { 'sourceId' => 'sul:123' }
+          'identification' => { 'sourceId' => 'sul:123' },
+          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
         }
       end
 
@@ -125,7 +128,7 @@ RSpec.describe Cocina::Models do
           'type' => 'http://cocina.sul.stanford.edu/models/admin_policy.jsonld',
           'label' => 'bar',
           'version' => 5,
-          'administrative' => {}
+          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
         }
       end
 

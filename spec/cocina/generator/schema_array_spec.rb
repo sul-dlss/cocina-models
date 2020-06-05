@@ -33,7 +33,8 @@ RSpec.describe Cocina::Generator::SchemaArray do
                                              to: 'Searchworks',
                                              release: false
                                            }
-                                         ])
+                                         ],
+                                         hasAdminPolicy: 'druid:bc123df4567')
     end
 
     it 'maps schemas' do

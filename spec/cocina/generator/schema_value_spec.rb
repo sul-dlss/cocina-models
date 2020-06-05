@@ -12,7 +12,8 @@ RSpec.describe Cocina::Generator::SchemaValue do
                                        label: 'The Prince',
                                        type: Cocina::Models::Vocab.book,
                                        version: 5,
-                                       identification: { sourceId: 'sul:123' }
+                                       identification: { sourceId: 'sul:123' },
+                                       administrative: { hasAdminPolicy: 'druid:bc123df4567' }
                                      }, false, false)
     end
 
@@ -28,7 +29,8 @@ RSpec.describe Cocina::Generator::SchemaValue do
                                        label: 'The Blue and Brown Books',
                                        type: Cocina::Models::Vocab.book,
                                        version: 5,
-                                       identification: { sourceId: 'sul:123' }
+                                       identification: { sourceId: 'sul:123' },
+                                       administrative: { hasAdminPolicy: 'druid:bc123df4567' }
                                      }, false, false)
     end
 
