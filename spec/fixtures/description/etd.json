@@ -206,11 +206,9 @@
       "date": [
         {
           "value": "2017",
-          "encoding": [
-            {
+          "encoding": {
               "code": "w3cdtf"
-            }
-          ]
+          }
         }
       ],
       "note": [
@@ -258,11 +256,9 @@
       "date": [
         {
           "value": "2017",
-          "encoding": [
-            {
+          "encoding": {
               "code": "w3cdtf"
-            }
-          ]
+          }
         }
       ],
       "location": [
@@ -331,29 +327,23 @@
         {
           "value": "[Stanford, California]",
           "type": "publication statement place",
-          "standard": [
-            {
+          "standard": {
               "code": "rda"
-            }
-          ]
+          }
         },
         {
           "value": "[Stanford University]",
           "type": "publication statement publisher",
-          "standard": [
-            {
+          "standard": {
               "code": "rda"
-            }
-          ]
+          }
         },
         {
           "value": "2017",
           "type": "publication statement date",
-          "standard": [
-            {
+          "standard": {
               "code": "rda"
-            }
-          ]
+          }
         }
       ]
     },
@@ -362,22 +352,18 @@
       "date": [
         {
           "value": "2017",
-          "encoding": [
-            {
+          "encoding": {
               "code": "w3cdtf"
-            }
-          ]
+          }
         }
       ],
       "structuredValue": [
         {
           "value": "©2017",
           "type": "copyright statement",
-          "standard": [
-            {
+          "standard": {
               "code": "rda"
-            }
-          ]
+          }
         }
       ]
     }
@@ -404,11 +390,9 @@
     {
       "value": "1 online resource",
       "type": "extent",
-      "standard": [
-        {
+      "standard": {
           "code": "rda"
-        }
-      ]
+      }
     },
     {
       "value": "text",
@@ -479,11 +463,9 @@
     {
       "value": "Akitada Kasahara, Jr.",
       "type": "statement of responsibility",
-      "standard": [
-        {
+      "standard": {
           "code": "rda"
-        }
-      ]
+      }
     }
   ],
   "identifier": [
@@ -530,11 +512,9 @@
         "date": [
           {
             "value": "2017-06-15",
-            "encoding": [
-              {
+            "encoding": {
                 "code": "w3cdtf"
-              }
-            ]
+            }
           }
         ]
       },
@@ -543,11 +523,9 @@
         "date": [
           {
             "value": "2020-03-23",
-            "encoding": [
-              {
+            "encoding": {
                 "code": "w3cdtf"
-              }
-            ]
+            }
           }
         ]
       }

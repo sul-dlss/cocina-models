@@ -406,10 +406,8 @@ components:
           items:
             $ref: "#/components/schemas/DescriptiveValue"
         standard:
-          description: Descriptive or content standards to which this resource description conforms.
-          type: array
-          items:
-            $ref: "#/components/schemas/Source"
+          description: Descriptive or content standard to which this resource description conforms.
+          $ref: "#/components/schemas/Standard"
         identifier:
           description: Identifiers associated with this resource description.
           type: array
@@ -443,15 +441,11 @@ components:
               type: string
               format: uri
             standard:
-              description: Descriptive or content standards to which the value conforms.
-              type: array
-              items:
-                $ref: "#/components/schemas/Source"
+              description: Descriptive or content standard to which the value conforms.
+              $ref: "#/components/schemas/Standard"
             encoding:
-              description: Encoding schemas, standards, or syntax to which the value conforms.
-              type: array
-              items:
-                $ref: "#/components/schemas/Source"
+              description: Encoding schema, standard, or syntax to which the value conforms.
+              $ref: "#/components/schemas/Standard"
             source:
               $ref: "#/components/schemas/Source"
             displayLabel:
@@ -1144,8 +1138,8 @@ components:
             - right-to-left
             - left-to-right
     Source:
-      description: Property model for indicating the vocabulary, authority,
-        standard, syntax, or encoding for a value.
+      description: Property model for indicating the vocabulary, authority, or
+        other origin for a term, code, or identifier.
       type: object
       additionalProperties: false
       properties:
@@ -1164,3 +1158,20 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
+    Standard:
+      description: Property model for indicating the encoding, standard, or syntax
+        to which a value conforms.
+      type: object
+      additionalProperties: false
+      properties:
+        code:
+          description: Code representing the standard or encoding.
+          type: string
+        uri:
+          description: URI for the standard or encoding.
+        value:
+          description: String describing the standard or encoding.
+        note:
+          description: Other information related to the standard or encoding.
+        source:
+          $ref: "#/components/schemas/Source"

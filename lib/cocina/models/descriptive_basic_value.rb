@@ -13,8 +13,8 @@ module Cocina
       attribute :code, Types::Strict::String.meta(omittable: true)
       # URI value of the descriptive element.
       attribute :uri, Types::Strict::String.meta(omittable: true)
-      attribute :standard, Types::Strict::Array.of(Source).meta(omittable: true)
-      attribute :encoding, Types::Strict::Array.of(Source).meta(omittable: true)
+      attribute :standard, Standard.optional.meta(omittable: true)
+      attribute :encoding, Standard.optional.meta(omittable: true)
       attribute :source, Source.optional.meta(omittable: true)
       attribute :displayLabel, Types::Strict::String.meta(omittable: true)
       attribute :qualifier, Types::Strict::String.meta(omittable: true)
