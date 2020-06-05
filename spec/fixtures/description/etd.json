@@ -9,14 +9,13 @@
     {
       "name": [
         {
-          "value": "Kasahara, Akitada, Jr",
-          "type": "inverted name"
+          "value": "Kasahara, Akitada, Jr"
         },
         {
           "structuredValue": [
             {
               "value": "Kasahara, Akitada",
-              "type": "inverted name"
+              "type": "name"
             },
             {
               "value": "Jr",
@@ -49,8 +48,7 @@
     {
       "name": [
         {
-          "value": "Duffie, Darrell",
-          "type": "inverted name"
+          "value": "Duffie, Darrell"
         }
       ],
       "type": "person",
@@ -82,8 +80,7 @@
     {
       "name": [
         {
-          "value": "Strebulaev, Ilya A",
-          "type": "inverted name"
+          "value": "Strebulaev, Ilya A"
         }
       ],
       "type": "person",
@@ -115,8 +112,7 @@
     {
       "name": [
         {
-          "value": "Zwiebel, Jeffrey",
-          "type": "inverted name"
+          "value": "Zwiebel, Jeffrey"
         }
       ],
       "type": "person",
