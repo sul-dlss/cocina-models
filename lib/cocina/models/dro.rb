@@ -31,7 +31,7 @@ module Cocina
       # Version for the DRO within SDR.
       attribute :version, Types::Strict::Integer
       attribute(:access, DROAccess.default { DROAccess.new })
-      attribute :administrative, Administrative.optional.meta(omittable: true)
+      attribute(:administrative, Administrative.default { Administrative.new })
       attribute :description, Description.optional.meta(omittable: true)
       attribute :identification, Identification.optional.meta(omittable: true)
       attribute :structural, DROStructural.optional.meta(omittable: true)
