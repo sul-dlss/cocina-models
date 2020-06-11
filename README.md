@@ -32,6 +32,17 @@ The generator is tested via its output when run against `openapi.yml`, viz., the
 
 Beyond what is necessary to test the generator, the Cocina model classes are not tested, i.e., they are assumed to be as specified in `openapi.yml`.
 
+## Releasing
+
+The release process is much like any other gem. First bump the version in `lib/cocina/models/version.rb`, and commit the result. Then run:
+```
+bundle exec rake release
+```
+which pushes the gem to rubygems.org.  Next write up the release notes: https://github.com/sul-dlss/cocina-models/releases .
+
+Finally, you must release versions of [sdr-client](https://github.com/sul-dlss/sdr-client) and [dor-services-client](https://github.com/sul-dlss/dor-services-client/) pinned to this version because [Argo](https://github.com/sul-dlss/argo) depends on both of those. When [dor-services-app](https://github.com/sul-dlss/dor-services-app) is updated to use the new models (via the auto-update script), the clients must be updated at the same time or there is risk of models produced by dor-services-app not being acceptable to the clients.
+
+
 ## Using this gem
 
 If you are using this gem in an application that has an API that accepts Cocina models (e.g., SDR API, Dor-Services-App), make sure that the `openapi.yml` for the application includes the schemas that match the schemas in this `openapi.yml`.
