@@ -142,6 +142,8 @@ components:
           description: Administrative or Internal project this resource is a part of
           example: Google Books
           type: string
+      required:
+        - hasAdminPolicy
     AdminPolicy:
       type: object
       additionalProperties: false
@@ -162,11 +164,11 @@ components:
         description:
           $ref: '#/components/schemas/Description'
       required:
+        - administrative
         - externalIdentifier
         - label
         - type
         - version
-        - administrative
     AdminPolicyAdministrative:
       type: object
       additionalProperties: false
@@ -178,6 +180,8 @@ components:
           type: string
         hasAdminPolicy:
           type: string
+      required:
+        - hasAdminPolicy
     AppliesTo:
       description: Property model for indicating the parts, aspects, or versions of the resource to which a
         descriptive element is applicable.
@@ -542,11 +546,12 @@ components:
         geographic:
           $ref: '#/components/schemas/Geographic'
       required:
+        - access
+        - administrative
         - externalIdentifier
         - label
         - type
         - version
-        - access
     DROAccess:
       type: object
       additionalProperties: false
@@ -791,6 +796,13 @@ components:
       properties:
         sourceId:
           type: string
+          description: >
+            Unique identifier in some other system. This is because a large proportion of what is deposited in SDR, 
+            historically and currently, are representations of objects that are also represented in other systems. 
+            For example, digitized paper and A/V collections have physical manifestations, and those physical objects are managed 
+            in systems that have their own identifiers. Similarly, books have barcodes, archival materials have collection numbers 
+            and physical locations, etc. The sourceId allows determining if an item has been deposited before and where to 
+            look for the original item if you're looking at its SDR representation.
           example: 'sul:PC0170_s3_Fiesta_Bowl_2012-01-02_210609_2026'
         catalogLinks:
           type: array
@@ -942,10 +954,10 @@ components:
         description:
           $ref: '#/components/schemas/Description'
       required:
+        - administrative
         - label
         - type
         - version
-        - administrative
     RequestCollection:
       description: Same as a Collection, but doesn't have an externalIdentifier as one will be created
       type: object
@@ -973,10 +985,11 @@ components:
         identification:
           $ref: '#/components/schemas/CollectionIdentification'
       required:
+        - access
+        - administrative
         - label
         - type
         - version
-        - access
     RequestDRO:
       description: A request to create a DRO.  This has the same general structure as a DRO but doesn't have externalIdentifier and doesn't require the access subschema. If no access subschema is provided, these values will be inherited from the AdminPolicy.
       type: object
@@ -1018,10 +1031,12 @@ components:
         geographic:
           $ref: '#/components/schemas/Geographic'
       required:
+        - access
+        - administrative
+        - identification
         - label
         - type
         - version
-        - identification
     RequestDROStructural:
       description: Structural metadata
       type: object
@@ -1114,6 +1129,13 @@ components:
       properties:
         sourceId:
           type: string
+          description: >
+            Unique identifier in some other system. This is because a large proportion of what is deposited in SDR, 
+            historically and currently, are representations of objects that are also represented in other systems. 
+            For example, digitized paper and A/V collections have physical manifestations, and those physical objects are managed 
+            in systems that have their own identifiers. Similarly, books have barcodes, archival materials have collection numbers 
+            and physical locations, etc. The sourceId allows determining if an item has been deposited before and where to 
+            look for the original item if you're looking at its SDR representation.
           example: 'sul:PC0170_s3_Fiesta_Bowl_2012-01-02_210609_2026'
         catalogLinks:
           type: array

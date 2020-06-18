@@ -11,7 +11,7 @@ RSpec.describe Cocina::Models::Validator do
         label: 'My admin policy',
         type: Cocina::Models::Vocab.admin_policy,
         version: 1,
-        administrative: {}
+        administrative: { hasAdminPolicy: 'druid:bc123df4567' }
       )
     end
 
@@ -43,7 +43,7 @@ RSpec.describe Cocina::Models::Validator do
                                         label: 'My admin policy',
                                         type: Cocina::Models::Vocab.admin_policy,
                                         version: 1,
-                                        administrative: {}
+                                        administrative: { hasAdminPolicy: 'druid:bc123df4567' }
                                       }, false, false)
     end
 
