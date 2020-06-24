@@ -16,7 +16,6 @@ module Cocina
       attribute :purl, Types::Strict::String.meta(omittable: true)
       attribute :access, DescriptiveAccessMetadata.optional.meta(omittable: true)
 
-      end
     end
   end
 end
