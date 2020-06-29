@@ -8,7 +8,7 @@ RSpec.describe Cocina::Generator::SchemaArray do
   # context 'when an array of datatypes' do
   #   # DescriptiveBasicValue.standard is an array of strings
   #   let(:value) { Cocina::Models::DescriptiveBasicValue.new(standard: %w[marc bibframe]) }
-  # 
+  #
   #   it 'maps datatypes' do
   #     expect(value.standard).to eq(%w[marc bibframe])
   #   end

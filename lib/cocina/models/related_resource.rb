@@ -15,7 +15,6 @@ module Cocina
       # Stanford persistent URL associated with the resource.
       attribute :purl, Types::Strict::String.meta(omittable: true)
       attribute :access, DescriptiveAccessMetadata.optional.meta(omittable: true)
-
     end
   end
 end
