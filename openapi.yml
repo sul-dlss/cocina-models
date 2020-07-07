@@ -411,7 +411,7 @@ components:
           items:
             $ref: "#/components/schemas/DescriptiveValue"
         standard:
-          description: Descriptive or content standard to which this resource description conforms.
+          # description: Descriptive or content standard to which this resource description conforms.
           $ref: "#/components/schemas/Standard"
         identifier:
           description: Identifiers associated with this resource description.
@@ -421,7 +421,8 @@ components:
     DescriptiveBasicValue:
       description: Basic value model for descriptive elements.
       type: object
-      additionalProperties: false
+      # additionalProperties breaks the validator, unclear as to why.
+      # additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/DescriptiveStructuredValue"
         - $ref: "#/components/schemas/DescriptiveParallelValue"
@@ -446,10 +447,10 @@ components:
               type: string
               format: uri
             standard:
-              description: Descriptive or content standard to which the value conforms.
+              # description: Descriptive or content standard to which the value conforms.
               $ref: "#/components/schemas/Standard"
             encoding:
-              description: Encoding schema, standard, or syntax to which the value conforms.
+              # description: Encoding schema, standard, or syntax to which the value conforms.
               $ref: "#/components/schemas/Standard"
             source:
               $ref: "#/components/schemas/Source"
@@ -817,12 +818,14 @@ components:
       allOf:
         - $ref: '#/components/schemas/DescriptiveValue'
         - type: object
-          additionalProperties: false
+          # additionalProperties breaks the validator, presumably because it can't
+          # conform to other schemas (allOf) and not have additionalProperties
+          # additionalProperties: false
           properties:
             script:
-              description: An alphabet or other notation used to represent a
-                language or other symbolic system associated with the resource.
               $ref: '#/components/schemas/DescriptiveValue'
+              # description: An alphabet or other notation used to represent a
+              #   language or other symbolic system associated with the resource.
     MessageDigest:
       description: The output of the message digest algorithm.
       type: object
