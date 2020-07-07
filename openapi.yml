@@ -421,7 +421,8 @@ components:
     DescriptiveBasicValue:
       description: Basic value model for descriptive elements.
       type: object
-      additionalProperties: false
+      # additionalProperties breaks the validator, unclear as to why.
+      # additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/DescriptiveStructuredValue"
         - $ref: "#/components/schemas/DescriptiveParallelValue"
@@ -817,7 +818,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DescriptiveValue'
         - type: object
-          additionalProperties: false
+          # additionalProperties breaks the validator, presumably because it can't
+          # conform to other schemas (allOf) and not have additionalProperties
+          # additionalProperties: false
           properties:
             script:
               $ref: '#/components/schemas/DescriptiveValue'
