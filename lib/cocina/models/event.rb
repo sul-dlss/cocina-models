@@ -3,7 +3,7 @@
 module Cocina
   module Models
     class Event < Struct
-      attribute :structuredValue, Types::Strict::Array.of(DescriptiveBasicValue).meta(omittable: true)
+      attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       # Description of the event (creation, publication, etc.).
       attribute :type, Types::Strict::String.meta(omittable: true)
       attribute :date, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)

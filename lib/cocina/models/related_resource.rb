@@ -3,6 +3,7 @@
 module Cocina
   module Models
     class RelatedResource < Struct
+      # The relationship of the related resource to the described resource.
       attribute :type, Types::Strict::String.meta(omittable: true)
       attribute :title, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :contributor, Types::Strict::Array.of(Contributor).meta(omittable: true)
@@ -12,7 +13,7 @@ module Cocina
       attribute :note, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :identifier, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :subject, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
-      # Stanford persistent URL associated with the resource.
+      # Stanford persistent URL associated with the related resource.
       attribute :purl, Types::Strict::String.meta(omittable: true)
       attribute :access, DescriptiveAccessMetadata.optional.meta(omittable: true)
     end
