@@ -17,7 +17,7 @@ module Cocina
       def generate
         clean_output
 
-        schemas.keys.each do |schema_name|
+        schemas.each_key do |schema_name|
           schema = schema_for(schema_name)
           generate_for(schema) if schema
         end

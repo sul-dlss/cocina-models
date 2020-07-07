@@ -14,7 +14,6 @@ require 'thor'
 
 # Help Zeitwerk find some of our classes
 class CocinaModelsInflector < Zeitwerk::Inflector
-  # rubocop:disable Metrics/CyclomaticComplexity
   # rubocop:disable Metrics/MethodLength
   def camelize(basename, _abspath)
     case basename
@@ -34,7 +33,7 @@ class CocinaModelsInflector < Zeitwerk::Inflector
       super
     end
   end
-  # rubocop:enable Metrics/CyclomaticComplexity
+
   # rubocop:enable Metrics/MethodLength
 end
 
