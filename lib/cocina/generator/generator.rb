@@ -17,10 +17,13 @@ module Cocina
       def generate
         clean_output
 
-        schemas.each_key do |schema_name|
+        # rubocop:disable Style/HashEachMethods
+        # This is not a Hash
+        schemas.keys.each do |schema_name|
           schema = schema_for(schema_name)
           generate_for(schema) if schema
         end
+        # rubocop:enable Style/HashEachMethods
 
         generate_vocab
       end
