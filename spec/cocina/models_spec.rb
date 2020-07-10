@@ -113,7 +113,6 @@ RSpec.describe Cocina::Models do
           'type' => 'http://cocina.sul.stanford.edu/models/image.jsonld',
           'label' => 'bar',
           'version' => 5,
-          'access' => {},
           'identification' => { 'sourceId' => 'sul:123' },
           'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
         }
