@@ -5,11 +5,13 @@ module Cocina
     class RequestCollection < Struct
       include Checkable
 
-      TYPES = ['http://cocina.sul.stanford.edu/models/collection.jsonld',
-               'http://cocina.sul.stanford.edu/models/curated-collection.jsonld',
-               'http://cocina.sul.stanford.edu/models/user-collection.jsonld',
-               'http://cocina.sul.stanford.edu/models/exhibit.jsonld',
-               'http://cocina.sul.stanford.edu/models/series.jsonld'].freeze
+      TYPES = [
+        'http://cocina.sul.stanford.edu/models/collection.jsonld',
+        'http://cocina.sul.stanford.edu/models/curated-collection.jsonld',
+        'http://cocina.sul.stanford.edu/models/user-collection.jsonld',
+        'http://cocina.sul.stanford.edu/models/exhibit.jsonld',
+        'http://cocina.sul.stanford.edu/models/series.jsonld'
+      ].freeze
 
       # example: item
       attribute :type, Types::Strict::String.enum(*RequestCollection::TYPES)

@@ -5,7 +5,9 @@ module Cocina
     class File < Struct
       include Checkable
 
-      TYPES = ['http://cocina.sul.stanford.edu/models/file.jsonld'].freeze
+      TYPES = [
+        'http://cocina.sul.stanford.edu/models/file.jsonld'
+      ].freeze
 
       # The content type of the File.
       attribute :type, Types::Strict::String.enum(*File::TYPES)

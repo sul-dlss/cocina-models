@@ -5,11 +5,13 @@ module Cocina
     class Collection < Struct
       include Checkable
 
-      TYPES = ['http://cocina.sul.stanford.edu/models/collection.jsonld',
-               'http://cocina.sul.stanford.edu/models/curated-collection.jsonld',
-               'http://cocina.sul.stanford.edu/models/user-collection.jsonld',
-               'http://cocina.sul.stanford.edu/models/exhibit.jsonld',
-               'http://cocina.sul.stanford.edu/models/series.jsonld'].freeze
+      TYPES = [
+        'http://cocina.sul.stanford.edu/models/collection.jsonld',
+        'http://cocina.sul.stanford.edu/models/curated-collection.jsonld',
+        'http://cocina.sul.stanford.edu/models/user-collection.jsonld',
+        'http://cocina.sul.stanford.edu/models/exhibit.jsonld',
+        'http://cocina.sul.stanford.edu/models/series.jsonld'
+      ].freeze
 
       # The content type of the Collection. Selected from an established set of values.
       # example: item

@@ -36,13 +36,13 @@ module Cocina
       def description
         return '' unless schema_doc.description
 
-        "# #{schema_doc.description}\n"
+        "      # #{schema_doc.description}\n"
       end
 
       def example
         return '' unless schema_doc.example
 
-        "# example: #{schema_doc.example}\n"
+        "      # example: #{schema_doc.example}\n"
       end
 
       def dry_datatype(doc)

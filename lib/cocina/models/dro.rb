@@ -5,21 +5,23 @@ module Cocina
     class DRO < Struct
       include Checkable
 
-      TYPES = ['http://cocina.sul.stanford.edu/models/object.jsonld',
-               'http://cocina.sul.stanford.edu/models/3d.jsonld',
-               'http://cocina.sul.stanford.edu/models/agreement.jsonld',
-               'http://cocina.sul.stanford.edu/models/book.jsonld',
-               'http://cocina.sul.stanford.edu/models/document.jsonld',
-               'http://cocina.sul.stanford.edu/models/geo.jsonld',
-               'http://cocina.sul.stanford.edu/models/image.jsonld',
-               'http://cocina.sul.stanford.edu/models/page.jsonld',
-               'http://cocina.sul.stanford.edu/models/photograph.jsonld',
-               'http://cocina.sul.stanford.edu/models/manuscript.jsonld',
-               'http://cocina.sul.stanford.edu/models/map.jsonld',
-               'http://cocina.sul.stanford.edu/models/media.jsonld',
-               'http://cocina.sul.stanford.edu/models/track.jsonld',
-               'http://cocina.sul.stanford.edu/models/webarchive-binary.jsonld',
-               'http://cocina.sul.stanford.edu/models/webarchive-seed.jsonld'].freeze
+      TYPES = [
+        'http://cocina.sul.stanford.edu/models/object.jsonld',
+        'http://cocina.sul.stanford.edu/models/3d.jsonld',
+        'http://cocina.sul.stanford.edu/models/agreement.jsonld',
+        'http://cocina.sul.stanford.edu/models/book.jsonld',
+        'http://cocina.sul.stanford.edu/models/document.jsonld',
+        'http://cocina.sul.stanford.edu/models/geo.jsonld',
+        'http://cocina.sul.stanford.edu/models/image.jsonld',
+        'http://cocina.sul.stanford.edu/models/page.jsonld',
+        'http://cocina.sul.stanford.edu/models/photograph.jsonld',
+        'http://cocina.sul.stanford.edu/models/manuscript.jsonld',
+        'http://cocina.sul.stanford.edu/models/map.jsonld',
+        'http://cocina.sul.stanford.edu/models/media.jsonld',
+        'http://cocina.sul.stanford.edu/models/track.jsonld',
+        'http://cocina.sul.stanford.edu/models/webarchive-binary.jsonld',
+        'http://cocina.sul.stanford.edu/models/webarchive-seed.jsonld'
+      ].freeze
 
       # The content type of the DRO. Selected from an established set of values.
       # example: item

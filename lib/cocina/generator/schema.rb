@@ -15,12 +15,7 @@ module Cocina
           module Cocina
             module Models
               class #{name} < Struct
-
-                #{types}
-
-                #{model_attributes}
-
-                #{validate}
+          #{types}#{model_attributes}#{validate}
               end
             end
           end
@@ -51,24 +46,20 @@ module Cocina
         type_properties_doc = schema_doc.properties['type']
         return '' if type_properties_doc.nil? || type_properties_doc.enum.nil?
 
-        types_list = type_properties_doc.enum.map { |item| "'#{item}'" }.join(",\n ")
+        types_list = type_properties_doc.enum.map { |item| "        '#{item}'" }.join(",\n")
 
-        <<~RUBY
-          include Checkable
-
-          TYPES = [#{types_list}].freeze
-        RUBY
+        "      include Checkable\n\n" \
+        "      TYPES = [\n#{types_list}\n      ].freeze\n\n"
       end
 
       def validate
         return '' unless validatable?
 
-        <<~RUBY
-          def self.new(attributes = default_attributes, safe = false, validate = true, &block)
-            Validator.validate(self, attributes.with_indifferent_access) if validate && name
-            super(attributes, safe, &block)
-                end
-        RUBY
+        "\n\n" \
+        "      def self.new(attributes = default_attributes, safe = false, validate = true, &block)\n" \
+        "        Validator.validate(self, attributes.with_indifferent_access) if validate && name\n" \
+        "        super(attributes, safe, &block)\n" \
+        '      end'
       end
 
       def validatable?

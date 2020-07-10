@@ -5,7 +5,9 @@ module Cocina
     class AdminPolicy < Struct
       include Checkable
 
-      TYPES = ['http://cocina.sul.stanford.edu/models/admin_policy.jsonld'].freeze
+      TYPES = [
+        'http://cocina.sul.stanford.edu/models/admin_policy.jsonld'
+      ].freeze
 
       # example: item
       attribute :type, Types::Strict::String.enum(*AdminPolicy::TYPES)

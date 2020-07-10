@@ -5,8 +5,10 @@ module Cocina
     class MessageDigest < Struct
       include Checkable
 
-      TYPES = %w[md5
-                 sha1].freeze
+      TYPES = %w[
+        md5
+        sha1
+      ].freeze
 
       # The algorithm that was used
       attribute :type, Types::Strict::String.enum(*MessageDigest::TYPES)

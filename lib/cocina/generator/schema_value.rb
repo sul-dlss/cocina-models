@@ -6,7 +6,7 @@ module Cocina
     class SchemaValue < SchemaBase
       # rubocop:disable Layout/LineLength
       def generate
-        "#{description}#{example}attribute :#{name.camelize(:lower)}, Types::#{dry_datatype(schema_doc)}#{default}#{enum}#{omittable}"
+        "#{description}#{example}      attribute :#{name.camelize(:lower)}, Types::#{dry_datatype(schema_doc)}#{default}#{enum}#{omittable}"
       end
       # rubocop:enable Layout/LineLength
 
