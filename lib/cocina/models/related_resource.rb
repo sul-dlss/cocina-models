@@ -2,8 +2,10 @@
 
 module Cocina
   module Models
-    class Description < Struct
-      attribute :title, Types::Strict::Array.of(DescriptiveValueRequired).default([].freeze)
+    class RelatedResource < Struct
+      # The relationship of the related resource to the described resource.
+      attribute :type, Types::Strict::String.meta(omittable: true)
+      attribute :title, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :contributor, Types::Strict::Array.of(Contributor).meta(omittable: true)
       attribute :event, Types::Strict::Array.of(Event).meta(omittable: true)
       attribute :form, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
@@ -11,17 +13,9 @@ module Cocina
       attribute :note, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :identifier, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :subject, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
-      # Stanford persistent URL associated with the resource.
+      # Stanford persistent URL associated with the related resource.
       attribute :purl, Types::Strict::String.meta(omittable: true)
       attribute :access, DescriptiveAccessMetadata.optional.meta(omittable: true)
-      attribute :relatedResource, Types::Strict::Array.of(RelatedResource).meta(omittable: true)
-      attribute :marcEncodedData, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
-      attribute :adminMetadata, DescriptiveAdminMetadata.optional.meta(omittable: true)
-
-      def self.new(attributes = default_attributes, safe = false, validate = true, &block)
-        Validator.validate(self, attributes.with_indifferent_access) if validate && name
-        super(attributes, safe, &block)
-      end
     end
   end
 end

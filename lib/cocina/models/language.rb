@@ -2,7 +2,7 @@
 
 module Cocina
   module Models
-    class DescriptiveBasicValue < Struct
+    class Language < Struct
       attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :parallelValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       # String value of the descriptive element.
@@ -23,6 +23,8 @@ module Cocina
       # A term providing information about the circumstances of the statement (e.g., approximate dates).
       attribute :qualifier, Types::Strict::String.meta(omittable: true)
       attribute :note, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
+      attribute :appliesTo, Types::Strict::Array.of(DescriptiveBasicValue).meta(omittable: true)
+      attribute :script, DescriptiveValue.optional.meta(omittable: true)
     end
   end
 end

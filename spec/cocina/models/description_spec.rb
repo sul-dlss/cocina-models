@@ -18,12 +18,11 @@ RSpec.describe Cocina::Models::Description do
 
       name_value = contributor.name.first
       expect(name_value.value).to eq('Kasahara, Akitada, Jr')
-      expect(name_value.type).to eq('inverted name')
 
       structured_name_value = contributor.name[1].structuredValue
       expect(structured_name_value.size).to eq(2)
       expect(structured_name_value.first.value).to eq('Kasahara, Akitada')
-      expect(structured_name_value.first.type).to eq('inverted name')
+      expect(structured_name_value.first.type).to eq('name')
 
       expect(contributor.type).to eq('person')
       expect(contributor.status).to eq('primary')
@@ -68,7 +67,7 @@ RSpec.describe Cocina::Models::Description do
 
       expect(item.purl).to eq('http://purl.stanford.edu/hj456dt5655')
 
-      url = item.url.first
+      url = item.access.url.first
       expect(url.value).to eq('https://etd.stanford.edu/view/0000005406')
       expect(url.type).to eq('ETD')
 

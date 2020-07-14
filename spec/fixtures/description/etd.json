@@ -9,14 +9,13 @@
     {
       "name": [
         {
-          "value": "Kasahara, Akitada, Jr",
-          "type": "inverted name"
+          "value": "Kasahara, Akitada, Jr"
         },
         {
           "structuredValue": [
             {
               "value": "Kasahara, Akitada",
-              "type": "inverted name"
+              "type": "name"
             },
             {
               "value": "Jr",
@@ -49,8 +48,7 @@
     {
       "name": [
         {
-          "value": "Duffie, Darrell",
-          "type": "inverted name"
+          "value": "Duffie, Darrell"
         }
       ],
       "type": "person",
@@ -82,8 +80,7 @@
     {
       "name": [
         {
-          "value": "Strebulaev, Ilya A",
-          "type": "inverted name"
+          "value": "Strebulaev, Ilya A"
         }
       ],
       "type": "person",
@@ -115,8 +112,7 @@
     {
       "name": [
         {
-          "value": "Zwiebel, Jeffrey",
-          "type": "inverted name"
+          "value": "Zwiebel, Jeffrey"
         }
       ],
       "type": "person",
@@ -206,7 +202,9 @@
       "date": [
         {
           "value": "2017",
-          "encoding": [ "edtf", "w3cdtf", "marc", "iso8601" ]
+          "encoding": {
+              "code": "w3cdtf"
+          }
         }
       ],
       "note": [
@@ -254,7 +252,9 @@
       "date": [
         {
           "value": "2017",
-          "encoding": [ "edtf", "w3cdtf", "marc", "iso8601" ]
+          "encoding": {
+              "code": "w3cdtf"
+          }
         }
       ],
       "location": [
@@ -323,17 +323,23 @@
         {
           "value": "[Stanford, California]",
           "type": "publication statement place",
-          "standard": [ "RDA" ]
+          "standard": {
+              "code": "rda"
+          }
         },
         {
           "value": "[Stanford University]",
           "type": "publication statement publisher",
-          "standard": [ "RDA" ]
+          "standard": {
+              "code": "rda"
+          }
         },
         {
           "value": "2017",
           "type": "publication statement date",
-          "standard": [ "RDA" ]
+          "standard": {
+              "code": "rda"
+          }
         }
       ]
     },
@@ -342,14 +348,18 @@
       "date": [
         {
           "value": "2017",
-          "encoding": [ "edtf", "w3cdtf", "marc", "iso8601" ]
+          "encoding": {
+              "code": "w3cdtf"
+          }
         }
       ],
       "structuredValue": [
         {
           "value": "©2017",
           "type": "copyright statement",
-          "standard": [ "RDA" ]
+          "standard": {
+              "code": "rda"
+          }
         }
       ]
     }
@@ -376,7 +386,9 @@
     {
       "value": "1 online resource",
       "type": "extent",
-      "standard": [ "RDA" ]
+      "standard": {
+          "code": "rda"
+      }
     },
     {
       "value": "text",
@@ -447,7 +459,9 @@
     {
       "value": "Akitada Kasahara, Jr.",
       "type": "statement of responsibility",
-      "standard": [ "RDA" ]
+      "standard": {
+          "code": "rda"
+      }
     }
   ],
   "identifier": [
@@ -457,12 +471,14 @@
     }
   ],
   "purl": "http://purl.stanford.edu/hj456dt5655",
-  "url": [
-    {
-      "value": "https://etd.stanford.edu/view/0000005406",
-      "type": "ETD"
-    }
-  ],
+  "access": {
+    "url": [
+      {
+        "value": "https://etd.stanford.edu/view/0000005406",
+        "type": "ETD"
+      }
+    ]
+  },
   "marcEncodedData": [
     {
       "value": "     nam a       3i",
@@ -492,7 +508,9 @@
         "date": [
           {
             "value": "2017-06-15",
-            "encoding": [ "w3cdtf" ]
+            "encoding": {
+                "code": "w3cdtf"
+            }
           }
         ]
       },
@@ -501,7 +519,9 @@
         "date": [
           {
             "value": "2020-03-23",
-            "encoding": [ "w3cdtf" ]
+            "encoding": {
+                "code": "w3cdtf"
+            }
           }
         ]
       }

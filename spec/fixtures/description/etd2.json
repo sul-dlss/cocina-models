@@ -9,8 +9,7 @@
     {
       "name": [
         {
-          "value": "Bassen, Jonathan Spencer",
-          "type": "inverted name"
+          "value": "Bassen, Jonathan Spencer"
         }
       ],
       "type": "person",
@@ -37,8 +36,7 @@
     {
       "name": [
         {
-          "value": "Mitchell, John",
-          "type": "inverted name"
+          "value": "Mitchell, John"
         }
       ],
       "type": "person",
@@ -70,8 +68,7 @@
     {
       "name": [
         {
-          "value": "Piech, Chris",
-          "type": "inverted name"
+          "value": "Piech, Chris"
         }
       ],
       "type": "person",
@@ -103,8 +100,7 @@
     {
       "name": [
         {
-          "value": "Thille, Candace",
-          "type": "inverted name"
+          "value": "Thille, Candace"
         }
       ],
       "type": "person",
@@ -194,7 +190,9 @@
       "date": [
         {
           "value": "2020",
-          "encoding": [ "edtf", "w3cdtf", "marc", "iso8601" ]
+          "encoding": {
+              "code": "w3cdtf"
+          }
         }
       ],
       "note": [
@@ -242,7 +240,9 @@
       "date": [
         {
           "value": "2020",
-          "encoding": [ "edtf", "w3cdtf", "marc", "iso8601" ]
+          "encoding": {
+              "code": "w3cdtf"
+          }
         }
       ],
       "location": [
@@ -311,17 +311,23 @@
         {
           "value": "[Stanford, California]",
           "type": "publication statement place",
-          "standard": [ "RDA" ]
+          "standard": {
+            "code": "rda"
+          }
         },
         {
           "value": "[Stanford University]",
           "type": "publication statement publisher",
-          "standard": [ "RDA" ]
+          "standard": {
+              "code": "rda"
+          }
         },
         {
           "value": "2020",
           "type": "publication statement date",
-          "standard": [ "RDA" ]
+          "standard": {
+              "code": "rda"
+          }
         }
       ]
     },
@@ -330,14 +336,18 @@
       "date": [
         {
           "value": "2020",
-          "encoding": [ "edtf", "w3cdtf", "marc", "iso8601" ]
+          "encoding": {
+              "code": "w3cdtf"
+          }
         }
       ],
       "structuredValue": [
         {
           "value": "©2020",
           "type": "copyright statement",
-          "standard": [ "RDA" ]
+          "standard": {
+              "code": "rda"
+          }
         }
       ]
     }
@@ -364,7 +374,9 @@
     {
       "value": "1 online resource",
       "type": "extent",
-      "standard": [ "RDA" ]
+      "standard": {
+          "code": "rda"
+      }
     },
     {
       "value": "text",
@@ -435,7 +447,9 @@
     {
       "value": "Jonathan Spencer Bassen.",
       "type": "statement of responsibility",
-      "standard": [ "RDA" ]
+      "standard": {
+          "code": "rda"
+      }
     }
   ],
   "identifier": [
@@ -445,12 +459,14 @@
     }
   ],
   "purl": "http://purl.stanford.edu/qk672zk2803",
-  "url": [
-    {
-      "value": "https://etd.stanford.edu/view/0000007516",
-      "type": "ETD"
-    }
-  ],
+  "access": {
+    "url": [
+      {
+        "value": "https://etd.stanford.edu/view/0000007516",
+        "type": "ETD"
+      }
+    ]
+  },
   "marcEncodedData": [
     {
       "value": "     nam a       3i",
@@ -480,7 +496,9 @@
         "date": [
           {
             "value": "2020-03-23",
-            "encoding": [ "w3cdtf" ]
+            "encoding": {
+                "code": "w3cdtf"
+            }
           }
         ]
       }
