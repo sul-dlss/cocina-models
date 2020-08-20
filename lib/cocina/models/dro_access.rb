@@ -4,6 +4,8 @@ module Cocina
   module Models
     class DROAccess < Struct
       attribute :access, Types::Strict::String.default('dark').enum('world', 'stanford', 'location-based', 'citation-only', 'dark').meta(omittable: true)
+      # Available for controlled digital lending.
+      attribute :controlledDigitalLending, Types::Strict::Bool.meta(omittable: true)
       # The human readable copyright statement that applies
       # example: Copyright World Trade Organization
       attribute :copyright, Types::Strict::String.meta(omittable: true)
