@@ -81,6 +81,10 @@
           "description": "The human readable copyright statement that applies to the DRO.",
           "type": "string"
         },
+        "controlledDigitalLending": {
+          "description": "If the object is available for controlled digital lending.",
+          "type": "boolean"
+        },
         "download": {
           "description": "Download level for the DRO metadata.",
           "type": "string",
