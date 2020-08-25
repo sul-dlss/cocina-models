@@ -4,7 +4,7 @@ module Cocina
   module Models
     class Access < Struct
       # Access level
-      attribute :access, Types::Strict::String.default('dark').enum('world', 'stanford', 'location-based', 'citation-only', 'dark').meta(omittable: true)
+      attribute :access, Types::Strict::String.default('dark').enum('world', 'stanford', 'location-based', 'citation-only', 'dark', 'cdl').meta(omittable: true)
       # Download access level for a file
       attribute :download, Types::Strict::String.default('none').enum('world', 'stanford', 'location-based', 'none').meta(omittable: true)
       # If access is "location-based", which location should have access.
