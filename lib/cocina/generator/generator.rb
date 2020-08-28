@@ -56,9 +56,14 @@ module Cocina
 
       def schema_for(schema_name)
         schema_doc = schemas[schema_name]
-        return nil if schema_doc.nil? || schema_doc.type != 'object'
+        return nil if schema_doc.nil?
 
-        Schema.new(schema_doc)
+        case schema_doc.type
+        when 'object'
+          Schema.new(schema_doc)
+        when 'string'
+          Datatype.new(schema_doc)
+        end
       end
 
       def generate_for(schema)

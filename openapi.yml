@@ -624,7 +624,10 @@ components:
           items:
             $ref: '#/components/schemas/Sequence'
         isMemberOf:
-          $ref: '#/components/schemas/Druid'
+          description: Collections that this DRO is a member of
+          type: array
+          items:
+            $ref: '#/components/schemas/Druid'
         hasAgreement:
           description: Agreement that covers the deposit of the DRO into SDR.
           type: string
@@ -1096,7 +1099,10 @@ components:
           items:
             $ref: '#/components/schemas/Sequence'
         isMemberOf:
-          $ref: '#/components/schemas/Druid'
+          description: Collections that this DRO is a member of
+          type: array
+          items:
+            $ref: '#/components/schemas/Druid'
         hasAgreement:
           type: string
     RequestFile:
