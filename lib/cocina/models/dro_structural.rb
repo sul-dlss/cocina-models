@@ -5,8 +5,7 @@ module Cocina
     class DROStructural < Struct
       attribute :contains, Types::Strict::Array.of(FileSet).meta(omittable: true)
       attribute :hasMemberOrders, Types::Strict::Array.of(Sequence).meta(omittable: true)
-      # example: druid:bc123df4567
-      attribute :isMemberOf, Types::Strict::String.meta(omittable: true)
+      attribute :isMemberOf, Types::Strict::Array.of(Druid).meta(omittable: true)
       # Agreement that covers the deposit of the DRO into SDR.
       attribute :hasAgreement, Types::Strict::String.meta(omittable: true)
     end

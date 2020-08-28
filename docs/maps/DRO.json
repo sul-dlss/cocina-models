@@ -298,8 +298,11 @@
           }
         },
         "isMemberOf": {
-          "description": "Collection that this DRO is a member of",
-          "type": "string"
+          "description": "Collections that this DRO is a member of",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "isTargetOf": {
           "description": "An Annotation instance that applies to the DRO.",
