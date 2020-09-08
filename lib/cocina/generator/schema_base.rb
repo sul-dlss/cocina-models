@@ -54,7 +54,11 @@ module Cocina
         when 'boolean'
           'Strict::Bool'
         else
-          raise "#{schema_doc.type} not supported"
+          if doc.one_of&.map(&:type).all? { |o| %w[integer string].include?(o) }
+            'Nominal::Any'
+          else
+            raise "#{schema_doc.type} not supported"
+          end
         end
       end
 
