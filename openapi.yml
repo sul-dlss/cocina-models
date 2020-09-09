@@ -467,6 +467,8 @@ components:
               type: array
               items:
                 $ref: "#/components/schemas/DescriptiveValue"
+            language:
+              $ref: "#/components/schemas/Language"
     DescriptiveParallelValue:
       description: Value model for multiple representations of the same information (e.g. in different languages).
       type: object
@@ -851,7 +853,7 @@ components:
             $ref: '#/components/schemas/CatalogLink'
     Language:
       description: Languages, scripts, symbolic systems, and notations used in all
-        or part of a resource.
+        or part of a resource or metadata value.
       type: object
       additionalProperties: false
       allOf:
