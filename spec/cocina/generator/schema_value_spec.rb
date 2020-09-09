@@ -83,6 +83,29 @@ RSpec.describe Cocina::Generator::SchemaValue do
     end
   end
 
+  context 'when property is an integer or a string' do
+    # DescriptiveBasicValue.value is an Any
+    subject { dro.value }
+
+    let(:dro) do
+      Cocina::Models::DescriptiveBasicValue.new({
+                                                  value: value
+                                                })
+    end
+
+    context 'when a string is provided' do
+      let(:value) { '5' }
+
+      it { is_expected.to eq '5' }
+    end
+
+    context 'when an integer is provided' do
+      let(:value) { 6 }
+
+      it { is_expected.to eq 6 }
+    end
+  end
+
   context 'when property is required' do
     # Geographic.iso19139 is required
     context 'when provided' do
