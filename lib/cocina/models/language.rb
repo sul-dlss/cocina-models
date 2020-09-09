@@ -23,7 +23,7 @@ module Cocina
       # A term providing information about the circumstances of the statement (e.g., approximate dates).
       attribute :qualifier, Types::Strict::String.meta(omittable: true)
       attribute :note, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
-      attribute :language, Language.optional.meta(omittable: true)
+      attribute :language, Standard.optional.meta(omittable: true)
       attribute :appliesTo, Types::Strict::Array.of(DescriptiveBasicValue).meta(omittable: true)
       attribute :script, DescriptiveValue.optional.meta(omittable: true)
     end

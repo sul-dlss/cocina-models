@@ -854,7 +854,7 @@ components:
             $ref: '#/components/schemas/CatalogLink'
     Language:
       description: Languages, scripts, symbolic systems, and notations used in all
-        or part of a resource or metadata value.
+        or part of a resource or its descriptive metadata.
       type: object
       additionalProperties: false
       allOf:
