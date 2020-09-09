@@ -42,6 +42,16 @@ which pushes the gem to rubygems.org.  Next write up the release notes: https://
 
 Finally, you must release versions of [sdr-client](https://github.com/sul-dlss/sdr-client) and [dor-services-client](https://github.com/sul-dlss/dor-services-client/) pinned to this version because [Argo](https://github.com/sul-dlss/argo) depends on both of those. When [dor-services-app](https://github.com/sul-dlss/dor-services-app) is updated to use the new models (via the auto-update script), the clients must be updated at the same time or there is risk of models produced by dor-services-app not being acceptable to the clients.
 
+### Dependent Services
+
+Once the above listed gems are updated all the following services that use cocina-models should be updated and released at the same time:
+
+* sul-dlss/sdr-api
+* sul-dlss/dor-services-app
+* sul-dlss/google-books
+* sul-dlss/common-accessioning
+* sul-dlss/argo
+* sul-dlss/pre-assembly
 
 ## Using this gem
 
