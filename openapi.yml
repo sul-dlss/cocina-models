@@ -468,7 +468,8 @@ components:
               items:
                 $ref: "#/components/schemas/DescriptiveValue"
             language:
-              $ref: "#/components/schemas/Language"
+              # description: Language of the descriptive element value.
+              $ref: "#/components/schemas/Standard"
     DescriptiveParallelValue:
       description: Value model for multiple representations of the same information (e.g. in different languages).
       type: object
