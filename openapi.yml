@@ -514,6 +514,9 @@ components:
             - type: object
               required:
                 - structuredValue
+            - type: object
+              required:
+                - parallelValue
     DRO:
       description: Domain-defined abstraction of a 'work'. Digital Repository Objects' abstraction is describable for our domain’s purposes, i.e. for management needs within our system.
       type: object
