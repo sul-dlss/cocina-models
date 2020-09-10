@@ -467,13 +467,13 @@ components:
               type: array
               items:
                 $ref: "#/components/schemas/DescriptiveValue"
-            language:
+            valueLanguage:
               # description: Language of the descriptive element value.
               allOf:
                 - $ref: "#/components/schemas/Standard"
                 - type: object
                 properties:
-                  script:
+                  valueScript:
                     $ref: '#/components/schemas/Standard'
                     # description: An alphabet or other notation used to represent a
                     #   language or other symbolic system of the descriptive element value.
