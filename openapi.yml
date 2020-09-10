@@ -468,15 +468,7 @@ components:
               items:
                 $ref: "#/components/schemas/DescriptiveValue"
             valueLanguage:
-              # description: Language of the descriptive element value.
-              allOf:
-                - $ref: "#/components/schemas/Standard"
-                - type: object
-                  properties:
-                    valueScript:
-                      $ref: '#/components/schemas/Standard'
-                      # description: An alphabet or other notation used to represent a
-                      #   language or other symbolic system of the descriptive element value.
+              $ref: "#/components/schemas/DescriptiveValueLanguage"
     DescriptiveParallelValue:
       description: Value model for multiple representations of the same information (e.g. in different languages).
       type: object
@@ -502,6 +494,18 @@ components:
       allOf:
         - $ref: "#/components/schemas/DescriptiveBasicValue"
         - $ref: "#/components/schemas/AppliesTo"
+    DescriptiveValueLanguage:
+      description: Language of the descriptive element value
+      type: object
+      additionalProperties: false
+      allOf:
+        - $ref: "#/components/schemas/Standard"
+        - type: object
+          properties:
+            valueScript:
+              $ref: '#/components/schemas/Standard'
+              # description: An alphabet or other notation used to represent a
+              #   language or other symbolic system of the descriptive element value.
     DescriptiveValueRequired:
       type: object
       additionalProperties: false
