@@ -295,7 +295,7 @@ components:
           type: array
           minItems: 1
           items:
-            $ref: "#/components/schemas/DescriptiveValueRequired"
+            $ref: "#/components/schemas/Title"
         contributor:
           description: Agents contributing in some way to the creation and history of the
             resource.
@@ -506,7 +506,7 @@ components:
               $ref: '#/components/schemas/Standard'
               # description: An alphabet or other notation used to represent a
               #   language or other symbolic system of the descriptive element value.
-    DescriptiveValueRequired:
+    Title:
       type: object
       additionalProperties: false
       allOf:

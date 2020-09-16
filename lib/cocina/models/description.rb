@@ -3,7 +3,7 @@
 module Cocina
   module Models
     class Description < Struct
-      attribute :title, Types::Strict::Array.of(DescriptiveValueRequired).default([].freeze)
+      attribute :title, Types::Strict::Array.of(Title).default([].freeze)
       attribute :contributor, Types::Strict::Array.of(Contributor).meta(omittable: true)
       attribute :event, Types::Strict::Array.of(Event).meta(omittable: true)
       attribute :form, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
