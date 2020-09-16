@@ -2,7 +2,7 @@
 
 module Cocina
   module Models
-    class DescriptiveValueRequired < Struct
+    class Title < Struct
       attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :parallelValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       # String or integer value of the descriptive element.
