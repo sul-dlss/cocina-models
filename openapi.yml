@@ -261,6 +261,7 @@ components:
           description: Status of the contributor relative to other parallel contributors
             (e.g. the primary author among a group of contributors).
           type: string
+          # type: integer
         role:
           description: Relationships of the contributor to the resource or to an event
             in its history.
@@ -435,6 +436,7 @@ components:
               description: Status of the descriptive element value relative to other instances
                 of the element.
               type: string
+              # type: integer
             code:
               description: Code value of the descriptive element.
               type: string
@@ -911,6 +913,13 @@ components:
       properties:
         type:
           description: The relationship of the related resource to the described resource.
+          type: string
+        status:
+          description: Status of the related resource relative to other related resources.
+          type: string
+          # type: integer
+        displayLabel:
+          description: The preferred display label to use for the related resource in access systems.
           type: string
         title:
           description: Titles of the related resource.
