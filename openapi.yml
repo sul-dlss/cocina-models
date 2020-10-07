@@ -450,6 +450,11 @@ components:
             encoding:
               # description: Encoding schema, standard, or syntax to which the value conforms.
               $ref: "#/components/schemas/Standard"
+            identifier:
+              description: "Identifiers and URIs associated with the related resource."
+              type: array
+              items:
+                  $ref: "#/components/schemas/DescriptiveValue"
             source:
               $ref: "#/components/schemas/Source"
             displayLabel:
@@ -699,6 +704,11 @@ components:
                 $ref: "#/components/schemas/Contributor"
             location:
               description: Locations associated with the event.
+              type: array
+              items:
+                $ref: "#/components/schemas/DescriptiveValue"
+            identifier:
+              description: "Identifiers and URIs associated with the related resource."
               type: array
               items:
                 $ref: "#/components/schemas/DescriptiveValue"
@@ -959,6 +969,9 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
+        standard:
+          #description: Descriptive or content standards to which the value conforms.
+          $ref: "#/components/schemas/Standard"
         subject:
           description: Terms associated with the intellectual content of the related resource.
           type: array
