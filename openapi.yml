@@ -1228,6 +1228,9 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
+        version:
+          description: The version of the value source.
+          type: string
     SourceId:
       type: string
       pattern: '^.+:.+$'
@@ -1262,3 +1265,6 @@ components:
             $ref: "#/components/schemas/DescriptiveValue"
         source:
           $ref: "#/components/schemas/Source"
+        version:
+          description: The version of the standard or encoding.
+          type: string
