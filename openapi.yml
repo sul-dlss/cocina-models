@@ -692,6 +692,9 @@ components:
             type:
               description: Description of the event (creation, publication, etc.).
               type: string
+            displayLabel:
+              description: The preferred display label to use for the event in access systems.
+              type: string
             date:
               description: Dates associated with the event.
               type: array
@@ -1250,9 +1253,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
-        version:
-          description: The version of the value source.
-          type: string
     SourceId:
       type: string
       pattern: '^.+:.+$'
@@ -1287,6 +1287,3 @@ components:
             $ref: "#/components/schemas/DescriptiveValue"
         source:
           $ref: "#/components/schemas/Source"
-        version:
-          description: The version of the standard or encoding.
-          type: string
