@@ -45,7 +45,7 @@ module Cocina
         FileUtils.rm_f(filepath)
 
         create_file filepath, vocab.generate
-        run("rubocop -a #{filepath}")
+        run("rubocop -a #{filepath} > /dev/null")
       end
 
       private
@@ -71,7 +71,7 @@ module Cocina
         FileUtils.rm_f(filepath)
 
         create_file filepath, schema.generate
-        run("rubocop -a #{filepath}")
+        run("rubocop -a #{filepath} > /dev/null")
       end
 
       def clean_output
