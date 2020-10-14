@@ -711,7 +711,7 @@ components:
               items:
                 $ref: "#/components/schemas/DescriptiveValue"
             identifier:
-              description: "Identifiers and URIs associated with the related resource."
+              description: Identifiers and URIs associated with the event.
               type: array
               items:
                 $ref: "#/components/schemas/DescriptiveValue"
