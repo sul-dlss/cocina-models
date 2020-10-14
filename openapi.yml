@@ -986,6 +986,9 @@ components:
           format: uri
         access:
           $ref: "#/components/schemas/DescriptiveAccessMetadata"
+        version:
+          description: The version of the related resource.
+          type: string
     ReleaseTag:
       description: A tag that indicates the item or collection should be released.
       type: object
