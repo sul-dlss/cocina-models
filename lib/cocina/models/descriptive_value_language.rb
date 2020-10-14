@@ -10,9 +10,9 @@ module Cocina
       # String describing the standard or encoding.
       attribute :value, Types::Strict::String.meta(omittable: true)
       attribute :note, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
-      attribute :source, Source.optional.meta(omittable: true)
-      # The version of the standard or encoding.
+      # The version of the value standard.
       attribute :version, Types::Strict::String.meta(omittable: true)
+      attribute :source, Source.optional.meta(omittable: true)
       attribute :valueScript, Standard.optional.meta(omittable: true)
     end
   end
