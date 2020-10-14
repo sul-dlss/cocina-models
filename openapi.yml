@@ -1253,6 +1253,9 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
+        version:
+          description: The version of the value source.
+          type: string
     SourceId:
       type: string
       pattern: '^.+:.+$'
@@ -1285,5 +1288,8 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
+        version:
+          description: The version of the value source.
+          type: string
         source:
           $ref: "#/components/schemas/Source"
