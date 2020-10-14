@@ -301,7 +301,7 @@ components:
             $ref: "#/components/schemas/Event"
         form:
           description: Characteristics of the resource's physical, digital, and intellectual
-            form and genre.
+            form and genre, and of its process of creation.
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
