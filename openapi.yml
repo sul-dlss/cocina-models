@@ -1292,7 +1292,7 @@ components:
           items:
             $ref: "#/components/schemas/DescriptiveValue"
         version:
-          description: The version of the value source.
+          description: The version of the value standard.
           type: string
         source:
           $ref: "#/components/schemas/Source"
