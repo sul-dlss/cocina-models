@@ -880,17 +880,63 @@ components:
         or part of a resource or its descriptive metadata.
       type: object
       additionalProperties: false
-      allOf:
-        - $ref: '#/components/schemas/DescriptiveValue'
-        - type: object
-          # additionalProperties breaks the validator, presumably because it can't
-          # conform to other schemas (allOf) and not have additionalProperties
-          # additionalProperties: false
-          properties:
-            script:
-              $ref: '#/components/schemas/DescriptiveValue'
-              # description: An alphabet or other notation used to represent a
-              #   language or other symbolic system associated with the resource.
+      properties:
+        appliesTo:
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveBasicValue"
+        code:
+          description: Code value of the descriptive element.
+          type: string
+        displayLabel:
+          description: The preferred display label to use for the descriptive element in access systems.
+          type: string
+        encoding:
+          # description: present for mapping to additional schemas in the future and for consistency but not otherwise used
+          $ref: "#/components/schemas/Standard"
+        note:
+          description: present for mapping to additional schemas in the future and for consistency but not otherwise used
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
+        parallelValue:
+          description: present for mapping to additional schemas in the future and for consistency but not otherwise used
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
+        qualifier:
+          type: string
+          description: present for mapping to additional schemas in the future and for consistency but not otherwise used
+        script:
+          $ref: '#/components/schemas/DescriptiveValue'
+          # description: An alphabet or other notation used to represent a
+          #   language or other symbolic system associated with the resource.
+        source:
+          $ref: "#/components/schemas/Source"
+        status:
+          description: Status of the contributor relative to other parallel contributors
+            (e.g. the primary author among a group of contributors).
+          type: string
+          enum:
+            - primary
+        standard:
+          # description: present for mapping to additional schemas in the future and for consistency but not otherwise used
+          $ref: "#/components/schemas/Standard"
+        structuredValue:
+          description: present for mapping to additional schemas in the future and for consistency but not otherwise used
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
+        uri:
+          description: URI value of the descriptive element.
+          type: string
+          format: uri
+        value:
+          description: Value of the descriptive element.
+          type: string
+        valueLanguage:
+          # description: present for mapping to additional schemas in the future and for consistency but not otherwise used
+          $ref: "#/components/schemas/DescriptiveValueLanguage"
     MessageDigest:
       description: The output of the message digest algorithm.
       type: object
