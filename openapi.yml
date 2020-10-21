@@ -261,6 +261,7 @@ components:
           description: Status of the contributor relative to other parallel contributors
             (e.g. the primary author among a group of contributors).
           type: string
+          # type: integer
         role:
           description: Relationships of the contributor to the resource or to an event
             in its history.
@@ -300,7 +301,7 @@ components:
             $ref: "#/components/schemas/Event"
         form:
           description: Characteristics of the resource's physical, digital, and intellectual
-            form and genre.
+            form and genre, and of its process of creation.
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
@@ -435,6 +436,7 @@ components:
               description: Status of the descriptive element value relative to other instances
                 of the element.
               type: string
+              # type: integer (uncomment when issue #154 is resolved)
             code:
               description: Code value of the descriptive element.
               type: string
@@ -448,6 +450,11 @@ components:
             encoding:
               # description: Encoding schema, standard, or syntax to which the value conforms.
               $ref: "#/components/schemas/Standard"
+            identifier:
+              description: Identifiers and URIs associated with the descriptive element.
+              type: array
+              items:
+                  $ref: "#/components/schemas/DescriptiveValue"
             source:
               $ref: "#/components/schemas/Source"
             displayLabel:
@@ -685,6 +692,9 @@ components:
             type:
               description: Description of the event (creation, publication, etc.).
               type: string
+            displayLabel:
+              description: The preferred display label to use for the event in access systems.
+              type: string
             date:
               description: Dates associated with the event.
               type: array
@@ -697,6 +707,11 @@ components:
                 $ref: "#/components/schemas/Contributor"
             location:
               description: Locations associated with the event.
+              type: array
+              items:
+                $ref: "#/components/schemas/DescriptiveValue"
+            identifier:
+              description: Identifiers and URIs associated with the event.
               type: array
               items:
                 $ref: "#/components/schemas/DescriptiveValue"
@@ -912,6 +927,13 @@ components:
         type:
           description: The relationship of the related resource to the described resource.
           type: string
+        status:
+          description: Status of the related resource relative to other related resources.
+          type: string
+          # type: integer
+        displayLabel:
+          description: The preferred display label to use for the related resource in access systems.
+          type: string
         title:
           description: Titles of the related resource.
           type: array
@@ -930,7 +952,7 @@ components:
             $ref: "#/components/schemas/Event"
         form:
           description: Characteristics of the related resource's physical, digital, and intellectual
-            form and genre.
+            form and genre, and of its process of creation.
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
@@ -950,6 +972,9 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
+        standard:
+          # description: Descriptive or content standards to which the value conforms.
+          $ref: "#/components/schemas/Standard"
         subject:
           description: Terms associated with the intellectual content of the related resource.
           type: array
@@ -961,6 +986,9 @@ components:
           format: uri
         access:
           $ref: "#/components/schemas/DescriptiveAccessMetadata"
+        version:
+          description: The version of the related resource.
+          type: string
     ReleaseTag:
       description: A tag that indicates the item or collection should be released.
       type: object
@@ -1244,7 +1272,7 @@ components:
       example: 'sul:PC0170_s3_Fiesta_Bowl_2012-01-02_210609_2026'
     Standard:
       description: Property model for indicating the encoding, standard, or syntax
-        to which a value conforms.
+        to which a value conforms (e.g. RDA).
       type: object
       additionalProperties: false
       properties:
@@ -1263,8 +1291,8 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
-        source:
-          $ref: "#/components/schemas/Source"
         version:
           description: The version of the standard or encoding.
           type: string
+        source:
+          $ref: "#/components/schemas/Source"
