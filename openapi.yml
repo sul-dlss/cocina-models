@@ -305,6 +305,11 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
+        geographic:
+          description: Geographic description for items with coordinates or bounding boxes.
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveGeographicMetadata"
         language:
           description: Languages, scripts, symbolic systems, and notations used in all or
             part of a resource.
@@ -470,6 +475,20 @@ components:
                 $ref: "#/components/schemas/DescriptiveValue"
             valueLanguage:
               $ref: "#/components/schemas/DescriptiveValueLanguage"
+    DescriptiveGeographicMetadata:
+      description: Value model for mods geographic extension metadata
+      type: object
+      additionalProperties: false
+      properties:
+        form:
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
+        subject:
+          description: Terms associated with the intellectual content of the related resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"    
     DescriptiveParallelValue:
       description: Value model for multiple representations of the same information (e.g. in different languages).
       type: object
