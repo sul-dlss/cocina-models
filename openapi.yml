@@ -436,7 +436,7 @@ components:
               description: Status of the descriptive element value relative to other instances
                 of the element.
               type: string
-              # type: integer
+              # type: integer (uncomment when issue #154 is resolved)
             code:
               description: Code value of the descriptive element.
               type: string
@@ -973,7 +973,7 @@ components:
           items:
             $ref: "#/components/schemas/DescriptiveValue"
         standard:
-          #description: Descriptive or content standards to which the value conforms.
+          # description: Descriptive or content standards to which the value conforms.
           $ref: "#/components/schemas/Standard"
         subject:
           description: Terms associated with the intellectual content of the related resource.
@@ -1272,7 +1272,7 @@ components:
       example: 'sul:PC0170_s3_Fiesta_Bowl_2012-01-02_210609_2026'
     Standard:
       description: Property model for indicating the encoding, standard, or syntax
-        to which a value conforms.
+        to which a value conforms (e.g. RDA).
       type: object
       additionalProperties: false
       properties:
@@ -1292,7 +1292,7 @@ components:
           items:
             $ref: "#/components/schemas/DescriptiveValue"
         version:
-          description: The version of the value standard.
+          description: The version of the standard or encoding.
           type: string
         source:
           $ref: "#/components/schemas/Source"
