@@ -304,6 +304,11 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
+        geographic:
+          description: Something soemthing geographic
+          type: array
+          items:
+            $ref: "#/components/schemas/Geographic"
         language:
           description: Languages, scripts, symbolic systems, and notations used in all or
             part of a resource.
