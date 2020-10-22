@@ -202,12 +202,11 @@ components:
       type: object
       additionalProperties: false
       properties:
-        authority:
-          type: string
-        displayLabel:
-          type: string
-        edition:
-          type: string
+        subject:
+          description: Terms associated with the intellectual content of the classification.
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
     Collection:
       description: A group of Digital Repository Objects that indicate some type of conceptual grouping within the domain that is worth reusing across the system.
       type: object
