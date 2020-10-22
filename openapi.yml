@@ -198,15 +198,6 @@ components:
           description: Record identifier that is unique within the context of the linked record's catalog.
           type: string
           example: 11403803
-    Classification:
-      type: object
-      additionalProperties: false
-      properties:
-        subject:
-          description: Terms associated with the intellectual content of the classification.
-          type: array
-          items:
-            $ref: "#/components/schemas/DescriptiveValue"
     Collection:
       description: A group of Digital Repository Objects that indicate some type of conceptual grouping within the domain that is worth reusing across the system.
       type: object
@@ -297,10 +288,6 @@ components:
           minItems: 1
           items:
             $ref: "#/components/schemas/Title"
-        classification:
-          type: array
-          items:
-            $ref: "#/components/schemas/Classification"
         contributor:
           description: Agents contributing in some way to the creation and history of the
             resource.
