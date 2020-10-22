@@ -4,6 +4,7 @@ module Cocina
   module Models
     class Description < Struct
       attribute :title, Types::Strict::Array.of(Title).default([].freeze)
+      attribute :classification, Types::Strict::Array.of(Classification).meta(omittable: true)
       attribute :contributor, Types::Strict::Array.of(Contributor).meta(omittable: true)
       attribute :event, Types::Strict::Array.of(Event).meta(omittable: true)
       attribute :form, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
@@ -18,7 +19,6 @@ module Cocina
       attribute :relatedResource, Types::Strict::Array.of(RelatedResource).meta(omittable: true)
       attribute :marcEncodedData, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :adminMetadata, DescriptiveAdminMetadata.optional.meta(omittable: true)
-      attribute :classification, Types::Strict::Array.of(Classification).meta(omittable: true)
 
       def self.new(attributes = default_attributes, safe = false, validate = true, &block)
         Validator.validate(self, attributes.with_indifferent_access) if validate && name
