@@ -52,6 +52,9 @@ Once the above listed gems are updated all the following services that use cocin
 * sul-dlss/common-accessioning
 * sul-dlss/argo
 * sul-dlss/pre-assembly
+* sul-dlss/hydrus
+* sul-dlss/happy-heron
+* sul-dlss/infrastructure-integration-test
 
 ## Using this gem
 
