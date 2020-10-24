@@ -488,7 +488,7 @@ components:
           description: Terms associated with the intellectual content of the related resource.
           type: array
           items:
-            $ref: "#/components/schemas/DescriptiveValue"    
+            $ref: "#/components/schemas/DescriptiveValue"
     DescriptiveParallelValue:
       description: Value model for multiple representations of the same information (e.g. in different languages).
       type: object
@@ -933,7 +933,7 @@ components:
         source:
           $ref: "#/components/schemas/Source"
         status:
-          description: Status of the contributor relative to other parallel contributors
+          description: Status of the language relative to other parallel language elements (e.g. the primary language)
             (e.g. the primary author among a group of contributors).
           type: string
           enum:
