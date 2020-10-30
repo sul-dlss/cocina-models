@@ -455,6 +455,8 @@ components:
             encoding:
               # description: Encoding schema, standard, or syntax to which the value conforms.
               $ref: "#/components/schemas/Standard"
+            language:
+              $ref: "#/components/schemas/Language"
             identifier:
               description: Identifiers and URIs associated with the descriptive element.
               type: array

@@ -15,7 +15,7 @@ module Cocina
       attribute :qualifier, Types::Strict::String.meta(omittable: true)
       attribute :script, DescriptiveValue.optional.meta(omittable: true)
       attribute :source, Source.optional.meta(omittable: true)
-      # Status of the contributor relative to other parallel contributors (e.g. the primary author among a group of contributors).
+      # Status of the language relative to other parallel language elements (e.g. the primary language) (e.g. the primary author among a group of contributors).
       attribute :status, Types::Strict::String.enum('primary').meta(omittable: true)
       attribute :standard, Standard.optional.meta(omittable: true)
       attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)

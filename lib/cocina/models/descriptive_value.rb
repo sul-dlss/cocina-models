@@ -17,6 +17,7 @@ module Cocina
       attribute :uri, Types::Strict::String.meta(omittable: true)
       attribute :standard, Standard.optional.meta(omittable: true)
       attribute :encoding, Standard.optional.meta(omittable: true)
+      attribute :language, Language.optional.meta(omittable: true)
       attribute :identifier, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :source, Source.optional.meta(omittable: true)
       # The preferred display label to use for the descriptive element in access systems.
