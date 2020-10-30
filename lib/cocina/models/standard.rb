@@ -13,6 +13,8 @@ module Cocina
       # The version of the standard or encoding.
       attribute :version, Types::Strict::String.meta(omittable: true)
       attribute :source, Source.optional.meta(omittable: true)
+      # Type of value provided by the descriptive element.
+      attribute :type, Types::Strict::String.meta(omittable: true)
     end
   end
 end
