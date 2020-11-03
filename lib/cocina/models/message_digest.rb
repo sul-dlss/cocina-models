@@ -10,7 +10,7 @@ module Cocina
 
       # The algorithm that was used
       attribute :type, Types::Strict::String.enum(*MessageDigest::TYPES)
-      # The digest value Base64 encoded
+      # The digest value hexidecimal encoded
       attribute :digest, Types::Strict::String
     end
   end
