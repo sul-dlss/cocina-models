@@ -968,7 +968,7 @@ components:
             - md5
             - sha1
         digest:
-          description: The digest value Base64 encoded
+          description: The digest value hexidecimal encoded
           type: string
       required:
         - type
