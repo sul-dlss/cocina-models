@@ -261,7 +261,6 @@ components:
           description: Status of the contributor relative to other parallel contributors
             (e.g. the primary author among a group of contributors).
           type: string
-          # type: integer (uncomment when issue #154 resolved)
         role:
           description: Relationships of the contributor to the resource or to an event
             in its history.
@@ -278,6 +277,9 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
+        order:
+          description: Place of contributor in order of authorship for resource.
+          type: integer
     Description:
       type: object
       additionalProperties: false
@@ -441,7 +443,6 @@ components:
               description: Status of the descriptive element value relative to other instances
                 of the element.
               type: string
-              # type: integer (uncomment when issue #154 is resolved)
             code:
               description: Code value of the descriptive element.
               type: string
@@ -995,7 +996,6 @@ components:
         status:
           description: Status of the related resource relative to other related resources.
           type: string
-          # type: integer (uncomment when issue #154 resolved)
         displayLabel:
           description: The preferred display label to use for the related resource in access systems.
           type: string
@@ -1054,6 +1054,9 @@ components:
         version:
           description: The version of the related resource.
           type: string
+        order:
+          description: The order of the related resource in a series of related resources.
+          type: integer
     ReleaseTag:
       description: A tag that indicates the item or collection should be released.
       type: object
