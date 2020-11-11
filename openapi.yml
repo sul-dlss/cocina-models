@@ -1364,3 +1364,7 @@ components:
           type: string
         source:
           $ref: "#/components/schemas/Source"
+        type:
+          description: Type of value provided by the descriptive element.
+          type: string
+  
