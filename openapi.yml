@@ -935,7 +935,6 @@ components:
           $ref: "#/components/schemas/Source"
         status:
           description: Status of the language relative to other parallel language elements (e.g. the primary language)
-            (e.g. the primary author among a group of contributors).
           type: string
           enum:
             - primary
