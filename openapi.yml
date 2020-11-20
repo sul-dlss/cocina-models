@@ -277,9 +277,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
-        order:
-          description: Place of contributor in order of authorship for resource.
-          type: integer
     Description:
       type: object
       additionalProperties: false
@@ -1060,9 +1057,6 @@ components:
         version:
           description: The version of the related resource.
           type: string
-        order:
-          description: The order of the related resource in a series of related resources.
-          type: integer
     ReleaseTag:
       description: A tag that indicates the item or collection should be released.
       type: object
