@@ -21,8 +21,12 @@ module Cocina
       # Stanford persistent URL associated with the related resource.
       attribute :purl, Types::Strict::String.meta(omittable: true)
       attribute :access, DescriptiveAccessMetadata.optional.meta(omittable: true)
+      attribute :relatedResource, Types::Strict::Array.of(RelatedResource).meta(omittable: true)
+      attribute :adminMetadata, DescriptiveAdminMetadata.optional.meta(omittable: true)
       # The version of the related resource.
       attribute :version, Types::Strict::String.meta(omittable: true)
+      # The order of the related resource in a series of related resources.
+      attribute :order, Types::Strict::Integer.meta(omittable: true)
     end
   end
 end
