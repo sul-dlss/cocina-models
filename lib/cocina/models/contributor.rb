@@ -11,6 +11,8 @@ module Cocina
       attribute :role, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :identifier, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :note, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
+      # Place of contributor in order of authorship for resource.
+      attribute :order, Types::Strict::Integer.meta(omittable: true)
     end
   end
 end

@@ -1050,6 +1050,13 @@ components:
           format: uri
         access:
           $ref: "#/components/schemas/DescriptiveAccessMetadata"
+        relatedResource:
+          description: Other resources associated with the related resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/RelatedResource"
+        adminMetadata:
+          $ref: "#/components/schemas/DescriptiveAdminMetadata"
         version:
           description: The version of the related resource.
           type: string
