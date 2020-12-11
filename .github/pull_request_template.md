@@ -1,4 +1,4 @@
-**NOTE:  Changes to openapi.yml require generating models - see README.**
+**NOTE:  Changes to openapi.yml require updating openapi.yml for sdr-api and dor-services-app and generating models - see README.**
 
 ## Why was this change made?
 
