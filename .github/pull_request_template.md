@@ -1,3 +1,5 @@
+**NOTE:  Changes to openapi.yml require generating models - see README.**
+
 ## Why was this change made?
 
 
@@ -7,6 +9,3 @@
 
 
 ## Which documentation and/or configurations were updated?
-
-
-
