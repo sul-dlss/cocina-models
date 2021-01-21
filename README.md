@@ -59,6 +59,7 @@ Once the above listed gems are updated all the following services that use cocin
 * sul-dlss/hydrus
 * sul-dlss/happy-heron
 * sul-dlss/infrastructure-integration-test
+* sul-dlss/dor_indexing_app
 
 ## Using this gem
 
