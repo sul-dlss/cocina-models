@@ -25,6 +25,8 @@ module Cocina
       attribute :adminMetadata, DescriptiveAdminMetadata.optional.meta(omittable: true)
       # The version of the related resource.
       attribute :version, Types::Strict::String.meta(omittable: true)
+      # URL or other pointer to the location of the related resource information.
+      attribute :valueAt, Types::Strict::String.meta(omittable: true)
     end
   end
 end
