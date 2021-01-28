@@ -25,6 +25,8 @@ module Cocina
       attribute :qualifier, Types::Strict::String.meta(omittable: true)
       attribute :note, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :valueLanguage, DescriptiveValueLanguage.optional.meta(omittable: true)
+      # URL or other pointer to the location of the value of the descriptive element.
+      attribute :valueAt, Types::Strict::String.meta(omittable: true)
     end
   end
 end

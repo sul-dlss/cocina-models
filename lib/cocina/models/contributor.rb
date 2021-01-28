@@ -11,6 +11,8 @@ module Cocina
       attribute :role, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :identifier, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :note, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
+      # URL or other pointer to the location of the contributor information.
+      attribute :valueAt, Types::Strict::String.meta(omittable: true)
     end
   end
 end

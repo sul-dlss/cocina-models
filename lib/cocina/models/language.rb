@@ -23,6 +23,8 @@ module Cocina
       attribute :uri, Types::Strict::String.meta(omittable: true)
       # Value of the descriptive element.
       attribute :value, Types::Strict::String.meta(omittable: true)
+      # URL or other pointer to the location of the language information.
+      attribute :valueAt, Types::Strict::String.meta(omittable: true)
       attribute :valueLanguage, DescriptiveValueLanguage.optional.meta(omittable: true)
     end
   end
