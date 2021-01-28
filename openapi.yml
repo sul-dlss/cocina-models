@@ -277,6 +277,9 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
+        valueAt:
+          description: URL or other pointer to the location of the contributor information.
+          type: string
     Description:
       type: object
       additionalProperties: false
@@ -348,6 +351,9 @@ components:
             $ref: "#/components/schemas/DescriptiveValue"
         adminMetadata:
           $ref: "#/components/schemas/DescriptiveAdminMetadata"
+        valueAt:
+          description: URL or other pointer to the location of the resource description.
+          type: string
       required:
         - title
     DescriptiveAccessMetadata:
@@ -480,6 +486,9 @@ components:
                 $ref: "#/components/schemas/DescriptiveValue"
             valueLanguage:
               $ref: "#/components/schemas/DescriptiveValueLanguage"
+            valueAt:
+              description: URL or other pointer to the location of the value of the descriptive element.
+              type: string
     DescriptiveGeographicMetadata:
       description: Value model for mods geographic extension metadata
       type: object
@@ -957,6 +966,9 @@ components:
         value:
           description: Value of the descriptive element.
           type: string
+        valueAt:
+          description: URL or other pointer to the location of the language information.
+          type: string
         valueLanguage:
           # description: present for mapping to additional schemas in the future and for consistency but not otherwise used
           $ref: "#/components/schemas/DescriptiveValueLanguage"
@@ -1063,6 +1075,9 @@ components:
           $ref: "#/components/schemas/DescriptiveAdminMetadata"
         version:
           description: The version of the related resource.
+          type: string
+        valueAt:
+          description: URL or other pointer to the location of the related resource information.
           type: string
     ReleaseTag:
       description: A tag that indicates the item or collection should be released.
