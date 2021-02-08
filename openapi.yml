@@ -506,13 +506,13 @@ components:
             $ref: "#/components/schemas/DescriptiveValue"
     DescriptiveGroupedValue:
       description: Value model for a set of descriptive elements grouped together in an unstructured way.
-        type: object
-        additionalProperties: false
-        properties:
-          groupedValue:
-            type: array
-            items:
-              $ref: "#/components/schemas/DescriptiveValue"
+      type: object
+      additionalProperties: false
+      properties:
+        groupedValue:
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
     DescriptiveParallelValue:
       description: Value model for multiple representations of the same information (e.g. in different languages).
       type: object
