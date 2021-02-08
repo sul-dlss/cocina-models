@@ -5,6 +5,7 @@ module Cocina
     class DescriptiveValue < Struct
       attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :parallelValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
+      attribute :groupedValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       # String or integer value of the descriptive element.
       attribute :value, Types::Nominal::Any.meta(omittable: true)
       # Type of value provided by the descriptive element.

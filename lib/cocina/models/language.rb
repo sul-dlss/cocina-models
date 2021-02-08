@@ -9,6 +9,7 @@ module Cocina
       # The preferred display label to use for the descriptive element in access systems.
       attribute :displayLabel, Types::Strict::String.meta(omittable: true)
       attribute :encoding, Standard.optional.meta(omittable: true)
+      attribute :groupedValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :note, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :parallelValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       # present for mapping to additional schemas in the future and for consistency but not otherwise used
