@@ -945,6 +945,9 @@ components:
           $ref: "#/components/schemas/Standard"
         groupedValue:
           description: present for mapping to additional schemas in the future and for consistency but not otherwise used
+          type: array
+          items:
+            $ref: "#/components/schemas/DescriptiveValue"
         note:
           description: present for mapping to additional schemas in the future and for consistency but not otherwise used
           type: array
