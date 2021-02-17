@@ -239,6 +239,8 @@ components:
       type: object
       additionalProperties: false
       properties:
+        sourceId:
+          $ref: '#/components/schemas/SourceId'
         catalogLinks:
           type: array
           items:
