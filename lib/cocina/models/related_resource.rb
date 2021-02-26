@@ -11,7 +11,7 @@ module Cocina
       attribute :displayLabel, Types::Strict::String.meta(omittable: true)
       attribute :title, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :contributor, Types::Strict::Array.of(Contributor).meta(omittable: true)
-      attribute :event, Types::Strict::Array.of(Event).meta(omittable: true)
+      attribute :event, Types::Strict::Array.of(DescriptiveEvent).meta(omittable: true)
       attribute :form, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :language, Types::Strict::Array.of(Language).meta(omittable: true)
       attribute :note, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
