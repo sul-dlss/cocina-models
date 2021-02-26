@@ -521,6 +521,47 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
+    DescriptiveParallelEvent:
+      description: Value model for multiple representations of information about the same event (e.g. in different languages).
+      type: object
+      additionalProperties: false
+      allOf:
+        - $ref: "#/components/schemas/DescriptiveValueLanguage"
+        - $ref: "#/components/schemas/DescriptiveStructuredValue"
+        - type: object
+          additionalProperties: false
+          properties:
+            type:
+              description: Description of the event (creation, publication, etc.).
+              type: string
+            displayLabel:
+              description: The preferred display label to use for the event in access systems.
+              type: string
+            date:
+              description: Dates associated with the event.
+              type: array
+              items:
+                $ref: "#/components/schemas/DescriptiveValue"
+            contributor:
+              description: Contributors associated with the event.
+              type: array
+              items:
+                $ref: "#/components/schemas/Contributor"
+            location:
+              description: Locations associated with the event.
+              type: array
+              items:
+                $ref: "#/components/schemas/DescriptiveValue"
+            identifier:
+              description: Identifiers and URIs associated with the event.
+              type: array
+              items:
+                $ref: "#/components/schemas/DescriptiveValue"
+            note:
+              description: Other information about the event.
+              type: array
+              items:
+                $ref: "#/components/schemas/DescriptiveValue"
     DescriptiveParallelValue:
       description: Value model for multiple representations of the same information (e.g. in different languages).
       type: object
@@ -743,7 +784,8 @@ components:
       additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/DescriptiveStructuredValue"
-        - $ref: "#/components/schemas/DescriptiveParallelValue"
+        - $ref: "#/components/schemas/DescriptiveParallelEvent"
+        - $ref: "#/components/schemas/DescriptiveValueLanguage"
         - type: object
           additionalProperties: false
           properties:

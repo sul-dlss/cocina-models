@@ -2,8 +2,7 @@
 
 module Cocina
   module Models
-    class Event < Struct
-      attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
+    class DescriptiveParallelEvent < Struct
       # Code representing the standard or encoding.
       attribute :code, Types::Strict::String.meta(omittable: true)
       # URI for the standard or encoding.
@@ -15,6 +14,7 @@ module Cocina
       attribute :version, Types::Strict::String.meta(omittable: true)
       attribute :source, Source.optional.meta(omittable: true)
       attribute :valueScript, Standard.optional.meta(omittable: true)
+      attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       # Description of the event (creation, publication, etc.).
       attribute :type, Types::Strict::String.meta(omittable: true)
       # The preferred display label to use for the event in access systems.
