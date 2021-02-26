@@ -307,9 +307,7 @@ components:
           description: Events in the history of the resource.
           type: array
           items:
-            oneOf:
-            - $ref: "#/components/schemas/Event"
-            - $ref: "#/components/schemas/DescriptiveParallelEvent"
+            $ref: "#/components/schemas/DescriptiveEvent"
         form:
           description: Characteristics of the resource's physical, digital, and intellectual
             form and genre, and of its process of creation.
@@ -414,9 +412,7 @@ components:
           description: Events in the history of this resource description.
           type: array
           items:
-            oneOf:
-            - $ref: "#/components/schemas/Event"
-            - $ref: "#/components/schemas/DescriptiveParallelEvent"
+            $ref: "#/components/schemas/DescriptiveEvent"
         language:
           description: Languages, scripts, symbolic systems, and notations used
             in this resource description.
@@ -502,6 +498,13 @@ components:
             valueAt:
               description: URL or other pointer to the location of the value of the descriptive element.
               type: string
+    DescriptiveEvent:
+      description: Value model for events associated with the resource.
+      type: object
+      additionalProperties: false
+      anyOf:
+        - $ref: "#/components/schemas/Event"
+        - $ref: "#/components/schemas/DescriptiveParallelEvent"
     DescriptiveGeographicMetadata:
       description: Value model for mods geographic extension metadata
       type: object
@@ -1104,9 +1107,7 @@ components:
           description: Events in the history of the related resource.
           type: array
           items:
-            oneOf:
-            - $ref: "#/components/schemas/Event"
-            - $ref: "#/components/schemas/DescriptiveParallelEvent"
+            $ref: "#/components/schemas/DescriptiveEvent"
         form:
           description: Characteristics of the related resource's physical, digital, and intellectual
             form and genre, and of its process of creation.
