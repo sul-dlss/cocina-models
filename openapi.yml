@@ -502,7 +502,7 @@ components:
       description: Value model for events associated with the resource.
       type: object
       additionalProperties: false
-      anyOf:
+      allOf:
         - $ref: "#/components/schemas/Event"
         - $ref: "#/components/schemas/DescriptiveParallelEvent"
     DescriptiveGeographicMetadata:
