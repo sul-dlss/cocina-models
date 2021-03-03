@@ -502,7 +502,7 @@ components:
       description: Value model for events associated with the resource.
       type: object
       # additionalProperties breaks the validator for allOf, unclear as to why.
-      # additionalProperties: false
+      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/Event"
         - $ref: "#/components/schemas/DescriptiveParallelEvent"
