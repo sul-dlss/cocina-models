@@ -532,12 +532,14 @@ components:
     DescriptiveParallelEvent:
       description: Value model for multiple representations of information about the same event (e.g. in different languages).
       type: object
-      additionalProperties: false
+      # additionalProperties breaks the validator for allOf, unclear as to why.
+      # additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/DescriptiveValueLanguage"
         - $ref: "#/components/schemas/DescriptiveStructuredValue"
         - type: object
-          additionalProperties: false
+          # additionalProperties breaks the validator for allOf, unclear as to why.
+          # additionalProperties: false
           properties:
             type:
               description: Description of the event (creation, publication, etc.).
