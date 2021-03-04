@@ -581,7 +581,6 @@ components:
       type: object
       additionalProperties: false
       allOf:
-        - $ref: "#/components/schemas/DescriptiveValueLanguage"
         - $ref: "#/components/schemas/DescriptiveStructuredValue"
         - type: object
           additionalProperties: false
@@ -617,6 +616,9 @@ components:
               type: array
               items:
                 $ref: "#/components/schemas/DescriptiveValue"
+            valueLanguage:
+              # description: Language of the descriptive element value
+              $ref: "#/components/schemas/DescriptiveValueLanguage"
     DescriptiveParallelValue:
       description: Value model for multiple representations of the same information (e.g. in different languages).
       type: object
@@ -839,7 +841,6 @@ components:
       additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/DescriptiveStructuredValue"
-        - $ref: "#/components/schemas/DescriptiveValueLanguage"
         - type: object
           additionalProperties: false
           properties:
@@ -874,6 +875,9 @@ components:
               type: array
               items:
                 $ref: "#/components/schemas/DescriptiveValue"
+            valueLanguage:
+              # description: Language of the descriptive element value
+              $ref: "#/components/schemas/DescriptiveValueLanguage"
             parallelEvent:
               description: For multiple representations of information about the same event (e.g. in different languages)
               type: array
