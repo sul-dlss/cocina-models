@@ -656,27 +656,6 @@ components:
               $ref: '#/components/schemas/Standard'
               # description: An alphabet or other notation used to represent a
               #   language or other symbolic system of the descriptive element value.
-    Title:
-      type: object
-      additionalProperties: false
-      allOf:
-        - $ref: "#/components/schemas/DescriptiveValue"
-        - anyOf:
-            - type: object
-              required:
-                - value
-            - type: object
-              required:
-                - structuredValue
-            - type: object
-              required:
-                - parallelValue
-            - type: object
-              required:
-                - groupedValue
-            - type: object
-              required:
-                - valueAt
     DRO:
       description: Domain-defined abstraction of a 'work'. Digital Repository Objects' abstraction is describable for our domain’s purposes, i.e. for management needs within our system.
       type: object
@@ -1521,3 +1500,24 @@ components:
           type: string
         source:
           $ref: "#/components/schemas/Source"
+    Title:
+      type: object
+      additionalProperties: false
+      allOf:
+        - $ref: "#/components/schemas/DescriptiveValue"
+        - anyOf:
+            - type: object
+              required:
+                - value
+            - type: object
+              required:
+                - structuredValue
+            - type: object
+              required:
+                - parallelValue
+            - type: object
+              required:
+                - groupedValue
+            - type: object
+              required:
+                - valueAt
