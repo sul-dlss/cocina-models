@@ -36,6 +36,45 @@ RSpec.describe Cocina::Models::Validator do
     end
   end
 
+  context 'when has a DateTime' do
+    # This makes sure that something like following does not raise a validation error due to DateTime:
+    # dro_hash = dro.to_h
+    # Change the hash.
+    # Cocina::Models::DRO.new(dro_hash)
+    let(:dro) do
+      Cocina::Models::DRO.new(
+        {
+          "type": 'http://cocina.sul.stanford.edu/models/image.jsonld',
+          "externalIdentifier": 'druid:bb000kg4251',
+          "label": 'Roger Howe Professorship',
+          "version": 3,
+          "access": {
+            "access": 'world',
+            "download": 'world',
+            "useAndReproductionStatement": 'Property rights reside with the repository.'
+          },
+          "administrative": {
+            "hasAdminPolicy": 'druid:ww057vk7675',
+            "releaseTags": [
+              {
+                "who": 'cspitzer',
+                "what": 'self',
+                "date": DateTime.new,
+                "to": 'Searchworks',
+                "release": true
+              }
+            ],
+            "partOfProject": 'School of Engineering photograph collection'
+          }
+        }
+      )
+    end
+
+    it 'does not raise' do
+      dro
+    end
+  end
+
   describe 'when validate=false' do
     let(:policy) do
       Cocina::Models::AdminPolicy.new({
