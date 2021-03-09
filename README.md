@@ -66,3 +66,12 @@ Once the above listed gems are updated all the following services that use cocin
 If you are using this gem in an application that has an API that accepts Cocina models (e.g., SDR API, Dor-Services-App), make sure that the `openapi.yml` for the application includes the schemas that match the schemas in this `openapi.yml`.
 
 This can be accomplished by cutting and pasting these schemas. By convention, these schemas are listed first in the `openapi.yml` of the associated projects, followed by the application-specific schemas.
+
+### Usage conventions
+
+The following are the recommended naming conventions for code using Cocina models:
+
+* cocina_item: Cocina::Models::DRO instance
+* cocina_admin_policy: Cocina::Models::AdminPolicy instance
+* cocina_collection: Cocina::Models::Collection instance
+* cocina_object: Cocina::Models::DRO or Cocina::Models::AdminPolicy or Cocina::Models::Collection instance
