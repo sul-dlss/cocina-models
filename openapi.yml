@@ -343,7 +343,7 @@ components:
           description: URL or other pointer to the location of the contributor information.
           type: string
         parallelContributor:
-          description: For multiple representations of infomration about the same contributor (e.g. in different languages).
+          description: For multiple representations of information about the same contributor (e.g. in different languages).
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveParallelContributor"
