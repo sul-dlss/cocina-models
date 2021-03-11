@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'fileutils'
+
 module Cocina
   module Generator
     # Class for generating Cocina models from openapi.
