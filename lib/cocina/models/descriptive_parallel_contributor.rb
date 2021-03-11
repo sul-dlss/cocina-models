@@ -3,7 +3,6 @@
 module Cocina
   module Models
     class DescriptiveParallelContributor < Struct
-      attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :name, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       # Entity type of the contributor (person, organization, etc.).
       attribute :type, Types::Strict::String.meta(omittable: true)
