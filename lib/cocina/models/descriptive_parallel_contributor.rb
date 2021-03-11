@@ -2,7 +2,8 @@
 
 module Cocina
   module Models
-    class Contributor < Struct
+    class DescriptiveParallelContributor < Struct
+      attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :name, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       # Entity type of the contributor (person, organization, etc.).
       attribute :type, Types::Strict::String.meta(omittable: true)
@@ -13,7 +14,7 @@ module Cocina
       attribute :note, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       # URL or other pointer to the location of the contributor information.
       attribute :valueAt, Types::Strict::String.meta(omittable: true)
-      attribute :parallelContributor, Types::Strict::Array.of(DescriptiveParallelContributor).meta(omittable: true)
+      attribute :valueLanguage, DescriptiveValueLanguage.optional.meta(omittable: true)
     end
   end
 end
