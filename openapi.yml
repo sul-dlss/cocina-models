@@ -1001,6 +1001,9 @@ components:
       type: object
       additionalProperties: false
       properties:
+        publish:
+          type: boolean
+          default: false
         sdrPreserve:
           type: boolean
           default: true
@@ -1008,6 +1011,7 @@ components:
           type: boolean
           default: false
       required:
+        - publish
         - sdrPreserve
         - shelve
     FileSet:
