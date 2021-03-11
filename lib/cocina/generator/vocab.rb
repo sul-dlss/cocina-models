@@ -33,23 +33,40 @@ module Cocina
 
       attr_reader :schemas
 
-      # rubocop:disable Style/MultilineBlockChain
+      BASE = 'http://cocina.sul.stanford.edu/models/'
+
       def vocabs
-        schemas.values.map do |schema|
-          type_property = schema.properties['type']
-          type_property.nil? ? [] : type_property.enum.to_a
-        end
-               .flatten
-               .uniq
-               .sort
-               .filter { |vocab| vocab.start_with?('http://cocina.sul.stanford.edu/models') }
+        type_properties = schemas.values.map { |schema| schema.properties['type'] }.compact
+        type_properties.map(&:enum).flat_map(&:to_a)
+                       .filter { |vocab| vocab.start_with?(BASE) }
+                       .uniq
+                       .sort
       end
-      # rubocop:enable Style/MultilineBlockChain
 
       def vocab_methods
-        # Note special handling of 3d
-        vocabs.map do |vocab|
-          name = vocab[38, vocab.size - 45].gsub('-', '_').gsub('3d', 'three_dimensional')
+        names = vocabs.each_with_object({}) do |vocab, object|
+          # Note special handling of 3d
+          namespaced = vocab.delete_prefix(BASE).delete_suffix('.jsonld')
+                            .gsub('-', '_').gsub('3d', 'three_dimensional')
+          namespace, name = namespaced.include?('/') ? namespaced.split('/') : [:root, namespaced]
+          object[namespace] ||= {}
+          object[namespace][name] = vocab
+        end
+        draw_namespaced_methods(names)
+      end
+
+      def draw_namespaced_methods(names)
+        names.flat_map do |namespace, methods|
+          [].tap do |items|
+            items << "class #{namespace.capitalize}" unless namespace == :root
+            items << draw_ruby_methods(methods)
+            items << 'end' unless namespace == :root
+          end
+        end.join("\n")
+      end
+
+      def draw_ruby_methods(methods)
+        methods.map do |name, vocab|
           <<~RUBY
             def self.#{name}
               "#{vocab}"
