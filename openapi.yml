@@ -229,13 +229,15 @@ components:
           type: array
           items:
             type: string
+        hasAdminPolicy:
+          $ref: '#/components/schemas/Druid'
+        referencesAgreement:
+          $ref: '#/components/schemas/Druid'
         roles:
           description: The access roles conferred by this AdminPolicy (used by Argo)
           type: array
           items:
             $ref: '#/components/schemas/AccessRole'
-        hasAdminPolicy:
-          type: string
       required:
         - hasAdminPolicy
     AppliesTo:
