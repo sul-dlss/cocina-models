@@ -248,6 +248,11 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveBasicValue"
+    Barcode:
+      description: The barcode associated with a DRO object
+      type: string
+      pattern: '^[0-9]{12,20}$'
+      example: 36105007006393
     CatalogLink:
       type: object
       additionalProperties: false
@@ -1083,6 +1088,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CatalogLink'
+        barcode:
+          $ref: '#/components/schemas/Barcode'
     Language:
       description: Languages, scripts, symbolic systems, and notations used in all
         or part of a resource or its descriptive metadata.

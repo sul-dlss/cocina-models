@@ -8,6 +8,9 @@ module Cocina
       # example: sul:PC0170_s3_Fiesta_Bowl_2012-01-02_210609_2026
       attribute :sourceId, Types::Strict::String.meta(omittable: true)
       attribute :catalogLinks, Types::Strict::Array.of(CatalogLink).meta(omittable: true)
+      # The barcode associated with a DRO object
+      # example: 36105007006393
+      attribute :barcode, Types::Strict::String.meta(omittable: true)
     end
   end
 end
