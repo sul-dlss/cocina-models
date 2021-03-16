@@ -249,10 +249,9 @@ components:
           items:
             $ref: "#/components/schemas/DescriptiveBasicValue"
     Barcode:
-      description: The barcode associated with a DRO object
+      description: The barcode associated with a DRO object in 
       type: string
-      pattern: '^[0-9]{12,20}$'
-      example: 36105007006393
+      pattern: '^[0-9]+-[0-9]+$|^36105[0-9]{9}$'
     CatalogLink:
       type: object
       additionalProperties: false
