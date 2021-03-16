@@ -9,8 +9,11 @@ module Cocina
       # example: wasCrawlPreassemblyWF
       attribute :disseminationWorkflow, Types::Strict::String.meta(omittable: true)
       attribute :collectionsForRegistration, Types::Strict::Array.of(Types::Strict::String).meta(omittable: true)
-      attribute :roles, Types::Strict::Array.of(AccessRole).meta(omittable: true)
+      # example: druid:bc123df4567
       attribute :hasAdminPolicy, Types::Strict::String
+      # example: druid:bc123df4567
+      attribute :referencesAgreement, Types::Strict::String.meta(omittable: true)
+      attribute :roles, Types::Strict::Array.of(AccessRole).meta(omittable: true)
     end
   end
 end

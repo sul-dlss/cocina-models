@@ -96,7 +96,7 @@ module Cocina
         doc.properties.map do |key, properties_doc|
           property_class_for(properties_doc).new(properties_doc,
                                                  key: key,
-                                                 required: doc.requires?(properties_doc),
+                                                 required: doc.requires?(key),
                                                  parent: self)
         end
       end
