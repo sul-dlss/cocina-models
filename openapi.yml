@@ -250,6 +250,11 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveBasicValue"
+    BusinessBarcode:
+      description: The barcode associated with a business library DRO object, prefixed with 2050
+      type: string
+      pattern: '^2050[0-9]{7}$'
+      example: 20503740296
     CatalogLink:
       type: object
       additionalProperties: false
@@ -265,6 +270,11 @@ components:
           description: Record identifier that is unique within the context of the linked record's catalog.
           type: string
           example: 11403803
+    CatkeyBarcode:
+      description: The barcode associated with a DRO object based on catkey, prefixed with 36105
+      type: string
+      pattern: '^[0-9]+-[0-9]+$'
+      example: 6772719-1001
     Collection:
       description: A group of Digital Repository Objects that indicate some type of conceptual grouping within the domain that is worth reusing across the system.
       type: object
@@ -1085,6 +1095,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CatalogLink'
+        barcode:
+          oneOf:
+            - $ref: '#/components/schemas/BusinessBarcode'
+            - $ref: '#/components/schemas/CatkeyBarcode'
+            - $ref: '#/components/schemas/StandardBarcode'
     Language:
       description: Languages, scripts, symbolic systems, and notations used in all
         or part of a resource or its descriptive metadata.
@@ -1583,6 +1598,11 @@ components:
           type: string
         source:
           $ref: "#/components/schemas/Source"
+    StandardBarcode:
+      description: The standard barcode associated with a DRO object, prefixed with 36105
+      type: string
+      pattern: '^36105[0-9]{9}$'
+      example: 36105010362304
     Title:
       type: object
       additionalProperties: false
