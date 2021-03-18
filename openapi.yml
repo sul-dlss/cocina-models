@@ -118,6 +118,13 @@ components:
             - 'art'
             - 'hoover'
             - 'm&m'
+        useAndReproductionStatement:
+          description: The human readable use and reproduction statement that applies
+          example: Property rights reside with the repository. Literary rights reside with the creators of the documents or their heirs. To obtain permission to publish or reproduce, please contact the Public Services Librarian of the Dept. of Special Collections (http://library.stanford.edu/spc).
+          type: string
+        license:
+          description: The license governing reuse of the Collection. Should be an IRI for known licenses (i.e. CC, RightsStatement.org URI, etc.).
+          type: string
     AccessRole:
       description: Access role conferred by an AdminPolicy to objects within it. (used by Argo)
       type: object
@@ -820,6 +827,9 @@ components:
         useAndReproductionStatement:
           description: The human readable use and reproduction statement that applies
           example: Property rights reside with the repository. Literary rights reside with the creators of the documents or their heirs. To obtain permission to publish or reproduce, please contact the Public Services Librarian of the Dept. of Special Collections (http://library.stanford.edu/spc).
+          type: string
+        license:
+          description: The license governing reuse of the DRO. Should be an IRI for known licenses (i.e. CC, RightsStatement.org URI, etc.).
           type: string
     DROStructural:
       description: Structural metadata

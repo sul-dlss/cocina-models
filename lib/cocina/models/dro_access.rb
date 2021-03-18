@@ -19,6 +19,8 @@ module Cocina
       # The human readable use and reproduction statement that applies
       # example: Property rights reside with the repository. Literary rights reside with the creators of the documents or their heirs. To obtain permission to publish or reproduce, please contact the Public Services Librarian of the Dept. of Special Collections (http://library.stanford.edu/spc).
       attribute :useAndReproductionStatement, Types::Strict::String.meta(omittable: true)
+      # The license governing reuse of the DRO. Should be an IRI for known licenses (i.e. CC, RightsStatement.org URI, etc.).
+      attribute :license, Types::Strict::String.meta(omittable: true)
     end
   end
 end
