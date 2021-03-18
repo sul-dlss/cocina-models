@@ -9,7 +9,6 @@ module Cocina
       # The human readable copyright statement that applies
       # example: Copyright World Trade Organization
       attribute :copyright, Types::Strict::String.meta(omittable: true)
-      attribute :embargo, Embargo.optional.meta(omittable: true)
       # Download access level. This is used in the transition from Fedora as a way to set a default download level at registration that is copied down to all the files.
 
       attribute :download, Types::Strict::String.enum('world', 'stanford', 'location-based', 'none').meta(omittable: true)

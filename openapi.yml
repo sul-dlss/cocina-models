@@ -252,7 +252,7 @@ components:
       required:
         - hasAdminPolicy
     AdminPolicyDefaultAccess:
-      description: 'Provides the default access settings for an AdminPolicy. This is almost the same as DROAccess, but it provides no defaults.'
+      description: 'Provides the default access settings for an AdminPolicy. This is almost the same as DROAccess, but it provides no defaults and has no embargo.'
       type: object
       additionalProperties: false
       properties:
@@ -271,8 +271,6 @@ components:
           description: The human readable copyright statement that applies
           example: Copyright World Trade Organization
           type: string
-        embargo:
-          $ref: '#/components/schemas/Embargo'
         download:
           description: >
             Download access level. This is used in the transition from Fedora as
