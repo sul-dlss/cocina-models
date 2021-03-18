@@ -40,7 +40,7 @@ bundle exec rake release
 ```
 which pushes the gem to rubygems.org.  Next write up the release notes: https://github.com/sul-dlss/cocina-models/releases .
 
-Finally, you must release versions of [sdr-client](https://github.com/sul-dlss/sdr-client) and [dor-services-client](https://github.com/sul-dlss/dor-services-client/) pinned to this version because [Argo](https://github.com/sul-dlss/argo) depends on both of those. When [dor-services-app](https://github.com/sul-dlss/dor-services-app) is updated to use the new models (via the auto-update script), the clients must be updated at the same time or there is risk of models produced by dor-services-app not being acceptable to the clients.
+Finally, you must release versions of [sdr-client](https://github.com/sul-dlss/sdr-client) and [dor-services-client](https://github.com/sul-dlss/dor-services-client/) pinned to this version because [Argo](https://github.com/sul-dlss/argo) depends on both of those. When [dor-services-app](https://github.com/sul-dlss/dor-services-app) is updated to use the new models (via the auto-update script), the clients must be updated at the same time or there is a risk of models produced by dor-services-app not being acceptable to the clients.
 
 ### Communicate
 
