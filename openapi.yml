@@ -257,6 +257,12 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveBasicValue"
+    Barcode:
+      description: 'A barcode'
+      oneOf:
+        - $ref: '#/components/schemas/BusinessBarcode'
+        - $ref: '#/components/schemas/CatkeyBarcode'
+        - $ref: '#/components/schemas/StandardBarcode'
     BusinessBarcode:
       description: The barcode associated with a business library DRO object, prefixed with 2050
       type: string
@@ -1106,10 +1112,7 @@ components:
           items:
             $ref: '#/components/schemas/CatalogLink'
         barcode:
-          oneOf:
-            - $ref: '#/components/schemas/BusinessBarcode'
-            - $ref: '#/components/schemas/CatkeyBarcode'
-            - $ref: '#/components/schemas/StandardBarcode'
+          $ref: '#/components/schemas/Barcode'
     Language:
       description: Languages, scripts, symbolic systems, and notations used in all
         or part of a resource or its descriptive metadata.
@@ -1529,6 +1532,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CatalogLink'
+        barcode:
+          $ref: '#/components/schemas/Barcode'
       required:
         - sourceId
     Sequence:
