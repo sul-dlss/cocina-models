@@ -126,11 +126,21 @@ RSpec.describe Cocina::Generator::SchemaValue do
   end
 
   context 'when property is not required' do
-    # Identification.sourceId is omittable
-    let(:identification) { Cocina::Models::Identification.new }
+    context 'when the value is omitted' do
+      # Identification.sourceId is omittable
+      let(:identification) { Cocina::Models::Identification.new }
 
-    it 'handles omittable' do
-      expect(identification.sourceId).to be_nil
+      it 'sets to nil' do
+        expect(identification.sourceId).to be_nil
+      end
+    end
+
+    context 'when the value set to nil' do
+      let(:default_access) { Cocina::Models::AdminPolicyDefaultAccess.new(copyright: nil) }
+
+      it 'sets to nil' do
+        expect(default_access.copyright).to be_nil
+      end
     end
   end
 

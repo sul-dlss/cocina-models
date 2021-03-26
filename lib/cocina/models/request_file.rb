@@ -10,11 +10,11 @@ module Cocina
       attribute :type, Types::Strict::String.enum(*RequestFile::TYPES)
       attribute :label, Types::Strict::String
       attribute :filename, Types::Strict::String
-      attribute :size, Types::Strict::Integer.meta(omittable: true)
+      attribute :size, Types::Strict::Integer.optional.meta(omittable: true)
       attribute :version, Types::Strict::Integer
-      attribute :hasMimeType, Types::Strict::String.meta(omittable: true)
-      attribute :externalIdentifier, Types::Strict::String.meta(omittable: true)
-      attribute :use, Types::Strict::String.meta(omittable: true)
+      attribute :hasMimeType, Types::Strict::String.optional.meta(omittable: true)
+      attribute :externalIdentifier, Types::Strict::String.optional.meta(omittable: true)
+      attribute :use, Types::Strict::String.optional.meta(omittable: true)
       attribute :hasMessageDigests, Types::Strict::Array.of(MessageDigest).default([].freeze)
       attribute(:access, FileAccess.default { FileAccess.new })
       attribute(:administrative, FileAdministrative.default { FileAdministrative.new })
