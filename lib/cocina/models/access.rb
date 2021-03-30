@@ -5,6 +5,9 @@ module Cocina
     class Access < Struct
       # Access level
       attribute :access, Types::Strict::String.default('dark').enum('world', 'stanford', 'location-based', 'citation-only', 'dark').meta(omittable: true)
+      # The human readable copyright statement that applies
+      # example: Copyright World Trade Organization
+      attribute :copyright, Types::Strict::String.meta(omittable: true)
       # If access is "location-based", which location should have access.
       attribute :readLocation, Types::Strict::String.enum('spec', 'music', 'ars', 'art', 'hoover', 'm&m').meta(omittable: true)
       # The human readable use and reproduction statement that applies
