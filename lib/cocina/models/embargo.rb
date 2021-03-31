@@ -10,7 +10,7 @@ module Cocina
       attribute :access, Types::Strict::String.enum('world', 'stanford', 'location-based', 'citation-only', 'dark')
       # The human readable use and reproduction statement that applies when the embargo expires.
       # example: These materials are in the public domain.
-      attribute :useAndReproductionStatement, Types::Strict::String.optional.meta(omittable: true)
+      attribute :useAndReproductionStatement, Types::Strict::String.meta(omittable: true)
     end
   end
 end

@@ -4,12 +4,13 @@ module Cocina
   module Generator
     # Base class for generating from openapi
     class SchemaBase
-      attr_reader :schema_doc, :key, :required, :parent
+      attr_reader :schema_doc, :key, :required, :nullable, :parent
 
-      def initialize(schema_doc, key: nil, required: false, parent: nil)
+      def initialize(schema_doc, key: nil, required: false, nullable: false, parent: nil)
         @schema_doc = schema_doc
         @key = key
         @required = required
+        @nullable = nullable
         @parent = parent
       end
 
@@ -29,12 +30,10 @@ module Cocina
         '.meta(omittable: true)'
       end
 
-      # Allows non-required values to be set to nil. This is useful when doing
+      # Allows nillable values to be set to nil. This is useful when doing
       # an update and you want to clear out a value.
       def optional
-        return '' if required
-
-        '.optional'
+        nullable ? '.optional' : ''
       end
 
       def quote(item)

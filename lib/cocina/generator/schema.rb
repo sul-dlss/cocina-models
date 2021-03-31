@@ -97,6 +97,7 @@ module Cocina
           property_class_for(properties_doc).new(properties_doc,
                                                  key: key,
                                                  required: doc.requires?(key),
+                                                 nullable: properties_doc.nullable?,
                                                  parent: self)
         end
       end
