@@ -17,7 +17,7 @@ module Cocina
       attribute :script, DescriptiveValue.optional.meta(omittable: true)
       attribute :source, Source.optional.meta(omittable: true)
       # Status of the language relative to other parallel language elements (e.g. the primary language)
-      attribute :status, Types::Strict::String.enum('primary').optional.meta(omittable: true)
+      attribute :status, Types::Strict::String.optional.enum('primary').meta(omittable: true)
       attribute :standard, Standard.optional.meta(omittable: true)
       attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       # URI value of the descriptive element.

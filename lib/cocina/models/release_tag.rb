@@ -8,7 +8,7 @@ module Cocina
       attribute :who, Types::Strict::String.optional.meta(omittable: true)
       # What is being released. This item or the whole collection.
       # example: self
-      attribute :what, Types::Strict::String.enum('self', 'collection').optional.meta(omittable: true)
+      attribute :what, Types::Strict::String.optional.enum('self', 'collection').meta(omittable: true)
       # When did this action happen
       attribute :date, Types::Params::DateTime.optional.meta(omittable: true)
       # What platform is it released to
