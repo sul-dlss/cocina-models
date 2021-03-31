@@ -4,11 +4,11 @@ module Cocina
   module Models
     class RelatedResource < Struct
       # The relationship of the related resource to the described resource.
-      attribute :type, Types::Strict::String.meta(omittable: true)
+      attribute :type, Types::Strict::String.optional.meta(omittable: true)
       # Status of the related resource relative to other related resources.
-      attribute :status, Types::Strict::String.meta(omittable: true)
+      attribute :status, Types::Strict::String.optional.meta(omittable: true)
       # The preferred display label to use for the related resource in access systems.
-      attribute :displayLabel, Types::Strict::String.meta(omittable: true)
+      attribute :displayLabel, Types::Strict::String.optional.meta(omittable: true)
       attribute :title, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :contributor, Types::Strict::Array.of(Contributor).meta(omittable: true)
       attribute :event, Types::Strict::Array.of(Event).meta(omittable: true)
@@ -19,14 +19,14 @@ module Cocina
       attribute :standard, Standard.optional.meta(omittable: true)
       attribute :subject, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       # Stanford persistent URL associated with the related resource.
-      attribute :purl, Types::Strict::String.meta(omittable: true)
+      attribute :purl, Types::Strict::String.optional.meta(omittable: true)
       attribute :access, DescriptiveAccessMetadata.optional.meta(omittable: true)
       attribute :relatedResource, Types::Strict::Array.of(RelatedResource).meta(omittable: true)
       attribute :adminMetadata, DescriptiveAdminMetadata.optional.meta(omittable: true)
       # The version of the related resource.
-      attribute :version, Types::Strict::String.meta(omittable: true)
+      attribute :version, Types::Strict::String.optional.meta(omittable: true)
       # URL or other pointer to the location of the related resource information.
-      attribute :valueAt, Types::Strict::String.meta(omittable: true)
+      attribute :valueAt, Types::Strict::String.optional.meta(omittable: true)
     end
   end
 end

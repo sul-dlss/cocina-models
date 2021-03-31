@@ -7,7 +7,7 @@ module Cocina
       attribute :hasMemberOrders, Types::Strict::Array.of(Sequence).meta(omittable: true)
       attribute :isMemberOf, Types::Strict::Array.of(Druid).meta(omittable: true)
       # Agreement that covers the deposit of the DRO into SDR.
-      attribute :hasAgreement, Types::Strict::String.meta(omittable: true)
+      attribute :hasAgreement, Types::Strict::String.optional.meta(omittable: true)
     end
   end
 end

@@ -7,27 +7,27 @@ module Cocina
       attribute :parallelValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :groupedValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       # String or integer value of the descriptive element.
-      attribute :value, Types::Nominal::Any.meta(omittable: true)
+      attribute :value, Types::Nominal::Any.optional.meta(omittable: true)
       # Type of value provided by the descriptive element.
-      attribute :type, Types::Strict::String.meta(omittable: true)
+      attribute :type, Types::Strict::String.optional.meta(omittable: true)
       # Status of the descriptive element value relative to other instances of the element.
-      attribute :status, Types::Strict::String.meta(omittable: true)
+      attribute :status, Types::Strict::String.optional.meta(omittable: true)
       # Code value of the descriptive element.
-      attribute :code, Types::Strict::String.meta(omittable: true)
+      attribute :code, Types::Strict::String.optional.meta(omittable: true)
       # URI value of the descriptive element.
-      attribute :uri, Types::Strict::String.meta(omittable: true)
+      attribute :uri, Types::Strict::String.optional.meta(omittable: true)
       attribute :standard, Standard.optional.meta(omittable: true)
       attribute :encoding, Standard.optional.meta(omittable: true)
       attribute :identifier, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :source, Source.optional.meta(omittable: true)
       # The preferred display label to use for the descriptive element in access systems.
-      attribute :displayLabel, Types::Strict::String.meta(omittable: true)
+      attribute :displayLabel, Types::Strict::String.optional.meta(omittable: true)
       # A term providing information about the circumstances of the statement (e.g., approximate dates).
-      attribute :qualifier, Types::Strict::String.meta(omittable: true)
+      attribute :qualifier, Types::Strict::String.optional.meta(omittable: true)
       attribute :note, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :valueLanguage, DescriptiveValueLanguage.optional.meta(omittable: true)
       # URL or other pointer to the location of the value of the descriptive element.
-      attribute :valueAt, Types::Strict::String.meta(omittable: true)
+      attribute :valueAt, Types::Strict::String.optional.meta(omittable: true)
     end
   end
 end

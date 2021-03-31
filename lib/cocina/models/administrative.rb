@@ -8,7 +8,7 @@ module Cocina
       attribute :releaseTags, Types::Strict::Array.of(ReleaseTag).meta(omittable: true)
       # Administrative or Internal project this resource is a part of
       # example: Google Books
-      attribute :partOfProject, Types::Strict::String.meta(omittable: true)
+      attribute :partOfProject, Types::Strict::String.optional.meta(omittable: true)
     end
   end
 end
