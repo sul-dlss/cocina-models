@@ -20,6 +20,25 @@ RSpec.describe Cocina::Models::Validator do
     end
   end
 
+  context 'when a nil value is passed' do
+    let(:policy) do
+      Cocina::Models::AdminPolicy.new(
+        externalIdentifier: 'druid:bc123df4567',
+        label: 'My admin policy',
+        type: Cocina::Models::Vocab.admin_policy,
+        version: 1,
+        administrative: {
+          defaultAccess: { copyright: nil },
+          hasAdminPolicy: 'druid:bc123df4567'
+        }
+      )
+    end
+
+    it 'does not raise' do
+      expect(policy.externalIdentifier).to eq('druid:bc123df4567')
+    end
+  end
+
   describe 'when invalid' do
     let(:policy) do
       Cocina::Models::AdminPolicy.new(

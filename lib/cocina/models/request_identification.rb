@@ -9,7 +9,7 @@ module Cocina
       attribute :sourceId, Types::Strict::String
       attribute :catalogLinks, Types::Strict::Array.of(CatalogLink).meta(omittable: true)
       # A barcode
-      attribute :barcode, Types::Nominal::Any.optional.meta(omittable: true)
+      attribute :barcode, Types::Nominal::Any.meta(omittable: true)
     end
   end
 end

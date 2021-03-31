@@ -16,13 +16,13 @@ module Cocina
       # Filename for a file. Can be same as label.
       attribute :filename, Types::Strict::String
       # Size of the File (binary) in bytes.
-      attribute :size, Types::Strict::Integer.optional.meta(omittable: true)
+      attribute :size, Types::Strict::Integer.meta(omittable: true)
       # Version for the File within SDR.
       attribute :version, Types::Strict::Integer
       # MIME Type of the File.
-      attribute :hasMimeType, Types::Strict::String.optional.meta(omittable: true)
+      attribute :hasMimeType, Types::Strict::String.meta(omittable: true)
       # Use for the File.
-      attribute :use, Types::Strict::String.optional.meta(omittable: true)
+      attribute :use, Types::Strict::String.meta(omittable: true)
       attribute :hasMessageDigests, Types::Strict::Array.of(MessageDigest).default([].freeze)
       attribute(:access, FileAccess.default { FileAccess.new })
       attribute(:administrative, FileAdministrative.default { FileAdministrative.new })
