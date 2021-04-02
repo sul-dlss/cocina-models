@@ -34,44 +34,53 @@ Beyond what is necessary to test the generator, the Cocina model classes are not
 
 ## Releasing
 
+### Step 0: Share intent to change the models
+
+Send a note to `#dlss-infra-chg-mgmt` on Slack to let people know what is changing and when.
+
+### Step 1: Cut the release
+
 The release process is much like any other gem. First bump the version in `lib/cocina/models/version.rb`, and commit the result. Then run:
 ```
 bundle exec rake release
 ```
 which pushes the gem to rubygems.org.  Next write up the release notes: https://github.com/sul-dlss/cocina-models/releases .
 
-Finally, you must release versions of [sdr-client](https://github.com/sul-dlss/sdr-client) and [dor-services-client](https://github.com/sul-dlss/dor-services-client/) pinned to this version because [Argo](https://github.com/sul-dlss/argo) depends on both of those. When [dor-services-app](https://github.com/sul-dlss/dor-services-app) is updated to use the new models (via the auto-update script), the clients must be updated at the same time or there is risk of models produced by dor-services-app not being acceptable to the clients.
+### Step 2: Update client gems coupled to the models
 
-### Communicate
+Next, you should release versions of [sdr-client](https://github.com/sul-dlss/sdr-client) and [dor-services-client](https://github.com/sul-dlss/dor-services-client/) pinned to this version because applications such as [Argo](https://github.com/sul-dlss/argo) depend on both of these gems using the same models.
 
-Send a note to `#dlss-infra-chg-mgmt` on Slack to let people know what is changing and when.
+### Step 3: Update service API specifications and gems
 
-### Dependent Services
+The cocina-models gem is used in applications that have an API specification that accepts Cocina models. Next, make sure that the `openapi.yml` for these applications include the `openapi.yml` schema changes made in cocina-models. This list of services is known to include:
 
-Once the above listed gems are updated all the following services that use cocina-models should be updated and released at the same time:
+* [sul-dlss/sdr-api](https://github.com/sul-dlss/sdr-api)
+* [sul-dlss/dor-services-app](https://github.com/sul-dlss/dor-services-app/)
 
-* sul-dlss/sdr-api
-* sul-dlss/dor-services-app
-* sul-dlss/google-books
-* sul-dlss/common-accessioning
-* sul-dlss/argo
-* sul-dlss/pre-assembly
-* sul-dlss/hydrus
-* sul-dlss/happy-heron
-* sul-dlss/infrastructure-integration-test
-* sul-dlss/dor_indexing_app
+This can be accomplished by copying and pasting these schemas. By convention, these schemas are listed first in the `openapi.yml` of the associated projects, followed by the application-specific schemas.
 
-## Using this gem
+#### Step 3b: Bump gems
 
-If you are using this gem in an application that has an API that accepts Cocina models (e.g., SDR API, Dor-Services-App), make sure that the `openapi.yml` for the application includes the schemas that match the schemas in this `openapi.yml`.
+At the same, we have found it convenient to use these PRs to also bump the versions of cocina-models, sdr-client, and dor-services-client in these applications/services. Why? When [dor-services-app](https://github.com/sul-dlss/dor-services-app), for example, is updated to use the new models (via the auto-update script), these clients should be updated at the same time or there is risk of models produced by dor-services-app not being acceptable to the clients.
 
-This can be accomplished by cutting and pasting these schemas. By convention, these schemas are listed first in the `openapi.yml` of the associated projects, followed by the application-specific schemas.
+### Step 4: Update other dependent applications
 
-### Usage conventions
+Once the above listed steps have been completed, all the following applications that use cocina-models should be updated and released at the same time:
+
+* [sul-dlss/dor_indexing_app](https://github.com/sul-dlss/dor_indexing_app/)
+* [sul-dlss/common-accessioning](https://github.com/sul-dlss/common-accessioning/)
+* [sul-dlss/google-books](https://github.com/sul-dlss/google-books/)
+* [sul-dlss/argo](https://github.com/sul-dlss/argo/)
+* [sul-dlss/pre-assembly](https://github.com/sul-dlss/pre-assembly/)
+* [sul-dlss/hydrus](https://github.com/sul-dlss/hydrus/)
+* [sul-dlss/happy-heron](https://github.com/sul-dlss/happy-heron/)
+* [sul-dlss/infrastructure-integration-test](https://github.com/sul-dlss/infrastructure-integration-test/)
+
+## Usage conventions
 
 The following are the recommended naming conventions for code using Cocina models:
 
-* cocina_item: Cocina::Models::DRO instance
-* cocina_admin_policy: Cocina::Models::AdminPolicy instance
-* cocina_collection: Cocina::Models::Collection instance
-* cocina_object: Cocina::Models::DRO or Cocina::Models::AdminPolicy or Cocina::Models::Collection instance
+* `cocina_item`: `Cocina::Models::DRO` instance
+* `cocina_admin_policy`: `Cocina::Models::AdminPolicy` instance
+* `cocina_collection`: `Cocina::Models::Collection` instance
+* `cocina_object`: `Cocina::Models::DRO` or `Cocina::Models::AdminPolicy` or `Cocina::Models::Collection` instance
