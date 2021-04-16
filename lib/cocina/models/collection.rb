@@ -20,7 +20,7 @@ module Cocina
       attribute :label, Types::Strict::String
       # Version for the Collection within SDR.
       attribute :version, Types::Strict::Integer
-      attribute(:access, Access.default { Access.new })
+      attribute(:access, CollectionAccess.default { CollectionAccess.new })
       attribute :administrative, Administrative.optional.meta(omittable: true)
       attribute :description, Description.optional.meta(omittable: true)
       attribute :identification, CollectionIdentification.optional.meta(omittable: true)

@@ -5,7 +5,7 @@ module Cocina
     # Class for generating from an openapi schema
     class Schema < SchemaBase
       def schema_properties
-        @schema_properties ||= (properties + all_of_properties).uniq(&:key)
+        @schema_properties ||= (properties + all_of_properties + one_of_properties).uniq(&:key)
       end
 
       def generate
@@ -83,13 +83,40 @@ module Cocina
         all_of_properties_for(schema_doc)
       end
 
+      def one_of_properties
+        one_of_properties_for(schema_doc)
+      end
+
       def all_of_properties_for(doc)
         return [] if doc.all_of.nil?
 
         doc.all_of.map do |all_of_schema|
           # All of for this + recurse
-          schema_properties_for(all_of_schema) + all_of_properties_for(all_of_schema)
+          schema_properties_for(all_of_schema) +
+            all_of_properties_for(all_of_schema) +
+            one_of_properties_for(all_of_schema)
         end.flatten
+      end
+
+      def one_of_properties_for(doc)
+        return [] if doc.one_of.nil?
+
+        # All properties must be objects.
+        unless doc.one_of.all? { |schema| schema.type == 'object' }
+          raise 'All properties for oneOf must be objects'
+        end
+
+        doc.one_of.flat_map do |one_of_doc|
+          one_of_doc.properties.map do |key, properties_doc|
+            property_class_for(properties_doc).new(properties_doc,
+                                                   key: key,
+                                                   # The property does less validation because may vary between
+                                                   # different oneOf schemas. Validation is still performed
+                                                   # by openAPI.
+                                                   relaxed: true,
+                                                   parent: self)
+          end
+        end
       end
 
       def schema_properties_for(doc)
