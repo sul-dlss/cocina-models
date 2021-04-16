@@ -4,14 +4,15 @@ module Cocina
   module Generator
     # Base class for generating from openapi
     class SchemaBase
-      attr_reader :schema_doc, :key, :required, :nullable, :parent
+      attr_reader :schema_doc, :key, :required, :nullable, :parent, :relaxed
 
-      def initialize(schema_doc, key: nil, required: false, nullable: false, parent: nil)
+      def initialize(schema_doc, key: nil, required: false, nullable: false, parent: nil, relaxed: false)
         @schema_doc = schema_doc
         @key = key
         @required = required
         @nullable = nullable
         @parent = parent
+        @relaxed = relaxed
       end
 
       def filename
@@ -25,7 +26,7 @@ module Cocina
       # Allows non-required values to not be provided. This allows smaller
       # requests as not every field needs to be present.
       def omittable
-        return '' if required
+        return '' if required && !relaxed
 
         '.meta(omittable: true)'
       end
@@ -33,7 +34,7 @@ module Cocina
       # Allows nillable values to be set to nil. This is useful when doing
       # an update and you want to clear out a value.
       def optional
-        nullable ? '.optional' : ''
+        nullable || relaxed ? '.optional' : ''
       end
 
       def quote(item)
@@ -54,6 +55,12 @@ module Cocina
         "# example: #{schema_doc.example}\n"
       end
 
+      def relaxed_comment
+        return '' unless relaxed
+
+        "# Validation of this property is relaxed. See the openapi for full validation.\n"
+      end
+
       def dry_datatype(doc)
         case doc.type
         when 'integer'
@@ -63,12 +70,16 @@ module Cocina
         when 'boolean'
           'Strict::Bool'
         else
-          if doc.one_of&.map(&:type).all? { |o| %w[integer string].include?(o) }
+          if any_datatype?(doc)
             'Nominal::Any'
           else
             raise "#{schema_doc.type} not supported"
           end
         end
+      end
+
+      def any_datatype?(doc)
+        relaxed || doc.one_of&.map(&:type).all? { |o| %w[integer string].include?(o) }
       end
 
       def string_dry_datatype(doc)

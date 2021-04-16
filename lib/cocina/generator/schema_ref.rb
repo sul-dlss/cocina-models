@@ -5,7 +5,7 @@ module Cocina
     # Class for generating from an openapi reference
     class SchemaRef < SchemaBase
       def generate
-        if required
+        if required && !relaxed
           "attribute(:#{name.camelize(:lower)}, #{schema_doc.name}.default { #{schema_doc.name}.new })"
         else
           "attribute :#{name.camelize(:lower)}, #{schema_doc.name}.optional.meta(omittable: true)"

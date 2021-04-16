@@ -59,20 +59,20 @@ RSpec.describe Cocina::Generator::SchemaValue do
   end
 
   context 'when property is an enum' do
-    # Embargo.access is an enum
+    # AccessRole.name is an enum
     context 'when value is in enum list' do
-      let(:embargo) { Cocina::Models::Embargo.new(releaseDate: '2009-12-14T07:00:00Z', access: 'world') }
+      let(:role) { Cocina::Models::AccessRole.new(name: 'dor-apo-creator') }
 
       it 'maps to an enum' do
-        expect(embargo.access).to eq('world')
+        expect(role.name).to eq('dor-apo-creator')
       end
     end
 
     context 'when value is not in enum list' do
-      let(:embargo) { Cocina::Models::Embargo.new(releaseDate: '2009-12-14T07:00:00Z', access: 'my office') }
+      let(:role) { Cocina::Models::AccessRole.new(name: 'the-creator') }
 
       it 'raises' do
-        expect { embargo }.to raise_error(Dry::Struct::Error)
+        expect { role }.to raise_error(Dry::Struct::Error)
       end
     end
 
@@ -136,7 +136,7 @@ RSpec.describe Cocina::Generator::SchemaValue do
     end
 
     context 'when the value is omitted and has a default' do
-      # DROAccess.download is not required and as a default
+      # DROAccess.download is not required and has a default
       let(:access) { Cocina::Models::DROAccess.new }
 
       it 'sets to the default' do
@@ -156,11 +156,22 @@ RSpec.describe Cocina::Generator::SchemaValue do
   end
 
   context 'when property has a default' do
-    # Access.access has a default
-    let(:access) { Cocina::Models::Access.new }
+    # CollectionAccess.access has a default
+    let(:access) { Cocina::Models::CollectionAccess.new }
 
     it 'default is provided' do
       expect(access.access).to eq('dark')
+    end
+  end
+
+  context 'when property is relaxed' do
+    # Properties are relaxed when part of oneOf. This leaves the validation to openApi, rather than dry-struct.
+    # Access.access and Access.location are constructed from a oneOf.
+    let(:access) { Cocina::Models::Access.new(access: nil, readLocation: 'my office') }
+
+    it 'is not required and does not have enum' do
+      expect(access.access).to be_nil
+      expect(access.readLocation).to eq('my office')
     end
   end
 end

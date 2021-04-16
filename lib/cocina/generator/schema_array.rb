@@ -9,7 +9,7 @@ module Cocina
       end
 
       def omittable
-        if required
+        if required && !relaxed
           '.default([].freeze)'
         else
           '.meta(omittable: true)'
