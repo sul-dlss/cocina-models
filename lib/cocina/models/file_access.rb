@@ -3,14 +3,17 @@
 module Cocina
   module Models
     class FileAccess < Struct
-      # Access level
-      attribute :access, Types::Strict::String.default('dark').enum('world', 'stanford', 'location-based', 'citation-only', 'dark').meta(omittable: true)
-      # Available for controlled digital lending.
-      attribute :controlledDigitalLending, Types::Strict::Bool.meta(omittable: true)
-      # Download access level for a file
-      attribute :download, Types::Strict::String.default('none').enum('world', 'stanford', 'location-based', 'none').meta(omittable: true)
+      # Access level.
+      # Validation of this property is relaxed. See the openapi for full validation.
+      attribute :access, Types::Strict::String.optional.default('dark').meta(omittable: true)
+      # Download access level.
+      # Validation of this property is relaxed. See the openapi for full validation.
+      attribute :download, Types::Strict::String.optional.default('none').meta(omittable: true)
       # If access is "location-based", which location should have access.
-      attribute :readLocation, Types::Strict::String.enum('spec', 'music', 'ars', 'art', 'hoover', 'm&m').meta(omittable: true)
+      # Validation of this property is relaxed. See the openapi for full validation.
+      attribute :readLocation, Types::Strict::String.optional.meta(omittable: true)
+      # Validation of this property is relaxed. See the openapi for full validation.
+      attribute :controlledDigitalLending, Types::Strict::Bool.optional.meta(omittable: true)
     end
   end
 end

@@ -79,6 +79,8 @@ Metrics/BlockLength:
 
 Metrics/MethodLength:
   Max: 14
+  Exclude:
+    - 'spec/cocina/models/file_access_spec.rb'
 
 # ----- RSpec ------
 
