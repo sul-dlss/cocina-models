@@ -220,6 +220,8 @@ components:
             type: string
         hasAdminPolicy:
           $ref: '#/components/schemas/Druid'
+        hasAgreement:
+          $ref: '#/components/schemas/Druid'
         referencesAgreement:
           $ref: '#/components/schemas/Druid'
         roles:
@@ -229,6 +231,7 @@ components:
             $ref: '#/components/schemas/AccessRole'
       required:
         - hasAdminPolicy
+        - hasAgreement
     AdminPolicyDefaultAccess:
       description: 'Provides the default access settings for an AdminPolicy. This is almost the same as DROAccess, but it provides no defaults and has no embargo.'
       type: object
@@ -1004,9 +1007,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Druid'
-        hasAgreement:
-          description: Agreement that covers the deposit of the DRO into SDR.
-          type: string
     Druid:
       type: string
       pattern: '^druid:[b-df-hjkmnp-tv-z]{2}[0-9]{3}[b-df-hjkmnp-tv-z]{2}[0-9]{4}$'
@@ -1619,8 +1619,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Druid'
-        hasAgreement:
-          type: string
     RequestFile:
       type: object
       additionalProperties: false

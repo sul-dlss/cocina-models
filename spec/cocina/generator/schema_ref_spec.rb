@@ -13,7 +13,10 @@ RSpec.describe Cocina::Generator::SchemaRef do
                                           label: 'My admin policy',
                                           type: Cocina::Models::Vocab.admin_policy,
                                           version: 1,
-                                          administrative: { hasAdminPolicy: 'druid:bc123df4567' }
+                                          administrative: {
+                                            hasAdminPolicy: 'druid:bc123df4567',
+                                            hasAgreement: 'druid:bc123df4567'
+                                          }
                                         }, false, false)
       end
 
@@ -28,13 +31,12 @@ RSpec.describe Cocina::Generator::SchemaRef do
                                           externalIdentifier: 'druid:bc123df4567',
                                           label: 'My admin policy',
                                           type: Cocina::Models::Vocab.admin_policy,
-                                          version: 1,
-                                          administrative: { hasAdminPolicy: 'druid:bc123df4567' }
+                                          version: 1
                                         }, false, false)
       end
 
-      it 'defaults to empty AdminPolicyAdministrative' do
-        expect(policy.administrative).to be_kind_of(Cocina::Models::AdminPolicyAdministrative)
+      it 'raises an error' do
+        expect { policy }.to raise_error(Dry::Struct::Error)
       end
     end
   end
@@ -47,7 +49,10 @@ RSpec.describe Cocina::Generator::SchemaRef do
                                         label: 'My admin policy',
                                         type: Cocina::Models::Vocab.admin_policy,
                                         version: 1,
-                                        administrative: { hasAdminPolicy: 'druid:bc123df4567' }
+                                        administrative: {
+                                          hasAdminPolicy: 'druid:bc123df4567',
+                                          hasAgreement: 'druid:bc123df4567'
+                                        }
                                       }, false, false)
     end
 

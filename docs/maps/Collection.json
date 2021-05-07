@@ -215,12 +215,7 @@
     "structural": {
       "description": "Structural metadata for the Collection.",
       "type": "object",
-      "required": ["hasAgreement"],
       "properties": {
-        "hasAgreement": {
-          "description": "Agreement that covers the deposit of the Collection into SDR.",
-          "type": "string"
-        },
         "hasMember": {
           "description": "Component digital repository objects or collections that are a part of this collection.",
           "type": "array",
