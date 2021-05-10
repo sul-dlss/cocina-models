@@ -408,6 +408,7 @@ components:
           description: The human readable copyright statement that applies
           example: Copyright World Trade Organization
           type: string
+          nullable: true
         useAndReproductionStatement:
           description: The human readable use and reproduction statement that applies
           example: Property rights reside with the repository. Literary rights reside with the creators of the documents or their heirs. To obtain permission to publish or reproduce, please contact the Public Services Librarian of the Dept. of Special Collections (http://library.stanford.edu/spc).
@@ -935,6 +936,7 @@ components:
               description: The human readable copyright statement that applies
               example: Copyright World Trade Organization
               type: string
+              nullable: true
             embargo:
               $ref: '#/components/schemas/Embargo'
             useAndReproductionStatement:
