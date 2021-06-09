@@ -72,6 +72,7 @@ Once the above listed steps have been completed, all the following applications 
 * [sul-dlss/google-books](https://github.com/sul-dlss/google-books/)
 * [sul-dlss/argo](https://github.com/sul-dlss/argo/)
 * [sul-dlss/pre-assembly](https://github.com/sul-dlss/pre-assembly/)
+* [sul-dlss/hydrus](https://github.com/sul-dlss/hydra_etd/)
 * [sul-dlss/hydrus](https://github.com/sul-dlss/hydrus/)
 * [sul-dlss/happy-heron](https://github.com/sul-dlss/happy-heron/)
 * [sul-dlss/infrastructure-integration-test](https://github.com/sul-dlss/infrastructure-integration-test/)
