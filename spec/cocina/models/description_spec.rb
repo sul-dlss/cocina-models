@@ -91,4 +91,16 @@ RSpec.describe Cocina::Models::Description do
       expect(title.status).to eq('primary')
     end
   end
+
+  context 'with an invalid purl' do
+    let(:properties) do
+      JSON.parse(File.read('spec/fixtures/description/etd.json')).tap do |props|
+        props['purl'] = 'https://purl.stanford.edu/hj456dt5655'
+      end
+    end
+
+    it 'raises' do
+      expect { item }.to raise_error(Cocina::Models::ValidationError)
+    end
+  end
 end
