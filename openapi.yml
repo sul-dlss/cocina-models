@@ -582,9 +582,7 @@ components:
           items:
             $ref: "#/components/schemas/DescriptiveValue"
         purl:
-          description: Stanford persistent URL associated with the resource.
-          type: string
-          format: uri
+          $ref: "#/components/schemas/Purl"
         access:
           $ref: "#/components/schemas/DescriptiveAccessMetadata"
         relatedResource:
@@ -1389,6 +1387,12 @@ components:
         width:
           description: Width in pixels
           type: integer
+    Purl:
+      description: Stanford persistent URL associated with the related resource. Note this is http, not https.
+      type: string
+      format: uri
+      # Canonical URI is http, even though this redirects to https.
+      pattern: '^http://'
     RelatedResource:
       description: Other resource associated with the described resource.
       type: object
@@ -1450,9 +1454,7 @@ components:
           items:
             $ref: "#/components/schemas/DescriptiveValue"
         purl:
-          description: Stanford persistent URL associated with the related resource.
-          type: string
-          format: uri
+          $ref: "#/components/schemas/Purl"
         access:
           $ref: "#/components/schemas/DescriptiveAccessMetadata"
         relatedResource:
