@@ -22,7 +22,6 @@ module Cocina
                'http://cocina.sul.stanford.edu/models/webarchive-seed.jsonld'].freeze
 
       # The content type of the DRO. Selected from an established set of values.
-      # example: item
       attribute :type, Types::Strict::String.enum(*DRO::TYPES)
       # example: druid:bc123df4567
       attribute :externalIdentifier, Types::Strict::String

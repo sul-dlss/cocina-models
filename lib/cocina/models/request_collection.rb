@@ -11,7 +11,6 @@ module Cocina
                'http://cocina.sul.stanford.edu/models/exhibit.jsonld',
                'http://cocina.sul.stanford.edu/models/series.jsonld'].freeze
 
-      # example: item
       attribute :type, Types::Strict::String.enum(*RequestCollection::TYPES)
       attribute :label, Types::Strict::String
       attribute :version, Types::Strict::Integer

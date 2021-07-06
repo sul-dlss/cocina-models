@@ -21,7 +21,6 @@ module Cocina
                'http://cocina.sul.stanford.edu/models/webarchive-binary.jsonld',
                'http://cocina.sul.stanford.edu/models/webarchive-seed.jsonld'].freeze
 
-      # example: item
       attribute :type, Types::Strict::String.enum(*RequestDRO::TYPES)
       attribute :label, Types::Strict::String
       attribute :version, Types::Strict::Integer

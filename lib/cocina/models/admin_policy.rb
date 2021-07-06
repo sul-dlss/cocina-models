@@ -7,7 +7,6 @@ module Cocina
 
       TYPES = ['http://cocina.sul.stanford.edu/models/admin_policy.jsonld'].freeze
 
-      # example: item
       attribute :type, Types::Strict::String.enum(*AdminPolicy::TYPES)
       # example: druid:bc123df4567
       attribute :externalIdentifier, Types::Strict::String
