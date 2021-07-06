@@ -12,7 +12,7 @@ module Cocina
       attribute :note, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :identifier, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
       attribute :subject, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
-      # Stanford persistent URL associated with the resource.
+      # Stanford persistent URL associated with the related resource. Note this is http, not https.
       attribute :purl, Types::Strict::String.meta(omittable: true)
       attribute :access, DescriptiveAccessMetadata.optional.meta(omittable: true)
       attribute :relatedResource, Types::Strict::Array.of(RelatedResource).meta(omittable: true)
