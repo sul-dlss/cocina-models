@@ -14,27 +14,19 @@ require 'thor'
 
 # Help Zeitwerk find some of our classes
 class CocinaModelsInflector < Zeitwerk::Inflector
-  # rubocop:disable Metrics/MethodLength
-  def camelize(basename, _abspath)
-    case basename
-    when 'dro'
-      'DRO'
-    when 'request_dro'
-      'RequestDRO'
-    when 'dro_access'
-      'DROAccess'
-    when 'dro_structural'
-      'DROStructural'
-    when 'request_dro_structural'
-      'RequestDROStructural'
-    when 'version'
-      'VERSION'
-    else
-      super
-    end
-  end
+  INFLECTIONS = {
+    'doi' => 'DOI',
+    'dro' => 'DRO',
+    'request_dro' => 'RequestDRO',
+    'dro_access' => 'DROAccess',
+    'dro_structural' => 'DROStructural',
+    'request_dro_structural' => 'RequestDROStructural',
+    'version' => 'VERSION'
+  }.freeze
 
-  # rubocop:enable Metrics/MethodLength
+  def camelize(basename, _abspath)
+    INFLECTIONS.fetch(basename) { super }
+  end
 end
 
 loader = Zeitwerk::Loader.new
