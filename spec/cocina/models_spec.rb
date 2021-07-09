@@ -115,7 +115,7 @@ RSpec.describe Cocina::Models do
           'version' => 5,
           'identification' => {
             'sourceId' => 'sul:123',
-            'doi' => '10.25740/druid:bc123df4567'
+            'doi' => '10.25740/bc123df4567'
           },
           'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
         }
