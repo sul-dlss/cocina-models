@@ -1704,7 +1704,9 @@ components:
           items:
             $ref: '#/components/schemas/RequestFile'
     RequestIdentification:
-      description: Same as a Identification, but requires a sourceId.
+      # Doesn't permit a DOI because our DOIs all use the DRUID as part of the DOI.
+      # You have to register the object in order to get the DRUID before you can mint a DOI
+      description: Same as a Identification, but requires a sourceId and doesn't permit a DOI.
       type: object
       additionalProperties: false
       properties:
@@ -1714,8 +1716,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CatalogLink'
-        doi:
-          $ref: '#/components/schemas/DOI'
         sourceId:
           $ref: '#/components/schemas/SourceId'
       required:
