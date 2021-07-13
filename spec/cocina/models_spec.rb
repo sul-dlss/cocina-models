@@ -48,7 +48,10 @@ RSpec.describe Cocina::Models do
           'label' => 'bar',
           'version' => 5,
           'access' => {},
-          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
+          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' },
+          'identification' => {
+            'doi' => '10.25740/bc123df4567'
+          }
         }
       end
 
@@ -114,8 +117,7 @@ RSpec.describe Cocina::Models do
           'label' => 'bar',
           'version' => 5,
           'identification' => {
-            'sourceId' => 'sul:123',
-            'doi' => '10.25740/bc123df4567'
+            'sourceId' => 'sul:123'
           },
           'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
         }
