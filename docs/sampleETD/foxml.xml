@@ -944,7 +944,7 @@ xsi:schemaLocation="info:fedora/fedora-system:def/foxml# http://www.fedora.info/
   <note>Submitted to the Graduate School of Education.</note>
   <note type="thesis">Thesis (Ph.D.)--Stanford University, 2015.</note>
   <location>
-  <url displayLabel="electronic resource" usage="primary display">http://purl.stanford.edu/xn109qc9773</url>
+  <url displayLabel="electronic resource" usage="primary display">https://purl.stanford.edu/xn109qc9773</url>
   </location>
   <recordInfo>
   <recordContentSource authority="marcorg">CSt</recordContentSource>
