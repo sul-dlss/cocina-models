@@ -65,7 +65,7 @@ RSpec.describe Cocina::Models::Description do
       expect(identifier.value).to eq('0000005406')
       expect(identifier.type).to eq('ETD ID')
 
-      expect(item.purl).to eq('http://purl.stanford.edu/hj456dt5655')
+      expect(item.purl).to eq('https://purl.stanford.edu/hj456dt5655')
 
       url = item.access.url.first
       expect(url.value).to eq('https://etd.stanford.edu/view/0000005406')
@@ -95,7 +95,7 @@ RSpec.describe Cocina::Models::Description do
   context 'with an invalid purl' do
     let(:properties) do
       JSON.parse(File.read('spec/fixtures/description/etd.json')).tap do |props|
-        props['purl'] = 'https://purl.stanford.edu/hj456dt5655'
+        props['purl'] = 'http://purl.stanford.edu/hj456dt5655'
       end
     end
 

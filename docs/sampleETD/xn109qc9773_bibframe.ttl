@@ -86,7 +86,7 @@
 
 :xn109qc9773_item [ a bf:Item ;
     bf:electronicLocator [ a rdf:Resource ;
-        rdf:value <http://purl.stanford.edu/xn109qc9773> ;
+        rdf:value <https://purl.stanford.edu/xn109qc9773> ;
         bf:note [ a bf:Note ;
             rdfs:label "primary display" ;
             bf:noteType "URL usage"
