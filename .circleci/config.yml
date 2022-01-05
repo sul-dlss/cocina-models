@@ -6,12 +6,12 @@ executors:
 jobs:
   test:
     docker:
-    - image: circleci/ruby:2.7.0-node
+    - image: cimg/ruby:3.0-node
     steps:
     - checkout
     - run:
         name: install bundler
-        command: gem install bundler -v 2.1.4
+        command: gem install bundler -v 2.3.4
     - run:
         name: Install gem dependencies
         command: bundle check || bundle install
