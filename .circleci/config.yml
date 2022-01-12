@@ -1,51 +1,12 @@
 version: 2.1
-executors:
-  docker-publisher:
-    docker:
-    - image: circleci/buildpack-deps:stretch
-jobs:
-  test:
-    docker:
-    - image: cimg/ruby:3.0-node
-    steps:
-    - checkout
-    - run:
-        name: install bundler
-        command: gem install bundler -v 2.3.4
-    - run:
-        name: Install gem dependencies
-        command: bundle check || bundle install
-    - run:
-        name: Lint using rubocop
-        command: bundle exec rubocop
-    - run:
-        name: Setup Code Climate test-reporter
-        command: |
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-          chmod +x ./cc-test-reporter
-          ./cc-test-reporter before-build
-    - run:
-        name: Run RSpec test suite
-        command: bundle exec rspec
-    - run:
-        name: upload test coverage report to Code Climate
-        command: ./cc-test-reporter after-build --coverage-input-type simplecov --exit-code $?
-    - run:
-        name: Validate API specification
-        command: |
-          sudo npm install -g openapi-enforcer-cli
-          result=$(openapi-enforcer validate openapi.yml)
-          [[ $result =~ "Document is valid" ]] && {
-          echo "Validation good"
-          exit 0
-          } || {
-          echo $result
-          exit 1
-          }
-
+orbs:
+  ruby-rails: sul-dlss/ruby-rails@1.1.0
 workflows:
-  version: 2
-
-  test:
+  build:
     jobs:
-    - test
+      - ruby-rails/validate-api:
+          name: validate
+      - ruby-rails/lint:
+          name: lint
+      - ruby-rails/test-gem:
+          name: test
