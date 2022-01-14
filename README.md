@@ -65,17 +65,30 @@ At the same, we have found it convenient to use these PRs to also bump the versi
 
 ### Step 4: Update other dependent applications
 
-Once the above listed steps have been completed, all the following applications that use cocina-models should be updated and released at the same time:
+Once the above listed steps have been completed, all the following applications that use cocina-models should be updated and released at the same time.  "Cocina Level 2" describes this set of updates.
 
-* [sul-dlss/dor_indexing_app](https://github.com/sul-dlss/dor_indexing_app/)
-* [sul-dlss/common-accessioning](https://github.com/sul-dlss/common-accessioning/)
-* [sul-dlss/google-books](https://github.com/sul-dlss/google-books/)
 * [sul-dlss/argo](https://github.com/sul-dlss/argo/)
-* [sul-dlss/pre-assembly](https://github.com/sul-dlss/pre-assembly/)
-* [sul-dlss/hydra_etd](https://github.com/sul-dlss/hydra_etd/)
-* [sul-dlss/hydrus](https://github.com/sul-dlss/hydrus/)
+* [sul-dlss/common-accessioning](https://github.com/sul-dlss/common-accessioning/)
+* [sul-dlss/dor_indexing_app](https://github.com/sul-dlss/dor_indexing_app/)
+* [sul-dlss/google-books](https://github.com/sul-dlss/google-books/)
 * [sul-dlss/happy-heron](https://github.com/sul-dlss/happy-heron/)
+* [sul-dlss/hydra_etd](https://github.com/sul-dlss/hydra_etd/)
 * [sul-dlss/infrastructure-integration-test](https://github.com/sul-dlss/infrastructure-integration-test/)
+* [sul-dlss/pre-assembly](https://github.com/sul-dlss/pre-assembly/)
+
+There are scripts to help with this:
+
+#### Step 4A: Create the PRs
+
+access-update-scripts repo has a script for this:  `cocina_level2_prs.rb`.  You will need a github access token with scopes of "read:org" and "repo" (see https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) to run it, as noted in the comments at the top of that script.
+
+#### Step 4B: Merge the PRs
+
+[sul-dlss/access-update-scripts](https://github.com/sul-dlss/access-update-scripts) has a switch in the `merge-all.rb` script for this, as noted in the comments at the top of that script. (`REPOS_PATH=infrastructure GH_ACCESS_TOKEN=abc123 COCINA_LEVEL2= ./merge-all.rb`)
+
+### Step 5: Deploy all affected applications together
+
+[sul-dlss/sdr-deploy](https://github.com/sul-dlss/sdr-deploy) has a flag in the deploy script to limit deploys to cocina dependent applications.  Refer to instructions in the [sdr-deploy/README](https://github.com/sul-dlss/sdr-deploy/blob/main/README.md#only-deploy-repos-related-to-cocina-models-update).
 
 ## Usage conventions
 
