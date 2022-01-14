@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
-  spec.required_ruby_version = '>= 2.5'
+  spec.required_ruby_version = '>= 2.7'
 
   spec.add_dependency 'activesupport'
   spec.add_dependency 'dry-struct', '~> 1.0'
@@ -36,7 +36,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'committee'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'rubocop', '~> 0.93'
-  spec.add_development_dependency 'rubocop-rspec', '~> 1.44'
+  spec.add_development_dependency 'rubocop', '~> 1.24'
+  spec.add_development_dependency 'rubocop-rake'
+  spec.add_development_dependency 'rubocop-rspec', '~> 2.1'
   spec.add_development_dependency 'simplecov', '~> 0.17.0'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 end

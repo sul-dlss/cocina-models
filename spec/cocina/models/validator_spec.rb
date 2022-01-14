@@ -63,27 +63,27 @@ RSpec.describe Cocina::Models::Validator do
     let(:dro) do
       Cocina::Models::DRO.new(
         {
-          "type": 'http://cocina.sul.stanford.edu/models/image.jsonld',
-          "externalIdentifier": 'druid:bb000kg4251',
-          "label": 'Roger Howe Professorship',
-          "version": 3,
-          "access": {
-            "access": 'world',
-            "download": 'world',
-            "useAndReproductionStatement": 'Property rights reside with the repository.'
+          type: 'http://cocina.sul.stanford.edu/models/image.jsonld',
+          externalIdentifier: 'druid:bb000kg4251',
+          label: 'Roger Howe Professorship',
+          version: 3,
+          access: {
+            access: 'world',
+            download: 'world',
+            useAndReproductionStatement: 'Property rights reside with the repository.'
           },
-          "administrative": {
-            "hasAdminPolicy": 'druid:ww057vk7675',
-            "releaseTags": [
+          administrative: {
+            hasAdminPolicy: 'druid:ww057vk7675',
+            releaseTags: [
               {
-                "who": 'cspitzer',
-                "what": 'self',
-                "date": DateTime.new,
-                "to": 'Searchworks',
-                "release": true
+                who: 'cspitzer',
+                what: 'self',
+                date: DateTime.new,
+                to: 'Searchworks',
+                release: true
               }
             ],
-            "partOfProject": 'School of Engineering photograph collection'
+            partOfProject: 'School of Engineering photograph collection'
           }
         }
       )
