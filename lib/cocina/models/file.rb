@@ -23,7 +23,7 @@ module Cocina
       attribute :hasMimeType, Types::Strict::String.meta(omittable: true)
       # Use for the File.
       attribute :use, Types::Strict::String.meta(omittable: true)
-      attribute :hasMessageDigests, Types::Strict::Array.of(MessageDigest).default([].freeze)
+      attribute :hasMessageDigests, Types::Strict::Array.of(MessageDigest).default([])
       attribute(:access, FileAccess.default { FileAccess.new })
       attribute(:administrative, FileAdministrative.default { FileAdministrative.new })
       attribute :presentation, Presentation.optional.meta(omittable: true)

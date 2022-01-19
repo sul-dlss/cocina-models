@@ -3,7 +3,7 @@
 module Cocina
   module Models
     class AppliesTo < Struct
-      attribute :appliesTo, Types::Strict::Array.of(DescriptiveBasicValue).meta(omittable: true)
+      attribute :appliesTo, Types::Strict::Array.of(DescriptiveBasicValue).default([])
     end
   end
 end

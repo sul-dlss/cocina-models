@@ -5,15 +5,7 @@ module Cocina
     # Class for generating from an openapi array
     class SchemaArray < SchemaBase
       def generate
-        "attribute :#{name.camelize(:lower)}, Types::Strict::Array.of(#{array_of_type})#{omittable}"
-      end
-
-      def omittable
-        if required && !relaxed
-          '.default([].freeze)'
-        else
-          '.meta(omittable: true)'
-        end
+        "attribute :#{name.camelize(:lower)}, Types::Strict::Array.of(#{array_of_type}).default([])"
       end
 
       def array_of_type
