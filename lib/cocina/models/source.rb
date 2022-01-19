@@ -9,7 +9,7 @@ module Cocina
       attribute :uri, Types::Strict::String.meta(omittable: true)
       # String describing the value source.
       attribute :value, Types::Strict::String.meta(omittable: true)
-      attribute :note, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
+      attribute :note, Types::Strict::Array.of(DescriptiveValue).default([])
       # The version of the value source.
       attribute :version, Types::Strict::String.meta(omittable: true)
     end

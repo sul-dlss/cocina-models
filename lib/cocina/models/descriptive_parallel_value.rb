@@ -3,7 +3,7 @@
 module Cocina
   module Models
     class DescriptiveParallelValue < Struct
-      attribute :parallelValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
+      attribute :parallelValue, Types::Strict::Array.of(DescriptiveValue).default([])
     end
   end
 end

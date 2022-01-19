@@ -3,7 +3,7 @@
 module Cocina
   module Models
     class RequestFileSetStructural < Struct
-      attribute :contains, Types::Strict::Array.of(RequestFile).meta(omittable: true)
+      attribute :contains, Types::Strict::Array.of(RequestFile).default([])
     end
   end
 end
