@@ -3,8 +3,8 @@
 module Cocina
   module Models
     class DescriptiveGeographicMetadata < Struct
-      attribute :form, Types::Strict::Array.of(DescriptiveValue).default([])
-      attribute :subject, Types::Strict::Array.of(DescriptiveValue).default([])
+      attribute :form, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
+      attribute :subject, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
     end
   end
 end

@@ -67,8 +67,8 @@ RSpec.describe Cocina::Generator::SchemaArray do
       Cocina::Models::Description.new({}, false, false)
     end
 
-    it 'defaults to empty array' do
-      expect(description.contributor).to eq([])
+    it 'defaults to nil' do
+      expect(description.contributor).to be_nil
     end
   end
 end

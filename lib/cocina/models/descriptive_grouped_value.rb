@@ -3,7 +3,7 @@
 module Cocina
   module Models
     class DescriptiveGroupedValue < Struct
-      attribute :groupedValue, Types::Strict::Array.of(DescriptiveValue).default([])
+      attribute :groupedValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
     end
   end
 end
