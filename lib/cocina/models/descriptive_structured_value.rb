@@ -3,7 +3,7 @@
 module Cocina
   module Models
     class DescriptiveStructuredValue < Struct
-      attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).meta(omittable: true)
+      attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).default([])
     end
   end
 end
