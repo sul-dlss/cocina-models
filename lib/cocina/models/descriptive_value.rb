@@ -3,9 +3,9 @@
 module Cocina
   module Models
     class DescriptiveValue < Struct
-      attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).default([])
-      attribute :parallelValue, Types::Strict::Array.of(DescriptiveValue).default([])
-      attribute :groupedValue, Types::Strict::Array.of(DescriptiveValue).default([])
+      attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
+      attribute :parallelValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
+      attribute :groupedValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # String or integer value of the descriptive element.
       attribute :value, Types::Nominal::Any.meta(omittable: true)
       # Type of value provided by the descriptive element.
@@ -18,17 +18,17 @@ module Cocina
       attribute :uri, Types::Strict::String.meta(omittable: true)
       attribute :standard, Standard.optional.meta(omittable: true)
       attribute :encoding, Standard.optional.meta(omittable: true)
-      attribute :identifier, Types::Strict::Array.of(DescriptiveValue).default([])
+      attribute :identifier, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute :source, Source.optional.meta(omittable: true)
       # The preferred display label to use for the descriptive element in access systems.
       attribute :displayLabel, Types::Strict::String.meta(omittable: true)
       # A term providing information about the circumstances of the statement (e.g., approximate dates).
       attribute :qualifier, Types::Strict::String.meta(omittable: true)
-      attribute :note, Types::Strict::Array.of(DescriptiveValue).default([])
+      attribute :note, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute :valueLanguage, DescriptiveValueLanguage.optional.meta(omittable: true)
       # URL or other pointer to the location of the value of the descriptive element.
       attribute :valueAt, Types::Strict::String.meta(omittable: true)
-      attribute :appliesTo, Types::Strict::Array.of(DescriptiveBasicValue).default([])
+      attribute :appliesTo, Types::Strict::Array.of(DescriptiveBasicValue).default([].freeze)
     end
   end
 end

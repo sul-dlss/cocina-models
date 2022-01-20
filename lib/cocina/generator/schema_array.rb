@@ -5,7 +5,7 @@ module Cocina
     # Class for generating from an openapi array
     class SchemaArray < SchemaBase
       def generate
-        "attribute :#{name.camelize(:lower)}, Types::Strict::Array.of(#{array_of_type}).default([])"
+        "attribute :#{name.camelize(:lower)}, Types::Strict::Array.of(#{array_of_type}).default([].freeze)"
       end
 
       def array_of_type

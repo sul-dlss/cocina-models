@@ -3,7 +3,7 @@
 module Cocina
   module Models
     class FileSetStructural < Struct
-      attribute :contains, Types::Strict::Array.of(File).default([])
+      attribute :contains, Types::Strict::Array.of(File).default([].freeze)
     end
   end
 end
