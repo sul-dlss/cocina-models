@@ -11,7 +11,10 @@ RSpec.describe Cocina::Models::Validator do
         label: 'My admin policy',
         type: Cocina::Models::Vocab.admin_policy,
         version: 1,
-        administrative: { hasAdminPolicy: 'druid:bc123df4567' }
+        administrative: {
+          hasAdminPolicy: 'druid:bc123df4567',
+          hasAgreement: 'druid:bc123df4567'
+        }
       )
     end
 
@@ -29,7 +32,8 @@ RSpec.describe Cocina::Models::Validator do
         version: 1,
         administrative: {
           defaultAccess: { copyright: nil },
-          hasAdminPolicy: 'druid:bc123df4567'
+          hasAdminPolicy: 'druid:bc123df4567',
+          hasAgreement: 'druid:bc123df4567'
         }
       )
     end
@@ -101,7 +105,10 @@ RSpec.describe Cocina::Models::Validator do
                                         label: 'My admin policy',
                                         type: Cocina::Models::Vocab.admin_policy,
                                         version: 1,
-                                        administrative: { hasAdminPolicy: 'druid:bc123df4567' }
+                                        administrative: {
+                                          hasAdminPolicy: 'druid:bc123df4567',
+                                          hasAgreement: 'druid:bc123df4567'
+                                        }
                                       }, false, false)
     end
 

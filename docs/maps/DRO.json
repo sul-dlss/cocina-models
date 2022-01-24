@@ -277,7 +277,6 @@
     "structural": {
       "description": "Structural metadata for the DRO.",
       "type": "object",
-      "required": ["hasAgreement"],
       "properties": {
         "contains": {
           "description": "Filesets that contain the digital representations (Files) of the DRO.",
@@ -285,10 +284,6 @@
           "items": {
             "$ref": "/Fileset"
           }
-        },
-        "hasAgreement": {
-          "description": "Agreement that covers the deposit of the DRO into SDR.",
-          "type": "string"
         },
         "hasMember": {
           "description": "Component or 'children' digital repository objects that are a part or portion of this 'parent' or aggregate DRO.",

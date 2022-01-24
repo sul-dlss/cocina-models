@@ -69,7 +69,10 @@ RSpec.describe Cocina::Generator::Schema do
         label: 'My admin policy',
         type: Cocina::Models::Vocab.admin_policy,
         version: 1,
-        administrative: { hasAdminPolicy: 'druid:bc123df4567' }
+        administrative: {
+          hasAdminPolicy: 'druid:bc123df4567',
+          hasAgreement: 'druid:bc123df4567'
+        }
       )
     end
 
