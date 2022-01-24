@@ -21,6 +21,9 @@ module Cocina
                'http://cocina.sul.stanford.edu/models/webarchive-binary.jsonld',
                'http://cocina.sul.stanford.edu/models/webarchive-seed.jsonld'].freeze
 
+      # The version of Cocina with which this object conforms.
+      # example: 1.2.3
+      attribute :cocinaVersion, Types::Strict::String.default(Cocina::Models::VERSION)
       attribute :type, Types::Strict::String.enum(*RequestDRO::TYPES)
       attribute :label, Types::Strict::String
       attribute :version, Types::Strict::Integer

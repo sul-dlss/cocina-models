@@ -174,4 +174,20 @@ RSpec.describe Cocina::Generator::SchemaValue do
       expect(access.readLocation).to eq('my office')
     end
   end
+
+  context 'when property is cocinaVersion' do
+    let(:dro) do
+      Cocina::Models::RequestDRO.new({
+                                       label: 'The Prince',
+                                       type: Cocina::Models::Vocab.book,
+                                       version: 5,
+                                       identification: { sourceId: 'sul:123' },
+                                       administrative: { hasAdminPolicy: 'druid:bc123df4567' }
+                                     }, false, false)
+    end
+
+    it 'default is provided' do
+      expect(dro.cocinaVersion).to eq(Cocina::Models::VERSION)
+    end
+  end
 end

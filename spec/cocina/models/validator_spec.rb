@@ -23,6 +23,45 @@ RSpec.describe Cocina::Models::Validator do
     end
   end
 
+  context 'when cocina version is omitted' do
+    let(:policy) do
+      Cocina::Models::AdminPolicy.new(
+        externalIdentifier: 'druid:bc123df4567',
+        label: 'My admin policy',
+        type: Cocina::Models::Vocab.admin_policy,
+        version: 1,
+        administrative: {
+          hasAdminPolicy: 'druid:bc123df4567',
+          hasAgreement: 'druid:bc123df4567'
+        }
+      )
+    end
+
+    it 'injects cocina version' do
+      expect(policy.cocinaVersion).to eq(Cocina::Models::VERSION)
+    end
+  end
+
+  context 'when cocina version is present' do
+    let(:policy) do
+      Cocina::Models::AdminPolicy.new(
+        cocinaVersion: '1.0.0',
+        externalIdentifier: 'druid:bc123df4567',
+        label: 'My admin policy',
+        type: Cocina::Models::Vocab.admin_policy,
+        version: 1,
+        administrative: {
+          hasAdminPolicy: 'druid:bc123df4567',
+          hasAgreement: 'druid:bc123df4567'
+        }
+      )
+    end
+
+    it 'does not inject cocina version' do
+      expect(policy.cocinaVersion).to eq('1.0.0')
+    end
+  end
+
   context 'when a nil value is passed' do
     let(:policy) do
       Cocina::Models::AdminPolicy.new(
