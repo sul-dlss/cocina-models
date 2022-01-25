@@ -11,7 +11,7 @@ module Cocina
       attribute :label, Types::Strict::String
       attribute :version, Types::Strict::Integer
       attribute(:administrative, AdminPolicyAdministrative.default { AdminPolicyAdministrative.new })
-      attribute :description, Description.optional.meta(omittable: true)
+      attribute :description, RequestDescription.optional.meta(omittable: true)
 
       def self.new(attributes = default_attributes, safe = false, validate = true, &block)
         Validator.validate(self, attributes.with_indifferent_access) if validate && name
