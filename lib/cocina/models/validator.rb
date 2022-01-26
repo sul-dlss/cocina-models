@@ -20,9 +20,17 @@ module Cocina
         raise ValidationError, e.message
       end
 
+      # rubocop:disable Metrics/AbcSize
+      # rubocop:disable Metrics/CyclomaticComplexity
       def self.operation_has_cocina_version?(request_operation)
-        request_operation.operation_object.request_body.content['application/json'].schema.properties.include?('cocinaVersion')
+        schema = request_operation.operation_object.request_body.content['application/json'].schema
+        all_of_properties = Array(schema.all_of&.flat_map { |all_of| all_of.properties&.keys }).compact
+        one_of_properties = Array(schema.one_of&.flat_map { |one_of| one_of.properties&.keys }).compact
+        properties = Array(schema.properties&.keys)
+        (properties + all_of_properties + one_of_properties).include?('cocinaVersion')
       end
+      # rubocop:enable Metrics/AbcSize
+      # rubocop:enable Metrics/CyclomaticComplexity
       private_class_method :operation_has_cocina_version?
 
       # rubocop:disable Style/ClassVars
