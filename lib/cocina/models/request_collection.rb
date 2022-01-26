@@ -19,7 +19,7 @@ module Cocina
       attribute :version, Types::Strict::Integer
       attribute(:access, CollectionAccess.default { CollectionAccess.new })
       attribute(:administrative, Administrative.default { Administrative.new })
-      attribute :description, Description.optional.meta(omittable: true)
+      attribute :description, RequestDescription.optional.meta(omittable: true)
       attribute :identification, CollectionIdentification.optional.meta(omittable: true)
 
       def self.new(attributes = default_attributes, safe = false, validate = true, &block)

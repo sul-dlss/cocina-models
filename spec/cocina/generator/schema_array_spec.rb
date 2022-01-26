@@ -42,7 +42,7 @@ RSpec.describe Cocina::Generator::SchemaArray do
     # Description.title is required
     context 'when array is provided' do
       let(:description) do
-        Cocina::Models::Description.new({ title: [{ value: 'A Theory of Justice' }] }, false, false)
+        Cocina::Models::RequestDescription.new({ title: [{ value: 'A Theory of Justice' }] }, false, false)
       end
 
       it 'handles required' do
@@ -52,7 +52,7 @@ RSpec.describe Cocina::Generator::SchemaArray do
 
     context 'when array is not provided' do
       let(:description) do
-        Cocina::Models::Description.new({}, false, false)
+        Cocina::Models::RequestDescription.new({}, false, false)
       end
 
       it 'defaults to empty array' do
@@ -64,7 +64,7 @@ RSpec.describe Cocina::Generator::SchemaArray do
   context 'when array is not required' do
     # Description.contributor is not required
     let(:description) do
-      Cocina::Models::Description.new({}, false, false)
+      Cocina::Models::RequestDescription.new({}, false, false)
     end
 
     it 'defaults to empty array' do
