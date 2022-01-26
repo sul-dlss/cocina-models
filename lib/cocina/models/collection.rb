@@ -11,6 +11,9 @@ module Cocina
                'http://cocina.sul.stanford.edu/models/exhibit.jsonld',
                'http://cocina.sul.stanford.edu/models/series.jsonld'].freeze
 
+      # The version of Cocina with which this object conforms.
+      # example: 1.2.3
+      attribute :cocinaVersion, Types::Strict::String.default(Cocina::Models::VERSION)
       # The content type of the Collection. Selected from an established set of values.
       attribute :type, Types::Strict::String.enum(*Collection::TYPES)
       # example: druid:bc123df4567

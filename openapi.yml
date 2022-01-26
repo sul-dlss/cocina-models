@@ -172,6 +172,8 @@ components:
       type: object
       additionalProperties: false
       properties:
+        cocinaVersion:
+          $ref: '#/components/schemas/CocinaVersion'
         type:
           type: string
           enum:
@@ -187,6 +189,7 @@ components:
         description:
           $ref: '#/components/schemas/Description'
       required:
+        - cocinaVersion
         - administrative
         - externalIdentifier
         - label
@@ -363,11 +366,18 @@ components:
       required:
         - access
         - download
+    CocinaVersion:
+      description: The version of Cocina with which this object conforms.
+      type: string
+      pattern: '^\d+\.\d+\.\d+$'
+      example: '1.2.3'
     Collection:
       description: A group of Digital Repository Objects that indicate some type of conceptual grouping within the domain that is worth reusing across the system.
       type: object
       additionalProperties: false
       properties:
+        cocinaVersion:
+            $ref: '#/components/schemas/CocinaVersion'
         type:
           description: The content type of the Collection. Selected from an established set of values.
           type: string
@@ -394,6 +404,7 @@ components:
         identification:
           $ref: '#/components/schemas/CollectionIdentification'
       required:
+        - cocinaVersion
         - externalIdentifier
         - label
         - type
@@ -889,6 +900,8 @@ components:
       type: object
       additionalProperties: false
       properties:
+        cocinaVersion:
+          $ref: '#/components/schemas/CocinaVersion'
         type:
           description: The content type of the DRO. Selected from an established set of values.
           type: string
@@ -929,6 +942,7 @@ components:
         geographic:
           $ref: '#/components/schemas/Geographic'
       required:
+        - cocinaVersion
         - access
         - administrative
         - externalIdentifier
@@ -1508,6 +1522,8 @@ components:
       type: object
       additionalProperties: false
       properties:
+        cocinaVersion:
+          $ref: '#/components/schemas/CocinaVersion'
         type:
           type: string
           enum:
@@ -1521,6 +1537,7 @@ components:
         description:
           $ref: '#/components/schemas/Description'
       required:
+        - cocinaVersion
         - administrative
         - label
         - type
@@ -1530,6 +1547,8 @@ components:
       type: object
       additionalProperties: false
       properties:
+        cocinaVersion:
+          $ref: '#/components/schemas/CocinaVersion'
         type:
           type: string
           enum:
@@ -1551,6 +1570,7 @@ components:
         identification:
           $ref: '#/components/schemas/CollectionIdentification'
       required:
+        - cocinaVersion
         - access
         - administrative
         - label
@@ -1561,6 +1581,8 @@ components:
       type: object
       additionalProperties: false
       properties:
+        cocinaVersion:
+          $ref: '#/components/schemas/CocinaVersion'
         type:
           type: string
           enum:
@@ -1596,6 +1618,7 @@ components:
         geographic:
           $ref: '#/components/schemas/Geographic'
       required:
+        - cocinaVersion
         - administrative
         - identification
         - label

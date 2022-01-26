@@ -26,10 +26,14 @@ module Cocina
       end
 
       def default
+        # Provide version as default for cocinaVersion
+        return '.default(Cocina::Models::VERSION)' if name == 'cocinaVersion'
+
         # If type is boolean and default is false, erroneously getting a nil.
         # Assuming that if required, then default is false.
         default = schema_doc.default
         default = false if default.nil? && schema_doc.type == 'boolean' && required
+
         return '' if default.nil?
 
         ".default(#{quote(default)})"
