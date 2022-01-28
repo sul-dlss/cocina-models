@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
-require 'deprecation'
-
 module Cocina
   module Models
     # TitleBuilder selects the prefered title from the cocina object for solr indexing
     # rubocop:disable Metrics/ClassLength
     class TitleBuilder
       extend Deprecation
+
       # @param [[Array<Cocina::Models::Title,Cocina::Models::DescriptiveValue>] titles the titles to consider
       # @param [Symbol] strategy ":first" is the strategy for selection when primary or display title are missing
       # @param [Boolean] add_punctuation determines if the title should be formmated with punctuation

@@ -6,9 +6,9 @@ module Cocina
     class SchemaRef < SchemaBase
       def generate
         if required && !relaxed
-          "attribute(:#{name.camelize(:lower)}, #{schema_doc.name}.default { #{schema_doc.name}.new })"
+          "attribute(:#{name.underscore}, #{schema_doc.name}.default { #{schema_doc.name}.new })"
         else
-          "attribute :#{name.camelize(:lower)}, #{schema_doc.name}.optional.meta(omittable: true)"
+          "attribute :#{name.underscore}, #{schema_doc.name}.optional.meta(omittable: true)"
         end
       end
     end

@@ -9,7 +9,8 @@ module Cocina
         request_operation = root.request_operation(:post, "/validate/#{method_name}")
 
         # JSON.parse forces serialization of objects like DateTime.
-        json_attributes = JSON.parse(attributes.to_json)
+        json_attributes = JSON.parse(attributes.to_json).deep_transform_keys { |key| key.camelize(:lower) }
+
         # Inject cocinaVersion if needed and not present.
         if operation_has_cocina_version?(request_operation) && !json_attributes.include?('cocinaVersion')
           json_attributes['cocinaVersion'] = Cocina::Models::VERSION
@@ -20,7 +21,6 @@ module Cocina
         raise ValidationError, e.message
       end
 
-      # rubocop:disable Metrics/AbcSize
       # rubocop:disable Metrics/CyclomaticComplexity
       def self.operation_has_cocina_version?(request_operation)
         schema = request_operation.operation_object.request_body.content['application/json'].schema
@@ -29,7 +29,6 @@ module Cocina
         properties = Array(schema.properties&.keys)
         (properties + all_of_properties + one_of_properties).include?('cocinaVersion')
       end
-      # rubocop:enable Metrics/AbcSize
       # rubocop:enable Metrics/CyclomaticComplexity
       private_class_method :operation_has_cocina_version?
 

@@ -3,7 +3,7 @@
 module Cocina
   module Models
     class DescriptiveParallelValue < Struct
-      attribute :parallelValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
+      attribute :parallel_value, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
     end
   end
 end

@@ -3,9 +3,9 @@
 module Cocina
   module Models
     class DescriptiveBasicValue < Struct
-      attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
-      attribute :parallelValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
-      attribute :groupedValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
+      attribute :structured_value, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
+      attribute :parallel_value, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
+      attribute :grouped_value, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # String or integer value of the descriptive element.
       attribute :value, Types::Nominal::Any.meta(omittable: true)
       # Type of value provided by the descriptive element.
@@ -21,13 +21,13 @@ module Cocina
       attribute :identifier, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute :source, Source.optional.meta(omittable: true)
       # The preferred display label to use for the descriptive element in access systems.
-      attribute :displayLabel, Types::Strict::String.meta(omittable: true)
+      attribute :display_label, Types::Strict::String.meta(omittable: true)
       # A term providing information about the circumstances of the statement (e.g., approximate dates).
       attribute :qualifier, Types::Strict::String.meta(omittable: true)
       attribute :note, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
-      attribute :valueLanguage, DescriptiveValueLanguage.optional.meta(omittable: true)
+      attribute :value_language, DescriptiveValueLanguage.optional.meta(omittable: true)
       # URL or other pointer to the location of the value of the descriptive element.
-      attribute :valueAt, Types::Strict::String.meta(omittable: true)
+      attribute :value_at, Types::Strict::String.meta(omittable: true)
     end
   end
 end

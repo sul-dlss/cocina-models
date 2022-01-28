@@ -15,11 +15,11 @@ module Cocina
 
       # The version of Cocina with which this object conforms.
       # example: 1.2.3
-      attribute :cocinaVersion, Types::Strict::String.default(Cocina::Models::VERSION)
+      attribute :cocina_version, Types::Strict::String.default(Cocina::Models::VERSION)
       # The content type of the Collection. Selected from an established set of values.
       attribute :type, Types::Strict::String.enum(*CollectionWithMetadata::TYPES)
       # example: druid:bc123df4567
-      attribute :externalIdentifier, Types::Strict::String
+      attribute :external_identifier, Types::Strict::String
       # Primary processing label (can be same as title) for a Collection.
       attribute :label, Types::Strict::String
       # Version for the Collection within SDR.

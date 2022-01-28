@@ -10,7 +10,7 @@ module Cocina
       # Not used for this access type, must be null.
       attribute :location, Types::Strict::String.optional.enum('').meta(omittable: true)
       # Available for controlled digital lending.
-      attribute :controlledDigitalLending, Types::Strict::Bool.default(false)
+      attribute :controlled_digital_lending, Types::Strict::Bool.default(false)
     end
   end
 end

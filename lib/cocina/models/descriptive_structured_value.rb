@@ -3,7 +3,7 @@
 module Cocina
   module Models
     class DescriptiveStructuredValue < Struct
-      attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
+      attribute :structured_value, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
     end
   end
 end

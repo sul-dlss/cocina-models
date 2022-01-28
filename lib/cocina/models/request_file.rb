@@ -12,10 +12,10 @@ module Cocina
       attribute :filename, Types::Strict::String
       attribute :size, Types::Strict::Integer.meta(omittable: true)
       attribute :version, Types::Strict::Integer
-      attribute :hasMimeType, Types::Strict::String.meta(omittable: true)
-      attribute :externalIdentifier, Types::Strict::String.meta(omittable: true)
+      attribute :has_mime_type, Types::Strict::String.meta(omittable: true)
+      attribute :external_identifier, Types::Strict::String.meta(omittable: true)
       attribute :use, Types::Strict::String.meta(omittable: true)
-      attribute :hasMessageDigests, Types::Strict::Array.of(MessageDigest).default([].freeze)
+      attribute :has_message_digests, Types::Strict::Array.of(MessageDigest).default([].freeze)
       attribute(:access, FileAccess.default { FileAccess.new })
       attribute(:administrative, FileAdministrative.default { FileAdministrative.new })
       attribute :presentation, Presentation.optional.meta(omittable: true)

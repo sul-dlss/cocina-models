@@ -13,7 +13,7 @@ module Cocina
       # The version of the standard or encoding.
       attribute :version, Types::Strict::String.meta(omittable: true)
       attribute :source, Source.optional.meta(omittable: true)
-      attribute :valueScript, Standard.optional.meta(omittable: true)
+      attribute :value_script, Standard.optional.meta(omittable: true)
     end
   end
 end
