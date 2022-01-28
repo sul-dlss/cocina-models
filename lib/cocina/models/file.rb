@@ -10,7 +10,7 @@ module Cocina
       # The content type of the File.
       attribute :type, Types::Strict::String.enum(*File::TYPES)
       # Identifier for the resource within the SDR architecture but outside of the repository. UUID. Constant across resource versions. What clients will use calling the repository.
-      attribute :externalIdentifier, Types::Strict::String
+      attribute :external_identifier, Types::Strict::String
       # Primary processing label (can be same as title) for a File.
       attribute :label, Types::Strict::String
       # Filename for a file. Can be same as label.
@@ -20,13 +20,29 @@ module Cocina
       # Version for the File within SDR.
       attribute :version, Types::Strict::Integer
       # MIME Type of the File.
-      attribute :hasMimeType, Types::Strict::String.meta(omittable: true)
+      attribute :has_mime_type, Types::Strict::String.meta(omittable: true)
       # Use for the File.
       attribute :use, Types::Strict::String.meta(omittable: true)
-      attribute :hasMessageDigests, Types::Strict::Array.of(MessageDigest).default([].freeze)
+      attribute :has_message_digests, Types::Strict::Array.of(MessageDigest).default([].freeze)
       attribute(:access, FileAccess.default { FileAccess.new })
       attribute(:administrative, FileAdministrative.default { FileAdministrative.new })
       attribute :presentation, Presentation.optional.meta(omittable: true)
+
+      def method_missing(method_name, *arguments, &block)
+        if %i[externalIdentifier hasMimeType hasMessageDigests].include?(method_name)
+          Deprecation.warn(
+            self,
+            "the `#{method_name}` attribute is deprecated and will be removed in the cocina-models 1.0.0 release"
+          )
+          public_send(method_name.to_s.underscore, *arguments, &block)
+        else
+          super
+        end
+      end
+
+      def respond_to_missing?(method_name, include_private = false)
+        %i[externalIdentifier hasMimeType hasMessageDigests].include?(method_name) || super
+      end
     end
   end
 end

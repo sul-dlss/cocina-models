@@ -6,8 +6,11 @@ module Cocina
     class SchemaValue < SchemaBase
       # rubocop:disable Layout/LineLength
       def generate
+        # TODO: Remove this when cocina-models 1.0.0 is released.
+        @camelcase_properties << name.to_sym unless name == name.underscore
+
         # optional has to come before default or the default value that gets set will be nil.
-        "#{description}#{example}#{relaxed_comment}attribute :#{name.camelize(:lower)}, Types::#{dry_datatype(schema_doc)}#{optional}#{default}#{enum}#{omittable}"
+        "#{description}#{example}#{relaxed_comment}attribute :#{name.underscore}, Types::#{dry_datatype(schema_doc)}#{optional}#{default}#{enum}#{omittable}"
       end
       # rubocop:enable Layout/LineLength
 

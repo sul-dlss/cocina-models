@@ -11,10 +11,10 @@ module Cocina
 
       # The version of Cocina with which this object conforms.
       # example: 1.2.3
-      attribute :cocinaVersion, Types::Strict::String.default(Cocina::Models::VERSION)
+      attribute :cocina_version, Types::Strict::String.default(Cocina::Models::VERSION)
       attribute :type, Types::Strict::String.enum(*AdminPolicyWithMetadata::TYPES)
       # example: druid:bc123df4567
-      attribute :externalIdentifier, Types::Strict::String
+      attribute :external_identifier, Types::Strict::String
       attribute :label, Types::Strict::String
       attribute :version, Types::Strict::Integer
       attribute(:administrative, AdminPolicyAdministrative.default { AdminPolicyAdministrative.new })
@@ -25,6 +25,22 @@ module Cocina
       attribute :modified, Types::Params::DateTime.meta(omittable: true)
       # Key for optimistic locking. The contents of the key is not specified.
       attribute :lock, Types::Strict::String
+
+      def method_missing(method_name, *arguments, &block)
+        if %i[cocinaVersion externalIdentifier].include?(method_name)
+          Deprecation.warn(
+            self,
+            "the `#{method_name}` attribute is deprecated and will be removed in the cocina-models 1.0.0 release"
+          )
+          public_send(method_name.to_s.underscore, *arguments, &block)
+        else
+          super
+        end
+      end
+
+      def respond_to_missing?(method_name, include_private = false)
+        %i[cocinaVersion externalIdentifier].include?(method_name) || super
+      end
     end
   end
 end

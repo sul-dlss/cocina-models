@@ -9,6 +9,7 @@ module Cocina
       end
 
       def generate
+        # TODO: Remove camelcase_backwards_compatibility below when cocina-models 1.0.0 is released.
         <<~RUBY
           # frozen_string_literal: true
 
@@ -20,6 +21,8 @@ module Cocina
                 #{types}
 
                 #{model_attributes}
+
+                #{camelcase_backwards_compatibility}
               end
             end
           end
@@ -44,6 +47,31 @@ module Cocina
 
       def model_attributes
         schema_properties.map(&:generate).join("\n")
+      end
+
+      # TODO: Remove this when cocina-models 1.0.0 is released.
+      # Temporarily allow callers to send camelCase method names to avoid having to change the world
+      def camelcase_backwards_compatibility
+        camelcase_properties = schema_properties.filter_map(&:camelcase_properties).flatten
+        return if camelcase_properties.empty?
+
+        <<~RUBY
+          def method_missing(method_name, *arguments, &block)
+            if #{camelcase_properties}.include?(method_name)
+              Deprecation.warn(
+                self,
+                "the `\#{method_name}` attribute is deprecated and will be removed in the cocina-models 1.0.0 release"
+              )
+              public_send(method_name.to_s.underscore, *arguments, &block)
+            else
+              super
+            end
+          end
+
+          def respond_to_missing?(method_name, include_private = false)
+            #{camelcase_properties}.include?(method_name) || super
+          end
+        RUBY
       end
 
       def types

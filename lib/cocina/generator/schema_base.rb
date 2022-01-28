@@ -4,7 +4,8 @@ module Cocina
   module Generator
     # Base class for generating from openapi
     class SchemaBase
-      attr_reader :schema_doc, :key, :required, :nullable, :parent, :relaxed
+      # TODO: Remove camelcase_properties attr when cocina-models 1.0.0 is released.
+      attr_reader :schema_doc, :key, :required, :nullable, :parent, :relaxed, :camelcase_properties
 
       def initialize(schema_doc, key: nil, required: false, nullable: false, parent: nil, relaxed: false)
         @schema_doc = schema_doc
@@ -13,6 +14,8 @@ module Cocina
         @nullable = nullable
         @parent = parent
         @relaxed = relaxed
+        # TODO: Remove this when cocina-models 1.0.0 is released.
+        @camelcase_properties = []
       end
 
       def filename

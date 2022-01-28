@@ -24,12 +24,28 @@ module Cocina
 
       # The content type of the Fileset.
       attribute :type, Types::Strict::String.enum(*FileSet::TYPES)
-      attribute :externalIdentifier, Types::Strict::String
+      attribute :external_identifier, Types::Strict::String
       # Primary processing label for a Fileset.
       attribute :label, Types::Strict::String
       # Version for the Fileset within SDR.
       attribute :version, Types::Strict::Integer
       attribute(:structural, FileSetStructural.default { FileSetStructural.new })
+
+      def method_missing(method_name, *arguments, &block)
+        if [:externalIdentifier].include?(method_name)
+          Deprecation.warn(
+            self,
+            "the `#{method_name}` attribute is deprecated and will be removed in the cocina-models 1.0.0 release"
+          )
+          public_send(method_name.to_s.underscore, *arguments, &block)
+        else
+          super
+        end
+      end
+
+      def respond_to_missing?(method_name, include_private = false)
+        [:externalIdentifier].include?(method_name) || super
+      end
     end
   end
 end

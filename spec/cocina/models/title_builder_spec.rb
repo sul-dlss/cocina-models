@@ -40,7 +40,7 @@ RSpec.describe Cocina::Models::TitleBuilder do
 
     it 'returns the first title object and logs a deprecation' do
       expect(build).to eq('However am I going to be')
-      expect(Deprecation).to have_received(:warn)
+      expect(Deprecation).to have_received(:warn).exactly(4).times
     end
   end
 

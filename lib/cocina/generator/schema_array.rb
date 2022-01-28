@@ -5,7 +5,10 @@ module Cocina
     # Class for generating from an openapi array
     class SchemaArray < SchemaBase
       def generate
-        "attribute :#{name.camelize(:lower)}, Types::Strict::Array.of(#{array_of_type}).default([].freeze)"
+        # TODO: Remove this when cocina-models 1.0.0 is released.
+        @camelcase_properties << name.to_sym unless name == name.underscore
+
+        "attribute :#{name.underscore}, Types::Strict::Array.of(#{array_of_type}).default([].freeze)"
       end
 
       def array_of_type

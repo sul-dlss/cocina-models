@@ -12,8 +12,24 @@ module Cocina
       attribute :identifier, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute :note, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # URL or other pointer to the location of the contributor information.
-      attribute :valueAt, Types::Strict::String.meta(omittable: true)
-      attribute :parallelContributor, Types::Strict::Array.of(DescriptiveParallelContributor).default([].freeze)
+      attribute :value_at, Types::Strict::String.meta(omittable: true)
+      attribute :parallel_contributor, Types::Strict::Array.of(DescriptiveParallelContributor).default([].freeze)
+
+      def method_missing(method_name, *arguments, &block)
+        if %i[valueAt parallelContributor].include?(method_name)
+          Deprecation.warn(
+            self,
+            "the `#{method_name}` attribute is deprecated and will be removed in the cocina-models 1.0.0 release"
+          )
+          public_send(method_name.to_s.underscore, *arguments, &block)
+        else
+          super
+        end
+      end
+
+      def respond_to_missing?(method_name, include_private = false)
+        %i[valueAt parallelContributor].include?(method_name) || super
+      end
     end
   end
 end

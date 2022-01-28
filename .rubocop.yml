@@ -11,11 +11,6 @@ AllCops:
 
 # ----- Layout ------
 
-Layout/LineLength:
-  Max: 114
-  Exclude:
-    - lib/cocina/models/*
-
 Layout/BeginEndAlignment: # (new in 0.91)
   Enabled: true
 Layout/EmptyLinesAroundAttributeAccessor:
