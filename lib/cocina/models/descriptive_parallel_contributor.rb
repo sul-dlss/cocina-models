@@ -12,8 +12,13 @@ module Cocina
       attribute :identifier, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute :note, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # URL or other pointer to the location of the contributor information.
-      attribute? :valueAt, Types::Strict::String
-      attribute? :valueLanguage, DescriptiveValueLanguage.optional
+      attribute? :value_at, Types::Strict::String
+      attribute? :value_language, DescriptiveValueLanguage.optional
+
+      alias valueAt value_at
+      deprecation_deprecate :valueAt
+      alias valueLanguage value_language
+      deprecation_deprecate :valueLanguage
     end
   end
 end

@@ -9,17 +9,19 @@ module Cocina
       end
 
       def generate
+        # TODO: Remove camelcase_backwards_compatibility below when cocina-models 1.0.0 is released.
         <<~RUBY
           # frozen_string_literal: true
 
           module Cocina
             module Models
               class #{name} < Struct
-
                 #{validate}
                 #{types}
 
                 #{model_attributes}
+
+                #{camelcase_backwards_compatibility}
               end
             end
           end
@@ -44,6 +46,20 @@ module Cocina
 
       def model_attributes
         schema_properties.map(&:generate).join("\n")
+      end
+
+      # TODO: Remove this when cocina-models 1.0.0 is released.
+      # Temporarily allow callers to send camelCase method names to avoid having to change the world
+      def camelcase_backwards_compatibility
+        camelcase_properties = schema_properties.filter_map(&:camelcase_properties).flatten
+        return if camelcase_properties.empty?
+
+        camelcase_properties.map do |prop|
+          [
+            "alias #{prop} #{prop.to_s.underscore}",
+            "deprecation_deprecate :#{prop}"
+          ]
+        end.join("\n")
       end
 
       def types

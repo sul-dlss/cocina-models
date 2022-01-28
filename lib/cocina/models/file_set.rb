@@ -24,12 +24,15 @@ module Cocina
 
       # The content type of the Fileset.
       attribute :type, Types::Strict::String.enum(*FileSet::TYPES)
-      attribute :externalIdentifier, Types::Strict::String
+      attribute :external_identifier, Types::Strict::String
       # Primary processing label for a Fileset.
       attribute :label, Types::Strict::String
       # Version for the Fileset within SDR.
       attribute :version, Types::Strict::Integer
       attribute(:structural, FileSetStructural.default { FileSetStructural.new })
+
+      alias externalIdentifier external_identifier
+      deprecation_deprecate :externalIdentifier
     end
   end
 end

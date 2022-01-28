@@ -11,9 +11,9 @@ module Cocina
       class NameTitleGroupBuilder
         # When to assign nameTitleGroup to MODS from cocina:
         #   for cocina title of type "uniform",
-        #     look for cocina title properties :value or :structuredValue (recurse down through :parallelValue
+        #     look for cocina title properties :value or :structured_value (recurse down through :parallelValue
         #     as needed), and look for associated :note with :type of "associated name" at the level of the
-        #     non-empty title [value|structuredValue]
+        #     non-empty title [value|structured_value]
         #     The note of type "associated name" will have [value|structuredValue] which will match
         #     [value|structuredValue] for a contributor (possibly after recursing through :parallelValue).
         #   Thus, a title [value|structuredValue] and a contributor [value|structuredValue] are associated in
@@ -80,17 +80,17 @@ module Cocina
 
         # @params [Cocina::Models::DescriptiveValue] desc_value
         # @return [Array<Cocina::Models::DescriptiveValue>] where we are only interested in
-        #   hashes containing (either :value or :structuredValue)
+        #   hashes containing (either :value or :structured_value)
         # rubocop:disable Metrics/AbcSize
         def self.value_slices(desc_value)
           slices = []
-          desc_value_slice = desc_value.to_h.slice(:value, :structuredValue, :parallelValue)
-          if desc_value_slice[:value].present? || desc_value_slice[:structuredValue].present?
+          desc_value_slice = desc_value.to_h.slice(:value, :structured_value, :parallel_value)
+          if desc_value_slice[:value].present? || desc_value_slice[:structured_value].present?
             slices << desc_value_slice.select { |_k, value| value.present? }
-          elsif desc_value_slice[:parallelValue].present?
-            desc_value_slice[:parallelValue].each { |parallel_val| slices << value_slices(parallel_val) }
+          elsif desc_value_slice[:parallel_value].present?
+            desc_value_slice[:parallel_value].each { |parallel_val| slices << value_slices(parallel_val) }
           end
-          # ignoring groupedValue
+          # ignoring grouped_value
           slices.flatten
         end
         # rubocop:enable Metrics/AbcSize
@@ -100,27 +100,27 @@ module Cocina
         # result will be either
         #   { value: 'string value' }
         # OR
-        #   { structuredValue: [ some structuredValue ] }
+        #   { structured_value: [ some structured_value ] }
         def self.slice_of_value_or_structured_value(hash)
           if hash[:value].present?
             hash.slice(:value).select { |_k, value| value.present? }
-          elsif hash[:structuredValue].present?
-            hash.slice(:structuredValue).select { |_k, value| value.present? }
+          elsif hash[:structured_value].present?
+            hash.slice(:structured_value).select { |_k, value| value.present? }
           end
         end
 
-        # reduce parallelValues down to value or structuredValue for these slices
+        # reduce parallelValues down to value or structured_value for these slices
         # @params [Cocina::Models::Title] title
         # @return [Array<Cocina::Models::DescriptiveValue>] where we are only interested in
         #   hashes containing (either :value or :structureValue) and :note if present
         # rubocop:disable Metrics/AbcSize
         def self.title_value_note_slices(title)
           slices = []
-          title_slice = title.to_h.slice(:value, :structuredValue, :parallelValue, :note)
-          if title_slice[:value].present? || title_slice[:structuredValue].present?
+          title_slice = title.to_h.slice(:value, :structured_value, :parallel_value, :note)
+          if title_slice[:value].present? || title_slice[:structured_value].present?
             slices << title_slice.select { |_k, value| value.present? }
-          elsif title_slice[:parallelValue].present?
-            title_slice[:parallelValue].each do |parallel_val|
+          elsif title_slice[:parallel_value].present?
+            title_slice[:parallel_value].each do |parallel_val|
               slices << title_value_note_slices(parallel_val)
             end
           end

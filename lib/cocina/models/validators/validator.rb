@@ -23,9 +23,11 @@ module Cocina
           # And add require 'active_support/core_ext/hash/deep_transform_values' to models file.
 
           # In the meantime, copying code.
-          attributes_hash = deep_transform_values(attributes.to_h) do |value|
-            value.class.name.starts_with?('Cocina::Models') ? value.to_h : value
-          end.with_indifferent_access
+          attributes_hash = deep_transform_values(
+            attributes.to_h.with_indifferent_access.deep_transform_keys(&:underscore)
+          ) do |value|
+            value.class.name.starts_with?('Cocina::Models') ? value.to_h.with_indifferent_access : value
+          end
 
           VALIDATORS.each { |validator| validator.validate(clazz, attributes_hash) }
         end

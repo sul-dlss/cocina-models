@@ -31,7 +31,7 @@ module Cocina
         end
 
         def druid
-          @druid ||= attributes[:externalIdentifier]
+          @druid ||= attributes[:external_identifier]
         end
 
         def purl

@@ -13,7 +13,10 @@ module Cocina
       # The version of the standard or encoding.
       attribute? :version, Types::Strict::String
       attribute? :source, Source.optional
-      attribute? :valueScript, Standard.optional
+      attribute? :value_script, Standard.optional
+
+      alias valueScript value_script
+      deprecation_deprecate :valueScript
     end
   end
 end

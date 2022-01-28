@@ -11,16 +11,16 @@ RSpec.describe Cocina::Models::Validators::Validator do
 
   let(:props) do
     {
-      externalIdentifier: 'druid:jq000jd3530',
+      external_identifier: 'druid:jq000jd3530',
       description: {
         title: [{
           value: 'Rockhounding Utah',
-          appliesTo: [],
-          groupedValue: [],
+          applies_to: [],
+          grouped_value: [],
           identifier: [],
           note: [],
-          parallelValue: [],
-          structuredValue: []
+          parallel_value: [],
+          structured_value: []
         }],
         purl: 'https://purl.stanford.edu/jq000jd3530'
       }
@@ -46,7 +46,7 @@ RSpec.describe Cocina::Models::Validators::Validator do
   context 'with a mixed hash' do
     let(:dro_props) do
       {
-        externalIdentifier: 'druid:jq000jd3530',
+        external_identifier: 'druid:jq000jd3530',
         description: {
           title: [Cocina::Models::Title.new(value: 'Rockhounding Utah')],
           purl: 'https://purl.stanford.edu/jq000jd3530'

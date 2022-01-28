@@ -5,6 +5,7 @@ module Cocina
     module Validators
       # Perform validation against openapi
       class OpenApiValidator
+        # rubocop:disable Metrics/AbcSize
         def self.validate(clazz, attributes)
           return unless clazz.name
 
@@ -12,7 +13,8 @@ module Cocina
           request_operation = root.request_operation(:post, "/validate/#{method_name}")
 
           # JSON.parse forces serialization of objects like DateTime.
-          json_attributes = JSON.parse(attributes.to_json)
+          json_attributes = JSON.parse(attributes.to_json).deep_transform_keys { |key| key.camelize(:lower) }
+
           # Inject cocinaVersion if needed and not present.
           if operation_has_cocina_version?(request_operation) && !json_attributes.include?('cocinaVersion')
             json_attributes['cocinaVersion'] = Cocina::Models::VERSION
@@ -22,6 +24,7 @@ module Cocina
         rescue OpenAPIParser::OpenAPIError => e
           raise ValidationError, e.message
         end
+        # rubocop:enable Metrics/AbcSize
 
         # rubocop:disable Metrics/AbcSize
         # rubocop:disable Metrics/CyclomaticComplexity

@@ -5,7 +5,7 @@ module Cocina
     class AdminPolicyAccessTemplate < Struct
       attribute? :view, Types::Strict::String.enum('world', 'stanford', 'location-based', 'citation-only', 'dark')
       # Available for controlled digital lending.
-      attribute? :controlledDigitalLending, Types::Strict::Bool
+      attribute? :controlled_digital_lending, Types::Strict::Bool
       # The human readable copyright statement that applies
       # example: Copyright World Trade Organization
       attribute? :copyright, Types::Strict::String.optional
@@ -17,9 +17,14 @@ module Cocina
       attribute? :location, Types::Strict::String.optional.enum('spec', 'music', 'ars', 'art', 'hoover', 'm&m')
       # The human readable use and reproduction statement that applies
       # example: Property rights reside with the repository. Literary rights reside with the creators of the documents or their heirs. To obtain permission to publish or reproduce, please contact the Public Services Librarian of the Dept. of Special Collections (http://library.stanford.edu/spc).
-      attribute? :useAndReproductionStatement, Types::Strict::String.optional
+      attribute? :use_and_reproduction_statement, Types::Strict::String.optional
       # The license governing reuse of the Collection. Should be an IRI for known licenses (i.e. CC, RightsStatement.org URI, etc.).
       attribute? :license, Types::Strict::String.optional
+
+      alias controlledDigitalLending controlled_digital_lending
+      deprecation_deprecate :controlledDigitalLending
+      alias useAndReproductionStatement use_and_reproduction_statement
+      deprecation_deprecate :useAndReproductionStatement
     end
   end
 end

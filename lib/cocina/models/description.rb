@@ -15,13 +15,22 @@ module Cocina
       attribute :identifier, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute :subject, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute? :access, DescriptiveAccessMetadata.optional
-      attribute :relatedResource, Types::Strict::Array.of(RelatedResource).default([].freeze)
-      attribute :marcEncodedData, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
-      attribute? :adminMetadata, DescriptiveAdminMetadata.optional
+      attribute :related_resource, Types::Strict::Array.of(RelatedResource).default([].freeze)
+      attribute :marc_encoded_data, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
+      attribute? :admin_metadata, DescriptiveAdminMetadata.optional
       # URL or other pointer to the location of the resource description.
-      attribute? :valueAt, Types::Strict::String
+      attribute? :value_at, Types::Strict::String
       # Stanford persistent URL associated with the related resource. Note this is http, not https.
       attribute :purl, Types::Strict::String
+
+      alias relatedResource related_resource
+      deprecation_deprecate :relatedResource
+      alias marcEncodedData marc_encoded_data
+      deprecation_deprecate :marcEncodedData
+      alias adminMetadata admin_metadata
+      deprecation_deprecate :adminMetadata
+      alias valueAt value_at
+      deprecation_deprecate :valueAt
     end
   end
 end

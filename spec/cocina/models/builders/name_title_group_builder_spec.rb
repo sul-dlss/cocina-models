@@ -66,7 +66,7 @@ RSpec.describe Cocina::Models::Builders::NameTitleGroupBuilder do
     context 'when uniform title with multipart name' do
       let(:props) do
         {
-          structuredValue: [
+          structured_value: [
             {
               value: 'Ballades, piano',
               type: 'main title'
@@ -79,7 +79,7 @@ RSpec.describe Cocina::Models::Builders::NameTitleGroupBuilder do
           type: 'uniform',
           note: [
             {
-              structuredValue: [
+              structured_value: [
                 {
                   value: 'Chopin, Frédéric',
                   type: 'name'
@@ -96,47 +96,47 @@ RSpec.describe Cocina::Models::Builders::NameTitleGroupBuilder do
       end
 
       it 'returns map' do
-        expect(title_to_name).to eq({ structuredValue: [
+        expect(title_to_name).to eq({ structured_value: [
                                       {
-                                        structuredValue: [],
-                                        parallelValue: [],
-                                        groupedValue: [],
+                                        structured_value: [],
+                                        parallel_value: [],
+                                        grouped_value: [],
                                         value: 'Ballades, piano',
                                         type: 'main title',
                                         identifier: [],
                                         note: [],
-                                        appliesTo: []
+                                        applies_to: []
                                       }, {
-                                        structuredValue: [],
-                                        parallelValue: [],
-                                        groupedValue: [],
+                                        structured_value: [],
+                                        parallel_value: [],
+                                        grouped_value: [],
                                         value: 'no. 3, op. 47, A♭ major',
                                         type: 'part number',
                                         identifier: [],
                                         note: [],
-                                        appliesTo: []
+                                        applies_to: []
                                       }
                                     ] } => {
-                                      structuredValue: [
+                                      structured_value: [
                                         {
-                                          structuredValue: [],
-                                          parallelValue: [],
-                                          groupedValue: [],
+                                          structured_value: [],
+                                          parallel_value: [],
+                                          grouped_value: [],
                                           value: 'Chopin, Frédéric',
                                           type: 'name',
                                           identifier: [],
                                           note: [],
-                                          appliesTo: []
+                                          applies_to: []
                                         },
                                         {
-                                          structuredValue: [],
-                                          parallelValue: [],
-                                          groupedValue: [],
+                                          structured_value: [],
+                                          parallel_value: [],
+                                          grouped_value: [],
                                           value: '1810-1849',
                                           type: 'life dates',
                                           identifier: [],
                                           note: [],
-                                          appliesTo: []
+                                          applies_to: []
                                         }
                                       ]
                                     })
@@ -146,12 +146,12 @@ RSpec.describe Cocina::Models::Builders::NameTitleGroupBuilder do
     context 'when parallel uniform title' do
       let(:props) do
         {
-          parallelValue: [
+          parallel_value: [
             {
               value: 'Mishnah berurah. English',
               note: [
                 {
-                  structuredValue: [
+                  structured_value: [
                     {
                       value: 'Israel Meir',
                       type: 'name'
@@ -169,7 +169,7 @@ RSpec.describe Cocina::Models::Builders::NameTitleGroupBuilder do
               value: 'Mishnah berurah in Hebrew characters',
               note: [
                 {
-                  structuredValue: [
+                  structured_value: [
                     {
                       value: 'Israel Meir in Hebrew characters',
                       type: 'name'
@@ -190,50 +190,50 @@ RSpec.describe Cocina::Models::Builders::NameTitleGroupBuilder do
 
       it 'returns map' do
         expect(title_to_name).to eq({ value: 'Mishnah berurah. English' } => {
-                                      structuredValue: [
+                                      structured_value: [
                                         {
-                                          structuredValue: [],
-                                          parallelValue: [],
-                                          groupedValue: [],
+                                          structured_value: [],
+                                          parallel_value: [],
+                                          grouped_value: [],
                                           value: 'Israel Meir',
                                           type: 'name',
                                           identifier: [],
                                           note: [],
-                                          appliesTo: []
+                                          applies_to: []
                                         },
                                         {
-                                          structuredValue: [],
-                                          parallelValue: [],
-                                          groupedValue: [],
+                                          structured_value: [],
+                                          parallel_value: [],
+                                          grouped_value: [],
                                           value: 'ha-Kohen',
                                           type: 'term of address',
                                           identifier: [],
                                           note: [],
-                                          appliesTo: []
+                                          applies_to: []
                                         }
                                       ]
                                     },
                                     { value: 'Mishnah berurah in Hebrew characters' } => {
-                                      structuredValue: [
+                                      structured_value: [
                                         {
-                                          structuredValue: [],
-                                          parallelValue: [],
-                                          groupedValue: [],
+                                          structured_value: [],
+                                          parallel_value: [],
+                                          grouped_value: [],
                                           value: 'Israel Meir in Hebrew characters',
                                           type: 'name',
                                           identifier: [],
                                           note: [],
-                                          appliesTo: []
+                                          applies_to: []
                                         },
                                         {
-                                          structuredValue: [],
-                                          parallelValue: [],
-                                          groupedValue: [],
+                                          structured_value: [],
+                                          parallel_value: [],
+                                          grouped_value: [],
                                           value: '1838-1933',
                                           type: 'life dates',
                                           identifier: [],
                                           note: [],
-                                          appliesTo: []
+                                          applies_to: []
                                         }
                                       ]
                                     })
@@ -313,7 +313,7 @@ RSpec.describe Cocina::Models::Builders::NameTitleGroupBuilder do
         {
           name: [
             {
-              structuredValue: [
+              structured_value: [
                 {
                   value: 'Chopin, Frédéric',
                   type: 'name'
@@ -337,26 +337,26 @@ RSpec.describe Cocina::Models::Builders::NameTitleGroupBuilder do
 
       let(:contributor_slice) do
         {
-          structuredValue: [
+          structured_value: [
             {
-              structuredValue: [],
-              parallelValue: [],
-              groupedValue: [],
+              structured_value: [],
+              parallel_value: [],
+              grouped_value: [],
               value: 'Chopin, Frédéric',
               type: 'name',
               identifier: [],
               note: [],
-              appliesTo: []
+              applies_to: []
             },
             {
-              structuredValue: [],
-              parallelValue: [],
-              groupedValue: [],
+              structured_value: [],
+              parallel_value: [],
+              grouped_value: [],
               value: '1810-1849',
               type: 'life dates',
               identifier: [],
               note: [],
-              appliesTo: []
+              applies_to: []
             }
           ]
         }
@@ -372,9 +372,9 @@ RSpec.describe Cocina::Models::Builders::NameTitleGroupBuilder do
         {
           name: [
             {
-              parallelValue: [
+              parallel_value: [
                 {
-                  structuredValue: [
+                  structured_value: [
                     {
                       value: 'Israel Meir',
                       type: 'name'
@@ -387,7 +387,7 @@ RSpec.describe Cocina::Models::Builders::NameTitleGroupBuilder do
                   status: 'primary'
                 },
                 {
-                  structuredValue: [
+                  structured_value: [
                     {
                       value: 'Israel Meir in Hebrew characters',
                       type: 'name'
@@ -408,26 +408,26 @@ RSpec.describe Cocina::Models::Builders::NameTitleGroupBuilder do
 
       let(:contributor_slice) do
         {
-          structuredValue: [
+          structured_value: [
             {
-              structuredValue: [],
-              parallelValue: [],
-              groupedValue: [],
+              structured_value: [],
+              parallel_value: [],
+              grouped_value: [],
               value: 'Israel Meir',
               type: 'name',
               identifier: [],
               note: [],
-              appliesTo: []
+              applies_to: []
             },
             {
-              structuredValue: [],
-              parallelValue: [],
-              groupedValue: [],
+              structured_value: [],
+              parallel_value: [],
+              grouped_value: [],
               value: 'ha-Kohen',
               type: 'term of address',
               identifier: [],
               note: [],
-              appliesTo: []
+              applies_to: []
             }
           ]
         }

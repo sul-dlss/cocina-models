@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'deprecation'
-
 module Cocina
   module Models
     module Builders

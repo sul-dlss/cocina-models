@@ -10,7 +10,7 @@ RSpec.describe Cocina::Models::Validators::PurlValidator do
   context 'when valid' do
     let(:props) do
       {
-        externalIdentifier: 'druid:jq000jd3530',
+        external_identifier: 'druid:jq000jd3530',
         description: {
           purl: 'https://purl.stanford.edu/jq000jd3530'
         }
@@ -25,7 +25,7 @@ RSpec.describe Cocina::Models::Validators::PurlValidator do
   context 'when mismatch' do
     let(:props) do
       {
-        externalIdentifier: 'druid:xq000jd3530',
+        external_identifier: 'druid:xq000jd3530',
         description: {
           purl: 'https://purl.stanford.edu/jq000jd3530'
         }
@@ -40,7 +40,7 @@ RSpec.describe Cocina::Models::Validators::PurlValidator do
     end
   end
 
-  context 'when a request (no externalIdentifier)' do
+  context 'when a request (no external_identifier)' do
     let(:props) { {} }
 
     let(:clazz) { Cocina::Models::RequestDRO }
@@ -55,7 +55,7 @@ RSpec.describe Cocina::Models::Validators::PurlValidator do
 
     let(:props) do
       {
-        externalIdentifier: 'druid:jq000jd3530'
+        external_identifier: 'druid:jq000jd3530'
       }
     end
 

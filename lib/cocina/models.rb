@@ -9,9 +9,11 @@ require 'yaml'
 require 'openapi_parser'
 require 'openapi3_parser'
 require 'active_support'
+require 'active_support/core_ext/class/attribute'
 require 'active_support/core_ext/hash/indifferent_access'
 require 'active_support/core_ext/string'
 require 'thor'
+require 'deprecation'
 
 # Help Zeitwerk find some of our classes
 class CocinaModelsInflector < Zeitwerk::Inflector
@@ -42,6 +44,20 @@ loader.setup
 module Cocina
   # Provides Ruby objects for the repository and serializing them to/from JSON.
   module Models
+    # TODO: Remove this when cocina-models 1.0.0 is released.
+    DEPRECATED_CAMELCASE_METHODS = %i[
+      accessContact accessTemplate adminMetadata appliesTo catalogLinks
+      catalogRecordId cocinaVersion collectionsForRegistration
+      controlledDigitalLending digitalLocation digitalRepository displayLabel
+      disseminationWorkflow externalIdentifier groupedValue hasAdminPolicy
+      hasAgreement hasMemberOrders hasMessageDigests hasMimeType isMemberOf
+      marcEncodedData metadataStandard parallelContributor parallelEvent
+      parallelValue partOfProject physicalLocation registrationWorkflow
+      relatedResource releaseDate releaseTags sdrPreserve sourceId
+      structuredValue useAndReproductionStatement valueAt valueLanguage
+      valueScript viewingDirection
+    ].freeze
+
     class Error < StandardError; end
     # Raised when the type attribute is not valid.
     class UnknownTypeError < Error; end
@@ -51,8 +67,60 @@ module Cocina
 
     # Base class for Cocina Structs
     class Struct < Dry::Struct
+      # TODO: Remove this when cocina-models 1.0.0 is released.
+      extend Deprecation
+
+      # TODO: Remove both these lines when cocina-models 1.0.0 is released.
+      class_attribute :deprecation_horizon
+      self.deprecation_horizon = 'cocina-models v1.0.0'
+
       transform_keys(&:to_sym)
       schema schema.strict
+
+      def self.new(attributes = default_attributes, safe = false, &block)
+        super(underscore_attributes(attributes), safe, &block)
+      end
+
+      def self.underscore_attributes(attrs)
+        attrs = attrs.with_indifferent_access
+        # TODO: Remove this when cocina-models 1.0.0 is released.
+        warn_about_deprecated_attributes!(attrs)
+        attrs.deep_transform_keys(&:underscore)
+      end
+
+      # TODO: Remove this when cocina-models 1.0.0 is released.
+      def self.warn_about_deprecated_attributes!(attrs)
+        deprecated_attrs = deep_list_attrs(attrs).select { |attr| DEPRECATED_CAMELCASE_METHODS.include?(attr.to_sym) }
+        return if deprecated_attrs.empty?
+
+        Deprecation.warn(
+          self,
+          'camelCase attributes are deprecated and have been replaced with snake_case attributes. ' \
+          "these will be removed in the cocina-models 1.0.0 release: #{deprecated_attrs.join(', ')}"
+        )
+      end
+      private_class_method :warn_about_deprecated_attributes!
+
+      # TODO: Remove this when cocina-models 1.0.0 is released.
+      def self.deep_list_attrs(object, attrs = [])
+        case object
+        when Hash
+          deep_list_attrs(object.values, attrs)
+
+          attrs.concat(object.keys)
+        when Array
+          object.map { |value| deep_list_attrs(value, attrs) }
+        end
+
+        attrs.sort.uniq
+      end
+      private_class_method :deep_list_attrs
+
+      def to_json(*)
+        to_h
+          .deep_transform_keys { |key| key.to_s.camelize(:lower) }
+          .to_json
+      end
     end
 
     # DRY Types

@@ -3,7 +3,10 @@
 module Cocina
   module Models
     class AppliesTo < Struct
-      attribute :appliesTo, Types::Strict::Array.of(DescriptiveBasicValue).default([].freeze)
+      attribute :applies_to, Types::Strict::Array.of(DescriptiveBasicValue).default([].freeze)
+
+      alias appliesTo applies_to
+      deprecation_deprecate :appliesTo
     end
   end
 end

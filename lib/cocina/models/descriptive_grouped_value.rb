@@ -3,7 +3,10 @@
 module Cocina
   module Models
     class DescriptiveGroupedValue < Struct
-      attribute :groupedValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
+      attribute :grouped_value, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
+
+      alias groupedValue grouped_value
+      deprecation_deprecate :groupedValue
     end
   end
 end

@@ -259,7 +259,7 @@ _Path: identifier_
   * URI
   * URN
   * videorecording identifier
-  * West Mat \#
+  * West Mat #
   * Wikidata
   * Bodley 342
   * vintage

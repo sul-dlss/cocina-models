@@ -12,8 +12,13 @@ module Cocina
       attribute :identifier, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute :note, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # URL or other pointer to the location of the contributor information.
-      attribute? :valueAt, Types::Strict::String
-      attribute :parallelContributor, Types::Strict::Array.of(DescriptiveParallelContributor).default([].freeze)
+      attribute? :value_at, Types::Strict::String
+      attribute :parallel_contributor, Types::Strict::Array.of(DescriptiveParallelContributor).default([].freeze)
+
+      alias valueAt value_at
+      deprecation_deprecate :valueAt
+      alias parallelContributor parallel_contributor
+      deprecation_deprecate :parallelContributor
     end
   end
 end

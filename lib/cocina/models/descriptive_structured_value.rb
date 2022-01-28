@@ -3,7 +3,10 @@
 module Cocina
   module Models
     class DescriptiveStructuredValue < Struct
-      attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
+      attribute :structured_value, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
+
+      alias structuredValue structured_value
+      deprecation_deprecate :structuredValue
     end
   end
 end

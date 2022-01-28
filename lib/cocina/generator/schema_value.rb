@@ -5,11 +5,14 @@ module Cocina
     # Class for generating from an openapi value
     class SchemaValue < SchemaBase
       def generate
+        # TODO: Remove this when cocina-models 1.0.0 is released.
+        @camelcase_properties << name.to_sym unless name == name.underscore
+
         # optional has to come before default or the default value that gets set will be nil.
         if required && !relaxed
-          "#{preamble}attribute :#{name.camelize(:lower)}, #{type}"
+          "#{preamble}attribute :#{name.underscore}, #{type}"
         else
-          "#{preamble}attribute? :#{name.camelize(:lower)}, #{type}"
+          "#{preamble}attribute? :#{name.underscore}, #{type}"
         end
       end
 
