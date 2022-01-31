@@ -15,8 +15,6 @@ module Cocina
       attribute :hasAdminPolicy, Types::Strict::String
       # example: druid:bc123df4567
       attribute :hasAgreement, Types::Strict::String
-      # example: druid:bc123df4567
-      attribute :referencesAgreement, Types::Strict::String.meta(omittable: true)
       attribute :roles, Types::Strict::Array.of(AccessRole).default([].freeze)
     end
   end
