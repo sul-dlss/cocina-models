@@ -237,8 +237,6 @@ components:
           $ref: '#/components/schemas/Druid'
         hasAgreement:
           $ref: '#/components/schemas/Druid'
-        referencesAgreement:
-          $ref: '#/components/schemas/Druid'
         roles:
           description: The access roles conferred by this AdminPolicy (used by Argo)
           type: array
