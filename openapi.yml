@@ -918,6 +918,7 @@ components:
             license:
               description: The license governing reuse of the DRO. Should be an IRI for known licenses (i.e. CC, RightsStatement.org URI, etc.).
               type: string
+              nullable: true
               enum:
                 - 'https://www.gnu.org/licenses/agpl.txt'
                 - 'https://www.apache.org/licenses/LICENSE-2.0'
