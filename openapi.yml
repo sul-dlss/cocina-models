@@ -314,6 +314,7 @@ components:
             $ref: "#/components/schemas/DescriptiveBasicValue"
     Barcode:
       description: 'A barcode'
+      nullable: true
       oneOf:
         - $ref: '#/components/schemas/BusinessBarcode'
         - $ref: '#/components/schemas/LaneMedicalBarcode'

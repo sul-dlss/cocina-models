@@ -4,7 +4,7 @@ module Cocina
   module Models
     class Identification < Struct
       # A barcode
-      attribute :barcode, Types::Nominal::Any.meta(omittable: true)
+      attribute :barcode, Types::Nominal::Any.optional.meta(omittable: true)
       attribute :catalogLinks, Types::Strict::Array.of(CatalogLink).default([].freeze)
       # Digital Object Identifier (https://www.doi.org)
       # example: 10.25740/bc123df4567
