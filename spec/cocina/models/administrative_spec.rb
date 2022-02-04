@@ -23,4 +23,19 @@ RSpec.describe Cocina::Models::Administrative do
       expect(administrative1.to_h).to eq(administrative2.to_h)
     end
   end
+
+  describe 'mutation' do
+    let(:administrative) do
+      described_class.new(
+        {
+          hasAdminPolicy: 'druid:bc123df4567'
+        }
+      )
+    end
+
+    it 'provides a setter as a mutation facade' do
+      administrative.hasAdminPolicy = 'druid:cb321fd7654'
+      expect(administrative.hasAdminPolicy).to eq('druid:cb321fd7654')
+    end
+  end
 end

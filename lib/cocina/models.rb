@@ -49,6 +49,18 @@ module Cocina
     class Struct < Dry::Struct
       transform_keys(&:to_sym)
       schema schema.strict
+
+      def self.attribute(name, type = nil, &block)
+        super
+
+        define_method("#{name}=") do |value|
+          self.attributes = attributes.merge(name => value)
+        end
+      end
+
+      def attributes=(new_attributes)
+        @attributes = self.class.schema[new_attributes]
+      end
     end
 
     # DRY Types

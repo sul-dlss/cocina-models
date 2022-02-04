@@ -4,49 +4,51 @@ require 'spec_helper'
 
 RSpec.describe Cocina::Models::FileAccess do
   # Verifying that correctly validate access, download, readLocation, and controlledDigitalLending.
-
   def dro(access, download, read_location, controlled_digital_lending)
-    Cocina::Models::DRO.new(externalIdentifier: 'druid:bc123df4567',
-                            label: 'My DRO',
-                            type: Cocina::Models::Vocab.book,
-                            version: 1,
-                            administrative: { hasAdminPolicy: 'druid:bc123df4567' },
-                            access: {},
-                            structural: {
-                              contains: [
-                                {
-                                  version: 1,
-                                  type: 'http://cocina.sul.stanford.edu/models/resources/file.jsonld',
-                                  label: 'Page 1',
-                                  externalIdentifier: 'abc123',
-                                  structural: {
-                                    contains: [
-                                      {
-                                        version: 1,
-                                        type: 'http://cocina.sul.stanford.edu/models/file.jsonld',
-                                        filename: '00002.jp2',
-                                        label: '00002.jp2',
-                                        hasMimeType: 'image/jp2',
-                                        externalIdentifier: 'abc123',
-                                        size: 111_467,
-                                        administrative: {
-                                          publish: true,
-                                          sdrPreserve: true,
-                                          shelve: true
-                                        },
-                                        access: {
-                                          access: access,
-                                          download: download,
-                                          readLocation: read_location,
-                                          controlledDigitalLending: controlled_digital_lending
-                                        },
-                                        hasMessageDigests: []
-                                      }
-                                    ]
-                                  }
-                                }
-                              ]
-                            })
+    dro_template = Cocina::Models::DRO.new(externalIdentifier: 'druid:bc123df4567',
+                                           label: 'My DRO',
+                                           type: Cocina::Models::Vocab.book,
+                                           version: 1,
+                                           administrative: { hasAdminPolicy: 'druid:bc123df4567' },
+                                           access: {},
+                                           structural: {
+                                             contains: [
+                                               {
+                                                 version: 1,
+                                                 type: 'http://cocina.sul.stanford.edu/models/resources/file.jsonld',
+                                                 label: 'Page 1',
+                                                 externalIdentifier: 'abc123',
+                                                 structural: {
+                                                   contains: [
+                                                     {
+                                                       version: 1,
+                                                       type: 'http://cocina.sul.stanford.edu/models/file.jsonld',
+                                                       filename: '00002.jp2',
+                                                       label: '00002.jp2',
+                                                       hasMimeType: 'image/jp2',
+                                                       externalIdentifier: 'abc123',
+                                                       size: 111_467,
+                                                       administrative: {
+                                                         publish: true,
+                                                         sdrPreserve: true,
+                                                         shelve: true
+                                                       },
+                                                       access: {},
+                                                       hasMessageDigests: []
+                                                     }
+                                                   ]
+                                                 }
+                                               }
+                                             ]
+                                           })
+
+    dro_template.structural.contains.first.structural.contains.first.access = {
+      access: access,
+      download: download,
+      readLocation: read_location,
+      controlledDigitalLending: controlled_digital_lending
+    }
+    dro_template
   end
 
   context 'with dark access' do
