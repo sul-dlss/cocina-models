@@ -62,7 +62,7 @@ RSpec.describe Cocina::Models::Validator do
     end
   end
 
-  context 'when a nil value is passed' do
+  context 'when a nil copyright value (nullable string) is passed' do
     let(:policy) do
       Cocina::Models::AdminPolicy.new(
         externalIdentifier: 'druid:bc123df4567',
@@ -73,6 +73,28 @@ RSpec.describe Cocina::Models::Validator do
           defaultAccess: { copyright: nil },
           hasAdminPolicy: 'druid:bc123df4567',
           hasAgreement: 'druid:bc123df4567'
+        }
+      )
+    end
+
+    it 'does not raise' do
+      expect(policy.externalIdentifier).to eq('druid:bc123df4567')
+    end
+  end
+
+  context 'when a nil barcode value (nullable oneOf) is passed' do
+    let(:policy) do
+      Cocina::Models::DRO.new(
+        externalIdentifier: 'druid:bc123df4567',
+        label: 'My item',
+        type: Cocina::Models::Vocab.object,
+        version: 1,
+        administrative: {
+          hasAdminPolicy: 'druid:bc123df4567'
+        },
+        access: {},
+        identification: {
+          barcode: nil
         }
       )
     end
