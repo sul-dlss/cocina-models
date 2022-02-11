@@ -965,6 +965,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Sequence'
+        isConstituentOf:
+          description: Virtual object DROs that this DRO is a constituent of
+          type: array
+          items:
+            $ref: '#/components/schemas/Druid'
         isMemberOf:
           description: Collections that this DRO is a member of
           type: array
@@ -1659,6 +1664,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Sequence'
+        isConstituentOf:
+          description: Virtual object DROs that this DRO is a constituent of
+          type: array
+          items:
+            $ref: '#/components/schemas/Druid'
         isMemberOf:
           description: Collections that this DRO is a member of
           type: array
