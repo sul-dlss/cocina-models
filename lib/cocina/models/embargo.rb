@@ -19,7 +19,7 @@ module Cocina
       attribute :releaseDate, Types::Params::DateTime
       # The human readable use and reproduction statement that applies when the embargo expires.
       # example: These materials are in the public domain.
-      attribute :useAndReproductionStatement, Types::Strict::String.meta(omittable: true)
+      attribute :useAndReproductionStatement, Types::Strict::String.optional.meta(omittable: true)
     end
   end
 end
