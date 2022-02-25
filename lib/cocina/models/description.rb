@@ -3,6 +3,8 @@
 module Cocina
   module Models
     class Description < Struct
+      include Validatable
+
       attribute :title, Types::Strict::Array.of(Title).default([].freeze)
       attribute :contributor, Types::Strict::Array.of(Contributor).default([].freeze)
       attribute :event, Types::Strict::Array.of(Event).default([].freeze)
@@ -20,11 +22,6 @@ module Cocina
       attribute :valueAt, Types::Strict::String.meta(omittable: true)
       # Stanford persistent URL associated with the related resource. Note this is http, not https.
       attribute :purl, Types::Strict::String
-
-      def self.new(attributes = default_attributes, safe = false, validate = true, &block)
-        Validator.validate(self, attributes.with_indifferent_access) if validate && name
-        super(attributes, safe, &block)
-      end
     end
   end
 end
