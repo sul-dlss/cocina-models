@@ -16,11 +16,10 @@ module Cocina
             module Models
               class #{name} < Struct
 
+                #{validate}
                 #{types}
 
                 #{model_attributes}
-
-                #{validate}
               end
             end
           end
@@ -64,10 +63,7 @@ module Cocina
         return '' unless validatable?
 
         <<~RUBY
-          def self.new(attributes = default_attributes, safe = false, validate = true, &block)
-            Validator.validate(self, attributes.with_indifferent_access) if validate && name
-            super(attributes, safe, &block)
-                end
+          include Validatable
         RUBY
       end
 

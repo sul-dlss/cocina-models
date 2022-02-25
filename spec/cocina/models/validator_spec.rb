@@ -3,23 +3,23 @@
 require 'spec_helper'
 
 RSpec.describe Cocina::Models::Validator do
+  let(:valid_policy) do
+    Cocina::Models::AdminPolicy.new(
+      externalIdentifier: 'druid:bc123df4567',
+      label: 'My admin policy',
+      type: Cocina::Models::Vocab.admin_policy,
+      version: 1,
+      administrative: {
+        hasAdminPolicy: 'druid:bc123df4567',
+        hasAgreement: 'druid:bc123df4567'
+      }
+    )
+  end
+
   # AdminPolicy.externalIdentifier must be a valid druid
   context 'when valid' do
-    let(:policy) do
-      Cocina::Models::AdminPolicy.new(
-        externalIdentifier: 'druid:bc123df4567',
-        label: 'My admin policy',
-        type: Cocina::Models::Vocab.admin_policy,
-        version: 1,
-        administrative: {
-          hasAdminPolicy: 'druid:bc123df4567',
-          hasAgreement: 'druid:bc123df4567'
-        }
-      )
-    end
-
     it 'does not raise' do
-      expect(policy.externalIdentifier).to eq('druid:bc123df4567')
+      expect(valid_policy.externalIdentifier).to eq('druid:bc123df4567')
     end
   end
 
@@ -104,7 +104,7 @@ RSpec.describe Cocina::Models::Validator do
     end
   end
 
-  describe 'when invalid' do
+  context 'when invalid' do
     let(:policy) do
       Cocina::Models::AdminPolicy.new(
         externalIdentifier: 'druid:abc123',
@@ -117,6 +117,21 @@ RSpec.describe Cocina::Models::Validator do
 
     it 'raises' do
       expect { policy }.to raise_error(Cocina::Models::ValidationError)
+    end
+  end
+
+  context 'when invalid and created from existing valid object' do
+    it 'raises' do
+      expect do
+        valid_policy.new(externalIdentifier: 'druid:abc123')
+      end.to raise_error(Cocina::Models::ValidationError)
+    end
+  end
+
+  context 'when invalid and created from existing valid object but not validating' do
+    it 'does not raise' do
+      expect(valid_policy.new(externalIdentifier: 'druid:abc123',
+                              validate: false).externalIdentifier).to eq('druid:abc123')
     end
   end
 

@@ -3,6 +3,8 @@
 module Cocina
   module Models
     class RequestDescription < Struct
+      include Validatable
+
       attribute :title, Types::Strict::Array.of(Title).default([].freeze)
       attribute :contributor, Types::Strict::Array.of(Contributor).default([].freeze)
       attribute :event, Types::Strict::Array.of(Event).default([].freeze)
@@ -18,11 +20,6 @@ module Cocina
       attribute :adminMetadata, DescriptiveAdminMetadata.optional.meta(omittable: true)
       # URL or other pointer to the location of the resource description.
       attribute :valueAt, Types::Strict::String.meta(omittable: true)
-
-      def self.new(attributes = default_attributes, safe = false, validate = true, &block)
-        Validator.validate(self, attributes.with_indifferent_access) if validate && name
-        super(attributes, safe, &block)
-      end
     end
   end
 end

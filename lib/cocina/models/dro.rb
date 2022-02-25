@@ -3,6 +3,8 @@
 module Cocina
   module Models
     class DRO < Struct
+      include Validatable
+
       include Checkable
 
       TYPES = ['http://cocina.sul.stanford.edu/models/object.jsonld',
@@ -38,11 +40,6 @@ module Cocina
       attribute :identification, Identification.optional.meta(omittable: true)
       attribute :structural, DROStructural.optional.meta(omittable: true)
       attribute :geographic, Geographic.optional.meta(omittable: true)
-
-      def self.new(attributes = default_attributes, safe = false, validate = true, &block)
-        Validator.validate(self, attributes.with_indifferent_access) if validate && name
-        super(attributes, safe, &block)
-      end
     end
   end
 end
