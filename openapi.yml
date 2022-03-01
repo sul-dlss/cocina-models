@@ -178,6 +178,7 @@ components:
           description: Administrative or Internal project this resource is a part of
           example: Google Books
           type: string
+          nullable: true
       required:
         - hasAdminPolicy
     AdminPolicy:
