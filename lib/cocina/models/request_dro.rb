@@ -28,7 +28,7 @@ module Cocina
       attribute :cocinaVersion, Types::Strict::String.default(Cocina::Models::VERSION)
       attribute :type, Types::Strict::String.enum(*RequestDRO::TYPES)
       attribute :label, Types::Strict::String
-      attribute :version, Types::Strict::Integer
+      attribute :version, Types::Strict::Integer.default(1).enum(1)
       attribute :access, DROAccess.optional.meta(omittable: true)
       attribute(:administrative, Administrative.default { Administrative.new })
       attribute :description, RequestDescription.optional.meta(omittable: true)
