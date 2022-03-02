@@ -104,7 +104,7 @@ RSpec.describe Cocina::Models do
         {
           'type' => 'http://cocina.sul.stanford.edu/models/exhibit.jsonld',
           'label' => 'bar',
-          'version' => 5,
+          'version' => 1,
           'access' => {},
           'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
         }
@@ -118,7 +118,7 @@ RSpec.describe Cocina::Models do
         {
           'type' => 'http://cocina.sul.stanford.edu/models/image.jsonld',
           'label' => 'bar',
-          'version' => 5,
+          'version' => 1,
           'identification' => {
             'sourceId' => 'sul:123'
           },
@@ -134,7 +134,7 @@ RSpec.describe Cocina::Models do
         {
           'type' => 'http://cocina.sul.stanford.edu/models/admin_policy.jsonld',
           'label' => 'bar',
-          'version' => 5,
+          'version' => 1,
           'administrative' => {
             'hasAdminPolicy' => 'druid:bc123df4567',
             'hasAgreement' => 'druid:bc123df4567'
@@ -143,6 +143,27 @@ RSpec.describe Cocina::Models do
       end
 
       it { is_expected.to be_kind_of Cocina::Models::RequestAdminPolicy }
+    end
+
+    context 'with an invalid version' do
+      let(:data) do
+        {
+          'type' => 'http://cocina.sul.stanford.edu/models/book.jsonld',
+          'label' => 'bar',
+          'version' => 5,
+          'administrative' => {
+            'hasAdminPolicy' => 'druid:bc123df4567',
+            'hasAgreement' => 'druid:bc123df4567'
+          }
+        }
+      end
+
+      it 'raises an error' do
+        expect do
+          build
+        end.to raise_error Cocina::Models::ValidationError,
+                           "5 isn't part of the enum in #/components/schemas/RequestDRO/properties/version"
+      end
     end
 
     context 'with an invalid type' do

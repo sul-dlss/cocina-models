@@ -1481,6 +1481,9 @@ components:
           type: string
         version:
           type: integer
+          default: 1
+          enum:
+            - 1
         administrative:
           $ref: '#/components/schemas/AdminPolicyAdministrative'
         description:
@@ -1510,6 +1513,9 @@ components:
           type: string
         version:
           type: integer
+          default: 1
+          enum:
+            - 1
         access:
           $ref: '#/components/schemas/CollectionAccess'
         administrative:
@@ -1627,6 +1633,9 @@ components:
           type: string
         version:
           type: integer
+          default: 1
+          enum:
+            - 1
         access:
           $ref: '#/components/schemas/DROAccess'
         administrative:
