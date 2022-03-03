@@ -28,7 +28,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'dry-struct', '~> 1.0'
   spec.add_dependency 'dry-types', '~> 1.1'
   spec.add_dependency 'openapi3_parser' # Parsing openapi doc
-  spec.add_dependency 'openapi_parser', '~> 1.0' # Validating openapi requests
+  # Match these version requirements to what committee wants,
+  # so that our client (non-committee) users have the same dependencies.
+  spec.add_dependency 'openapi_parser', '>= 0.11.1', '< 1.0'
   spec.add_dependency 'thor'
   spec.add_dependency 'zeitwerk', '~> 2.1'
 
