@@ -35,7 +35,7 @@ module Cocina
 
       # rubocop:disable Style/ClassVars
       def self.root
-        @@root ||= OpenAPIParser.parse(YAML.load_file(openapi_path))
+        @@root ||= OpenAPIParser.parse(YAML.load_file(openapi_path), strict_reference_validation: true)
       end
       # rubocop:enable Style/ClassVars
       private_class_method :root
