@@ -30,7 +30,7 @@ module Cocina
       attribute :label, Types::Strict::String
       attribute :version, Types::Strict::Integer.default(1).enum(1)
       attribute :access, DROAccess.optional.meta(omittable: true)
-      attribute(:administrative, Administrative.default { Administrative.new })
+      attribute(:administrative, RequestAdministrative.default { RequestAdministrative.new })
       attribute :description, RequestDescription.optional.meta(omittable: true)
       attribute(:identification, RequestIdentification.default { RequestIdentification.new })
       attribute :structural, RequestDROStructural.optional.meta(omittable: true)

@@ -174,11 +174,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ReleaseTag'
-        partOfProject:
-          description: Administrative or Internal project this resource is a part of
-          example: Google Books
-          type: string
-          nullable: true
       required:
         - hasAdminPolicy
     AdminPolicy:
@@ -1469,6 +1464,18 @@ components:
           example: Searchworks
         release:
           type: boolean
+    RequestAdministrative:
+      type: object
+      additionalProperties: false
+      allOf:
+        - $ref: "#/components/schemas/Administrative"
+        - type: object
+          additionalProperties: false
+          properties:
+            partOfProject:
+              description: Internal project this resource is a part of. This governs routing of messages about this object.
+              example: Google Books
+              type: string
     RequestAdminPolicy:
       description: Same as an AdminPolicy, but doesn't have an externalIdentifier as one will be created
       type: object
@@ -1522,7 +1529,7 @@ components:
         access:
           $ref: '#/components/schemas/CollectionAccess'
         administrative:
-          $ref: '#/components/schemas/Administrative'
+          $ref: '#/components/schemas/RequestAdministrative'
         description:
           $ref: '#/components/schemas/RequestDescription'
         identification:
@@ -1642,7 +1649,7 @@ components:
         access:
           $ref: '#/components/schemas/DROAccess'
         administrative:
-          $ref: '#/components/schemas/Administrative'
+          $ref: '#/components/schemas/RequestAdministrative'
         description:
           $ref: '#/components/schemas/RequestDescription'
         identification:
