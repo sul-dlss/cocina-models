@@ -241,6 +241,7 @@ components:
       required:
         - hasAdminPolicy
         - hasAgreement
+        - defaultAccess
     AdminPolicyDefaultAccess:
       description: 'Provides the default access settings for an AdminPolicy. This is almost the same as DROAccess, but it provides no defaults and has no embargo.'
       type: object

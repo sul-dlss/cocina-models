@@ -3,7 +3,7 @@
 module Cocina
   module Models
     class AdminPolicyAdministrative < Struct
-      attribute :defaultAccess, AdminPolicyDefaultAccess.optional.meta(omittable: true)
+      attribute(:defaultAccess, AdminPolicyDefaultAccess.default { AdminPolicyDefaultAccess.new })
       attribute :registrationWorkflow, Types::Strict::Array.of(Types::Strict::String).default([].freeze)
       # An additional workflow to start for objects managed by this admin policy once the end-accession workflow step is complete
       # example: wasCrawlPreassemblyWF

@@ -67,7 +67,8 @@ RSpec.describe Cocina::Models do
           'version' => 5,
           'administrative' => {
             'hasAdminPolicy' => 'druid:bc123df4567',
-            'hasAgreement' => 'druid:bc123df4567'
+            'hasAgreement' => 'druid:bc123df4567',
+            'defaultAccess' => {}
           }
         }
       end
@@ -137,7 +138,8 @@ RSpec.describe Cocina::Models do
           'version' => 1,
           'administrative' => {
             'hasAdminPolicy' => 'druid:bc123df4567',
-            'hasAgreement' => 'druid:bc123df4567'
+            'hasAgreement' => 'druid:bc123df4567',
+            'defaultAccess' => {}
           }
         }
       end
