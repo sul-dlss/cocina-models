@@ -89,6 +89,10 @@ RSpec.describe Cocina::Models::Validator do
         label: 'My item',
         type: Cocina::Models::Vocab.object,
         version: 1,
+        description: {
+          title: [{ value: 'Test DRO' }],
+          purl: 'https://purl.stanford.edu/bc123df4567'
+        },
         administrative: {
           hasAdminPolicy: 'druid:bc123df4567'
         },
@@ -147,6 +151,10 @@ RSpec.describe Cocina::Models::Validator do
           externalIdentifier: 'druid:bb000kg4251',
           label: 'Roger Howe Professorship',
           version: 3,
+          description: {
+            title: [{ value: 'Test DRO' }],
+            purl: 'https://purl.stanford.edu/bb000kg4251'
+          },
           access: {
             access: 'world',
             download: 'world',

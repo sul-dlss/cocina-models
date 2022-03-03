@@ -26,7 +26,7 @@ module Cocina
       attribute :version, Types::Strict::Integer
       attribute(:access, CollectionAccess.default { CollectionAccess.new })
       attribute :administrative, Administrative.optional.meta(omittable: true)
-      attribute :description, Description.optional.meta(omittable: true)
+      attribute(:description, Description.default { Description.new })
       attribute :identification, CollectionIdentification.optional.meta(omittable: true)
     end
   end

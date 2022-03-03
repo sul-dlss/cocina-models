@@ -10,6 +10,10 @@ RSpec.describe Cocina::Models::DROAccess do
                             label: 'My DRO',
                             type: Cocina::Models::Vocab.book,
                             version: 1,
+                            description: {
+                              title: [{ value: 'Test DRO' }],
+                              purl: 'https://purl.stanford.edu/bc123df4567'
+                            },
                             administrative: { hasAdminPolicy: 'druid:bc123df4567' },
                             access: {
                               access: access,

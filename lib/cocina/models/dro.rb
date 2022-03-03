@@ -36,7 +36,7 @@ module Cocina
       attribute :version, Types::Strict::Integer
       attribute(:access, DROAccess.default { DROAccess.new })
       attribute(:administrative, Administrative.default { Administrative.new })
-      attribute :description, Description.optional.meta(omittable: true)
+      attribute(:description, Description.default { Description.new })
       attribute :identification, Identification.optional.meta(omittable: true)
       attribute :structural, DROStructural.optional.meta(omittable: true)
       attribute :geographic, Geographic.optional.meta(omittable: true)

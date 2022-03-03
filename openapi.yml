@@ -411,6 +411,7 @@ components:
           $ref: '#/components/schemas/CollectionIdentification'
       required:
         - cocinaVersion
+        - description
         - externalIdentifier
         - label
         - type
@@ -891,6 +892,7 @@ components:
         - cocinaVersion
         - access
         - administrative
+        - description
         - externalIdentifier
         - label
         - type

@@ -17,7 +17,11 @@ RSpec.describe Cocina::Models do
           'externalIdentifier' => 'druid:bc123df4567',
           'label' => 'bar',
           'version' => 5,
-          'access' => {}
+          'access' => {},
+          'description' => {
+            'title' => [{ 'value' => 'Test Collection' }],
+            'purl' => 'https://purl.stanford.edu/bc123df4567'
+          }
         }
       end
 
@@ -51,6 +55,10 @@ RSpec.describe Cocina::Models do
           'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' },
           'identification' => {
             'doi' => '10.25740/bc123df4567'
+          },
+          'description' => {
+            'title' => [{ 'value' => 'Test DRO' }],
+            'purl' => 'https://purl.stanford.edu/bc123df4567'
           }
         }
       end
