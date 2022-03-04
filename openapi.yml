@@ -275,11 +275,12 @@ components:
             - 'stanford'
             - 'location-based'
             - 'none'
-        readLocation:
+        location:
           description: >
-            If access is "location-based", which location should have access.
-            This is used in the transition from Fedora as a way to set a default
-            readLocation at registration that is copied down to all the files.
+            If access or download is "location-based", this indicates which
+            location should have access. This is used in the transition from
+            Fedora as a way to set a default location at registration that is
+            copied down to all the files.
 
           type: string
           nullable: true
@@ -359,8 +360,8 @@ components:
           type: string
           enum:
             - 'none'
-        readLocation:
-          description: If access is "location-based", which location should have access.
+        location:
+          description: Not used for this access type, must be null.
           type: string
           nullable: true
           enum:
@@ -509,8 +510,8 @@ components:
           type: string
           enum:
             - none
-        readLocation:
-          description: If access is "location-based", which location should have access.
+        location:
+          description: Not used for this access type, must be null.
           type: string
           nullable: true
           enum:
@@ -538,8 +539,8 @@ components:
           default: 'none'
           enum:
             - 'none'
-        readLocation:
-          description: If access is "location-based", which location should have access.
+        location:
+          description: Not used for this access type, must be null.
           type: string
           nullable: true
           default: null
@@ -1278,8 +1279,8 @@ components:
           enum:
             - location-based
             - none
-        readLocation:
-          description: If access is "location-based", which location should have access.
+        location:
+          description: If access or download is "location-based", which location should have access.
           type: string
           enum:
             - 'spec'
@@ -1296,7 +1297,7 @@ components:
       required:
         - access
         - download
-        - readLocation
+        - location
     LocationBasedDownloadAccess:
       type: object
       properties:
@@ -1311,8 +1312,8 @@ components:
           type: string
           enum:
             - location-based
-        readLocation:
-          description: If access is "location-based", which location should have access.
+        location:
+          description: Which location should have download access.
           type: string
           enum:
             - 'spec'
@@ -1329,7 +1330,7 @@ components:
       required:
         - access
         - download
-        - readLocation
+        - location
     MessageDigest:
       description: The output of the message digest algorithm.
       type: object
@@ -1893,8 +1894,8 @@ components:
           type: string
           enum:
             - stanford
-        readLocation:
-          description: If access is "location-based", which location should have access.
+        location:
+          description: Not used for this access type, must be null.
           type: string
           nullable: true
           enum:
@@ -1922,8 +1923,8 @@ components:
             - none
             - stanford
             - world
-        readLocation:
-          description: If access is "location-based", which location should have access.
+        location:
+          description: Not used for this access type, must be null.
           type: string
           nullable: true
           enum:
