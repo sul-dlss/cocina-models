@@ -208,8 +208,8 @@ components:
       type: object
       additionalProperties: false
       properties:
-        defaultAccess:
-          $ref: '#/components/schemas/AdminPolicyDefaultAccess'
+        accessTemplate:
+          $ref: '#/components/schemas/AdminPolicyAccessTemplate'
         registrationWorkflow:
           description: When you register an item with this admin policy, these are the workflows that are available.
           type: array
@@ -236,9 +236,9 @@ components:
       required:
         - hasAdminPolicy
         - hasAgreement
-        - defaultAccess
-    AdminPolicyDefaultAccess:
-      description: 'Provides the default access settings for an AdminPolicy. This is almost the same as DROAccess, but it provides no defaults and has no embargo.'
+        - accessTemplate
+    AdminPolicyAccessTemplate:
+      description: 'Provides the template of access settings that is copied to the items goverend by an AdminPolicy. This is almost the same as DROAccess, but it provides no defaults and has no embargo.'
       type: object
       additionalProperties: false
       properties:
