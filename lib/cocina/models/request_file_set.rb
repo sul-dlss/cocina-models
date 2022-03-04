@@ -5,22 +5,22 @@ module Cocina
     class RequestFileSet < Struct
       include Checkable
 
-      TYPES = ['http://cocina.sul.stanford.edu/models/resources/audio.jsonld',
-               'http://cocina.sul.stanford.edu/models/resources/attachment.jsonld',
-               'http://cocina.sul.stanford.edu/models/resources/document.jsonld',
-               'http://cocina.sul.stanford.edu/models/resources/file.jsonld',
-               'http://cocina.sul.stanford.edu/models/resources/image.jsonld',
-               'http://cocina.sul.stanford.edu/models/resources/main-augmented.jsonld',
-               'http://cocina.sul.stanford.edu/models/resources/main-original.jsonld',
-               'http://cocina.sul.stanford.edu/models/resources/media.jsonld',
-               'http://cocina.sul.stanford.edu/models/resources/object.jsonld',
-               'http://cocina.sul.stanford.edu/models/resources/page.jsonld',
-               'http://cocina.sul.stanford.edu/models/resources/permissions.jsonld',
-               'http://cocina.sul.stanford.edu/models/resources/preview.jsonld',
-               'http://cocina.sul.stanford.edu/models/resources/supplement.jsonld',
-               'http://cocina.sul.stanford.edu/models/resources/3d.jsonld',
-               'http://cocina.sul.stanford.edu/models/resources/thumb.jsonld',
-               'http://cocina.sul.stanford.edu/models/resources/video.jsonld'].freeze
+      TYPES = ['https://cocina.sul.stanford.edu/models/resources/audio',
+               'https://cocina.sul.stanford.edu/models/resources/attachment',
+               'https://cocina.sul.stanford.edu/models/resources/document',
+               'https://cocina.sul.stanford.edu/models/resources/file',
+               'https://cocina.sul.stanford.edu/models/resources/image',
+               'https://cocina.sul.stanford.edu/models/resources/main-augmented',
+               'https://cocina.sul.stanford.edu/models/resources/main-original',
+               'https://cocina.sul.stanford.edu/models/resources/media',
+               'https://cocina.sul.stanford.edu/models/resources/object',
+               'https://cocina.sul.stanford.edu/models/resources/page',
+               'https://cocina.sul.stanford.edu/models/resources/permissions',
+               'https://cocina.sul.stanford.edu/models/resources/preview',
+               'https://cocina.sul.stanford.edu/models/resources/supplement',
+               'https://cocina.sul.stanford.edu/models/resources/3d',
+               'https://cocina.sul.stanford.edu/models/resources/thumb',
+               'https://cocina.sul.stanford.edu/models/resources/video'].freeze
 
       attribute :type, Types::Strict::String.enum(*RequestFileSet::TYPES)
       attribute :label, Types::Strict::String

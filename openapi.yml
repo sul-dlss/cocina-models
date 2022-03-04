@@ -185,7 +185,7 @@ components:
         type:
           type: string
           enum:
-            - 'http://cocina.sul.stanford.edu/models/admin_policy.jsonld'
+            - 'https://cocina.sul.stanford.edu/models/admin_policy'
         externalIdentifier:
           $ref: '#/components/schemas/Druid'
         label:
@@ -385,11 +385,11 @@ components:
           description: The content type of the Collection. Selected from an established set of values.
           type: string
           enum:
-            - 'http://cocina.sul.stanford.edu/models/collection.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/curated-collection.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/user-collection.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/exhibit.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/series.jsonld'
+            - 'https://cocina.sul.stanford.edu/models/collection'
+            - 'https://cocina.sul.stanford.edu/models/curated-collection'
+            - 'https://cocina.sul.stanford.edu/models/user-collection'
+            - 'https://cocina.sul.stanford.edu/models/exhibit'
+            - 'https://cocina.sul.stanford.edu/models/series'
         externalIdentifier:
           $ref: '#/components/schemas/Druid'
         label:
@@ -850,21 +850,21 @@ components:
           description: The content type of the DRO. Selected from an established set of values.
           type: string
           enum:
-            - 'http://cocina.sul.stanford.edu/models/object.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/3d.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/agreement.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/book.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/document.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/geo.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/image.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/page.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/photograph.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/manuscript.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/map.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/media.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/track.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/webarchive-binary.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/webarchive-seed.jsonld'
+            - 'https://cocina.sul.stanford.edu/models/object'
+            - 'https://cocina.sul.stanford.edu/models/3d'
+            - 'https://cocina.sul.stanford.edu/models/agreement'
+            - 'https://cocina.sul.stanford.edu/models/book'
+            - 'https://cocina.sul.stanford.edu/models/document'
+            - 'https://cocina.sul.stanford.edu/models/geo'
+            - 'https://cocina.sul.stanford.edu/models/image'
+            - 'https://cocina.sul.stanford.edu/models/page'
+            - 'https://cocina.sul.stanford.edu/models/photograph'
+            - 'https://cocina.sul.stanford.edu/models/manuscript'
+            - 'https://cocina.sul.stanford.edu/models/map'
+            - 'https://cocina.sul.stanford.edu/models/media'
+            - 'https://cocina.sul.stanford.edu/models/track'
+            - 'https://cocina.sul.stanford.edu/models/webarchive-binary'
+            - 'https://cocina.sul.stanford.edu/models/webarchive-seed'
         externalIdentifier:
           $ref: '#/components/schemas/Druid'
         label:
@@ -947,7 +947,7 @@ components:
                 - 'https://creativecommons.org/licenses/by-nc/3.0/legalcode'
                 - 'https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode'
                 - 'https://creativecommons.org/licenses/by-nc-nd/3.0/legalcode'
-                - 'http://cocina.sul.stanford.edu/licenses/none' # Only used in some legacy ETDs and not actually permitted per the Project Chimera docs.
+                - 'https://cocina.sul.stanford.edu/licenses/none' # Only used in some legacy ETDs and not actually permitted per the Project Chimera docs.
     DROStructural:
       description: Structural metadata
       type: object
@@ -1048,7 +1048,7 @@ components:
           description: The content type of the File.
           type: string
           enum:
-            - 'http://cocina.sul.stanford.edu/models/file.jsonld'
+            - 'https://cocina.sul.stanford.edu/models/file'
         externalIdentifier:
           description: Identifier for the resource within the SDR architecture but outside of the repository. UUID. Constant across resource versions. What clients will use calling the repository.
           type: string
@@ -1127,22 +1127,22 @@ components:
           description: The content type of the Fileset.
           type: string
           enum:
-            - 'http://cocina.sul.stanford.edu/models/resources/audio.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/attachment.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/document.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/file.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/image.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/main-augmented.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/main-original.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/media.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/object.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/page.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/permissions.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/preview.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/supplement.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/3d.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/thumb.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/video.jsonld'
+            - 'https://cocina.sul.stanford.edu/models/resources/audio'
+            - 'https://cocina.sul.stanford.edu/models/resources/attachment'
+            - 'https://cocina.sul.stanford.edu/models/resources/document'
+            - 'https://cocina.sul.stanford.edu/models/resources/file'
+            - 'https://cocina.sul.stanford.edu/models/resources/image'
+            - 'https://cocina.sul.stanford.edu/models/resources/main-augmented'
+            - 'https://cocina.sul.stanford.edu/models/resources/main-original'
+            - 'https://cocina.sul.stanford.edu/models/resources/media'
+            - 'https://cocina.sul.stanford.edu/models/resources/object'
+            - 'https://cocina.sul.stanford.edu/models/resources/page'
+            - 'https://cocina.sul.stanford.edu/models/resources/permissions'
+            - 'https://cocina.sul.stanford.edu/models/resources/preview'
+            - 'https://cocina.sul.stanford.edu/models/resources/supplement'
+            - 'https://cocina.sul.stanford.edu/models/resources/3d'
+            - 'https://cocina.sul.stanford.edu/models/resources/thumb'
+            - 'https://cocina.sul.stanford.edu/models/resources/video'
         externalIdentifier:
           type: string
         label:
@@ -1487,7 +1487,7 @@ components:
         type:
           type: string
           enum:
-            - 'http://cocina.sul.stanford.edu/models/admin_policy.jsonld'
+            - 'https://cocina.sul.stanford.edu/models/admin_policy'
         label:
           type: string
         version:
@@ -1515,11 +1515,11 @@ components:
         type:
           type: string
           enum:
-            - 'http://cocina.sul.stanford.edu/models/collection.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/curated-collection.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/user-collection.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/exhibit.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/series.jsonld'
+            - 'https://cocina.sul.stanford.edu/models/collection'
+            - 'https://cocina.sul.stanford.edu/models/curated-collection'
+            - 'https://cocina.sul.stanford.edu/models/user-collection'
+            - 'https://cocina.sul.stanford.edu/models/exhibit'
+            - 'https://cocina.sul.stanford.edu/models/series'
         label:
           type: string
         version:
@@ -1625,21 +1625,21 @@ components:
         type:
           type: string
           enum:
-            - 'http://cocina.sul.stanford.edu/models/object.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/3d.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/agreement.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/book.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/document.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/geo.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/image.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/page.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/photograph.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/manuscript.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/map.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/media.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/track.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/webarchive-binary.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/webarchive-seed.jsonld'
+            - 'https://cocina.sul.stanford.edu/models/object'
+            - 'https://cocina.sul.stanford.edu/models/3d'
+            - 'https://cocina.sul.stanford.edu/models/agreement'
+            - 'https://cocina.sul.stanford.edu/models/book'
+            - 'https://cocina.sul.stanford.edu/models/document'
+            - 'https://cocina.sul.stanford.edu/models/geo'
+            - 'https://cocina.sul.stanford.edu/models/image'
+            - 'https://cocina.sul.stanford.edu/models/page'
+            - 'https://cocina.sul.stanford.edu/models/photograph'
+            - 'https://cocina.sul.stanford.edu/models/manuscript'
+            - 'https://cocina.sul.stanford.edu/models/map'
+            - 'https://cocina.sul.stanford.edu/models/media'
+            - 'https://cocina.sul.stanford.edu/models/track'
+            - 'https://cocina.sul.stanford.edu/models/webarchive-binary'
+            - 'https://cocina.sul.stanford.edu/models/webarchive-seed'
         label:
           type: string
         version:
@@ -1691,7 +1691,7 @@ components:
         type:
           type: string
           enum:
-            - 'http://cocina.sul.stanford.edu/models/file.jsonld'
+            - 'https://cocina.sul.stanford.edu/models/file'
         label:
           type: string
         filename:
@@ -1731,22 +1731,22 @@ components:
         type:
           type: string
           enum:
-            - 'http://cocina.sul.stanford.edu/models/resources/audio.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/attachment.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/document.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/file.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/image.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/main-augmented.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/main-original.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/media.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/object.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/page.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/permissions.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/preview.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/supplement.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/3d.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/thumb.jsonld'
-            - 'http://cocina.sul.stanford.edu/models/resources/video.jsonld'
+            - 'https://cocina.sul.stanford.edu/models/resources/audio'
+            - 'https://cocina.sul.stanford.edu/models/resources/attachment'
+            - 'https://cocina.sul.stanford.edu/models/resources/document'
+            - 'https://cocina.sul.stanford.edu/models/resources/file'
+            - 'https://cocina.sul.stanford.edu/models/resources/image'
+            - 'https://cocina.sul.stanford.edu/models/resources/main-augmented'
+            - 'https://cocina.sul.stanford.edu/models/resources/main-original'
+            - 'https://cocina.sul.stanford.edu/models/resources/media'
+            - 'https://cocina.sul.stanford.edu/models/resources/object'
+            - 'https://cocina.sul.stanford.edu/models/resources/page'
+            - 'https://cocina.sul.stanford.edu/models/resources/permissions'
+            - 'https://cocina.sul.stanford.edu/models/resources/preview'
+            - 'https://cocina.sul.stanford.edu/models/resources/supplement'
+            - 'https://cocina.sul.stanford.edu/models/resources/3d'
+            - 'https://cocina.sul.stanford.edu/models/resources/thumb'
+            - 'https://cocina.sul.stanford.edu/models/resources/video'
         label:
           type: string
         version:

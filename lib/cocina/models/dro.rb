@@ -7,21 +7,21 @@ module Cocina
 
       include Checkable
 
-      TYPES = ['http://cocina.sul.stanford.edu/models/object.jsonld',
-               'http://cocina.sul.stanford.edu/models/3d.jsonld',
-               'http://cocina.sul.stanford.edu/models/agreement.jsonld',
-               'http://cocina.sul.stanford.edu/models/book.jsonld',
-               'http://cocina.sul.stanford.edu/models/document.jsonld',
-               'http://cocina.sul.stanford.edu/models/geo.jsonld',
-               'http://cocina.sul.stanford.edu/models/image.jsonld',
-               'http://cocina.sul.stanford.edu/models/page.jsonld',
-               'http://cocina.sul.stanford.edu/models/photograph.jsonld',
-               'http://cocina.sul.stanford.edu/models/manuscript.jsonld',
-               'http://cocina.sul.stanford.edu/models/map.jsonld',
-               'http://cocina.sul.stanford.edu/models/media.jsonld',
-               'http://cocina.sul.stanford.edu/models/track.jsonld',
-               'http://cocina.sul.stanford.edu/models/webarchive-binary.jsonld',
-               'http://cocina.sul.stanford.edu/models/webarchive-seed.jsonld'].freeze
+      TYPES = ['https://cocina.sul.stanford.edu/models/object',
+               'https://cocina.sul.stanford.edu/models/3d',
+               'https://cocina.sul.stanford.edu/models/agreement',
+               'https://cocina.sul.stanford.edu/models/book',
+               'https://cocina.sul.stanford.edu/models/document',
+               'https://cocina.sul.stanford.edu/models/geo',
+               'https://cocina.sul.stanford.edu/models/image',
+               'https://cocina.sul.stanford.edu/models/page',
+               'https://cocina.sul.stanford.edu/models/photograph',
+               'https://cocina.sul.stanford.edu/models/manuscript',
+               'https://cocina.sul.stanford.edu/models/map',
+               'https://cocina.sul.stanford.edu/models/media',
+               'https://cocina.sul.stanford.edu/models/track',
+               'https://cocina.sul.stanford.edu/models/webarchive-binary',
+               'https://cocina.sul.stanford.edu/models/webarchive-seed'].freeze
 
       # The version of Cocina with which this object conforms.
       # example: 1.2.3

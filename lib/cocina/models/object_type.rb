@@ -5,91 +5,91 @@ module Cocina
     # This vocabulary defines the top level object type
     class ObjectType
       def self.three_dimensional
-        'http://cocina.sul.stanford.edu/models/3d.jsonld'
+        'https://cocina.sul.stanford.edu/models/3d'
       end
 
       def self.admin_policy
-        'http://cocina.sul.stanford.edu/models/admin_policy.jsonld'
+        'https://cocina.sul.stanford.edu/models/admin_policy'
       end
 
       def self.agreement
-        'http://cocina.sul.stanford.edu/models/agreement.jsonld'
+        'https://cocina.sul.stanford.edu/models/agreement'
       end
 
       def self.book
-        'http://cocina.sul.stanford.edu/models/book.jsonld'
+        'https://cocina.sul.stanford.edu/models/book'
       end
 
       def self.collection
-        'http://cocina.sul.stanford.edu/models/collection.jsonld'
+        'https://cocina.sul.stanford.edu/models/collection'
       end
 
       def self.curated_collection
-        'http://cocina.sul.stanford.edu/models/curated-collection.jsonld'
+        'https://cocina.sul.stanford.edu/models/curated-collection'
       end
 
       def self.document
-        'http://cocina.sul.stanford.edu/models/document.jsonld'
+        'https://cocina.sul.stanford.edu/models/document'
       end
 
       def self.exhibit
-        'http://cocina.sul.stanford.edu/models/exhibit.jsonld'
+        'https://cocina.sul.stanford.edu/models/exhibit'
       end
 
       def self.file
-        'http://cocina.sul.stanford.edu/models/file.jsonld'
+        'https://cocina.sul.stanford.edu/models/file'
       end
 
       def self.geo
-        'http://cocina.sul.stanford.edu/models/geo.jsonld'
+        'https://cocina.sul.stanford.edu/models/geo'
       end
 
       def self.image
-        'http://cocina.sul.stanford.edu/models/image.jsonld'
+        'https://cocina.sul.stanford.edu/models/image'
       end
 
       def self.manuscript
-        'http://cocina.sul.stanford.edu/models/manuscript.jsonld'
+        'https://cocina.sul.stanford.edu/models/manuscript'
       end
 
       def self.map
-        'http://cocina.sul.stanford.edu/models/map.jsonld'
+        'https://cocina.sul.stanford.edu/models/map'
       end
 
       def self.media
-        'http://cocina.sul.stanford.edu/models/media.jsonld'
+        'https://cocina.sul.stanford.edu/models/media'
       end
 
       def self.object
-        'http://cocina.sul.stanford.edu/models/object.jsonld'
+        'https://cocina.sul.stanford.edu/models/object'
       end
 
       def self.page
-        'http://cocina.sul.stanford.edu/models/page.jsonld'
+        'https://cocina.sul.stanford.edu/models/page'
       end
 
       def self.photograph
-        'http://cocina.sul.stanford.edu/models/photograph.jsonld'
+        'https://cocina.sul.stanford.edu/models/photograph'
       end
 
       def self.series
-        'http://cocina.sul.stanford.edu/models/series.jsonld'
+        'https://cocina.sul.stanford.edu/models/series'
       end
 
       def self.track
-        'http://cocina.sul.stanford.edu/models/track.jsonld'
+        'https://cocina.sul.stanford.edu/models/track'
       end
 
       def self.user_collection
-        'http://cocina.sul.stanford.edu/models/user-collection.jsonld'
+        'https://cocina.sul.stanford.edu/models/user-collection'
       end
 
       def self.webarchive_binary
-        'http://cocina.sul.stanford.edu/models/webarchive-binary.jsonld'
+        'https://cocina.sul.stanford.edu/models/webarchive-binary'
       end
 
       def self.webarchive_seed
-        'http://cocina.sul.stanford.edu/models/webarchive-seed.jsonld'
+        'https://cocina.sul.stanford.edu/models/webarchive-seed'
       end
     end
   end

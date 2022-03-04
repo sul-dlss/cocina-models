@@ -5,67 +5,67 @@ module Cocina
     # This vocabulary defines the types of file sets
     class FileSetType
       def self.three_dimensional
-        'http://cocina.sul.stanford.edu/models/resources/3d.jsonld'
+        'https://cocina.sul.stanford.edu/models/resources/3d'
       end
 
       def self.attachment
-        'http://cocina.sul.stanford.edu/models/resources/attachment.jsonld'
+        'https://cocina.sul.stanford.edu/models/resources/attachment'
       end
 
       def self.audio
-        'http://cocina.sul.stanford.edu/models/resources/audio.jsonld'
+        'https://cocina.sul.stanford.edu/models/resources/audio'
       end
 
       def self.document
-        'http://cocina.sul.stanford.edu/models/resources/document.jsonld'
+        'https://cocina.sul.stanford.edu/models/resources/document'
       end
 
       def self.file
-        'http://cocina.sul.stanford.edu/models/resources/file.jsonld'
+        'https://cocina.sul.stanford.edu/models/resources/file'
       end
 
       def self.image
-        'http://cocina.sul.stanford.edu/models/resources/image.jsonld'
+        'https://cocina.sul.stanford.edu/models/resources/image'
       end
 
       def self.main_augmented
-        'http://cocina.sul.stanford.edu/models/resources/main-augmented.jsonld'
+        'https://cocina.sul.stanford.edu/models/resources/main-augmented'
       end
 
       def self.main_original
-        'http://cocina.sul.stanford.edu/models/resources/main-original.jsonld'
+        'https://cocina.sul.stanford.edu/models/resources/main-original'
       end
 
       def self.media
-        'http://cocina.sul.stanford.edu/models/resources/media.jsonld'
+        'https://cocina.sul.stanford.edu/models/resources/media'
       end
 
       def self.object
-        'http://cocina.sul.stanford.edu/models/resources/object.jsonld'
+        'https://cocina.sul.stanford.edu/models/resources/object'
       end
 
       def self.page
-        'http://cocina.sul.stanford.edu/models/resources/page.jsonld'
+        'https://cocina.sul.stanford.edu/models/resources/page'
       end
 
       def self.permissions
-        'http://cocina.sul.stanford.edu/models/resources/permissions.jsonld'
+        'https://cocina.sul.stanford.edu/models/resources/permissions'
       end
 
       def self.preview
-        'http://cocina.sul.stanford.edu/models/resources/preview.jsonld'
+        'https://cocina.sul.stanford.edu/models/resources/preview'
       end
 
       def self.supplement
-        'http://cocina.sul.stanford.edu/models/resources/supplement.jsonld'
+        'https://cocina.sul.stanford.edu/models/resources/supplement'
       end
 
       def self.thumb
-        'http://cocina.sul.stanford.edu/models/resources/thumb.jsonld'
+        'https://cocina.sul.stanford.edu/models/resources/thumb'
       end
 
       def self.video
-        'http://cocina.sul.stanford.edu/models/resources/video.jsonld'
+        'https://cocina.sul.stanford.edu/models/resources/video'
       end
     end
   end

@@ -7,11 +7,11 @@ module Cocina
 
       include Checkable
 
-      TYPES = ['http://cocina.sul.stanford.edu/models/collection.jsonld',
-               'http://cocina.sul.stanford.edu/models/curated-collection.jsonld',
-               'http://cocina.sul.stanford.edu/models/user-collection.jsonld',
-               'http://cocina.sul.stanford.edu/models/exhibit.jsonld',
-               'http://cocina.sul.stanford.edu/models/series.jsonld'].freeze
+      TYPES = ['https://cocina.sul.stanford.edu/models/collection',
+               'https://cocina.sul.stanford.edu/models/curated-collection',
+               'https://cocina.sul.stanford.edu/models/user-collection',
+               'https://cocina.sul.stanford.edu/models/exhibit',
+               'https://cocina.sul.stanford.edu/models/series'].freeze
 
       # The version of Cocina with which this object conforms.
       # example: 1.2.3

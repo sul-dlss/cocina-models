@@ -20,14 +20,14 @@ RSpec.describe Cocina::Models::FileAccess do
                               contains: [
                                 {
                                   version: 1,
-                                  type: 'http://cocina.sul.stanford.edu/models/resources/file.jsonld',
+                                  type: 'https://cocina.sul.stanford.edu/models/resources/file',
                                   label: 'Page 1',
                                   externalIdentifier: 'abc123',
                                   structural: {
                                     contains: [
                                       {
                                         version: 1,
-                                        type: 'http://cocina.sul.stanford.edu/models/file.jsonld',
+                                        type: 'https://cocina.sul.stanford.edu/models/file',
                                         filename: '00002.jp2',
                                         label: '00002.jp2',
                                         hasMimeType: 'image/jp2',
