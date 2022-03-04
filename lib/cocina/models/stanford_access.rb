@@ -4,7 +4,7 @@ module Cocina
   module Models
     class StanfordAccess < Struct
       # Access level.
-      attribute :access, Types::Strict::String.enum('stanford')
+      attribute :view, Types::Strict::String.enum('stanford')
       # Download access level.
       attribute :download, Types::Strict::String.enum('stanford')
       # Not used for this access type, must be null.

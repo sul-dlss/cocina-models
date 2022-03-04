@@ -242,7 +242,7 @@ components:
       type: object
       additionalProperties: false
       properties:
-        access:
+        view:
           type: string
           enum:
             - 'world'
@@ -345,7 +345,7 @@ components:
     CitationOnlyAccess:
       type: object
       properties:
-        access:
+        view:
           description: Access level.
           type: string
           enum:
@@ -367,7 +367,7 @@ components:
           enum:
             - false
       required:
-        - access
+        - view
         - download
     CocinaVersion:
       description: The version of Cocina with which this object conforms.
@@ -419,7 +419,7 @@ components:
       type: object
       additionalProperties: false
       properties:
-        access:
+        view:
           description: Access level
           type: string
           enum:
@@ -495,7 +495,7 @@ components:
     ControlledDigitalLendingAccess:
       type: object
       properties:
-        access:
+        view:
           description: Access level.
           type: string
           enum:
@@ -516,13 +516,13 @@ components:
           type: boolean
           default: false
       required:
-        - access
+        - view
         - download
         - controlledDigitalLending
     DarkAccess:
       type: object
       properties:
-        access:
+        view:
           description: Access level.
           type: string
           default: 'dark'
@@ -1263,7 +1263,7 @@ components:
     LocationBasedAccess:
       type: object
       properties:
-        access:
+        view:
           description: Access level.
           type: string
           enum:
@@ -1290,13 +1290,13 @@ components:
           enum:
             - false
       required:
-        - access
+        - view
         - download
         - location
     LocationBasedDownloadAccess:
       type: object
       properties:
-        access:
+        view:
           description: Access level.
           type: string
           enum:
@@ -1323,7 +1323,7 @@ components:
           enum:
             - false
       required:
-        - access
+        - view
         - download
         - location
     MessageDigest:
@@ -1891,7 +1891,7 @@ components:
     StanfordAccess:
       type: object
       properties:
-        access:
+        view:
           description: Access level.
           type: string
           enum:
@@ -1913,12 +1913,12 @@ components:
           enum:
             - false
       required:
-        - access
+        - view
         - download
     WorldAccess:
       type: object
       properties:
-        access:
+        view:
           description: Access level.
           type: string
           enum:
@@ -1942,5 +1942,5 @@ components:
           enum:
             - false
       required:
-        - access
+        - view
         - download

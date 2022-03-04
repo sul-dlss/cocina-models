@@ -51,7 +51,7 @@ RSpec.describe Cocina::Generator::SchemaValue do
 
   context 'when property is a string with date-time format' do
     # Embargo.releaseDate is a date-time
-    let(:embargo) { Cocina::Models::Embargo.new(releaseDate: '2009-12-14T07:00:00Z', access: 'world') }
+    let(:embargo) { Cocina::Models::Embargo.new(releaseDate: '2009-12-14T07:00:00Z', view: 'world') }
 
     it 'maps to datetime' do
       expect(embargo.releaseDate).to eq DateTime.parse('2009-12-14T07:00:00Z')
@@ -160,17 +160,17 @@ RSpec.describe Cocina::Generator::SchemaValue do
     let(:access) { Cocina::Models::CollectionAccess.new }
 
     it 'default is provided' do
-      expect(access.access).to eq('dark')
+      expect(access.view).to eq 'dark'
     end
   end
 
   context 'when property is relaxed' do
     # Properties are relaxed when part of oneOf. This leaves the validation to openApi, rather than dry-struct.
     # Access.access and Access.location are constructed from a oneOf.
-    let(:access) { Cocina::Models::Access.new(access: nil, location: 'my office') }
+    let(:access) { Cocina::Models::Access.new(view: nil, location: 'my office') }
 
     it 'is not required and does not have enum' do
-      expect(access.access).to be_nil
+      expect(access.view).to be_nil
       expect(access.location).to eq('my office')
     end
   end

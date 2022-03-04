@@ -159,7 +159,7 @@ RSpec.describe Cocina::Models::Validator do
             purl: 'https://purl.stanford.edu/bb000kg4251'
           },
           access: {
-            access: 'world',
+            view: 'world',
             download: 'world',
             useAndReproductionStatement: 'Property rights reside with the repository.'
           },

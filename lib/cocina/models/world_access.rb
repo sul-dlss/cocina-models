@@ -4,7 +4,7 @@ module Cocina
   module Models
     class WorldAccess < Struct
       # Access level.
-      attribute :access, Types::Strict::String.enum('world')
+      attribute :view, Types::Strict::String.enum('world')
       # Download access level.
       attribute :download, Types::Strict::String.enum('none', 'stanford', 'world')
       # Not used for this access type, must be null.

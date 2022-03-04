@@ -4,7 +4,7 @@ module Cocina
   module Models
     class DarkAccess < Struct
       # Access level.
-      attribute :access, Types::Strict::String.default('dark').enum('dark').meta(omittable: true)
+      attribute :view, Types::Strict::String.default('dark').enum('dark').meta(omittable: true)
       # Download access level.
       attribute :download, Types::Strict::String.default('none').enum('none').meta(omittable: true)
       # Not used for this access type, must be null.

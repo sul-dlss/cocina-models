@@ -16,7 +16,7 @@ RSpec.describe Cocina::Models::DROAccess do
                             },
                             administrative: { hasAdminPolicy: 'druid:bc123df4567' },
                             access: {
-                              access: access,
+                              view: access,
                               download: download,
                               location: location,
                               controlledDigitalLending: controlled_digital_lending
