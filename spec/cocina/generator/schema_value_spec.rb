@@ -167,11 +167,11 @@ RSpec.describe Cocina::Generator::SchemaValue do
   context 'when property is relaxed' do
     # Properties are relaxed when part of oneOf. This leaves the validation to openApi, rather than dry-struct.
     # Access.access and Access.location are constructed from a oneOf.
-    let(:access) { Cocina::Models::Access.new(access: nil, readLocation: 'my office') }
+    let(:access) { Cocina::Models::Access.new(access: nil, location: 'my office') }
 
     it 'is not required and does not have enum' do
       expect(access.access).to be_nil
-      expect(access.readLocation).to eq('my office')
+      expect(access.location).to eq('my office')
     end
   end
 

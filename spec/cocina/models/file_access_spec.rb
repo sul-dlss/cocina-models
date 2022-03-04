@@ -3,9 +3,9 @@
 require 'spec_helper'
 
 RSpec.describe Cocina::Models::FileAccess do
-  # Verifying that correctly validate access, download, readLocation, and controlledDigitalLending.
+  # Verifying that correctly validate access, download, location, and controlledDigitalLending.
 
-  def dro(access, download, read_location, controlled_digital_lending)
+  def dro(access, download, location, controlled_digital_lending)
     Cocina::Models::DRO.new(externalIdentifier: 'druid:bc123df4567',
                             label: 'My DRO',
                             type: Cocina::Models::Vocab.book,
@@ -41,7 +41,7 @@ RSpec.describe Cocina::Models::FileAccess do
                                         access: {
                                           access: access,
                                           download: download,
-                                          readLocation: read_location,
+                                          location: location,
                                           controlledDigitalLending: controlled_digital_lending
                                         },
                                         hasMessageDigests: []
