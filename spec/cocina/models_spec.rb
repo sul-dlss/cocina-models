@@ -4,7 +4,7 @@ require 'spec_helper'
 
 RSpec.describe Cocina::Models do
   it 'has a version number' do
-    expect(Cocina::Models::VERSION).not_to be nil
+    expect(Cocina::Models::VERSION).not_to be_nil
   end
 
   describe '.build' do
