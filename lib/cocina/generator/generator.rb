@@ -42,12 +42,7 @@ module Cocina
 
       desc 'generate_vocab', 'generate vocab'
       def generate_vocab
-        vocab = Vocab.new(schemas)
-        filepath = "#{options[:output]}/#{vocab.filename}"
-        FileUtils.rm_f(filepath)
-
-        create_file filepath, vocab.generate
-        run("rubocop -a #{filepath} > /dev/null")
+        Vocab.generate(schemas, output_dir: options[:output])
       end
 
       private

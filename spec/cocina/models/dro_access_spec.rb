@@ -8,7 +8,7 @@ RSpec.describe Cocina::Models::DROAccess do
   def dro(access, download, location, controlled_digital_lending)
     Cocina::Models::DRO.new(externalIdentifier: 'druid:bc123df4567',
                             label: 'My DRO',
-                            type: Cocina::Models::Vocab.book,
+                            type: Cocina::Models::ObjectType.book,
                             version: 1,
                             description: {
                               title: [{ value: 'Test DRO' }],

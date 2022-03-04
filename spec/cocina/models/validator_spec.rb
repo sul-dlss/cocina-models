@@ -7,7 +7,7 @@ RSpec.describe Cocina::Models::Validator do
     Cocina::Models::AdminPolicy.new(
       externalIdentifier: 'druid:bc123df4567',
       label: 'My admin policy',
-      type: Cocina::Models::Vocab.admin_policy,
+      type: Cocina::Models::ObjectType.admin_policy,
       version: 1,
       administrative: {
         hasAdminPolicy: 'druid:bc123df4567',
@@ -29,7 +29,7 @@ RSpec.describe Cocina::Models::Validator do
       Cocina::Models::AdminPolicy.new(
         externalIdentifier: 'druid:bc123df4567',
         label: 'My admin policy',
-        type: Cocina::Models::Vocab.admin_policy,
+        type: Cocina::Models::ObjectType.admin_policy,
         version: 1,
         administrative: {
           hasAdminPolicy: 'druid:bc123df4567',
@@ -50,7 +50,7 @@ RSpec.describe Cocina::Models::Validator do
         cocinaVersion: '1.0.0',
         externalIdentifier: 'druid:bc123df4567',
         label: 'My admin policy',
-        type: Cocina::Models::Vocab.admin_policy,
+        type: Cocina::Models::ObjectType.admin_policy,
         version: 1,
         administrative: {
           hasAdminPolicy: 'druid:bc123df4567',
@@ -70,7 +70,7 @@ RSpec.describe Cocina::Models::Validator do
       Cocina::Models::AdminPolicy.new(
         externalIdentifier: 'druid:bc123df4567',
         label: 'My admin policy',
-        type: Cocina::Models::Vocab.admin_policy,
+        type: Cocina::Models::ObjectType.admin_policy,
         version: 1,
         administrative: {
           accessTemplate: { copyright: nil },
@@ -90,7 +90,7 @@ RSpec.describe Cocina::Models::Validator do
       Cocina::Models::DRO.new(
         externalIdentifier: 'druid:bc123df4567',
         label: 'My item',
-        type: Cocina::Models::Vocab.object,
+        type: Cocina::Models::ObjectType.object,
         version: 1,
         description: {
           title: [{ value: 'Test DRO' }],
@@ -116,7 +116,7 @@ RSpec.describe Cocina::Models::Validator do
       Cocina::Models::AdminPolicy.new(
         externalIdentifier: 'druid:abc123',
         label: 'My admin policy',
-        type: Cocina::Models::Vocab.admin_policy,
+        type: Cocina::Models::ObjectType.admin_policy,
         version: 1,
         administrative: {}
       )
@@ -189,7 +189,7 @@ RSpec.describe Cocina::Models::Validator do
       Cocina::Models::AdminPolicy.new({
                                         externalIdentifier: 'druid:abc123',
                                         label: 'My admin policy',
-                                        type: Cocina::Models::Vocab.admin_policy,
+                                        type: Cocina::Models::ObjectType.admin_policy,
                                         version: 1,
                                         administrative: {
                                           hasAdminPolicy: 'druid:bc123df4567',
