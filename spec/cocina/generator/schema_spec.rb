@@ -13,7 +13,7 @@ RSpec.describe Cocina::Generator::Schema do
         externalIdentifier: 'druid:ab123cd4567',
         label: 'morris.exe',
         filename: 'morris.exe',
-        type: 'http://cocina.sul.stanford.edu/models/file.jsonld',
+        type: 'https://cocina.sul.stanford.edu/models/file',
         version: 3,
         administrative: {
           shelve: true,

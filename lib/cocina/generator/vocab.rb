@@ -44,7 +44,7 @@ module Cocina
 
       attr_reader :schemas, :output_dir
 
-      BASE = 'http://cocina.sul.stanford.edu/models/'
+      BASE = 'https://cocina.sul.stanford.edu/models/'
 
       def vocabs
         type_properties = schemas.values.map { |schema| schema.properties['type'] }.compact
@@ -57,7 +57,7 @@ module Cocina
       def names
         @names ||= vocabs.each_with_object({}) do |vocab, object|
           # Note special handling of 3d
-          namespaced = vocab.delete_prefix(BASE).delete_suffix('.jsonld')
+          namespaced = vocab.delete_prefix(BASE)
                             .gsub('-', '_').gsub('3d', 'three_dimensional')
           namespace, name = namespaced.include?('/') ? namespaced.split('/') : ['ObjectType', namespaced]
           namespace = 'FileSetType' if namespace == 'resources'

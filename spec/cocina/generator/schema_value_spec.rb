@@ -78,7 +78,7 @@ RSpec.describe Cocina::Generator::SchemaValue do
 
     context 'when a type enum' do
       it 'has a TYPES constant' do
-        expect(Cocina::Models::FileSet::TYPES).to include 'http://cocina.sul.stanford.edu/models/resources/page.jsonld'
+        expect(Cocina::Models::FileSet::TYPES).to include 'https://cocina.sul.stanford.edu/models/resources/page'
       end
     end
   end

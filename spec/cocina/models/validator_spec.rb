@@ -150,7 +150,7 @@ RSpec.describe Cocina::Models::Validator do
     let(:dro) do
       Cocina::Models::DRO.new(
         {
-          type: 'http://cocina.sul.stanford.edu/models/image.jsonld',
+          type: 'https://cocina.sul.stanford.edu/models/image',
           externalIdentifier: 'druid:bb000kg4251',
           label: 'Roger Howe Professorship',
           version: 3,

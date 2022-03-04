@@ -13,7 +13,7 @@ RSpec.describe Cocina::Models do
     context 'with a collection type' do
       let(:data) do
         {
-          'type' => 'http://cocina.sul.stanford.edu/models/exhibit.jsonld',
+          'type' => 'https://cocina.sul.stanford.edu/models/exhibit',
           'externalIdentifier' => 'druid:bc123df4567',
           'label' => 'bar',
           'version' => 5,
@@ -31,7 +31,7 @@ RSpec.describe Cocina::Models do
     context 'with an invalid DRO (openapi)' do
       let(:data) do
         {
-          'type' => 'http://cocina.sul.stanford.edu/models/image.jsonld',
+          'type' => 'https://cocina.sul.stanford.edu/models/image',
           'externalIdentifier' => 'foo',
           'label' => 'bar',
           'version' => 5,
@@ -47,7 +47,7 @@ RSpec.describe Cocina::Models do
     context 'with a DRO type' do
       let(:data) do
         {
-          'type' => 'http://cocina.sul.stanford.edu/models/image.jsonld',
+          'type' => 'https://cocina.sul.stanford.edu/models/image',
           'externalIdentifier' => 'druid:bc123df4567',
           'label' => 'bar',
           'version' => 5,
@@ -69,7 +69,7 @@ RSpec.describe Cocina::Models do
     context 'with an AdminPolicy type' do
       let(:data) do
         {
-          'type' => 'http://cocina.sul.stanford.edu/models/admin_policy.jsonld',
+          'type' => 'https://cocina.sul.stanford.edu/models/admin_policy',
           'externalIdentifier' => 'druid:bc123df4567',
           'label' => 'bar',
           'version' => 5,
@@ -111,7 +111,7 @@ RSpec.describe Cocina::Models do
     context 'with a collection type' do
       let(:data) do
         {
-          'type' => 'http://cocina.sul.stanford.edu/models/exhibit.jsonld',
+          'type' => 'https://cocina.sul.stanford.edu/models/exhibit',
           'label' => 'bar',
           'version' => 1,
           'access' => {},
@@ -125,7 +125,7 @@ RSpec.describe Cocina::Models do
     context 'with a DRO type' do
       let(:data) do
         {
-          'type' => 'http://cocina.sul.stanford.edu/models/image.jsonld',
+          'type' => 'https://cocina.sul.stanford.edu/models/image',
           'label' => 'bar',
           'version' => 1,
           'identification' => {
@@ -141,7 +141,7 @@ RSpec.describe Cocina::Models do
     context 'with an AdminPolicy type' do
       let(:data) do
         {
-          'type' => 'http://cocina.sul.stanford.edu/models/admin_policy.jsonld',
+          'type' => 'https://cocina.sul.stanford.edu/models/admin_policy',
           'label' => 'bar',
           'version' => 1,
           'administrative' => {
@@ -158,7 +158,7 @@ RSpec.describe Cocina::Models do
     context 'with an invalid version' do
       let(:data) do
         {
-          'type' => 'http://cocina.sul.stanford.edu/models/book.jsonld',
+          'type' => 'https://cocina.sul.stanford.edu/models/book',
           'label' => 'bar',
           'version' => 5,
           'administrative' => {

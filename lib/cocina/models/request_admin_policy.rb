@@ -7,7 +7,7 @@ module Cocina
 
       include Checkable
 
-      TYPES = ['http://cocina.sul.stanford.edu/models/admin_policy.jsonld'].freeze
+      TYPES = ['https://cocina.sul.stanford.edu/models/admin_policy'].freeze
 
       # The version of Cocina with which this object conforms.
       # example: 1.2.3
