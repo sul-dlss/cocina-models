@@ -173,8 +173,7 @@ RSpec.describe Cocina::Models::Validator do
                 to: 'Searchworks',
                 release: true
               }
-            ],
-            partOfProject: 'School of Engineering photograph collection'
+            ]
           }
         }
       )

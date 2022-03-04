@@ -20,7 +20,7 @@ module Cocina
       attribute :label, Types::Strict::String
       attribute :version, Types::Strict::Integer.default(1).enum(1)
       attribute(:access, CollectionAccess.default { CollectionAccess.new })
-      attribute(:administrative, Administrative.default { Administrative.new })
+      attribute(:administrative, RequestAdministrative.default { RequestAdministrative.new })
       attribute :description, RequestDescription.optional.meta(omittable: true)
       attribute :identification, CollectionIdentification.optional.meta(omittable: true)
     end
