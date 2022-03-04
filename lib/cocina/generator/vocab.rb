@@ -4,34 +4,45 @@ module Cocina
   module Generator
     # Class for generating a vocab
     class Vocab
-      def initialize(schemas)
-        @schemas = schemas
+      CLASS_COMMENT = {
+        'ObjectType' => 'This vocabulary defines the top level object type',
+        'FileSetType' => 'This vocabulary defines the types of file sets'
+      }.freeze
+
+      def self.generate(schemas, output_dir:)
+        new(schemas, output_dir: output_dir).generate
       end
 
-      def filename
-        'vocab.rb'
+      def initialize(schemas, output_dir:)
+        @schemas = schemas
+        @output_dir = output_dir
       end
 
       def generate
+        names.each do |namespace, v|
+          filepath = File.join(output_dir, "#{namespace.underscore}.rb")
+          File.write(filepath, contents(namespace, v))
+        end
+      end
+
+      def contents(namespace, methods)
         <<~RUBY
-                    # frozen_string_literal: true
+          # frozen_string_literal: true
 
-                    module Cocina
-                      module Models
-                        # A digital repository object.  See http://sul-dlss.github.io/cocina-models/maps/DRO.json
-                        class Vocab
-
-          #{vocab_methods}
-
-                        end
-                      end
+          module Cocina
+            module Models
+              # #{CLASS_COMMENT.fetch(namespace)}
+              class #{namespace}
+          #{draw_ruby_methods(methods, 6)}
+              end
+            end
           end
         RUBY
       end
 
       private
 
-      attr_reader :schemas
+      attr_reader :schemas, :output_dir
 
       BASE = 'http://cocina.sul.stanford.edu/models/'
 
@@ -43,37 +54,23 @@ module Cocina
                        .sort
       end
 
-      def vocab_methods
-        names = vocabs.each_with_object({}) do |vocab, object|
+      def names
+        @names ||= vocabs.each_with_object({}) do |vocab, object|
           # Note special handling of 3d
           namespaced = vocab.delete_prefix(BASE).delete_suffix('.jsonld')
                             .gsub('-', '_').gsub('3d', 'three_dimensional')
-          namespace, name = namespaced.include?('/') ? namespaced.split('/') : [:root, namespaced]
+          namespace, name = namespaced.include?('/') ? namespaced.split('/') : ['ObjectType', namespaced]
+          namespace = 'FileSetType' if namespace == 'resources'
           object[namespace] ||= {}
           object[namespace][name] = vocab
         end
-        draw_namespaced_methods(names)
       end
 
-      def draw_namespaced_methods(names)
-        names.flat_map do |namespace, methods|
-          [].tap do |items|
-            items << "class #{namespace.capitalize}" unless namespace == :root
-            items << draw_ruby_methods(methods)
-            items << 'end' unless namespace == :root
-          end
-        end.join("\n")
-      end
-
-      def draw_ruby_methods(methods)
+      def draw_ruby_methods(methods, indent)
+        spaces = ' ' * indent
         methods.map do |name, vocab|
-          <<~RUBY
-            def self.#{name}
-              "#{vocab}"
-            end
-
-          RUBY
-        end.join("\n")
+          "#{spaces}def self.#{name}\n#{spaces}  '#{vocab}'\n#{spaces}end"
+        end.join("\n\n")
       end
     end
   end

@@ -10,7 +10,7 @@ RSpec.describe Cocina::Generator::SchemaValue do
     let(:dro) do
       Cocina::Models::RequestDRO.new({
                                        label: 'The Prince',
-                                       type: Cocina::Models::Vocab.book,
+                                       type: Cocina::Models::ObjectType.book,
                                        version: 1,
                                        identification: { sourceId: 'sul:123' },
                                        administrative: { hasAdminPolicy: 'druid:bc123df4567' }
@@ -27,7 +27,7 @@ RSpec.describe Cocina::Generator::SchemaValue do
     let(:dro) do
       Cocina::Models::RequestDRO.new({
                                        label: 'The Blue and Brown Books',
-                                       type: Cocina::Models::Vocab.book,
+                                       type: Cocina::Models::ObjectType.book,
                                        version: 1,
                                        identification: { sourceId: 'sul:123' },
                                        administrative: { hasAdminPolicy: 'druid:bc123df4567' }
@@ -179,7 +179,7 @@ RSpec.describe Cocina::Generator::SchemaValue do
     let(:dro) do
       Cocina::Models::RequestDRO.new({
                                        label: 'The Prince',
-                                       type: Cocina::Models::Vocab.book,
+                                       type: Cocina::Models::ObjectType.book,
                                        version: 1,
                                        identification: { sourceId: 'sul:123' },
                                        administrative: { hasAdminPolicy: 'druid:bc123df4567' }

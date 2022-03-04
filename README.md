@@ -26,6 +26,11 @@ exe/generator generate
 exe/generator generate_schema DRO
 ```
 
+### Controlled vocabularies
+```
+exe/generator generate_vocab
+```
+
 ## Testing
 
 The generator is tested via its output when run against `openapi.yml`, viz., the Cocina model classes. Thus, `generate` should be run after any changes to `openapi.yml`.
