@@ -87,6 +87,12 @@ Metrics/MethodLength:
 
 # ----- RSpec ------
 
+RSpec/BeEq: # new in 2.9.0
+  Enabled: true
+
+RSpec/BeNil: # new in 2.9.0
+  Enabled: true
+
 RSpec/ExampleLength:
   Max: 18
   Exclude:

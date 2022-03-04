@@ -34,7 +34,7 @@ RSpec.describe Cocina::Generator::SchemaArray do
       expect(tag.what).to eq('collection')
       expect(tag.date).to eq DateTime.parse '2018-11-23T00:44:52Z'
       expect(tag.to).to eq('Searchworks')
-      expect(tag.release).to eq true
+      expect(tag.release).to be true
     end
   end
 
