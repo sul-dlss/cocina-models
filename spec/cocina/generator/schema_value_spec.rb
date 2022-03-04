@@ -147,7 +147,7 @@ RSpec.describe Cocina::Generator::SchemaValue do
 
   context 'when property is nullable' do
     context 'when the value set to nil' do
-      let(:default_access) { Cocina::Models::AdminPolicyDefaultAccess.new(copyright: nil) }
+      let(:default_access) { Cocina::Models::AdminPolicyAccessTemplate.new(copyright: nil) }
 
       it 'sets to nil' do
         expect(default_access.copyright).to be_nil

@@ -76,7 +76,7 @@ RSpec.describe Cocina::Models do
           'administrative' => {
             'hasAdminPolicy' => 'druid:bc123df4567',
             'hasAgreement' => 'druid:bc123df4567',
-            'defaultAccess' => {}
+            'accessTemplate' => {}
           }
         }
       end
@@ -147,7 +147,7 @@ RSpec.describe Cocina::Models do
           'administrative' => {
             'hasAdminPolicy' => 'druid:bc123df4567',
             'hasAgreement' => 'druid:bc123df4567',
-            'defaultAccess' => {}
+            'accessTemplate' => {}
           }
         }
       end
