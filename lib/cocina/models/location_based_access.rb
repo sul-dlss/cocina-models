@@ -4,7 +4,7 @@ module Cocina
   module Models
     class LocationBasedAccess < Struct
       # Access level.
-      attribute :access, Types::Strict::String.enum('location-based')
+      attribute :view, Types::Strict::String.enum('location-based')
       # Download access level.
       attribute :download, Types::Strict::String.enum('location-based', 'none')
       # If access or download is "location-based", which location should have access.

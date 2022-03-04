@@ -39,7 +39,7 @@ RSpec.describe Cocina::Models::FileAccess do
                                           shelve: true
                                         },
                                         access: {
-                                          access: access,
+                                          view: access,
                                           download: download,
                                           location: location,
                                           controlledDigitalLending: controlled_digital_lending

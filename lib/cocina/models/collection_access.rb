@@ -4,7 +4,7 @@ module Cocina
   module Models
     class CollectionAccess < Struct
       # Access level
-      attribute :access, Types::Strict::String.default('dark').enum('world', 'dark').meta(omittable: true)
+      attribute :view, Types::Strict::String.default('dark').enum('world', 'dark').meta(omittable: true)
       # The human readable copyright statement that applies
       # example: Copyright World Trade Organization
       attribute :copyright, Types::Strict::String.optional.meta(omittable: true)

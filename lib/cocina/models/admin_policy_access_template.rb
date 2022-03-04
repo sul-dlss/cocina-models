@@ -3,7 +3,7 @@
 module Cocina
   module Models
     class AdminPolicyAccessTemplate < Struct
-      attribute :access, Types::Strict::String.enum('world', 'stanford', 'location-based', 'citation-only', 'dark').meta(omittable: true)
+      attribute :view, Types::Strict::String.enum('world', 'stanford', 'location-based', 'citation-only', 'dark').meta(omittable: true)
       # Available for controlled digital lending.
       attribute :controlledDigitalLending, Types::Strict::Bool.meta(omittable: true)
       # The human readable copyright statement that applies

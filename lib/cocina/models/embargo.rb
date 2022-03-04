@@ -5,7 +5,7 @@ module Cocina
     class Embargo < Struct
       # Access level.
       # Validation of this property is relaxed. See the openapi for full validation.
-      attribute :access, Types::Strict::String.optional.default('dark').meta(omittable: true)
+      attribute :view, Types::Strict::String.optional.default('dark').meta(omittable: true)
       # Download access level.
       # Validation of this property is relaxed. See the openapi for full validation.
       attribute :download, Types::Strict::String.optional.default('none').meta(omittable: true)
