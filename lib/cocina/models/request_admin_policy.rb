@@ -7,6 +7,8 @@ module Cocina
 
       include Checkable
 
+      include TitleBuilder
+
       TYPES = ['https://cocina.sul.stanford.edu/models/admin_policy'].freeze
 
       # The version of Cocina with which this object conforms.
