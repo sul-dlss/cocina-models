@@ -42,7 +42,7 @@ module Cocina
     # Raised when the type attribute is not valid.
     class UnknownTypeError < Error; end
 
-    # Raised when an error occurs validating against openapi.
+    # Raised when the type attribute is missing or an error occurs validating against openapi.
     class ValidationError < Error; end
 
     # Base class for Cocina Structs
@@ -60,10 +60,10 @@ module Cocina
     # @param [boolean] validate
     # @return [DRO,Collection,AdminPolicy]
     # @raises [UnknownTypeError] if a valid type is not found in the data
-    # @raises [KeyError] if a type field cannot be found in the data
+    # @raises [ValidationError] if a type field cannot be found in the data
     # @raises [ValidationError] if hash representation fails openapi validation
     def self.build(dyn, validate: true)
-      clazz = case dyn.fetch('type')
+      clazz = case type_for(dyn)
               when *DRO::TYPES
                 DRO
               when *Collection::TYPES
@@ -71,7 +71,7 @@ module Cocina
               when *AdminPolicy::TYPES
                 AdminPolicy
               else
-                raise UnknownTypeError, "Unknown type: '#{dyn.fetch('type')}'"
+                raise UnknownTypeError, "Unknown type: '#{dyn.with_indifferent_access.fetch('type')}'"
               end
       clazz.new(dyn, false, validate)
     end
@@ -80,10 +80,10 @@ module Cocina
     # @param [boolean] validate
     # @return [RequestDRO,RequestCollection,RequestAdminPolicy]
     # @raises [UnknownTypeError] if a valid type is not found in the data
-    # @raises [KeyError] if a type field cannot be found in the data
+    # @raises [ValidationError] if a type field cannot be found in the data
     # @raises [ValidationError] if hash representation fails openapi validation
     def self.build_request(dyn, validate: true)
-      clazz = case dyn.fetch('type')
+      clazz = case type_for(dyn)
               when *DRO::TYPES
                 RequestDRO
               when *Collection::TYPES
@@ -91,9 +91,16 @@ module Cocina
               when *AdminPolicy::TYPES
                 RequestAdminPolicy
               else
-                raise UnknownTypeError, "Unknown type: '#{dyn.fetch('type')}'"
+                raise UnknownTypeError, "Unknown type: '#{dyn.with_indifferent_access.fetch('type')}'"
               end
       clazz.new(dyn, false, validate)
     end
+
+    def self.type_for(dyn)
+      dyn.with_indifferent_access.fetch('type')
+    rescue KeyError
+      raise ValidationError, 'Type field not found'
+    end
+    private_class_method :type_for
   end
 end

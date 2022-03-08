@@ -84,6 +84,25 @@ RSpec.describe Cocina::Models do
       it { is_expected.to be_kind_of Cocina::Models::AdminPolicy }
     end
 
+    context 'with keys as symbols' do
+      let(:data) do
+        {
+          type: 'https://cocina.sul.stanford.edu/models/image',
+          externalIdentifier: 'druid:bc123df4567',
+          label: 'bar',
+          version: 5,
+          access: {},
+          administrative: { 'hasAdminPolicy' => 'druid:bc123df4567' },
+          description: {
+            title: [{ 'value' => 'Test DRO' }],
+            purl: 'https://purl.stanford.edu/bc123df4567'
+          }
+        }
+      end
+
+      it { is_expected.to be_kind_of Cocina::Models::DRO }
+    end
+
     context 'with an invalid type' do
       let(:data) do
         { 'type' => 'foo' }
@@ -100,7 +119,7 @@ RSpec.describe Cocina::Models do
       end
 
       it 'raises an error' do
-        expect { build }.to raise_error KeyError
+        expect { build }.to raise_error Cocina::Models::ValidationError
       end
     end
   end
@@ -155,6 +174,22 @@ RSpec.describe Cocina::Models do
       it { is_expected.to be_kind_of Cocina::Models::RequestAdminPolicy }
     end
 
+    context 'with keys as symbols' do
+      let(:data) do
+        {
+          type: 'https://cocina.sul.stanford.edu/models/image',
+          label: 'bar',
+          version: 1,
+          identification: {
+            sourceId: 'sul:123'
+          },
+          administrative: { 'hasAdminPolicy' => 'druid:bc123df4567' }
+        }
+      end
+
+      it { is_expected.to be_kind_of Cocina::Models::RequestDRO }
+    end
+
     context 'with an invalid version' do
       let(:data) do
         {
@@ -192,7 +227,7 @@ RSpec.describe Cocina::Models do
       end
 
       it 'raises an error' do
-        expect { build }.to raise_error KeyError
+        expect { build }.to raise_error Cocina::Models::ValidationError
       end
     end
   end
