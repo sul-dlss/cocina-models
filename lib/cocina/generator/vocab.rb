@@ -32,7 +32,7 @@ module Cocina
           module Cocina
             module Models
               # #{CLASS_COMMENT.fetch(namespace)}
-              class #{namespace}
+              class #{namespace} < Vocabulary('#{URIS.fetch(namespace)}')
           #{draw_ruby_methods(methods, 6)}
               end
             end
@@ -45,6 +45,10 @@ module Cocina
       attr_reader :schemas, :output_dir
 
       BASE = 'https://cocina.sul.stanford.edu/models/'
+      URIS = {
+        'ObjectType' => BASE,
+        'FileSetType' => "#{BASE}resources/"
+      }.freeze
 
       def vocabs
         type_properties = schemas.values.map { |schema| schema.properties['type'] }.compact
@@ -56,21 +60,24 @@ module Cocina
 
       def names
         @names ||= vocabs.each_with_object({}) do |vocab, object|
-          # Note special handling of 3d
           namespaced = vocab.delete_prefix(BASE)
-                            .gsub('-', '_').gsub('3d', 'three_dimensional')
           namespace, name = namespaced.include?('/') ? namespaced.split('/') : ['ObjectType', namespaced]
           namespace = 'FileSetType' if namespace == 'resources'
-          object[namespace] ||= {}
-          object[namespace][name] = vocab
+          object[namespace] ||= []
+          object[namespace] << name
         end
       end
 
       def draw_ruby_methods(methods, indent)
         spaces = ' ' * indent
-        methods.map do |name, vocab|
-          "#{spaces}def self.#{name}\n#{spaces}  '#{vocab}'\n#{spaces}end"
-        end.join("\n\n")
+        methods.map do |name|
+          if name == '3d'
+            "#{spaces}property :'3d', method_name: :three_dimensional"
+          else
+            name = "'#{name}'" if name.match?(/(^\d)|-/)
+            "#{spaces}property :#{name}"
+          end
+        end.join("\n")
       end
     end
   end
