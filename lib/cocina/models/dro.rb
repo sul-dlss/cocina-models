@@ -7,8 +7,6 @@ module Cocina
 
       include Checkable
 
-      include TitleBuilder
-
       TYPES = ['https://cocina.sul.stanford.edu/models/object',
                'https://cocina.sul.stanford.edu/models/3d',
                'https://cocina.sul.stanford.edu/models/agreement',

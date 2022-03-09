@@ -2,7 +2,9 @@
 
 require 'spec_helper'
 
-RSpec.describe Cocina::Models::TitleBuilder do
+RSpec.describe Cocina::Services::TitleBuilder do
+  subject(:build) { described_class.build(cocina_object) }
+
   let(:druid) { 'druid:bc753qt7345' }
   let(:apo_druid) { 'druid:pp000pp0000' }
   let(:cocina_object) do
@@ -25,7 +27,7 @@ RSpec.describe Cocina::Models::TitleBuilder do
     end
 
     it 'returns the first tile object' do
-      expect(cocina_object.build_title).to eq('However am I going to be')
+      expect(build).to eq('However am I going to be')
     end
   end
 
@@ -41,7 +43,7 @@ RSpec.describe Cocina::Models::TitleBuilder do
     end
 
     it 'returns the first tile object' do
-      expect(cocina_object.build_title).to eq('A very silly primary title')
+      expect(build).to eq('A very silly primary title')
     end
   end
 
@@ -81,7 +83,7 @@ RSpec.describe Cocina::Models::TitleBuilder do
     end
 
     it 'returns the structured title' do
-      expect(cocina_object.build_title).to eq('ti1:nonSortbrisk junket : ti1:subTitle. ti1:partNumber, ti1:partName') # rubocop:disable Layout/LineLength
+      expect(build).to eq('ti1:nonSortbrisk junket : ti1:subTitle. ti1:partNumber, ti1:partName')
     end
   end
 
@@ -110,7 +112,7 @@ RSpec.describe Cocina::Models::TitleBuilder do
     end
 
     it 'returns the title with non sorting characters included' do
-      expect(cocina_object.build_title).to eq('The  means to prosperity')
+      expect(build).to eq('The  means to prosperity')
     end
   end
 end

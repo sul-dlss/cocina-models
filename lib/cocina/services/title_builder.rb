@@ -1,12 +1,27 @@
 # frozen_string_literal: true
 
 module Cocina
-  module Models
-    # rubocop:disable Metrics/ModuleLength
-    module TitleBuilder
+  module Services
+    # TitleBuilder selects the prefered title from the cocina object for solr indexing
+    # rubocop:disable Metrics/ClassLength
+    class TitleBuilder
+      # @param [Cocina::Models::D*] cocina_object is the object to extract the title for
+      # @param [Symbol] strategy ":first" is the strategy for selection when primary or display title are missing
+      # @param [Boolean] add_punctuation determines if the title should be formmated with punctuation
+      # @return [String] the title value for Solr
+      def self.build(cocina_object, strategy: :first, add_punctuation: true)
+        new(cocina_object, strategy: strategy, add_punctuation: add_punctuation).build_title
+      end
+
+      def initialize(cocina_object, strategy:, add_punctuation:)
+        @cocina_object = cocina_object
+        @strategy = strategy
+        @add_punctuation = add_punctuation
+      end
+
       # @return [String] the title value for Solr
       def build_title(strategy: :first, add_punctuation: true)
-        @titles = description.title
+        @titles = cocina_object.description.title
         @strategy = strategy
         @add_punctuation = add_punctuation
 
@@ -21,18 +36,19 @@ module Cocina
 
       private
 
+      attr_reader :cocina_object, :strategy, :titles
+
       def extract_title(cocina_title)
         result = if cocina_title.value
                    cocina_title.value
                  elsif cocina_title.structuredValue.present?
-                   title_from_structured_values(cocina_title.structuredValue, non_sorting_char_count(cocina_title))
+                   title_from_structured_values(cocina_title.structuredValue,
+                                                non_sorting_char_count(cocina_title))
                  elsif cocina_title.parallelValue.present?
                    return build(cocina_title.parallelValue)
                  end
         remove_trailing_punctuation(result.strip) if result.present?
       end
-
-      attr_reader :strategy, :titles
 
       def add_punctuation?
         @add_punctuation
@@ -80,9 +96,9 @@ module Cocina
       # rubocop:disable Metrics/PerceivedComplexity
       # rubocop:disable Metrics/MethodLength
       # rubocop:disable Metrics/AbcSize
-      # @param [Array<Cocina::Models::StructuredValue>] structured_values - the individual pieces of a structuredValue to be combined
+      # @param [Array<Cocina::Models::StructuredValue>] structured_values - the pieces of a structuredValue
       # @param [Integer] the length of the non_sorting_characters
-      # @return [String] the title value from combining the pieces of the structured_values according to type and order of occurrence,
+      # @return [String] the title value from combining the pieces of the structured_values by type and order
       #   with desired punctuation per specs
       def title_from_structured_values(structured_values, non_sorting_char_count)
         structured_title = ''
@@ -179,6 +195,6 @@ module Cocina
         end
       end
     end
-    # rubocop:enable Metrics/ModuleLength
+    # rubocop:enable Metrics/ClassLength
   end
 end
