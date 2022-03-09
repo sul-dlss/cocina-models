@@ -20,12 +20,11 @@ module Cocina
       end
 
       # @return [String] the title value for Solr
-      def build_title(strategy: :first, add_punctuation: true)
+      def build_title
         @titles = cocina_object.description.title
-        @strategy = strategy
-        @add_punctuation = add_punctuation
 
-        cocina_title = primary_title || untyped_title || other_title
+        cocina_title = primary_title || untyped_title
+        cocina_title = other_title if cocina_title.blank?
 
         if strategy == :first
           extract_title(cocina_title)
@@ -45,7 +44,7 @@ module Cocina
                    title_from_structured_values(cocina_title.structuredValue,
                                                 non_sorting_char_count(cocina_title))
                  elsif cocina_title.parallelValue.present?
-                   return build(cocina_title.parallelValue)
+                   return cocina_title.parallelValue.first.value
                  end
         remove_trailing_punctuation(result.strip) if result.present?
       end
@@ -70,12 +69,16 @@ module Cocina
         end
       end
 
-      # @return [Cocina::Models::Title, nil] first title that has no type attribute
       def untyped_title
         method = strategy == :first ? :find : :select
-        titles.public_send(method) do |title|
+        untyped_title_for(titles.public_send(method))
+      end
+
+      # @return [Array[Cocina::Models::Title]] first title that has no type attribute
+      def untyped_title_for(titles)
+        titles.each do |title|
           if title.parallelValue.present?
-            untyped_title(title.parallelValue)
+            untyped_title_for(title.parallelValue)
           else
             title.type.nil? || title.type == 'title'
           end
