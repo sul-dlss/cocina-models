@@ -80,6 +80,8 @@ module Cocina
         files.delete("#{options[:output]}/checkable.rb")
         files.delete("#{options[:output]}/validator.rb")
         files.delete("#{options[:output]}/validatable.rb")
+        files.delete("#{options[:output]}/license.rb")
+
         FileUtils.rm_f(files)
       end
       # rubocop:enable Metrics/AbcSize
