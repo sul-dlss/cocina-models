@@ -56,6 +56,17 @@ module Cocina
       include Dry.Types()
     end
 
+    ##
+    # Alias for `Cocina::Models::Vocabulary.create`.
+    #
+    # @param (see Cocina::Models::Vocabulary#initialize)
+    # @return [Class]
+    # rubocop:disable Naming/MethodName
+    def self.Vocabulary(uri)
+      Vocabulary.create(uri)
+    end
+    # rubocop:enable Naming/MethodName
+
     # @param [Hash] dyn a ruby hash representation of the JSON serialization of a collection or DRO
     # @param [boolean] validate
     # @return [DRO,Collection,AdminPolicy]
