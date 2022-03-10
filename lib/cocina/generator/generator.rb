@@ -71,18 +71,23 @@ module Cocina
         run("rubocop -a #{filepath} > /dev/null")
       end
 
-      # rubocop:disable Metrics/AbcSize
+      NO_CLEAN = [
+        'version.rb',
+        'checkable.rb',
+        'validator.rb',
+        'validatable.rb',
+        'vocabulary.rb',
+        'license.rb'
+      ].freeze
+
       def clean_output
         FileUtils.mkdir_p(options[:output])
         files = Dir.glob("#{options[:output]}/*.rb")
         # Leave alone
-        files.delete("#{options[:output]}/version.rb")
-        files.delete("#{options[:output]}/checkable.rb")
-        files.delete("#{options[:output]}/validator.rb")
-        files.delete("#{options[:output]}/validatable.rb")
+        NO_CLEAN.each { |filename| files.delete("#{options[:output]}/#{filename}") }
+
         FileUtils.rm_f(files)
       end
-      # rubocop:enable Metrics/AbcSize
     end
   end
 end
