@@ -83,30 +83,6 @@ RSpec.describe Cocina::Generator::Schema do
     end
   end
 
-  context 'when schema has types via allOf' do
-    let(:policy) do
-      Cocina::Models::AdminPolicyWithMetadata.new(
-        externalIdentifier: 'druid:bc123df4567',
-        label: 'My admin policy',
-        type: Cocina::Models::ObjectType.admin_policy,
-        version: 1,
-        administrative: {
-          hasAdminPolicy: 'druid:bc123df4567',
-          hasAgreement: 'druid:bc123df4567',
-          accessTemplate: {}
-        },
-        created: DateTime.now,
-        modified: DateTime.now,
-        lock: 'abc123'
-      )
-    end
-
-    it 'is checkable' do
-      expect(policy.admin_policy?).to be true
-      expect(policy.dro?).to be false
-    end
-  end
-
   context 'when validatable' do
     # A model is validatable when there is a validation path in the openapi. For example, /validate/AdminPolicy
     # Its initializer then accepts a third argument which indicates whether to validate.
