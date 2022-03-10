@@ -22,7 +22,8 @@ class CocinaModelsInflector < Zeitwerk::Inflector
     'dro_access' => 'DROAccess',
     'dro_structural' => 'DROStructural',
     'request_dro_structural' => 'RequestDROStructural',
-    'version' => 'VERSION'
+    'version' => 'VERSION',
+    'dro_with_metadata' => 'DROWithMetadata'
   }.freeze
 
   def camelize(basename, _abspath)
