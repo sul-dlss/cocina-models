@@ -47,7 +47,7 @@ module Cocina
       end
 
       def types
-        type_properties_doc = schema_doc.properties['type']
+        type_properties_doc = schema_properties.find { |property| property.key == 'type' }&.schema_doc
         return '' if type_properties_doc.nil? || type_properties_doc.enum.nil?
 
         types_list = type_properties_doc.enum.map { |item| "'#{item}'" }.join(",\n ")
