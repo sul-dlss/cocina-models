@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Cocina::Services::TitleBuilder do
+RSpec.describe Cocina::Models::TitleBuilder do
   subject(:build) { described_class.build(cocina_object, strategy: strategy, add_punctuation: add_punctuation) }
 
   let(:strategy) { :first }

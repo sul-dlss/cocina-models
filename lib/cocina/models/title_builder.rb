@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Cocina
-  module Services
+  module Models
     # TitleBuilder selects the prefered title from the cocina object for solr indexing
     # rubocop:disable Metrics/ClassLength
     class TitleBuilder
