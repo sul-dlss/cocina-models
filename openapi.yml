@@ -31,6 +31,18 @@ paths:
       responses:
         '200':
           description: noop
+  /validate/DROWithMetadata:
+    post:
+      summary: Validate a DRO with object metadata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DROWithMetadata'
+      responses:
+        '200':
+          description: noop
   /validate/Collection:
     post:
       summary: Validate a Collection
@@ -55,6 +67,18 @@ paths:
       responses:
         '200':
           description: noop
+  /validate/CollectionWithMetadata:
+    post:
+      summary: Validate a Collection with object metadata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionWithMetadata'
+      responses:
+        '200':
+          description: noop
   /validate/AdminPolicy:
     post:
       summary: Validate an AdminPolicy
@@ -76,6 +100,18 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RequestAdminPolicy'
+      responses:
+        '200':
+          description: noop
+  /validate/AdminPolicyWithMetadata:
+    post:
+      summary: Validate an AdminPolicy with object metadata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminPolicyWithMetadata'
       responses:
         '200':
           description: noop
@@ -295,6 +331,14 @@ components:
           description: The license governing reuse of the Collection. Should be an IRI for known licenses (i.e. CC, RightsStatement.org URI, etc.).
           type: string
           nullable: true
+    # AdminPolicyWithMetadata schema should not be copied to sdr-api and dor-services-app.
+    AdminPolicyWithMetadata:
+      description: Admin Policy with addition object metadata.
+      type: object
+      additionalProperties: false
+      allOf:
+        - $ref: "#/components/schemas/AdminPolicy"
+        - $ref: "#/components/schemas/ObjectMetadata"
     AppliesTo:
       description: Property model for indicating the parts, aspects, or versions of the resource to which a
         descriptive element is applicable.
@@ -450,6 +494,14 @@ components:
             $ref: '#/components/schemas/CatalogLink'
         sourceId:
           $ref: '#/components/schemas/SourceId'
+    # CollectionWithMetadata schema should not be copied to sdr-api and dor-services-app.
+    CollectionWithMetadata:
+      description: Collection with addition object metadata.
+      type: object
+      additionalProperties: false
+      allOf:
+        - $ref: "#/components/schemas/Collection"
+        - $ref: "#/components/schemas/ObjectMetadata"
     Contributor:
       description: Property model for describing agents contributing in some way to
         the creation and history of the resource.
@@ -968,6 +1020,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Druid'
+    # DROWithMetadata schema should not be copied to sdr-api and dor-services-app.
+    DROWithMetadata:
+      description: DRO with addition object metadata.
+      type: object
+      additionalProperties: false
+      allOf:
+        - $ref: "#/components/schemas/DRO"
+        - $ref: "#/components/schemas/ObjectMetadata"
     Druid:
       type: string
       pattern: '^druid:[b-df-hjkmnp-tv-z]{2}[0-9]{3}[b-df-hjkmnp-tv-z]{2}[0-9]{4}$'
@@ -1343,6 +1403,25 @@ components:
       required:
         - type
         - digest
+    # ObjectMetadata schema should not be copied to sdr-api and dor-services-app.
+    ObjectMetadata:
+      description: Metadata for a cocina object.
+      type: object
+      additionalProperties: false
+      properties:
+        created:
+          description: When the object was created.
+          type: string
+          format: date-time
+        modified:
+          description: When the object was modified.
+          type: string
+          format: date-time
+        lock:
+          description: Key for optimistic locking. The contents of the key is not specified.
+          type: string        
+      required:
+        - lock
     Presentation:
       description: Presentation data for the File.
       type: object

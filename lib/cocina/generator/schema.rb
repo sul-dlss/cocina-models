@@ -47,10 +47,13 @@ module Cocina
       end
 
       def types
-        type_properties_doc = schema_doc.properties['type']
-        return '' if type_properties_doc.nil? || type_properties_doc.enum.nil?
+        type_schema_property = schema_properties.find { |schema_property| schema_property.key == 'type' }
+        return '' if type_schema_property.nil?
 
-        types_list = type_properties_doc.enum.map { |item| "'#{item}'" }.join(",\n ")
+        type_schema_doc = type_schema_property.schema_doc
+        return '' if type_schema_doc.enum.nil?
+
+        types_list = type_schema_doc.enum.map { |item| "'#{item}'" }.join(",\n ")
 
         <<~RUBY
           include Checkable

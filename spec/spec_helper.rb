@@ -2,6 +2,7 @@
 
 require 'bundler/setup'
 require 'cocina/models'
+require 'cocina/rspec'
 require 'byebug'
 
 require 'simplecov'
