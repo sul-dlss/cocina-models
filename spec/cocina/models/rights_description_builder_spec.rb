@@ -19,85 +19,91 @@ RSpec.describe Cocina::Models::RightsDescriptionBuilder do
     )
   end
 
-  context 'with a valid admin policy' do
-    context 'with access world/world' do
-      let(:access_template) { { view: 'world', download: 'world' } }
+  context 'when access is limited by controlled digital lending' do
+    let(:access_template) { { controlledDigitalLending: true, view: 'world', download: 'world' } }
 
-      it 'returns the world rights description' do
-        expect(build).to eq(['world'])
-      end
+    it 'returns the controlled digital lending rights description' do
+      expect(build).to eq('controlled digital lending')
     end
+  end
 
-    context 'with access world/none' do
-      let(:access_template) { { view: 'world', download: 'none' } }
+  context 'with access world/world' do
+    let(:access_template) { { view: 'world', download: 'world' } }
 
-      it 'returns the world (no-download) rights description' do
-        expect(build).to eq(['world (no-download)'])
-      end
+    it 'returns the world rights description' do
+      expect(build).to eq(['world'])
     end
+  end
 
-    context 'with access world/stanford' do
-      let(:access_template) { { view: 'world', download: 'stanford' } }
+  context 'with access world/none' do
+    let(:access_template) { { view: 'world', download: 'none' } }
 
-      it 'returns the world (no-download) rights description' do
-        expect(build).to eq(['stanford', 'world (no-download)'])
-      end
+    it 'returns the world (no-download) rights description' do
+      expect(build).to eq(['world (no-download)'])
     end
+  end
 
-    context 'with access world/location-based' do
-      let(:access_template) { { view: 'world', download: 'location-based', location: 'm&m' } }
+  context 'with access world/stanford' do
+    let(:access_template) { { view: 'world', download: 'stanford' } }
 
-      it 'returns the world (no-download) and location rights description' do
-        expect(build).to eq(['world (no-download)', 'location: m&m'])
-      end
+    it 'returns the world (no-download) rights description' do
+      expect(build).to eq(['stanford', 'world (no-download)'])
     end
+  end
 
-    context 'with access citation-only/none' do
-      let(:access_template) { { view: 'citation-only', download: 'none' } }
+  context 'with access world/location-based' do
+    let(:access_template) { { view: 'world', download: 'location-based', location: 'm&m' } }
 
-      it 'returns the citation rights description' do
-        expect(build).to eq(['citation'])
-      end
+    it 'returns the world (no-download) and location rights description' do
+      expect(build).to eq(['world (no-download)', 'location: m&m'])
     end
+  end
 
-    context 'with access location-based/none' do
-      let(:access_template) { { view: 'location-based', download: 'none', location: 'm&m' } }
+  context 'with access citation-only/none' do
+    let(:access_template) { { view: 'citation-only', download: 'none' } }
 
-      it 'returns the location (no-download) rights description' do
-        expect(build).to eq(['location: m&m (no-download)'])
-      end
+    it 'returns the citation rights description' do
+      expect(build).to eq(['citation'])
     end
+  end
 
-    context 'with access location-based/world' do
-      let(:access_template) { { view: 'location-based', download: 'world', location: 'm&m' } }
+  context 'with access location-based/none' do
+    let(:access_template) { { view: 'location-based', download: 'none', location: 'm&m' } }
 
-      it 'returns the location rights description' do
-        expect(build).to eq(['location: m&m'])
-      end
+    it 'returns the location (no-download) rights description' do
+      expect(build).to eq(['location: m&m (no-download)'])
     end
+  end
 
-    context 'with access stanford/none' do
-      let(:access_template) { { view: 'stanford', download: 'none' } }
+  context 'with access location-based/world' do
+    let(:access_template) { { view: 'location-based', download: 'world', location: 'm&m' } }
 
-      it 'returns the stanford (no-download) rights description' do
-        expect(build).to eq(['stanford (no-download)'])
-      end
+    it 'returns the location rights description' do
+      expect(build).to eq(['location: m&m'])
     end
+  end
 
-    context 'with access stanford/location-based' do
-      let(:access_template) { { view: 'stanford', download: 'location-based', location: 'm&m' } }
+  context 'with access stanford/none' do
+    let(:access_template) { { view: 'stanford', download: 'none' } }
 
-      it 'returns the stanford (no-download) and location rights description' do
-        expect(build).to eq(['stanford (no-download)', 'location: m&m'])
-      end
+    it 'returns the stanford (no-download) rights description' do
+      expect(build).to eq(['stanford (no-download)'])
     end
+  end
 
-    context 'with access stanford/world' do
-      let(:access_template) { { view: 'stanford', download: 'world' } }
+  context 'with access stanford/location-based' do
+    let(:access_template) { { view: 'stanford', download: 'location-based', location: 'm&m' } }
 
-      it 'returns the stanford rights description' do
-        expect(build).to eq(['stanford'])
-      end
+    it 'returns the stanford (no-download) and location rights description' do
+      expect(build).to eq(['stanford (no-download)', 'location: m&m'])
+    end
+  end
+
+  context 'with access stanford/world' do
+    let(:access_template) { { view: 'stanford', download: 'world' } }
+
+    it 'returns the stanford rights description' do
+      expect(build).to eq(['stanford'])
     end
   end
 end
