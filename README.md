@@ -103,3 +103,17 @@ The following are the recommended naming conventions for code using Cocina model
 * `cocina_admin_policy`: `Cocina::Models::AdminPolicy` instance
 * `cocina_collection`: `Cocina::Models::Collection` instance
 * `cocina_object`: `Cocina::Models::DRO` or `Cocina::Models::AdminPolicy` or `Cocina::Models::Collection` instance
+
+## RSpec matchers
+
+As of the 0.69.0 release, the `cocina-models` gem provides RSpec matchers for downstream apps to make it easier to compare Cocina data structures. The matchers provided include:
+
+* `equal_cocina_model`: Compare a Cocina JSON string with a model instance. This matcher is especially valuable coupled with the `super_diff` gem (a dependency of `cocina-models` since the 0.69.0 release). Example usage:
+  * `expect(http_response_body_with_cocina_json).to equal_cocina_model(cocina_instance)`
+* `cocina_object_with` (AKA `match_cocina_object_with`): Compare a Cocina model instance with a hash containining part of the structure of a Cocina object. Example usage:
+  * `expect(CocinaObjectStore).to have_received(:save).with(cocina_object_with(access: { view: 'world' }, structural: { contains: [...] }))`
+  * expect(updated_cocina_item).to match_cocina_object_with(structural: { hasMemberOrders: [] })
+* `cocina_object_with_types`: Check a Cocina object's type information. Example usage:
+  * `expect(object_client).to have_received(:update).with(params: cocina_object_with_types(content_type: Cocina::Models::ObjectType.book, viewing_direction: 'left-to-right'))`
+* `cocina_admin_policy_with_registration_collections`: Check a Cocina admin policy's collections. Example usage:
+  * `expect(object_client).to have_received(:update).with(params: cocina_admin_policy_with_registration_collections([collection_id]))`
