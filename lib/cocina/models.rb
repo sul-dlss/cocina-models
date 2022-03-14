@@ -22,6 +22,7 @@ class CocinaModelsInflector < Zeitwerk::Inflector
     'dro_access' => 'DROAccess',
     'dro_structural' => 'DROStructural',
     'request_dro_structural' => 'RequestDROStructural',
+    'rspec' => 'RSpec',
     'version' => 'VERSION'
   }.freeze
 

@@ -31,6 +31,7 @@ Gem::Specification.new do |spec|
   # Match these version requirements to what committee wants,
   # so that our client (non-committee) users have the same dependencies.
   spec.add_dependency 'openapi_parser', '>= 0.11.1', '< 1.0'
+  spec.add_dependency 'super_diff'
   spec.add_dependency 'thor'
   spec.add_dependency 'zeitwerk', '~> 2.1'
 

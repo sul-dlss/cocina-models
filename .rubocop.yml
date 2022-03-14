@@ -78,6 +78,7 @@ Metrics/BlockLength:
   Exclude:
     - cocina-models.gemspec
     - spec/cocina/**/*
+    - lib/cocina/rspec/matchers.rb
 
 Metrics/MethodLength:
   Max: 14
