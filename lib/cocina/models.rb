@@ -34,6 +34,8 @@ end
 loader = Zeitwerk::Loader.new
 loader.inflector = CocinaModelsInflector.new
 loader.push_dir(File.absolute_path("#{__FILE__}/../.."))
+loader.ignore("#{__dir__}/rspec.rb")
+loader.ignore("#{__dir__}/rspec/**/*.rb")
 loader.setup
 
 module Cocina
