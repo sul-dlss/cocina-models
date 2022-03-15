@@ -72,12 +72,15 @@ module Cocina
       end
 
       NO_CLEAN = [
-        'version.rb',
         'checkable.rb',
-        'validator.rb',
+        'dro_rights_description_builder.rb',
+        'license.rb',
+        'rights_description_builder.rb',
+        'title_builder.rb',
         'validatable.rb',
-        'vocabulary.rb',
-        'license.rb'
+        'validator.rb',
+        'version.rb',
+        'vocabulary.rb'
       ].freeze
 
       def clean_output
