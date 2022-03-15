@@ -280,3 +280,5 @@ RSpec/FactoryBot/SyntaxMethods: # new in 2.7
   Enabled: true
 RSpec/Rails/AvoidSetupHook: # new in 2.4
   Enabled: true
+Style/NestedFileDirname: # new in 1.26
+  Enabled: true
