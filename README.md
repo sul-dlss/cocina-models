@@ -53,9 +53,13 @@ which pushes the gem to rubygems.org.  Next write up the release notes: https://
 
 ### Step 2: Update client gems coupled to the models
 
+**NOTE**: You can skip this step if the new release is a patch-level bump only.
+
 Next, you should release versions of [sdr-client](https://github.com/sul-dlss/sdr-client) and [dor-services-client](https://github.com/sul-dlss/dor-services-client/) pinned to this version because applications such as [Argo](https://github.com/sul-dlss/argo) depend on both of these gems using the same models.
 
 ### Step 3: Update service API specifications and gems
+
+**NOTE**: You can skip this first half of the step if there have not been any changes to the `cocina-models` OpenAPI spec since the prior release.
 
 The cocina-models gem is used in applications that have an API specification that accepts Cocina models. Next, make sure that the `openapi.yml` for these applications include the `openapi.yml` schema changes made in cocina-models. This list of services is known to include:
 
@@ -85,7 +89,9 @@ There are scripts to help with this:
 
 #### Step 4A: Create the PRs
 
-access-update-scripts repo has a script for this:  `cocina_level2_prs.rb`.  You will need a github access token with scopes of "read:org" and "repo" (see https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) to run it, as noted in the comments at the top of that script.
+There is a Jenkins CI job that you can run manually to create all the PRs you need. Head to https://sul-ci-prod.stanford.edu/job/SUL-DLSS/job/access-update-scripts/job/cocina-level2-updates/ and then click `Build Now`. Click the new build that is created and then `Console Output` to watch the build. Once it has completed, you can proceed with the next step.
+
+If for some reason the above method does not work, the sul-dlss/access-update-scripts repo has a script for this: `cocina_level2_prs.rb`. You will need a github access token with scopes of "read:org" and "repo" (see https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) to run it, as noted in the comments at the top of that script.
 
 #### Step 4B: Merge the PRs
 
