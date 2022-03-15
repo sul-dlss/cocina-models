@@ -2,11 +2,7 @@
 
 require 'rspec/core'
 require 'rspec/matchers'
-if defined?(Rails)
-  require 'super_diff/rspec-rails'
-else
-  require 'super_diff/rspec'
-end
+require 'super_diff/rspec'
 require 'cocina/rspec/matchers'
 
 RSpec.configure do |config|
