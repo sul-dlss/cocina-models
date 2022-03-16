@@ -95,6 +95,8 @@ access-update-scripts repo has a script for this:  `cocina_level2_prs.rb`.  You 
 
 [sul-dlss/sdr-deploy](https://github.com/sul-dlss/sdr-deploy) has a flag in the deploy script to limit deploys to cocina dependent applications.  Refer to instructions in the [sdr-deploy/README](https://github.com/sul-dlss/sdr-deploy/blob/main/README.md#only-deploy-repos-related-to-cocina-models-update).
 
+**[Turn off Google Books](https://sul-gbooks-prod.stanford.edu/features) when deploying to production.** This avoids failed deposit due to a temporary Cocina model mismatch. Unlike other applications, the deposits will fail without retry and require manual remediation.
+
 ## Usage conventions
 
 The following are the recommended naming conventions for code using Cocina models:
