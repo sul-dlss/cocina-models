@@ -120,7 +120,7 @@ As of the 0.69.0 release, the `cocina-models` gem provides RSpec matchers for do
   * `expect(http_response_body_with_cocina_json).to equal_cocina_model(cocina_instance)`
 * `cocina_object_with` (AKA `match_cocina_object_with`): Compare a Cocina model instance with a hash containining part of the structure of a Cocina object. Example usage:
   * `expect(CocinaObjectStore).to have_received(:save).with(cocina_object_with(access: { view: 'world' }, structural: { contains: [...] }))`
-  * expect(updated_cocina_item).to match_cocina_object_with(structural: { hasMemberOrders: [] })
+  * `expect(updated_cocina_item).to match_cocina_object_with(structural: { hasMemberOrders: [] })`
 * `cocina_object_with_types`: Check a Cocina object's type information. Example usage:
   * `expect(object_client).to have_received(:update).with(params: cocina_object_with_types(content_type: Cocina::Models::ObjectType.book, viewing_direction: 'left-to-right'))`
 * `cocina_admin_policy_with_registration_collections`: Check a Cocina admin policy's collections. Example usage:
