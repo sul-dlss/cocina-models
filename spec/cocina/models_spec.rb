@@ -286,7 +286,7 @@ RSpec.describe Cocina::Models do
 
     it 'returns a DROWithMetadata' do
       expect(cocina_object_with_metadata).to be_kind_of Cocina::Models::DROWithMetadata
-      expect(cocina_object_with_metadata).to cocina_object_with expected
+      expect(cocina_object_with_metadata).to match_cocina_object_with(expected.to_h)
     end
   end
 end
