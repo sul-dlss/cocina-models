@@ -231,4 +231,62 @@ RSpec.describe Cocina::Models do
       end
     end
   end
+
+  describe '.without_metadata' do
+    subject(:cocina_object_without_metadata) { described_class.without_metadata(cocina_object) }
+
+    let(:cocina_object) do
+      Cocina::Models::DROWithMetadata.new(
+        type: 'https://cocina.sul.stanford.edu/models/image',
+        externalIdentifier: 'druid:bc123df4567',
+        label: 'bar',
+        version: 5,
+        access: {},
+        administrative: { 'hasAdminPolicy' => 'druid:bc123df4567' },
+        description: {
+          title: [{ 'value' => 'Test DRO' }],
+          purl: 'https://purl.stanford.edu/bc123df4567'
+        },
+        created: DateTime.now.iso8601,
+        modified: DateTime.now.iso8601,
+        lock: 'abc123'
+      )
+    end
+
+    it { is_expected.to be_kind_of Cocina::Models::DRO }
+  end
+
+  describe '.with_metadata' do
+    subject(:cocina_object_with_metadata) do
+      described_class.with_metadata(cocina_object, 'abc123', created: date, modified: date)
+    end
+
+    let(:date) { DateTime.now }
+
+    let(:props) do
+      {
+        type: 'https://cocina.sul.stanford.edu/models/image',
+        externalIdentifier: 'druid:bc123df4567',
+        label: 'bar',
+        version: 5,
+        access: {},
+        administrative: { 'hasAdminPolicy' => 'druid:bc123df4567' },
+        description: {
+          title: [{ 'value' => 'Test DRO' }],
+          purl: 'https://purl.stanford.edu/bc123df4567'
+        }
+      }
+    end
+
+    let(:cocina_object) { Cocina::Models::DRO.new(props) }
+
+    let(:expected) do
+      Cocina::Models::DROWithMetadata.new(props.merge({ lock: 'abc123', created: date, modified: date }))
+    end
+
+    it 'returns a DROWithMetadata' do
+      expect(cocina_object_with_metadata).to be_kind_of Cocina::Models::DROWithMetadata
+      expect(cocina_object_with_metadata).to match_cocina_object_with(expected.to_h)
+    end
+  end
 end

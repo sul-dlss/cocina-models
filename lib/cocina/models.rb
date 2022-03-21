@@ -21,6 +21,7 @@ class CocinaModelsInflector < Zeitwerk::Inflector
     'request_dro' => 'RequestDRO',
     'dro_access' => 'DROAccess',
     'dro_structural' => 'DROStructural',
+    'dro_with_metadata' => 'DROWithMetadata',
     'request_dro_structural' => 'RequestDROStructural',
     'rspec' => 'RSpec',
     'version' => 'VERSION'
@@ -108,6 +109,38 @@ module Cocina
                 raise UnknownTypeError, "Unknown type: '#{dyn.with_indifferent_access.fetch('type')}'"
               end
       clazz.new(dyn, false, validate)
+    end
+
+    # Coerces DROWithMetadata, CollectionWithMetadata, AdminPolicyWithMetadata to DRO, Collection, AdminPolicy
+    # @param [DROWithMetadata,CollectionWithMetadata,AdminPolicyWithMetadata] cocina_object
+    # @return [DRO,Collection,AdminPolicy]
+    def self.without_metadata(cocina_object)
+      build(cocina_object.to_h.except(:created, :modified, :lock))
+    end
+
+    # Adds metadata to a DRO, Collection, AdminPolicy
+    # or updates for a DROWithMetadata, CollectionWithMetadata, AdminPolicyWithMetadata
+    # @param [DROWithMetadata,CollectionWithMetadata,
+    #           AdminPolicyWithMetadata,DRO,Collection,AdminPolicy] cocina_object
+    # @param [String] lock
+    # @param [DateTime] created
+    # @param [DateTime] modified
+    # @return [DROWithMetadata,CollectionWithMetadata,AdminPolicyWithMetadata]
+    def self.with_metadata(cocina_object, lock, created: nil, modified: nil)
+      props = cocina_object.to_h
+      props[:created] = created.iso8601 if created
+      props[:modified] = modified.iso8601 if modified
+      props[:lock] = lock
+
+      clazz = case cocina_object.type
+              when *DRO::TYPES
+                DROWithMetadata
+              when *Collection::TYPES
+                CollectionWithMetadata
+              else
+                AdminPolicyWithMetadata
+              end
+      clazz.new(props)
     end
 
     def self.type_for(dyn)
