@@ -1,30 +1,35 @@
 # frozen_string_literal: true
 
+require 'deprecation'
+
 module Cocina
   module Models
     # TitleBuilder selects the prefered title from the cocina object for solr indexing
     # rubocop:disable Metrics/ClassLength
     class TitleBuilder
-      # @param [Cocina::Models::D*] cocina_object is the object to extract the title for
+      extend Deprecation
+      # @param [[Array<Cocina::Models::Title,Cocina::Models::DescriptiveValue>] titles the titles to consider
       # @param [Symbol] strategy ":first" is the strategy for selection when primary or display title are missing
       # @param [Boolean] add_punctuation determines if the title should be formmated with punctuation
       # @return [String] the title value for Solr
-      def self.build(cocina_object, strategy: :first, add_punctuation: true)
-        new(cocina_object, strategy: strategy, add_punctuation: add_punctuation).build_title
+      def self.build(titles, strategy: :first, add_punctuation: true)
+        if titles.respond_to?(:description)
+          Deprecation.warn(self, "Calling TitleBuilder.build with a #{titles.class} is deprecated. It must be called with an array of titles")
+          titles = titles.description.title
+        end
+        new(strategy: strategy, add_punctuation: add_punctuation).build(titles)
       end
 
-      def initialize(cocina_object, strategy:, add_punctuation:)
-        @cocina_object = cocina_object
+      def initialize(strategy:, add_punctuation:)
         @strategy = strategy
         @add_punctuation = add_punctuation
       end
 
+      # @param [[Array<Cocina::Models::Title>] titles the titles to consider
       # @return [String] the title value for Solr
-      def build_title
-        @titles = cocina_object.description.title
-
-        cocina_title = primary_title || untyped_title
-        cocina_title = other_title if cocina_title.blank?
+      def build(titles)
+        cocina_title = primary_title(titles) || untyped_title(titles)
+        cocina_title = other_title(titles) if cocina_title.blank?
 
         if strategy == :first
           extract_title(cocina_title)
@@ -35,7 +40,7 @@ module Cocina
 
       private
 
-      attr_reader :cocina_object, :strategy, :titles
+      attr_reader :strategy
 
       def extract_title(cocina_title)
         result = if cocina_title.value
@@ -44,7 +49,7 @@ module Cocina
                    title_from_structured_values(cocina_title.structuredValue,
                                                 non_sorting_char_count(cocina_title))
                  elsif cocina_title.parallelValue.present?
-                   return cocina_title.parallelValue.first.value
+                   return build(cocina_title.parallelValue)
                  end
         remove_trailing_punctuation(result.strip) if result.present?
       end
@@ -54,7 +59,7 @@ module Cocina
       end
 
       # @return [Cocina::Models::Title, nil] title that has status=primary
-      def primary_title
+      def primary_title(titles)
         primary_title = titles.find do |title|
           title.status == 'primary'
         end
@@ -69,7 +74,7 @@ module Cocina
         end
       end
 
-      def untyped_title
+      def untyped_title(titles)
         method = strategy == :first ? :find : :select
         untyped_title_for(titles.public_send(method))
       end
@@ -86,7 +91,7 @@ module Cocina
       end
 
       # This handles 'main title', 'uniform' or 'translated'
-      def other_title
+      def other_title(titles)
         if strategy == :first
           titles.first
         else
