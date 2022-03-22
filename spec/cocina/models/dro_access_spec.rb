@@ -20,7 +20,9 @@ RSpec.describe Cocina::Models::DROAccess do
                               download: download,
                               location: location,
                               controlledDigitalLending: controlled_digital_lending
-                            })
+                            },
+                            structural: {},
+                            identification: {})
   end
 
   context 'with dark access' do

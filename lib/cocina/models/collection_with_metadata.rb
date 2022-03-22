@@ -25,9 +25,9 @@ module Cocina
       # Version for the Collection within SDR.
       attribute :version, Types::Strict::Integer
       attribute(:access, CollectionAccess.default { CollectionAccess.new })
-      attribute :administrative, Administrative.optional.meta(omittable: true)
+      attribute(:administrative, Administrative.default { Administrative.new })
       attribute(:description, Description.default { Description.new })
-      attribute :identification, CollectionIdentification.optional.meta(omittable: true)
+      attribute(:identification, CollectionIdentification.default { CollectionIdentification.new })
       # When the object was created.
       attribute :created, Types::Params::DateTime.meta(omittable: true)
       # When the object was modified.

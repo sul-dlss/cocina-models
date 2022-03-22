@@ -29,7 +29,7 @@ module Cocina
       attribute :label, Types::Strict::String
       # Version for the Fileset within SDR.
       attribute :version, Types::Strict::Integer
-      attribute :structural, FileSetStructural.optional.meta(omittable: true)
+      attribute(:structural, FileSetStructural.default { FileSetStructural.new })
     end
   end
 end

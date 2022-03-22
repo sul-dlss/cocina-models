@@ -21,7 +21,9 @@ RSpec.describe Cocina::Models do
           'description' => {
             'title' => [{ 'value' => 'Test Collection' }],
             'purl' => 'https://purl.stanford.edu/bc123df4567'
-          }
+          },
+          'identification' => {},
+          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
         }
       end
 
@@ -59,7 +61,8 @@ RSpec.describe Cocina::Models do
           'description' => {
             'title' => [{ 'value' => 'Test DRO' }],
             'purl' => 'https://purl.stanford.edu/bc123df4567'
-          }
+          },
+          'structural' => {}
         }
       end
 
@@ -96,7 +99,9 @@ RSpec.describe Cocina::Models do
           description: {
             title: [{ 'value' => 'Test DRO' }],
             purl: 'https://purl.stanford.edu/bc123df4567'
-          }
+          },
+          structural: {},
+          identification: {}
         }
       end
 
@@ -247,6 +252,8 @@ RSpec.describe Cocina::Models do
           title: [{ 'value' => 'Test DRO' }],
           purl: 'https://purl.stanford.edu/bc123df4567'
         },
+        structural: {},
+        identification: {},
         created: DateTime.now.iso8601,
         modified: DateTime.now.iso8601,
         lock: 'abc123'
@@ -274,7 +281,9 @@ RSpec.describe Cocina::Models do
         description: {
           title: [{ 'value' => 'Test DRO' }],
           purl: 'https://purl.stanford.edu/bc123df4567'
-        }
+        },
+        structural: {},
+        identification: {}
       }
     end
 

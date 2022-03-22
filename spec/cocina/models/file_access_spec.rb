@@ -15,6 +15,7 @@ RSpec.describe Cocina::Models::FileAccess do
                               purl: 'https://purl.stanford.edu/bc123df4567'
                             },
                             administrative: { hasAdminPolicy: 'druid:bc123df4567' },
+                            identification: {},
                             access: {},
                             structural: {
                               contains: [

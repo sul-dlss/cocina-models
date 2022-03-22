@@ -458,6 +458,8 @@ components:
         - type
         - version
         - access
+        - administrative
+        - identification
     CollectionAccess:
       description: Access metadata for collections
       type: object
@@ -946,6 +948,8 @@ components:
         - label
         - type
         - version
+        - identification
+        - structural
     DROAccess:
       type: object
       additionalProperties: false
@@ -1218,6 +1222,7 @@ components:
         - label
         - type
         - version
+        - structural
     FileSetStructural:
       description: Structural metadata
       type: object
