@@ -37,8 +37,8 @@ module Cocina
       attribute(:access, DROAccess.default { DROAccess.new })
       attribute(:administrative, Administrative.default { Administrative.new })
       attribute(:description, Description.default { Description.new })
-      attribute :identification, Identification.optional.meta(omittable: true)
-      attribute :structural, DROStructural.optional.meta(omittable: true)
+      attribute(:identification, Identification.default { Identification.new })
+      attribute(:structural, DROStructural.default { DROStructural.new })
       attribute :geographic, Geographic.optional.meta(omittable: true)
     end
   end

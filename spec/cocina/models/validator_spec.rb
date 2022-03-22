@@ -102,7 +102,8 @@ RSpec.describe Cocina::Models::Validator do
         access: {},
         identification: {
           barcode: nil
-        }
+        },
+        structural: {}
       )
     end
 
@@ -174,7 +175,9 @@ RSpec.describe Cocina::Models::Validator do
                 release: true
               }
             ]
-          }
+          },
+          structural: {},
+          identification: {}
         }
       )
     end
