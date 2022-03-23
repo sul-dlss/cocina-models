@@ -25,6 +25,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 2.7'
 
   spec.add_dependency 'activesupport'
+  spec.add_dependency 'deprecation'
   spec.add_dependency 'dry-struct', '~> 1.0'
   spec.add_dependency 'dry-types', '~> 1.1'
   spec.add_dependency 'openapi3_parser' # Parsing openapi doc

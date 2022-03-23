@@ -107,7 +107,7 @@ RSpec/StubbedMock: # (new in 1.44)
   Enabled: true
 
 RSpec/MultipleMemoizedHelpers:
-  Max: 6
+  Enabled: false
 
 # ----- Style ------
 
