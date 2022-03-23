@@ -118,6 +118,7 @@ It is safest to ensure _all_ the integration tests run cleanly.  However, patch 
 The following are the recommended naming conventions for code using Cocina models:
 
 * `cocina_item`: `Cocina::Models::DRO` instance
+* `cocina_agreement`: `Cocina::Models::DRO` with type of Cocina::Models::ObjectType.agreement
 * `cocina_admin_policy`: `Cocina::Models::AdminPolicy` instance
 * `cocina_collection`: `Cocina::Models::Collection` instance
 * `cocina_object`: `Cocina::Models::DRO` or `Cocina::Models::AdminPolicy` or `Cocina::Models::Collection` instance
