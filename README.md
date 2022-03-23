@@ -101,6 +101,16 @@ If for some reason the above method does not work, the sul-dlss/access-update-sc
 
 [sul-dlss/sdr-deploy](https://github.com/sul-dlss/sdr-deploy) has a flag in the deploy script to limit deploys to cocina dependent applications.  Refer to instructions in the [sdr-deploy/README](https://github.com/sul-dlss/sdr-deploy/blob/main/README.md#only-deploy-repos-related-to-cocina-models-update).
 
+Note that running the integration tests is currently the best way we have to check for unintended effects and/or bugs when rolling out cocina-models changes.
+
+#### Step 5A: Deploy to QA and/or Stage
+
+#### Step 5B: Run infrastructure_integration_tests
+
+It is safest to ensure _all_ the integration tests run cleanly.  However, patch releases of cocina-models may only warrant running individual tests that exercise the changes.
+
+#### Step 5C: Deploy to Production
+
 **[Turn off Google Books](https://sul-gbooks-prod.stanford.edu/features) when deploying to production.** This avoids failed deposit due to a temporary Cocina model mismatch. Unlike other applications, the deposits will fail without retry and require manual remediation.
 
 ## Usage conventions
