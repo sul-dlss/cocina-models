@@ -56,7 +56,8 @@ RSpec.describe Cocina::Models do
           'access' => {},
           'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' },
           'identification' => {
-            'doi' => '10.25740/bc123df4567'
+            'doi' => '10.25740/bc123df4567',
+            sourceId: 'sul:123'
           },
           'description' => {
             'title' => [{ 'value' => 'Test DRO' }],
@@ -101,7 +102,7 @@ RSpec.describe Cocina::Models do
             purl: 'https://purl.stanford.edu/bc123df4567'
           },
           structural: {},
-          identification: {}
+          identification: { sourceId: 'sul:123' }
         }
       end
 
@@ -253,7 +254,7 @@ RSpec.describe Cocina::Models do
           purl: 'https://purl.stanford.edu/bc123df4567'
         },
         structural: {},
-        identification: {},
+        identification: { sourceId: 'sul:123' },
         created: DateTime.now.iso8601,
         modified: DateTime.now.iso8601,
         lock: 'abc123'
@@ -283,7 +284,7 @@ RSpec.describe Cocina::Models do
           purl: 'https://purl.stanford.edu/bc123df4567'
         },
         structural: {},
-        identification: {}
+        identification: { sourceId: 'sul:123' }
       }
     end
 
