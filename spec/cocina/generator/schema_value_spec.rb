@@ -127,11 +127,11 @@ RSpec.describe Cocina::Generator::SchemaValue do
 
   context 'when property is not required' do
     context 'when the value is omitted and has no default' do
-      # Identification.sourceId is not required
-      let(:identification) { Cocina::Models::Identification.new }
+      # DROAccess.location is not required
+      let(:access) { Cocina::Models::DROAccess.new }
 
       it 'sets to nil' do
-        expect(identification.sourceId).to be_nil
+        expect(access.location).to be_nil
       end
     end
 

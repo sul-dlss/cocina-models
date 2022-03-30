@@ -15,7 +15,7 @@ RSpec.describe Cocina::Models::DroRightsDescriptionBuilder do
                               title: [{ value: 'However am I going to be' }],
                               purl: 'https://purl.stanford.edu/bc753qt7345'
                             },
-                            identification: {},
+                            identification: { sourceId: 'sul:123' },
                             access: access,
                             administrative: { hasAdminPolicy: 'druid:pp000pp0000' },
                             structural: structural)

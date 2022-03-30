@@ -6,23 +6,25 @@ RSpec.describe Cocina::Models::DROAccess do
   # Verifying that correctly validate access, download, location, and controlledDigitalLending.
 
   def dro(access, download, location, controlled_digital_lending)
-    Cocina::Models::DRO.new(externalIdentifier: 'druid:bc123df4567',
-                            label: 'My DRO',
-                            type: Cocina::Models::ObjectType.book,
-                            version: 1,
-                            description: {
-                              title: [{ value: 'Test DRO' }],
-                              purl: 'https://purl.stanford.edu/bc123df4567'
-                            },
-                            administrative: { hasAdminPolicy: 'druid:bc123df4567' },
-                            access: {
-                              view: access,
-                              download: download,
-                              location: location,
-                              controlledDigitalLending: controlled_digital_lending
-                            },
-                            structural: {},
-                            identification: {})
+    Cocina::Models::DRO.new(
+      externalIdentifier: 'druid:bc123df4567',
+      label: 'My DRO',
+      type: Cocina::Models::ObjectType.book,
+      version: 1,
+      description: {
+        title: [{ value: 'Test DRO' }],
+        purl: 'https://purl.stanford.edu/bc123df4567'
+      },
+      administrative: { hasAdminPolicy: 'druid:bc123df4567' },
+      access: {
+        view: access,
+        download: download,
+        location: location,
+        controlledDigitalLending: controlled_digital_lending
+      },
+      structural: {},
+      identification: { sourceId: 'sul:123' }
+    )
   end
 
   context 'with dark access' do
