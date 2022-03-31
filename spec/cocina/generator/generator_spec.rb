@@ -17,6 +17,6 @@ RSpec.describe Cocina::Generator::Generator do
   it 'leaves files alone' do
     expect(File.exist?('lib/cocina/models/version.rb')).to be true
     expect(File.exist?('lib/cocina/models/checkable.rb')).to be true
-    expect(File.exist?('lib/cocina/models/validator.rb')).to be true
+    expect(File.exist?('lib/cocina/models/validators/validator.rb')).to be true
   end
 end
