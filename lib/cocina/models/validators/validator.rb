@@ -5,7 +5,11 @@ module Cocina
     module Validators
       # Perform validation against all other Validators
       class Validator
-        VALIDATORS = [OpenApiValidator, DarkValidator].freeze
+        VALIDATORS = [
+          OpenApiValidator,
+          DarkValidator,
+          DescriptionTypesValidator
+        ].freeze
 
         def self.validate(clazz, attributes)
           VALIDATORS.each { |validator| validator.validate(clazz, attributes) }

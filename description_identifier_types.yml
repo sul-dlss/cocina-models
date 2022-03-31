@@ -1,0 +1,10 @@
+# Description identifier type validation
+
+identifier: # expand list based on mapping
+  - value: ARK
+  - value: ISBN
+  - value: LCCN
+  - value: local
+  - value: OCLC
+identifier.note:
+  - value: type

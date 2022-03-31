@@ -1,0 +1,391 @@
+# Description type validation
+
+access.accessContact:
+  - value: email
+    description: Email address for a contact person or institution concerning the resource.
+  - value: repository
+    description: Institution providing access to the resource.
+access.digitalLocation:
+  - value: discovery
+    description: Online location for the purpose of discovering the resource.
+access.note:
+  - value: access restriction
+    description: Restrictions on or conditions for gaining access to the resource.
+  - value: display label
+    description: Display label for purl.
+  - value: license
+    description: License describing allowed uses of the resource.
+  - value: use and reproduction
+    description: Information related to allowed uses of the resource in other contexts.
+access.physicalLocation:
+  - value: location
+    description: Physical location of the resource, or path to the resource on a hard drive or disk.
+  - value: shelf locator
+    description: Identifier or shelfmark indicating the location of the resource.
+adminMetadata.note:
+  - value: record information
+  - value: record origin
+contributor:
+  - value: conference
+    description: An event focusing on a particular topic or discipline.
+  - value: event
+    description: A time-bound occurrence.
+  - value: family
+    description: A group of individuals related by blood or personal alliance.
+  - value: organization
+    description: An institution or other corporate or collective body.
+  - value: person
+    description: An individual identity.
+  - value: unspecified others
+    description: Designator for one or more additional contributors not named individually.
+contributor.identifier:
+  - value: ORCID
+  - value: Wikidata
+contributor.name:
+  - value: display
+    description: Preferred form of the name for display.
+  - value: forename
+    description: First or given name or names.
+  - value: inverted full name
+    description: Name given in last name, first name order.
+  - value: pseudonym
+    description: Name used that differs from legal or primary form of name.
+  - value: surname
+    description: Last or family name.
+    # parallelValue
+  - value: transliteration
+    description: Name originally in non-Latin script presented phonetically using Latin characters.
+contributor.name.structuredValue:
+  - value: activity dates
+    description: The date or dates when someone was producing work.
+  - value: forename
+    description: First or given name or names.
+  - value: life dates
+    description: Birth and death dates, or dates when an entity was in existence.
+  - value: name
+    description: Name provided alongside additional information.
+  - value: ordinal
+    description: Indicator that the name is one in a series (e.g. Elizabeth I, Martin Luther King, Jr.).
+  - value: surname
+    description: Last or family name.
+  - value: term of address
+    description: Title or other signifier associated with name.
+contributor.name.parallelValue:
+  - value: display
+    description: Preferred form of the name for display.
+  - value: transliteration
+    description: Name originally in non-Latin script presented phonetically using Latin characters.
+contributor.name.groupedValue:
+  - value: alternative
+    description: Additional nonpreferred form of name.
+  - value: name
+    description: Primary form of name within group of values.
+  - value: pseudonym
+    description: Name used that differs from legal or primary form of name.
+contributor.note:
+  - value: affiliation
+    description: Institution with which the contributor is associated.
+  - value: citation status
+    description: Indicator of whether the contributor should be included in the citation.
+  - value: description
+    description: Biographical information about the contributor.
+event:
+  - value: acquisition
+    description: The transferral of ownership of a resource to a repository.
+  - value: capture
+    description: A record of the resource in a fixed form at a specific time.
+  - value: collection
+    description: The addition of a resource to a set of other resources.
+  - value: copyright
+    description: The activity by which a resource may be considered subject to copyright law.
+  - value: copyright notice
+    description: An explicit statement that a resource is under copyright.
+  - value: creation
+    description: The coming into being of a resource.
+  - value: degree conferral
+    description: The institutional approval of a thesis or other resource leading to an academic degree.
+  - value: development
+    description: The creation of a print from a photographic negative or other source medium.
+  - value: distribution
+    description: The delivery of the resource to an external audience.
+  - value: generation
+    description: The creation of a resource by an automatic or natural process.
+  - value: manufacture
+    description: The physical assembly of a resource, often in multiple copies, for publication or other distribution.
+  - value: modification
+    description: A change to an existing resource.
+  - value: performance
+    description: The enactment of an artistic or cultural work for an audience, such as a play.
+  - value: presentation
+    description: The discussion of an academic or intellectual work for an audience, such as a seminar.
+  - value: production
+    description: The physical assembly of a resource not considered published, such as page proofs for a book.
+  - value: publication
+    description: The publishing or issuing of a resource.
+  - value: recording
+    description: The initial fixation to a medium of live audio and/or visual activity.
+  - value: release
+    description: Making a resource available to a broader audience.
+  - value: submission
+    description: The provision of a resource for review or evaluation.
+  - value: validity
+    description: When a resource takes effect, such as a revised train schedule.
+  - value: withdrawal
+    description: The removal of previous access to a resource, often due to its obsolescence.
+event.date:
+  - value: acquisition
+    description: The transferral of ownership of a resource to a repository.
+  - value: capture
+    description: A record of the resource in a fixed form at a specific time.
+  - value: collection
+    description: The addition of a resource to a set of other resources.
+  - value: copyright
+    description: The activity by which a resource may be considered subject to copyright law.
+  - value: creation
+    description: The coming into being of a resource.
+  - value: degree conferral
+    description: The institutional approval of a thesis or other resource leading to an academic degree.
+    # developed is also in MODS metadata as date type
+  - value: developed
+    description: The creation of a print from a photographic negative or other source medium.
+    status: deprecated
+  - value: development
+    description: The creation of a print from a photographic negative or other source medium.
+  - value: distribution
+    description: The delivery of the resource to an external audience.
+  - value: generation
+    description: The creation of a resource by an automatic or natural process.
+  - value: manufacture
+    description: The physical assembly of a resource, often in multiple copies, for publication or other distribution.
+  - value: modification
+    description: A change to an existing resource.
+  - value: performance
+    description: The enactment of an artistic or cultural work for an audience, such as a play.
+  - value: presentation
+    description: The discussion of an academic or intellectual work for an audience, such as a seminar.
+  - value: production
+    description: The physical assembly of a resource not considered published, such as page proofs for a book.
+  - value: publication
+    description: The publishing or issuing of a resource.
+  - value: recording
+    description: The initial fixation to a medium of live audio and/or visual activity.
+  - value: release
+    description: Making a resource available to a broader audience.
+  - value: submission
+    description: The provision of a resource for review or evaluation.
+  - value: validity
+    description: When a resource takes effect, such as a revised train schedule.
+  - value: withdrawal
+    description: The removal of previous access to a resource, often due to its obsolescence.
+event.date.structuredValue:
+  - value: start
+    description: The start date in a range.
+  - value: end
+    description: The end date in a range.
+event.note:
+  - value: copyright statement
+    description: A formal declaration of copyright on a resource.
+  - value: edition
+  - value: issuance
+form:
+  - value: data format
+  - value: digital original
+  - value: extent
+  - value: form
+  - value: genre
+  - value: map projection
+  - value: map scale
+  - value: media type
+  - value: reformatting quality
+  - value: resource type
+  - value: type
+form.note:
+  - value: arrangement
+  - value: binding
+  - value: codicology
+  - value: collation
+  - value: colophon
+  - value: condition
+  - value: decoration
+  - value: dimensions
+  - value: explicit
+  - value: foliation
+  - value: genre type
+  - value: hand note
+  - value: incipit
+  - value: instrumentation
+  - value: layout
+  - value: material
+  - value: medium of performance
+  - value: reassembly
+  - value: reproduction
+  - value: rubric
+  - value: second folio
+  - value: unit
+form.structuredValue:
+  - value: type
+  - value: subtype
+form.groupedValue:
+  - value: extent
+  - value: form
+geographic.form:
+  - value: data format
+  - value: media type
+  - value: type
+geographic.subject:
+  - value: bounding box coordinates
+  - value: coverage
+  - value: point coordinates
+geographic.subject.structuredValue:
+  - value: east
+  - value: latitude
+  - value: longitude
+  - value: north
+  - value: south
+  - value: west
+note:
+  - value: abstract
+  - value: acquisition
+  - value: action
+  - value: additional physical form
+  - value: additions
+  - value: admin
+  - value: bibliographic
+  - value: bibliography
+  - value: biographical/historical
+  - value: biography
+  - value: boat note
+  - value: citation/reference
+  - value: content
+  - value: content note
+  - value: contents
+  - value: copyright
+  - value: creation/production credits
+  - value: date
+  - value: date/sequential designation
+  - value: digitization
+  - value: event
+  - value: exhibitions
+  - value: funding
+  - value: general
+  - value: geography
+  - value: host
+  - value: language
+  - value: local
+  - value: location
+  - value: names
+  - value: numbering
+  - value: original location
+  - value: ownership
+  - value: part
+  - value: performer
+  - value: performers
+  - value: preferred citation
+  - value: provenance
+  - value: publications
+  - value: qualifications
+  - value: quote
+  - value: reference
+  - value: references
+  - value: related publication
+  - value: research
+  - value: restriction
+  - value: scope and content
+  - value: source character
+  - value: statement of responsibility
+  - value: summary
+  - value: system details
+  - value: system requirements
+  - value: table of contents
+  - value: target audience
+  - value: technical note
+  - value: thesis
+  - value: transcript
+  - value: translation
+  - value: venue
+  - value: version identification
+  - value: writing
+note.groupedValue:
+  - value: caption
+  - value: date
+  - value: detail type
+  - value: extent unit
+  - value: list
+  - value: marker
+  - value: number
+  - value: title
+  - value: text
+relatedResource:
+  - value: has original version
+  - value: has other format
+  - value: has part
+  - value: in series
+  - value: other relation type
+  - value: part of
+  - value: referenced by
+  - value: related to
+relatedResource.note:
+  - value: other relation type
+subject:
+  - value: classification
+  - value: conference
+  - value: display
+  - value: event
+  - value: family
+  - value: genre
+  - value: map coordinates
+  - value: name
+  - value: occupation
+  - value: organization
+  - value: person
+  - value: place
+  - value: time
+  - value: title
+  - value: topic
+subject.structuredValue:
+  - value: city
+  - value: continent
+  - value: country
+  - value: end
+  - value: east
+  - value: forename
+  - value: genre
+  - value: latitude
+  - value: life dates
+  - value: longitude
+  - value: main title
+  - value: name
+  - value: north
+  - value: part name
+  - value: person
+  - value: place
+  - value: south
+  - value: start
+  - value: surname
+  - value: term of address
+  - value: time
+  - value: title
+  - value: topic
+  - value: west
+subject.parallelValue:
+  - value: display
+title:
+  - value: abbreviated
+  - value: alternative
+  - value: parallel
+  - value: supplied
+  - value: translated
+  - value: transliterated
+  - value: uniform
+title.note:
+  - value: nonsorting character count
+title.structuredValue:
+  - value: main title
+  - value: nonsorting characters
+  - value: part name
+  - value: part number
+  - value: subtitle
+  - value: title
+title.parallelValue:
+  - value: transliteration
+    description: Title originally in non-Latin script presented phonetically using Latin characters.
