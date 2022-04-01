@@ -78,7 +78,6 @@ module Cocina
         'rights_description_builder.rb',
         'title_builder.rb',
         'validatable.rb',
-        'validator.rb',
         'version.rb',
         'vocabulary.rb'
       ].freeze
