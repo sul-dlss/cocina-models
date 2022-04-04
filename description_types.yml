@@ -12,19 +12,28 @@ access.note:
   - value: access restriction
     description: Restrictions on or conditions for gaining access to the resource.
   - value: display label
-    description: Display label for purl.
+    description: Display label for the purl.
   - value: license
     description: License describing allowed uses of the resource.
   - value: use and reproduction
     description: Information related to allowed uses of the resource in other contexts.
 access.physicalLocation:
+  - value: discovery
+    description: Location where a user may find the resource.
   - value: location
     description: Physical location of the resource, or path to the resource on a hard drive or disk.
+  - value: repository
+    description: The institution holding the resource.
+  - value: series
+    description: Archival series of the resource.
+    status: deprecated
   - value: shelf locator
     description: Identifier or shelfmark indicating the location of the resource.
 adminMetadata.note:
   - value: record information
+    description: General information about the metadata record.
   - value: record origin
+    description: The source of the record, such as another record transformed to generate the current record.
 contributor:
   - value: conference
     description: An event focusing on a particular topic or discipline.
@@ -40,8 +49,12 @@ contributor:
     description: Designator for one or more additional contributors not named individually.
 contributor.identifier:
   - value: ORCID
+    description: Identifier from orcid.org.
   - value: Wikidata
+    description: Identifier from wikidata.org.
 contributor.name:
+  - value: alternative
+    description: Additional nonpreferred form of name.
   - value: display
     description: Preferred form of the name for display.
   - value: forename
@@ -52,7 +65,6 @@ contributor.name:
     description: Name used that differs from legal or primary form of name.
   - value: surname
     description: Last or family name.
-    # parallelValue
   - value: transliteration
     description: Name originally in non-Latin script presented phonetically using Latin characters.
 contributor.name.structuredValue:
@@ -70,11 +82,6 @@ contributor.name.structuredValue:
     description: Last or family name.
   - value: term of address
     description: Title or other signifier associated with name.
-contributor.name.parallelValue:
-  - value: display
-    description: Preferred form of the name for display.
-  - value: transliteration
-    description: Name originally in non-Latin script presented phonetically using Latin characters.
 contributor.name.groupedValue:
   - value: alternative
     description: Additional nonpreferred form of name.
@@ -145,10 +152,10 @@ event.date:
     description: The coming into being of a resource.
   - value: degree conferral
     description: The institutional approval of a thesis or other resource leading to an academic degree.
-    # developed is also in MODS metadata as date type
   - value: developed
     description: The creation of a print from a photographic negative or other source medium.
     status: deprecated
+    use: development
   - value: development
     description: The creation of a print from a photographic negative or other source medium.
   - value: distribution
@@ -186,8 +193,12 @@ event.note:
   - value: copyright statement
     description: A formal declaration of copyright on a resource.
   - value: edition
+  - value: frequency
+    description: How often a resource is issued, such as monthly.
   - value: issuance
+    description: How the resource is issued, such as serially.
 form:
+  - value: carrier
   - value: data format
   - value: digital original
   - value: extent
@@ -195,39 +206,55 @@ form:
   - value: genre
   - value: map projection
   - value: map scale
+  - value: material
+  - value: media
   - value: media type
   - value: reformatting quality
   - value: resource type
+  - value: technique
   - value: type
 form.note:
+  - value: additions
   - value: arrangement
   - value: binding
   - value: codicology
   - value: collation
   - value: colophon
   - value: condition
+  - value: decoNote
+    status: deprecated
+    use: decoration
   - value: decoration
   - value: dimensions
   - value: explicit
   - value: foliation
   - value: genre type
   - value: hand note
+  - value: handNote
+    status: deprecated
+    use: hand note
   - value: incipit
   - value: instrumentation
   - value: layout
   - value: material
   - value: medium of performance
+  - value: provenance
   - value: reassembly
   - value: reproduction
+  - value: research
   - value: rubric
+  - value: secfol
+    status: deprecated
+    use: second folio
   - value: second folio
+  - value: secondFolio
+    status: deprecated
+    use: second folio
   - value: unit
+  - value: writing
 form.structuredValue:
   - value: type
   - value: subtype
-form.groupedValue:
-  - value: extent
-  - value: form
 geographic.form:
   - value: data format
   - value: media type
@@ -243,39 +270,127 @@ geographic.subject.structuredValue:
   - value: north
   - value: south
   - value: west
+identifier:
+  - value: accession number
+  - value: alternate case number
+  - value: Apis ID
+    code: apis
+  - value: ARK
+    code: ark
+  - value: arXiv
+    code: arxiv
+  - value: case identifier
+  - value: case number
+  - value: document number
+  - value: DOI
+    code: doi
+  - value: druid
+  - value: GTIN-14 ID
+    code: gtin-14
+  - value: Handle
+    code: hdl
+  - value: inventory number
+  - value: ISBN
+    code: isbn
+  - value: ISMN
+    code: ismn
+  - value: ISRC
+    code: isrc
+  - value: ISSN
+    code: issn
+  - value: ISSN-L
+    code: issn-l
+  - value: issue number
+    code: issue-number
+  - value: LCCN
+    code: lccn
+  - value: local
+    code: local
+  - value: Local ID
+  - value: matrix number
+    code: matrix-number
+  - value: music plate
+    code: music-plate
+  - value: music publisher
+    code: music-publisher
+  - value: OCLC
+  - value: PMCID
+  - value: PMID
+  - value: record id
+  - value: Senate Number
+  - value: Series
+  - value: SIRSI
+  - value: Source ID
+  - value: sourceID
+    status: deprecated
+    use: Source ID
+  - value: stock number
+    code: stock-number
+  - value: Swets (Netherlands) ID
+    code: swets
+  - value: UPC
+    code: upc
+  - value: URI
+    code: uri
+  - value: URN
+    code: urn
+  - value: videorecording identifier
+    code: videorecording-identifier
+  - value: West Mat \#
+  - value: Wikidata
+    code: wikidata
 note:
   - value: abstract
+  - value: access
+  - value: access note
+    status: deprecated
+    use: access
   - value: acquisition
   - value: action
   - value: additional physical form
   - value: additions
   - value: admin
+  - value: affiliation
   - value: bibliographic
   - value: bibliography
   - value: biographical/historical
+  - value: biographical/historical note
+    status: deprecated
+    use: biographical/historical
   - value: biography
   - value: boat note
   - value: citation/reference
+  - value: contact
   - value: content
   - value: content note
+    status: deprecated
+    use: content
+  - value: content warning
   - value: contents
+    status: deprecated
+    use: content
   - value: copyright
   - value: creation/production credits
   - value: date
   - value: date/sequential designation
+  - value: description
   - value: digitization
+  - value: duration
   - value: event
   - value: exhibitions
   - value: funding
   - value: general
+  - value: genre type
   - value: geography
   - value: host
   - value: language
   - value: local
   - value: location
+  - value: medium of performance
   - value: names
   - value: numbering
   - value: original location
+  - value: other relation type
   - value: ownership
   - value: part
   - value: performer
@@ -285,13 +400,16 @@ note:
   - value: publications
   - value: qualifications
   - value: quote
+  - value: reassembly
   - value: reference
   - value: references
   - value: related publication
+  - value: reproduction
   - value: research
   - value: restriction
   - value: scope and content
-  - value: source character
+  - value: source characteristics
+  - value: source identifier
   - value: statement of responsibility
   - value: summary
   - value: system details
@@ -302,7 +420,10 @@ note:
   - value: thesis
   - value: transcript
   - value: translation
+  - value: update
+  - value: use and reproduction
   - value: venue
+  - value: version
   - value: version identification
   - value: writing
 note.groupedValue:
@@ -317,15 +438,31 @@ note.groupedValue:
   - value: text
 relatedResource:
   - value: has original version
+    description: An initial form of the resource.
   - value: has other format
+    description: A version of the resource in a different physical or digital format.
   - value: has part
+    description: A constituent unit of the resource.
+  - value: has version
+    description: A version of the resource with different intellectual content.
   - value: in series
+    description: The name of a series of publications to which the resource belongs.
   - value: other relation type
+    description: Resource type not otherwise described.
   - value: part of
+    description: A larger resource to which the resource belongs, such as a collection.
+  - value: preceded by
+    description: A predecessor to the resource, such as a preceding journal title.
   - value: referenced by
+    description: Other resources that cite the resource, such as a catalog.
+  - value: references
+    description: A resource which the resource references or cites.
   - value: related to
-relatedResource.note:
-  - value: other relation type
+    description: A generically related resource.
+  - value: reviewed by
+    description: A review of the resource.
+  - value: succeeded by
+    description: A successor to the resource, such as a subsequent journal title.
 subject:
   - value: classification
   - value: conference
@@ -339,15 +476,20 @@ subject:
   - value: organization
   - value: person
   - value: place
+  - value: point coordinates
   - value: time
   - value: title
   - value: topic
+subject.note:
+  - value: role
 subject.structuredValue:
+  - value: activity dates
   - value: city
   - value: continent
   - value: country
   - value: end
   - value: east
+  - value: display
   - value: forename
   - value: genre
   - value: latitude
@@ -356,6 +498,8 @@ subject.structuredValue:
   - value: main title
   - value: name
   - value: north
+  - value: occupation
+  - value: ordinal
   - value: part name
   - value: person
   - value: place
@@ -367,25 +511,40 @@ subject.structuredValue:
   - value: title
   - value: topic
   - value: west
-subject.parallelValue:
-  - value: display
+subject.structuredValue.note:
+  - value: role
+    description: The relation of the subject entity to the resource.
+subject.groupedValue:
+  - value: uniform
+    description: Form of title in Library of Congress title authority.
 title:
   - value: abbreviated
+    description: Abbreviated form of title for indexing or identification.
   - value: alternative
+    description: Variant title.
   - value: parallel
+    description: Title transcribed from the resource in multiple languages or scripts.
   - value: supplied
+    description: Title provided by metadata creator rather than transcribed from the resource.
   - value: translated
+    description: Title translated into another language.
   - value: transliterated
+    description: Title transliterated from non-Latin script to Latin script.
   - value: uniform
+    description: Form of title in Library of Congress title authority.
 title.note:
+  - value: associated name
+    description: A name linked to the title, such as for a name-title heading.
   - value: nonsorting character count
+    description: The number of characters at the beginning of the string to be disregarded when sorting.
 title.structuredValue:
   - value: main title
+    description: The primary part of a multipart title.
   - value: nonsorting characters
+    description: A string at the beginning of the title to be disregarded when sorting.
   - value: part name
+    description: The distinct name of a resource as part of a series or multivolume set.
   - value: part number
+    description: The distinct number of a resource as part of a series or multivolume set.
   - value: subtitle
-  - value: title
-title.parallelValue:
-  - value: transliteration
-    description: Title originally in non-Latin script presented phonetically using Latin characters.
+    description: The secondary part of a title.
