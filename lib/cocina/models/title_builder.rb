@@ -46,8 +46,7 @@ module Cocina
         result = if cocina_title.value
                    cocina_title.value
                  elsif cocina_title.structuredValue.present?
-                   title_from_structured_values(cocina_title.structuredValue,
-                                                non_sorting_char_count(cocina_title))
+                   title_from_structured_values(cocina_title)
                  elsif cocina_title.parallelValue.present?
                    return build(cocina_title.parallelValue)
                  end
@@ -104,20 +103,17 @@ module Cocina
       # rubocop:disable Metrics/PerceivedComplexity
       # rubocop:disable Metrics/MethodLength
       # rubocop:disable Metrics/AbcSize
-      # @param [Array<Cocina::Models::StructuredValue>] structured_values - the pieces of a structuredValue
-      # @param [Integer] the length of the non_sorting_characters
+      # @param [Cocina::Models::Title] title with structured values
       # @return [String] the title value from combining the pieces of the structured_values by type and order
       #   with desired punctuation per specs
-      def title_from_structured_values(structured_values, non_sorting_char_count)
+      def title_from_structured_values(title)
         structured_title = ''
         part_name_number = ''
         # combine pieces of the cocina structuredValue into a single title
-        structured_values.each do |structured_value|
+        title.structuredValue.each do |structured_value|
           # There can be a structuredValue inside a structuredValue.  For example,
           #   a uniform title where both the name and the title have internal StructuredValue
-          if structured_value.structuredValue.present?
-            return title_from_structured_values(structured_value.structuredValue, non_sorting_char_count)
-          end
+          return title_from_structured_values(structured_value) if structured_value.structuredValue.present?
 
           value = structured_value.value&.strip
           next unless value
@@ -125,8 +121,7 @@ module Cocina
           # additional types:  name, uniform ...
           case structured_value.type&.downcase
           when 'nonsorting characters'
-            non_sorting_size = [non_sorting_char_count - (value&.size || 0), 0].max
-            non_sort_value = "#{value}#{' ' * non_sorting_size}"
+            non_sort_value = "#{value}#{non_sorting_padding(title, value)}"
             structured_title = if structured_title.present?
                                  "#{structured_title}#{non_sort_value}"
                                else
@@ -134,7 +129,7 @@ module Cocina
                                end
           when 'part name', 'part number'
             if part_name_number.blank?
-              part_name_number = part_name_number(structured_values)
+              part_name_number = part_name_number(title.structuredValue)
               structured_title = if !add_punctuation?
                                    [structured_title, part_name_number].join(' ')
                                  elsif structured_title.present?
@@ -168,11 +163,16 @@ module Cocina
         title.sub(%r{[ .,;:/\\]+$}, '')
       end
 
-      def non_sorting_char_count(title)
+      def non_sorting_padding(title, non_sorting_value)
         non_sort_note = title.note&.find { |note| note.type&.downcase == 'nonsorting character count' }
-        return 0 unless non_sort_note
-
-        non_sort_note.value.to_i
+        if non_sort_note
+          padding_count = [non_sort_note.value.to_i - non_sorting_value.length, 0].max
+          ' ' * padding_count
+        elsif ['\'', '-'].include?(non_sorting_value.last)
+          ''
+        else
+          ' '
+        end
       end
 
       # combine part name and part number:

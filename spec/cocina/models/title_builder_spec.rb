@@ -160,7 +160,7 @@ RSpec.describe Cocina::Models::TitleBuilder do
     end
 
     it 'returns the structured title' do
-      expect(build).to eq('ti1:nonSortbrisk junket : ti1:subTitle. ti1:partNumber, ti1:partName')
+      expect(build).to eq('ti1:nonSort brisk junket : ti1:subTitle. ti1:partNumber, ti1:partName')
     end
   end
 
@@ -326,7 +326,7 @@ RSpec.describe Cocina::Models::TitleBuilder do
     end
   end
 
-  context 'when multiple nonsorting characters' do
+  context 'when multiple nonsorting characters with note' do
     let(:titles) do
       [
         structuredValue: [
@@ -349,6 +349,66 @@ RSpec.describe Cocina::Models::TitleBuilder do
 
     it 'returns the title with non sorting characters included' do
       expect(build).to eq('The  means to prosperity')
+    end
+  end
+
+  context 'when multiple nonsorting characters without note' do
+    let(:titles) do
+      [
+        structuredValue: [
+          {
+            value: 'The',
+            type: 'nonsorting characters'
+          }, {
+            value: 'means to prosperity',
+            type: 'main title'
+          }
+        ]
+      ]
+    end
+
+    it 'returns the title with non sorting characters included' do
+      expect(build).to eq('The means to prosperity')
+    end
+  end
+
+  context 'when multiple nonsorting characters without note, ends in dash' do
+    let(:titles) do
+      [
+        structuredValue: [
+          {
+            value: 'The-',
+            type: 'nonsorting characters'
+          }, {
+            value: 'means to prosperity',
+            type: 'main title'
+          }
+        ]
+      ]
+    end
+
+    it 'returns the title with non sorting characters included' do
+      expect(build).to eq('The-means to prosperity')
+    end
+  end
+
+  context 'when multiple nonsorting characters without note, ends in apostrophe' do
+    let(:titles) do
+      [
+        structuredValue: [
+          {
+            value: 'L\'',
+            type: 'nonsorting characters'
+          }, {
+            value: 'means to prosperity',
+            type: 'main title'
+          }
+        ]
+      ]
+    end
+
+    it 'returns the title with non sorting characters included' do
+      expect(build).to eq('L\'means to prosperity')
     end
   end
 end
