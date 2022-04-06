@@ -25,6 +25,15 @@ module Cocina
       def self.properties
         @properties ||= {}
       end
+
+      ##
+      # Returns the URI for the term `property` in this vocabulary.
+      #
+      # @param  [#to_sym] property
+      # @return [String]
+      def self.[](property)
+        properties[property.to_sym]
+      end
     end
   end
 end
