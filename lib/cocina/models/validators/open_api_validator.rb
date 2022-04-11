@@ -6,6 +6,8 @@ module Cocina
       # Perform validation against openapi
       class OpenApiValidator
         def self.validate(clazz, attributes)
+          return unless clazz.name
+
           method_name = clazz.name.split('::').last
           request_operation = root.request_operation(:post, "/validate/#{method_name}")
 
