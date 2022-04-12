@@ -61,10 +61,10 @@ RSpec.describe Cocina::Generator::SchemaValue do
   context 'when property is an enum' do
     # AccessRole.name is an enum
     context 'when value is in enum list' do
-      let(:role) { Cocina::Models::AccessRole.new(name: 'dor-apo-creator') }
+      let(:role) { Cocina::Models::AccessRole.new(name: 'dor-apo-manager') }
 
       it 'maps to an enum' do
-        expect(role.name).to eq('dor-apo-creator')
+        expect(role.name).to eq('dor-apo-manager')
       end
     end
 
