@@ -28,6 +28,7 @@ module Cocina
         # rubocop:enable Style/HashEachMethods
 
         generate_vocab
+        generate_descriptive_docs
       end
 
       desc 'generate_schema SCHEMA_NAME', 'generate for SCHEMA_NAME'
@@ -45,7 +46,55 @@ module Cocina
         Vocab.generate(schemas, output_dir: options[:output])
       end
 
+      desc 'generate_descriptive_docs', 'generate descriptive documentation'
+      def generate_descriptive_docs
+        markdown = YAML.load_file('description_types.yml').map do |field, types|
+          header_markdown = field_markdown_from(field)
+          types_markdown = types_markdown_from(types)
+
+          <<~MARKDOWN
+            #{'#' * (field.count('.') + 1)} #{header_markdown}
+            _Path: #{field}_
+            #{types_markdown}
+          MARKDOWN
+        end.join("\n")
+
+        remove_file 'docs/description_types.md'
+        create_file 'docs/description_types.md', h1_markdown + markdown
+      end
+
       private
+
+      def h1_markdown
+        <<~MARKDOWN
+          # Description types
+
+        MARKDOWN
+      end
+
+      def field_markdown_from(field)
+        header = field.split('.')
+                      .grep_v(/groupedValue|structuredValue/)
+                      .join(' ')
+                      .capitalize
+
+        header_suffix = if field.ends_with?('structuredValue')
+                          'part types for structured value'
+                        elsif field.ends_with?('groupedValue')
+                          'types for grouped value (MODS legacy)'
+                        else
+                          'types'
+                        end
+        "#{header} #{header_suffix}"
+      end
+
+      def types_markdown_from(types)
+        types.map do |type|
+          "  * #{type['value']}".tap do |type_value|
+            type_value << ": #{type['description']}" if type['description']
+          end
+        end.join("\n")
+      end
 
       def schemas
         @schemas ||= Openapi3Parser.load_file(options[:openapi]).components.schemas
