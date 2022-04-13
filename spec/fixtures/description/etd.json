@@ -19,7 +19,7 @@
             },
             {
               "value": "Jr",
-              "type": "name suffix"
+              "type": "ordinal"
             }
           ]
         }
@@ -144,7 +144,7 @@
   ],
   "event": [
     {
-      "type": "thesis submission",
+      "type": "degree conferral",
       "date": [
         {
           "value": "2017"
@@ -157,7 +157,7 @@
               "structuredValue": [
                 {
                   "value": "Stanford University",
-                  "type": "university",
+                  "type": "name",
                   "uri": "http://id.loc.gov/authorities/names/n79054636",
                   "source": {
                     "code": "lcnaf",
@@ -166,11 +166,11 @@
                 },
                 {
                   "value": "Graduate School of Business",
-                  "type": "school"
+                  "type": "name"
                 },
                 {
                   "value": "Business Administration",
-                  "type": "department"
+                  "type": "name"
                 }
               ]
             }
@@ -205,12 +205,6 @@
           "encoding": {
               "code": "w3cdtf"
           }
-        }
-      ],
-      "note": [
-        {
-          "value": "Ph.D.",
-          "type": "degree type"
         }
       ],
       "contributor": [
@@ -399,7 +393,7 @@
     },
     {
       "value": "text",
-      "type": "content type",
+      "type": "type",
       "uri": "http://id.loc.gov/vocabulary/contentTypes/txt",
       "source": {
         "code": "rdacontent",
@@ -467,7 +461,7 @@
   "identifier": [
     {
       "value": "0000005406",
-      "type": "ETD ID"
+      "type": "record id"
     }
   ],
   "purl": "https://purl.stanford.edu/hj456dt5655",
@@ -515,7 +509,7 @@
         ]
       },
       {
-        "type": "last modification",
+        "type": "modification",
         "date": [
           {
             "value": "2020-03-23",

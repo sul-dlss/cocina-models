@@ -37,7 +37,7 @@ RSpec.describe Cocina::Models::Description do
 
       expect(item.event.size).to eq(4)
       event = item.event.first
-      expect(event.type).to eq('thesis submission')
+      expect(event.type).to eq('degree conferral')
       expect(event.date.first.value).to eq('2017')
       expect(event.contributor.size).to eq(1)
 
@@ -63,7 +63,7 @@ RSpec.describe Cocina::Models::Description do
 
       identifier = item.identifier.first
       expect(identifier.value).to eq('0000005406')
-      expect(identifier.type).to eq('ETD ID')
+      expect(identifier.type).to eq('record id')
 
       expect(item.purl).to eq('https://purl.stanford.edu/hj456dt5655')
 
@@ -79,16 +79,6 @@ RSpec.describe Cocina::Models::Description do
       expect(item.adminMetadata.event.size).to eq(2)
       expect(item.adminMetadata.contributor.size).to eq(3)
       expect(item.adminMetadata.language.size).to eq(1)
-    end
-  end
-
-  context 'with another etd' do
-    let(:properties) { JSON.parse(File.read('spec/fixtures/description/etd2.json')) }
-
-    it 'populates attributes passed in' do
-      title = item.title.first
-      expect(title.value).to eq('Adaptive Guidance for Online Learning Environments')
-      expect(title.status).to eq('primary')
     end
   end
 

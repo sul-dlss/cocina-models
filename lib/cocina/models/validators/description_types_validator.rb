@@ -11,7 +11,7 @@ module Cocina
 
         def initialize(clazz, attributes)
           @clazz = clazz
-          @attributes = attributes
+          @attributes = attributes.deep_symbolize_keys
           @error_paths = []
         end
 
@@ -60,7 +60,7 @@ module Cocina
             next unless match?(path, type_signature)
             break if types.include?(type.downcase)
 
-            error_paths << path_to_s(path)
+            error_paths << "#{path_to_s(path)} (#{type})"
             break
           end
         end
