@@ -393,11 +393,14 @@ _Path: subject.note_
 _Path: subject.structuredValue_
   * activity dates
   * city
+  * conference
   * continent
   * country
   * end
   * east
+  * event
   * display
+  * family
   * forename
   * genre
   * latitude
@@ -408,6 +411,7 @@ _Path: subject.structuredValue_
   * north
   * occupation
   * ordinal
+  * organization
   * part name
   * person
   * place

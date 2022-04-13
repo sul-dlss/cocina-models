@@ -485,11 +485,14 @@ subject.note:
 subject.structuredValue:
   - value: activity dates
   - value: city
+  - value: conference
   - value: continent
   - value: country
   - value: end
   - value: east
+  - value: event
   - value: display
+  - value: family
   - value: forename
   - value: genre
   - value: latitude
@@ -500,6 +503,7 @@ subject.structuredValue:
   - value: north
   - value: occupation
   - value: ordinal
+  - value: organization
   - value: part name
   - value: person
   - value: place
