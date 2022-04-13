@@ -139,7 +139,7 @@ _Path: event.note_
 _Path: form_
   * carrier
   * data format
-  * digital original
+  * digital origin
   * extent
   * form
   * genre

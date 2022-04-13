@@ -200,7 +200,7 @@ event.note:
 form:
   - value: carrier
   - value: data format
-  - value: digital original
+  - value: digital origin
   - value: extent
   - value: form
   - value: genre
