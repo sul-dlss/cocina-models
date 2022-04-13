@@ -124,7 +124,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
     it 'raises' do
       expect do
         validate
-      end.to raise_error(Cocina::Models::ValidationError, 'Unrecognized types in description: contributor1')
+      end.to raise_error(Cocina::Models::ValidationError, 'Unrecognized types in description: contributor1 (foo)')
     end
   end
 
@@ -135,7 +135,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
       expect do
         validate
       end.to raise_error(Cocina::Models::ValidationError,
-                         'Unrecognized types in description: contributor1.identifier1')
+                         'Unrecognized types in description: contributor1.identifier1 (foo)')
     end
   end
 
@@ -146,7 +146,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
       expect do
         validate
       end.to raise_error(Cocina::Models::ValidationError,
-                         'Unrecognized types in description: relatedResource1.contributor1')
+                         'Unrecognized types in description: relatedResource1.contributor1 (foo)')
     end
   end
 
@@ -215,7 +215,8 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
       expect do
         validate
       end.to raise_error(Cocina::Models::ValidationError,
-                         'Unrecognized types in description: contributor1.name1.parallelValue1.structuredValue1')
+                         'Unrecognized types in description: ' \
+                         'contributor1.name1.parallelValue1.structuredValue1 (fooname)')
     end
   end
 
@@ -254,7 +255,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
       expect do
         validate
       end.to raise_error(Cocina::Models::ValidationError,
-                         'Unrecognized types in description: event1.parallelEvent2.note1')
+                         'Unrecognized types in description: event1.parallelEvent2.note1 (foo)')
     end
   end
 
@@ -335,7 +336,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
         validate
       end.to raise_error(Cocina::Models::ValidationError,
                          'Unrecognized types in description: ' \
-                         'contributor1.parallelContributor1.name1.structuredValue1')
+                         'contributor1.parallelContributor1.name1.structuredValue1 (foo)')
     end
   end
 
@@ -439,6 +440,30 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
       expect do
         validate
       end.to raise_error(Cocina::Models::ValidationError)
+    end
+  end
+
+  describe 'when an invalid Description with string keys' do
+    let(:props) do
+      {
+        'title' => [{ 'value' => 'The Structure of Scientific Revolutions' }],
+        'purl' => 'https://purl.stanford.edu/bc123df4567',
+        'contributor' => [
+          {
+            'name' => [
+              {
+                'value' => 'Kuhn, Thomas'
+              }
+            ],
+            'type' => 'foo',
+            'status' => 'primary'
+          }
+        ]
+      }
+    end
+
+    it 'is not valid' do
+      expect { validate }.to raise_error(Cocina::Models::ValidationError)
     end
   end
 end
