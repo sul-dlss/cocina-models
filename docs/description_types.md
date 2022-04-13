@@ -105,6 +105,7 @@ _Path: event.date_
   * capture: A record of the resource in a fixed form at a specific time.
   * collection: The addition of a resource to a set of other resources.
   * copyright: The activity by which a resource may be considered subject to copyright law.
+  * coverage
   * creation: The coming into being of a resource.
   * degree conferral: The institutional approval of a thesis or other resource leading to an academic degree.
   * developed: The creation of a print from a photographic negative or other source medium.
@@ -221,6 +222,8 @@ _Path: identifier_
   * arXiv
   * case identifier
   * case number
+  * CSt
+  * CStRLIN
   * document number
   * DOI
   * druid
@@ -240,6 +243,7 @@ _Path: identifier_
   * music plate
   * music publisher
   * OCLC
+  * OCoLC
   * PMCID
   * PMID
   * record id
@@ -249,6 +253,7 @@ _Path: identifier_
   * Source ID
   * sourceID
   * stock number
+  * SUL catalog key
   * Swets (Netherlands) ID
   * UPC
   * URI
@@ -314,6 +319,7 @@ _Path: note_
   * reassembly
   * reference
   * references
+  * reformatting
   * related publication
   * reproduction
   * research
@@ -392,17 +398,22 @@ _Path: subject.note_
 ## Subject part types for structured value
 _Path: subject.structuredValue_
   * activity dates
+  * area
   * city
+  * city section
   * conference
   * continent
   * country
+  * county
   * end
   * east
   * event
+  * extraterrestrial area
   * display
   * family
   * forename
   * genre
+  * island
   * latitude
   * life dates
   * longitude
@@ -413,12 +424,16 @@ _Path: subject.structuredValue_
   * ordinal
   * organization
   * part name
+  * part number
   * person
   * place
+  * region
   * south
   * start
+  * state
   * surname
   * term of address
+  * territory
   * time
   * title
   * topic
@@ -426,6 +441,7 @@ _Path: subject.structuredValue_
 
 ### Subject note types
 _Path: subject.structuredValue.note_
+  * affiliation
   * role: The relation of the subject entity to the resource.
 
 ## Subject types for grouped value (MODS legacy)

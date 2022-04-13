@@ -148,6 +148,7 @@ event.date:
     description: The addition of a resource to a set of other resources.
   - value: copyright
     description: The activity by which a resource may be considered subject to copyright law.
+  - value: coverage
   - value: creation
     description: The coming into being of a resource.
   - value: degree conferral
@@ -281,6 +282,8 @@ identifier:
     code: arxiv
   - value: case identifier
   - value: case number
+  - value: CSt
+  - value: CStRLIN
   - value: document number
   - value: DOI
     code: doi
@@ -314,6 +317,7 @@ identifier:
   - value: music publisher
     code: music-publisher
   - value: OCLC
+  - value: OCoLC
   - value: PMCID
   - value: PMID
   - value: record id
@@ -326,6 +330,7 @@ identifier:
     use: Source ID
   - value: stock number
     code: stock-number
+  - value: SUL catalog key
   - value: Swets (Netherlands) ID
     code: swets
   - value: UPC
@@ -403,6 +408,7 @@ note:
   - value: reassembly
   - value: reference
   - value: references
+  - value: reformatting
   - value: related publication
   - value: reproduction
   - value: research
@@ -484,17 +490,22 @@ subject.note:
   - value: role
 subject.structuredValue:
   - value: activity dates
+  - value: area
   - value: city
+  - value: city section
   - value: conference
   - value: continent
   - value: country
+  - value: county
   - value: end
   - value: east
   - value: event
+  - value: extraterrestrial area
   - value: display
   - value: family
   - value: forename
   - value: genre
+  - value: island
   - value: latitude
   - value: life dates
   - value: longitude
@@ -505,17 +516,22 @@ subject.structuredValue:
   - value: ordinal
   - value: organization
   - value: part name
+  - value: part number
   - value: person
   - value: place
+  - value: region
   - value: south
   - value: start
+  - value: state
   - value: surname
   - value: term of address
+  - value: territory
   - value: time
   - value: title
   - value: topic
   - value: west
 subject.structuredValue.note:
+  - value: affiliation
   - value: role
     description: The relation of the subject entity to the resource.
 subject.groupedValue:
