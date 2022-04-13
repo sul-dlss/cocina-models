@@ -219,6 +219,167 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
     end
   end
 
+  describe 'with an invalid parallelEvent' do
+    let(:desc_props) do
+      {
+        title: [
+          {
+            parallelValue: [
+              { value: 'Ṣammamtu an ahwāka yā sayyidī', status: 'primary' },
+              { value: 'صممت أن اهواك يا سيدي' }
+            ]
+          }
+        ],
+        purl: 'https://purl.stanford.edu/xq000jd3530',
+        event: [
+          {
+            parallelEvent: [
+              {
+                note: [
+                  { type: 'edition', value: 'al-Ṭabʻah 1.' }
+                ]
+              },
+              {
+                note: [
+                  { type: 'foo', value: 'الطبعة ١.' }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    end
+
+    it 'ignores parallelEvent and raises' do
+      expect do
+        validate
+      end.to raise_error(Cocina::Models::ValidationError,
+                         'Unrecognized types in description: event1.parallelEvent2.note1')
+    end
+  end
+
+  describe 'with a valid parallelEvent' do
+    let(:desc_props) do
+      {
+        title: [
+          {
+            parallelValue: [
+              { value: 'Ṣammamtu an ahwāka yā sayyidī', status: 'primary' },
+              { value: 'صممت أن اهواك يا سيدي' }
+            ]
+          }
+        ],
+        purl: 'https://purl.stanford.edu/xq000jd3530',
+        event: [
+          {
+            parallelEvent: [
+              {
+                note: [
+                  { type: 'edition', value: 'al-Ṭabʻah 1.' }
+                ]
+              },
+              {
+                note: [
+                  { type: 'edition', value: 'الطبعة ١.' }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    end
+
+    it 'ignores parallelEvent and does not raise' do
+      validate
+    end
+  end
+
+  describe 'with an invalid parallelContributor' do
+    let(:desc_props) do
+      {
+        contributor: [
+          {
+            parallelContributor: [
+              {
+                name: [
+                  {
+                    structuredValue: [
+                      {
+                        value: 'Li, Yahong',
+                        type: 'foo'
+                      },
+                      {
+                        value: '1963-',
+                        type: 'life dates'
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                name: [
+                  {
+                    value: '李亞虹'
+                  }
+                ]
+              }
+            ],
+            type: 'person'
+          }
+        ]
+      }
+    end
+
+    it 'ignores parallelContributor and raises' do
+      expect do
+        validate
+      end.to raise_error(Cocina::Models::ValidationError,
+                         'Unrecognized types in description: ' \
+                         'contributor1.parallelContributor1.name1.structuredValue1')
+    end
+  end
+
+  describe 'with an valid parallelContributor' do
+    let(:desc_props) do
+      {
+        contributor: [
+          {
+            parallelContributor: [
+              {
+                name: [
+                  {
+                    structuredValue: [
+                      {
+                        value: 'Li, Yahong',
+                        type: 'name'
+                      },
+                      {
+                        value: '1963-',
+                        type: 'life dates'
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                name: [
+                  {
+                    value: '李亞虹'
+                  }
+                ]
+              }
+            ],
+            type: 'person'
+          }
+        ]
+      }
+    end
+
+    it 'ignores parallelContributor and does not raise' do
+      validate
+    end
+  end
+
   describe 'with a nested structuredValue' do
     let(:desc_props) do
       {
