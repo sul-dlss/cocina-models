@@ -154,39 +154,6 @@ _Path: form_
   * technique
   * type
 
-## Form note types
-_Path: form.note_
-  * additions
-  * arrangement
-  * binding
-  * codicology
-  * collation
-  * colophon
-  * condition
-  * decoNote
-  * decoration
-  * dimensions
-  * explicit
-  * foliation
-  * genre type
-  * hand note
-  * handNote
-  * incipit
-  * instrumentation
-  * layout
-  * material
-  * medium of performance
-  * provenance
-  * reassembly
-  * reproduction
-  * research
-  * rubric
-  * secfol
-  * second folio
-  * secondFolio
-  * unit
-  * writing
-
 ## Form part types for structured value
 _Path: form.structuredValue_
   * type
@@ -273,13 +240,19 @@ _Path: note_
   * additions
   * admin
   * affiliation
+  * arrangement
   * bibliographic
   * bibliography
+  * binding
   * biographical/historical
   * biographical/historical note
   * biography
   * boat note
   * citation/reference
+  * codicology
+  * collation
+  * colophon
+  * condition
   * contact
   * content
   * content note
@@ -289,19 +262,30 @@ _Path: note_
   * creation/production credits
   * date
   * date/sequential designation
+  * decoNote
+  * decoration
   * description
   * digitization
+  * dimensions
   * duration
   * event
   * exhibitions
+  * explicit
+  * foliation
   * funding
   * general
   * genre type
   * geography
+  * hand note
+  * handNote
   * host
+  * incipit
+  * instrumentation
   * language
+  * layout
   * local
   * location
+  * material
   * medium of performance
   * names
   * numbering
@@ -324,7 +308,11 @@ _Path: note_
   * reproduction
   * research
   * restriction
+  * rubric
   * scope and content
+  * secfol
+  * second folio
+  * secondFolio
   * source characteristics
   * source identifier
   * statement of responsibility
@@ -337,6 +325,7 @@ _Path: note_
   * thesis
   * transcript
   * translation
+  * unit
   * update
   * use and reproduction
   * venue
