@@ -99,6 +99,7 @@ RSpec/ExampleLength:
   Exclude:
     - spec/cocina/models/description_spec.rb
     - spec/cocina/models/dro_shared_examples.rb
+    - spec/cocina/models/builders/name_title_group_builder_spec.rb
 
 RSpec/MultipleExpectations:
   Enabled: false
