@@ -83,7 +83,9 @@ _Path: event_
   * copyright: The activity by which a resource may be considered subject to copyright law.
   * copyright notice: An explicit statement that a resource is under copyright.
   * creation: The coming into being of a resource.
+  * deaccession
   * degree conferral: The institutional approval of a thesis or other resource leading to an academic degree.
+  * deposit
   * development: The creation of a print from a photographic negative or other source medium.
   * distribution: The delivery of the resource to an external audience.
   * generation: The creation of a resource by an automatic or natural process.
@@ -107,11 +109,16 @@ _Path: event.date_
   * copyright: The activity by which a resource may be considered subject to copyright law.
   * coverage
   * creation: The coming into being of a resource.
+  * deaccession
   * degree conferral: The institutional approval of a thesis or other resource leading to an academic degree.
+  * deposit
   * developed: The creation of a print from a photographic negative or other source medium.
   * development: The creation of a print from a photographic negative or other source medium.
   * distribution: The delivery of the resource to an external audience.
   * generation: The creation of a resource by an automatic or natural process.
+  * Hijiri calendar
+  * Islamic
+  * Julian
   * manufacture: The physical assembly of a resource, often in multiple copies, for publication or other distribution.
   * modification: A change to an existing resource.
   * performance: The enactment of an artistic or cultural work for an audience, such as a play.
@@ -120,9 +127,14 @@ _Path: event.date_
   * publication: The publishing or issuing of a resource.
   * recording: The initial fixation to a medium of live audio and/or visual activity.
   * release: Making a resource available to a broader audience.
+  * Revolutionary calendar
   * submission: The provision of a resource for review or evaluation.
   * validity: When a resource takes effect, such as a revised train schedule.
   * withdrawal: The removal of previous access to a resource, often due to its obsolescence.
+
+### Event date note types
+_Path: event.date.note_
+  * calendar
 
 ### Event date part types for structured value
 _Path: event.date.structuredValue_
@@ -184,6 +196,7 @@ _Path: geographic.subject.structuredValue_
 _Path: identifier_
   * accession number
   * alternate case number
+  * anchor
   * Apis ID
   * ARK
   * arXiv
@@ -191,6 +204,7 @@ _Path: identifier_
   * case number
   * CSt
   * CStRLIN
+  * Data Provider Digital Object Identifier
   * document number
   * DOI
   * druid
@@ -268,6 +282,7 @@ _Path: note_
   * digitization
   * dimensions
   * duration
+  * email
   * event
   * exhibitions
   * explicit
@@ -278,6 +293,7 @@ _Path: note_
   * geography
   * hand note
   * handNote
+  * handwritten
   * host
   * incipit
   * instrumentation
@@ -290,6 +306,7 @@ _Path: note_
   * names
   * numbering
   * original location
+  * other
   * other relation type
   * ownership
   * part
@@ -382,6 +399,8 @@ _Path: subject_
 
 ## Subject note types
 _Path: subject.note_
+  * affiliation
+  * description
   * role
 
 ## Subject part types for structured value

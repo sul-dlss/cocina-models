@@ -109,8 +109,10 @@ event:
     description: An explicit statement that a resource is under copyright.
   - value: creation
     description: The coming into being of a resource.
+  - value: deaccession
   - value: degree conferral
     description: The institutional approval of a thesis or other resource leading to an academic degree.
+  - value: deposit
   - value: development
     description: The creation of a print from a photographic negative or other source medium.
   - value: distribution
@@ -151,8 +153,10 @@ event.date:
   - value: coverage
   - value: creation
     description: The coming into being of a resource.
+  - value: deaccession
   - value: degree conferral
     description: The institutional approval of a thesis or other resource leading to an academic degree.
+  - value: deposit
   - value: developed
     description: The creation of a print from a photographic negative or other source medium.
     status: deprecated
@@ -163,6 +167,9 @@ event.date:
     description: The delivery of the resource to an external audience.
   - value: generation
     description: The creation of a resource by an automatic or natural process.
+  - value: Hijiri calendar
+  - value: Islamic
+  - value: Julian
   - value: manufacture
     description: The physical assembly of a resource, often in multiple copies, for publication or other distribution.
   - value: modification
@@ -179,12 +186,15 @@ event.date:
     description: The initial fixation to a medium of live audio and/or visual activity.
   - value: release
     description: Making a resource available to a broader audience.
+  - value: Revolutionary calendar
   - value: submission
     description: The provision of a resource for review or evaluation.
   - value: validity
     description: When a resource takes effect, such as a revised train schedule.
   - value: withdrawal
     description: The removal of previous access to a resource, often due to its obsolescence.
+event.date.note:
+  - value: calendar
 event.date.structuredValue:
   - value: start
     description: The start date in a range.
@@ -235,6 +245,7 @@ geographic.subject.structuredValue:
 identifier:
   - value: accession number
   - value: alternate case number
+  - value: anchor
   - value: Apis ID
     code: apis
   - value: ARK
@@ -245,6 +256,7 @@ identifier:
   - value: case number
   - value: CSt
   - value: CStRLIN
+  - value: Data Provider Digital Object Identifier
   - value: document number
   - value: DOI
     code: doi
@@ -353,6 +365,7 @@ note:
   - value: digitization
   - value: dimensions
   - value: duration
+  - value: email
   - value: event
   - value: exhibitions
   - value: explicit
@@ -365,6 +378,7 @@ note:
   - value: handNote
     status: deprecated
     use: hand note
+  - value: handwritten
   - value: host
   - value: incipit
   - value: instrumentation
@@ -377,6 +391,7 @@ note:
   - value: names
   - value: numbering
   - value: original location
+  - value: other
   - value: other relation type
   - value: ownership
   - value: part
@@ -478,6 +493,8 @@ subject:
   - value: title
   - value: topic
 subject.note:
+  - value: affiliation
+  - value: description
   - value: role
 subject.structuredValue:
   - value: activity dates
