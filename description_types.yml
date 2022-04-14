@@ -214,45 +214,6 @@ form:
   - value: resource type
   - value: technique
   - value: type
-form.note:
-  - value: additions
-  - value: arrangement
-  - value: binding
-  - value: codicology
-  - value: collation
-  - value: colophon
-  - value: condition
-  - value: decoNote
-    status: deprecated
-    use: decoration
-  - value: decoration
-  - value: dimensions
-  - value: explicit
-  - value: foliation
-  - value: genre type
-  - value: hand note
-  - value: handNote
-    status: deprecated
-    use: hand note
-  - value: incipit
-  - value: instrumentation
-  - value: layout
-  - value: material
-  - value: medium of performance
-  - value: provenance
-  - value: reassembly
-  - value: reproduction
-  - value: research
-  - value: rubric
-  - value: secfol
-    status: deprecated
-    use: second folio
-  - value: second folio
-  - value: secondFolio
-    status: deprecated
-    use: second folio
-  - value: unit
-  - value: writing
 form.structuredValue:
   - value: type
   - value: subtype
@@ -356,8 +317,10 @@ note:
   - value: additions
   - value: admin
   - value: affiliation
+  - value: arrangement
   - value: bibliographic
   - value: bibliography
+  - value: binding
   - value: biographical/historical
   - value: biographical/historical note
     status: deprecated
@@ -365,6 +328,10 @@ note:
   - value: biography
   - value: boat note
   - value: citation/reference
+  - value: codicology
+  - value: collation
+  - value: colophon
+  - value: condition
   - value: contact
   - value: content
   - value: content note
@@ -378,19 +345,34 @@ note:
   - value: creation/production credits
   - value: date
   - value: date/sequential designation
+  - value: decoNote
+    status: deprecated
+    use: decoration
+  - value: decoration
   - value: description
   - value: digitization
+  - value: dimensions
   - value: duration
   - value: event
   - value: exhibitions
+  - value: explicit
+  - value: foliation
   - value: funding
   - value: general
   - value: genre type
   - value: geography
+  - value: hand note
+  - value: handNote
+    status: deprecated
+    use: hand note
   - value: host
+  - value: incipit
+  - value: instrumentation
   - value: language
+  - value: layout
   - value: local
   - value: location
+  - value: material
   - value: medium of performance
   - value: names
   - value: numbering
@@ -413,7 +395,15 @@ note:
   - value: reproduction
   - value: research
   - value: restriction
+  - value: rubric
   - value: scope and content
+  - value: secfol
+    status: deprecated
+    use: second folio
+  - value: second folio
+  - value: secondFolio
+    status: deprecated
+    use: second folio
   - value: source characteristics
   - value: source identifier
   - value: statement of responsibility
@@ -426,6 +416,7 @@ note:
   - value: thesis
   - value: transcript
   - value: translation
+  - value: unit
   - value: update
   - value: use and reproduction
   - value: venue
