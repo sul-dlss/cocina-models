@@ -103,9 +103,12 @@ _Path: event_
 
 ## Event date types
 _Path: event.date_
+  * accompanying letter: Athanasius
   * acquisition: The transferral of ownership of a resource to a repository.
   * capture: A record of the resource in a fixed form at a specific time.
   * collection: The addition of a resource to a set of other resources.
+  * composition: Athanasius
+  * copy: Athanasius
   * copyright: The activity by which a resource may be considered subject to copyright law.
   * coverage
   * creation: The coming into being of a resource.
@@ -119,12 +122,23 @@ _Path: event.date_
   * Hijiri calendar
   * Islamic
   * Julian
+  * letter: Athanasius
+  * letter referred to: Athanasius
   * manufacture: The physical assembly of a resource, often in multiple copies, for publication or other distribution.
+  * manuscript: Athanasius
+  * manuscript referred to: Athanasius
   * modification: A change to an existing resource.
+  * new document: Athanasius
+  * new style letter: Athanasius
+  * observation: Athanasius
+  * old style letter: Athanasius
+  * original sent: Athanasius
   * performance: The enactment of an artistic or cultural work for an audience, such as a play.
   * presentation: The discussion of an academic or intellectual work for an audience, such as a seminar.
+  * proclamation: Athanasius
   * production: The physical assembly of a resource not considered published, such as page proofs for a book.
   * publication: The publishing or issuing of a resource.
+  * quoted: Athanasius
   * recording: The initial fixation to a medium of live audio and/or visual activity.
   * release: Making a resource available to a broader audience.
   * Revolutionary calendar
@@ -427,6 +441,7 @@ _Path: subject.structuredValue_
   * longitude
   * main title
   * name
+  * nonsorting characters
   * north
   * occupation
   * ordinal

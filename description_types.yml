@@ -561,6 +561,7 @@ subject.structuredValue:
   - value: longitude
   - value: main title
   - value: name
+  - value: nonsorting characters
   - value: north
   - value: occupation
   - value: ordinal
