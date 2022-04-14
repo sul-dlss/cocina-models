@@ -142,12 +142,21 @@ event:
   - value: withdrawal
     description: The removal of previous access to a resource, often due to its obsolescence.
 event.date:
+  - value: accompanying letter
+    description: Athanasius
+    status: deprecated
   - value: acquisition
     description: The transferral of ownership of a resource to a repository.
   - value: capture
     description: A record of the resource in a fixed form at a specific time.
   - value: collection
     description: The addition of a resource to a set of other resources.
+  - value: composition
+    description: Athanasius
+    status: deprecated
+  - value: copy
+    description: Athanasius
+    status: deprecated
   - value: copyright
     description: The activity by which a resource may be considered subject to copyright law.
   - value: coverage
@@ -170,18 +179,51 @@ event.date:
   - value: Hijiri calendar
   - value: Islamic
   - value: Julian
+  - value: letter
+    description: Athanasius
+    status: deprecated
+  - value: letter referred to
+    description: Athanasius
+    status: deprecated
   - value: manufacture
     description: The physical assembly of a resource, often in multiple copies, for publication or other distribution.
+  - value: manuscript
+    description: Athanasius
+    status: deprecated
+  - value: manuscript referred to
+    description: Athanasius
+    status: deprecated
   - value: modification
     description: A change to an existing resource.
+  - value: new document
+    description: Athanasius
+  - value: new style letter
+    status: deprecated
+    description: Athanasius
+    status: deprecated
+  - value: observation
+    description: Athanasius
+    status: deprecated
+  - value: old style letter
+    description: Athanasius
+    status: deprecated
+  - value: original sent
+    description: Athanasius
+    status: deprecated
   - value: performance
     description: The enactment of an artistic or cultural work for an audience, such as a play.
   - value: presentation
     description: The discussion of an academic or intellectual work for an audience, such as a seminar.
+  - value: proclamation
+    description: Athanasius
+    status: deprecated
   - value: production
     description: The physical assembly of a resource not considered published, such as page proofs for a book.
   - value: publication
     description: The publishing or issuing of a resource.
+  - value: quoted
+    description: Athanasius
+    status: deprecated
   - value: recording
     description: The initial fixation to a medium of live audio and/or visual activity.
   - value: release
