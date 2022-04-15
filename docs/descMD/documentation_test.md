@@ -1,5 +1,11 @@
+# Access accessContact types
+_Path: access.accessContact.type_
+  * email
+     * Email address for a contact person or institution concerning the resource.
+  * repository
+     * Institution providing access to the resource.
 # Contributor types
-contributor1:type
+_Path: contributor.type_
   * conference
     * An event focusing on a particular topic or discipline.
   * event
@@ -13,13 +19,13 @@ contributor1:type
   * unspecified others
     * Designator for one or more additional contributors not named individually.
 ## Contributor identifier types
-contributor1:identifier1:type
+_Path: contributor.identifier.type_
   * ORCID
     * Identifier from orcid.org.
   * Wikidata
     * Identifier from wikidata.org.
 ## Contributor name types
-contributor1:name1:type
+_Path: contributor.name.type_
   * alternative
     * Additional nonpreferred form of name.
   * display
@@ -35,7 +41,7 @@ contributor1:name1:type
   * transliteration
     * Name originally in non-Latin script presented phonetically using Latin characters.
 ### Contributor name part types for structuredValue
-contributor1:name1:structuredValue1:type
+_Path: contributor.name.structuredValue.type_
   * activity dates
     * The date or dates when someone was producing work.
   * forename
@@ -51,7 +57,7 @@ contributor1:name1:structuredValue1:type
   * term of address
     * Title or other signifier associated with name.
 ### Contributor name types for groupedValue (MODS legacy)
-contributor1:name1:groupedValue1:type
+_Path: contributor.name.groupedValue.type_
   * alternative
     * Additional nonpreferred form of name.
   * name
@@ -59,7 +65,7 @@ contributor1:name1:groupedValue1:type
   * pseudonym
     * Name used that differs from legal or primary form of name.
 ## Contributor note types
-contributor1:note1:type
+_Path: contributor.note.type_
   * affiliation
     * Institution with which the contributor is associated.
   * citation status
@@ -67,7 +73,7 @@ contributor1:note1:type
   * description
     * Biographical information about the contributor.
 # Note types
-note1:type
+_Path: note.type_
   * abstract
   * access
   * access note
@@ -87,7 +93,7 @@ note1:type
   * biography
   * boat note
 # Title types
-title1:type
+_Path: title.type_
   * abbreviated
     * Abbreviated form of title for indexing or identification.
   * alternative
@@ -103,13 +109,13 @@ title1:type
   * uniform
     * Form of title in Library of Congress title authority.
 ## Title note types
-title1:note1:type
+_Path: title.note.type_
   * associated name
     * A name linked to the title, such as for a name-title heading.
   * nonsorting character count
     * The number of characters at the beginning of the string to be disregarded when sorting.
 ## Title part types for structuredValue
-title1:structuredValue1:type
+_Path: title.structuredValue.type_
   * main title
     * The primary part of a multipart title.
   * nonsorting characters
