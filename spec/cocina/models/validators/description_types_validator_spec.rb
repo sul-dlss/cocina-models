@@ -466,4 +466,23 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
       expect { validate }.to raise_error(Cocina::Models::ValidationError)
     end
   end
+
+  context 'when description_types.yml has value with special character' do
+    let(:desc_props) do
+      {
+        title: [{ value: 'Testing West Mat #' }],
+        purl: 'https://purl.stanford.edu/bc123df4567',
+        identifier: [
+          {
+            value: '123',
+            type: 'West Mat #'
+          }
+        ]
+      }
+    end
+
+    it 'does not raise' do
+      validate
+    end
+  end
 end
