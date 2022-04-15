@@ -15,6 +15,7 @@ _Path: access.note_
   * display label: Display label for the purl.
   * license: License describing allowed uses of the resource.
   * use and reproduction: Information related to allowed uses of the resource in other contexts.
+  * access constraints
 
 ## Access physicallocation types
 _Path: access.physicalLocation_
@@ -119,7 +120,7 @@ _Path: event.date_
   * development: The creation of a print from a photographic negative or other source medium.
   * distribution: The delivery of the resource to an external audience.
   * generation: The creation of a resource by an automatic or natural process.
-  * Hijiri calendar
+  * Hijri calendar
   * Islamic
   * Julian
   * letter: Athanasius
@@ -208,6 +209,7 @@ _Path: geographic.subject.structuredValue_
 
 # Identifier types
 _Path: identifier_
+  * accession
   * accession number
   * alternate case number
   * anchor
@@ -216,8 +218,11 @@ _Path: identifier_
   * arXiv
   * case identifier
   * case number
+  * CCP
+  * CLC
   * CSt
   * CStRLIN
+  * CTC
   * Data Provider Digital Object Identifier
   * document number
   * DOI
@@ -256,6 +261,10 @@ _Path: identifier_
   * videorecording identifier
   * West Mat \#
   * Wikidata
+  * Bodley 342
+  * vintage
+  * accesion
+  * Suri UUID
 
 # Note types
 _Path: note_
@@ -363,6 +372,7 @@ _Path: note_
   * version
   * version identification
   * writing
+  * note
 
 ## Note types for grouped value (MODS legacy)
 _Path: note.groupedValue_
@@ -410,6 +420,7 @@ _Path: subject_
   * time
   * title
   * topic
+  * surname
 
 ## Subject note types
 _Path: subject.note_
@@ -454,7 +465,6 @@ _Path: subject.structuredValue_
   * south
   * start
   * state
-  * subtitle
   * surname
   * term of address
   * territory
@@ -481,6 +491,8 @@ _Path: title_
   * translated: Title translated into another language.
   * transliterated: Title transliterated from non-Latin script to Latin script.
   * uniform: Form of title in Library of Congress title authority.
+  * main
+  * other title
 
 ## Title note types
 _Path: title.note_

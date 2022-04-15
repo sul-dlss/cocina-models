@@ -17,6 +17,8 @@ access.note:
     description: License describing allowed uses of the resource.
   - value: use and reproduction
     description: Information related to allowed uses of the resource in other contexts.
+  - value: access constraints
+    status: TEMP
 access.physicalLocation:
   - value: discovery
     description: Location where a user may find the resource.
@@ -176,7 +178,7 @@ event.date:
     description: The delivery of the resource to an external audience.
   - value: generation
     description: The creation of a resource by an automatic or natural process.
-  - value: Hijiri calendar
+  - value: Hijri calendar
   - value: Islamic
   - value: Julian
   - value: letter
@@ -285,6 +287,9 @@ geographic.subject.structuredValue:
   - value: south
   - value: west
 identifier:
+  - value: accession
+    status: deprecated
+    use: accession number
   - value: accession number
   - value: alternate case number
   - value: anchor
@@ -296,8 +301,11 @@ identifier:
     code: arxiv
   - value: case identifier
   - value: case number
+  - value: CCP
+  - value: CLC
   - value: CSt
   - value: CStRLIN
+  - value: CTC
   - value: Data Provider Digital Object Identifier
   - value: document number
   - value: DOI
@@ -359,6 +367,14 @@ identifier:
   - value: West Mat \#
   - value: Wikidata
     code: wikidata
+  - value: Bodley 342
+    status: TEMP
+  - value: vintage
+    status: TEMP
+  - value: accesion
+    status: TEMP
+  - value: Suri UUID
+    status: TEMP
 note:
   - value: abstract
   - value: access
@@ -480,6 +496,8 @@ note:
   - value: version
   - value: version identification
   - value: writing
+  - value: note
+    status: TEMP
 note.groupedValue:
   - value: caption
   - value: date
@@ -534,6 +552,8 @@ subject:
   - value: time
   - value: title
   - value: topic
+  - value: surname
+    status: TEMP
 subject.note:
   - value: affiliation
   - value: description
@@ -574,7 +594,6 @@ subject.structuredValue:
   - value: south
   - value: start
   - value: state
-  - value: subtitle
   - value: surname
   - value: term of address
   - value: territory
@@ -604,6 +623,10 @@ title:
     description: Title transliterated from non-Latin script to Latin script.
   - value: uniform
     description: Form of title in Library of Congress title authority.
+  - value: main
+    status: TEMP
+  - value: other title
+    status: TEMP
 title.note:
   - value: associated name
     description: A name linked to the title, such as for a name-title heading.
