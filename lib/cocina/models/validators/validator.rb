@@ -8,6 +8,7 @@ module Cocina
         VALIDATORS = [
           OpenApiValidator,
           DarkValidator,
+          PurlValidator,
           CatalogLinksValidator,
           DescriptionTypesValidator
         ].freeze
