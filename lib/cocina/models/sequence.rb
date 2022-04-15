@@ -5,7 +5,7 @@ module Cocina
     class Sequence < Struct
       attribute :members, Types::Strict::Array.of(Types::Strict::String).default([].freeze)
       # The direction that a sequence of canvases should be displayed to the user
-      attribute :viewingDirection, Types::Strict::String.enum('right-to-left', 'left-to-right').meta(omittable: true)
+      attribute? :viewingDirection, Types::Strict::String.enum('right-to-left', 'left-to-right')
     end
   end
 end

@@ -29,12 +29,12 @@ module Cocina
       attribute :type, Types::Strict::String.enum(*RequestDRO::TYPES)
       attribute :label, Types::Strict::String
       attribute :version, Types::Strict::Integer.default(1).enum(1)
-      attribute :access, DROAccess.optional.meta(omittable: true)
+      attribute? :access, DROAccess.optional
       attribute(:administrative, RequestAdministrative.default { RequestAdministrative.new })
-      attribute :description, RequestDescription.optional.meta(omittable: true)
+      attribute? :description, RequestDescription.optional
       attribute(:identification, RequestIdentification.default { RequestIdentification.new })
-      attribute :structural, RequestDROStructural.optional.meta(omittable: true)
-      attribute :geographic, Geographic.optional.meta(omittable: true)
+      attribute? :structural, RequestDROStructural.optional
+      attribute? :geographic, Geographic.optional
     end
   end
 end

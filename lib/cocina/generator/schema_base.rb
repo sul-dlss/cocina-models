@@ -23,14 +23,6 @@ module Cocina
         key || schema_doc.name
       end
 
-      # Allows non-required values to not be provided. This allows smaller
-      # requests as not every field needs to be present.
-      def omittable
-        return '' if required && !relaxed
-
-        '.meta(omittable: true)'
-      end
-
       # Allows nillable values to be set to nil. This is useful when doing
       # an update and you want to clear out a value.
       def optional

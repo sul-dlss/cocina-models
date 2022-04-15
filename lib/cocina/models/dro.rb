@@ -39,7 +39,7 @@ module Cocina
       attribute(:description, Description.default { Description.new })
       attribute(:identification, Identification.default { Identification.new })
       attribute(:structural, DROStructural.default { DROStructural.new })
-      attribute :geographic, Geographic.optional.meta(omittable: true)
+      attribute? :geographic, Geographic.optional
     end
   end
 end

@@ -4,14 +4,24 @@ module Cocina
   module Generator
     # Class for generating from an openapi value
     class SchemaValue < SchemaBase
-      # rubocop:disable Layout/LineLength
       def generate
         # optional has to come before default or the default value that gets set will be nil.
-        "#{description}#{example}#{relaxed_comment}attribute :#{name.camelize(:lower)}, Types::#{dry_datatype(schema_doc)}#{optional}#{default}#{enum}#{omittable}"
+        if required && !relaxed
+          "#{preamble}attribute :#{name.camelize(:lower)}, #{type}"
+        else
+          "#{preamble}attribute? :#{name.camelize(:lower)}, #{type}"
+        end
       end
-      # rubocop:enable Layout/LineLength
 
       private
+
+      def type
+        "Types::#{dry_datatype(schema_doc)}#{optional}#{default}#{enum}"
+      end
+
+      def preamble
+        "#{description}#{example}#{relaxed_comment}"
+      end
 
       def enum
         return '' if !schema_doc.enum || relaxed

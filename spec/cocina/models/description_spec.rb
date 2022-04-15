@@ -93,4 +93,12 @@ RSpec.describe Cocina::Models::Description do
       expect { item }.to raise_error(Cocina::Models::ValidationError)
     end
   end
+
+  describe 'introspecting' do
+    it 'is possible to get the nodes from the schema' do
+      # We use this to determine whether the paths in the descriptive spreadsheet are valid
+      node = Cocina::Models::DescriptiveValue.schema.find { |key| key.name == :source }
+      expect(node.type.right).to eq Cocina::Models::Source
+    end
+  end
 end

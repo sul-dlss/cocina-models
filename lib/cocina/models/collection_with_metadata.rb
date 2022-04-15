@@ -29,9 +29,9 @@ module Cocina
       attribute(:description, Description.default { Description.new })
       attribute(:identification, CollectionIdentification.default { CollectionIdentification.new })
       # When the object was created.
-      attribute :created, Types::Params::DateTime.meta(omittable: true)
+      attribute? :created, Types::Params::DateTime
       # When the object was modified.
-      attribute :modified, Types::Params::DateTime.meta(omittable: true)
+      attribute? :modified, Types::Params::DateTime
       # Key for optimistic locking. The contents of the key is not specified.
       attribute :lock, Types::Strict::String
     end
