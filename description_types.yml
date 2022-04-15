@@ -364,7 +364,7 @@ identifier:
     code: urn
   - value: videorecording identifier
     code: videorecording-identifier
-  - value: West Mat \#
+  - value: 'West Mat #'
   - value: Wikidata
     code: wikidata
   - value: Bodley 342
