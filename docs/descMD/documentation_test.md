@@ -1,7 +1,7 @@
 # Contributor types
 contributor1:type
   * conference
-   *  An event focusing on a particular topic or discipline.
+    * An event focusing on a particular topic or discipline.
   * event
     * A time-bound occurrence.
   * family
