@@ -454,6 +454,7 @@ _Path: subject.structuredValue_
   * south
   * start
   * state
+  * subtitle
   * surname
   * term of address
   * territory
