@@ -574,6 +574,7 @@ subject.structuredValue:
   - value: south
   - value: start
   - value: state
+  - value: subtitle
   - value: surname
   - value: term of address
   - value: territory
