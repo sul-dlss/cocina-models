@@ -30,7 +30,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
           ]
         }
       ],
-      relatedResource: [
+      related_resource: [
         {
           title: [
             {
@@ -146,7 +146,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
       expect do
         validate
       end.to raise_error(Cocina::Models::ValidationError,
-                         'Unrecognized types in description: relatedResource1.contributor1 (foo)')
+                         'Unrecognized types in description: related_resource1.contributor1 (foo)')
     end
   end
 
@@ -158,7 +158,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
     end
   end
 
-  describe 'with a parallelValue' do
+  describe 'with a parallel_value' do
     let(:desc_props) do
       {
         title: [{ value: 'The Professor: A Sentimental Education' }],
@@ -167,9 +167,9 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
           {
             name: [
               {
-                parallelValue: [
+                parallel_value: [
                   {
-                    structuredValue: [
+                    structured_value: [
                       {
                         value: 'Terry',
                         # This type is invalid
@@ -211,21 +211,21 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
       }
     end
 
-    it 'ignores parallelValue and raises' do
+    it 'ignores parallel_value and raises' do
       expect do
         validate
       end.to raise_error(Cocina::Models::ValidationError,
                          'Unrecognized types in description: ' \
-                         'contributor1.name1.parallelValue1.structuredValue1 (fooname)')
+                         'contributor1.name1.parallel_value1.structured_value1 (fooname)')
     end
   end
 
-  describe 'with an invalid parallelEvent' do
+  describe 'with an invalid parallel_event' do
     let(:desc_props) do
       {
         title: [
           {
-            parallelValue: [
+            parallel_value: [
               { value: 'Ṣammamtu an ahwāka yā sayyidī', status: 'primary' },
               { value: 'صممت أن اهواك يا سيدي' }
             ]
@@ -234,7 +234,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
         purl: 'https://purl.stanford.edu/xq000jd3530',
         event: [
           {
-            parallelEvent: [
+            parallel_event: [
               {
                 note: [
                   { type: 'edition', value: 'al-Ṭabʻah 1.' }
@@ -251,20 +251,20 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
       }
     end
 
-    it 'ignores parallelEvent and raises' do
+    it 'ignores parallel_event and raises' do
       expect do
         validate
       end.to raise_error(Cocina::Models::ValidationError,
-                         'Unrecognized types in description: event1.parallelEvent2.note1 (foo)')
+                         'Unrecognized types in description: event1.parallel_event2.note1 (foo)')
     end
   end
 
-  describe 'with a valid parallelEvent' do
+  describe 'with a valid parallel_event' do
     let(:desc_props) do
       {
         title: [
           {
-            parallelValue: [
+            parallel_value: [
               { value: 'Ṣammamtu an ahwāka yā sayyidī', status: 'primary' },
               { value: 'صممت أن اهواك يا سيدي' }
             ]
@@ -273,7 +273,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
         purl: 'https://purl.stanford.edu/xq000jd3530',
         event: [
           {
-            parallelEvent: [
+            parallel_event: [
               {
                 note: [
                   { type: 'edition', value: 'al-Ṭabʻah 1.' }
@@ -290,21 +290,21 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
       }
     end
 
-    it 'ignores parallelEvent and does not raise' do
+    it 'ignores parallel_event and does not raise' do
       validate
     end
   end
 
-  describe 'with an invalid parallelContributor' do
+  describe 'with an invalid parallel_contributor' do
     let(:desc_props) do
       {
         contributor: [
           {
-            parallelContributor: [
+            parallel_contributor: [
               {
                 name: [
                   {
-                    structuredValue: [
+                    structured_value: [
                       {
                         value: 'Li, Yahong',
                         type: 'foo'
@@ -331,25 +331,25 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
       }
     end
 
-    it 'ignores parallelContributor and raises' do
+    it 'ignores parallel_contributor and raises' do
       expect do
         validate
       end.to raise_error(Cocina::Models::ValidationError,
                          'Unrecognized types in description: ' \
-                         'contributor1.parallelContributor1.name1.structuredValue1 (foo)')
+                         'contributor1.parallel_contributor1.name1.structured_value1 (foo)')
     end
   end
 
-  describe 'with an valid parallelContributor' do
+  describe 'with an valid parallel_contributor' do
     let(:desc_props) do
       {
         contributor: [
           {
-            parallelContributor: [
+            parallel_contributor: [
               {
                 name: [
                   {
-                    structuredValue: [
+                    structured_value: [
                       {
                         value: 'Li, Yahong',
                         type: 'name'
@@ -376,23 +376,23 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
       }
     end
 
-    it 'ignores parallelContributor and does not raise' do
+    it 'ignores parallel_contributor and does not raise' do
       validate
     end
   end
 
-  describe 'with a nested structuredValue' do
+  describe 'with a nested structured_value' do
     let(:desc_props) do
       {
         title: [{ value: 'Leon Kolb collection of portraits' }],
         purl: 'https://purl.stanford.edu/rr239pp1335',
         subject: [
           {
-            structuredValue: [
+            structured_value: [
               {
-                parallelValue: [
+                parallel_value: [
                   {
-                    structuredValue: [
+                    structured_value: [
                       {
                         value: 'Andrada',
                         type: 'surname'

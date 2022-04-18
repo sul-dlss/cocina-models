@@ -27,7 +27,7 @@ module Cocina
             attributes.to_h.with_indifferent_access.deep_transform_keys(&:underscore)
           ) do |value|
             value.class.name.starts_with?('Cocina::Models') ? value.to_h.with_indifferent_access : value
-          end
+          end.with_indifferent_access
 
           VALIDATORS.each { |validator| validator.validate(clazz, attributes_hash) }
         end

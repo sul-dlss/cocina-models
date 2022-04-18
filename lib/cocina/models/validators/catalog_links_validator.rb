@@ -30,11 +30,11 @@ module Cocina
         attr_reader :clazz, :attributes
 
         def meets_preconditions?
-          (dro? || collection?) && Array(attributes.dig(:identification, :catalogLinks)).any?
+          (dro? || collection?) && Array(attributes.dig(:identification, :catalog_links)).any?
         end
 
         def refresh_catalog_links
-          attributes.dig(:identification, :catalogLinks).select { |catalog_link| catalog_link[:refresh] }
+          attributes.dig(:identification, :catalog_links).select { |catalog_link| catalog_link[:refresh] }
         end
 
         def dro?

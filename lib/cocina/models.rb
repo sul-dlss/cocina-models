@@ -81,6 +81,10 @@ module Cocina
         super(underscore_attributes(attributes), safe, &block)
       end
 
+      def new(attrs)
+        super(self.class.underscore_attributes(attrs))
+      end
+
       def self.underscore_attributes(attrs)
         attrs = attrs.with_indifferent_access
         # TODO: Remove this when cocina-models 1.0.0 is released.

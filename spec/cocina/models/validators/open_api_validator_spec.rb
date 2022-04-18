@@ -9,19 +9,19 @@ RSpec.describe Cocina::Models::Validators::OpenApiValidator do
 
   let(:props) do
     {
-      externalIdentifier: 'druid:bc123df4567',
+      external_identifier: 'druid:bc123df4567',
       label: 'My admin policy',
       type: Cocina::Models::ObjectType.admin_policy,
       version: 1,
       administrative: {
-        hasAdminPolicy: 'druid:bc123df4567',
-        hasAgreement: 'druid:bc123df4567',
-        accessTemplate: {}
+        has_admin_policy: 'druid:bc123df4567',
+        has_agreement: 'druid:bc123df4567',
+        access_template: {}
       }
     }
   end
 
-  # AdminPolicy.externalIdentifier must be a valid druid
+  # AdminPolicy.external_identifier must be a valid druid
   context 'when valid' do
     it 'does not raise' do
       validate
@@ -31,55 +31,55 @@ RSpec.describe Cocina::Models::Validators::OpenApiValidator do
   context 'when cocina version is omitted' do
     let(:policy) do
       Cocina::Models::AdminPolicy.new(
-        externalIdentifier: 'druid:bc123df4567',
+        external_identifier: 'druid:bc123df4567',
         label: 'My admin policy',
         type: Cocina::Models::ObjectType.admin_policy,
         version: 1,
         administrative: {
-          hasAdminPolicy: 'druid:bc123df4567',
-          hasAgreement: 'druid:bc123df4567',
-          accessTemplate: {}
+          has_admin_policy: 'druid:bc123df4567',
+          has_agreement: 'druid:bc123df4567',
+          access_template: {}
         }
       )
     end
 
     it 'injects cocina version' do
-      expect(policy.cocinaVersion).to eq(Cocina::Models::VERSION)
+      expect(policy.cocina_version).to eq(Cocina::Models::VERSION)
     end
   end
 
   context 'when cocina version is present' do
     let(:policy) do
       Cocina::Models::AdminPolicy.new(
-        cocinaVersion: '1.0.0',
-        externalIdentifier: 'druid:bc123df4567',
+        cocina_version: '1.0.0',
+        external_identifier: 'druid:bc123df4567',
         label: 'My admin policy',
         type: Cocina::Models::ObjectType.admin_policy,
         version: 1,
         administrative: {
-          hasAdminPolicy: 'druid:bc123df4567',
-          hasAgreement: 'druid:bc123df4567',
-          accessTemplate: {}
+          has_admin_policy: 'druid:bc123df4567',
+          has_agreement: 'druid:bc123df4567',
+          access_template: {}
         }
       )
     end
 
     it 'does not inject cocina version' do
-      expect(policy.cocinaVersion).to eq('1.0.0')
+      expect(policy.cocina_version).to eq('1.0.0')
     end
   end
 
   context 'when a nil copyright value (nullable string) is passed' do
     let(:props) do
       {
-        externalIdentifier: 'druid:bc123df4567',
+        external_identifier: 'druid:bc123df4567',
         label: 'My admin policy',
         type: Cocina::Models::ObjectType.admin_policy,
         version: 1,
         administrative: {
-          accessTemplate: { copyright: nil },
-          hasAdminPolicy: 'druid:bc123df4567',
-          hasAgreement: 'druid:bc123df4567'
+          access_template: { copyright: nil },
+          has_admin_policy: 'druid:bc123df4567',
+          has_agreement: 'druid:bc123df4567'
         }
       }
     end
@@ -92,7 +92,7 @@ RSpec.describe Cocina::Models::Validators::OpenApiValidator do
   context 'when a nil barcode value (nullable oneOf) is passed' do
     let(:props) do
       {
-        externalIdentifier: 'druid:bc123df4567',
+        external_identifier: 'druid:bc123df4567',
         label: 'My item',
         type: Cocina::Models::ObjectType.object,
         version: 1,
@@ -101,12 +101,12 @@ RSpec.describe Cocina::Models::Validators::OpenApiValidator do
           purl: 'https://purl.stanford.edu/bc123df4567'
         },
         administrative: {
-          hasAdminPolicy: 'druid:bc123df4567'
+          has_admin_policy: 'druid:bc123df4567'
         },
         access: {},
         identification: {
           barcode: nil,
-          sourceId: 'sul:123'
+          source_id: 'sul:123'
         },
         structural: {}
       }
@@ -122,7 +122,7 @@ RSpec.describe Cocina::Models::Validators::OpenApiValidator do
   context 'when invalid' do
     let(:props) do
       {
-        externalIdentifier: 'druid:abc123',
+        external_identifier: 'druid:abc123',
         label: 'My admin policy',
         type: Cocina::Models::ObjectType.admin_policy,
         version: 1,
@@ -143,7 +143,7 @@ RSpec.describe Cocina::Models::Validators::OpenApiValidator do
     let(:props) do
       {
         type: 'https://cocina.sul.stanford.edu/models/image',
-        externalIdentifier: 'druid:bb000kg4251',
+        external_identifier: 'druid:bb000kg4251',
         label: 'Roger Howe Professorship',
         version: 3,
         description: {
@@ -153,11 +153,11 @@ RSpec.describe Cocina::Models::Validators::OpenApiValidator do
         access: {
           view: 'world',
           download: 'world',
-          useAndReproductionStatement: 'Property rights reside with the repository.'
+          use_and_reproduction_statement: 'Property rights reside with the repository.'
         },
         administrative: {
-          hasAdminPolicy: 'druid:ww057vk7675',
-          releaseTags: [
+          has_admin_policy: 'druid:ww057vk7675',
+          release_tags: [
             {
               who: 'cspitzer',
               what: 'self',
@@ -168,7 +168,7 @@ RSpec.describe Cocina::Models::Validators::OpenApiValidator do
           ]
         },
         structural: {},
-        identification: { sourceId: 'sul:123' }
+        identification: { source_id: 'sul:123' }
       }
     end
 

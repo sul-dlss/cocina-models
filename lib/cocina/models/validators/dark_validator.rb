@@ -52,7 +52,7 @@ module Cocina
 
         def invalid?(file)
           # Ignore if a WARC
-          return false if file[:hasMimeType] == 'application/warc'
+          return false if file[:has_mime_type] == 'application/warc'
 
           return true if file.dig(:administrative, :shelve)
           return true if file.dig(:access, :view) != 'dark'

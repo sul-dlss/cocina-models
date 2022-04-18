@@ -7,7 +7,7 @@ RSpec.describe Cocina::Models::Builders::DroRightsDescriptionBuilder do
 
   let(:structural) { {} }
   let(:cocina_object) do
-    Cocina::Models::DRO.new(externalIdentifier: 'druid:bc753qt7345',
+    Cocina::Models::DRO.new(external_identifier: 'druid:bc753qt7345',
                             type: Cocina::Models::ObjectType.object,
                             label: 'A new map of Africa',
                             version: 1,
@@ -15,14 +15,14 @@ RSpec.describe Cocina::Models::Builders::DroRightsDescriptionBuilder do
                               title: [{ value: 'However am I going to be' }],
                               purl: 'https://purl.stanford.edu/bc753qt7345'
                             },
-                            identification: { sourceId: 'sul:123' },
+                            identification: { source_id: 'sul:123' },
                             access: access,
-                            administrative: { hasAdminPolicy: 'druid:pp000pp0000' },
+                            administrative: { has_admin_policy: 'druid:pp000pp0000' },
                             structural: structural)
   end
 
   context 'when access is limited by controlled digital lending' do
-    let(:access) { { controlledDigitalLending: true, view: 'stanford', download: 'none' } }
+    let(:access) { { controlled_digital_lending: true, view: 'stanford', download: 'none' } }
 
     it 'returns the controlled digital lending rights description' do
       expect(build).to eq('controlled digital lending')
@@ -94,7 +94,7 @@ RSpec.describe Cocina::Models::Builders::DroRightsDescriptionBuilder do
             version: 1,
             type: 'https://cocina.sul.stanford.edu/models/resources/file',
             label: 'Page 1',
-            externalIdentifier: 'abc123',
+            external_identifier: 'abc123',
             structural: {
               contains: [
                 {
@@ -102,19 +102,19 @@ RSpec.describe Cocina::Models::Builders::DroRightsDescriptionBuilder do
                   type: 'https://cocina.sul.stanford.edu/models/file',
                   filename: '00002.jp2',
                   label: '00002.jp2',
-                  hasMimeType: 'image/jp2',
-                  externalIdentifier: 'abc123',
+                  has_mime_type: 'image/jp2',
+                  external_identifier: 'abc123',
                   size: 111_467,
                   administrative: {
                     publish: true,
-                    sdrPreserve: true,
+                    sdr_preserve: true,
                     shelve: true
                   },
                   access: {
                     view: 'stanford',
                     download: 'stanford'
                   },
-                  hasMessageDigests: []
+                  has_message_digests: []
                 }
               ]
             }

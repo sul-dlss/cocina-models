@@ -5,10 +5,10 @@ require 'spec_helper'
 RSpec.describe Cocina::Generator::SchemaArray do
   # This tests the outcome of running exe/generator generate against openapi.yml.
   context 'when an array of schemas' do
-    # Administrative.releaseTags is an array of ReleaseTags
+    # Administrative.release_tags is an array of ReleaseTags
 
     let(:administrative) do
-      Cocina::Models::Administrative.new(releaseTags: [
+      Cocina::Models::Administrative.new(release_tags: [
                                            {
                                              who: 'Justin',
                                              what: 'collection',
@@ -24,12 +24,12 @@ RSpec.describe Cocina::Generator::SchemaArray do
                                              release: false
                                            }
                                          ],
-                                         hasAdminPolicy: 'druid:bc123df4567')
+                                         has_admin_policy: 'druid:bc123df4567')
     end
 
     it 'maps schemas' do
-      expect(administrative.releaseTags.size).to eq(2)
-      tag = administrative.releaseTags.first
+      expect(administrative.release_tags.size).to eq(2)
+      tag = administrative.release_tags.first
       expect(tag.who).to eq('Justin')
       expect(tag.what).to eq('collection')
       expect(tag.date).to eq DateTime.parse '2018-11-23T00:44:52Z'

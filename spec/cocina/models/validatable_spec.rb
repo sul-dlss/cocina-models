@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe Cocina::Models::Validatable do
   let(:props) do
     {
-      externalIdentifier: 'druid:bc123df4567',
+      external_identifier: 'druid:bc123df4567',
       label: 'My admin policy',
       type: Cocina::Models::ObjectType.admin_policy,
       version: 1,
@@ -15,9 +15,9 @@ RSpec.describe Cocina::Models::Validatable do
 
   let(:administrative_props) do
     {
-      hasAdminPolicy: 'druid:bc123df4567',
-      hasAgreement: 'druid:bc123df4567',
-      accessTemplate: {}
+      has_admin_policy: 'druid:bc123df4567',
+      has_agreement: 'druid:bc123df4567',
+      access_template: {}
     }
   end
 

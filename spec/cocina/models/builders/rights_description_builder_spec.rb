@@ -7,20 +7,20 @@ RSpec.describe Cocina::Models::Builders::RightsDescriptionBuilder do
 
   let(:cocina_object) do
     Cocina::Models::AdminPolicy.new(
-      externalIdentifier: 'druid:bc123df4567',
+      external_identifier: 'druid:bc123df4567',
       label: 'My admin policy',
       type: Cocina::Models::ObjectType.admin_policy,
       version: 1,
       administrative: {
-        hasAdminPolicy: 'druid:bc123df4567',
-        hasAgreement: 'druid:bc123df4567',
-        accessTemplate: access_template
+        has_admin_policy: 'druid:bc123df4567',
+        has_agreement: 'druid:bc123df4567',
+        access_template: access_template
       }
     )
   end
 
   context 'when access is limited by controlled digital lending' do
-    let(:access_template) { { controlledDigitalLending: true, view: 'world', download: 'world' } }
+    let(:access_template) { { controlled_digital_lending: true, view: 'world', download: 'world' } }
 
     it 'returns the controlled digital lending rights description' do
       expect(build).to eq('controlled digital lending')

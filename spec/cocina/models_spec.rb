@@ -14,7 +14,7 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/exhibit',
-          'externalIdentifier' => 'druid:bc123df4567',
+          'external_identifier' => 'druid:bc123df4567',
           'label' => 'bar',
           'version' => 5,
           'access' => {},
@@ -23,7 +23,7 @@ RSpec.describe Cocina::Models do
             'purl' => 'https://purl.stanford.edu/bc123df4567'
           },
           'identification' => {},
-          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
+          'administrative' => { 'has_admin_policy' => 'druid:bc123df4567' }
         }
       end
 
@@ -34,7 +34,7 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/image',
-          'externalIdentifier' => 'foo',
+          'external_identifier' => 'foo',
           'label' => 'bar',
           'version' => 5,
           'access' => {}
@@ -50,14 +50,14 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/image',
-          'externalIdentifier' => 'druid:bc123df4567',
+          'external_identifier' => 'druid:bc123df4567',
           'label' => 'bar',
           'version' => 5,
           'access' => {},
-          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' },
+          'administrative' => { 'has_admin_policy' => 'druid:bc123df4567' },
           'identification' => {
             'doi' => '10.25740/bc123df4567',
-            sourceId: 'sul:123'
+            source_id: 'sul:123'
           },
           'description' => {
             'title' => [{ 'value' => 'Test DRO' }],
@@ -74,13 +74,13 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/admin_policy',
-          'externalIdentifier' => 'druid:bc123df4567',
+          'external_identifier' => 'druid:bc123df4567',
           'label' => 'bar',
           'version' => 5,
           'administrative' => {
-            'hasAdminPolicy' => 'druid:bc123df4567',
-            'hasAgreement' => 'druid:bc123df4567',
-            'accessTemplate' => {}
+            'has_admin_policy' => 'druid:bc123df4567',
+            'has_agreement' => 'druid:bc123df4567',
+            'access_template' => {}
           }
         }
       end
@@ -92,17 +92,17 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           type: 'https://cocina.sul.stanford.edu/models/image',
-          externalIdentifier: 'druid:bc123df4567',
+          external_identifier: 'druid:bc123df4567',
           label: 'bar',
           version: 5,
           access: {},
-          administrative: { 'hasAdminPolicy' => 'druid:bc123df4567' },
+          administrative: { 'has_admin_policy' => 'druid:bc123df4567' },
           description: {
             title: [{ 'value' => 'Test DRO' }],
             purl: 'https://purl.stanford.edu/bc123df4567'
           },
           structural: {},
-          identification: { sourceId: 'sul:123' }
+          identification: { source_id: 'sul:123' }
         }
       end
 
@@ -140,7 +140,7 @@ RSpec.describe Cocina::Models do
           'label' => 'bar',
           'version' => 1,
           'access' => {},
-          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
+          'administrative' => { 'has_admin_policy' => 'druid:bc123df4567' }
         }
       end
 
@@ -154,9 +154,9 @@ RSpec.describe Cocina::Models do
           'label' => 'bar',
           'version' => 1,
           'identification' => {
-            'sourceId' => 'sul:123'
+            'source_id' => 'sul:123'
           },
-          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
+          'administrative' => { 'has_admin_policy' => 'druid:bc123df4567' }
         }
       end
 
@@ -170,9 +170,9 @@ RSpec.describe Cocina::Models do
           'label' => 'bar',
           'version' => 1,
           'administrative' => {
-            'hasAdminPolicy' => 'druid:bc123df4567',
-            'hasAgreement' => 'druid:bc123df4567',
-            'accessTemplate' => {}
+            'has_admin_policy' => 'druid:bc123df4567',
+            'has_agreement' => 'druid:bc123df4567',
+            'access_template' => {}
           }
         }
       end
@@ -187,9 +187,9 @@ RSpec.describe Cocina::Models do
           label: 'bar',
           version: 1,
           identification: {
-            sourceId: 'sul:123'
+            source_id: 'sul:123'
           },
-          administrative: { 'hasAdminPolicy' => 'druid:bc123df4567' }
+          administrative: { 'has_admin_policy' => 'druid:bc123df4567' }
         }
       end
 
@@ -203,8 +203,8 @@ RSpec.describe Cocina::Models do
           'label' => 'bar',
           'version' => 5,
           'administrative' => {
-            'hasAdminPolicy' => 'druid:bc123df4567',
-            'hasAgreement' => 'druid:bc123df4567'
+            'has_admin_policy' => 'druid:bc123df4567',
+            'has_agreement' => 'druid:bc123df4567'
           }
         }
       end
@@ -244,17 +244,17 @@ RSpec.describe Cocina::Models do
     let(:cocina_object) do
       Cocina::Models::DROWithMetadata.new(
         type: 'https://cocina.sul.stanford.edu/models/image',
-        externalIdentifier: 'druid:bc123df4567',
+        external_identifier: 'druid:bc123df4567',
         label: 'bar',
         version: 5,
         access: {},
-        administrative: { 'hasAdminPolicy' => 'druid:bc123df4567' },
+        administrative: { 'has_admin_policy' => 'druid:bc123df4567' },
         description: {
           title: [{ 'value' => 'Test DRO' }],
           purl: 'https://purl.stanford.edu/bc123df4567'
         },
         structural: {},
-        identification: { sourceId: 'sul:123' },
+        identification: { source_id: 'sul:123' },
         created: DateTime.now.iso8601,
         modified: DateTime.now.iso8601,
         lock: 'abc123'
@@ -274,17 +274,17 @@ RSpec.describe Cocina::Models do
     let(:props) do
       {
         type: 'https://cocina.sul.stanford.edu/models/image',
-        externalIdentifier: 'druid:bc123df4567',
+        external_identifier: 'druid:bc123df4567',
         label: 'bar',
         version: 5,
         access: {},
-        administrative: { 'hasAdminPolicy' => 'druid:bc123df4567' },
+        administrative: { 'has_admin_policy' => 'druid:bc123df4567' },
         description: {
           title: [{ 'value' => 'Test DRO' }],
           purl: 'https://purl.stanford.edu/bc123df4567'
         },
         structural: {},
-        identification: { sourceId: 'sul:123' }
+        identification: { source_id: 'sul:123' }
       }
     end
 

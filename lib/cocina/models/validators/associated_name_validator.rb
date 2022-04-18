@@ -52,7 +52,7 @@ module Cocina
         end
 
         def resources
-          @resources ||= [description_attributes] + Array(description_attributes[:relatedResource])
+          @resources ||= [description_attributes] + Array(description_attributes[:related_resource])
         end
 
         def description_attributes

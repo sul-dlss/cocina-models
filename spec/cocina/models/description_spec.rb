@@ -19,7 +19,7 @@ RSpec.describe Cocina::Models::Description do
       name_value = contributor.name.first
       expect(name_value.value).to eq('Kasahara, Akitada, Jr')
 
-      structured_name_value = contributor.name[1].structuredValue
+      structured_name_value = contributor.name[1].structured_value
       expect(structured_name_value.size).to eq(2)
       expect(structured_name_value.first.value).to eq('Kasahara, Akitada')
       expect(structured_name_value.first.type).to eq('name')
@@ -71,14 +71,14 @@ RSpec.describe Cocina::Models::Description do
       expect(url.value).to eq('https://etd.stanford.edu/view/0000005406')
       expect(url.type).to eq('ETD')
 
-      expect(item.marcEncodedData.size).to eq(5)
-      marc = item.marcEncodedData.first
+      expect(item.marc_encoded_data.size).to eq(5)
+      marc = item.marc_encoded_data.first
       expect(marc.value).to eq('     nam a       3i')
       expect(marc.type).to eq('leader')
 
-      expect(item.adminMetadata.event.size).to eq(2)
-      expect(item.adminMetadata.contributor.size).to eq(3)
-      expect(item.adminMetadata.language.size).to eq(1)
+      expect(item.admin_metadata.event.size).to eq(2)
+      expect(item.admin_metadata.contributor.size).to eq(3)
+      expect(item.admin_metadata.language.size).to eq(1)
     end
   end
 

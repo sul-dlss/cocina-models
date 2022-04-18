@@ -72,12 +72,12 @@ module Cocina
         # Some part of the path are ignored for the purpose of matching.
         def clean_path(path)
           new_path = path.reject do |part|
-            part.is_a?(Integer) || %i[parallelValue parallelContributor parallelEvent].include?(part)
+            part.is_a?(Integer) || %i[parallel_value parallel_contributor parallel_event].include?(part)
           end
-          # This needs to happen after parallelValue is removed
-          # to handle structuredValue > parallelValue > structuredValue
+          # This needs to happen after parallel_value is removed
+          # to handle structured_value > parallel_value > structured_value
           new_path.reject.with_index do |part, index|
-            part == :structuredValue && new_path[index - 1] == :structuredValue
+            part == :structured_value && new_path[index - 1] == :structured_value
           end
         end
 
@@ -86,7 +86,7 @@ module Cocina
           # Class var to minimize loading from disk.
           @@valid_types ||= begin
             types = types_yaml.map do |type_signature_str, type_objs|
-              type_signature = type_signature_str.split('.').map(&:to_sym)
+              type_signature = type_signature_str.split('.').map(&:underscore).map(&:to_sym)
               types = type_objs.map { |type_obj| type_obj['value'].downcase }
               [type_signature, types]
             end

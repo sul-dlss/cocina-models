@@ -60,7 +60,7 @@ RSpec.describe Cocina::Models::Validators::AssociatedNameValidator do
             ]
           }
         ],
-        relatedResource: [
+        related_resource: [
           {
             title: [
               {
@@ -111,7 +111,7 @@ RSpec.describe Cocina::Models::Validators::AssociatedNameValidator do
   end
 
   context 'when valid Description with related resource' do
-    let(:props) { { relatedResource: [desc_props] } }
+    let(:props) { { related_resource: [desc_props] } }
 
     it 'does not raise' do
       validate
@@ -119,7 +119,7 @@ RSpec.describe Cocina::Models::Validators::AssociatedNameValidator do
   end
 
   context 'when invalid Description with related resource' do
-    let(:props) { { relatedResource: [desc_props] } }
+    let(:props) { { related_resource: [desc_props] } }
 
     let(:contributor_name) { 'not Smith, John' }
 

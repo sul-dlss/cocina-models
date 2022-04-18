@@ -16,13 +16,13 @@ RSpec.describe Cocina::Models::Validators::DarkValidator do
       structural: {
         contains: [
           {
-            externalIdentifier: 'bc123df4567_1',
+            external_identifier: 'bc123df4567_1',
             label: 'Fileset 1',
             type: Cocina::Models::FileSetType.file,
             version: 1,
             structural: {
               contains: [
-                { externalIdentifier: 'bc123df4567_1',
+                { external_identifier: 'bc123df4567_1',
                   label: 'Page 1',
                   type: Cocina::Models::ObjectType.file,
                   version: 1,
@@ -30,10 +30,10 @@ RSpec.describe Cocina::Models::Validators::DarkValidator do
                   administrative: {
                     publish: publish,
                     shelve: shelve,
-                    sdrPreserve: true
+                    sdr_preserve: true
                   },
-                  hasMessageDigests: [],
-                  hasMimeType: mime_type,
+                  has_message_digests: [],
+                  has_mime_type: mime_type,
                   filename: 'page1.txt' }
               ]
             }
@@ -45,8 +45,8 @@ RSpec.describe Cocina::Models::Validators::DarkValidator do
 
   let(:request_dro_props) do
     dro_props.dup.tap do |props|
-      props[:structural][:contains][0].delete(:externalIdentifier)
-      props[:structural][:contains][0][:structural][:contains].delete(:externalIdentifier)
+      props[:structural][:contains][0].delete(:external_identifier)
+      props[:structural][:contains][0][:structural][:contains].delete(:external_identifier)
     end
   end
 

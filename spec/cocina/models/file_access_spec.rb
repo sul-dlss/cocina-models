@@ -3,10 +3,10 @@
 require 'spec_helper'
 
 RSpec.describe Cocina::Models::FileAccess do
-  # Verifying that correctly validate access, download, location, and controlledDigitalLending.
+  # Verifying that correctly validate access, download, location, and controlled_digital_lending.
 
   def dro(access, download, location, controlled_digital_lending)
-    Cocina::Models::DRO.new(externalIdentifier: 'druid:bc123df4567',
+    Cocina::Models::DRO.new(external_identifier: 'druid:bc123df4567',
                             label: 'My DRO',
                             type: Cocina::Models::ObjectType.book,
                             version: 1,
@@ -14,8 +14,8 @@ RSpec.describe Cocina::Models::FileAccess do
                               title: [{ value: 'Test DRO' }],
                               purl: 'https://purl.stanford.edu/bc123df4567'
                             },
-                            administrative: { hasAdminPolicy: 'druid:bc123df4567' },
-                            identification: { sourceId: 'sul:123' },
+                            administrative: { has_admin_policy: 'druid:bc123df4567' },
+                            identification: { source_id: 'sul:123' },
                             access: {},
                             structural: {
                               contains: [
@@ -23,7 +23,7 @@ RSpec.describe Cocina::Models::FileAccess do
                                   version: 1,
                                   type: 'https://cocina.sul.stanford.edu/models/resources/file',
                                   label: 'Page 1',
-                                  externalIdentifier: 'abc123',
+                                  external_identifier: 'abc123',
                                   structural: {
                                     contains: [
                                       {
@@ -31,21 +31,21 @@ RSpec.describe Cocina::Models::FileAccess do
                                         type: 'https://cocina.sul.stanford.edu/models/file',
                                         filename: '00002.jp2',
                                         label: '00002.jp2',
-                                        hasMimeType: 'image/jp2',
-                                        externalIdentifier: 'abc123',
+                                        has_mime_type: 'image/jp2',
+                                        external_identifier: 'abc123',
                                         size: 111_467,
                                         administrative: {
                                           publish: true,
-                                          sdrPreserve: true,
+                                          sdr_preserve: true,
                                           shelve: true
                                         },
                                         access: {
                                           view: access,
                                           download: download,
                                           location: location,
-                                          controlledDigitalLending: controlled_digital_lending
+                                          controlled_digital_lending: controlled_digital_lending
                                         },
-                                        hasMessageDigests: []
+                                        has_message_digests: []
                                       }
                                     ]
                                   }

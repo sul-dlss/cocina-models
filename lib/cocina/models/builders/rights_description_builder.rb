@@ -17,11 +17,11 @@ module Cocina
         # This is set up to work for APOs, but this method is to be overridden on sub classes
         # @return [Cocina::Models::AdminPolicyDefaultAccess]
         def object_access
-          @object_access ||= cocina.administrative.accessTemplate
+          @object_access ||= cocina.administrative.access_template
         end
 
         def build
-          return 'controlled digital lending' if object_access.controlledDigitalLending
+          return 'controlled digital lending' if object_access.controlled_digital_lending
 
           return ['dark'] if object_access.view == 'dark'
 

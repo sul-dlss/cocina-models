@@ -19,14 +19,14 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     end
 
     let(:cocina_object) do
-      Cocina::Models::DRO.new(externalIdentifier: druid,
+      Cocina::Models::DRO.new(external_identifier: druid,
                               type: Cocina::Models::ObjectType.object,
                               label: 'A new map of Africa',
                               version: 1,
                               description: description,
-                              identification: { sourceId: 'sul:123' },
+                              identification: { source_id: 'sul:123' },
                               access: {},
-                              administrative: { hasAdminPolicy: apo_druid },
+                              administrative: { has_admin_policy: apo_druid },
                               structural: {})
     end
     let(:description) do
@@ -40,7 +40,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
 
     it 'returns the first title object and logs a deprecation' do
       expect(build).to eq('However am I going to be')
-      expect(Deprecation).to have_received(:warn).exactly(4).times
+      expect(Deprecation).to have_received(:warn).once
     end
   end
 
@@ -51,7 +51,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
 
     let(:descriptive_values) do
       [{
-        parallelValue: [
+        parallel_value: [
           {
             value: 'The master and Margarita'
           },
@@ -127,14 +127,14 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     end
   end
 
-  context 'when the titles are in a structuredValue' do
+  context 'when the titles are in a structured_value' do
     # from a spreadsheet upload integration test
     #   https://argo-stage.stanford.edu/view/sk561pf3505
     let(:titles) do
-      # Yes, there can be a structuredValue inside a StructuredValue.  For example,
+      # Yes, there can be a structured_value inside a StructuredValue.  For example,
       # a uniform title where both the name and the title have internal StructuredValue
       [
-        structuredValue: [
+        structured_value: [
           {
             value: 'ti1:nonSort',
             type: 'nonsorting characters'
@@ -164,16 +164,16 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     end
   end
 
-  context 'when the titles are in nested structuredValues' do
+  context 'when the titles are in nested structured_values' do
     # from a spreadsheet upload integration test
     #   https://argo-stage.stanford.edu/view/sk561pf3505
     let(:titles) do
-      # Yes, there can be a structuredValue inside a StructuredValue.  For example,
+      # Yes, there can be a structured_value inside a StructuredValue.  For example,
       # a uniform title where both the name and the title have internal StructuredValue
       [
-        structuredValue: [
+        structured_value: [
           {
-            structuredValue: [
+            structured_value: [
               {
                 value: 'brisk junket',
                 type: 'main title'
@@ -193,14 +193,14 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     end
   end
 
-  context 'when the title parts are in a structuredValue' do
+  context 'when the title parts are in a structured_value' do
     # from a spreadsheet upload integration test
     #   https://argo-stage.stanford.edu/view/sk561pf3505
     let(:titles) do
-      # Yes, there can be a structuredValue inside a StructuredValue.  For example,
+      # Yes, there can be a structured_value inside a StructuredValue.  For example,
       # a uniform title where both the name and the title have internal StructuredValue
       [
-        structuredValue: [
+        structured_value: [
           {
             value: 'ti1:partNumber',
             type: 'part number'
@@ -228,14 +228,14 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     end
   end
 
-  context 'when a subtitle is in a structuredValue' do
+  context 'when a subtitle is in a structured_value' do
     # from a spreadsheet upload integration test
     #   https://argo-stage.stanford.edu/view/sk561pf3505
     let(:titles) do
-      # Yes, there can be a structuredValue inside a StructuredValue.  For example,
+      # Yes, there can be a structured_value inside a StructuredValue.  For example,
       # a uniform title where both the name and the title have internal StructuredValue
       [
-        structuredValue: [
+        structured_value: [
           {
             value: 'A random subtitle',
             type: 'subtitle'
@@ -263,14 +263,14 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     end
   end
 
-  context 'when multiple subtitles are in a structuredValue' do
+  context 'when multiple subtitles are in a structured_value' do
     # from a spreadsheet upload integration test
     #   https://argo-stage.stanford.edu/view/sk561pf3505
     let(:titles) do
-      # Yes, there can be a structuredValue inside a StructuredValue.  For example,
+      # Yes, there can be a structured_value inside a StructuredValue.  For example,
       # a uniform title where both the name and the title have internal StructuredValue
       [
-        structuredValue: [
+        structured_value: [
           {
             value: 'The first subtitle',
             type: 'subtitle'
@@ -302,14 +302,14 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     end
   end
 
-  context 'when the titles are in a parallelValue' do
+  context 'when the titles are in a parallel_value' do
     # from a spreadsheet upload integration test
     #   https://argo-stage.stanford.edu/view/sk561pf3505
     let(:titles) do
-      # Yes, there can be a structuredValue inside a StructuredValue.  For example,
+      # Yes, there can be a structured_value inside a StructuredValue.  For example,
       # a uniform title where both the name and the title have internal StructuredValue
       [
-        parallelValue: [
+        parallel_value: [
           {
             value: 'A Random sub title',
             type: 'subtitle'
@@ -329,7 +329,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
   context 'when multiple nonsorting characters with note' do
     let(:titles) do
       [
-        structuredValue: [
+        structured_value: [
           {
             value: 'The',
             type: 'nonsorting characters'
@@ -355,7 +355,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
   context 'when multiple nonsorting characters without note' do
     let(:titles) do
       [
-        structuredValue: [
+        structured_value: [
           {
             value: 'The',
             type: 'nonsorting characters'
@@ -375,7 +375,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
   context 'when multiple nonsorting characters without note, ends in dash' do
     let(:titles) do
       [
-        structuredValue: [
+        structured_value: [
           {
             value: 'The-',
             type: 'nonsorting characters'
@@ -395,7 +395,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
   context 'when multiple nonsorting characters without note, ends in apostrophe' do
     let(:titles) do
       [
-        structuredValue: [
+        structured_value: [
           {
             value: 'L\'',
             type: 'nonsorting characters'

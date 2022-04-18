@@ -17,7 +17,7 @@ RSpec.describe Cocina::Models::Validators::CatalogLinksValidator do
         {
           type: type,
           identification: {
-            catalogLinks: catalog_links
+            catalog_links: catalog_links
           }
         }
       end
@@ -35,7 +35,7 @@ RSpec.describe Cocina::Models::Validators::CatalogLinksValidator do
           [
             {
               catalog: 'symphony',
-              catalogRecordId: '111',
+              catalog_record_id: '111',
               refresh: true
             }
           ]
@@ -51,7 +51,7 @@ RSpec.describe Cocina::Models::Validators::CatalogLinksValidator do
           [
             {
               catalog: 'symphony',
-              catalogRecordId: '111',
+              catalog_record_id: '111',
               refresh: false
             }
           ]
@@ -67,12 +67,12 @@ RSpec.describe Cocina::Models::Validators::CatalogLinksValidator do
           [
             {
               catalog: 'symphony',
-              catalogRecordId: '111',
+              catalog_record_id: '111',
               refresh: false
             },
             {
               catalog: 'symphony',
-              catalogRecordId: '222',
+              catalog_record_id: '222',
               refresh: false
             }
           ]
@@ -88,12 +88,12 @@ RSpec.describe Cocina::Models::Validators::CatalogLinksValidator do
           [
             {
               catalog: 'symphony',
-              catalogRecordId: '111',
+              catalog_record_id: '111',
               refresh: false
             },
             {
               catalog: 'symphony',
-              catalogRecordId: '222',
+              catalog_record_id: '222',
               refresh: true
             }
           ]
@@ -109,12 +109,12 @@ RSpec.describe Cocina::Models::Validators::CatalogLinksValidator do
           [
             {
               catalog: 'symphony',
-              catalogRecordId: '111',
+              catalog_record_id: '111',
               refresh: true
             },
             {
               catalog: 'symphony',
-              catalogRecordId: '222',
+              catalog_record_id: '222',
               refresh: true
             }
           ]

@@ -47,10 +47,10 @@ module Cocina
         def extract_title(cocina_title)
           result = if cocina_title.value
                      cocina_title.value
-                   elsif cocina_title.structuredValue.present?
+                   elsif cocina_title.structured_value.present?
                      title_from_structured_values(cocina_title)
-                   elsif cocina_title.parallelValue.present?
-                     return build(cocina_title.parallelValue)
+                   elsif cocina_title.parallel_value.present?
+                     return build(cocina_title.parallel_value)
                    end
           remove_trailing_punctuation(result.strip) if result.present?
         end
@@ -66,10 +66,10 @@ module Cocina
           end
           return primary_title if primary_title.present?
 
-          # NOTE: structuredValues would only have status primary assigned as a sibling, not as an attribute
+          # NOTE: structured_values would only have status primary assigned as a sibling, not as an attribute
 
           titles.find do |title|
-            title.parallelValue&.find do |parallel_title|
+            title.parallel_value&.find do |parallel_title|
               parallel_title.status == 'primary'
             end
           end
@@ -83,8 +83,8 @@ module Cocina
         # @return [Array[Cocina::Models::Title]] first title that has no type attribute
         def untyped_title_for(titles)
           titles.each do |title|
-            if title.parallelValue.present?
-              untyped_title_for(title.parallelValue)
+            if title.parallel_value.present?
+              untyped_title_for(title.parallel_value)
             else
               title.type.nil? || title.type == 'title'
             end
@@ -111,11 +111,11 @@ module Cocina
         def title_from_structured_values(title)
           structured_title = ''
           part_name_number = ''
-          # combine pieces of the cocina structuredValue into a single title
-          title.structuredValue.each do |structured_value|
-            # There can be a structuredValue inside a structuredValue.  For example,
+          # combine pieces of the cocina structured_value into a single title
+          title.structured_value.each do |structured_value|
+            # There can be a structured_value inside a structured_value.  For example,
             #   a uniform title where both the name and the title have internal StructuredValue
-            return title_from_structured_values(structured_value) if structured_value.structuredValue.present?
+            return title_from_structured_values(structured_value) if structured_value.structured_value.present?
 
             value = structured_value.value&.strip
             next unless value
@@ -131,7 +131,7 @@ module Cocina
                                  end
             when 'part name', 'part number'
               if part_name_number.blank?
-                part_name_number = part_name_number(title.structuredValue)
+                part_name_number = part_name_number(title.structured_value)
                 structured_title = if !add_punctuation?
                                      [structured_title, part_name_number].join(' ')
                                    elsif structured_title.present?

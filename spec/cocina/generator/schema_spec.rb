@@ -6,20 +6,20 @@ RSpec.describe Cocina::Generator::Schema do
   # This tests the outcome of running exe/generator generate against openapi.yml.
   context 'when properties' do
     # RequestFile.administrative is an object attribute.
-    # RequestFile.hasMessageDigests is an array attribute.
+    # RequestFile.has_message_digests is an array attribute.
     # RequestFile.label is a value (string) attribute.
     let(:file) do
       Cocina::Models::RequestFile.new(
-        externalIdentifier: 'druid:ab123cd4567',
+        external_identifier: 'druid:ab123cd4567',
         label: 'morris.exe',
         filename: 'morris.exe',
         type: 'https://cocina.sul.stanford.edu/models/file',
         version: 3,
         administrative: {
           shelve: true,
-          sdrPreserve: true
+          sdr_preserve: true
         },
-        hasMessageDigests: [
+        has_message_digests: [
           {
             type: 'md5',
             digest: 'd57db4241d7da0eecba5b33abf13f448'
@@ -37,7 +37,7 @@ RSpec.describe Cocina::Generator::Schema do
     end
 
     it 'generates array attributes' do
-      expect(file.hasMessageDigests.size).to eq(2)
+      expect(file.has_message_digests.size).to eq(2)
     end
 
     it 'generates value attributes' do
@@ -50,29 +50,29 @@ RSpec.describe Cocina::Generator::Schema do
     let(:value) do
       Cocina::Models::DescriptiveValue.new(
         value: 'foo',
-        structuredValue: [{ value: 'bar' }],
-        appliesTo: [{ value: 'foobar' }]
+        structured_value: [{ value: 'bar' }],
+        applies_to: [{ value: 'foobar' }]
       )
     end
 
     it 'generates attributes from all schemas' do
       expect(value.value).to eq('foo')
-      expect(value.structuredValue.first.value).to eq('bar')
-      expect(value.appliesTo.first.value).to eq('foobar')
+      expect(value.structured_value.first.value).to eq('bar')
+      expect(value.applies_to.first.value).to eq('foobar')
     end
   end
 
   context 'when schema has types' do
     let(:policy) do
       Cocina::Models::AdminPolicy.new(
-        externalIdentifier: 'druid:bc123df4567',
+        external_identifier: 'druid:bc123df4567',
         label: 'My admin policy',
         type: Cocina::Models::ObjectType.admin_policy,
         version: 1,
         administrative: {
-          hasAdminPolicy: 'druid:bc123df4567',
-          hasAgreement: 'druid:bc123df4567',
-          accessTemplate: {}
+          has_admin_policy: 'druid:bc123df4567',
+          has_agreement: 'druid:bc123df4567',
+          access_template: {}
         }
       )
     end
@@ -88,7 +88,7 @@ RSpec.describe Cocina::Generator::Schema do
     # Its initializer then accepts a third argument which indicates whether to validate.
     let(:policy) do
       Cocina::Models::AdminPolicy.new({
-                                        externalIdentifier: 'druid:abc123',
+                                        external_identifier: 'druid:abc123',
                                         label: 'My admin policy',
                                         type: Cocina::Models::ObjectType.admin_policy,
                                         version: 1,

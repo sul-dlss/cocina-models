@@ -12,7 +12,7 @@
           "value": "Kasahara, Akitada, Jr"
         },
         {
-          "structuredValue": [
+          "structured_value": [
             {
               "value": "Kasahara, Akitada",
               "type": "name"
@@ -154,7 +154,7 @@
         {
           "name": [
             {
-              "structuredValue": [
+              "structured_value": [
                 {
                   "value": "Stanford University",
                   "type": "name",
@@ -313,7 +313,7 @@
           }
         }
       ],
-      "structuredValue": [
+      "structured_value": [
         {
           "value": "[Stanford, California]",
           "type": "publication statement place",
@@ -347,7 +347,7 @@
           }
         }
       ],
-      "structuredValue": [
+      "structured_value": [
         {
           "value": "©2017",
           "type": "copyright statement",
@@ -431,7 +431,7 @@
     },
     {
       "type": "thesis",
-      "structuredValue": [
+      "structured_value": [
         {
           "value": "Thesis",
           "type": "note"
@@ -473,7 +473,7 @@
       }
     ]
   },
-  "marcEncodedData": [
+  "marc_encoded_data": [
     {
       "value": "     nam a       3i",
       "type": "leader"
@@ -495,7 +495,7 @@
       "type": "008"
     }
   ],
-  "adminMetadata": {
+  "admin_metadata": {
     "event": [
       {
         "type": "creation",

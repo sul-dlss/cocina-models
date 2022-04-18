@@ -12,8 +12,8 @@ RSpec.describe Cocina::Generator::SchemaValue do
                                        label: 'The Prince',
                                        type: Cocina::Models::ObjectType.book,
                                        version: 1,
-                                       identification: { sourceId: 'sul:123' },
-                                       administrative: { hasAdminPolicy: 'druid:bc123df4567' }
+                                       identification: { source_id: 'sul:123' },
+                                       administrative: { has_admin_policy: 'druid:bc123df4567' }
                                      }, false, false)
     end
 
@@ -29,8 +29,8 @@ RSpec.describe Cocina::Generator::SchemaValue do
                                        label: 'The Blue and Brown Books',
                                        type: Cocina::Models::ObjectType.book,
                                        version: 1,
-                                       identification: { sourceId: 'sul:123' },
-                                       administrative: { hasAdminPolicy: 'druid:bc123df4567' }
+                                       identification: { source_id: 'sul:123' },
+                                       administrative: { has_admin_policy: 'druid:bc123df4567' }
                                      }, false, false)
     end
 
@@ -40,21 +40,21 @@ RSpec.describe Cocina::Generator::SchemaValue do
   end
 
   context 'when property is a boolean' do
-    # FileAdministrative.shelve and .sdrPreserve are boolean
-    let(:administrative) { Cocina::Models::FileAdministrative.new(sdrPreserve: false, shelve: true) }
+    # FileAdministrative.shelve and .sdr_preserve are boolean
+    let(:administrative) { Cocina::Models::FileAdministrative.new(sdr_preserve: false, shelve: true) }
 
     it 'maps to boolean' do
-      expect(administrative.sdrPreserve).to be false
+      expect(administrative.sdr_preserve).to be false
       expect(administrative.shelve).to be true
     end
   end
 
   context 'when property is a string with date-time format' do
-    # Embargo.releaseDate is a date-time
-    let(:embargo) { Cocina::Models::Embargo.new(releaseDate: '2009-12-14T07:00:00Z', view: 'world') }
+    # Embargo.release_date is a date-time
+    let(:embargo) { Cocina::Models::Embargo.new(release_date: '2009-12-14T07:00:00Z', view: 'world') }
 
     it 'maps to datetime' do
-      expect(embargo.releaseDate).to eq DateTime.parse('2009-12-14T07:00:00Z')
+      expect(embargo.release_date).to eq DateTime.parse('2009-12-14T07:00:00Z')
     end
   end
 
@@ -175,19 +175,19 @@ RSpec.describe Cocina::Generator::SchemaValue do
     end
   end
 
-  context 'when property is cocinaVersion' do
+  context 'when property is cocina_version' do
     let(:dro) do
       Cocina::Models::RequestDRO.new({
                                        label: 'The Prince',
                                        type: Cocina::Models::ObjectType.book,
                                        version: 1,
-                                       identification: { sourceId: 'sul:123' },
-                                       administrative: { hasAdminPolicy: 'druid:bc123df4567' }
+                                       identification: { source_id: 'sul:123' },
+                                       administrative: { has_admin_policy: 'druid:bc123df4567' }
                                      }, false, false)
     end
 
     it 'default is provided' do
-      expect(dro.cocinaVersion).to eq(Cocina::Models::VERSION)
+      expect(dro.cocina_version).to eq(Cocina::Models::VERSION)
     end
   end
 end

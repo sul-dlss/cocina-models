@@ -3,11 +3,11 @@
 require 'spec_helper'
 
 RSpec.describe Cocina::Models::DROAccess do
-  # Verifying that correctly validate access, download, location, and controlledDigitalLending.
+  # Verifying that correctly validate access, download, location, and controlled_digital_lending.
 
   def dro(access, download, location, controlled_digital_lending)
     Cocina::Models::DRO.new(
-      externalIdentifier: 'druid:bc123df4567',
+      external_identifier: 'druid:bc123df4567',
       label: 'My DRO',
       type: Cocina::Models::ObjectType.book,
       version: 1,
@@ -15,15 +15,15 @@ RSpec.describe Cocina::Models::DROAccess do
         title: [{ value: 'Test DRO' }],
         purl: 'https://purl.stanford.edu/bc123df4567'
       },
-      administrative: { hasAdminPolicy: 'druid:bc123df4567' },
+      administrative: { has_admin_policy: 'druid:bc123df4567' },
       access: {
         view: access,
         download: download,
         location: location,
-        controlledDigitalLending: controlled_digital_lending
+        controlled_digital_lending: controlled_digital_lending
       },
       structural: {},
-      identification: { sourceId: 'sul:123' }
+      identification: { source_id: 'sul:123' }
     )
   end
 

@@ -13,13 +13,14 @@ Lint/SafeNavigationChain:
   Exclude:
     - 'lib/cocina/generator/schema_base.rb'
 
-# Offense count: 3
+# Offense count: 4
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes, Max.
 Metrics/AbcSize:
   Exclude:
     - 'lib/cocina/generator/schema_ref.rb'
     - 'lib/cocina/generator/schema_value.rb'
     - 'lib/cocina/models/validator.rb'
+    - 'lib/cocina/models/validators/description_types_validator.rb'
 
 # Offense count: 1
 # Configuration parameters: CountComments, Max, CountAsOne.

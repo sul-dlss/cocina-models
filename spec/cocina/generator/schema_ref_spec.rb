@@ -9,13 +9,13 @@ RSpec.describe Cocina::Generator::SchemaRef do
     context 'when provided' do
       let(:policy) do
         Cocina::Models::AdminPolicy.new({
-                                          externalIdentifier: 'druid:bc123df4567',
+                                          external_identifier: 'druid:bc123df4567',
                                           label: 'My admin policy',
                                           type: Cocina::Models::ObjectType.admin_policy,
                                           version: 1,
                                           administrative: {
-                                            hasAdminPolicy: 'druid:bc123df4567',
-                                            hasAgreement: 'druid:bc123df4567'
+                                            has_admin_policy: 'druid:bc123df4567',
+                                            has_agreement: 'druid:bc123df4567'
                                           }
                                         }, false, false)
       end
@@ -28,7 +28,7 @@ RSpec.describe Cocina::Generator::SchemaRef do
     context 'when not provided' do
       let(:policy) do
         Cocina::Models::AdminPolicy.new({
-                                          externalIdentifier: 'druid:bc123df4567',
+                                          external_identifier: 'druid:bc123df4567',
                                           label: 'My admin policy',
                                           type: Cocina::Models::ObjectType.admin_policy,
                                           version: 1
@@ -45,13 +45,13 @@ RSpec.describe Cocina::Generator::SchemaRef do
     # AdminPolicy.description is an optional Description
     let(:policy) do
       Cocina::Models::AdminPolicy.new({
-                                        externalIdentifier: 'druid:bc123df4567',
+                                        external_identifier: 'druid:bc123df4567',
                                         label: 'My admin policy',
                                         type: Cocina::Models::ObjectType.admin_policy,
                                         version: 1,
                                         administrative: {
-                                          hasAdminPolicy: 'druid:bc123df4567',
-                                          hasAgreement: 'druid:bc123df4567'
+                                          has_admin_policy: 'druid:bc123df4567',
+                                          has_agreement: 'druid:bc123df4567'
                                         }
                                       }, false, false)
     end

@@ -79,7 +79,7 @@ module Cocina
         end
 
         def match_no_orders?
-          actual.structural.hasMemberOrders.blank?
+          actual.structural.has_member_orders.blank?
         end
 
         def match_cocina_type?(actual, expected)
@@ -87,7 +87,7 @@ module Cocina
         end
 
         def match_cocina_viewing_direction?(actual, expected)
-          actual.structural.hasMemberOrders.map(&:viewingDirection).all? do |viewing_direction|
+          actual.structural.has_member_orders.map(&:viewing_direction).all? do |viewing_direction|
             viewing_direction == expected[:viewing_direction]
           end
         end
@@ -100,7 +100,7 @@ module Cocina
       matcher :cocina_admin_policy_with_registration_collections do |expected|
         match do |actual|
           actual.type == Cocina::Models::ObjectType.admin_policy &&
-            expected.all? { |collection_id| collection_id.in?(actual.administrative.collectionsForRegistration) }
+            expected.all? { |collection_id| collection_id.in?(actual.administrative.collections_for_registration) }
         end
       end
     end

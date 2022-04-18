@@ -11,23 +11,23 @@ module Cocina
       class NameTitleGroupBuilder
         # When to assign nameTitleGroup to MODS from cocina:
         #   for cocina title of type "uniform",
-        #     look for cocina title properties :value or :structured_value (recurse down through :parallelValue
+        #     look for cocina title properties :value or :structured_value (recurse down through :parallel_value
         #     as needed), and look for associated :note with :type of "associated name" at the level of the
         #     non-empty title [value|structured_value]
-        #     The note of type "associated name" will have [value|structuredValue] which will match
-        #     [value|structuredValue] for a contributor (possibly after recursing through :parallelValue).
-        #   Thus, a title [value|structuredValue] and a contributor [value|structuredValue] are associated in
+        #     The note of type "associated name" will have [value|structured_value] which will match
+        #     [value|structured_value] for a contributor (possibly after recursing through :parallel_value).
+        #   Thus, a title [value|structured_value] and a contributor [value|structured_value] are associated in
         #   cocina.
         #
         # If those criteria not met in Cocina, do not assign nameTitleGroup in MODS
         #
         # @params [Cocina::Models::Title] title
-        # @return [Hash<Hash, Hash>] key:  hash of value or structuredValue property for title
-        #   value: hash of value or structuredValue property for contributor
+        # @return [Hash<Hash, Hash>] key:  hash of value or structured_value property for title
+        #   value: hash of value or structured_value property for contributor
         #   e.g. {{:value=>"Portrait of the artist as a young man"}=>{:value=>"James Joyce"}}
-        #   e.g. {{:value=>"Portrait of the artist as a young man"}=>{:structuredValue=>
+        #   e.g. {{:value=>"Portrait of the artist as a young man"}=>{:structured_value=>
         #         [{:value=>"Joyce, James", :type=>"name"},{:value=>"1882-1941", :type=>"life dates"}]}}
-        #   e.g. {{:structuredValue=>[{:value=>"Demanding Food", :type=>"main"},
+        #   e.g. {{:structured_value=>[{:value=>"Demanding Food", :type=>"main"},
         #           {:value=>"A Cat's Life", :type=>"subtitle"}]}=>{:value=>"James Joyce"}}
         #   this complexity is needed for multilingual titles mapping to multilingual names.
         def self.build_title_values_to_contributor_name_values(title)
@@ -49,7 +49,7 @@ module Cocina
             #   }
             # OR
             #   {
-            #     structuredValue: [ structuredValue contributor name ],
+            #     structured_value: [ structured_value contributor name ],
             #     type: 'associated name'
             #   }
             # and we want the hash without the :type attribute
@@ -109,7 +109,7 @@ module Cocina
           end
         end
 
-        # reduce parallelValues down to value or structured_value for these slices
+        # reduce parallel_values down to value or structured_value for these slices
         # @params [Cocina::Models::Title] title
         # @return [Array<Cocina::Models::DescriptiveValue>] where we are only interested in
         #   hashes containing (either :value or :structureValue) and :note if present
@@ -124,7 +124,7 @@ module Cocina
               slices << title_value_note_slices(parallel_val)
             end
           end
-          # ignoring groupedValue
+          # ignoring grouped_value
           slices.flatten
         end
         # rubocop:enable Metrics/AbcSize
