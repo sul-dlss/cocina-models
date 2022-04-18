@@ -122,10 +122,7 @@ module Cocina
 
       NO_CLEAN = [
         'checkable.rb',
-        'dro_rights_description_builder.rb',
         'license.rb',
-        'rights_description_builder.rb',
-        'title_builder.rb',
         'validatable.rb',
         'version.rb',
         'vocabulary.rb'
