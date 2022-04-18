@@ -17,8 +17,6 @@ access.note:
     description: License describing allowed uses of the resource.
   - value: use and reproduction
     description: Information related to allowed uses of the resource in other contexts.
-  - value: access constraints
-    status: TEMP
 access.physicalLocation:
   - value: discovery
     description: Location where a user may find the resource.
@@ -66,7 +64,7 @@ contributor.name:
   - value: pseudonym
     description: Name used that differs from legal or primary form of name.
   - value: surname
-    description: Last or family name.
+    description: Last or family name or names.
   - value: transliteration
     description: Name originally in non-Latin script presented phonetically using Latin characters.
 contributor.name.structuredValue:
@@ -81,7 +79,7 @@ contributor.name.structuredValue:
   - value: ordinal
     description: Indicator that the name is one in a series (e.g. Elizabeth I, Martin Luther King, Jr.).
   - value: surname
-    description: Last or family name.
+    description: Last or family name or names.
   - value: term of address
     description: Title or other signifier associated with name.
 contributor.name.groupedValue:
@@ -112,9 +110,11 @@ event:
   - value: creation
     description: The coming into being of a resource.
   - value: deaccession
+    description: The removal of a reosurce from a repository.
   - value: degree conferral
     description: The institutional approval of a thesis or other resource leading to an academic degree.
   - value: deposit
+    description: The submission of a resource to a repository.
   - value: development
     description: The creation of a print from a photographic negative or other source medium.
   - value: distribution
@@ -145,7 +145,7 @@ event:
     description: The removal of previous access to a resource, often due to its obsolescence.
 event.date:
   - value: accompanying letter
-    description: Athanasius
+    description: Used in Athanasius Kircher project.
     status: deprecated
   - value: acquisition
     description: The transferral of ownership of a resource to a repository.
@@ -154,10 +154,10 @@ event.date:
   - value: collection
     description: The addition of a resource to a set of other resources.
   - value: composition
-    description: Athanasius
+    description: Used in Athanasius Kircher project.
     status: deprecated
   - value: copy
-    description: Athanasius
+    description: Used in Athanasius Kircher project.
     status: deprecated
   - value: copyright
     description: The activity by which a resource may be considered subject to copyright law.
@@ -165,9 +165,11 @@ event.date:
   - value: creation
     description: The coming into being of a resource.
   - value: deaccession
+    description: The removal of a resource from a repository.
   - value: degree conferral
     description: The institutional approval of a thesis or other resource leading to an academic degree.
   - value: deposit
+    description: The submission of a resource to a repository.
   - value: developed
     description: The creation of a print from a photographic negative or other source medium.
     status: deprecated
@@ -178,59 +180,73 @@ event.date:
     description: The delivery of the resource to an external audience.
   - value: generation
     description: The creation of a resource by an automatic or natural process.
+  - value: Gregorian
+    status: deprecated
+    use: event.date.note.value with type "calendar"
+  - value: Hebrew
+    status: deprecated
+    use: event.date.note.value with type "calendar"
   - value: Hijri calendar
+    status: deprecated
+    use: event.date.note.value with type "calendar"
   - value: Islamic
+    status: deprecated
+    use: event.date.note.value with type "calendar"
   - value: Julian
+    status: deprecated
+    use: event.date.note.value with type "calendar"
   - value: letter
-    description: Athanasius
+    description: Used in Athanasius Kircher project.
     status: deprecated
   - value: letter referred to
-    description: Athanasius
+    description: Used in Athanasius Kircher project.
     status: deprecated
   - value: manufacture
     description: The physical assembly of a resource, often in multiple copies, for publication or other distribution.
   - value: manuscript
-    description: Athanasius
+    description: Used in Athanasius Kircher project.
     status: deprecated
   - value: manuscript referred to
-    description: Athanasius
+    description: Used in Athanasius Kircher project.
     status: deprecated
   - value: modification
     description: A change to an existing resource.
   - value: new document
-    description: Athanasius
-  - value: new style letter
+    description: Used in Athanasius Kircher project.
     status: deprecated
-    description: Athanasius
+  - value: new style letter
+    description: Used in Athanasius Kircher project.
     status: deprecated
   - value: observation
-    description: Athanasius
+    description: Used in Athanasius Kircher project.
     status: deprecated
   - value: old style letter
-    description: Athanasius
+    description: Used in Athanasius Kircher project.
     status: deprecated
   - value: original sent
-    description: Athanasius
+    description: Used in Athanasius Kircher project.
     status: deprecated
   - value: performance
     description: The enactment of an artistic or cultural work for an audience, such as a play.
   - value: presentation
     description: The discussion of an academic or intellectual work for an audience, such as a seminar.
   - value: proclamation
-    description: Athanasius
+    description: Used in Athanasius Kircher project.
     status: deprecated
   - value: production
     description: The physical assembly of a resource not considered published, such as page proofs for a book.
   - value: publication
     description: The publishing or issuing of a resource.
   - value: quoted
-    description: Athanasius
+    description: Used in Athanasius Kircher project.
     status: deprecated
   - value: recording
     description: The initial fixation to a medium of live audio and/or visual activity.
   - value: release
     description: Making a resource available to a broader audience.
   - value: Revolutionary calendar
+    status: deprecated
+    use: event.date.note.value with type "calendar"
   - value: submission
     description: The provision of a resource for review or evaluation.
   - value: validity
@@ -239,6 +255,7 @@ event.date:
     description: The removal of previous access to a resource, often due to its obsolescence.
 event.date.note:
   - value: calendar
+    description: The calendar system used for a date.
 event.date.structuredValue:
   - value: start
     description: The start date in a range.
@@ -270,7 +287,9 @@ form:
   - value: type
 form.structuredValue:
   - value: type
+    description: Used for H2 deposits.
   - value: subtype
+    description: Used for H2 deposits.
 geographic.form:
   - value: data format
   - value: media type
@@ -281,11 +300,15 @@ geographic.subject:
   - value: point coordinates
 geographic.subject.structuredValue:
   - value: east
+    description: A directional indicator for a point of a bounding box.
   - value: latitude
   - value: longitude
   - value: north
+    description: A directional indicator for a point of a bounding box.
   - value: south
+    description: A directional indicator for a point of a bounding box.
   - value: west
+    description: A directional indicator for a point of a bounding box.
 identifier:
   - value: accession
     status: deprecated
@@ -367,14 +390,6 @@ identifier:
   - value: 'West Mat #'
   - value: Wikidata
     code: wikidata
-  - value: Bodley 342
-    status: TEMP
-  - value: vintage
-    status: TEMP
-  - value: accesion
-    status: TEMP
-  - value: Suri UUID
-    status: TEMP
 note:
   - value: abstract
   - value: access
@@ -496,8 +511,6 @@ note:
   - value: version
   - value: version identification
   - value: writing
-  - value: note
-    status: TEMP
 note.groupedValue:
   - value: caption
   - value: date
@@ -537,77 +550,123 @@ relatedResource:
     description: A successor to the resource, such as a subsequent journal title.
 subject:
   - value: classification
+    description: A coded reference to the main subjects of the resource according to a larger system.
   - value: conference
+    description: An event focusing on a particular topic or discipline.
   - value: display
+    description: Preferred form of the value for display.
   - value: event
+    description: A time-bound occurrence.
   - value: family
+    description: A group of individuals related by blood or personal alliance.
   - value: genre
   - value: map coordinates
   - value: name
+    description: The name of an entity whose type is not known.
   - value: occupation
   - value: organization
+    description: An institution or other corporate or collective body.
   - value: person
+    description: An individual identity.
   - value: place
   - value: point coordinates
   - value: time
   - value: title
   - value: topic
-  - value: surname
-    status: TEMP
 subject.note:
   - value: affiliation
+    description: Institution with which the contributor is associated.
   - value: description
+    description: Biographical information about the contributor.
   - value: role
+    description: The relation of the subject entity to the resource.
 subject.structuredValue:
   - value: activity dates
+    description: The date or dates when someone was producing work.
   - value: area
+    description: A non-jurisdictional geographic entity.
   - value: city
+    description: An inhabited place incorporated as a city or equivalent.
   - value: city section
+    description: A smaller unit within a populated place, such as a neighborhood.
   - value: conference
+    description: An event focusing on a particular topic or discipline.
   - value: continent
+    description: Large land mass or portion of land mass considered to be a continent.
   - value: country
+    value: A political entity considered to be a country.
   - value: county
-  - value: end
-  - value: east
-  - value: event
-  - value: extraterrestrial area
+    description: A political division of a state or the largest local administrative unit.
   - value: display
+    description: Preferred form of the value for display.
+  - value: east
+    description: A directional indicator for a point of a bounding box.
+  - value: end
+    description: The end date in a range.
+  - value: event
+    description: A time-bound occurrence.
+  - value: extraterrestrial area
+    description: An entity, space, or feature not on Earth.
   - value: family
+    description: A group of individuals related by blood or personal alliance.
   - value: forename
+    description: First or given name or names.
   - value: genre
   - value: island
+    description: A tract of land surrounded by water but not itself a separate continent or country.
   - value: latitude
   - value: life dates
+    description: Birth and death dates, or dates when an entity was in existence.
   - value: longitude
   - value: main title
+    description: Title provided alongside additional information.
   - value: name
+    description: Name provided alongside additional information.
   - value: nonsorting characters
+    description: A string at the beginning of the title to be disregarded when sorting.
   - value: north
+    description: A directional indicator for a point of a bounding box.
   - value: occupation
   - value: ordinal
+    description: Indicator that the name is one in a series (e.g. Elizabeth I, Martin Luther King, Jr.).
   - value: organization
+    description: An institution or other corporate or collective body.
   - value: part name
+    description: The distinct name of a resource as part of a series or multivolume set.
   - value: part number
+    description: The distinct number of a resource as part of a series or multivolume set.
   - value: person
+    description: An individual identity.
   - value: place
   - value: region
+    description: An area that incorporates more than one first-order jurisdiction.
   - value: south
+    description: A directional indicator for a point of a bounding box.
   - value: start
+    description: The start date in a range.
   - value: state
+    description: A first-order political jurisdiction under country, including provinces, cantons, etc.
   - value: surname
+    description: Last or family name or names.
   - value: term of address
+    description: Title or other signifier associated with name.
   - value: territory
+    description: A geographical area belonging to or under the jurisdiction of a governmental authority.
   - value: time
   - value: title
   - value: topic
   - value: west
+    description: A directional indicator for a point of a bounding box.
 subject.structuredValue.note:
   - value: affiliation
+    description: Institution with which the contributor is associated.
+  - value: description
+    description: Biographical information about the contributor.
   - value: role
     description: The relation of the subject entity to the resource.
 subject.groupedValue:
   - value: uniform
-    description: Form of title in Library of Congress title authority.
+    description: Form of title in Library of Congress title authority file.
 title:
   - value: abbreviated
     description: Abbreviated form of title for indexing or identification.
@@ -623,10 +682,6 @@ title:
     description: Title transliterated from non-Latin script to Latin script.
   - value: uniform
     description: Form of title in Library of Congress title authority.
-  - value: main
-    status: TEMP
-  - value: other title
-    status: TEMP
 title.note:
   - value: associated name
     description: A name linked to the title, such as for a name-title heading.
