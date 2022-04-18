@@ -8,6 +8,7 @@ module Cocina
         VALIDATORS = [
           OpenApiValidator,
           DarkValidator,
+          CdlValidator,
           PurlValidator,
           CatalogLinksValidator,
           AssociatedNameValidator,
