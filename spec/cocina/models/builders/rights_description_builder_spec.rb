@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Cocina::Models::RightsDescriptionBuilder do
+RSpec.describe Cocina::Models::Builders::RightsDescriptionBuilder do
   subject(:build) { described_class.build(cocina_object) }
 
   let(:cocina_object) do

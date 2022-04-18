@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Cocina::Models::TitleBuilder do
+RSpec.describe Cocina::Models::Builders::TitleBuilder do
   subject(:build) { described_class.build(cocina_titles, strategy: strategy, add_punctuation: add_punctuation) }
 
   let(:cocina_titles) { titles.map { |hash| Cocina::Models::Title.new(hash) } }
