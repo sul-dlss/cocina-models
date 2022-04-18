@@ -10,6 +10,7 @@ module Cocina
           DarkValidator,
           PurlValidator,
           CatalogLinksValidator,
+          AssociatedNameValidator,
           DescriptionTypesValidator
         ].freeze
 
