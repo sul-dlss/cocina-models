@@ -18,11 +18,11 @@ module Cocina
       attribute :label, Types::Strict::String
       attribute :version, Types::Strict::Integer
       attribute(:administrative, AdminPolicyAdministrative.default { AdminPolicyAdministrative.new })
-      attribute :description, Description.optional.meta(omittable: true)
+      attribute? :description, Description.optional
       # When the object was created.
-      attribute :created, Types::Params::DateTime.meta(omittable: true)
+      attribute? :created, Types::Params::DateTime
       # When the object was modified.
-      attribute :modified, Types::Params::DateTime.meta(omittable: true)
+      attribute? :modified, Types::Params::DateTime
       # Key for optimistic locking. The contents of the key is not specified.
       attribute :lock, Types::Strict::String
     end

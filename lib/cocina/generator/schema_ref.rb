@@ -8,7 +8,7 @@ module Cocina
         if required && !relaxed
           "attribute(:#{name.camelize(:lower)}, #{schema_doc.name}.default { #{schema_doc.name}.new })"
         else
-          "attribute :#{name.camelize(:lower)}, #{schema_doc.name}.optional.meta(omittable: true)"
+          "attribute? :#{name.camelize(:lower)}, #{schema_doc.name}.optional"
         end
       end
     end

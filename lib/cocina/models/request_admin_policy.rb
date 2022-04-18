@@ -16,7 +16,7 @@ module Cocina
       attribute :label, Types::Strict::String
       attribute :version, Types::Strict::Integer.default(1).enum(1)
       attribute(:administrative, AdminPolicyAdministrative.default { AdminPolicyAdministrative.new })
-      attribute :description, RequestDescription.optional.meta(omittable: true)
+      attribute? :description, RequestDescription.optional
     end
   end
 end

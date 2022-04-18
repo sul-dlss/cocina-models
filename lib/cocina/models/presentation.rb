@@ -4,9 +4,9 @@ module Cocina
   module Models
     class Presentation < Struct
       # Height in pixels
-      attribute :height, Types::Strict::Integer.meta(omittable: true)
+      attribute? :height, Types::Strict::Integer
       # Width in pixels
-      attribute :width, Types::Strict::Integer.meta(omittable: true)
+      attribute? :width, Types::Strict::Integer
     end
   end
 end

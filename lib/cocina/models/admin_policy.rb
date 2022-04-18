@@ -18,7 +18,7 @@ module Cocina
       attribute :label, Types::Strict::String
       attribute :version, Types::Strict::Integer
       attribute(:administrative, AdminPolicyAdministrative.default { AdminPolicyAdministrative.new })
-      attribute :description, Description.optional.meta(omittable: true)
+      attribute? :description, Description.optional
     end
   end
 end
