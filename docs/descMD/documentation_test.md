@@ -78,7 +78,7 @@ _Path: note.type_
   * access
   * access note
     * Information about how to access the resource.
-    * Deprecated. Preferred value: access.
+    * Deprecated. Preferred usage: access.
   * acquisition
   * action
   * additional physical form
@@ -89,7 +89,7 @@ _Path: note.type_
   * bibliography
   * biographical/historical
   * biographical/historical note
-    * Deprecated. Preferred value: biographical/historical.
+    * Deprecated. Preferred usage: biographical/historical.
   * biography
   * boat note
 # Title types
