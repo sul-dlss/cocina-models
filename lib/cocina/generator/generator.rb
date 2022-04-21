@@ -54,29 +54,22 @@ module Cocina
 
           <<~MARKDOWN
             #{'#' * (field.count('.') + 1)} #{header_markdown}
-            _Path: #{field}_
+            _Path: #{field}.type_
             #{types_markdown}
           MARKDOWN
-        end.join("\n")
+        end.join
 
         remove_file 'docs/description_types.md'
-        create_file 'docs/description_types.md', h1_markdown + markdown
+        create_file 'docs/description_types.md', markdown
       end
 
       private
-
-      def h1_markdown
-        <<~MARKDOWN
-          # Description types
-
-        MARKDOWN
-      end
 
       def field_markdown_from(field)
         header = field.split('.')
                       .grep_v(/groupedValue|structuredValue/)
                       .join(' ')
-                      .capitalize
+                      .upcase_first
 
         header_suffix = if field.ends_with?('structuredValue')
                           'part types for structured value'
@@ -91,7 +84,9 @@ module Cocina
       def types_markdown_from(types)
         types.map do |type|
           "  * #{type['value']}".tap do |type_value|
-            type_value << ": #{type['description']}" if type['description']
+            type_value << "\n    * #{type['description']}" if type['description']
+            type_value << "\n    * Deprecated." if type['status'] == 'deprecated'
+            type_value << " Preferred usage: #{type['use']}" if type['use']
           end
         end.join("\n")
       end
