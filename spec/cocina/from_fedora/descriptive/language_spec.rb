@@ -4,7 +4,7 @@ require 'spec_helper'
 
 RSpec.describe Cocina::FromFedora::Descriptive::Language do
   subject(:build) do
-    described_class.build(resource_element: ng_xml.root, descriptive_builder: descriptive_builder)
+    described_class.build(resource_element: ng_xml.root, descriptive_builder: descriptive_builder, is_purl: nil)
   end
 
   let(:descriptive_builder) do

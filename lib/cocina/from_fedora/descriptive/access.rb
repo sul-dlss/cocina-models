@@ -15,12 +15,13 @@ module Cocina
         # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
         # @param [Cocina::FromFedora::Descriptive::DescriptiveBuilder] descriptive_builder
         # @param [String] purl
+        # @param [Proc] is_purl returns true if the passed in value is a purl
         # @return [Hash] a hash that can be mapped to a cocina model
-        def self.build(resource_element:, descriptive_builder:, purl: nil)
-          new(resource_element: resource_element, descriptive_builder: descriptive_builder, purl: purl).build
+        def self.build(resource_element:, descriptive_builder:, is_purl:, purl: nil)
+          new(resource_element: resource_element, descriptive_builder: descriptive_builder, purl: purl, is_purl: is_purl).build
         end
 
-        def initialize(resource_element:, descriptive_builder:, purl:, is_purl: ->(val) { FromFedora::Purl.purl?(val) })
+        def initialize(resource_element:, descriptive_builder:, purl:, is_purl:)
           @resource_element = resource_element
           @notifier = descriptive_builder.notifier
           @purl = purl

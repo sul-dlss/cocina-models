@@ -221,14 +221,18 @@ module Cocina
       end
 
       def purl_nodes(base_node)
-        base_node.xpath('mods:location/mods:url', mods: MODS_NS).select { |url_node| ::Cocina::FromFedora::Purl.purl?(url_node.text) }
+        base_node.xpath('mods:location/mods:url', mods: MODS_NS).select { |url_node| purl?(url_node.text) }
+      end
+
+      def purl?(value)
+        @is_purl.call(value)
       end
 
       def primary_url_node_for(base_node, purl)
         primary_purl_nodes, primary_url_nodes = base_node.xpath('mods:location/mods:url[@usage="primary display"]', mods: MODS_NS)
-                                                         .partition { |url_node| ::Cocina::FromFedora::Purl.purl?(url_node.text) }
+                                                         .partition { |url_node| purl?(url_node.text) }
         all_purl_nodes = base_node.xpath('mods:location/mods:url', mods: MODS_NS)
-                                  .select { |url_node| ::Cocina::FromFedora::Purl.purl?(url_node.text) }
+                                  .select { |url_node| purl?(url_node.text) }
 
         this_purl_node = purl ? all_purl_nodes.find { |purl_node| purl_node.content == purl } : nil
 

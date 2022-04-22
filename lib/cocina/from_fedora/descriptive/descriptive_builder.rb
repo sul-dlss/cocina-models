@@ -25,10 +25,14 @@ module Cocina
         # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
         # @param [Cocina::FromFedora::ErrorNotifier] notifier
         # @param [String] purl
+        # @param [Proc] is_purl returns true if the passed in value is a valid purl
         # @return [Hash] a hash that can be mapped to a cocina descriptive model
-        def self.build(resource_element:, notifier:, title_builder: Titles, purl: nil)
+        def self.build(resource_element:, notifier:, title_builder: Titles, purl: nil, is_purl: nil)
+          Deprecation.warn(self, "Calling build without passing 'is_purl:' is deprecated and will be removed in 1.0") unless is_purl
+          is_purl ||= ->(val) { FromFedora::Purl.purl?(val) }
           new(title_builder: title_builder, notifier: notifier).build(resource_element: resource_element,
-                                                                      purl: purl)
+                                                                      purl: purl,
+                                                                      is_purl: is_purl)
         end
 
         def initialize(notifier:, title_builder: Titles)
@@ -37,7 +41,7 @@ module Cocina
         end
 
         # @return [Hash] a hash that can be mapped to a cocina descriptive model
-        def build(resource_element:, purl: nil, require_title: true)
+        def build(resource_element:, is_purl:, purl: nil, require_title: true)
           cocina_description = {}
           title_result = @title_builder.build(resource_element: resource_element, require_title: require_title,
                                               notifier: notifier)
@@ -48,7 +52,7 @@ module Cocina
 
           BUILDERS.each do |descriptive_property, builder|
             result = builder.build(resource_element: resource_element, descriptive_builder: self,
-                                   purl: purl_value)
+                                   purl: purl_value, is_purl: is_purl)
             cocina_description.merge!(descriptive_property => result) if result.present?
           end
           cocina_description

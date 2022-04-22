@@ -11,16 +11,18 @@ module Cocina
         # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
         # @param [Cocina::FromFedora::Descriptive::DescriptiveBuilder] descriptive_builder
         # @param [String] purl
+        # @param [Proc] is_purl
         # @return [Hash] a hash that can be mapped to a cocina model
-        def self.build(resource_element:, descriptive_builder:, purl:)
-          new(resource_element: resource_element, descriptive_builder: descriptive_builder, purl: purl).build
+        def self.build(resource_element:, descriptive_builder:, purl:, is_purl:)
+          new(resource_element: resource_element, descriptive_builder: descriptive_builder, purl: purl, is_purl: is_purl).build
         end
 
-        def initialize(resource_element:, descriptive_builder:, purl:)
+        def initialize(resource_element:, descriptive_builder:, purl:, is_purl:)
           @resource_element = resource_element
           @descriptive_builder = descriptive_builder
           @notifier = descriptive_builder.notifier
           @purl = purl
+          @is_purl = is_purl
         end
 
         def build
@@ -29,7 +31,7 @@ module Cocina
 
         private
 
-        attr_reader :resource_element, :descriptive_builder, :notifier, :purl
+        attr_reader :resource_element, :descriptive_builder, :notifier, :purl, :is_purl
 
         def related_items
           resource_element.xpath('mods:relatedItem', mods: DESC_METADATA_NS).filter_map do |related_item|
@@ -46,7 +48,7 @@ module Cocina
         end
 
         def build_related_item(related_item)
-          descriptive_builder.build(resource_element: related_item, require_title: false).tap do |item|
+          descriptive_builder.build(resource_element: related_item, require_title: false, is_purl: is_purl).tap do |item|
             item[:displayLabel] = related_item['displayLabel']
             if related_item['type']
               item[:type] = normalized_type_for(related_item['type'])
@@ -82,11 +84,15 @@ module Cocina
           notifier.warn('Related resource has type and otherType')
         end
 
+        def purl?(val)
+          @is_purl.call(val)
+        end
+
         def related_purls
           primary_purl_node = Descriptive::Purl.primary_purl_node(resource_element, purl)
           purl_nodes = resource_element.xpath('mods:location/mods:url',
                                               mods: DESC_METADATA_NS).select do |url_node|
-            FromFedora::Purl.purl?(url_node.text) && url_node != primary_purl_node
+            purl?(url_node.text) && url_node != primary_purl_node
           end
           purl_nodes.map do |purl_node|
             {
