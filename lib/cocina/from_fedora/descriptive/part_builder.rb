@@ -4,7 +4,7 @@ module Cocina
   module FromFedora
     class Descriptive
       # Maps parts
-      class PartBuilder
+      class PartBuilder # rubocop:disable Metrics/ClassLength
         # @param [Nokogiri::XML::Element] part_element
         # @return [Hash] a hash that can be mapped to a cocina model
         def self.build(part_element:)

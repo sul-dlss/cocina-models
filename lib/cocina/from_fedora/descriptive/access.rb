@@ -4,7 +4,7 @@ module Cocina
   module FromFedora
     class Descriptive
       # Maps access conditions
-      class Access
+      class Access # rubocop:disable Metrics/ClassLength
         ACCESS_CONDITION_TYPES = {
           'restriction on access' => 'access restriction',
           'restrictionOnAccess' => 'access restriction',

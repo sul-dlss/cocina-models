@@ -4,7 +4,7 @@ module Cocina
   module ToFedora
     class Descriptive
       # Maps events from cocina to MODS XML
-      class Event
+      class Event # rubocop:disable Metrics/ClassLength
         # @params [Nokogiri::XML::Builder] xml
         # @params [Array<Cocina::Models::Event>] events
         # @params [IdGenerator] id_generator

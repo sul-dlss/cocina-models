@@ -4,7 +4,7 @@ module Cocina
   module FromFedora
     class Descriptive
       # Maps MODS recordInfo to cocina
-      class AdminMetadata
+      class AdminMetadata # rubocop:disable Metrics/ClassLength
         # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
         # @param [Cocina::FromFedora::Descriptive::DescriptiveBuilder] descriptive_builder
         # @param [String] purl

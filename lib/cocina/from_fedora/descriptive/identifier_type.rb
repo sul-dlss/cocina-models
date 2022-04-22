@@ -4,7 +4,7 @@ module Cocina
   module FromFedora
     class Descriptive
       # Maps identifier types
-      class IdentifierType
+      class IdentifierType # rubocop:disable Metrics/ClassLength
         COCINA_TO_STANDARD_IDENTIFIER_SCHEMES = {
           'AGROVOC ID' => 'agrovoc',
           'AllMovie ID' => 'allmovie',

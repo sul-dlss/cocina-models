@@ -4,7 +4,7 @@ module Cocina
   module ToFedora
     class Descriptive
       # Maps geo extension from cocina to MODS
-      class Geographic
+      class Geographic # rubocop:disable Metrics/ClassLength
         TYPE_REGEX = /^type$/.freeze
         MEDIA_REGEX = /^media type$/.freeze
         DATA_FORMAT_REGEX = /^data format$/.freeze

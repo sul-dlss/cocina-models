@@ -4,7 +4,7 @@ module Cocina
   module ToFedora
     class Descriptive
       # Maps contributor from cocina to MODS XML
-      class ContributorWriter
+      class ContributorWriter # rubocop:disable Metrics/ClassLength
         # one way mapping:  MODS 'corporate' already maps to Cocina 'organization'
         NAME_TYPE = Cocina::FromFedora::Descriptive::Contributor::ROLES.invert.freeze
         NAME_PART = FromFedora::Descriptive::Contributor::NAME_PART.invert.merge('activity dates' => 'date').freeze

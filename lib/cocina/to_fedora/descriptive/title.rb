@@ -6,7 +6,7 @@ module Cocina
       # Maps titles from cocina to MODS XML
       #   NOTE: contributors from nameTitleGroups are output here as well;
       #   this allows for consistency of the nameTitleGroup number for the matching title(s) and the contributor(s)
-      class Title
+      class Title # rubocop:disable Metrics/ClassLength
         TAG_NAME = FromFedora::Descriptive::Titles::TYPES.invert.merge('activity dates' => 'date').freeze
         NAME_TYPES = ['name', 'forename', 'surname', 'life dates', 'term of address'].freeze
 

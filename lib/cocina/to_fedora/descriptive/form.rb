@@ -4,7 +4,7 @@ module Cocina
   module ToFedora
     class Descriptive
       # Maps forms from cocina to MODS XML
-      class Form
+      class Form # rubocop:disable Metrics/ClassLength
         # NOTE: H2 is the first case of structured form values we're implementing
         H2_SOURCE_LABEL = 'Stanford self-deposit resource types'
         PHYSICAL_DESCRIPTION_TAG = {

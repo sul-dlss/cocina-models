@@ -4,7 +4,7 @@ module Cocina
   module FromFedora
     class Descriptive
       # Maps titles
-      class Titles
+      class Titles # rubocop:disable Metrics/ClassLength
         TYPES = {
           'nonSort' => 'nonsorting characters',
           'title' => 'main title',

@@ -4,7 +4,7 @@ module Cocina
   module ToFedora
     class Descriptive
       # Maps the Access subschema from cocina to MODS XML
-      class Access
+      class Access # rubocop:disable Metrics/ClassLength
         # @params [Nokogiri::XML::Builder] xml
         # @params [Cocina::Models::Access] access
         # @params [string] purl

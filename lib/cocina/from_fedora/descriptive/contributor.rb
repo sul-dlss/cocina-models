@@ -4,7 +4,7 @@ module Cocina
   module FromFedora
     class Descriptive
       # Maps contributors
-      class Contributor
+      class Contributor # rubocop:disable Metrics/ClassLength
         # key: MODS, value: cocina
         ROLES = {
           'personal' => 'person',
