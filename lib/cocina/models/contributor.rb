@@ -4,7 +4,7 @@ module Cocina
   module Models
     class Contributor < Struct
       attribute :name, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
-      # Entity type of the contributor (person, organization, etc.). See https://sul-dlss.github.io/cocina-models/description_types.html for valid types.
+      # Entity type of the contributor (person, organization, etc.). See https://github.com/sul-dlss/cocina-models/blob/main/docs/description_types.md for valid types.
       attribute? :type, Types::Strict::String
       # Status of the contributor relative to other parallel contributors (e.g. the primary author among a group of contributors).
       attribute? :status, Types::Strict::String

@@ -524,7 +524,7 @@ components:
           items:
             $ref: "#/components/schemas/DescriptiveValue"
         type:
-          description: Entity type of the contributor (person, organization, etc.). See https://sul-dlss.github.io/cocina-models/description_types.html for valid types.
+          description: Entity type of the contributor (person, organization, etc.). See https://github.com/sul-dlss/cocina-models/blob/main/docs/description_types.md for valid types.
           type: string
         status:
           description: Status of the contributor relative to other parallel contributors
@@ -713,7 +713,7 @@ components:
               # https://github.com/interagent/committee/issues/286
               # - type: integer
             type:
-              description: Type of value provided by the descriptive element. See https://sul-dlss.github.io/cocina-models/description_types.html for valid types.
+              description: Type of value provided by the descriptive element. See https://github.com/sul-dlss/cocina-models/blob/main/docs/description_types.md for valid types.
               type: string
             status:
               description: Status of the descriptive element value relative to other instances
@@ -789,7 +789,7 @@ components:
           items:
             $ref: "#/components/schemas/DescriptiveValue"
         type:
-          description: Entity type of the contributor (person, organization, etc.). See https://sul-dlss.github.io/cocina-models/description_types.html for valid types.
+          description: Entity type of the contributor (person, organization, etc.). See https://github.com/sul-dlss/cocina-models/blob/main/docs/description_types.md for valid types.
           type: string
         status:
           description: Status of the contributor relative to other parallel contributors (e.g. the primary author among a group of contributors).
