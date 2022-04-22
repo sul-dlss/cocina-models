@@ -12,9 +12,13 @@ AllCops:
 # ----- Layout ------
 
 Layout/LineLength:
-  Max: 114
+  Max: 157
   Exclude:
     - lib/cocina/models/*
+    - 'lib/cocina/normalizers/mods/title_normalizer.rb'
+    - 'spec/cocina/mapping/descriptive/h2/related_item_h2_spec.rb'
+    - 'spec/cocina/mapping/descriptive/mods/physical_description_spec.rb'
+    - 'spec/cocina/mapping/descriptive/mods/title_info_spec.rb'
 
 Layout/BeginEndAlignment: # (new in 0.91)
   Enabled: true
@@ -79,12 +83,37 @@ Metrics/BlockLength:
     - cocina-models.gemspec
     - spec/cocina/**/*
     - lib/cocina/rspec/matchers.rb
+    - 'spec/support/mods_mapping_spec_helper.rb'
+
+# Offense count: 16
+# Configuration parameters: CountComments, CountAsOne.
+Metrics/ClassLength:
+  Max: 100
+  # Exclude:
+  #   - 'lib/cocina/from_fedora/descriptive/*.rb'
+  #   - 'lib/cocina/to_fedora/descriptive/*.rb'
+  #   - 'lib/cocina/normalizers/**/*'
 
 Metrics/MethodLength:
   Max: 14
   Exclude:
     - 'spec/cocina/models/file_access_spec.rb'
     - 'spec/cocina/models/dro_access_spec.rb'
+    - 'lib/cocina/to_fedora/descriptive/*'
+    - 'lib/cocina/from_fedora/descriptive/*'
+    - 'lib/cocina/normalizers/mods/origin_info_normalizer.rb'
+    - 'lib/cocina/normalizers/mods/subject_normalizer.rb'
+    - 'lib/cocina/normalizers/mods_normalizer.rb'
+
+
+# Offense count: 37
+# Configuration parameters: IgnoredMethods.
+Metrics/PerceivedComplexity:
+  # Max: 20
+  Exclude:
+    - 'lib/cocina/from_fedora/descriptive/*'
+    - 'lib/cocina/to_fedora/descriptive/*'
+    - 'lib/cocina/normalizers/**/*'
 
 # ----- RSpec ------
 
@@ -100,6 +129,24 @@ RSpec/ExampleLength:
     - spec/cocina/models/description_spec.rb
     - spec/cocina/models/dro_shared_examples.rb
     - spec/cocina/models/builders/name_title_group_builder_spec.rb
+    - 'spec/cocina/from_fedora/descriptive/admin_metadata_spec.rb'
+    - 'spec/cocina/from_fedora/descriptive/subject_name_spec.rb'
+    - 'spec/cocina/from_fedora/descriptive/subject_spec.rb'
+    - 'spec/cocina/from_fedora/descriptive/titles_spec.rb'
+    - 'spec/cocina/from_fedora/descriptive_spec.rb'
+    - 'spec/cocina/mapping/descriptive/mods/name_spec.rb'
+    - 'spec/cocina/mapping/descriptive/mods/origin_info_place_spec.rb'
+    - 'spec/cocina/mapping/descriptive/mods/physical_description_spec.rb'
+    - 'spec/cocina/mapping/descriptive/mods/record_info_spec.rb'
+    - 'spec/cocina/mapping/descriptive/mods/subject_classification_spec.rb'
+    - 'spec/cocina/mapping/descriptive/mods/subject_genre_spec.rb'
+    - 'spec/cocina/mapping/descriptive/mods/subject_geographic_spec.rb'
+    - 'spec/cocina/mapping/descriptive/mods/subject_name_spec.rb'
+    - 'spec/cocina/mapping/descriptive/mods/subject_spec.rb'
+    - 'spec/cocina/mapping/descriptive/mods/subject_title_spec.rb'
+    - 'spec/cocina/mapping/descriptive/mods/title_info_spec.rb'
+    - 'spec/cocina/mapping/descriptive/mods/type_of_resource_spec.rb'
+    - 'spec/support/mods_mapping_spec_helper.rb'
 
 RSpec/MultipleExpectations:
   Enabled: false

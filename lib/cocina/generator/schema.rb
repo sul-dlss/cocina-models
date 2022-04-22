@@ -101,9 +101,7 @@ module Cocina
         return [] if doc.one_of.nil?
 
         # All properties must be objects.
-        unless doc.one_of.all? { |schema| schema.type == 'object' }
-          raise 'All properties for oneOf must be objects'
-        end
+        raise 'All properties for oneOf must be objects' unless doc.one_of.all? { |schema| schema.type == 'object' }
 
         doc.one_of.flat_map do |one_of_doc|
           one_of_doc.properties.map do |key, properties_doc|
