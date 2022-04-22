@@ -22,7 +22,7 @@ module Cocina
         @title_builder = title_builder
         @ng_xml = mods
         @notifier = notifier || ErrorNotifier.new(druid: druid)
-        @druid = druid
+        @purl = FromFedora::Purl.for(druid: druid)
         @label = label
       end
 
@@ -36,14 +36,14 @@ module Cocina
         props = DescriptiveBuilder.build(title_builder: title_builder,
                                          resource_element: ng_xml.root,
                                          notifier: notifier,
-                                         purl: druid ? FromFedora::Purl.for(druid: druid) : nil)
+                                         purl: purl)
         props[:title] = [{ value: label }] unless props.key?(:title)
         props
       end
 
       private
 
-      attr_reader :title_builder, :ng_xml, :notifier, :druid, :label
+      attr_reader :title_builder, :ng_xml, :notifier, :purl, :label
 
       def check_altrepgroups
         ng_xml.xpath('//mods:*[@altRepGroup]', mods: DESC_METADATA_NS)
