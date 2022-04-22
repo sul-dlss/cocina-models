@@ -15,43 +15,57 @@ module Cocina
       # @param [Nokogiri::Document] mods_ng_xml MODS to be normalized
       # @param [String] druid
       # @param [String] label
+      # @param [String] purl
+      # @param [Proc] is_purl
       # @return [Nokogiri::Document] normalized MODS
-      def self.normalize(mods_ng_xml:, druid:, label:, purl: nil)
-        Deprecation.warn(self, "Calling normalize without passing purl: is deprecated and will be removed in 1.0") unless purl
+      def self.normalize(mods_ng_xml:, druid:, label:, purl: nil, is_purl: nil)
+        Deprecation.warn(self, "Calling normalize without passing 'purl:' is deprecated and will be removed in 1.0") unless purl
         purl ||= Cocina::FromFedora::Purl.for(druid: druid)
-        new(mods_ng_xml: mods_ng_xml, druid: druid, label: label, purl: purl).normalize
+
+        Deprecation.warn(self, "Calling normalize without passing 'is_purl:' is deprecated and will be removed in 1.0") unless is_purl
+        is_purl ||= ->(val) { FromFedora::Purl.purl?(val) }
+        new(mods_ng_xml: mods_ng_xml, druid: druid, label: label, purl: purl, is_purl: is_purl).normalize
       end
 
       # @param [Nokogiri::Document] mods_ng_xml MODS to be normalized
       # @param [String] druid
+      # @param [String] purl
+      # @param [Proc] is_purl
       # @return [Nokogiri::Document] normalized MODS
-      def self.normalize_purl(mods_ng_xml:, druid:, purl: nil)
-        Deprecation.warn(self, "Calling normalize_purl without passing purl: is deprecated and will be removed in 1.0") unless purl
+      def self.normalize_purl(mods_ng_xml:, druid:, purl: nil, is_purl: nil)
+        Deprecation.warn(self, "Calling normalize_purl without passing 'purl:'' is deprecated and will be removed in 1.0") unless purl
         purl ||= Cocina::FromFedora::Purl.for(druid: druid)
-        new(mods_ng_xml: mods_ng_xml, druid: druid, purl: purl).normalize_purl
+
+        Deprecation.warn(self, "Calling normalize_purl without passing 'is_purl:' is deprecated and will be removed in 1.0") unless is_purl
+        is_purl ||= ->(val) { FromFedora::Purl.purl?(val) }
+        new(mods_ng_xml: mods_ng_xml, druid: druid, purl: purl, is_purl: is_purl).normalize_purl
       end
 
       # @param [Nokogiri::Document] mods_ng_xml MODS to be normalized
       # @param [String] druid
       # @param [String] label
       # @return [Nokogiri::Document] normalized MODS
-      def self.normalize_purl_and_missing_title(mods_ng_xml:, druid:, label:, purl: nil)
-        Deprecation.warn(self, "Calling normalize_purl_and_missing_title without passing purl: is deprecated and will be removed in 1.0") unless purl
+      def self.normalize_purl_and_missing_title(mods_ng_xml:, druid:, label:, purl: nil, is_purl: nil)
+        Deprecation.warn(self, "Calling normalize_purl_and_missing_title without passing 'purl:' is deprecated and will be removed in 1.0") unless purl
         purl ||= Cocina::FromFedora::Purl.for(druid: druid)
-        new(mods_ng_xml: mods_ng_xml, druid: druid, label: label, purl: purl).normalize_purl_and_missing_title
+
+        Deprecation.warn(self, "Calling normalize_purl without passing 'is_purl:' is deprecated and will be removed in 1.0") unless is_purl
+        is_purl ||= ->(val) { FromFedora::Purl.purl?(val) }
+        new(mods_ng_xml: mods_ng_xml, druid: druid, label: label, purl: purl, is_purl: is_purl).normalize_purl_and_missing_title
       end
 
       # @param [Nokogiri::Document] mods_ng_xml MODS to be normalized
       # @return [Nokogiri::Document] normalized MODS
       def self.normalize_identifier_type(mods_ng_xml:)
-        new(mods_ng_xml: mods_ng_xml, druid: nil, purl: nil).normalize_identifier_type
+        new(mods_ng_xml: mods_ng_xml, druid: nil, purl: nil, is_purl: nil).normalize_identifier_type
       end
 
-      def initialize(mods_ng_xml:, druid:, purl:, label: nil)
+      def initialize(mods_ng_xml:, druid:, purl:, is_purl:, label: nil)
         @ng_xml = mods_ng_xml.root ? mods_ng_xml.dup : blank_ng_xml
         @ng_xml.encoding = 'UTF-8'
         @druid = druid
         @purl = purl
+        @is_purl = is_purl
         @label = label
       end
 
@@ -185,7 +199,7 @@ module Cocina
         end
 
         purl_nodes(base_node).each do |purl_node|
-          next if purl_node == Cocina::FromFedora::Descriptive::Purl.primary_purl_node(base_node, purl)
+            next if purl_node == Cocina::FromFedora::Descriptive::Purl.primary_purl_node(base_node, purl)
 
           # Move into own relatedItem
           new_related_item = Nokogiri::XML::Node.new('relatedItem', Nokogiri::XML(nil))
