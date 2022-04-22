@@ -9,6 +9,8 @@ require 'yaml'
 require 'openapi_parser'
 require 'openapi3_parser'
 require 'active_support'
+require 'active_support/core_ext/class/attribute'
+require 'active_support/core_ext/enumerable'
 require 'active_support/core_ext/hash/indifferent_access'
 require 'active_support/core_ext/string'
 require 'thor'
@@ -24,6 +26,7 @@ class CocinaModelsInflector < Zeitwerk::Inflector
     'dro_with_metadata' => 'DROWithMetadata',
     'request_dro_structural' => 'RequestDROStructural',
     'rspec' => 'RSpec',
+    'value_uri' => 'ValueURI',
     'version' => 'VERSION'
   }.freeze
 

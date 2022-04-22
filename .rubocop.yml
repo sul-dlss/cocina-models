@@ -12,7 +12,7 @@ AllCops:
 # ----- Layout ------
 
 Layout/LineLength:
-  Max: 114
+  Max: 157
   Exclude:
     - lib/cocina/models/*
 
@@ -85,6 +85,8 @@ Metrics/MethodLength:
   Exclude:
     - 'spec/cocina/models/file_access_spec.rb'
     - 'spec/cocina/models/dro_access_spec.rb'
+    - 'lib/cocina/to_fedora/descriptive/*'
+    - 'lib/cocina/from_fedora/descriptive/*'
 
 # ----- RSpec ------
 
@@ -100,6 +102,11 @@ RSpec/ExampleLength:
     - spec/cocina/models/description_spec.rb
     - spec/cocina/models/dro_shared_examples.rb
     - spec/cocina/models/builders/name_title_group_builder_spec.rb
+    - 'spec/cocina/from_fedora/descriptive/admin_metadata_spec.rb'
+    - 'spec/cocina/from_fedora/descriptive/subject_name_spec.rb'
+    - 'spec/cocina/from_fedora/descriptive/subject_spec.rb'
+    - 'spec/cocina/from_fedora/descriptive/titles_spec.rb'
+    - 'spec/cocina/from_fedora/descriptive_spec.rb'
 
 RSpec/MultipleExpectations:
   Enabled: false

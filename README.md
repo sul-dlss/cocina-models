@@ -6,11 +6,18 @@
 
 # Cocina::Models
 
-The cocina-models gem is a Ruby implementation of the Stanford Digital Repository (SDR) data model, which we named "Cocina." The data being modeled is oriented around digital repository objects. 
+The cocina-models gem is a Ruby implementation of the Stanford Digital Repository (SDR) data model, which we named "Cocina." The data being modeled is oriented around digital repository objects.
 
 The data model is expressed in an OpenAPI specification that lives in this codebase. Expressing the model in such a spec allows for rich validation (using gems such as `OpenAPIParser` and `committee`). The gem provides a set of generators (see below) to generate Ruby classes from the specification, with modeling provided by dry-struct / dry-types. Together, these provide a way for consumers to validate objects against models and to manipulate those objects.
 
 Note that the data model encodes properties as camelCase, which the team believes to be consistent with other HTTP APIs and the original design of the Cocina data model. While using camelCase in Ruby code may look and feel wrong, we did explore automagic conversion between camelCase in the model and snake_case in the Ruby context. We ultimately concluded that we have enough representations of the data model in enough codebases to reasonably worry about data inconsistency problems, none of which we need in our work on SDR.
+
+## Configuration
+
+Set the PURL url base:
+```ruby
+Cocina::FromFedora::Purl.base_url = Settings.release.purl_base_url
+```
 
 ## Generate models from openapi.yml
 

@@ -106,7 +106,6 @@ module Cocina
         # rubocop:disable Metrics/CyclomaticComplexity
         # rubocop:disable Metrics/PerceivedComplexity
         # rubocop:disable Metrics/MethodLength
-        # rubocop:disable Metrics/AbcSize
         # @param [Cocina::Models::Title] title with structured values
         # @return [String] the title value from combining the pieces of the structured_values by type and order
         #   with desired punctuation per specs
@@ -157,7 +156,6 @@ module Cocina
           end
           structured_title
         end
-        # rubocop:enable Metrics/AbcSize
         # rubocop:enable Metrics/MethodLength
         # rubocop:enable Metrics/BlockLength
         # rubocop:enable Metrics/CyclomaticComplexity

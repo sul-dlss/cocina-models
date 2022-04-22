@@ -4,6 +4,7 @@ require 'bundler/setup'
 require 'cocina/models'
 require 'cocina/rspec'
 require 'byebug'
+require 'equivalent-xml/rspec_matchers'
 
 require 'simplecov'
 SimpleCov.start do

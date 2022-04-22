@@ -81,7 +81,6 @@ module Cocina
         # @params [Cocina::Models::DescriptiveValue] desc_value
         # @return [Array<Cocina::Models::DescriptiveValue>] where we are only interested in
         #   hashes containing (either :value or :structuredValue)
-        # rubocop:disable Metrics/AbcSize
         def self.value_slices(desc_value)
           slices = []
           desc_value_slice = desc_value.to_h.slice(:value, :structuredValue, :parallelValue)
@@ -93,7 +92,6 @@ module Cocina
           # ignoring groupedValue
           slices.flatten
         end
-        # rubocop:enable Metrics/AbcSize
         # private_class_method :value_slices
 
         # for a given Hash (from a Cocina DescriptiveValue or Title or Name or ...)
@@ -113,7 +111,6 @@ module Cocina
         # @params [Cocina::Models::Title] title
         # @return [Array<Cocina::Models::DescriptiveValue>] where we are only interested in
         #   hashes containing (either :value or :structureValue) and :note if present
-        # rubocop:disable Metrics/AbcSize
         def self.title_value_note_slices(title)
           slices = []
           title_slice = title.to_h.slice(:value, :structuredValue, :parallelValue, :note)
@@ -127,7 +124,6 @@ module Cocina
           # ignoring groupedValue
           slices.flatten
         end
-        # rubocop:enable Metrics/AbcSize
       end
     end
   end
