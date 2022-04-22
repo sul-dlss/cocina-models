@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'deprecation'
 
 module Cocina
   module Normalizers
@@ -6,6 +7,7 @@ module Cocina
     # these adjustments have been approved by our metadata authority, Arcadia.
     class ModsNormalizer # rubocop:disable Metrics/ClassLength
       include Cocina::Normalizers::Base
+      extend Deprecation
 
       MODS_NS = Cocina::FromFedora::Descriptive::DESC_METADATA_NS
       XLINK_NS = Cocina::FromFedora::Descriptive::XLINK_NS
@@ -14,36 +16,42 @@ module Cocina
       # @param [String] druid
       # @param [String] label
       # @return [Nokogiri::Document] normalized MODS
-      def self.normalize(mods_ng_xml:, druid:, label:)
-        new(mods_ng_xml: mods_ng_xml, druid: druid, label: label).normalize
+      def self.normalize(mods_ng_xml:, druid:, label:, purl: nil)
+        Deprecation.warn(self, "Calling normalize without passing purl: is deprecated and will be removed in 1.0") unless purl
+        purl ||= Cocina::FromFedora::Purl.for(druid: druid)
+        new(mods_ng_xml: mods_ng_xml, druid: druid, label: label, purl: purl).normalize
       end
 
       # @param [Nokogiri::Document] mods_ng_xml MODS to be normalized
       # @param [String] druid
       # @return [Nokogiri::Document] normalized MODS
-      def self.normalize_purl(mods_ng_xml:, druid:)
-        new(mods_ng_xml: mods_ng_xml, druid: druid).normalize_purl
+      def self.normalize_purl(mods_ng_xml:, druid:, purl: nil)
+        Deprecation.warn(self, "Calling normalize_purl without passing purl: is deprecated and will be removed in 1.0") unless purl
+        purl ||= Cocina::FromFedora::Purl.for(druid: druid)
+        new(mods_ng_xml: mods_ng_xml, druid: druid, purl: purl).normalize_purl
       end
 
       # @param [Nokogiri::Document] mods_ng_xml MODS to be normalized
       # @param [String] druid
       # @param [String] label
       # @return [Nokogiri::Document] normalized MODS
-      def self.normalize_purl_and_missing_title(mods_ng_xml:, druid:, label:)
-        new(mods_ng_xml: mods_ng_xml, druid: druid, label: label).normalize_purl_and_missing_title
+      def self.normalize_purl_and_missing_title(mods_ng_xml:, druid:, label:, purl: nil)
+        Deprecation.warn(self, "Calling normalize_purl_and_missing_title without passing purl: is deprecated and will be removed in 1.0") unless purl
+        purl ||= Cocina::FromFedora::Purl.for(druid: druid)
+        new(mods_ng_xml: mods_ng_xml, druid: druid, label: label, purl: purl).normalize_purl_and_missing_title
       end
 
       # @param [Nokogiri::Document] mods_ng_xml MODS to be normalized
       # @return [Nokogiri::Document] normalized MODS
       def self.normalize_identifier_type(mods_ng_xml:)
-        new(mods_ng_xml: mods_ng_xml, druid: nil).normalize_identifier_type
+        new(mods_ng_xml: mods_ng_xml, druid: nil, purl: nil).normalize_identifier_type
       end
 
-      def initialize(mods_ng_xml:, druid:, label: nil)
+      def initialize(mods_ng_xml:, druid:, purl:, label: nil)
         @ng_xml = mods_ng_xml.root ? mods_ng_xml.dup : blank_ng_xml
         @ng_xml.encoding = 'UTF-8'
         @druid = druid
-        @purl = Cocina::FromFedora::Purl.for(druid: druid)
+        @purl = purl
         @label = label
       end
 
