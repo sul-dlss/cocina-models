@@ -111,7 +111,7 @@ event:
   - value: creation
     description: The coming into being of a resource.
   - value: deaccession
-    description: The removal of a reosurce from a repository.
+    description: The removal of a resource from a repository.
   - value: degree conferral
     description: The institutional approval of a thesis or other resource leading to an academic degree.
   - value: deposit
@@ -469,7 +469,6 @@ note:
   - value: date
     description: Information about a date or dates associated with the resource.
   - value: date/sequential designation
-    description:
   - value: decoNote
     status: deprecated
     use: decoration
