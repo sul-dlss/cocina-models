@@ -20,10 +20,11 @@ module Cocina
           new(resource_element: resource_element, descriptive_builder: descriptive_builder, purl: purl).build
         end
 
-        def initialize(resource_element:, descriptive_builder:, purl:)
+        def initialize(resource_element:, descriptive_builder:, purl:, is_purl: ->(val) { FromFedora::Purl.purl?(val) })
           @resource_element = resource_element
           @notifier = descriptive_builder.notifier
           @purl = purl
+          @is_purl = is_purl
         end
 
         def build
@@ -115,7 +116,11 @@ module Cocina
         end
 
         def all_purl_nodes
-          @all_purl_nodes ||= all_url_nodes.select { |url_node| FromFedora::Purl.purl?(url_node.text) }
+          @all_purl_nodes ||= all_url_nodes.select { |url_node| purl?(url_node.text) }
+        end
+
+        def purl?(val)
+          @is_purl.call(val)
         end
 
         def all_url_nodes
@@ -127,7 +132,7 @@ module Cocina
         end
 
         def url_nodes
-          @url_nodes ||= all_url_nodes.reject { |url_node| FromFedora::Purl.purl?(url_node.text) }
+          @url_nodes ||= all_url_nodes.reject { |url_node| purl?(url_node.text) }
         end
 
         def purl_note
