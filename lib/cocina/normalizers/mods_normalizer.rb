@@ -43,6 +43,7 @@ module Cocina
         @ng_xml = mods_ng_xml.root ? mods_ng_xml.dup : blank_ng_xml
         @ng_xml.encoding = 'UTF-8'
         @druid = druid
+        @purl = Cocina::FromFedora::Purl.for(druid: druid)
         @label = label
       end
 
@@ -96,7 +97,7 @@ module Cocina
 
       private
 
-      attr_reader :ng_xml, :druid, :label
+      attr_reader :ng_xml, :druid, :purl, :label
 
       # remove all empty elements that have no attributes and no children, recursively
       def remove_empty_elements(start_node)
@@ -157,7 +158,7 @@ module Cocina
       end
 
       def normalize_purl_location
-        normalize_purl_for(ng_xml.root, purl: Cocina::FromFedora::Purl.for(druid: druid))
+        normalize_purl_for(ng_xml.root, purl: purl)
         ng_xml.xpath('/mods:mods/mods:relatedItem', mods: MODS_NS).each { |related_item_node| normalize_purl_for(related_item_node) }
       end
 
