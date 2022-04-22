@@ -89,10 +89,6 @@ Metrics/BlockLength:
 # Configuration parameters: CountComments, CountAsOne.
 Metrics/ClassLength:
   Max: 100
-  # Exclude:
-  #   - 'lib/cocina/from_fedora/descriptive/*.rb'
-  #   - 'lib/cocina/to_fedora/descriptive/*.rb'
-  #   - 'lib/cocina/normalizers/**/*'
 
 Metrics/MethodLength:
   Max: 14
