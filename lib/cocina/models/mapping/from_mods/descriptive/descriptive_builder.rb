@@ -10,7 +10,7 @@ module Cocina
             attr_reader :notifier
 
             BUILDERS = {
-              note: Notes,
+              note: Note,
               language: Language,
               contributor: Contributor,
               event: Descriptive::Event,
