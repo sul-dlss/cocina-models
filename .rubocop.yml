@@ -11,19 +11,13 @@ AllCops:
 
 # ----- Layout ------
 
-Layout/LineLength:
-  Max: 157
-  Exclude:
-    - lib/cocina/models/*
-    - 'lib/cocina/normalizers/mods/title_normalizer.rb'
-    - 'spec/cocina/mapping/descriptive/h2/related_item_h2_spec.rb'
-    - 'spec/cocina/mapping/descriptive/mods/physical_description_spec.rb'
-    - 'spec/cocina/mapping/descriptive/mods/title_info_spec.rb'
-
 Layout/BeginEndAlignment: # (new in 0.91)
   Enabled: true
 Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
+Layout/LineLength:
+  Exclude:
+    - lib/cocina/models/*
 Layout/SpaceAroundMethodCallOperator:
   Enabled: true
 
@@ -95,11 +89,11 @@ Metrics/MethodLength:
   Exclude:
     - 'spec/cocina/models/file_access_spec.rb'
     - 'spec/cocina/models/dro_access_spec.rb'
-    - 'lib/cocina/to_fedora/descriptive/*'
-    - 'lib/cocina/from_fedora/descriptive/*'
-    - 'lib/cocina/normalizers/mods/origin_info_normalizer.rb'
-    - 'lib/cocina/normalizers/mods/subject_normalizer.rb'
-    - 'lib/cocina/normalizers/mods_normalizer.rb'
+    - 'lib/cocina/models/mapping/to_mods/descriptive/*'
+    - 'lib/cocina/models/mapping/from_mods/descriptive/*'
+    - 'lib/cocina/models/mapping/normalizers/mods/origin_info_normalizer.rb'
+    - 'lib/cocina/models/mapping/normalizers/mods/subject_normalizer.rb'
+    - 'lib/cocina/models/mapping/normalizers/mods_normalizer.rb'
 
 
 # Offense count: 37
@@ -107,9 +101,9 @@ Metrics/MethodLength:
 Metrics/PerceivedComplexity:
   # Max: 20
   Exclude:
-    - 'lib/cocina/from_fedora/descriptive/*'
-    - 'lib/cocina/to_fedora/descriptive/*'
-    - 'lib/cocina/normalizers/**/*'
+    - 'lib/cocina/models/mapping/from_mods/descriptive/*'
+    - 'lib/cocina/models/mapping/to_mods/descriptive/*'
+    - 'lib/cocina/models/mapping/normalizers/**/*'
 
 # ----- RSpec ------
 
@@ -118,31 +112,6 @@ RSpec/BeEq: # new in 2.9.0
 
 RSpec/BeNil: # new in 2.9.0
   Enabled: true
-
-RSpec/ExampleLength:
-  Max: 18
-  Exclude:
-    - spec/cocina/models/description_spec.rb
-    - spec/cocina/models/dro_shared_examples.rb
-    - spec/cocina/models/builders/name_title_group_builder_spec.rb
-    - 'spec/cocina/from_fedora/descriptive/admin_metadata_spec.rb'
-    - 'spec/cocina/from_fedora/descriptive/subject_name_spec.rb'
-    - 'spec/cocina/from_fedora/descriptive/subject_spec.rb'
-    - 'spec/cocina/from_fedora/descriptive/titles_spec.rb'
-    - 'spec/cocina/from_fedora/descriptive_spec.rb'
-    - 'spec/cocina/mapping/descriptive/mods/name_spec.rb'
-    - 'spec/cocina/mapping/descriptive/mods/origin_info_place_spec.rb'
-    - 'spec/cocina/mapping/descriptive/mods/physical_description_spec.rb'
-    - 'spec/cocina/mapping/descriptive/mods/record_info_spec.rb'
-    - 'spec/cocina/mapping/descriptive/mods/subject_classification_spec.rb'
-    - 'spec/cocina/mapping/descriptive/mods/subject_genre_spec.rb'
-    - 'spec/cocina/mapping/descriptive/mods/subject_geographic_spec.rb'
-    - 'spec/cocina/mapping/descriptive/mods/subject_name_spec.rb'
-    - 'spec/cocina/mapping/descriptive/mods/subject_spec.rb'
-    - 'spec/cocina/mapping/descriptive/mods/subject_title_spec.rb'
-    - 'spec/cocina/mapping/descriptive/mods/title_info_spec.rb'
-    - 'spec/cocina/mapping/descriptive/mods/type_of_resource_spec.rb'
-    - 'spec/support/mods_mapping_spec_helper.rb'
 
 RSpec/MultipleExpectations:
   Enabled: false
