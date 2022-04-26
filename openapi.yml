@@ -580,7 +580,6 @@ components:
       required:
         - view
         - download
-        - controlledDigitalLending
     DarkAccess:
       type: object
       properties:

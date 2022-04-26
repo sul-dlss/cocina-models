@@ -5,7 +5,7 @@ module Cocina
     class AdminPolicyAccessTemplate < Struct
       attribute? :view, Types::Strict::String.enum('world', 'stanford', 'location-based', 'citation-only', 'dark')
       # Available for controlled digital lending.
-      attribute? :controlledDigitalLending, Types::Strict::Bool
+      attribute? :controlledDigitalLending, Types::Strict::Bool.default(false)
       # The human readable copyright statement that applies
       # example: Copyright World Trade Organization
       attribute? :copyright, Types::Strict::String.optional

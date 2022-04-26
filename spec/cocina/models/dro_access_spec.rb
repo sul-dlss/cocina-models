@@ -21,7 +21,7 @@ RSpec.describe Cocina::Models::DROAccess do
         download: download,
         location: location,
         controlledDigitalLending: controlled_digital_lending
-      },
+      }.compact,
       structural: {},
       identification: { sourceId: 'sul:123' }
     )
@@ -69,6 +69,7 @@ RSpec.describe Cocina::Models::DROAccess do
       expect { dro('stanford', 'stanford', nil, false) }.not_to raise_error
       expect { dro('stanford', 'none', nil, false) }.not_to raise_error
       expect { dro('stanford', 'none', nil, true) }.not_to raise_error
+      expect { dro('stanford', 'none', nil, nil) }.not_to raise_error
       expect { dro('stanford', 'location-based', 'art', false) }.not_to raise_error
       expect { dro('stanford', 'location-based', nil, false) }.to raise_error(Cocina::Models::ValidationError)
       expect { dro('stanford', 'world', nil, false) }.to raise_error(Cocina::Models::ValidationError)
@@ -87,6 +88,14 @@ RSpec.describe Cocina::Models::DROAccess do
       # Depends on https://github.com/ota42y/openapi_parser/pull/104
       # expect {dro('location-based', 'location-based', 'art', true) }
       #   .to raise_error(Cocina::Models::ValidationError)
+    end
+  end
+
+  context 'with stanford/none' do
+    it 'handles missing controlledDigitalLending param' do
+      expect(described_class.new(view: 'stanford', download: 'none')).to eq(
+        described_class.new(view: 'stanford', download: 'none', controlledDigitalLending: false)
+      )
     end
   end
 end
