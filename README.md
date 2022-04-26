@@ -16,7 +16,7 @@ Note that the data model encodes properties as camelCase, which the team believe
 
 Set the PURL url base:
 ```ruby
-Cocina::FromFedora::Purl.base_url = Settings.release.purl_base_url
+Cocina::Models::Mapping::Purl.base_url = Settings.release.purl_base_url
 ```
 
 ## Generate models from openapi.yml
