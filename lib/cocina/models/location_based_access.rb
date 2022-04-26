@@ -9,7 +9,7 @@ module Cocina
       attribute :download, Types::Strict::String.enum('location-based', 'none')
       # If access or download is "location-based", which location should have access.
       attribute :location, Types::Strict::String.enum('spec', 'music', 'ars', 'art', 'hoover', 'm&m')
-      attribute? :controlledDigitalLending, Types::Strict::Bool.enum(false)
+      attribute? :controlledDigitalLending, Types::Strict::Bool.default(false).enum(false)
     end
   end
 end

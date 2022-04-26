@@ -9,7 +9,7 @@ module Cocina
       attribute :download, Types::Strict::String.enum('none', 'stanford', 'world')
       # Not used for this access type, must be null.
       attribute? :location, Types::Strict::String.optional.enum('')
-      attribute? :controlledDigitalLending, Types::Strict::Bool.enum(false)
+      attribute? :controlledDigitalLending, Types::Strict::Bool.default(false).enum(false)
     end
   end
 end

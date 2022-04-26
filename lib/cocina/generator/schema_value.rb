@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'byebug'
-
 module Cocina
   module Generator
     # Class for generating from an openapi value

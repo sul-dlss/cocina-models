@@ -13,7 +13,7 @@ module Cocina
       # Validation of this property is relaxed. See the openapi for full validation.
       attribute? :location, Types::Strict::String.optional
       # Validation of this property is relaxed. See the openapi for full validation.
-      attribute? :controlledDigitalLending, Types::Strict::Bool.optional
+      attribute? :controlledDigitalLending, Types::Strict::Bool.optional.default(false)
       # Date when the Collection is released from an embargo.
       # example: 2029-06-22T07:00:00.000+00:00
       attribute :releaseDate, Types::Params::DateTime

@@ -13,7 +13,7 @@ module Cocina
       # Validation of this property is relaxed. See the openapi for full validation.
       attribute? :location, Types::Strict::String.optional
       # Validation of this property is relaxed. See the openapi for full validation.
-      attribute? :controlledDigitalLending, Types::Strict::Bool.optional
+      attribute? :controlledDigitalLending, Types::Strict::Bool.optional.default(false)
     end
   end
 end
