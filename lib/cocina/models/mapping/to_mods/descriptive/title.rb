@@ -74,7 +74,7 @@ module Cocina
                 contributors.each do |contributor|
                   if NameTitleGroup.in_name_title_group?(contributor: contributor, titles: [title])
                     NameWriter.write(xml: xml, contributor: contributor,
-                                            name_title_vals_index: name_title_vals_index, id_generator: id_generator)
+                                     name_title_vals_index: name_title_vals_index, id_generator: id_generator)
                   end
                 end
               end

@@ -36,7 +36,7 @@ module Cocina
               end
                 .each do |contributor|
                 NameWriter.write(xml: xml, contributor: contributor,
-                                        id_generator: id_generator)
+                                 id_generator: id_generator)
               end
             end
 
