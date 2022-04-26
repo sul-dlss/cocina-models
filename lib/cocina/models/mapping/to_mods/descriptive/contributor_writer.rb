@@ -182,9 +182,10 @@ module Cocina
 
             def write_grouped(name)
               Array(name.groupedValue).each do |part|
-                if part.type == 'pseudonym'
+                case part.type
+                when 'pseudonym'
                   xml.alternativeName part.value, name_part_attributes(part).merge({ altType: 'pseudonym' })
-                elsif part.type == 'alternative'
+                when 'alternative'
                   xml.alternativeName part.value, name_part_attributes(part)
                 else
                   write_name(part)

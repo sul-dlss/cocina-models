@@ -30,10 +30,7 @@ module Cocina
               AdminMetadata.write(xml: xml, admin_metadata: descriptive.adminMetadata)
               RelatedResource.write(xml: xml, related_resources: descriptive.relatedResource, druid: druid,
                                     id_generator: id_generator)
-              if descriptive.respond_to?(:geographic)
-                Geographic.write(xml: xml, geos: descriptive.geographic,
-                                 druid: druid)
-              end
+              Geographic.write(xml: xml, geos: descriptive.geographic, druid: druid) if descriptive.respond_to?(:geographic)
             end
           end
         end

@@ -53,29 +53,29 @@ module Cocina
 
                 next if children_nodes.empty?
 
-                if (have_authorityURI?(subject_node) || have_valueURI?(subject_node)) &&
+                if (has_authorityURI?(subject_node) || has_valueURI?(subject_node)) &&
                    children_nodes.size == 1
                   # If subject has authority and child doesn't, copy to child.
-                  add_authority(children_nodes, subject_node) if have_authority?(subject_node) && !have_authority?(children_nodes)
+                  add_authority(children_nodes, subject_node) if has_authority?(subject_node) && !has_authority?(children_nodes)
                   # If subject has authorityURI and child doesn't, move to child.
-                  add_authorityURI(children_nodes, subject_node) if have_authorityURI?(subject_node) && !have_authorityURI?(children_nodes)
+                  add_authorityURI(children_nodes, subject_node) if has_authorityURI?(subject_node) && !has_authorityURI?(children_nodes)
                   subject_node.delete('authorityURI')
                   # If subject has valueURI and child doesn't, move to child.
-                  add_valueURI(children_nodes, subject_node) if have_valueURI?(subject_node) && !have_valueURI?(children_nodes)
+                  add_valueURI(children_nodes, subject_node) if has_valueURI?(subject_node) && !has_valueURI?(children_nodes)
                   subject_node.delete('valueURI')
                 end
 
-                if !have_authority?(subject_node) &&
-                   have_authority?(children_nodes.first) &&
-                   have_same_authority?(children_nodes, children_nodes.first)
+                if !has_authority?(subject_node) &&
+                   has_authority?(children_nodes.first) &&
+                   has_same_authority?(children_nodes, children_nodes.first)
                   add_authority(subject_node, children_nodes.first, naf_to_lcsh: true)
                 end
 
-                next unless have_authority?(subject_node) &&
-                            have_authorityURI?(subject_node) &&
-                            !have_valueURI?(subject_node) &&
-                            have_authority?(children_nodes.first) &&
-                            have_same_authority?(children_nodes, children_nodes.first)
+                next unless has_authority?(subject_node) &&
+                            has_authorityURI?(subject_node) &&
+                            !has_valueURI?(subject_node) &&
+                            has_authority?(children_nodes.first) &&
+                            has_same_authority?(children_nodes, children_nodes.first)
 
                 delete_authorityURI(subject_node)
               end
@@ -86,21 +86,21 @@ module Cocina
                 children_nodes = subject_node.xpath('mods:*', mods: ModsNormalizer::MODS_NS)
 
                 children_nodes.each do |child_node|
-                  next unless !have_authorityURI?(subject_node) &&
-                              !have_valueURI?(subject_node) &&
-                              have_authority?(child_node) &&
-                              have_same_authority?(child_node, subject_node) &&
+                  next unless !has_authorityURI?(subject_node) &&
+                              !has_valueURI?(subject_node) &&
+                              has_authority?(child_node) &&
+                              has_same_authority?(child_node, subject_node) &&
                               child_node['authority'] != 'naf' &&
-                              !(have_authorityURI?(child_node) || have_valueURI?(child_node))
+                              !(has_authorityURI?(child_node) || has_valueURI?(child_node))
 
                   delete_authority(child_node)
                 end
 
-                next unless !have_authorityURI?(subject_node) &&
-                            !have_valueURI?(subject_node) &&
-                            have_authority?(subject_node) &&
-                            !have_authority?(children_nodes) &&
-                            (have_authorityURI?(children_nodes) || have_valueURI?(children_nodes))
+                next unless !has_authorityURI?(subject_node) &&
+                            !has_valueURI?(subject_node) &&
+                            has_authority?(subject_node) &&
+                            !has_authority?(children_nodes) &&
+                            (has_authorityURI?(children_nodes) || has_valueURI?(children_nodes))
 
                 add_authority(children_nodes, subject_node)
               end
@@ -108,13 +108,15 @@ module Cocina
             # rubocop:enable Metrics/CyclomaticComplexity
             # rubocop:enable Metrics/AbcSize
 
-            def have_authority?(nodes)
+            # rubocop:disable Naming/PredicateName
+            def has_authority?(nodes)
               nodes_to_a(nodes).all? { |node| node[:authority] }
             end
 
-            def have_same_authority?(nodes, same_node)
+            def has_same_authority?(nodes, same_node)
               nodes_to_a(nodes).all? { |node| same_node[:authority] == node[:authority] || (lcsh_or_naf?(same_node) && lcsh_or_naf?(node)) }
             end
+            # rubocop:enable Naming/PredicateName
 
             def lcsh_or_naf?(node)
               %w[lcsh naf].include?(node[:authority])
@@ -134,7 +136,8 @@ module Cocina
             end
 
             # rubocop:disable Naming/MethodName
-            def have_authorityURI?(nodes)
+            # rubocop:disable Naming/PredicateName
+            def has_authorityURI?(nodes)
               nodes_to_a(nodes).all? { |node| node[:authorityURI] }
             end
 
@@ -146,7 +149,7 @@ module Cocina
               nodes_to_a(nodes).each { |node| node.delete('authorityURI') }
             end
 
-            def have_valueURI?(nodes)
+            def has_valueURI?(nodes)
               nodes_to_a(nodes).all? { |node| node[:valueURI] }
             end
 
@@ -154,6 +157,7 @@ module Cocina
               nodes_to_a(nodes).each { |node| node[:valueURI] = from_node[:valueURI] }
             end
             # rubocop:enable Naming/MethodName
+            # rubocop:enable Naming/PredicateName
 
             def nodes_to_a(nodes)
               nodes.is_a?(Nokogiri::XML::NodeSet) ? nodes : [nodes]

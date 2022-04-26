@@ -72,9 +72,7 @@ module Cocina
             end
 
             def display_label(node)
-              if Cocina::Models::Mapping::ToMods::Descriptive::Note.display_label_to_abstract_type.include? node[:displayLabel]
-                return node[:displayLabel].capitalize
-              end
+              return node[:displayLabel].capitalize if Cocina::Models::Mapping::ToMods::Descriptive::Note.display_label_to_abstract_type.include? node[:displayLabel]
 
               node[:displayLabel].presence
             end
