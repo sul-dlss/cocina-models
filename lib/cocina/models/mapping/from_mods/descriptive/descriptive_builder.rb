@@ -23,17 +23,17 @@ module Cocina
               access: Descriptive::Access
             }.freeze
 
-            # @param [#build] title_builder
             # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
             # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
+            # @param [TitleBuilder] title_builder - defaults to Title class
             # @param [String] purl
             # @return [Hash] a hash that can be mapped to a cocina descriptive model
-            def self.build(resource_element:, notifier:, title_builder: Titles, purl: nil)
+            def self.build(resource_element:, notifier:, title_builder: Title, purl: nil)
               new(title_builder: title_builder, notifier: notifier).build(resource_element: resource_element,
                                                                           purl: purl)
             end
 
-            def initialize(notifier:, title_builder: Titles)
+            def initialize(notifier:, title_builder: Title)
               @title_builder = title_builder
               @notifier = notifier
             end

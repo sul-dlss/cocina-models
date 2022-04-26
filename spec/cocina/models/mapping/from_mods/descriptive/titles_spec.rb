@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Cocina::Models::Mapping::FromMods::Descriptive::Titles do
+RSpec.describe Cocina::Models::Mapping::FromMods::Descriptive::Title do
   describe '.build' do
     subject(:build) do
       described_class.build(resource_element: ng_xml.root, require_title: require_title, notifier: notifier)

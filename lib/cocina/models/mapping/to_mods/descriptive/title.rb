@@ -9,7 +9,7 @@ module Cocina
           #   NOTE: contributors from nameTitleGroups are output here as well;
           #   this allows for consistency of the nameTitleGroup number for the matching title(s) and the contributor(s)
           class Title # rubocop:disable Metrics/ClassLength
-            TAG_NAME = Cocina::Models::Mapping::FromMods::Descriptive::Titles::TYPES.invert.merge('activity dates' => 'date').freeze
+            TAG_NAME = Cocina::Models::Mapping::FromMods::Descriptive::Title::TYPES.invert.merge('activity dates' => 'date').freeze
             NAME_TYPES = ['name', 'forename', 'surname', 'life dates', 'term of address'].freeze
 
             # @params [Nokogiri::XML::Builder] xml
