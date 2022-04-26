@@ -7,7 +7,7 @@ RSpec.describe Cocina::Models::Mapping::FromMods::Descriptive do
     described_class.props(mods: Nokogiri::XML(desc_metadata), druid: 'druid:bb196dd3409', notifier: notifier, label: 'test label')
   end
 
-  let(:notifier) { instance_double(Cocina::Models::Mapping::FromMods::ErrorNotifier) }
+  let(:notifier) { instance_double(Cocina::Models::Mapping::ErrorNotifier) }
 
   context 'when the item is a was-seed' do
     let(:desc_metadata) do

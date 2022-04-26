@@ -12,7 +12,7 @@ module Cocina
             TYPE_FOR_ROLES = Cocina::Models::Mapping::FromMods::Descriptive::Contributor::ROLES.merge('event' => 'event').freeze
 
             # @param [Array<Nokogiri::XML::Element>] name_elements (multiple if parallel)
-            # @param [Cocina::Models::Mapping::FromMods::ErrorNotifier] notifier
+            # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
             # @return [Hash] a hash that can be mapped to a cocina model
             def self.build(name_elements:, notifier:)
               new(name_elements: name_elements, notifier: notifier).build

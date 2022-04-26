@@ -4,7 +4,7 @@ require 'spec_helper'
 
 RSpec.describe Cocina::Models::Mapping::FromMods::Descriptive::ValueURI do
   describe '.sniff' do
-    let(:notifier) { instance_double(Cocina::Models::Mapping::FromMods::ErrorNotifier) }
+    let(:notifier) { instance_double(Cocina::Models::Mapping::ErrorNotifier) }
 
     before do
       allow(notifier).to receive(:warn)

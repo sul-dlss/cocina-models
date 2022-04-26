@@ -8,7 +8,7 @@ module Cocina
           # Maps titles
           class HydrusDefaultTitleBuilder
             # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
-            # @param [Cocina::Models::Mapping::FromMods::ErrorNotifier] notifier
+            # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
             # @return [Hash] a hash that can be mapped to a cocina model
             def self.build(resource_element:, notifier:, require_title: nil)
               titles = resource_element.xpath('mods:titleInfo/mods:title[string-length() > 0]',

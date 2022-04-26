@@ -8,7 +8,7 @@ module Cocina
           # Maps titles
           class TitleBuilder
             # @param [Nokogiri::XML::Element] title_info_element titleInfo element
-            # @param [Cocina::Models::Mapping::FromMods::ErrorNotifier] notifier
+            # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
             # @return [Hash] a hash that can be mapped to a cocina model
             def self.build(title_info_element:, notifier:)
               new(title_info_element: title_info_element, notifier: notifier).build
