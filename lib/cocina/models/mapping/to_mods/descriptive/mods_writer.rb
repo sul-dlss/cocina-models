@@ -6,7 +6,7 @@ module Cocina
       module ToMods
         class Descriptive
           # Maps descriptive resource from cocina to MODS XML
-          class DescriptiveWriter
+          class ModsWriter
             # @params [Nokogiri::XML::Builder] xml
             # @param [Cocina::Models::Description] descriptive
             # @param [string] druid
