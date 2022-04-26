@@ -424,7 +424,7 @@ RSpec.describe Cocina::Models::Mapping::Normalizers::Mods::SubjectNormalizer do
     end
   end
 
-  context 'when normalizing subject authority' do
+  context 'when normalizing subject authority (naf)' do
     let(:mods_ng_xml) do
       Nokogiri::XML <<~XML
         <mods #{MODS_ATTRIBUTES}>
@@ -446,7 +446,7 @@ RSpec.describe Cocina::Models::Mapping::Normalizers::Mods::SubjectNormalizer do
     end
   end
 
-  context 'when normalizing subject authority' do
+  context 'when normalizing subject authority (fast)' do
     let(:mods_ng_xml) do
       Nokogiri::XML <<~XML
         <mods #{MODS_ATTRIBUTES}>

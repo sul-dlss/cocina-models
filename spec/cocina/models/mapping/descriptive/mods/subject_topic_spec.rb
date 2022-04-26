@@ -341,7 +341,7 @@ RSpec.describe 'MODS subject topic <--> cocina mappings' do
     end
   end
 
-  describe 'Multi-term topic subject with authority for both set and terms' do
+  describe 'Multi-term topic subject with authority and authorityURI for both set and terms' do
     it_behaves_like 'MODS cocina mapping' do
       let(:mods) do
         <<~XML
@@ -482,7 +482,7 @@ RSpec.describe 'MODS subject topic <--> cocina mappings' do
     end
   end
 
-  describe 'Multi-term topic subject with authority for both set and terms' do
+  describe 'Multi-term topic subject with authority only for both set and terms' do
     it_behaves_like 'MODS cocina mapping' do
       let(:mods) do
         <<~XML
