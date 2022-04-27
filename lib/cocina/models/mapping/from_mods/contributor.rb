@@ -22,7 +22,7 @@ module Cocina
           }.freeze
 
           # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
-          # @param [Cocina::Models::Mapping::FromMods::DescriptiveBuilder] descriptive_builder
+          # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] descriptive_builder
           # @param [String] purl
           # @return [Hash] a hash that can be mapped to a cocina model
           def self.build(resource_element:, descriptive_builder:, purl: nil)
@@ -51,7 +51,7 @@ module Cocina
             # In addition, to plain-old dupes, need to get rid of names that are dupes where
             #   e.g., one has a nameTitleGroup and one does not
             # Need to retain nameTitleGroups, so sorting so those first. (Array.uniq takes first.)
-            name_nodes = resource_element.xpath('mods:name', mods: Descriptive::DESC_METADATA_NS)
+            name_nodes = resource_element.xpath('mods:name', mods: Description::DESC_METADATA_NS)
             nametitle_nodes, other_nodes = name_nodes.partition { |name_node| name_node['nameTitleGroup'] }
             ordered_name_nodes = nametitle_nodes + other_nodes
             uniq_name_nodes = uniq_name_nodes(ordered_name_nodes)
@@ -76,7 +76,7 @@ module Cocina
             dup_name_node = name_node.dup
             dup_name_node.delete('usage')
             dup_name_node.delete('nameTitleGroup')
-            dup_name_node.xpath('mods:role', mods: Descriptive::DESC_METADATA_NS).each(&:unlink)
+            dup_name_node.xpath('mods:role', mods: Description::DESC_METADATA_NS).each(&:unlink)
             dup_name_node.to_s.strip.gsub(/\s+/, ' ')
           end
 
@@ -88,7 +88,7 @@ module Cocina
               role_nodes = names_to_roles[name_node_comparitor(uniq_name_node)]
               next if role_nodes.blank?
 
-              uniq_name_node.xpath('mods:role', mods: Descriptive::DESC_METADATA_NS).each(&:unlink)
+              uniq_name_node.xpath('mods:role', mods: Description::DESC_METADATA_NS).each(&:unlink)
               role_nodes.each { |role_node| uniq_name_node.add_child(role_node) }
             end
             uniq_name_nodes
@@ -100,7 +100,7 @@ module Cocina
             result = {}
 
             # we must do this outside the loop in case of duplicate name nodes
-            all_role_nodes = resource_element.xpath('mods:name/mods:role', mods: Descriptive::DESC_METADATA_NS)
+            all_role_nodes = resource_element.xpath('mods:name/mods:role', mods: Description::DESC_METADATA_NS)
             all_role_nodes.each do |role_node|
               name_comparitor = name_node_comparitor(role_node.parent)
               result[name_comparitor] = if result[name_comparitor]

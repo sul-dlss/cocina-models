@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Cocina::Models::Mapping::ToMods::Descriptive do
+RSpec.describe Cocina::Models::Mapping::ToMods::Description do
   subject(:xml) { described_class.transform(descriptive, druid).to_xml }
 
   context 'with a minimal description' do

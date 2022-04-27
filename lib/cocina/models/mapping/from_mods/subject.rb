@@ -17,7 +17,7 @@ module Cocina
           }.freeze
 
           # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
-          # @param [Cocina::Models::Mapping::FromMods::DescriptiveBuilder] descriptive_builder
+          # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] descriptive_builder
           # @param [String] purl
           # @return [Hash] a hash that can be mapped to a cocina model
           def self.build(resource_element:, descriptive_builder:, purl: nil)
@@ -75,7 +75,7 @@ module Cocina
               notifier.warn('Subject has text', { subject: subject_node.to_s }) if subject_node.content.present?
             end
 
-            children_nodes = subject_node.xpath('mods:*', mods: Descriptive::DESC_METADATA_NS).to_a.reject do |child_node|
+            children_nodes = subject_node.xpath('mods:*', mods: Description::DESC_METADATA_NS).to_a.reject do |child_node|
               child_node.children.empty? && child_node.attributes.empty?
             end
             first_child_node = children_nodes.first
@@ -344,10 +344,10 @@ module Cocina
 
           def name_notes_for(roles, name_node)
             notes = Array(roles).map { |role| role.merge({ type: 'role' }) }
-            name_node.xpath('mods:affiliation', mods: Descriptive::DESC_METADATA_NS).each do |affil_node|
+            name_node.xpath('mods:affiliation', mods: Description::DESC_METADATA_NS).each do |affil_node|
               notes << { value: affil_node.text, type: 'affiliation' }
             end
-            name_node.xpath('mods:description', mods: Descriptive::DESC_METADATA_NS).each do |descr_node|
+            name_node.xpath('mods:description', mods: Description::DESC_METADATA_NS).each do |descr_node|
               notes << { value: descr_node.text, type: 'description' }
             end
             notes
@@ -376,8 +376,8 @@ module Cocina
 
           def subject_nodes
             resource_element.xpath('mods:subject',
-                                   mods: Descriptive::DESC_METADATA_NS) + resource_element.xpath('mods:classification',
-                                                                                                 mods: Descriptive::DESC_METADATA_NS)
+                                   mods: Description::DESC_METADATA_NS) + resource_element.xpath('mods:classification',
+                                                                                                 mods: Description::DESC_METADATA_NS)
           end
 
           def temporal_range(children_nodes, attrs)
@@ -395,7 +395,7 @@ module Cocina
           def build_cartographics
             coordinates = subject_nodes.map do |subject_node|
               subject_node.xpath('mods:cartographics/mods:coordinates',
-                                 mods: Descriptive::DESC_METADATA_NS).filter_map do |coordinate_node|
+                                 mods: Description::DESC_METADATA_NS).filter_map do |coordinate_node|
                 coordinate = coordinate_node.content
                 next if coordinate.blank?
 

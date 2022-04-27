@@ -5,7 +5,7 @@ module Cocina
     module Mapping
       module FromMods
         # Creates Cocina Descriptive objects from MODS xml
-        class Descriptive
+        class Description
           DESC_METADATA_NS = 'http://www.loc.gov/mods/v3'
           XLINK_NS = 'http://www.w3.org/1999/xlink'
 
@@ -35,7 +35,7 @@ module Cocina
 
             check_altrepgroups
             check_version
-            props = DescriptiveBuilder.build(title_builder: title_builder,
+            props = DescriptionBuilder.build(title_builder: title_builder,
                                              resource_element: ng_xml.root,
                                              notifier: notifier,
                                              purl: druid ? Cocina::Models::Mapping::Purl.for(druid: druid) : nil)
@@ -48,7 +48,7 @@ module Cocina
           attr_reader :title_builder, :ng_xml, :notifier, :druid, :label
 
           def check_altrepgroups
-            ng_xml.xpath('//mods:*[@altRepGroup]', mods: Descriptive::DESC_METADATA_NS)
+            ng_xml.xpath('//mods:*[@altRepGroup]', mods: DESC_METADATA_NS)
                   .group_by { |node| node['altRepGroup'] }
                   .values
                   .select { |nodes| nodes.size > 1 }
@@ -86,7 +86,7 @@ module Cocina
 
           def check_version
             match = /MODS version (\d\.\d)/.match(ng_xml.root.at('//mods:recordInfo/mods:recordOrigin',
-                                                                 mods: Descriptive::DESC_METADATA_NS)&.content)
+                                                                 mods: DESC_METADATA_NS)&.content)
 
             return unless match
 

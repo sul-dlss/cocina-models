@@ -5,7 +5,7 @@ module Cocina
     module Mapping
       module FromMods
         # Creates Cocina Description objects from MODS resource element.
-        class DescriptiveBuilder
+        class DescriptionBuilder
           attr_reader :notifier
 
           BUILDERS = {

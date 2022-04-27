@@ -9,8 +9,8 @@ module Cocina
         class ModsNormalizer # rubocop:disable Metrics/ClassLength
           include Cocina::Models::Mapping::Normalizers::Base
 
-          MODS_NS = Cocina::Models::Mapping::FromMods::Descriptive::DESC_METADATA_NS
-          XLINK_NS = Cocina::Models::Mapping::FromMods::Descriptive::XLINK_NS
+          MODS_NS = Cocina::Models::Mapping::FromMods::Description::DESC_METADATA_NS
+          XLINK_NS = Cocina::Models::Mapping::FromMods::Description::XLINK_NS
 
           # @param [Nokogiri::Document] mods_ng_xml MODS to be normalized
           # @param [String] druid

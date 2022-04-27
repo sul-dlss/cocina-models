@@ -7,7 +7,7 @@ module Cocina
         # Maps languages
         class Language
           # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
-          # @param [Cocina::Models::Mapping::FromMods::DescriptiveBuilder] descriptive_builder
+          # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] descriptive_builder
           # @param [String] purl
           # @return [Hash] a hash that can be mapped to a cocina model
           def self.build(resource_element:, descriptive_builder:, purl: nil)
@@ -20,7 +20,7 @@ module Cocina
           end
 
           def build
-            languages = resource_element.xpath('mods:language', mods: Descriptive::DESC_METADATA_NS).map do |lang_node|
+            languages = resource_element.xpath('mods:language', mods: Description::DESC_METADATA_NS).map do |lang_node|
               Cocina::Models::Mapping::FromMods::LanguageTerm.build(language_element: lang_node, notifier: notifier)
             end
             Primary.adjust(languages, 'language', notifier)

@@ -25,7 +25,7 @@ module Cocina
           attr_reader :part_element
 
           def structured_value?
-            part_element.xpath('mods:detail[@type]', mods: Descriptive::DESC_METADATA_NS).size > 1
+            part_element.xpath('mods:detail[@type]', mods: Description::DESC_METADATA_NS).size > 1
           end
 
           def grouped_value
@@ -73,7 +73,7 @@ module Cocina
           end
 
           def detail_values
-            part_element.xpath('mods:detail', mods: Descriptive::DESC_METADATA_NS).filter_map do |detail_node|
+            part_element.xpath('mods:detail', mods: Description::DESC_METADATA_NS).filter_map do |detail_node|
               detail_values_for(detail_node)
             end
           end
@@ -92,7 +92,7 @@ module Cocina
           end
 
           def extent_values
-            part_element.xpath('mods:extent', mods: Descriptive::DESC_METADATA_NS).filter_map do |extent_node|
+            part_element.xpath('mods:extent', mods: Description::DESC_METADATA_NS).filter_map do |extent_node|
               extent_values_for(extent_node)
             end
           end
@@ -123,7 +123,7 @@ module Cocina
           end
 
           def page_value_for(extent_node, type)
-            page_node = extent_node.xpath("mods:#{type}", mods: Descriptive::DESC_METADATA_NS).first
+            page_node = extent_node.xpath("mods:#{type}", mods: Description::DESC_METADATA_NS).first
             return nil if page_node.nil?
 
             {
@@ -134,7 +134,7 @@ module Cocina
 
           def part_note_value_for(node, type, xpath: nil)
             xpath ||= "mods:#{type}"
-            node.xpath(xpath, mods: Descriptive::DESC_METADATA_NS).filter_map do |value_node|
+            node.xpath(xpath, mods: Description::DESC_METADATA_NS).filter_map do |value_node|
               next if value_node.content.blank?
 
               { type: type, value: value_node.content }

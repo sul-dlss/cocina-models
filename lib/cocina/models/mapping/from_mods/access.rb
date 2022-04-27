@@ -14,7 +14,7 @@ module Cocina
           }.freeze
 
           # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
-          # @param [Cocina::Models::Mapping::FromMods::DescriptiveBuilder] descriptive_builder
+          # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] descriptive_builder
           # @param [String] purl
           # @return [Hash] a hash that can be mapped to a cocina model
           def self.build(resource_element:, descriptive_builder:, purl: nil)
@@ -44,24 +44,24 @@ module Cocina
 
           # Hydrus is known to create location nodes with no children.
           def location_nodes
-            resource_element.xpath('mods:location[*]', mods: Descriptive::DESC_METADATA_NS)
+            resource_element.xpath('mods:location[*]', mods: Description::DESC_METADATA_NS)
           end
 
           def physical_location
             descriptive_value_for(resource_element.xpath(
-                                    "mods:location/mods:physicalLocation[not(@type='repository')][not(@type='discovery')]", mods: Descriptive::DESC_METADATA_NS
+                                    "mods:location/mods:physicalLocation[not(@type='repository')][not(@type='discovery')]", mods: Description::DESC_METADATA_NS
                                   ))
           end
 
           def digital_location
             descriptive_value_for(resource_element.xpath(
-                                    "mods:location/mods:physicalLocation[(@type='discovery')]", mods: Descriptive::DESC_METADATA_NS
+                                    "mods:location/mods:physicalLocation[(@type='discovery')]", mods: Description::DESC_METADATA_NS
                                   ))
           end
 
           def xlink_location
-            resource_element.xpath('mods:location/mods:physicalLocation[@xlink:href]', mods: Descriptive::DESC_METADATA_NS,
-                                                                                       xlink: Descriptive::XLINK_NS).map do |node|
+            resource_element.xpath('mods:location/mods:physicalLocation[@xlink:href]', mods: Description::DESC_METADATA_NS,
+                                                                                       xlink: Description::XLINK_NS).map do |node|
               {
                 valueAt: node['xlink:href']
               }
@@ -70,14 +70,14 @@ module Cocina
 
           def access_contact
             descriptive_value_for(resource_element.xpath("mods:location/mods:physicalLocation[@type='repository']",
-                                                         mods: Descriptive::DESC_METADATA_NS)) +
-              descriptive_value_for(resource_element.xpath("mods:note[@type='contact']", mods: Descriptive::DESC_METADATA_NS),
+                                                         mods: Description::DESC_METADATA_NS)) +
+              descriptive_value_for(resource_element.xpath("mods:note[@type='contact']", mods: Description::DESC_METADATA_NS),
                                     type: 'email')
           end
 
           def shelf_location
             resource_element.xpath('mods:location/mods:shelfLocator',
-                                   mods: Descriptive::DESC_METADATA_NS).filter_map do |shelf_locator_elem|
+                                   mods: Description::DESC_METADATA_NS).filter_map do |shelf_locator_elem|
               next if shelf_locator_elem.content.blank?
 
               {
@@ -120,7 +120,7 @@ module Cocina
           end
 
           def all_url_nodes
-            @all_url_nodes ||= resource_element.xpath('mods:location/mods:url', mods: Descriptive::DESC_METADATA_NS)
+            @all_url_nodes ||= resource_element.xpath('mods:location/mods:url', mods: Description::DESC_METADATA_NS)
           end
 
           def primary_purl_node
@@ -138,7 +138,7 @@ module Cocina
           end
 
           def note
-            resource_element.xpath('mods:accessCondition', mods: Descriptive::DESC_METADATA_NS).map do |access_elem|
+            resource_element.xpath('mods:accessCondition', mods: Description::DESC_METADATA_NS).map do |access_elem|
               {
                 value: access_elem.text.presence,
                 type: ACCESS_CONDITION_TYPES.fetch(access_elem['type'], access_elem['type']),

@@ -7,7 +7,7 @@ RSpec.describe Cocina::Models::Mapping::FromMods::RelatedResource do
     described_class.build(resource_element: ng_xml.root, descriptive_builder: descriptive_builder, purl: nil)
   end
 
-  let(:descriptive_builder) { Cocina::Models::Mapping::FromMods::DescriptiveBuilder.new(notifier: notifier) }
+  let(:descriptive_builder) { Cocina::Models::Mapping::FromMods::DescriptionBuilder.new(notifier: notifier) }
 
   let(:notifier) { instance_double(Cocina::Models::Mapping::ErrorNotifier) }
 

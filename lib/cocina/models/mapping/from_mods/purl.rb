@@ -8,7 +8,7 @@ module Cocina
         class Purl
           def self.primary_purl_node(resource_element, purl)
             purl_nodes = resource_element.xpath('mods:location/mods:url',
-                                                mods: Descriptive::DESC_METADATA_NS).select do |url_node|
+                                                mods: Description::DESC_METADATA_NS).select do |url_node|
               Cocina::Models::Mapping::Purl.purl?(url_node.text)
             end
 

@@ -7,8 +7,8 @@ module Cocina
         # Maps notes
         class Note # rubocop:disable Metrics/ClassLength
           # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
-          # @param [Cocina::Models::Mapping::FromMods::DescriptiveBuilder] descriptive_builder (not used, but passed in by DescriptiveBuilder)
-          # @param [String] purl (not used, but passed in by DescriptiveBuilder)
+          # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] descriptive_builder (not used, but passed in by DescriptionBuilder)
+          # @param [String] purl (not used, but passed in by DescriptionBuilder)
           # @return [Hash] a hash that can be mapped to a cocina model
           # def self.build(resource_element:, descriptive_builder: nil, purl: nil)
           def self.build(resource_element:, descriptive_builder: nil, purl: nil)
@@ -28,7 +28,7 @@ module Cocina
           attr_reader :resource_element
 
           def abstracts
-            all_abstract_nodes = resource_element.xpath('mods:abstract', mods: Descriptive::DESC_METADATA_NS).select do |node|
+            all_abstract_nodes = resource_element.xpath('mods:abstract', mods: Description::DESC_METADATA_NS).select do |node|
               note_present?(node)
             end
             altrepgroup_abstract_nodes, other_abstract_nodes = AltRepGroup.split(nodes: all_abstract_nodes)
@@ -88,7 +88,7 @@ module Cocina
           end
 
           def notes
-            all_note_nodes = resource_element.xpath('mods:note', mods: Descriptive::DESC_METADATA_NS).select do |node|
+            all_note_nodes = resource_element.xpath('mods:note', mods: Description::DESC_METADATA_NS).select do |node|
               note_present?(node) && node[:type] != 'contact'
             end
             altrepgroup_note_nodes, other_note_nodes = AltRepGroup.split(nodes: all_note_nodes)
@@ -107,7 +107,7 @@ module Cocina
           end
 
           def target_audience
-            resource_element.xpath('mods:targetAudience', mods: Descriptive::DESC_METADATA_NS).filter_map do |node|
+            resource_element.xpath('mods:targetAudience', mods: Description::DESC_METADATA_NS).filter_map do |node|
               {
                 type: 'target audience',
                 value: node.content,
@@ -119,7 +119,7 @@ module Cocina
           end
 
           def table_of_contents
-            all_toc_nodes = resource_element.xpath('mods:tableOfContents', mods: Descriptive::DESC_METADATA_NS).select do |node|
+            all_toc_nodes = resource_element.xpath('mods:tableOfContents', mods: Description::DESC_METADATA_NS).select do |node|
               note_present?(node)
             end
             altrepgroup_toc_nodes, other_toc_nodes = AltRepGroup.split(nodes: all_toc_nodes)
@@ -151,7 +151,7 @@ module Cocina
           end
 
           def parts
-            resource_element.xpath('mods:part', mods: Descriptive::DESC_METADATA_NS).filter_map do |part_node|
+            resource_element.xpath('mods:part', mods: Description::DESC_METADATA_NS).filter_map do |part_node|
               PartBuilder.build(part_element: part_node)
             end
           end
