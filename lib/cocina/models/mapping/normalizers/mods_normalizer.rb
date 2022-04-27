@@ -151,7 +151,7 @@ module Cocina
           end
 
           def normalize_authority_uris
-            Cocina::Models::Mapping::FromMods::Descriptive::Authority::NORMALIZE_AUTHORITY_URIS.each do |authority_uri|
+            Cocina::Models::Mapping::FromMods::Authority::NORMALIZE_AUTHORITY_URIS.each do |authority_uri|
               ng_xml.xpath("//mods:*[@authorityURI='#{authority_uri}']", mods: MODS_NS).each do |node|
                 node[:authorityURI] = "#{authority_uri}/"
               end
@@ -165,7 +165,7 @@ module Cocina
 
           def normalize_purl_for(base_node, purl: nil)
             purl_nodes(base_node).each do |purl_node|
-              purl_node.content = Cocina::Models::Mapping::FromMods::Descriptive::Purl.purl_value(purl_node)
+              purl_node.content = Cocina::Models::Mapping::FromMods::Purl.purl_value(purl_node)
             end
 
             # If there is a purl, add a url node if there is not already one.
@@ -178,7 +178,7 @@ module Cocina
             end
 
             purl_nodes(base_node).each do |purl_node|
-              next if purl_node == Cocina::Models::Mapping::FromMods::Descriptive::Purl.primary_purl_node(base_node, purl)
+              next if purl_node == Cocina::Models::Mapping::FromMods::Purl.primary_purl_node(base_node, purl)
 
               # Move into own relatedItem
               new_related_item = Nokogiri::XML::Node.new('relatedItem', Nokogiri::XML(nil))
@@ -313,9 +313,9 @@ module Cocina
           end
 
           def normalized_identifier_type_for(type)
-            cocina_type, _mods_type, identifier_source = Cocina::Models::Mapping::FromMods::Descriptive::IdentifierType.cocina_type_for_mods_type(type)
+            cocina_type, _mods_type, identifier_source = Cocina::Models::Mapping::FromMods::IdentifierType.cocina_type_for_mods_type(type)
 
-            return Cocina::Models::Mapping::FromMods::Descriptive::IdentifierType.mods_type_for_cocina_type(cocina_type) if identifier_source
+            return Cocina::Models::Mapping::FromMods::IdentifierType.mods_type_for_cocina_type(cocina_type) if identifier_source
 
             type
           end
@@ -343,12 +343,12 @@ module Cocina
 
           def normalize_notes
             ng_xml.xpath('//mods:note', mods: MODS_NS).each do |note_node|
-              if Cocina::Models::Mapping::ToMods::Descriptive::Note.note_type_to_abstract_type.include?(note_node['type']&.downcase) ||
-                 Cocina::Models::Mapping::ToMods::Descriptive::Note.display_label_to_abstract_type.include?(note_node['displayLabel'])
+              if Cocina::Models::Mapping::ToMods::Note.note_type_to_abstract_type.include?(note_node['type']&.downcase) ||
+                 Cocina::Models::Mapping::ToMods::Note.display_label_to_abstract_type.include?(note_node['displayLabel'])
                 note_node.delete('type') unless note_node['type']&.downcase == 'summary'
                 note_node.name = 'abstract'
               end
-              if Cocina::Models::Mapping::ToMods::Descriptive::Note.display_label_to_abstract_type.include? note_node['displayLabel']
+              if Cocina::Models::Mapping::ToMods::Note.display_label_to_abstract_type.include? note_node['displayLabel']
                 note_node['displayLabel'] =
                   note_node['displayLabel'].capitalize
               end
@@ -357,11 +357,11 @@ module Cocina
 
           def normalize_abstracts
             ng_xml.xpath('/mods:mods/mods:abstract', mods: MODS_NS).each do |abstract_node|
-              if Cocina::Models::Mapping::ToMods::Descriptive::Note.note_type_to_abstract_type.include? abstract_node['type']&.downcase
+              if Cocina::Models::Mapping::ToMods::Note.note_type_to_abstract_type.include? abstract_node['type']&.downcase
                 abstract_node['type'] =
                   abstract_node['type'].downcase
               end
-              if Cocina::Models::Mapping::ToMods::Descriptive::Note.display_label_to_abstract_type.include? abstract_node['displayLabel']
+              if Cocina::Models::Mapping::ToMods::Note.display_label_to_abstract_type.include? abstract_node['displayLabel']
                 abstract_node['displayLabel'] =
                   abstract_node['displayLabel'].capitalize
               end
