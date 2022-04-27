@@ -8,24 +8,10 @@ RSpec.describe Cocina::Models do
   end
 
   describe '.build' do
-    subject(:build) { described_class.build(data) }
+    subject(:model_build) { described_class.build(data) }
 
     context 'with a collection type' do
-      let(:data) do
-        {
-          'type' => 'https://cocina.sul.stanford.edu/models/exhibit',
-          'externalIdentifier' => 'druid:bc123df4567',
-          'label' => 'bar',
-          'version' => 5,
-          'access' => {},
-          'description' => {
-            'title' => [{ 'value' => 'Test Collection' }],
-            'purl' => 'https://purl.stanford.edu/bc123df4567'
-          },
-          'identification' => {},
-          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
-        }
-      end
+      let(:data) { build(:collection).to_h }
 
       it { is_expected.to be_kind_of Cocina::Models::Collection }
     end
@@ -42,69 +28,24 @@ RSpec.describe Cocina::Models do
       end
 
       it 'raises' do
-        expect { build }.to raise_error(Cocina::Models::ValidationError)
+        expect { model_build }.to raise_error(Cocina::Models::ValidationError)
       end
     end
 
     context 'with a DRO type' do
-      let(:data) do
-        {
-          'type' => 'https://cocina.sul.stanford.edu/models/image',
-          'externalIdentifier' => 'druid:bc123df4567',
-          'label' => 'bar',
-          'version' => 5,
-          'access' => {},
-          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' },
-          'identification' => {
-            'doi' => '10.25740/bc123df4567',
-            sourceId: 'sul:123'
-          },
-          'description' => {
-            'title' => [{ 'value' => 'Test DRO' }],
-            'purl' => 'https://purl.stanford.edu/bc123df4567'
-          },
-          'structural' => {}
-        }
-      end
+      let(:data) { build(:dro).to_h }
 
       it { is_expected.to be_kind_of Cocina::Models::DRO }
     end
 
     context 'with an AdminPolicy type' do
-      let(:data) do
-        {
-          'type' => 'https://cocina.sul.stanford.edu/models/admin_policy',
-          'externalIdentifier' => 'druid:bc123df4567',
-          'label' => 'bar',
-          'version' => 5,
-          'administrative' => {
-            'hasAdminPolicy' => 'druid:bc123df4567',
-            'hasAgreement' => 'druid:bc123df4567',
-            'accessTemplate' => {}
-          }
-        }
-      end
+      let(:data) { build(:admin_policy).to_h }
 
       it { is_expected.to be_kind_of Cocina::Models::AdminPolicy }
     end
 
-    context 'with keys as symbols' do
-      let(:data) do
-        {
-          type: 'https://cocina.sul.stanford.edu/models/image',
-          externalIdentifier: 'druid:bc123df4567',
-          label: 'bar',
-          version: 5,
-          access: {},
-          administrative: { 'hasAdminPolicy' => 'druid:bc123df4567' },
-          description: {
-            title: [{ 'value' => 'Test DRO' }],
-            purl: 'https://purl.stanford.edu/bc123df4567'
-          },
-          structural: {},
-          identification: { sourceId: 'sul:123' }
-        }
-      end
+    context 'with keys as strings' do
+      let(:data) { build(:dro).to_h.deep_stringify_keys }
 
       it { is_expected.to be_kind_of Cocina::Models::DRO }
     end
@@ -115,7 +56,7 @@ RSpec.describe Cocina::Models do
       end
 
       it 'raises an error' do
-        expect { build }.to raise_error Cocina::Models::UnknownTypeError, "Unknown type: 'foo'"
+        expect { model_build }.to raise_error Cocina::Models::UnknownTypeError, "Unknown type: 'foo'"
       end
     end
 
@@ -125,7 +66,7 @@ RSpec.describe Cocina::Models do
       end
 
       it 'raises an error' do
-        expect { build }.to raise_error Cocina::Models::ValidationError
+        expect { model_build }.to raise_error Cocina::Models::ValidationError
       end
     end
   end
@@ -241,25 +182,7 @@ RSpec.describe Cocina::Models do
   describe '.without_metadata' do
     subject(:cocina_object_without_metadata) { described_class.without_metadata(cocina_object) }
 
-    let(:cocina_object) do
-      Cocina::Models::DROWithMetadata.new(
-        type: 'https://cocina.sul.stanford.edu/models/image',
-        externalIdentifier: 'druid:bc123df4567',
-        label: 'bar',
-        version: 5,
-        access: {},
-        administrative: { 'hasAdminPolicy' => 'druid:bc123df4567' },
-        description: {
-          title: [{ 'value' => 'Test DRO' }],
-          purl: 'https://purl.stanford.edu/bc123df4567'
-        },
-        structural: {},
-        identification: { sourceId: 'sul:123' },
-        created: DateTime.now.iso8601,
-        modified: DateTime.now.iso8601,
-        lock: 'abc123'
-      )
-    end
+    let(:cocina_object) { build(:dro_with_metadata) }
 
     it { is_expected.to be_kind_of Cocina::Models::DRO }
   end
@@ -271,24 +194,9 @@ RSpec.describe Cocina::Models do
 
     let(:date) { DateTime.now }
 
-    let(:props) do
-      {
-        type: 'https://cocina.sul.stanford.edu/models/image',
-        externalIdentifier: 'druid:bc123df4567',
-        label: 'bar',
-        version: 5,
-        access: {},
-        administrative: { 'hasAdminPolicy' => 'druid:bc123df4567' },
-        description: {
-          title: [{ 'value' => 'Test DRO' }],
-          purl: 'https://purl.stanford.edu/bc123df4567'
-        },
-        structural: {},
-        identification: { sourceId: 'sul:123' }
-      }
-    end
+    let(:cocina_object) { build(:dro) }
 
-    let(:cocina_object) { Cocina::Models::DRO.new(props) }
+    let(:props) { cocina_object.to_h }
 
     let(:expected) do
       Cocina::Models::DROWithMetadata.new(props.merge({ lock: 'abc123', created: date, modified: date }))
