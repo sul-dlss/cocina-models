@@ -7,7 +7,7 @@ module Cocina
         # Maps MODS identifer to cocina identifier
         class Identifier
           # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
-          # @param [Cocina::Models::Mapping::FromMods::DescriptiveBuilder] descriptive_builder
+          # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] descriptive_builder
           # @param [String] purl
           # @return [Hash] a hash that can be mapped to a cocina model
           def self.build(resource_element:, descriptive_builder: nil, purl: nil)
@@ -40,9 +40,9 @@ module Cocina
           end
 
           def identifiers
-            (resource_element.xpath('mods:identifier', mods: Descriptive::DESC_METADATA_NS) +
+            (resource_element.xpath('mods:identifier', mods: Description::DESC_METADATA_NS) +
               resource_element.xpath('mods:recordIdentifier',
-                                     mods: Descriptive::DESC_METADATA_NS)).reject { |identifier_node| identifier_node.text.blank? && identifier_node.attributes.size.zero? }
+                                     mods: Description::DESC_METADATA_NS)).reject { |identifier_node| identifier_node.text.blank? && identifier_node.attributes.size.zero? }
           end
         end
       end

@@ -59,7 +59,7 @@ module Cocina
 
           # @param [Nokogiri::XML::Element] node the titleInfo node
           def simple_value(node)
-            value = node.xpath('./mods:title', mods: Descriptive::DESC_METADATA_NS).text
+            value = node.xpath('./mods:title', mods: Description::DESC_METADATA_NS).text
 
             { value: clean_title(value, node.name) }
           end

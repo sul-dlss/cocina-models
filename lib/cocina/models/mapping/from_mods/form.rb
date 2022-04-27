@@ -11,7 +11,7 @@ module Cocina
           H2_GENRE_TYPE_PREFIX = 'H2 '
 
           # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
-          # @param [Cocina::Models::Mapping::FromMods::DescriptiveBuilder] descriptive_builder
+          # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] descriptive_builder
           # @param [String] purl
           # @return [Hash] a hash that can be mapped to a cocina model
           def self.build(resource_element:, descriptive_builder:, purl: nil)
@@ -38,7 +38,7 @@ module Cocina
           attr_reader :resource_element, :notifier
 
           def add_subject_cartographics(forms)
-            subject_nodes = resource_element.xpath('mods:subject[mods:cartographics]', mods: Descriptive::DESC_METADATA_NS)
+            subject_nodes = resource_element.xpath('mods:subject[mods:cartographics]', mods: Description::DESC_METADATA_NS)
             altrepgroup_subject_nodes, other_subject_nodes = AltRepGroup.split(nodes: subject_nodes)
 
             forms.concat(
@@ -57,8 +57,8 @@ module Cocina
 
           def build_cartographics(subject_node)
             carto_forms = []
-            subject_node.xpath('mods:cartographics[mods:scale]', mods: Descriptive::DESC_METADATA_NS).each do |carto_node|
-              scale_nodes = carto_node.xpath('mods:scale', mods: Descriptive::DESC_METADATA_NS).reject do |scale_node|
+            subject_node.xpath('mods:cartographics[mods:scale]', mods: Description::DESC_METADATA_NS).each do |carto_node|
+              scale_nodes = carto_node.xpath('mods:scale', mods: Description::DESC_METADATA_NS).reject do |scale_node|
                 scale_node.text.blank?
               end
               if scale_nodes.size == 1
@@ -75,7 +75,7 @@ module Cocina
             end
 
             subject_node.xpath('mods:cartographics/mods:projection',
-                               mods: Descriptive::DESC_METADATA_NS).each do |projection_node|
+                               mods: Description::DESC_METADATA_NS).each do |projection_node|
               next if projection_node.text.blank?
 
               carto_forms << {
@@ -271,7 +271,7 @@ module Cocina
           end
 
           def physical_description_notes_for(physical_description)
-            physical_description.xpath('mods:note', mods: Descriptive::DESC_METADATA_NS).filter_map do |node|
+            physical_description.xpath('mods:note', mods: Description::DESC_METADATA_NS).filter_map do |node|
               next if node.content.blank?
 
               {
@@ -283,7 +283,7 @@ module Cocina
           end
 
           def add_digital_origin(forms, physical_description)
-            physical_description.xpath('mods:digitalOrigin', mods: Descriptive::DESC_METADATA_NS).each do |node|
+            physical_description.xpath('mods:digitalOrigin', mods: Description::DESC_METADATA_NS).each do |node|
               forms << {
                 value: node.content,
                 type: 'digital origin',
@@ -293,7 +293,7 @@ module Cocina
           end
 
           def add_extent(forms, physical_description)
-            physical_description.xpath('mods:extent', mods: Descriptive::DESC_METADATA_NS).each do |extent|
+            physical_description.xpath('mods:extent', mods: Description::DESC_METADATA_NS).each do |extent|
               forms << {
                 value: extent.content,
                 type: 'extent'
@@ -304,7 +304,7 @@ module Cocina
           end
 
           def add_media_type(forms, physical_description)
-            physical_description.xpath('mods:internetMediaType', mods: Descriptive::DESC_METADATA_NS).each do |node|
+            physical_description.xpath('mods:internetMediaType', mods: Description::DESC_METADATA_NS).each do |node|
               forms << {
                 value: node.content,
                 type: 'media type',
@@ -314,7 +314,7 @@ module Cocina
           end
 
           def add_reformatting_quality(forms, physical_description)
-            physical_description.xpath('mods:reformattingQuality', mods: Descriptive::DESC_METADATA_NS).each do |node|
+            physical_description.xpath('mods:reformattingQuality', mods: Description::DESC_METADATA_NS).each do |node|
               forms << {
                 value: node.content,
                 type: 'reformatting quality',
@@ -324,7 +324,7 @@ module Cocina
           end
 
           def add_forms(forms, physical_description)
-            physical_description.xpath('mods:form', mods: Descriptive::DESC_METADATA_NS).each do |form_content|
+            physical_description.xpath('mods:form', mods: Description::DESC_METADATA_NS).each do |form_content|
               forms << {
                 value: form_content.content,
                 uri: ValueURI.sniff(form_content['valueURI'], notifier),
@@ -335,7 +335,7 @@ module Cocina
           end
 
           def physical_descriptions
-            resource_element.xpath('mods:physicalDescription', mods: Descriptive::DESC_METADATA_NS)
+            resource_element.xpath('mods:physicalDescription', mods: Description::DESC_METADATA_NS)
           end
 
           def source_for(form)
@@ -346,12 +346,12 @@ module Cocina
           end
 
           def type_of_resource
-            resource_element.xpath('mods:typeOfResource', mods: Descriptive::DESC_METADATA_NS)
+            resource_element.xpath('mods:typeOfResource', mods: Description::DESC_METADATA_NS)
           end
 
           def datacite_resource_type
             node = resource_element.xpath('mods:extension[@displayLabel="datacite"]/mods:resourceType',
-                                          mods: Descriptive::DESC_METADATA_NS).first
+                                          mods: Description::DESC_METADATA_NS).first
             return unless node
 
             { value: node[:resourceTypeGeneral], type: 'resource type',
@@ -361,17 +361,17 @@ module Cocina
           # returns genre at the root and inside subjects excluding structured genres
           def basic_genre
             resource_element.xpath("mods:genre[not(@type) or not(starts-with(@type, '#{H2_GENRE_TYPE_PREFIX}'))]",
-                                   mods: Descriptive::DESC_METADATA_NS)
+                                   mods: Description::DESC_METADATA_NS)
           end
 
           def subject_genre
-            resource_element.xpath('mods:subject/mods:genre', mods: Descriptive::DESC_METADATA_NS)
+            resource_element.xpath('mods:subject/mods:genre', mods: Description::DESC_METADATA_NS)
           end
 
           # returns structured genres at the root and inside subjects, which are combined to form a single, structured Cocina element
           def structured_genre
             resource_element.xpath("mods:genre[@type and starts-with(@type, '#{H2_GENRE_TYPE_PREFIX}')]",
-                                   mods: Descriptive::DESC_METADATA_NS)
+                                   mods: Description::DESC_METADATA_NS)
           end
         end
         # rubocop:enable Metrics/ClassLength

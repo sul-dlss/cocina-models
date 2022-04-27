@@ -13,7 +13,7 @@ module Cocina
           GML_NS = 'http://www.opengis.net/gml/3.2/'
 
           NAMESPACE = {
-            'mods' => Descriptive::DESC_METADATA_NS,
+            'mods' => Description::DESC_METADATA_NS,
             'dc' => DUBLIN_CORE_NS,
             'rdf' => RDF_NS,
             'gmd' => GMD_NS,
@@ -40,7 +40,7 @@ module Cocina
           TYPE = 'type'
 
           # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
-          # @param [Cocina::Models::Mapping::FromMods::DescriptiveBuilder] descriptive_builder
+          # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] descriptive_builder
           # @param [String] purl
           # @return [Hash] a hash that can be mapped to a cocina model
           def self.build(resource_element:, descriptive_builder:, purl: nil)

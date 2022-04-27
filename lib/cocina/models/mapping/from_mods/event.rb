@@ -55,7 +55,7 @@ module Cocina
           }.freeze
 
           # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
-          # @param [Cocina::Models::Mapping::FromMods::DescriptiveBuilder] descriptive_builder
+          # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] descriptive_builder
           # @param [String] purl
           # @return [Hash] a hash that can be mapped to a cocina model
           def self.build(resource_element:, descriptive_builder:, purl: nil)
@@ -69,7 +69,7 @@ module Cocina
 
           def build
             altrepgroup_origin_info_nodes, other_origin_info_nodes = AltRepGroup.split(nodes: resource_element.xpath(
-              'mods:originInfo', mods: Descriptive::DESC_METADATA_NS
+              'mods:originInfo', mods: Description::DESC_METADATA_NS
             ))
 
             results = build_grouped_origin_infos(altrepgroup_origin_info_nodes) + build_ungrouped_origin_infos(other_origin_info_nodes)
@@ -84,7 +84,7 @@ module Cocina
             origin_infos.filter_map do |origin_info|
               next if origin_info.content.blank? &&
                       origin_info.xpath('.//*[@valueURI]').empty? &&
-                      origin_info.xpath('.//*[@xlink:href]', xlink: Descriptive::XLINK_NS).empty?
+                      origin_info.xpath('.//*[@xlink:href]', xlink: Description::XLINK_NS).empty?
 
               build_event_for_origin_info(origin_info)
             end
@@ -158,19 +158,19 @@ module Cocina
           end
 
           def add_info_to_event(event, origin_info_node)
-            place_nodes = origin_info_node.xpath('mods:place', mods: Descriptive::DESC_METADATA_NS)
+            place_nodes = origin_info_node.xpath('mods:place', mods: Description::DESC_METADATA_NS)
             add_place_info(event, place_nodes) if place_nodes.present?
 
-            publisher = origin_info_node.xpath('mods:publisher', mods: Descriptive::DESC_METADATA_NS)
+            publisher = origin_info_node.xpath('mods:publisher', mods: Description::DESC_METADATA_NS)
             add_publisher_info(event, publisher, origin_info_node) if publisher.present?
 
-            issuance = origin_info_node.xpath('mods:issuance', mods: Descriptive::DESC_METADATA_NS)
+            issuance = origin_info_node.xpath('mods:issuance', mods: Description::DESC_METADATA_NS)
             add_issuance_note(event, issuance) if issuance.present?
 
-            edition = origin_info_node.xpath('mods:edition', mods: Descriptive::DESC_METADATA_NS)
+            edition = origin_info_node.xpath('mods:edition', mods: Description::DESC_METADATA_NS)
             add_edition_info(event, edition) if edition.present?
 
-            frequency = origin_info_node.xpath('mods:frequency', mods: Descriptive::DESC_METADATA_NS)
+            frequency = origin_info_node.xpath('mods:frequency', mods: Description::DESC_METADATA_NS)
             add_frequency_info(event, frequency) if frequency.present?
 
             date_values = build_date_values(origin_info_node)
@@ -181,7 +181,7 @@ module Cocina
 
           def build_copyright_notice_event(origin_info_node)
             date_nodes = origin_info_node.xpath("mods:copyrightDate#{XPATH_HAS_CONTENT_PREDICATE}",
-                                                mods: Descriptive::DESC_METADATA_NS)
+                                                mods: Description::DESC_METADATA_NS)
             return if date_nodes.blank?
 
             {
@@ -205,7 +205,7 @@ module Cocina
 
           def build_date_desc_values(mods_date_el_name, origin_info_node, default_type)
             date_nodes = origin_info_node.xpath("mods:#{mods_date_el_name}#{XPATH_HAS_CONTENT_PREDICATE}",
-                                                mods: Descriptive::DESC_METADATA_NS)
+                                                mods: Description::DESC_METADATA_NS)
             if mods_date_el_name == 'dateOther' && date_nodes.present?
               date_other_type = date_other_type_attr(origin_info_node['eventType'], date_nodes.first)
               date_values_for_event(date_nodes, date_other_type)
@@ -266,7 +266,7 @@ module Cocina
 
             # text only and text-and-code placeTerm types in single place node
             text_places = place_nodes.select do |place|
-              place.xpath("mods:placeTerm[not(@type='code')]", mods: Descriptive::DESC_METADATA_NS).present?
+              place.xpath("mods:placeTerm[not(@type='code')]", mods: Description::DESC_METADATA_NS).present?
             end
             code_only_places = place_nodes.reject { |place| text_places.include?(place) }
 
@@ -278,11 +278,11 @@ module Cocina
           def place_nodes_have_info?(place_nodes)
             return true if place_nodes.any? { |node| node.content.present? }
             return true if place_nodes.any? do |node|
-                             node.xpath('mods:placeTerm[@valueURI]', mods: Descriptive::DESC_METADATA_NS).present?
+                             node.xpath('mods:placeTerm[@valueURI]', mods: Description::DESC_METADATA_NS).present?
                            end
 
             place_nodes.any? do |node|
-              node.xpath('mods:placeTerm[@xlink:href]', { mods: Descriptive::DESC_METADATA_NS, xlink: Descriptive::XLINK_NS }).present?
+              node.xpath('mods:placeTerm[@xlink:href]', { mods: Description::DESC_METADATA_NS, xlink: Description::XLINK_NS }).present?
             end
           end
 
@@ -291,13 +291,13 @@ module Cocina
           def locations_for_place_terms_with_text(place_nodes)
             place_nodes.map do |place_node|
               text_place_term_node = place_node.xpath("mods:placeTerm[not(@type='code')]",
-                                                      mods: Descriptive::DESC_METADATA_NS).first
+                                                      mods: Description::DESC_METADATA_NS).first
               next if text_place_term_node.text.blank?
 
               cocina_location = {}
               add_authority_info(cocina_location, text_place_term_node)
               cocina_location[:value] = text_place_term_node.text
-              code_place_term_node = place_node.xpath("mods:placeTerm[@type='code']", mods: Descriptive::DESC_METADATA_NS).first
+              code_place_term_node = place_node.xpath("mods:placeTerm[@type='code']", mods: Description::DESC_METADATA_NS).first
               if code_place_term_node
                 cocina_location[:code] = code_place_term_node.text
                 # NOTE: deliberately skipping situation where text node has some authority info and code node
@@ -318,7 +318,7 @@ module Cocina
           # @return cocina locations
           def locations_for_code_only_place_terms(place_nodes)
             place_nodes.map do |place_node|
-              code_place_term_node = place_node.xpath("mods:placeTerm[@type='code']", mods: Descriptive::DESC_METADATA_NS).first
+              code_place_term_node = place_node.xpath("mods:placeTerm[@type='code']", mods: Description::DESC_METADATA_NS).first
               next if code_place_term_node.content.blank?
 
               cocina_location = {}

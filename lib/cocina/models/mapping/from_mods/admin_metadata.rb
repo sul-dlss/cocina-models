@@ -7,7 +7,7 @@ module Cocina
         # Maps MODS recordInfo to cocina
         class AdminMetadata # rubocop:disable Metrics/ClassLength
           # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
-          # @param [Cocina::Models::Mapping::FromMods::DescriptiveBuilder] descriptive_builder
+          # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] descriptive_builder
           # @param [String] purl
           # @return [Hash] a hash that can be mapped to a cocina model
           def self.build(resource_element:, descriptive_builder:, purl: nil)
@@ -176,39 +176,39 @@ module Cocina
           end
 
           def record_info
-            @record_info ||= resource_element.xpath('mods:recordInfo[1]', mods: Descriptive::DESC_METADATA_NS).first
+            @record_info ||= resource_element.xpath('mods:recordInfo[1]', mods: Description::DESC_METADATA_NS).first
           end
 
           def language_of_cataloging
-            @language_of_cataloging ||= record_info.xpath('mods:languageOfCataloging', mods: Descriptive::DESC_METADATA_NS)
+            @language_of_cataloging ||= record_info.xpath('mods:languageOfCataloging', mods: Description::DESC_METADATA_NS)
           end
 
           def record_content_sources
-            @record_content_sources ||= record_info.xpath('mods:recordContentSource', mods: Descriptive::DESC_METADATA_NS)
+            @record_content_sources ||= record_info.xpath('mods:recordContentSource', mods: Description::DESC_METADATA_NS)
           end
 
           def description_standards
-            @description_standards ||= record_info.xpath('mods:descriptionStandard', mods: Descriptive::DESC_METADATA_NS)
+            @description_standards ||= record_info.xpath('mods:descriptionStandard', mods: Description::DESC_METADATA_NS)
           end
 
           def record_origins
-            @record_origins ||= record_info.xpath('mods:recordOrigin', mods: Descriptive::DESC_METADATA_NS)
+            @record_origins ||= record_info.xpath('mods:recordOrigin', mods: Description::DESC_METADATA_NS)
           end
 
           def record_info_notes
-            @record_info_notes ||= record_info.xpath('mods:recordInfoNote', mods: Descriptive::DESC_METADATA_NS)
+            @record_info_notes ||= record_info.xpath('mods:recordInfoNote', mods: Description::DESC_METADATA_NS)
           end
 
           def creation_event
-            @creation_event ||= record_info.xpath('mods:recordCreationDate', mods: Descriptive::DESC_METADATA_NS).first
+            @creation_event ||= record_info.xpath('mods:recordCreationDate', mods: Description::DESC_METADATA_NS).first
           end
 
           def modification_events
-            @modification_events ||= record_info.xpath('mods:recordChangeDate', mods: Descriptive::DESC_METADATA_NS)
+            @modification_events ||= record_info.xpath('mods:recordChangeDate', mods: Description::DESC_METADATA_NS)
           end
 
           def record_identifiers
-            @record_identifiers ||= record_info.xpath('mods:recordIdentifier', mods: Descriptive::DESC_METADATA_NS)
+            @record_identifiers ||= record_info.xpath('mods:recordIdentifier', mods: Description::DESC_METADATA_NS)
           end
         end
       end

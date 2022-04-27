@@ -10,7 +10,7 @@ module Cocina
           DETAIL_TYPES = Cocina::Models::Mapping::ToMods::RelatedResource::DETAIL_TYPES.invert.freeze
 
           # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
-          # @param [Cocina::Models::Mapping::FromMods::DescriptiveBuilder] descriptive_builder
+          # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] descriptive_builder
           # @param [String] purl
           # @return [Hash] a hash that can be mapped to a cocina model
           def self.build(resource_element:, descriptive_builder:, purl:)
@@ -33,7 +33,7 @@ module Cocina
           attr_reader :resource_element, :descriptive_builder, :notifier, :purl
 
           def related_items
-            resource_element.xpath('mods:relatedItem', mods: Descriptive::DESC_METADATA_NS).filter_map do |related_item|
+            resource_element.xpath('mods:relatedItem', mods: Description::DESC_METADATA_NS).filter_map do |related_item|
               check_other_type(related_item)
               next { valueAt: related_item['xlink:href'] } if related_item['xlink:href']
               next if related_item.elements.empty?
@@ -86,7 +86,7 @@ module Cocina
           def related_purls
             primary_purl_node = Purl.primary_purl_node(resource_element, purl)
             purl_nodes = resource_element.xpath('mods:location/mods:url',
-                                                mods: Descriptive::DESC_METADATA_NS).select do |url_node|
+                                                mods: Description::DESC_METADATA_NS).select do |url_node|
               Cocina::Models::Mapping::Purl.purl?(url_node.text) && url_node != primary_purl_node
             end
             purl_nodes.map do |purl_node|

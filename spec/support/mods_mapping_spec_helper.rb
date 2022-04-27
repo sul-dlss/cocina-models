@@ -65,7 +65,7 @@ RSpec.shared_examples 'MODS cocina mapping' do
     let(:notifier) { instance_double(Cocina::Models::Mapping::ErrorNotifier) }
 
     let(:actual_cocina_props) do
-      Cocina::Models::Mapping::FromMods::Descriptive.props(mods: orig_mods_ng, druid: local_druid, notifier: notifier, label: label)
+      Cocina::Models::Mapping::FromMods::Description.props(mods: orig_mods_ng, druid: local_druid, notifier: notifier, label: label)
     end
 
     before do
@@ -89,7 +89,7 @@ RSpec.shared_examples 'MODS cocina mapping' do
 
     it 'notifier receives warning and/or error messages as specified' do
       # TODO: support testing with no title
-      Cocina::Models::Mapping::FromMods::Descriptive.props(mods: orig_mods_ng, druid: local_druid, notifier: notifier, title_builder: TestTitleBuilder,
+      Cocina::Models::Mapping::FromMods::Description.props(mods: orig_mods_ng, druid: local_druid, notifier: notifier, title_builder: TestTitleBuilder,
                                                            label: label)
       if local_warnings.empty?
         expect(notifier).not_to have_received(:warn)
@@ -123,7 +123,7 @@ RSpec.shared_examples 'MODS cocina mapping' do
                                                                                             label: label)
     end
 
-    let(:actual_mods_ng) { Cocina::Models::Mapping::ToMods::Descriptive.transform(orig_cocina_description, local_druid) }
+    let(:actual_mods_ng) { Cocina::Models::Mapping::ToMods::Description.transform(orig_cocina_description, local_druid) }
 
     let(:actual_xml) { actual_mods_ng.to_xml }
 
@@ -153,12 +153,12 @@ RSpec.shared_examples 'MODS cocina mapping' do
     end
 
     let(:roundtrip_cocina_props) do
-      Cocina::Models::Mapping::FromMods::Descriptive.props(mods: roundtrip_mods_ng, druid: local_druid, notifier: notifier, label: label)
+      Cocina::Models::Mapping::FromMods::Description.props(mods: roundtrip_mods_ng, druid: local_druid, notifier: notifier, label: label)
     end
 
     let(:roundtrip_cocina_description) { Cocina::Models::Description.new(roundtrip_cocina_props, false, false) }
 
-    let(:re_roundtrip_mods_xml) { Cocina::Models::Mapping::ToMods::Descriptive.transform(roundtrip_cocina_description, local_druid).to_xml }
+    let(:re_roundtrip_mods_xml) { Cocina::Models::Mapping::ToMods::Description.transform(roundtrip_cocina_description, local_druid).to_xml }
 
     before do
       allow(notifier).to receive(:warn)
@@ -209,7 +209,7 @@ RSpec.shared_examples 'cocina MODS mapping' do
   let(:label) { 'Test title' }
 
   context 'when mapping from cocina (to MODS)' do
-    let(:actual_mods_ng) { Cocina::Models::Mapping::ToMods::Descriptive.transform(orig_cocina_description, local_druid) }
+    let(:actual_mods_ng) { Cocina::Models::Mapping::ToMods::Description.transform(orig_cocina_description, local_druid) }
 
     let(:actual_xml) { actual_mods_ng.to_xml }
 
@@ -228,7 +228,7 @@ RSpec.shared_examples 'cocina MODS mapping' do
   context 'when mapping to cocina (from MODS)' do
     let(:notifier) { instance_double(Cocina::Models::Mapping::ErrorNotifier) }
 
-    let(:actual_cocina_props) { Cocina::Models::Mapping::FromMods::Descriptive.props(mods: mods_ng, druid: local_druid, notifier: notifier, label: label) }
+    let(:actual_cocina_props) { Cocina::Models::Mapping::FromMods::Description.props(mods: mods_ng, druid: local_druid, notifier: notifier, label: label) }
 
     let(:expected_cocina) { defined?(roundtrip_cocina) ? roundtrip_cocina : cocina }
 
@@ -248,7 +248,7 @@ RSpec.shared_examples 'cocina MODS mapping' do
     end
 
     it 'notifier receives warning and/or error messages as specified' do
-      Cocina::Models::Mapping::FromMods::Descriptive.props(mods: mods_ng, druid: local_druid, notifier: notifier, title_builder: TestTitleBuilder,
+      Cocina::Models::Mapping::FromMods::Description.props(mods: mods_ng, druid: local_druid, notifier: notifier, title_builder: TestTitleBuilder,
                                                            label: label)
       if local_warnings.empty?
         expect(notifier).not_to have_received(:warn)
@@ -283,12 +283,12 @@ RSpec.shared_examples 'cocina MODS mapping' do
 
     let(:roundtrip_cocina_description) { Cocina::Models::Description.new(add_purl_and_title(my_roundtrip_cocina, local_druid), false, false) }
 
-    let(:roundtrip_mods_ng) { Cocina::Models::Mapping::ToMods::Descriptive.transform(roundtrip_cocina_description, local_druid) }
+    let(:roundtrip_mods_ng) { Cocina::Models::Mapping::ToMods::Description.transform(roundtrip_cocina_description, local_druid) }
 
     let(:roundtrip_mods_xml) { roundtrip_mods_ng.to_xml }
 
     let(:re_roundtrip_cocina_props) do
-      Cocina::Models::Mapping::FromMods::Descriptive.props(mods: roundtrip_mods_ng, druid: local_druid, notifier: notifier, label: label)
+      Cocina::Models::Mapping::FromMods::Description.props(mods: roundtrip_mods_ng, druid: local_druid, notifier: notifier, label: label)
     end
 
     before do
@@ -328,7 +328,7 @@ class TestTitleBuilder
   # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
   # @return [Hash] a hash that can be mapped to a cocina model
   def self.build(resource_element:, notifier:, require_title:)
-    titles = resource_element.xpath('mods:titleInfo', mods: Cocina::Models::Mapping::FromMods::Descriptive::DESC_METADATA_NS)
+    titles = resource_element.xpath('mods:titleInfo', mods: Cocina::Models::Mapping::FromMods::Description::DESC_METADATA_NS)
     if titles.empty?
       [{ value: 'Placeholder title for specs' }]
     else

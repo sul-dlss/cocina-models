@@ -60,7 +60,7 @@ module Cocina
 
           # build non-parallel, single name
           def build_name(name_node)
-            return { type: 'unspecified others' } if name_node.xpath('mods:etal', mods: Descriptive::DESC_METADATA_NS).present?
+            return { type: 'unspecified others' } if name_node.xpath('mods:etal', mods: Description::DESC_METADATA_NS).present?
 
             name_parts = build_name_parts(name_node)
             # If there are no name parts, do not map the name
@@ -75,7 +75,7 @@ module Cocina
             if status.blank? && name_node[:nameTitleGroup].present? && name_node[:type] == 'corporate' &&
                name_node.parent.node_name == 'mods'
               xpath_expression = "//mods:mods/mods:name[@usage='primary']"
-              primary_names = name_node.xpath(xpath_expression, mods: Descriptive::DESC_METADATA_NS)
+              primary_names = name_node.xpath(xpath_expression, mods: Description::DESC_METADATA_NS)
               status = 'primary' if primary_names.blank?
             end
             {
@@ -107,8 +107,8 @@ module Cocina
           end
 
           def build_name_parts(name_node)
-            name_part_nodes = name_node.xpath('mods:namePart', mods: Descriptive::DESC_METADATA_NS)
-            alternative_name_nodes = name_node.xpath('mods:alternativeName', mods: Descriptive::DESC_METADATA_NS)
+            name_part_nodes = name_node.xpath('mods:namePart', mods: Description::DESC_METADATA_NS)
+            alternative_name_nodes = name_node.xpath('mods:alternativeName', mods: Description::DESC_METADATA_NS)
 
             parts = []
             case name_part_nodes.size
@@ -128,7 +128,7 @@ module Cocina
 
             parts = build_alternative_name(alternative_name_nodes, parts) if alternative_name_nodes.present?
 
-            display_form = name_node.xpath('mods:displayForm', mods: Descriptive::DESC_METADATA_NS).first
+            display_form = name_node.xpath('mods:displayForm', mods: Description::DESC_METADATA_NS).first
             parts << { value: display_form.text, type: 'display' } if display_form
             parts.compact
           end
@@ -180,7 +180,7 @@ module Cocina
             name_type = type_for(name_node['type'])
             return name_type if name_type.present?
 
-            role_nodes = name_node.xpath('mods:role', mods: Descriptive::DESC_METADATA_NS)
+            role_nodes = name_node.xpath('mods:role', mods: Description::DESC_METADATA_NS)
             cocina_roles = role_nodes.filter_map { |role_node| role_for(role_node) }.presence
             return if cocina_roles.blank?
 
@@ -219,18 +219,18 @@ module Cocina
           end
 
           def build_identifier(name_node)
-            name_node.xpath('mods:nameIdentifier', mods: Descriptive::DESC_METADATA_NS).map do |identifier|
+            name_node.xpath('mods:nameIdentifier', mods: Description::DESC_METADATA_NS).map do |identifier|
               IdentifierBuilder.build_from_name_identifier(identifier_element: identifier)
             end.presence
           end
 
           def build_notes(name_node)
             [].tap do |parts|
-              name_node.xpath('mods:affiliation', mods: Descriptive::DESC_METADATA_NS).each do |affiliation_node|
+              name_node.xpath('mods:affiliation', mods: Description::DESC_METADATA_NS).each do |affiliation_node|
                 parts << { value: affiliation_node.text, type: 'affiliation' }
               end
 
-              description = name_node.xpath('mods:description', mods: Descriptive::DESC_METADATA_NS).first
+              description = name_node.xpath('mods:description', mods: Description::DESC_METADATA_NS).first
               if description
                 parts << if description.text == UNCITED_DESCRIPTION
                            { value: 'false', type: 'citation status' }
@@ -242,20 +242,20 @@ module Cocina
           end
 
           def build_roles(name_node)
-            role_nodes = name_node.xpath('mods:role', mods: Descriptive::DESC_METADATA_NS)
+            role_nodes = name_node.xpath('mods:role', mods: Description::DESC_METADATA_NS)
             role_nodes.filter_map { |role_node| role_for(role_node) }.presence
           end
 
           # shameless green
           def role_for(ng_role)
-            code = ng_role.xpath('./mods:roleTerm[@type="code"]', mods: Descriptive::DESC_METADATA_NS).first
+            code = ng_role.xpath('./mods:roleTerm[@type="code"]', mods: Description::DESC_METADATA_NS).first
             text = ng_role.xpath('./mods:roleTerm[@type="text"] | ./mods:roleTerm[not(@type)]',
-                                 mods: Descriptive::DESC_METADATA_NS).first
+                                 mods: Description::DESC_METADATA_NS).first
             return if code.nil? && text.nil?
 
-            authority = ng_role.xpath('./mods:roleTerm/@authority', mods: Descriptive::DESC_METADATA_NS).first&.content
-            authority_uri = ng_role.xpath('./mods:roleTerm/@authorityURI', mods: Descriptive::DESC_METADATA_NS).first&.content
-            authority_value = ng_role.xpath('./mods:roleTerm/@valueURI', mods: Descriptive::DESC_METADATA_NS).first&.content
+            authority = ng_role.xpath('./mods:roleTerm/@authority', mods: Description::DESC_METADATA_NS).first&.content
+            authority_uri = ng_role.xpath('./mods:roleTerm/@authorityURI', mods: Description::DESC_METADATA_NS).first&.content
+            authority_value = ng_role.xpath('./mods:roleTerm/@valueURI', mods: Description::DESC_METADATA_NS).first&.content
 
             check_role_code(code, authority)
 

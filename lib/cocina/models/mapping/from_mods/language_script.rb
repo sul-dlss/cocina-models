@@ -7,7 +7,7 @@ module Cocina
         # Maps lang and script attributes
         class LanguageScript
           # @param [Nokogiri::XML::Element] element that may have lang or script attributes
-          # @param [Cocina::Models::Mapping::FromMods::DescriptiveBuilder] descriptive_builder
+          # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] descriptive_builder
           # @return [Hash] a hash that can be mapped to a cocina model for a valueLanguage
           def self.build(node:)
             return nil unless node['lang'].present? || node['script'].present?

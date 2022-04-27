@@ -31,12 +31,12 @@ module Cocina
 
           def lang_term_attributes
             code_language_term = language_element.xpath('./mods:languageTerm[@type="code"]',
-                                                        mods: Descriptive::DESC_METADATA_NS).first
+                                                        mods: Description::DESC_METADATA_NS).first
             text_language_term = language_element.xpath('./mods:languageTerm[@type="text"]',
-                                                        mods: Descriptive::DESC_METADATA_NS).first
+                                                        mods: Description::DESC_METADATA_NS).first
             if code_language_term.nil? && text_language_term.nil?
               notifier.warn('languageTerm missing type')
-              code_language_term = language_element.xpath('./mods:languageTerm', mods: Descriptive::DESC_METADATA_NS).first
+              code_language_term = language_element.xpath('./mods:languageTerm', mods: Description::DESC_METADATA_NS).first
             end
 
             {
@@ -52,7 +52,7 @@ module Cocina
           end
 
           def script_term_attributes
-            script_term_nodes = language_element.xpath('mods:scriptTerm', mods: Descriptive::DESC_METADATA_NS)
+            script_term_nodes = language_element.xpath('mods:scriptTerm', mods: Description::DESC_METADATA_NS)
 
             return if script_term_nodes.blank?
 

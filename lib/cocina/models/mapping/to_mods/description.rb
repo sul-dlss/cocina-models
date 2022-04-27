@@ -7,7 +7,7 @@ module Cocina
     module Mapping
       module ToMods
         # This transforms the DRO.descriptive schema to MODS xml
-        class Descriptive
+        class Description
           # @param [Cocina::Models::Description] descriptive
           # @param [string] druid
           # @return [Nokogiri::XML::Document]

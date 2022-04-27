@@ -8,7 +8,7 @@ RSpec.describe Cocina::Models::Mapping::FromMods::Language do
   end
 
   let(:descriptive_builder) do
-    instance_double(Cocina::Models::Mapping::FromMods::DescriptiveBuilder, notifier: notifier)
+    instance_double(Cocina::Models::Mapping::FromMods::DescriptionBuilder, notifier: notifier)
   end
 
   let(:notifier) { instance_double(Cocina::Models::Mapping::ErrorNotifier) }
