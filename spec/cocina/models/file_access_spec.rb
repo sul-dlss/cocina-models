@@ -6,52 +6,44 @@ RSpec.describe Cocina::Models::FileAccess do
   # Verifying that correctly validate access, download, location, and controlledDigitalLending.
 
   def dro(access, download, location, controlled_digital_lending)
-    Cocina::Models::DRO.new(externalIdentifier: 'druid:bc123df4567',
-                            label: 'My DRO',
-                            type: Cocina::Models::ObjectType.book,
-                            version: 1,
-                            description: {
-                              title: [{ value: 'Test DRO' }],
-                              purl: 'https://purl.stanford.edu/bc123df4567'
-                            },
-                            administrative: { hasAdminPolicy: 'druid:bc123df4567' },
-                            identification: { sourceId: 'sul:123' },
-                            access: {},
-                            structural: {
-                              contains: [
-                                {
-                                  version: 1,
-                                  type: 'https://cocina.sul.stanford.edu/models/resources/file',
-                                  label: 'Page 1',
-                                  externalIdentifier: 'abc123',
-                                  structural: {
-                                    contains: [
-                                      {
-                                        version: 1,
-                                        type: 'https://cocina.sul.stanford.edu/models/file',
-                                        filename: '00002.jp2',
-                                        label: '00002.jp2',
-                                        hasMimeType: 'image/jp2',
-                                        externalIdentifier: 'abc123',
-                                        size: 111_467,
-                                        administrative: {
-                                          publish: true,
-                                          sdrPreserve: true,
-                                          shelve: true
-                                        },
-                                        access: {
-                                          view: access,
-                                          download: download,
-                                          location: location,
-                                          controlledDigitalLending: controlled_digital_lending
-                                        },
-                                        hasMessageDigests: []
-                                      }
-                                    ]
-                                  }
-                                }
-                              ]
-                            })
+    build(:dro).new(
+      access: { view: 'world', download: 'world' },
+      structural: {
+        contains: [
+          {
+            version: 1,
+            type: 'https://cocina.sul.stanford.edu/models/resources/file',
+            label: 'Page 1',
+            externalIdentifier: 'abc123',
+            structural: {
+              contains: [
+                {
+                  version: 1,
+                  type: 'https://cocina.sul.stanford.edu/models/file',
+                  filename: '00002.jp2',
+                  label: '00002.jp2',
+                  hasMimeType: 'image/jp2',
+                  externalIdentifier: 'abc123',
+                  size: 111_467,
+                  administrative: {
+                    publish: true,
+                    sdrPreserve: true,
+                    shelve: true
+                  },
+                  access: {
+                    view: access,
+                    download: download,
+                    location: location,
+                    controlledDigitalLending: controlled_digital_lending
+                  },
+                  hasMessageDigests: []
+                }
+              ]
+            }
+          }
+        ]
+      }
+    )
   end
 
   context 'with dark access' do

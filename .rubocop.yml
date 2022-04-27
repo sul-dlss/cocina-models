@@ -83,12 +83,15 @@ Metrics/BlockLength:
 # Configuration parameters: CountComments, CountAsOne.
 Metrics/ClassLength:
   Max: 100
+  Exclude:
+    - 'lib/cocina/rspec/factories.rb'
 
 Metrics/MethodLength:
   Max: 14
   Exclude:
     - 'spec/cocina/models/file_access_spec.rb'
     - 'spec/cocina/models/dro_access_spec.rb'
+    - 'lib/cocina/rspec/factories.rb'
     - 'lib/cocina/models/mapping/to_mods/descriptive/*'
     - 'lib/cocina/models/mapping/from_mods/descriptive/*'
     - 'lib/cocina/models/mapping/normalizers/mods/origin_info_normalizer.rb'
