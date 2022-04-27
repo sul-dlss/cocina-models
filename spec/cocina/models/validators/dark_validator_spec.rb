@@ -12,7 +12,7 @@ RSpec.describe Cocina::Models::Validators::DarkValidator do
   let(:dro_props) do
     {
       type: Cocina::Models::ObjectType.book,
-      access: { view: view, download: 'none' },
+      access: obj_access,
       structural: {
         contains: [
           {
@@ -26,7 +26,7 @@ RSpec.describe Cocina::Models::Validators::DarkValidator do
                   label: 'Page 1',
                   type: Cocina::Models::ObjectType.file,
                   version: 1,
-                  access: { view: file_view, download: 'none' },
+                  access: file_access,
                   administrative: {
                     publish: publish,
                     shelve: shelve,
@@ -43,6 +43,14 @@ RSpec.describe Cocina::Models::Validators::DarkValidator do
     }
   end
 
+  let(:obj_access) do
+    { view: view, download: 'none' }
+  end
+
+  let(:file_access) do
+    { view: file_view, download: 'none' }
+  end
+
   let(:request_dro_props) do
     dro_props.dup.tap do |props|
       props[:structural][:contains][0].delete(:externalIdentifier)
@@ -56,13 +64,13 @@ RSpec.describe Cocina::Models::Validators::DarkValidator do
   let(:shelve) { false }
   let(:mime_type) { 'text/plain' }
 
-  describe 'when a valid DRO' do
+  context 'when a valid DRO' do
     it 'does not raise' do
       validate
     end
   end
 
-  describe 'when a valid RequestDRO' do
+  context 'when a valid RequestDRO' do
     let(:props) { request_dro_props }
     let(:clazz) { Cocina::Models::RequestDRO }
 
@@ -71,7 +79,7 @@ RSpec.describe Cocina::Models::Validators::DarkValidator do
     end
   end
 
-  describe 'when a valid DROWithMetadata' do
+  context 'when a valid DROWithMetadata' do
     let(:clazz) { Cocina::Models::DROWithMetadata }
 
     it 'does not raise' do
@@ -79,7 +87,7 @@ RSpec.describe Cocina::Models::Validators::DarkValidator do
     end
   end
 
-  describe 'when not a DRO' do
+  context 'when not a DRO' do
     let(:props) { {} }
     let(:clazz) { Cocina::Models::Identification }
 
@@ -88,7 +96,7 @@ RSpec.describe Cocina::Models::Validators::DarkValidator do
     end
   end
 
-  describe 'when an invalid RequestDRO' do
+  context 'when an invalid RequestDRO' do
     let(:props) { request_dro_props }
     let(:clazz) { Cocina::Models::RequestDRO }
     let(:shelve) { true }
@@ -98,7 +106,7 @@ RSpec.describe Cocina::Models::Validators::DarkValidator do
     end
   end
 
-  describe 'when an invalid DROWithMetadata' do
+  context 'when an invalid DROWithMetadata' do
     let(:clazz) { Cocina::Models::DROWithMetadata }
     let(:shelve) { true }
 
@@ -140,6 +148,34 @@ RSpec.describe Cocina::Models::Validators::DarkValidator do
     let(:publish) { true }
 
     it 'is valid' do
+      validate
+    end
+  end
+
+  context 'when empty object access' do
+    # Empty access defaults to dark
+    let(:obj_access) { {} }
+
+    context 'when valid' do
+      it 'does not raise' do
+        validate
+      end
+    end
+
+    context 'when invalid' do
+      let(:shelve) { true }
+
+      it 'raise' do
+        expect { validate }.to raise_error(Cocina::Models::ValidationError)
+      end
+    end
+  end
+
+  context 'when empty file access' do
+    # Empty access defaults to dark
+    let(:file_access) { {} }
+
+    it 'does not raise' do
       validate
     end
   end
