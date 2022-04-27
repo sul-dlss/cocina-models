@@ -7,7 +7,10 @@ RSpec.describe Cocina::Models::FileAccess do
 
   def dro(access, download, location, controlled_digital_lending)
     build(:dro).new(
-      access: { view: 'world', download: 'world' },
+      access: {
+        view: 'world',
+        download: 'world'
+      },
       structural: {
         contains: [
           {

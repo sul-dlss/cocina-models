@@ -28,7 +28,8 @@ module Cocina
         attr_reader :clazz, :attributes
 
         def meets_preconditions?
-          dro? && attributes.dig(:access, :view) == 'dark'
+          # Checking for nil to account for default being dark.
+          dro? && ['dark', nil].include?(attributes.dig(:access, :view))
         end
 
         def dro?
@@ -55,7 +56,8 @@ module Cocina
           return false if file[:hasMimeType] == 'application/warc'
 
           return true if file.dig(:administrative, :shelve)
-          return true if file.dig(:access, :view) != 'dark'
+          # Checking for nil to account for default being dark.
+          return true if ['dark', nil].exclude?(file.dig(:access, :view))
 
           false
         end
