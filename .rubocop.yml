@@ -92,8 +92,8 @@ Metrics/MethodLength:
     - 'spec/cocina/models/file_access_spec.rb'
     - 'spec/cocina/models/dro_access_spec.rb'
     - 'lib/cocina/rspec/factories.rb'
-    - 'lib/cocina/models/mapping/to_mods/descriptive/*'
-    - 'lib/cocina/models/mapping/from_mods/descriptive/*'
+    - 'lib/cocina/models/mapping/to_mods/*'
+    - 'lib/cocina/models/mapping/from_mods/*'
     - 'lib/cocina/models/mapping/normalizers/mods/origin_info_normalizer.rb'
     - 'lib/cocina/models/mapping/normalizers/mods/subject_normalizer.rb'
     - 'lib/cocina/models/mapping/normalizers/mods_normalizer.rb'
@@ -104,8 +104,8 @@ Metrics/MethodLength:
 Metrics/PerceivedComplexity:
   # Max: 20
   Exclude:
-    - 'lib/cocina/models/mapping/from_mods/descriptive/*'
-    - 'lib/cocina/models/mapping/to_mods/descriptive/*'
+    - 'lib/cocina/models/mapping/from_mods/*'
+    - 'lib/cocina/models/mapping/to_mods/*'
     - 'lib/cocina/models/mapping/normalizers/**/*'
 
 # ----- RSpec ------

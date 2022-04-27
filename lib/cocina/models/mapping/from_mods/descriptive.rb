@@ -48,7 +48,7 @@ module Cocina
           attr_reader :title_builder, :ng_xml, :notifier, :druid, :label
 
           def check_altrepgroups
-            ng_xml.xpath('//mods:*[@altRepGroup]', mods: DESC_METADATA_NS)
+            ng_xml.xpath('//mods:*[@altRepGroup]', mods: Descriptive::DESC_METADATA_NS)
                   .group_by { |node| node['altRepGroup'] }
                   .values
                   .select { |nodes| nodes.size > 1 }
@@ -58,7 +58,6 @@ module Cocina
           end
 
           # rubocop:disable Metrics/CyclomaticComplexity
-          # rubocop:disable Metrics/PerceivedComplexity
           def altrepgroup_error?(nodes)
             return true if nodes.map(&:name).uniq.size != 1
 
@@ -84,11 +83,10 @@ module Cocina
             true
           end
           # rubocop:enable Metrics/CyclomaticComplexity
-          # rubocop:enable Metrics/PerceivedComplexity
 
           def check_version
             match = /MODS version (\d\.\d)/.match(ng_xml.root.at('//mods:recordInfo/mods:recordOrigin',
-                                                                 mods: DESC_METADATA_NS)&.content)
+                                                                 mods: Descriptive::DESC_METADATA_NS)&.content)
 
             return unless match
 
