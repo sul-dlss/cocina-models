@@ -3,11 +3,12 @@
 module Cocina
   module Models
     class DescriptiveBasicValue < Struct
-      attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
-      attribute :parallelValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
-      attribute :groupedValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
+      attribute? :structuredValue, Types::Strict::Array.of(DescriptiveValue)#.default([].freeze)
+      attribute? :parallelValue, Types::Strict::Array.of(DescriptiveValue)#.default([].freeze)
+      attribute? :groupedValue, Types::Strict::Array.of(DescriptiveValue)#.default([].freeze)
       # String or integer value of the descriptive element.
-      attribute? :value, Types::Nominal::Any
+      # Validation of this property is relaxed. See the openapi for full validation.
+      attribute? :value, Types::Nominal::Any.optional
       # Type of value provided by the descriptive element. See https://github.com/sul-dlss/cocina-models/blob/main/docs/description_types.md for valid types.
       attribute? :type, Types::Strict::String
       # Status of the descriptive element value relative to other instances of the element.

@@ -690,27 +690,26 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DescriptiveValue"
+    DescriptiveBasicItem:
+      description: Basic value model for descriptive elements.
+      type: object
+      # additionalProperties: false
+      oneOf:
+        - $ref: "#/components/schemas/DescriptiveStructuredValue"
+        - $ref: "#/components/schemas/DescriptiveParallelValue"
+        - $ref: "#/components/schemas/DescriptiveGroupedValue"
+        - $ref: "#/components/schemas/DescriptiveValueSingle"
     DescriptiveBasicValue:
       description: Basic value model for descriptive elements.
       type: object
       # additionalProperties breaks the validator for allOf, unclear as to why.
       # additionalProperties: false
       allOf:
-        - $ref: "#/components/schemas/DescriptiveStructuredValue"
-        - $ref: "#/components/schemas/DescriptiveParallelValue"
-        - $ref: "#/components/schemas/DescriptiveGroupedValue"
+        - $ref: "#/components/schemas/DescriptiveBasicItem"
         - type: object
           # additionalProperties breaks the validator for DescriptiveValue, unclear as to why.
           # additionalProperties: false
           properties:
-            value:
-              description: String or integer value of the descriptive element.
-              oneOf:
-              - type: string
-              # Title note (nonsorting character count) was supposed to be able to accept an integer value,
-              # but this triggered a bug in committee:
-              # https://github.com/interagent/committee/issues/286
-              # - type: integer
             type:
               description: Type of value provided by the descriptive element. See https://github.com/sul-dlss/cocina-models/blob/main/docs/description_types.md for valid types.
               type: string
@@ -894,6 +893,19 @@ components:
               $ref: '#/components/schemas/Standard'
               # description: An alphabet or other notation used to represent a
               #   language or other symbolic system of the descriptive element value.
+    DescriptiveValueSingle:
+      description: Value model for a single item.
+      type: object
+      # additionalProperties: false
+      properties:
+        value:
+          description: String or integer value of the descriptive element.
+          oneOf:
+          - type: string
+          # Title note (nonsorting character count) was supposed to be able to accept an integer value,
+          # but this triggered a bug in committee:
+          # https://github.com/interagent/committee/issues/286
+          # - type: integer
     DOI:
       type: string
       description: Digital Object Identifier (https://www.doi.org)
