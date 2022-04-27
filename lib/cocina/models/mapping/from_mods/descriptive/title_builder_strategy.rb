@@ -11,7 +11,7 @@ module Cocina
             # @return [#build] a class that can build a title
             def self.find(label:)
               # Some hydrus items don't have titles, so using label. See https://github.com/sul-dlss/hydrus/issues/421
-              label == 'Hydrus' ? HydrusDefaultTitleBuilder : Titles
+              label == 'Hydrus' ? HydrusDefaultTitleBuilder : Title
             end
           end
         end

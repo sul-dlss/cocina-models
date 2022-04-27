@@ -20,7 +20,7 @@ module Cocina
                 return []
               end
 
-              Titles.build(resource_element: resource_element, notifier: notifier)
+              Title.build(resource_element: resource_element, notifier: notifier)
             end
           end
         end
