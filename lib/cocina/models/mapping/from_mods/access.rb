@@ -14,16 +14,16 @@ module Cocina
           }.freeze
 
           # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
-          # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] descriptive_builder
+          # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] description_builder
           # @param [String] purl
           # @return [Hash] a hash that can be mapped to a cocina model
-          def self.build(resource_element:, descriptive_builder:, purl: nil)
-            new(resource_element: resource_element, descriptive_builder: descriptive_builder, purl: purl).build
+          def self.build(resource_element:, description_builder:, purl: nil)
+            new(resource_element: resource_element, description_builder: description_builder, purl: purl).build
           end
 
-          def initialize(resource_element:, descriptive_builder:, purl:)
+          def initialize(resource_element:, description_builder:, purl:)
             @resource_element = resource_element
-            @notifier = descriptive_builder.notifier
+            @notifier = description_builder.notifier
             @purl = purl
           end
 

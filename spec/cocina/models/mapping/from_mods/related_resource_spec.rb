@@ -4,10 +4,10 @@ require 'spec_helper'
 
 RSpec.describe Cocina::Models::Mapping::FromMods::RelatedResource do
   subject(:build) do
-    described_class.build(resource_element: ng_xml.root, descriptive_builder: descriptive_builder, purl: nil)
+    described_class.build(resource_element: ng_xml.root, description_builder: description_builder, purl: nil)
   end
 
-  let(:descriptive_builder) { Cocina::Models::Mapping::FromMods::DescriptionBuilder.new(notifier: notifier) }
+  let(:description_builder) { Cocina::Models::Mapping::FromMods::DescriptionBuilder.new(notifier: notifier) }
 
   let(:notifier) { instance_double(Cocina::Models::Mapping::ErrorNotifier) }
 

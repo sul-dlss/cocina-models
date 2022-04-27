@@ -4,7 +4,7 @@ module Cocina
   module Models
     module Mapping
       module FromMods
-        # Checks and fixes status: primary
+        # Helper class: checks and fixes status: primary
         class Primary
           # @params [Nokogiri::XML::NodeSet] node_set
           # @params [String] type the value of a node's type attribute we are concerned with

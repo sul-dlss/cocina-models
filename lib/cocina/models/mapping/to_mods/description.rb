@@ -6,17 +6,17 @@ module Cocina
   module Models
     module Mapping
       module ToMods
-        # This transforms the DRO.descriptive schema to MODS xml
+        # This transforms the DRO.description schema to MODS xml
         class Description
-          # @param [Cocina::Models::Description] descriptive
+          # @param [Cocina::Models::Description] description
           # @param [string] druid
           # @return [Nokogiri::XML::Document]
-          def self.transform(descriptive, druid)
-            new(descriptive, druid).transform
+          def self.transform(description, druid)
+            new(description, druid).transform
           end
 
-          def initialize(descriptive, druid)
-            @descriptive = descriptive
+          def initialize(description, druid)
+            @description = description
             @druid = druid
           end
 
@@ -24,18 +24,18 @@ module Cocina
           def transform
             Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
               xml.mods(mods_attributes) do
-                ModsWriter.write(xml: xml, descriptive: descriptive, druid: druid)
+                ModsWriter.write(xml: xml, description: description, druid: druid)
               end
             end.doc
           end
 
           private
 
-          attr_reader :descriptive, :druid
+          attr_reader :description, :druid
 
           def mods_version
             @mods_version ||= begin
-              notes = descriptive.adminMetadata&.note || []
+              notes = description.adminMetadata&.note || []
               notes.select { |note| note.type == 'record origin' }.each do |note|
                 match = /MODS version (\d\.\d)/.match(note.value)
                 return match[1] if match

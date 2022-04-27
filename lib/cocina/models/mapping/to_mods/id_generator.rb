@@ -4,7 +4,7 @@ module Cocina
   module Models
     module Mapping
       module ToMods
-        # Generates altRepGroup and nameTitleGroup ids.
+        # Helper class - generates altRepGroup and nameTitleGroup ids.
         class IdGenerator
           def initialize
             @alt_rep_group = 0

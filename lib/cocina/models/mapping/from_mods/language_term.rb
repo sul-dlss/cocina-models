@@ -4,7 +4,7 @@ module Cocina
   module Models
     module Mapping
       module FromMods
-        # Maps language terms
+        # Maps language term attributes
         class LanguageTerm
           # @param [Nokogiri::XML::Element] language_element language or languageOfCataloging element
           # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
