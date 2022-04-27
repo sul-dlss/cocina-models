@@ -13,7 +13,7 @@ module Cocina
           # @param [Nokogiri::XML] mods
           # @param [String] druid
           # @oaram [String] label
-          # @param [Cocina::Models::Mapping::FromMods::ErrorNotifier] notifier
+          # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
           # @return [Hash] a hash that can be mapped to a cocina descriptive model
           # @raises [Cocina::Mapper::InvalidDescMetadata] if some assumption about descMetadata is violated
           def self.props(mods:, druid:, label:, title_builder: Titles, notifier: nil)

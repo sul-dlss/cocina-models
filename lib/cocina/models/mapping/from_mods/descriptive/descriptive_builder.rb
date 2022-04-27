@@ -25,7 +25,7 @@ module Cocina
 
             # @param [#build] title_builder
             # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
-            # @param [Cocina::Models::Mapping::FromMods::ErrorNotifier] notifier
+            # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
             # @param [String] purl
             # @return [Hash] a hash that can be mapped to a cocina descriptive model
             def self.build(resource_element:, notifier:, title_builder: Titles, purl: nil)

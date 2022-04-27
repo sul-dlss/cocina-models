@@ -11,7 +11,7 @@ RSpec.describe Cocina::Models::Mapping::FromMods::Descriptive::Geographic do
     instance_double(Cocina::Models::Mapping::FromMods::Descriptive::DescriptiveBuilder, notifier: notifier)
   end
 
-  let(:notifier) { instance_double(Cocina::Models::Mapping::FromMods::ErrorNotifier) }
+  let(:notifier) { instance_double(Cocina::Models::Mapping::ErrorNotifier) }
 
   let(:ng_xml) do
     Nokogiri::XML <<~XML

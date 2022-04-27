@@ -25,7 +25,7 @@ module Cocina
 
             # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
             # @param [boolean] require_title notify if true and title is missing.
-            # @param [Cocina::Models::Mapping::FromMods::ErrorNotifier] notifier
+            # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
             # @return [Hash] a hash that can be mapped to a cocina model
             def self.build(resource_element:, notifier:, require_title: true)
               new(resource_element: resource_element, notifier: notifier).build(require_title: require_title)

@@ -8,7 +8,7 @@ RSpec.describe Cocina::Models::Mapping::FromMods::Descriptive::HydrusDefaultTitl
       described_class.build(resource_element: ng_xml.root, require_title: true, notifier: notifier)
     end
 
-    let(:notifier) { instance_double(Cocina::Models::Mapping::FromMods::ErrorNotifier) }
+    let(:notifier) { instance_double(Cocina::Models::Mapping::ErrorNotifier) }
 
     context 'when no title' do
       let(:ng_xml) do

@@ -62,7 +62,7 @@ RSpec.shared_examples 'MODS cocina mapping' do
   let(:label) { 'Test title' }
 
   context 'when mapping from MODS (to cocina)' do
-    let(:notifier) { instance_double(Cocina::Models::Mapping::FromMods::ErrorNotifier) }
+    let(:notifier) { instance_double(Cocina::Models::Mapping::ErrorNotifier) }
 
     let(:actual_cocina_props) do
       Cocina::Models::Mapping::FromMods::Descriptive.props(mods: orig_mods_ng, druid: local_druid, notifier: notifier, label: label)
@@ -143,7 +143,7 @@ RSpec.shared_examples 'MODS cocina mapping' do
   end
 
   context 'when mapping from roundtrip MODS (to cocina)' do
-    let(:notifier) { instance_double(Cocina::Models::Mapping::FromMods::ErrorNotifier) }
+    let(:notifier) { instance_double(Cocina::Models::Mapping::ErrorNotifier) }
 
     let(:roundtrip_mods_xml) do
       if defined?(roundtrip_mods)
@@ -226,7 +226,7 @@ RSpec.shared_examples 'cocina MODS mapping' do
   end
 
   context 'when mapping to cocina (from MODS)' do
-    let(:notifier) { instance_double(Cocina::Models::Mapping::FromMods::ErrorNotifier) }
+    let(:notifier) { instance_double(Cocina::Models::Mapping::ErrorNotifier) }
 
     let(:actual_cocina_props) { Cocina::Models::Mapping::FromMods::Descriptive.props(mods: mods_ng, druid: local_druid, notifier: notifier, label: label) }
 
@@ -277,7 +277,7 @@ RSpec.shared_examples 'cocina MODS mapping' do
   end
 
   context 'when mapping from roundtrip cocina (to MODS)' do
-    let(:notifier) { instance_double(Cocina::Models::Mapping::FromMods::ErrorNotifier) }
+    let(:notifier) { instance_double(Cocina::Models::Mapping::ErrorNotifier) }
 
     let(:my_roundtrip_cocina) { defined?(roundtrip_cocina) ? roundtrip_cocina : cocina }
 
@@ -325,7 +325,7 @@ Notification = Struct.new(:msg, :context, :times, keyword_init: true)
 # Builds titles for tests
 class TestTitleBuilder
   # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
-  # @param [Cocina::Models::Mapping::FromMods::ErrorNotifier] notifier
+  # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
   # @return [Hash] a hash that can be mapped to a cocina model
   def self.build(resource_element:, notifier:, require_title:)
     titles = resource_element.xpath('mods:titleInfo', mods: Cocina::Models::Mapping::FromMods::Descriptive::DESC_METADATA_NS)

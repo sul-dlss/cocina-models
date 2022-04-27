@@ -8,7 +8,7 @@ module Cocina
           # Maps language terms
           class LanguageTerm
             # @param [Nokogiri::XML::Element] language_element language or languageOfCataloging element
-            # @param [Cocina::Models::Mapping::FromMods::ErrorNotifier] notifier
+            # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
             # @return [Hash] a hash that can be mapped to a cocina model
             def self.build(language_element:, notifier:)
               new(language_element: language_element, notifier: notifier).build
