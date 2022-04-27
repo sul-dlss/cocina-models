@@ -51,7 +51,7 @@ module Cocina
           def write
             filtered_related_resources.each do |(attributes, new_related, _orig_related)|
               xml.relatedItem attributes do
-                ModsWriter.write(xml: xml, descriptive: new_related, druid: druid,
+                ModsWriter.write(xml: xml, description: new_related, druid: druid,
                                  id_generator: id_generator)
               end
             end

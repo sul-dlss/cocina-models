@@ -4,10 +4,10 @@ require 'spec_helper'
 
 RSpec.describe Cocina::Models::Mapping::FromMods::AdminMetadata do
   subject(:build) do
-    described_class.build(resource_element: ng_xml.root, descriptive_builder: descriptive_builder)
+    described_class.build(resource_element: ng_xml.root, description_builder: description_builder)
   end
 
-  let(:descriptive_builder) do
+  let(:description_builder) do
     instance_double(Cocina::Models::Mapping::FromMods::DescriptionBuilder, notifier: notifier)
   end
 

@@ -10,17 +10,17 @@ module Cocina
           DETAIL_TYPES = Cocina::Models::Mapping::ToMods::RelatedResource::DETAIL_TYPES.invert.freeze
 
           # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
-          # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] descriptive_builder
+          # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] description_builder
           # @param [String] purl
           # @return [Hash] a hash that can be mapped to a cocina model
-          def self.build(resource_element:, descriptive_builder:, purl:)
-            new(resource_element: resource_element, descriptive_builder: descriptive_builder, purl: purl).build
+          def self.build(resource_element:, description_builder:, purl:)
+            new(resource_element: resource_element, description_builder: description_builder, purl: purl).build
           end
 
-          def initialize(resource_element:, descriptive_builder:, purl:)
+          def initialize(resource_element:, description_builder:, purl:)
             @resource_element = resource_element
-            @descriptive_builder = descriptive_builder
-            @notifier = descriptive_builder.notifier
+            @description_builder = description_builder
+            @notifier = description_builder.notifier
             @purl = purl
           end
 
@@ -30,7 +30,7 @@ module Cocina
 
           private
 
-          attr_reader :resource_element, :descriptive_builder, :notifier, :purl
+          attr_reader :resource_element, :description_builder, :notifier, :purl
 
           def related_items
             resource_element.xpath('mods:relatedItem', mods: Description::DESC_METADATA_NS).filter_map do |related_item|
@@ -47,7 +47,7 @@ module Cocina
           end
 
           def build_related_item(related_item)
-            descriptive_builder.build(resource_element: related_item, require_title: false).tap do |item|
+            description_builder.build(resource_element: related_item, require_title: false).tap do |item|
               item[:displayLabel] = related_item['displayLabel']
               if related_item['type']
                 item[:type] = normalized_type_for(related_item['type'])

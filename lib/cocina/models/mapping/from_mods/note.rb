@@ -7,11 +7,11 @@ module Cocina
         # Maps notes
         class Note # rubocop:disable Metrics/ClassLength
           # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
-          # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] descriptive_builder (not used, but passed in by DescriptionBuilder)
+          # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] description_builder (not used, but passed in by DescriptionBuilder)
           # @param [String] purl (not used, but passed in by DescriptionBuilder)
           # @return [Hash] a hash that can be mapped to a cocina model
-          # def self.build(resource_element:, descriptive_builder: nil, purl: nil)
-          def self.build(resource_element:, descriptive_builder: nil, purl: nil)
+          # def self.build(resource_element:, description_builder: nil, purl: nil)
+          def self.build(resource_element:, description_builder: nil, purl: nil)
             new(resource_element: resource_element).build
           end
 

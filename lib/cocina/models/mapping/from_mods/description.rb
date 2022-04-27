@@ -4,7 +4,7 @@ module Cocina
   module Models
     module Mapping
       module FromMods
-        # Creates Cocina Descriptive objects from MODS xml
+        # Creates Cocina Description objects from MODS xml
         class Description
           DESC_METADATA_NS = 'http://www.loc.gov/mods/v3'
           XLINK_NS = 'http://www.w3.org/1999/xlink'

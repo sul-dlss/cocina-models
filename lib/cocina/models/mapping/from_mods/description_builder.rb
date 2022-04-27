@@ -26,7 +26,7 @@ module Cocina
           # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
           # @param [TitleBuilder] title_builder - defaults to Title class
           # @param [String] purl
-          # @return [Hash] a hash that can be mapped to a cocina descriptive model
+          # @return [Hash] a hash that can be mapped to a cocina description model
           def self.build(resource_element:, notifier:, title_builder: Title, purl: nil)
             new(title_builder: title_builder, notifier: notifier).build(resource_element: resource_element,
                                                                         purl: purl)
@@ -37,7 +37,7 @@ module Cocina
             @notifier = notifier
           end
 
-          # @return [Hash] a hash that can be mapped to a cocina descriptive model
+          # @return [Hash] a hash that can be mapped to a cocina description model
           def build(resource_element:, purl: nil, require_title: true)
             cocina_description = {}
             title_result = @title_builder.build(resource_element: resource_element, require_title: require_title,
@@ -47,10 +47,10 @@ module Cocina
             purl_value = purl || Purl.primary_purl_value(resource_element, purl)
             cocina_description[:purl] = purl_value if purl_value
 
-            BUILDERS.each do |descriptive_property, builder|
-              result = builder.build(resource_element: resource_element, descriptive_builder: self,
+            BUILDERS.each do |description_property, builder|
+              result = builder.build(resource_element: resource_element, description_builder: self,
                                      purl: purl_value)
-              cocina_description.merge!(descriptive_property => result) if result.present?
+              cocina_description.merge!(description_property => result) if result.present?
             end
             cocina_description
           end

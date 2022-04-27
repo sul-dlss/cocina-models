@@ -5,7 +5,7 @@ module Cocina
   module Models
     module Mapping
       module FromMods
-        # Provides subject authority codes
+        # Helper class - provides subject authority codes
         class SubjectAuthorityCodes
           # Subject codes: https://id.loc.gov/vocabulary/subjectSchemes.html
           # curl https://id.loc.gov/vocabulary/subjectSchemes.madsrdf.json | jq '[.[0]."http://www.loc.gov/mads/rdf/v1#hasMADSSchemeMember"[]."@id"[44:]]'

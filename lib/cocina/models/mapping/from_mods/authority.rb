@@ -4,7 +4,7 @@ module Cocina
   module Models
     module Mapping
       module FromMods
-        # Normalizes Authorities
+        # Helper class: normalizes Authorities
         class Authority
           NORMALIZE_AUTHORITY_URIS = [
             'http://id.loc.gov/authorities/names',

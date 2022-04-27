@@ -4,7 +4,7 @@ module Cocina
   module Models
     module Mapping
       module FromMods
-        # Splits nodes by altRepGroup ids
+        # Helper class: splits nodes by altRepGroup ids
         class AltRepGroup
           # @param [Array<Nokogiri::XML::Element>] nodes to split
           # @return [Array<Array<Nokogiri::XML::Element>>, Array<Nokogiri::XML::Element>] nodes grouped by altRepGroup, other nodes
