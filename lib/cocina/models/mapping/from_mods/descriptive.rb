@@ -9,14 +9,14 @@ module Cocina
           DESC_METADATA_NS = 'http://www.loc.gov/mods/v3'
           XLINK_NS = 'http://www.w3.org/1999/xlink'
 
-          # @param [#build] title_builder
           # @param [Nokogiri::XML] mods
           # @param [String] druid
           # @oaram [String] label
+          # @param [TitleBuilder] title_builder - defaults to Title class
           # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
           # @return [Hash] a hash that can be mapped to a cocina descriptive model
           # @raises [Cocina::Mapper::InvalidDescMetadata] if some assumption about descMetadata is violated
-          def self.props(mods:, druid:, label:, title_builder: Titles, notifier: nil)
+          def self.props(mods:, druid:, label:, title_builder: Title, notifier: nil)
             new(title_builder: title_builder, mods: mods, druid: druid, label: label, notifier: notifier).props
           end
 

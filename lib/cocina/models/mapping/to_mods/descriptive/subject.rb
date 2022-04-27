@@ -450,7 +450,7 @@ module Cocina
               return unless name_part.value
 
               attributes = {}.tap do |attrs|
-                attrs[:type] = ContributorWriter::NAME_PART[name_part.type]
+                attrs[:type] = NameWriter::NAME_PART[name_part.type]
               end.compact
               xml.namePart name_part.value, attributes
               write_other_notes(name_part.note, 'affiliation')

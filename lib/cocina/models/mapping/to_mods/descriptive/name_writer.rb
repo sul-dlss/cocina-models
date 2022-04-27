@@ -5,8 +5,8 @@ module Cocina
     module Mapping
       module ToMods
         class Descriptive
-          # Maps contributor from cocina to MODS XML
-          class ContributorWriter # rubocop:disable Metrics/ClassLength
+          # Writes MODS XML name elements from cocina contributor
+          class NameWriter # rubocop:disable Metrics/ClassLength
             # one way mapping:  MODS 'corporate' already maps to Cocina 'organization'
             NAME_TYPE = Cocina::Models::Mapping::FromMods::Descriptive::Contributor::ROLES.invert.freeze
             NAME_PART = Cocina::Models::Mapping::FromMods::Descriptive::Contributor::NAME_PART.invert.merge('activity dates' => 'date').freeze

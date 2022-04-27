@@ -332,7 +332,7 @@ class TestTitleBuilder
     if titles.empty?
       [{ value: 'Placeholder title for specs' }]
     else
-      Cocina::Models::Mapping::FromMods::Descriptive::Titles.build(resource_element: resource_element, notifier: notifier, require_title: require_title)
+      Cocina::Models::Mapping::FromMods::Descriptive::Title.build(resource_element: resource_element, notifier: notifier, require_title: require_title)
     end
   end
 end

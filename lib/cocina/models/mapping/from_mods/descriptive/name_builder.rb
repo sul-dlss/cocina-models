@@ -8,7 +8,7 @@ module Cocina
         class Descriptive
           # Maps a name
           class NameBuilder
-            UNCITED_DESCRIPTION = Cocina::Models::Mapping::ToMods::Descriptive::ContributorWriter::UNCITED_DESCRIPTION
+            UNCITED_DESCRIPTION = Cocina::Models::Mapping::ToMods::Descriptive::NameWriter::UNCITED_DESCRIPTION
             TYPE_FOR_ROLES = Cocina::Models::Mapping::FromMods::Descriptive::Contributor::ROLES.merge('event' => 'event').freeze
 
             # @param [Array<Nokogiri::XML::Element>] name_elements (multiple if parallel)

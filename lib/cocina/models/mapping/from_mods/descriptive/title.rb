@@ -6,7 +6,7 @@ module Cocina
       module FromMods
         class Descriptive
           # Maps titles
-          class Titles # rubocop:disable Metrics/ClassLength
+          class Title # rubocop:disable Metrics/ClassLength
             TYPES = {
               'nonSort' => 'nonsorting characters',
               'title' => 'main title',

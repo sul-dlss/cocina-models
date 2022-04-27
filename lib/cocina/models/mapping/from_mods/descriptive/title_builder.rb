@@ -68,7 +68,7 @@ module Cocina
             # @param [Nokogiri::XML::NodeSet] child_nodes the children of the titleInfo
             def structured_value(child_nodes)
               values = child_nodes.map do |node|
-                { value: clean_title(node.text, node.name), type: Titles::TYPES[node.name] }
+                { value: clean_title(node.text, node.name), type: Title::TYPES[node.name] }
               end
               {
                 structuredValue: values,
