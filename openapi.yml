@@ -691,7 +691,7 @@ components:
           items:
             $ref: "#/components/schemas/DescriptiveValue"
     DescriptiveBasicValue:
-      description: Basic value model for descriptive elements.
+      description: Basic value model for descriptive elements. Can only have one of value, parallelValue, groupedValue, or structuredValue.
       type: object
       # additionalProperties breaks the validator for allOf, unclear as to why.
       # additionalProperties: false
