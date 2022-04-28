@@ -5,8 +5,7 @@ module Cocina
     module Mapping
       # Utility methods for generating purl links
       class Purl
-        class_attribute :base_url
-        self.base_url = 'https://purl.stanford.edu'
+        class_attribute :base_url, default: 'https://purl.stanford.edu'
 
         def self.for(druid:)
           return nil if druid.nil?
