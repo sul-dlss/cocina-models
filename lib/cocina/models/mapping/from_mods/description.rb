@@ -15,7 +15,6 @@ module Cocina
           # @param [TitleBuilder] title_builder - defaults to Title class
           # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
           # @return [Hash] a hash that can be mapped to a cocina descriptive model
-          # @raises [Cocina::Mapper::InvalidDescMetadata] if some assumption about descMetadata is violated
           def self.props(mods:, druid:, label:, title_builder: Title, notifier: nil)
             new(title_builder: title_builder, mods: mods, druid: druid, label: label, notifier: notifier).props
           end
