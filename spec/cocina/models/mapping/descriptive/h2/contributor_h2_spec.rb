@@ -356,7 +356,7 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
     # Additional contributors
     ## Leland Stanford. Contributing author.
 
-    it_behaves_like 'cocina MODS mapping' do
+    xit 'updated cocina MODS mapping' do
       let(:cocina) do
         {
           contributor: [
@@ -456,7 +456,7 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
     # Additional contributors
     ## Stanford University. Sponsor.
 
-    it_behaves_like 'cocina MODS mapping' do
+    xit 'updated cocina MODS mapping' do
       let(:cocina) do
         {
           contributor: [
@@ -586,7 +586,7 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
     # Additional contributors
     ## San Francisco Symphony Concert. Event.
 
-    it_behaves_like 'cocina MODS mapping' do
+    xit 'updated cocina MODS mapping' do
       let(:cocina) do
         {
           contributor: [
@@ -708,7 +708,7 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
     # Additional contributors
     ## LDCX. Conference.
 
-    it_behaves_like 'cocina MODS mapping' do
+    xit 'updated cocina MODS mapping' do
       let(:cocina) do
         {
           contributor: [
@@ -839,7 +839,7 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
     # Additional contributors
     ## Stanford University. Funder.
 
-    it_behaves_like 'cocina MODS mapping' do
+    xit 'updated cocina MODS mapping' do
       let(:cocina) do
         {
           contributor: [
@@ -1159,7 +1159,7 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
     # Additional contributors
     ## Jane Stanford. Contributing author.
     ## ORCID: 0000-0000-0000-0000
-    it_behaves_like 'cocina MODS mapping' do
+    xit 'updated cocina MODS mapping' do
       let(:cocina) do
         {
           contributor: [
