@@ -55,8 +55,37 @@ If there is a possibility that a model or validation change will conflict with s
 
 1. Create a cocina-models branch containing the proposed change and push to Github.
 2. On sdr-deploy, check out `main`, update the `Gemfile` so that cocina-models references the branch, and `bundle install`.
-3. Run `bin/validate-cocina`.
-4. Check `validate-cocina.csv` for validation errors.
+3. Select the appropriate database.
+For QA:
+```
+export DATABASE_NAME="dor_services"
+export DATABASE_USERNAME=$DOR_SERVICES_DB_USER
+export DATABASE_HOSTNAME=$DOR_SERVICES_DB_QA_HOST
+export DATABASE_PASSWORD=$DOR_SERVICES_DB_QA_PWD
+```
+
+For stage:
+```
+export DATABASE_NAME="dor_services"
+export DATABASE_USERNAME=$DOR_SERVICES_DB_USER
+export DATABASE_HOSTNAME=$DOR_SERVICES_DB_STAGE_HOST
+export DATABASE_PASSWORD=$DOR_SERVICES_DB_STAGE_PWD
+```
+
+For production:
+```
+export DATABASE_NAME="dor_services"
+export DATABASE_USERNAME=$DOR_SERVICES_DB_USER
+export DATABASE_HOSTNAME=$DOR_SERVICES_DB_PROD_HOST
+export DATABASE_PASSWORD=$DOR_SERVICES_DB_PROD_PWD
+```
+
+4. Run `bin/validate-cocina`:
+```
+export RUBYOPT='-W:no-deprecated -W:no-experimental'
+RAILS_ENV=production bin/validate-cocina -p 8
+```
+5. Check `validate-cocina.csv` for validation errors.
 
 ## Releasing
 
