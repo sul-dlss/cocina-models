@@ -141,6 +141,8 @@ _Path: event.type_
     * The discussion of an academic or intellectual work for an audience, such as a seminar.
   * production
     * The physical assembly of a resource not considered published, such as page proofs for a book.
+  * provenance
+    * The resource's origins and history.
   * publication
     * The publishing or issuing of a resource.
   * recording

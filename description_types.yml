@@ -132,6 +132,8 @@ event:
     description: The discussion of an academic or intellectual work for an audience, such as a seminar.
   - value: production
     description: The physical assembly of a resource not considered published, such as page proofs for a book.
+  - value: provenance
+    description: The resource's origins and history.
   - value: publication
     description: The publishing or issuing of a resource.
   - value: recording
