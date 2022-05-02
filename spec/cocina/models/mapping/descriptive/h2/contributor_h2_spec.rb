@@ -440,7 +440,6 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
           <name type="personal">
             <namePart type="given">Leland</namePart>
             <namePart type="family">Stanford</namePart>
-            <description>not included in citation</description>
             <role>
               <roleTerm type="text" authority="marcrelator" authorityURI="http://id.loc.gov/vocabulary/relators/" valueURI="http://id.loc.gov/vocabulary/relators/ctb">contributor</roleTerm>
               <roleTerm type="code" authority="marcrelator" authorityURI="http://id.loc.gov/vocabulary/relators/" valueURI="http://id.loc.gov/vocabulary/relators/ctb">ctb</roleTerm>
@@ -531,7 +530,6 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
           </name>
           <name type="corporate">
             <namePart>Stanford University</namePart>
-            <description>not included in citation</description>
             <role>
               <roleTerm type="text" authority="marcrelator" authorityURI="http://id.loc.gov/vocabulary/relators/" valueURI="http://id.loc.gov/vocabulary/relators/spn">sponsor</roleTerm>
               <roleTerm type="code" authority="marcrelator" authorityURI="http://id.loc.gov/vocabulary/relators/" valueURI="http://id.loc.gov/vocabulary/relators/spn">spn</roleTerm>
@@ -656,7 +654,6 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
           </name>
           <name>
             <namePart>San Francisco Symphony Concert</namePart>
-            <description>not included in citation</description>
             <role>
               <roleTerm type="text">event</roleTerm>
             </role>
@@ -779,7 +776,6 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
           </name>
           <name type="conference">
             <namePart>LDCX</namePart>
-            <description>not included in citation</description>
             <role>
               <roleTerm type="text">conference</roleTerm>
             </role>
@@ -917,7 +913,6 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
           </name>
           <name type="corporate">
             <namePart>Stanford University</namePart>
-            <description>not included in citation</description>
             <role>
               <roleTerm type="code" authority="marcrelator" authorityURI="http://id.loc.gov/vocabulary/relators/"
                 valueURI="http://id.loc.gov/vocabulary/relators/fnd">fnd</roleTerm>
@@ -1221,7 +1216,6 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
           <name type="personal" usage="primary">
             <namePart type="given">Jane</namePart>
             <namePart type="family">Stanford</namePart>
-            <description>not included in citation</description>
             <nameIdentifier type="orcid" typeURI="https://orcid.org">0000-0000-0000-0000</nameIdentifier>
             <role>
               <roleTerm type="text" authority="marcrelator" authorityURI="http://id.loc.gov/vocabulary/relators/" valueURI="http://id.loc.gov/vocabulary/relators/ctb">contributor</roleTerm>
