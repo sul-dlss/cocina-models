@@ -12,8 +12,20 @@ module Cocina
         end
       end
 
+      SUPPORTED_TYPES = %i[
+        admin_policy
+        admin_policy_with_metadata
+        collection
+        collection_with_metadata
+        dro
+        dro_with_metadata
+        request_admin_policy
+        request_collection
+        request_dro
+      ].freeze
+
       def self.supported_type?(type)
-        %i[dro collection admin_policy dro_with_metadata collection_with_metadata admin_policy_with_metadata].include?(type)
+        SUPPORTED_TYPES.include?(type)
       end
 
       WITH_METADATA_SUFFIX = '_with_metadata'
@@ -39,7 +51,11 @@ module Cocina
         admin_policy_id: 'druid:hv992ry2431'
       }.freeze
 
+      REQUEST_DRO_DEFAULTS = DRO_DEFAULTS.except(:id)
+
       COLLECTION_DEFAULTS = DRO_DEFAULTS.except(:source_id).merge(type: Cocina::Models::ObjectType.collection)
+
+      REQUEST_COLLECTION_DEFAULTS = COLLECTION_DEFAULTS.except(:id)
 
       ADMIN_POLICY_DEFAULTS = {
         type: Cocina::Models::ObjectType.admin_policy,
@@ -51,19 +67,31 @@ module Cocina
         agreement_id: 'druid:hp308wm0436'
       }.freeze
 
+      REQUEST_ADMIN_POLICY_DEFAULTS = ADMIN_POLICY_DEFAULTS.except(:id)
+
+      def self.build_dro_properties(id:, **kwargs)
+        build_request_dro_properties(**kwargs)
+          .merge(externalIdentifier: id)
+          .tap do |props|
+          props[:description][:purl] = "https://purl.stanford.edu/#{id.delete_prefix('druid:')}"
+        end
+      end
+
+      def self.build_dro(attributes)
+        Cocina::Models.build(build_dro_properties(**DRO_DEFAULTS.merge(attributes)))
+      end
+
       # rubocop:disable Metrics/ParameterLists
-      def self.build_dro_properties(type:, id:, version:, label:, title:, source_id:, admin_policy_id:,
-                                    barcode: nil, catkeys: [], collection_ids: [])
+      def self.build_request_dro_properties(type:, version:, label:, title:, source_id:, admin_policy_id:,
+                                            barcode: nil, catkeys: [], collection_ids: [])
         {
           type: type,
-          externalIdentifier: id,
           version: version,
           label: label,
           access: {},
           administrative: { hasAdminPolicy: admin_policy_id },
           description: {
-            title: [{ value: title }],
-            purl: "https://purl.stanford.edu/#{id.delete_prefix('druid:')}"
+            title: [{ value: title }]
           },
           identification: {
             sourceId: source_id
@@ -82,22 +110,28 @@ module Cocina
       end
       # rubocop:enable Metrics/ParameterLists
 
-      def self.build_dro(attributes)
-        Cocina::Models.build(build_dro_properties(**DRO_DEFAULTS.merge(attributes)))
+      def self.build_request_dro(attributes)
+        Cocina::Models.build_request(build_request_dro_properties(**REQUEST_DRO_DEFAULTS.merge(attributes)))
+      end
+
+      def self.build_collection_properties(id:, **kwargs)
+        build_request_collection_properties(**kwargs)
+          .merge(externalIdentifier: id)
+          .tap do |props|
+          props[:description][:purl] = "https://purl.stanford.edu/#{id.delete_prefix('druid:')}"
+        end
       end
 
       # rubocop:disable Metrics/ParameterLists
-      def self.build_collection_properties(type:, id:, version:, label:, title:, admin_policy_id:, source_id: nil, catkeys: [])
+      def self.build_request_collection_properties(type:, version:, label:, title:, admin_policy_id:, source_id: nil, catkeys: [])
         {
           type: type,
-          externalIdentifier: id,
           version: version,
           label: label,
           access: {},
           administrative: { hasAdminPolicy: admin_policy_id },
           description: {
-            title: [{ value: title }],
-            purl: "https://purl.stanford.edu/#{id.delete_prefix('druid:')}"
+            title: [{ value: title }]
           },
           identification: {}
         }.tap do |props|
@@ -115,19 +149,34 @@ module Cocina
         Cocina::Models.build(build_collection_properties(**COLLECTION_DEFAULTS.merge(attributes)))
       end
 
+      def self.build_request_collection(attributes)
+        Cocina::Models.build_request(build_request_collection_properties(**REQUEST_COLLECTION_DEFAULTS.merge(attributes)))
+      end
+
       def self.build_admin_policy(attributes)
         Cocina::Models.build(build_admin_policy_properties(**ADMIN_POLICY_DEFAULTS.merge(attributes)))
       end
 
+      def self.build_request_admin_policy(attributes)
+        Cocina::Models.build_request(build_request_admin_policy_properties(**REQUEST_ADMIN_POLICY_DEFAULTS.merge(attributes)))
+      end
+
+      def self.build_admin_policy_properties(id:, **kwargs)
+        build_request_admin_policy_properties(**kwargs)
+          .merge(externalIdentifier: id)
+          .tap do |props|
+          props[:description][:purl] = "https://purl.stanford.edu/#{id.delete_prefix('druid:')}"
+        end
+      end
+
       # rubocop:disable Metrics/ParameterLists
-      def self.build_admin_policy_properties(type:, id:, version:, label:, title:,
-                                             admin_policy_id:, agreement_id:,
-                                             use_statement: nil, copyright: nil, license: nil,
-                                             registration_workflow: nil, collections_for_registration: nil,
-                                             without_description: false)
+      def self.build_request_admin_policy_properties(type:, version:, label:, title:,
+                                                     admin_policy_id:, agreement_id:,
+                                                     use_statement: nil, copyright: nil, license: nil,
+                                                     registration_workflow: nil, collections_for_registration: nil,
+                                                     without_description: false)
         {
           type: type,
-          externalIdentifier: id,
           version: version,
           label: label,
           administrative: {
@@ -139,8 +188,7 @@ module Cocina
             }
           },
           description: {
-            title: [{ value: title }],
-            purl: "https://purl.stanford.edu/#{id.delete_prefix('druid:')}"
+            title: [{ value: title }]
           }
         }.tap do |props|
           props[:administrative][:accessTemplate][:useAndReproductionStatement] = use_statement if use_statement
