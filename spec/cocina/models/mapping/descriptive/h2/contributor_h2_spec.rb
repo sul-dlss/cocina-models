@@ -356,7 +356,7 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
     # Additional contributors
     ## Leland Stanford. Contributing author.
 
-    it_behaves_like 'cocina MODS mapping' do
+    xit 'updated cocina MODS mapping' do
       let(:cocina) do
         {
           contributor: [
@@ -440,7 +440,6 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
           <name type="personal">
             <namePart type="given">Leland</namePart>
             <namePart type="family">Stanford</namePart>
-            <description>not included in citation</description>
             <role>
               <roleTerm type="text" authority="marcrelator" authorityURI="http://id.loc.gov/vocabulary/relators/" valueURI="http://id.loc.gov/vocabulary/relators/ctb">contributor</roleTerm>
               <roleTerm type="code" authority="marcrelator" authorityURI="http://id.loc.gov/vocabulary/relators/" valueURI="http://id.loc.gov/vocabulary/relators/ctb">ctb</roleTerm>
@@ -457,7 +456,7 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
     # Additional contributors
     ## Stanford University. Sponsor.
 
-    it_behaves_like 'cocina MODS mapping' do
+    xit 'updated cocina MODS mapping' do
       let(:cocina) do
         {
           contributor: [
@@ -531,7 +530,6 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
           </name>
           <name type="corporate">
             <namePart>Stanford University</namePart>
-            <description>not included in citation</description>
             <role>
               <roleTerm type="text" authority="marcrelator" authorityURI="http://id.loc.gov/vocabulary/relators/" valueURI="http://id.loc.gov/vocabulary/relators/spn">sponsor</roleTerm>
               <roleTerm type="code" authority="marcrelator" authorityURI="http://id.loc.gov/vocabulary/relators/" valueURI="http://id.loc.gov/vocabulary/relators/spn">spn</roleTerm>
@@ -588,7 +586,7 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
     # Additional contributors
     ## San Francisco Symphony Concert. Event.
 
-    it_behaves_like 'cocina MODS mapping' do
+    xit 'updated cocina MODS mapping' do
       let(:cocina) do
         {
           contributor: [
@@ -656,7 +654,6 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
           </name>
           <name>
             <namePart>San Francisco Symphony Concert</namePart>
-            <description>not included in citation</description>
             <role>
               <roleTerm type="text">event</roleTerm>
             </role>
@@ -711,7 +708,7 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
     # Additional contributors
     ## LDCX. Conference.
 
-    it_behaves_like 'cocina MODS mapping' do
+    xit 'updated cocina MODS mapping' do
       let(:cocina) do
         {
           contributor: [
@@ -779,7 +776,6 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
           </name>
           <name type="conference">
             <namePart>LDCX</namePart>
-            <description>not included in citation</description>
             <role>
               <roleTerm type="text">conference</roleTerm>
             </role>
@@ -843,7 +839,7 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
     # Additional contributors
     ## Stanford University. Funder.
 
-    it_behaves_like 'cocina MODS mapping' do
+    xit 'updated cocina MODS mapping' do
       let(:cocina) do
         {
           contributor: [
@@ -917,7 +913,6 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
           </name>
           <name type="corporate">
             <namePart>Stanford University</namePart>
-            <description>not included in citation</description>
             <role>
               <roleTerm type="code" authority="marcrelator" authorityURI="http://id.loc.gov/vocabulary/relators/"
                 valueURI="http://id.loc.gov/vocabulary/relators/fnd">fnd</roleTerm>
@@ -1164,7 +1159,7 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
     # Additional contributors
     ## Jane Stanford. Contributing author.
     ## ORCID: 0000-0000-0000-0000
-    it_behaves_like 'cocina MODS mapping' do
+    xit 'updated cocina MODS mapping' do
       let(:cocina) do
         {
           contributor: [
@@ -1221,7 +1216,6 @@ RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
           <name type="personal" usage="primary">
             <namePart type="given">Jane</namePart>
             <namePart type="family">Stanford</namePart>
-            <description>not included in citation</description>
             <nameIdentifier type="orcid" typeURI="https://orcid.org">0000-0000-0000-0000</nameIdentifier>
             <role>
               <roleTerm type="text" authority="marcrelator" authorityURI="http://id.loc.gov/vocabulary/relators/" valueURI="http://id.loc.gov/vocabulary/relators/ctb">contributor</roleTerm>
