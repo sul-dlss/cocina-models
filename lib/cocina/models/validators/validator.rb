@@ -11,7 +11,8 @@ module Cocina
           PurlValidator,
           CatalogLinksValidator,
           AssociatedNameValidator,
-          DescriptionTypesValidator
+          DescriptionTypesValidator,
+          DescriptionValuesValidator
         ].freeze
 
         def self.validate(clazz, attributes)
