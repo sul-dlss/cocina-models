@@ -199,8 +199,6 @@ module Cocina
                 xml.affiliation note.value
               when 'description'
                 xml.description note.value
-              when 'citation status'
-                xml.description UNCITED_DESCRIPTION if note.value == 'false'
               end
             end
           end
