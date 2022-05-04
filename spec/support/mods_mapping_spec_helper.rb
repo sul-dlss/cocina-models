@@ -42,8 +42,7 @@ RSpec.shared_examples 'MODS cocina mapping' do
   # Required: mods, cocina
   # Optional: druid, roundtrip_mods, warnings, errors, mods_attributes, skip_normalization, label
 
-  # NOTE: Because we haven't necessarily set a title in this Cocina::Models::Description, it may not validate against the openapi.
-  let(:orig_cocina_description) { Cocina::Models::Description.new(add_purl_and_title(cocina, local_druid), false, false) }
+  let(:orig_cocina_description) { Cocina::Models::Description.new(add_purl_and_title(cocina, local_druid)) }
 
   let(:orig_mods_ng) { ng_mods_for(mods, mods_attributes) }
 
@@ -156,7 +155,7 @@ RSpec.shared_examples 'MODS cocina mapping' do
       Cocina::Models::Mapping::FromMods::Description.props(mods: roundtrip_mods_ng, druid: local_druid, notifier: notifier, label: label)
     end
 
-    let(:roundtrip_cocina_description) { Cocina::Models::Description.new(roundtrip_cocina_props, false, false) }
+    let(:roundtrip_cocina_description) { Cocina::Models::Description.new(roundtrip_cocina_props) }
 
     let(:re_roundtrip_mods_xml) { Cocina::Models::Mapping::ToMods::Description.transform(roundtrip_cocina_description, local_druid).to_xml }
 
@@ -191,8 +190,7 @@ RSpec.shared_examples 'cocina MODS mapping' do
   # Required: mods, cocina
   # Optional: druid, roundtrip_cocina, warnings, errors, mods_attributes, label
 
-  # NOTE: Because we haven't necessarily set a title in this Cocina::Models::Description, it may not validate against the openapi.
-  let(:orig_cocina_description) { Cocina::Models::Description.new(add_purl_and_title(cocina, local_druid), false, false) }
+  let(:orig_cocina_description) { Cocina::Models::Description.new(add_purl_and_title(cocina, local_druid)) }
 
   let(:mods_attributes) { MODS_ATTRIBUTES }
 
