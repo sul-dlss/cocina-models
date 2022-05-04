@@ -45,24 +45,31 @@ module Cocina
         type: Cocina::Models::ObjectType.object,
         id: 'druid:bc234fg5678',
         version: 1,
-        label: 'test object',
-        title: 'test object',
+        label: 'factory DRO label',
+        title: 'factory DRO title',
         source_id: 'sul:1234',
         admin_policy_id: 'druid:hv992ry2431'
       }.freeze
 
       REQUEST_DRO_DEFAULTS = DRO_DEFAULTS.except(:id)
 
-      COLLECTION_DEFAULTS = DRO_DEFAULTS.except(:source_id).merge(type: Cocina::Models::ObjectType.collection)
+      COLLECTION_DEFAULTS = {
+        type: Cocina::Models::ObjectType.collection,
+        id: 'druid:bb222ff5555',
+        version: 1,
+        label: 'factory collection label',
+        title: 'factory collection title',
+        admin_policy_id: 'druid:hv992ry2431'
+      }.freeze
 
       REQUEST_COLLECTION_DEFAULTS = COLLECTION_DEFAULTS.except(:id)
 
       ADMIN_POLICY_DEFAULTS = {
         type: Cocina::Models::ObjectType.admin_policy,
-        id: 'druid:bc234fg5678',
+        id: 'druid:cb432gf8765',
         version: 1,
-        label: 'test admin policy',
-        title: 'test admin policy',
+        label: 'factory APO label',
+        title: 'factory APO title',
         admin_policy_id: 'druid:hv992ry2431',
         agreement_id: 'druid:hp308wm0436'
       }.freeze
