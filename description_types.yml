@@ -391,6 +391,8 @@ identifier:
   - value: record id
   - value: Senate Number
   - value: Series
+  - value: SICI
+    code: sici
   - value: SIRSI
   - value: Source ID
   - value: sourceID
