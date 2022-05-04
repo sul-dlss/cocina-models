@@ -308,6 +308,61 @@ RSpec.describe 'MODS subject name <--> cocina mappings' do
     end
   end
 
+  describe 'Name subject with structuredValue name and affiliation' do
+    # kr674vm3549
+    xit 'new MODS cocina mapping' do
+      let(:mods) do
+        <<~XML
+          <subject authority="lcsh">
+            <name type="personal">
+              <namePart>Smith, Fern M. (Fern Meyerson)</namePart>
+              <namePart type="date">1933-</namePart>
+              <affiliation>Stanford Law School graduate, J.D. (1975)</affiliation>
+            </name>
+            <genre>Interviews</genre>
+          </subject>
+        XML
+      end
+
+      let(:cocina) do
+        {
+          subject: [
+            {
+              source: {
+                code: 'lcsh'
+              },
+              structuredValue: [
+                {
+                  structuredValue: [
+                    {
+                      value: 'Smith, Fern M. (Fern Meyerson)',
+                      type: 'name'
+                    },
+                    {
+                      value: '1933-',
+                      type: 'life dates'
+                    }
+                  ],
+                  type: 'person',
+                  note: [
+                    {
+                      value: 'Stanford Law School graduate, J.D. (1975)',
+                      type: 'affiliation'
+                    }
+                  ]
+                },
+                {
+                  value: 'Interviews',
+                  type: 'genre'
+                }
+              ]
+            }
+          ]
+        }
+      end
+    end
+  end
+
   describe 'Name subject with authority on both subject and name' do
     it_behaves_like 'MODS cocina mapping' do
       let(:mods) do
