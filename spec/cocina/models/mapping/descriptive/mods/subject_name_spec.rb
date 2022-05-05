@@ -310,7 +310,7 @@ RSpec.describe 'MODS subject name <--> cocina mappings' do
 
   describe 'Name subject with structuredValue name and affiliation' do
     # kr674vm3549
-    xit 'new MODS cocina mapping' do
+    it_behaves_like 'MODS cocina mapping' do
       let(:mods) do
         <<~XML
           <subject authority="lcsh">
