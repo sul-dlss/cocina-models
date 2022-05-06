@@ -149,16 +149,6 @@ RSpec.describe Cocina::Models::Validators::AssociatedNameValidator do
     end
   end
 
-  context 'when valid DRO with name title group' do
-    let(:clazz) { Cocina::Models::DRO }
-
-    let(:props) { { description: desc_props } }
-
-    it 'does not raise' do
-      validate
-    end
-  end
-
   context 'when invalid DRO with name title group' do
     let(:clazz) { Cocina::Models::DRO }
 
@@ -166,8 +156,8 @@ RSpec.describe Cocina::Models::Validators::AssociatedNameValidator do
 
     let(:props) { { description: desc_props } }
 
-    it 'raises' do
-      expect { validate }.to raise_error(Cocina::Models::ValidationError)
+    it 'does not validate' do
+      expect { validate }.not_to raise_error(Cocina::Models::ValidationError)
     end
   end
 end

@@ -30,8 +30,7 @@ module Cocina
         attr_reader :clazz, :attributes, :error_paths
 
         def meets_preconditions?
-          attributes.key?(:description) || [Cocina::Models::Description,
-                                            Cocina::Models::RequestDescription].include?(clazz)
+          [Cocina::Models::Description, Cocina::Models::RequestDescription].include?(clazz)
         end
 
         def validate_hash(hash, path)

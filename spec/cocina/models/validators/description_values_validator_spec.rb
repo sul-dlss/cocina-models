@@ -76,24 +76,6 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
     end
   end
 
-  describe 'when a valid DRO' do
-    let(:clazz) { Cocina::Models::DRO }
-    let(:props) { dro_props }
-
-    it 'does not raise' do
-      validate
-    end
-  end
-
-  describe 'when none of the above' do
-    let(:props) { {} }
-    let(:clazz) { Cocina::Models::Identification }
-
-    it 'does not raise' do
-      validate
-    end
-  end
-
   describe 'when an invalid Description' do
     let(:props) { invalid_desc_props }
 
@@ -105,7 +87,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
   end
 
   describe 'when an invalid RequestDescription' do
-    let(:clazz) { Cocina::Models::RequestDRO }
+    let(:clazz) { Cocina::Models::RequestDescription }
     let(:props) { request_desc_props }
     let(:dro_props) { { description: invalid_desc_props } }
 
@@ -119,8 +101,8 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
     let(:props) { dro_props }
     let(:dro_props) { { description: invalid_desc_props } }
 
-    it 'is not valid' do
-      expect { validate }.to raise_error(Cocina::Models::ValidationError)
+    it 'does not validate' do
+      expect { validate }.not_to raise_error(Cocina::Models::ValidationError)
     end
   end
 end
