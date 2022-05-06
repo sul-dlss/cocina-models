@@ -3,8 +3,6 @@
 require 'spec_helper'
 
 RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
-  let(:validate) { described_class.validate(clazz, props) }
-
   let(:clazz) { Cocina::Models::Description }
 
   let(:props) { desc_props }
@@ -30,79 +28,91 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
     }
   end
 
-  let(:invalid_desc_props) do
-    {
-      title: [
-        {
-          value: 'A title',
-          parallelValue: [{ value: 'A title' }, { value: 'Another title' }]
-        }
-      ],
-      purl: 'https://purl.stanford.edu/bc123df4567',
-      relatedResource: [
-        {
-          title: [
-            {
-              groupedValue: [{ value: 'A title' }, { value: 'Another title' }],
-              structuredValue: [{ value: 'A title' }, { value: 'Another title' }]
-            }
-          ],
-          type: 'related to'
-        }
-      ]
-    }
-  end
+  describe '#validate' do
+    let(:validate) { described_class.validate(clazz, props) }
 
-  let(:request_desc_props) do
-    dro_props.dup.tap do |props|
-      props[:description].delete(:purl)
+    let(:invalid_desc_props) do
+      {
+        title: [
+          {
+            value: 'A title',
+            parallelValue: [{ value: 'A title' }, { value: 'Another title' }]
+          }
+        ],
+        purl: 'https://purl.stanford.edu/bc123df4567',
+        relatedResource: [
+          {
+            title: [
+              {
+                groupedValue: [{ value: 'A title' }, { value: 'Another title' }],
+                structuredValue: [{ value: 'A title' }, { value: 'Another title' }]
+              }
+            ],
+            type: 'related to'
+          }
+        ]
+      }
     end
-  end
 
-  let(:dro_props) { { description: desc_props } }
-
-  describe 'when a valid Description' do
-    it 'does not raise' do
-      validate
+    let(:request_desc_props) do
+      desc_props.dup.tap do |props|
+        props.delete(:purl)
+      end
     end
-  end
 
-  describe 'when a valid RequestDescription' do
-    let(:props) { request_desc_props }
-    let(:clazz) { Cocina::Models::RequestDescription }
-
-    it 'does not raise' do
-      validate
-    end
-  end
-
-  describe 'when an invalid Description' do
-    let(:props) { invalid_desc_props }
-
-    it 'is not valid' do
-      expect do
+    describe 'when a valid Description' do
+      it 'does not raise' do
         validate
-      end.to raise_error(Cocina::Models::ValidationError, 'Multiple value, groupedValue, structuredValue, and parallelValue in description: title1, relatedResource1.title1')
+      end
+    end
+
+    describe 'when a valid RequestDescription' do
+      let(:props) { request_desc_props }
+      let(:clazz) { Cocina::Models::RequestDescription }
+
+      it 'does not raise' do
+        validate
+      end
+    end
+
+    describe 'when an invalid Description' do
+      let(:props) { invalid_desc_props }
+
+      it 'is not valid' do
+        expect do
+          validate
+        end.to raise_error(Cocina::Models::ValidationError, 'Multiple value, groupedValue, structuredValue, and parallelValue in description: title1, relatedResource1.title1')
+      end
     end
   end
 
-  describe 'when an invalid RequestDescription' do
-    let(:clazz) { Cocina::Models::RequestDescription }
-    let(:props) { request_desc_props }
-    let(:dro_props) { { description: invalid_desc_props } }
+  describe '#meets_preconditions?' do
+    let(:validator) { described_class.new(clazz, props) }
 
-    it 'is not valid' do
-      expect { validate }.to raise_error(Cocina::Models::ValidationError)
+    let(:meets_preconditions) { validator.send(:meets_preconditions?) }
+
+    context 'when RequestDescription' do
+      let(:clazz) { Cocina::Models::RequestDescription }
+
+      it 'meets preconditions' do
+        expect(meets_preconditions).to be true
+      end
     end
-  end
 
-  describe 'when an invalid DRO' do
-    let(:clazz) { Cocina::Models::DRO }
-    let(:props) { dro_props }
-    let(:dro_props) { { description: invalid_desc_props } }
+    context 'when Description' do
+      let(:clazz) { Cocina::Models::Description }
 
-    it 'does not validate' do
-      expect { validate }.not_to raise_error(Cocina::Models::ValidationError)
+      it 'meets preconditions' do
+        expect(meets_preconditions).to be true
+      end
+    end
+
+    context 'when DRO' do
+      let(:clazz) { Cocina::Models::DRO }
+
+      it 'does not meet preconditions' do
+        expect(meets_preconditions).to be false
+      end
     end
   end
 end

@@ -3,8 +3,6 @@
 require 'spec_helper'
 
 RSpec.describe Cocina::Models::Validators::AssociatedNameValidator do
-  let(:validate) { described_class.validate(clazz, props) }
-
   let(:clazz) { Cocina::Models::Description }
 
   let(:desc_props) do
@@ -37,127 +35,131 @@ RSpec.describe Cocina::Models::Validators::AssociatedNameValidator do
 
   let(:contributor_name) { 'Smith, John' }
 
-  context 'when no description' do
-    let(:props) { {} }
+  describe '#validate' do
+    let(:validate) { described_class.validate(clazz, props) }
 
-    it 'does not raise' do
-      validate
-    end
-  end
+    context 'when no description' do
+      let(:props) { {} }
 
-  context 'when no associated name' do
-    let(:props) do
-      {
-        title: [
-          {
-            value: 'A title',
-            type: 'uniform',
-            note: [
-              {
-                value: 'Smith, John',
-                type: 'not an associated name'
-              }
-            ]
-          }
-        ],
-        relatedResource: [
-          {
-            title: [
-              {
-                value: 'A title',
-                type: 'uniform'
-              }
-            ]
-          }
-        ]
-      }
-    end
-
-    it 'does not raise' do
-      validate
-    end
-  end
-
-  context 'when valid Description with name title group' do
-    it 'does not raise' do
-      validate
-    end
-  end
-
-  context 'when invalid Description with name title group' do
-    let(:contributor_name) { 'not Smith, John' }
-
-    it 'raises' do
-      expect do
+      it 'does not raise' do
         validate
-      end.to raise_error(Cocina::Models::ValidationError,
-                         'Missing data: Name associated with uniform title does not match any contributor.')
-    end
-  end
-
-  context 'when invalid Description with missing contributors' do
-    let(:props) do
-      props = desc_props.dup
-      props.delete(:contributor)
-      props
+      end
     end
 
-    it 'raises' do
-      expect do
+    context 'when no associated name' do
+      let(:props) do
+        {
+          title: [
+            {
+              value: 'A title',
+              type: 'uniform',
+              note: [
+                {
+                  value: 'Smith, John',
+                  type: 'not an associated name'
+                }
+              ]
+            }
+          ],
+          relatedResource: [
+            {
+              title: [
+                {
+                  value: 'A title',
+                  type: 'uniform'
+                }
+              ]
+            }
+          ]
+        }
+      end
+
+      it 'does not raise' do
         validate
-      end.to raise_error(Cocina::Models::ValidationError,
-                         'Missing data: Name associated with uniform title does not match any contributor.')
+      end
     end
-  end
 
-  context 'when valid Description with related resource' do
-    let(:props) { { relatedResource: [desc_props] } }
-
-    it 'does not raise' do
-      validate
-    end
-  end
-
-  context 'when invalid Description with related resource' do
-    let(:props) { { relatedResource: [desc_props] } }
-
-    let(:contributor_name) { 'not Smith, John' }
-
-    it 'raises' do
-      expect do
+    context 'when valid Description with name title group' do
+      it 'does not raise' do
         validate
-      end.to raise_error(Cocina::Models::ValidationError,
-                         'Missing data: Name associated with uniform title does not match any contributor.')
+      end
+    end
+
+    context 'when invalid Description with name title group' do
+      let(:contributor_name) { 'not Smith, John' }
+
+      it 'raises' do
+        expect do
+          validate
+        end.to raise_error(Cocina::Models::ValidationError,
+                           'Missing data: Name associated with uniform title does not match any contributor.')
+      end
+    end
+
+    context 'when invalid Description with missing contributors' do
+      let(:props) do
+        props = desc_props.dup
+        props.delete(:contributor)
+        props
+      end
+
+      it 'raises' do
+        expect do
+          validate
+        end.to raise_error(Cocina::Models::ValidationError,
+                           'Missing data: Name associated with uniform title does not match any contributor.')
+      end
+    end
+
+    context 'when valid Description with related resource' do
+      let(:props) { { relatedResource: [desc_props] } }
+
+      it 'does not raise' do
+        validate
+      end
+    end
+
+    context 'when invalid Description with related resource' do
+      let(:props) { { relatedResource: [desc_props] } }
+
+      let(:contributor_name) { 'not Smith, John' }
+
+      it 'raises' do
+        expect do
+          validate
+        end.to raise_error(Cocina::Models::ValidationError,
+                           'Missing data: Name associated with uniform title does not match any contributor.')
+      end
     end
   end
 
-  context 'when valid RequestDescription with name title group' do
-    let(:clazz) { Cocina::Models::RequestDescription }
+  describe '#meets_preconditions?' do
+    let(:validator) { described_class.new(clazz, props) }
 
-    it 'does not raise' do
-      validate
+    let(:meets_preconditions) { validator.send(:meets_preconditions?) }
+
+    context 'when RequestDescription' do
+      let(:clazz) { Cocina::Models::RequestDescription }
+
+      it 'meets preconditions' do
+        expect(meets_preconditions).to be true
+      end
     end
-  end
 
-  context 'when invalid RequestDescription with name title group' do
-    let(:clazz) { Cocina::Models::RequestDescription }
+    context 'when Description' do
+      let(:clazz) { Cocina::Models::Description }
 
-    let(:contributor_name) { 'not Smith, John' }
-
-    it 'raises' do
-      expect { validate }.to raise_error(Cocina::Models::ValidationError)
+      it 'meets preconditions' do
+        expect(meets_preconditions).to be true
+      end
     end
-  end
 
-  context 'when invalid DRO with name title group' do
-    let(:clazz) { Cocina::Models::DRO }
+    context 'when DRO' do
+      let(:clazz) { Cocina::Models::DRO }
 
-    let(:contributor_name) { 'not Smith, John' }
-
-    let(:props) { { description: desc_props } }
-
-    it 'does not validate' do
-      expect { validate }.not_to raise_error(Cocina::Models::ValidationError)
+      it 'does not meet preconditions' do
+        expect(meets_preconditions).to be false
+      end
     end
   end
 end
