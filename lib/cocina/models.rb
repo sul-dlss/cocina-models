@@ -119,7 +119,7 @@ module Cocina
     # @param [DROWithMetadata,CollectionWithMetadata,AdminPolicyWithMetadata] cocina_object
     # @return [DRO,Collection,AdminPolicy]
     def self.without_metadata(cocina_object)
-      build(cocina_object.to_h.except(:created, :modified, :lock))
+      build(cocina_object.to_h.except(:created, :modified, :lock), validate: false)
     end
 
     # Adds metadata to a DRO, Collection, AdminPolicy
@@ -144,7 +144,7 @@ module Cocina
               else
                 AdminPolicyWithMetadata
               end
-      clazz.new(props)
+      clazz.new(props, false, false)
     end
 
     def self.type_for(dyn)
