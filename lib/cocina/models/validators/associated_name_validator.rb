@@ -11,7 +11,7 @@ module Cocina
 
         def initialize(clazz, attributes)
           @clazz = clazz
-          @attributes = attributes.deep_symbolize_keys
+          @attributes = attributes
           @error_paths = []
         end
 
@@ -29,9 +29,7 @@ module Cocina
         attr_reader :clazz, :attributes, :error_paths
 
         def meets_preconditions?
-          resources.any? do |resource|
-            titles_with_associated_name_note_for(resource).present?
-          end
+          [Cocina::Models::Description, Cocina::Models::RequestDescription].include?(clazz)
         end
 
         def valid?(resource)

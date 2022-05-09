@@ -3,8 +3,6 @@
 require 'spec_helper'
 
 RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
-  let(:validate) { described_class.validate(clazz, props) }
-
   let(:clazz) { Cocina::Models::Description }
 
   let(:props) { desc_props }
@@ -58,431 +56,401 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
   let(:related_resource_contributor_type) { 'person' }
 
   let(:request_desc_props) do
-    dro_props.dup.tap do |props|
-      props[:description].delete(:purl)
+    desc_props.dup.tap do |props|
+      props.delete(:purl)
     end
   end
 
-  let(:dro_props) { { description: desc_props } }
+  describe '#validate' do
+    let(:validate) { described_class.validate(clazz, props) }
 
-  describe 'when a valid Description' do
-    it 'does not raise' do
-      validate
-    end
-  end
-
-  describe 'when a valid RequestDescription' do
-    let(:props) { request_desc_props }
-    let(:clazz) { Cocina::Models::RequestDescription }
-
-    it 'does not raise' do
-      validate
-    end
-  end
-
-  describe 'when a valid DRO' do
-    let(:clazz) { Cocina::Models::DRO }
-    let(:props) { dro_props }
-
-    it 'does not raise' do
-      validate
-    end
-  end
-
-  describe 'when none of the above' do
-    let(:props) { {} }
-    let(:clazz) { Cocina::Models::Identification }
-
-    it 'does not raise' do
-      validate
-    end
-  end
-
-  describe 'when an invalid RequestDescription' do
-    let(:props) { request_desc_props }
-    let(:clazz) { Cocina::Models::RequestDRO }
-    let(:contributor_type) { 'foo' }
-
-    it 'is not valid' do
-      expect { validate }.to raise_error(Cocina::Models::ValidationError)
-    end
-  end
-
-  describe 'when an invalid DRO' do
-    let(:clazz) { Cocina::Models::DRO }
-    let(:props) { dro_props }
-    let(:contributor_type) { 'foo' }
-
-    it 'is not valid' do
-      expect { validate }.to raise_error(Cocina::Models::ValidationError)
-    end
-  end
-
-  describe 'when an invalid type at top level' do
-    let(:contributor_type) { 'foo' }
-
-    it 'raises' do
-      expect do
+    describe 'when a valid Description' do
+      it 'does not raise' do
         validate
-      end.to raise_error(Cocina::Models::ValidationError, 'Unrecognized types in description: contributor1 (foo)')
+      end
     end
-  end
 
-  describe 'when an invalid type at other level' do
-    let(:contributor_identifier_type) { 'foo' }
+    describe 'when a valid RequestDescription' do
+      let(:props) { request_desc_props }
+      let(:clazz) { Cocina::Models::RequestDescription }
 
-    it 'raises' do
-      expect do
+      it 'does not raise' do
         validate
-      end.to raise_error(Cocina::Models::ValidationError,
-                         'Unrecognized types in description: contributor1.identifier1 (foo)')
+      end
     end
-  end
 
-  describe 'when an invalid type at nested level' do
-    let(:related_resource_contributor_type) { 'foo' }
+    describe 'when an invalid type at top level' do
+      let(:contributor_type) { 'foo' }
 
-    it 'raises' do
-      expect do
+      it 'raises' do
+        expect do
+          validate
+        end.to raise_error(Cocina::Models::ValidationError, 'Unrecognized types in description: contributor1 (foo)')
+      end
+    end
+
+    describe 'when an invalid type at other level' do
+      let(:contributor_identifier_type) { 'foo' }
+
+      it 'raises' do
+        expect do
+          validate
+        end.to raise_error(Cocina::Models::ValidationError,
+                           'Unrecognized types in description: contributor1.identifier1 (foo)')
+      end
+    end
+
+    describe 'when an invalid type at nested level' do
+      let(:related_resource_contributor_type) { 'foo' }
+
+      it 'raises' do
+        expect do
+          validate
+        end.to raise_error(Cocina::Models::ValidationError,
+                           'Unrecognized types in description: relatedResource1.contributor1 (foo)')
+      end
+    end
+
+    describe 'when a case mismatch' do
+      let(:contributor_type) { 'PERson' }
+
+      it 'is case insensitive' do
         validate
-      end.to raise_error(Cocina::Models::ValidationError,
-                         'Unrecognized types in description: relatedResource1.contributor1 (foo)')
-    end
-  end
-
-  describe 'when a case mismatch' do
-    let(:contributor_type) { 'PERson' }
-
-    it 'is case insensitive' do
-      validate
-    end
-  end
-
-  describe 'with a parallelValue' do
-    let(:desc_props) do
-      {
-        title: [{ value: 'The Professor: A Sentimental Education' }],
-        purl: 'https://purl.stanford.edu/bc123df4567',
-        contributor: [
-          {
-            name: [
-              {
-                parallelValue: [
-                  {
-                    structuredValue: [
-                      {
-                        value: 'Terry',
-                        # This type is invalid
-                        type: 'fooname'
-                      },
-                      {
-                        value: 'Castle',
-                        type: 'surname'
-                      }
-                    ]
-                  },
-                  {
-                    value: 'Castle, Terry',
-                    type: 'display'
-                  }
-                ]
-              }
-            ],
-            status: 'primary',
-            type: 'person',
-            identifier: [
-              {
-                value: 'https://www.wikidata.org/wiki/Q7704207',
-                type: 'Wikidata'
-              }
-            ],
-            note: [
-              {
-                value: 'Stanford University',
-                type: 'affiliation'
-              },
-              {
-                value: 'Professor of English',
-                type: 'description'
-              }
-            ]
-          }
-        ]
-      }
+      end
     end
 
-    it 'ignores parallelValue and raises' do
-      expect do
-        validate
-      end.to raise_error(Cocina::Models::ValidationError,
-                         'Unrecognized types in description: ' \
-                         'contributor1.name1.parallelValue1.structuredValue1 (fooname)')
-    end
-  end
-
-  describe 'with an invalid parallelEvent' do
-    let(:desc_props) do
-      {
-        title: [
-          {
-            parallelValue: [
-              { value: 'Ṣammamtu an ahwāka yā sayyidī', status: 'primary' },
-              { value: 'صممت أن اهواك يا سيدي' }
-            ]
-          }
-        ],
-        purl: 'https://purl.stanford.edu/xq000jd3530',
-        event: [
-          {
-            parallelEvent: [
-              {
-                note: [
-                  { type: 'edition', value: 'al-Ṭabʻah 1.' }
-                ]
-              },
-              {
-                note: [
-                  { type: 'foo', value: 'الطبعة ١.' }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    end
-
-    it 'ignores parallelEvent and raises' do
-      expect do
-        validate
-      end.to raise_error(Cocina::Models::ValidationError,
-                         'Unrecognized types in description: event1.parallelEvent2.note1 (foo)')
-    end
-  end
-
-  describe 'with a valid parallelEvent' do
-    let(:desc_props) do
-      {
-        title: [
-          {
-            parallelValue: [
-              { value: 'Ṣammamtu an ahwāka yā sayyidī', status: 'primary' },
-              { value: 'صممت أن اهواك يا سيدي' }
-            ]
-          }
-        ],
-        purl: 'https://purl.stanford.edu/xq000jd3530',
-        event: [
-          {
-            parallelEvent: [
-              {
-                note: [
-                  { type: 'edition', value: 'al-Ṭabʻah 1.' }
-                ]
-              },
-              {
-                note: [
-                  { type: 'edition', value: 'الطبعة ١.' }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    end
-
-    it 'ignores parallelEvent and does not raise' do
-      validate
-    end
-  end
-
-  describe 'with an invalid parallelContributor' do
-    let(:desc_props) do
-      {
-        contributor: [
-          {
-            parallelContributor: [
-              {
-                name: [
-                  {
-                    structuredValue: [
-                      {
-                        value: 'Li, Yahong',
-                        type: 'foo'
-                      },
-                      {
-                        value: '1963-',
-                        type: 'life dates'
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                name: [
-                  {
-                    value: '李亞虹'
-                  }
-                ]
-              }
-            ],
-            type: 'person'
-          }
-        ]
-      }
-    end
-
-    it 'ignores parallelContributor and raises' do
-      expect do
-        validate
-      end.to raise_error(Cocina::Models::ValidationError,
-                         'Unrecognized types in description: ' \
-                         'contributor1.parallelContributor1.name1.structuredValue1 (foo)')
-    end
-  end
-
-  describe 'with an valid parallelContributor' do
-    let(:desc_props) do
-      {
-        contributor: [
-          {
-            parallelContributor: [
-              {
-                name: [
-                  {
-                    structuredValue: [
-                      {
-                        value: 'Li, Yahong',
-                        type: 'name'
-                      },
-                      {
-                        value: '1963-',
-                        type: 'life dates'
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                name: [
-                  {
-                    value: '李亞虹'
-                  }
-                ]
-              }
-            ],
-            type: 'person'
-          }
-        ]
-      }
-    end
-
-    it 'ignores parallelContributor and does not raise' do
-      validate
-    end
-  end
-
-  describe 'with a nested structuredValue' do
-    let(:desc_props) do
-      {
-        title: [{ value: 'Leon Kolb collection of portraits' }],
-        purl: 'https://purl.stanford.edu/rr239pp1335',
-        subject: [
-          {
-            structuredValue: [
-              {
-                parallelValue: [
-                  {
-                    structuredValue: [
-                      {
-                        value: 'Andrada',
-                        type: 'surname'
-                      },
-                      {
-                        value: 'Leitao, Francisco d\'',
-                        type: 'fooname'
-                      },
-                      {
-                        value: '17th C.',
-                        type: 'life dates'
-                      }
-                    ]
-                  },
-                  {
-                    value: 'Andrada, Leitao, Francisco d\', 17th C.',
-                    type: 'display'
-                  }
-                ],
-                type: 'person',
-                note: [
-                  {
-                    value: 'Depicted',
-                    type: 'role',
-                    code: 'dpc',
-                    uri: 'http://id.loc.gov/vocabulary/relators/dpc',
-                    source: {
-                      code: 'marcrelator',
-                      uri: 'http://id.loc.gov/vocabulary/relators/'
+    describe 'with a parallelValue' do
+      let(:desc_props) do
+        {
+          title: [{ value: 'The Professor: A Sentimental Education' }],
+          purl: 'https://purl.stanford.edu/bc123df4567',
+          contributor: [
+            {
+              name: [
+                {
+                  parallelValue: [
+                    {
+                      structuredValue: [
+                        {
+                          value: 'Terry',
+                          # This type is invalid
+                          type: 'fooname'
+                        },
+                        {
+                          value: 'Castle',
+                          type: 'surname'
+                        }
+                      ]
+                    },
+                    {
+                      value: 'Castle, Terry',
+                      type: 'display'
                     }
-                  }
-                ]
-              },
-              {
-                value: 'Pictorial works',
-                type: 'topic'
-              }
-            ]
-          }
-        ]
-      }
+                  ]
+                }
+              ],
+              status: 'primary',
+              type: 'person',
+              identifier: [
+                {
+                  value: 'https://www.wikidata.org/wiki/Q7704207',
+                  type: 'Wikidata'
+                }
+              ],
+              note: [
+                {
+                  value: 'Stanford University',
+                  type: 'affiliation'
+                },
+                {
+                  value: 'Professor of English',
+                  type: 'description'
+                }
+              ]
+            }
+          ]
+        }
+      end
+
+      it 'ignores parallelValue and raises' do
+        expect do
+          validate
+        end.to raise_error(Cocina::Models::ValidationError,
+                           'Unrecognized types in description: ' \
+                           'contributor1.name1.parallelValue1.structuredValue1 (fooname)')
+      end
     end
 
-    it 'ignores nesting and raises' do
-      expect do
+    describe 'with an invalid parallelEvent' do
+      let(:desc_props) do
+        {
+          title: [
+            {
+              parallelValue: [
+                { value: 'Ṣammamtu an ahwāka yā sayyidī', status: 'primary' },
+                { value: 'صممت أن اهواك يا سيدي' }
+              ]
+            }
+          ],
+          purl: 'https://purl.stanford.edu/xq000jd3530',
+          event: [
+            {
+              parallelEvent: [
+                {
+                  note: [
+                    { type: 'edition', value: 'al-Ṭabʻah 1.' }
+                  ]
+                },
+                {
+                  note: [
+                    { type: 'foo', value: 'الطبعة ١.' }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      end
+
+      it 'ignores parallelEvent and raises' do
+        expect do
+          validate
+        end.to raise_error(Cocina::Models::ValidationError,
+                           'Unrecognized types in description: event1.parallelEvent2.note1 (foo)')
+      end
+    end
+
+    describe 'with a valid parallelEvent' do
+      let(:desc_props) do
+        {
+          title: [
+            {
+              parallelValue: [
+                { value: 'Ṣammamtu an ahwāka yā sayyidī', status: 'primary' },
+                { value: 'صممت أن اهواك يا سيدي' }
+              ]
+            }
+          ],
+          purl: 'https://purl.stanford.edu/xq000jd3530',
+          event: [
+            {
+              parallelEvent: [
+                {
+                  note: [
+                    { type: 'edition', value: 'al-Ṭabʻah 1.' }
+                  ]
+                },
+                {
+                  note: [
+                    { type: 'edition', value: 'الطبعة ١.' }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      end
+
+      it 'ignores parallelEvent and does not raise' do
         validate
-      end.to raise_error(Cocina::Models::ValidationError)
+      end
+    end
+
+    describe 'with an invalid parallelContributor' do
+      let(:desc_props) do
+        {
+          contributor: [
+            {
+              parallelContributor: [
+                {
+                  name: [
+                    {
+                      structuredValue: [
+                        {
+                          value: 'Li, Yahong',
+                          type: 'foo'
+                        },
+                        {
+                          value: '1963-',
+                          type: 'life dates'
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  name: [
+                    {
+                      value: '李亞虹'
+                    }
+                  ]
+                }
+              ],
+              type: 'person'
+            }
+          ]
+        }
+      end
+
+      it 'ignores parallelContributor and raises' do
+        expect do
+          validate
+        end.to raise_error(Cocina::Models::ValidationError,
+                           'Unrecognized types in description: ' \
+                           'contributor1.parallelContributor1.name1.structuredValue1 (foo)')
+      end
+    end
+
+    describe 'with an valid parallelContributor' do
+      let(:desc_props) do
+        {
+          contributor: [
+            {
+              parallelContributor: [
+                {
+                  name: [
+                    {
+                      structuredValue: [
+                        {
+                          value: 'Li, Yahong',
+                          type: 'name'
+                        },
+                        {
+                          value: '1963-',
+                          type: 'life dates'
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  name: [
+                    {
+                      value: '李亞虹'
+                    }
+                  ]
+                }
+              ],
+              type: 'person'
+            }
+          ]
+        }
+      end
+
+      it 'ignores parallelContributor and does not raise' do
+        validate
+      end
+    end
+
+    describe 'with a nested structuredValue' do
+      let(:desc_props) do
+        {
+          title: [{ value: 'Leon Kolb collection of portraits' }],
+          purl: 'https://purl.stanford.edu/rr239pp1335',
+          subject: [
+            {
+              structuredValue: [
+                {
+                  parallelValue: [
+                    {
+                      structuredValue: [
+                        {
+                          value: 'Andrada',
+                          type: 'surname'
+                        },
+                        {
+                          value: 'Leitao, Francisco d\'',
+                          type: 'fooname'
+                        },
+                        {
+                          value: '17th C.',
+                          type: 'life dates'
+                        }
+                      ]
+                    },
+                    {
+                      value: 'Andrada, Leitao, Francisco d\', 17th C.',
+                      type: 'display'
+                    }
+                  ],
+                  type: 'person',
+                  note: [
+                    {
+                      value: 'Depicted',
+                      type: 'role',
+                      code: 'dpc',
+                      uri: 'http://id.loc.gov/vocabulary/relators/dpc',
+                      source: {
+                        code: 'marcrelator',
+                        uri: 'http://id.loc.gov/vocabulary/relators/'
+                      }
+                    }
+                  ]
+                },
+                {
+                  value: 'Pictorial works',
+                  type: 'topic'
+                }
+              ]
+            }
+          ]
+        }
+      end
+
+      it 'ignores nesting and raises' do
+        expect do
+          validate
+        end.to raise_error(Cocina::Models::ValidationError)
+      end
+    end
+
+    context 'when description_types.yml has value with special character' do
+      let(:desc_props) do
+        {
+          title: [{ value: 'Testing West Mat #' }],
+          purl: 'https://purl.stanford.edu/bc123df4567',
+          identifier: [
+            {
+              value: '123',
+              type: 'West Mat #'
+            }
+          ]
+        }
+      end
+
+      it 'does not raise' do
+        validate
+      end
     end
   end
 
-  describe 'when an invalid Description with string keys' do
-    let(:props) do
-      {
-        'title' => [{ 'value' => 'The Structure of Scientific Revolutions' }],
-        'purl' => 'https://purl.stanford.edu/bc123df4567',
-        'contributor' => [
-          {
-            'name' => [
-              {
-                'value' => 'Kuhn, Thomas'
-              }
-            ],
-            'type' => 'foo',
-            'status' => 'primary'
-          }
-        ]
-      }
+  describe '#meets_preconditions?' do
+    let(:validator) { described_class.new(clazz, props) }
+
+    let(:meets_preconditions) { validator.send(:meets_preconditions?) }
+
+    context 'when RequestDescription' do
+      let(:clazz) { Cocina::Models::RequestDescription }
+
+      it 'meets preconditions' do
+        expect(meets_preconditions).to be true
+      end
     end
 
-    it 'is not valid' do
-      expect { validate }.to raise_error(Cocina::Models::ValidationError)
-    end
-  end
+    context 'when Description' do
+      let(:clazz) { Cocina::Models::Description }
 
-  context 'when description_types.yml has value with special character' do
-    let(:desc_props) do
-      {
-        title: [{ value: 'Testing West Mat #' }],
-        purl: 'https://purl.stanford.edu/bc123df4567',
-        identifier: [
-          {
-            value: '123',
-            type: 'West Mat #'
-          }
-        ]
-      }
+      it 'meets preconditions' do
+        expect(meets_preconditions).to be true
+      end
     end
 
-    it 'does not raise' do
-      validate
+    context 'when DRO' do
+      let(:clazz) { Cocina::Models::DRO }
+
+      it 'does not meet preconditions' do
+        expect(meets_preconditions).to be false
+      end
     end
   end
 end

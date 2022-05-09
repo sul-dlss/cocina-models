@@ -26,8 +26,7 @@ module Cocina
           # In the meantime, copying code.
           attributes_hash = deep_transform_values(attributes.to_h) do |value|
             value.class.name.starts_with?('Cocina::Models') ? value.to_h : value
-          end.with_indifferent_access
-
+          end.deep_symbolize_keys.with_indifferent_access
           VALIDATORS.each { |validator| validator.validate(clazz, attributes_hash) }
         end
 
