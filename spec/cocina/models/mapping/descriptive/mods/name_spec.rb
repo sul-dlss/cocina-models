@@ -306,13 +306,27 @@ RSpec.describe 'MODS name <--> cocina mappings' do
         XML
       end
 
+      let(:roundtrip_mods) do
+        <<~XML
+          <name type="personal" usage="primary" altRepGroup="01">
+            <namePart>Li, Yahong</namePart>
+            <namePart type="date">1963-</namePart>
+            <affiliation>Stanford Law School graduate, J.S.D. (2007)</affiliation>
+          </name>
+          <name type="personal" altRepGroup="01">
+            <namePart>李亞虹</namePart>
+            <affiliation>Stanford Law School graduate, J.S.D. (2007)</affiliation>
+          </name>
+        XML
+      end
+
       let(:cocina) do
         {
           contributor: [
             {
-              parallelContributor: [
+              name: [
                 {
-                  name: [
+                  parallelValue: [
                     {
                       structuredValue: [
                         {
@@ -323,25 +337,23 @@ RSpec.describe 'MODS name <--> cocina mappings' do
                           value: '1963-',
                           type: 'life dates'
                         }
-                      ]
-                    }
-                  ],
-                  note: [
-                    {
-                      value: 'Stanford Law School graduate, J.S.D. (2007)',
-                      type: 'affiliation'
-                    }
-                  ]
-                },
-                {
-                  name: [
+                      ],
+                      status: 'primary'
+                    },
                     {
                       value: '李亞虹'
                     }
                   ]
                 }
               ],
-              type: 'person'
+              note: [
+                {
+                  value: 'Stanford Law School graduate, J.S.D. (2007)',
+                  type: 'affiliation'
+                }
+              ],
+              type: 'person',
+              status: 'primary'
             }
           ]
         }
