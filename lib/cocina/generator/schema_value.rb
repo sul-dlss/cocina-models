@@ -19,10 +19,6 @@ module Cocina
         "Types::#{dry_datatype(schema_doc)}#{optional}#{default}#{enum}"
       end
 
-      def preamble
-        "#{description}#{example}#{relaxed_comment}"
-      end
-
       def enum
         return '' if !schema_doc.enum || relaxed
 

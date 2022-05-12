@@ -41,6 +41,12 @@ module Cocina
         "# #{schema_doc.description}\n"
       end
 
+      def deprecation
+        return '' unless schema_doc.deprecated?
+
+        "# DEPRECATED\n"
+      end
+
       def example
         return '' unless schema_doc.example
 
@@ -81,6 +87,10 @@ module Cocina
         else
           'Strict::String'
         end
+      end
+
+      def preamble
+        "#{deprecation}#{description}#{example}#{relaxed_comment}"
       end
     end
   end

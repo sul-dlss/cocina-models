@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Relevant groupings of Files. Also called a File Grouping.
     class FileSet < Struct
       include Checkable
 

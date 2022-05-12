@@ -2,6 +2,8 @@
 
 module Cocina
   module Models
+    # DEPRECATED
+    # Value model for multiple representations of information about the same contributor (e.g. in different languages).
     class DescriptiveParallelContributor < Struct
       attribute :name, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # Entity type of the contributor (person, organization, etc.). See https://github.com/sul-dlss/cocina-models/blob/main/docs/description_types.md for valid types.

@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Property model for describing agents contributing in some way to the creation and history of the resource.
     class Contributor < Struct
       attribute :name, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # Entity type of the contributor (person, organization, etc.). See https://github.com/sul-dlss/cocina-models/blob/main/docs/description_types.md for valid types.

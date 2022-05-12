@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Metadata for a cocina object.
     class ObjectMetadata < Struct
       # When the object was created.
       attribute? :created, Types::Params::DateTime

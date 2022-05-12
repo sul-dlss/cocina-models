@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Same as an AdminPolicy, but doesn't have an externalIdentifier as one will be created
     class RequestAdminPolicy < Struct
       include Validatable
 

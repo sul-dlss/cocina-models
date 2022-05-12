@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Language of the descriptive element value
     class DescriptiveValueLanguage < Struct
       # Code representing the standard or encoding.
       attribute? :code, Types::Strict::String

@@ -13,8 +13,8 @@ module Cocina
           # frozen_string_literal: true
 
           module Cocina
-            module Models
-              class #{name} < Struct
+            module Models#{'              '}
+              #{preamble}class #{name} < Struct
 
                 #{validate}
                 #{types}

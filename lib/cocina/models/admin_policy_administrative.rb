@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Administrative properties for an AdminPolicy
     class AdminPolicyAdministrative < Struct
       attribute(:accessTemplate, AdminPolicyAccessTemplate.default { AdminPolicyAccessTemplate.new })
       attribute :registrationWorkflow, Types::Strict::Array.of(Types::Strict::String).default([].freeze)

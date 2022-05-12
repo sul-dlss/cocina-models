@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # The output of the message digest algorithm.
     class MessageDigest < Struct
       include Checkable
 

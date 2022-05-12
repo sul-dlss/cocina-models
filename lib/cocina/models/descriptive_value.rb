@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Default value model for descriptive elements.
     class DescriptiveValue < Struct
       attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute :parallelValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)

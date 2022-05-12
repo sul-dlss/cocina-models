@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # A group of Digital Repository Objects that indicate some type of conceptual grouping within the domain that is worth reusing across the system.
     class Collection < Struct
       include Validatable
 

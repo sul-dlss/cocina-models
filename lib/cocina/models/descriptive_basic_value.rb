@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Basic value model for descriptive elements. Can only have one of value, parallelValue, groupedValue, or structuredValue.
     class DescriptiveBasicValue < Struct
       attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute :parallelValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)

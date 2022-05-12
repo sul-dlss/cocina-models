@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Value model for multiple representations of information about the same event (e.g. in different languages).
     class DescriptiveParallelEvent < Struct
       attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # Description of the event (creation, publication, etc.).

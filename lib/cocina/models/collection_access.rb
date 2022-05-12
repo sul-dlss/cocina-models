@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Access metadata for collections
     class CollectionAccess < Struct
       # Access level
       attribute? :view, Types::Strict::String.default('dark').enum('world', 'dark')

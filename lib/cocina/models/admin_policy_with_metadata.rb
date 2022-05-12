@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Admin Policy with addition object metadata.
     class AdminPolicyWithMetadata < Struct
       include Validatable
 
