@@ -292,15 +292,15 @@ RSpec.describe 'MODS name <--> cocina mappings' do
 
   describe 'Name with altRepGroup and affiliation' do
     # druid:zn746hz1696
-    xit 'not implemented' do
+    it_behaves_like 'MODS cocina mapping' do
       let(:mods) do
         <<~XML
-          <name type="personal" usage="primary" altRepGroup="01">
+          <name type="personal" usage="primary" altRepGroup="1">
             <namePart>Li, Yahong</namePart>
             <namePart type="date">1963-</namePart>
             <affiliation>Stanford Law School graduate, J.S.D. (2007)</affiliation>
           </name>
-          <name type="personal" altRepGroup="01">
+          <name type="personal" altRepGroup="1">
             <namePart>李亞虹</namePart>
           </name>
         XML
@@ -308,12 +308,12 @@ RSpec.describe 'MODS name <--> cocina mappings' do
 
       let(:roundtrip_mods) do
         <<~XML
-          <name type="personal" usage="primary" altRepGroup="01">
+          <name type="personal" usage="primary" altRepGroup="1">
             <namePart>Li, Yahong</namePart>
             <namePart type="date">1963-</namePart>
             <affiliation>Stanford Law School graduate, J.S.D. (2007)</affiliation>
           </name>
-          <name type="personal" altRepGroup="01">
+          <name type="personal" altRepGroup="1">
             <namePart>李亞虹</namePart>
             <affiliation>Stanford Law School graduate, J.S.D. (2007)</affiliation>
           </name>
