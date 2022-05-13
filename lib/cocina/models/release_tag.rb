@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # A tag that indicates the item or collection should be released.
     class ReleaseTag < Struct
       # Who did this release
       # example: petucket

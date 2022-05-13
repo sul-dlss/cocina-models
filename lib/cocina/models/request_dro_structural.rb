@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Structural metadata
     class RequestDROStructural < Struct
       attribute :contains, Types::Strict::Array.of(RequestFileSet).default([].freeze)
       attribute :hasMemberOrders, Types::Strict::Array.of(Sequence).default([].freeze)

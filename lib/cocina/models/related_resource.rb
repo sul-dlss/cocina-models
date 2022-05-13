@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Other resource associated with the described resource.
     class RelatedResource < Struct
       # The relationship of the related resource to the described resource.
       attribute? :type, Types::Strict::String

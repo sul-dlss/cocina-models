@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Access metadata for files
     class FileAccess < Struct
       # Access level.
       # Validation of this property is relaxed. See the openapi for full validation.

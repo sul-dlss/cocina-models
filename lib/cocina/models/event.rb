@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Property model for describing events in the history of the resource.
     class Event < Struct
       attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # Description of the event (creation, publication, etc.).

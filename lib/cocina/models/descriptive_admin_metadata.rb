@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Information about this resource description.
     class DescriptiveAdminMetadata < Struct
       attribute :contributor, Types::Strict::Array.of(Contributor).default([].freeze)
       attribute :event, Types::Strict::Array.of(Event).default([].freeze)

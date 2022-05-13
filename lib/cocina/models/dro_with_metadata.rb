@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # DRO with addition object metadata.
     class DROWithMetadata < Struct
       include Validatable
 

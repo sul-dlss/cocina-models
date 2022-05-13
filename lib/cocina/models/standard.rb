@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Property model for indicating the encoding, standard, or syntax to which a value conforms (e.g. RDA).
     class Standard < Struct
       # Code representing the standard or encoding.
       attribute? :code, Types::Strict::String

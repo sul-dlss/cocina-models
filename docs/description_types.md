@@ -385,6 +385,7 @@ _Path: identifier.type_
   * record id
   * Senate Number
   * Series
+  * SICI
   * SIRSI
   * Source ID
   * sourceID

@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Provides the template of access settings that is copied to the items goverend by an AdminPolicy. This is almost the same as DROAccess, but it provides no defaults and has no embargo.
     class AdminPolicyAccessTemplate < Struct
       attribute? :view, Types::Strict::String.enum('world', 'stanford', 'location-based', 'citation-only', 'dark')
       # Available for controlled digital lending.

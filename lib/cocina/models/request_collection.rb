@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Same as a Collection, but doesn't have an externalIdentifier as one will be created
     class RequestCollection < Struct
       include Validatable
 

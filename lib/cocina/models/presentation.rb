@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Presentation data for the File.
     class Presentation < Struct
       # Height in pixels
       attribute? :height, Types::Strict::Integer

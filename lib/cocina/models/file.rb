@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Binaries that are the basis of what our domain manages. Binaries here do not include metadata files generated for the domain's own management purposes.
     class File < Struct
       include Checkable
 

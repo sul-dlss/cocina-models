@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Collection with addition object metadata.
     class CollectionWithMetadata < Struct
       include Validatable
 

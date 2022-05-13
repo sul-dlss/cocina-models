@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
+    # Represents a user or group that is a member of an AccessRole
     class AccessRoleMember < Struct
       include Checkable
 
