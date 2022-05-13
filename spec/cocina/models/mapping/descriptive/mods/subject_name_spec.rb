@@ -935,6 +935,58 @@ RSpec.describe 'MODS subject name <--> cocina mappings' do
     end
   end
 
+  describe 'Topics and name subject with role' do
+    # dv559gn8984
+    it_behaves_like 'MODS cocina mapping' do
+      let(:mods) do
+        <<~XML
+          <subject authority="lcsh">
+            <topic>Stanford Shopping Center</topic>
+            <name type="personal">
+              <namePart>Brandin, Alf</namePart>
+              <role>
+                <roleTerm type="text">interviewee</roleTerm>
+              </role>
+            </name>
+            <topic>Stanford Industrial Park</topic>
+          </subject>
+        XML
+      end
+
+      let(:cocina) do
+        {
+          subject: [
+            {
+              structuredValue: [
+                {
+                  value: 'Stanford Shopping Center',
+                  type: 'topic'
+                },
+                {
+                  value: 'Brandin, Alf',
+                  type: 'person',
+                  note: [
+                    {
+                      value: 'interviewee',
+                      type: 'role'
+                    }
+                  ]
+                },
+                {
+                  value: 'Stanford Industrial Park',
+                  type: 'topic'
+                }
+              ],
+              source: {
+                code: 'lcsh'
+              }
+            }
+          ]
+        }
+      end
+    end
+  end
+
   describe 'Link to external value only' do
     it_behaves_like 'MODS cocina mapping' do
       let(:mods) do

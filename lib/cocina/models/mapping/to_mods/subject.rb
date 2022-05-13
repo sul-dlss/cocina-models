@@ -394,7 +394,7 @@ module Cocina
             xml.name name_attrs do
               write_name_part(subject_value)
               write_display_form(display_values)
-              write_roles(subject.note)
+              write_roles(subject_value.note)
               write_other_notes(subject.note, 'description')
               write_other_notes(subject.note, 'affiliation')
             end
