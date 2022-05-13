@@ -410,7 +410,7 @@ module Cocina
               write_display_form(display_values)
               write_roles(subject.note)
               write_other_notes(subject.note, 'description')
-              write_other_notes(subject.note, 'affiliation')
+              write_other_notes(subject_value.note, 'affiliation')
             end
             write_genres(subject_value)
           end
