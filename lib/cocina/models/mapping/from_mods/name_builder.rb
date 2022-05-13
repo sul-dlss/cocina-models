@@ -41,8 +41,8 @@ module Cocina
               status: name_elements.filter_map { |name_element| name_element['usage'] }.first
             }.compact
             { name: [names] }.tap do |attrs|
-              roles = name_elements.flat_map { |name_node| build_roles(name_node) }.compact.uniq
-              attrs[:role] = roles.presence
+              attrs[:role] = name_elements.flat_map { |name_node| build_roles(name_node) }.compact.uniq.presence
+              attrs[:note] = name_elements.flat_map { |name_node| build_affiliation_notes(name_node) }.compact.uniq.presence
             end.compact
           end
 
@@ -51,7 +51,7 @@ module Cocina
               status: name_node['usage']
             }.compact.merge(common_lang_script(name_node))
 
-            name_attrs = name_attrs.merge(common_name(name_node, name_attrs[:name]))
+            name_attrs = name_attrs.merge(common_name(name_node, name_attrs[:name], is_parallel: true))
             name_parts = build_name_parts(name_node)
             notifier.warn('Missing name/namePart element') if name_parts.all?(&:empty?)
             name_parts.each { |name_part| name_attrs = name_part.merge(name_attrs) }
@@ -85,9 +85,9 @@ module Cocina
             }.compact.merge(common_name(name_node, name_parts))
           end
 
-          def common_name(name_node, name)
+          def common_name(name_node, name, is_parallel: false)
             {
-              note: build_notes(name_node),
+              note: build_notes(name_node, is_parallel: is_parallel),
               identifier: build_identifier(name_node)
             }.tap do |attrs|
               roles = build_roles(name_node)
@@ -224,12 +224,8 @@ module Cocina
             end.presence
           end
 
-          def build_notes(name_node)
+          def build_notes(name_node, is_parallel:)
             [].tap do |parts|
-              name_node.xpath('mods:affiliation', mods: Description::DESC_METADATA_NS).each do |affiliation_node|
-                parts << { value: affiliation_node.text, type: 'affiliation' }
-              end
-
               description = name_node.xpath('mods:description', mods: Description::DESC_METADATA_NS).first
               if description
                 parts << if description.text == UNCITED_DESCRIPTION
@@ -238,7 +234,16 @@ module Cocina
                            { value: description.text, type: 'description' }
                          end
               end
+              parts.concat(build_affiliation_notes(name_node)) unless is_parallel
             end.presence
+          end
+
+          def build_affiliation_notes(name_node)
+            [].tap do |parts|
+              name_node.xpath('mods:affiliation', mods: Description::DESC_METADATA_NS).each do |affiliation_node|
+                parts << { value: affiliation_node.text, type: 'affiliation' }
+              end
+            end
           end
 
           def build_roles(name_node)

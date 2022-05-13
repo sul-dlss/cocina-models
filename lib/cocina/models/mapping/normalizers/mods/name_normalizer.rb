@@ -20,6 +20,7 @@ module Cocina
 
             def normalize
               normalize_parallel_name_role
+              normalize_parallel_affiliation_note
               normalize_text_role_term
               normalize_role_term
               normalize_role # must be after normalize_role_term
@@ -35,10 +36,13 @@ module Cocina
 
             attr_reader :ng_xml
 
+            def grouped_name_nodes
+              name_nodes = ng_xml.root.xpath('//mods:name[@altRepGroup]', mods: ModsNormalizer::MODS_NS)
+              name_nodes.group_by { |name_node| name_node['altRepGroup'] }.values.reject { |name_node_group| name_node_group.size == 1 }
+            end
+
             def normalize_parallel_name_role
               # For parallel names, all should have the same roles.
-              name_nodes = ng_xml.root.xpath('//mods:name[@altRepGroup]', mods: ModsNormalizer::MODS_NS)
-              grouped_name_nodes = name_nodes.group_by { |name_node| name_node['altRepGroup'] }.values.reject { |name_node_group| name_node_group.size == 1 }
               grouped_name_nodes.each do |name_node_group|
                 name_node_with_role = name_node_group.find { |name_node| role_node_for(name_node) }
                 next unless name_node_with_role
@@ -56,6 +60,27 @@ module Cocina
 
             def role_node_for(name_node)
               name_node.xpath('mods:role', mods: ModsNormalizer::MODS_NS).first
+            end
+
+            def normalize_parallel_affiliation_note
+              # For parallel names, all should have the same affiliation.
+              grouped_name_nodes.each do |name_node_group|
+                name_node_with_affiliation = name_node_group.find { |name_node| affiliation_node_for(name_node) }
+                next unless name_node_with_affiliation
+
+                name_node_group.each do |name_node|
+                  next if name_node == name_node_with_affiliation
+
+                  existing_affiliation_node = affiliation_node_for(name_node)
+                  existing_affiliation_node&.remove
+
+                  name_node << affiliation_node_for(name_node_with_affiliation).dup
+                end
+              end
+            end
+
+            def affiliation_node_for(name_node)
+              name_node.xpath('mods:affiliation', mods: ModsNormalizer::MODS_NS).first
             end
 
             def normalize_text_role_term
