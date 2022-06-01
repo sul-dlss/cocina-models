@@ -92,7 +92,6 @@ module Cocina
           # ignoring groupedValue
           slices.flatten
         end
-        # private_class_method :value_slices
 
         # for a given Hash (from a Cocina DescriptiveValue or Title or Name or ...)
         # result will be either
