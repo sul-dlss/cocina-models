@@ -68,7 +68,9 @@ module Cocina
                     else
                       note.value
                     end
-            xml.public_send tag_name, value, attributes
+            xml.public_send tag_name, attributes do |builder|
+              EscapeHtml.with_cdata(value, builder) if value
+            end
           end
 
           def write_basic(note)
