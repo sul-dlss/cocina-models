@@ -124,18 +124,9 @@ At the same, we have found it convenient to use these PRs to also bump the versi
 
 ### Step 4: Update other dependent applications
 
-Once the above listed steps have been completed, all the following applications that use cocina-models should be updated and released at the same time.  "Cocina Level 2" describes this set of updates.
+Once the above listed steps have been completed, all applications that use cocina-models should be updated and released at the same time.  "Cocina Level 2" describes this set of updates. The applications that use cocina-models are those in [this list](https://github.com/sul-dlss/access-update-scripts/blob/master/infrastructure/projects.yml) that are NOT marked with `cocina_level2: false`.
 
-* [sul-dlss/argo](https://github.com/sul-dlss/argo/)
-* [sul-dlss/common-accessioning](https://github.com/sul-dlss/common-accessioning/)
-* [sul-dlss/dor_indexing_app](https://github.com/sul-dlss/dor_indexing_app/)
-* [sul-dlss/google-books](https://github.com/sul-dlss/google-books/)
-* [sul-dlss/happy-heron](https://github.com/sul-dlss/happy-heron/)
-* [sul-dlss/hydra_etd](https://github.com/sul-dlss/hydra_etd/)
-* [sul-dlss/infrastructure-integration-test](https://github.com/sul-dlss/infrastructure-integration-test/)
-* [sul-dlss/pre-assembly](https://github.com/sul-dlss/pre-assembly/)
-
-There are scripts to help with this:
+There are scripts to help with updating other dependent applications:
 
 #### Step 4A: Create the PRs
 
