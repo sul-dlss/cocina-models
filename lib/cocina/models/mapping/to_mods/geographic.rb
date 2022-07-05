@@ -70,12 +70,10 @@ module Cocina
           end
 
           def extract_type(geo)
-            type = geo[:form].find do |form|
-              form[:type].match(TYPE_REGEX) || (form[:type].match(MEDIA_REGEX) && form[:value] == 'Image')
+            type = geo.form.find do |form|
+              form.type.match(TYPE_REGEX) || (form.type.match(MEDIA_REGEX) && form.value == 'Image')
             end
-            return type[:value] if type
-
-            nil
+            type&.value
           end
 
           def about(druid)
