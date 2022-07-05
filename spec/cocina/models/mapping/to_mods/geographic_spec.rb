@@ -158,4 +158,44 @@ RSpec.describe Cocina::Models::Mapping::ToMods::Geographic do
       XML
     end
   end
+
+  context 'when missing value' do
+    let(:geo) do
+      Cocina::Models::DescriptiveGeographicMetadata.new(
+        form: [
+          {
+            value: 'application/x-esri-shapefile',
+            type: 'media type',
+            source: {
+              value: 'IANA media type terms'
+            }
+          },
+          {
+            value: 'Shapefile',
+            type: 'data format'
+          },
+          {
+            type: 'type'
+          }
+        ]
+      )
+    end
+
+    it 'builds the cocina data structure' do
+      # TODO:  rdf:about="http://purl.stanford.edu/xy581jd9710"
+      expect(xml).to be_equivalent_to <<~XML
+        <mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://www.loc.gov/mods/v3" version="3.6"
+          xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+          xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+          <extension displayLabel="geo">
+            <rdf:RDF xmlns:gml="http://www.opengis.net/gml/3.2/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+              <rdf:Description rdf:about="http://purl.stanford.edu/aa666bb1234">
+                <dc:format>application/x-esri-shapefile; format=Shapefile</dc:format>
+              </rdf:Description>
+            </rdf:RDF>
+          </extension>
+      XML
+    end
+  end
 end
