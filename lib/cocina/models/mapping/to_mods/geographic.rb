@@ -71,7 +71,7 @@ module Cocina
 
           def extract_type(geo)
             type = geo.form.find do |form|
-              form.type.match(TYPE_REGEX) || (form.type.match(MEDIA_REGEX) && form.value == 'Image')
+              form.type.match?(TYPE_REGEX) || (form.type.match?(MEDIA_REGEX) && form.value == 'Image')
             end
             type&.value
           end
