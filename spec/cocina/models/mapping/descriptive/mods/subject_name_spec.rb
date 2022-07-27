@@ -1367,6 +1367,42 @@ RSpec.describe 'MODS subject name <--> cocina mappings' do
     end
   end
 
+  describe 'Name subject with RWO identifier' do
+    # bh354nc2071
+    xit 'new mapping - not implemented' do
+      let(:mods) do
+        <<~XML
+          <subject>
+            <name type="personal">
+              <namePart>Kleinschmidt, Angeline</namePart>
+              <nameIdentifier type="wikidata">https://www.wikidata.org/wiki/Q99810910</nameIdentifier>
+            </name>
+          </subject>
+        XML
+      end
+
+      let(:cocina) do
+        {
+          subject: [
+            {
+              type: 'person',
+              value: 'Kleinschmidt, Angeline',
+              identifier: [
+                {
+                  value: 'https://www.wikidata.org/wiki/Q99810910',
+                  type: 'Wikidata',
+                  source: {
+                    code: 'wikidata'
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      end
+    end
+  end
+
   # Data consistency fix
   describe 'Single subject subelement with authority code same as subject, no URI' do
     it_behaves_like 'MODS cocina mapping' do
