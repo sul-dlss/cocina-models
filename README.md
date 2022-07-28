@@ -51,10 +51,10 @@ Beyond what is necessary to test the generator, the Cocina model classes are not
 
 ## Testing validation changes
 
-If there is a possibility that a model or validation change will conflict with some existing objects then [validate-cocina](https://github.com/sul-dlss/dor-services-app/blob/main/bin/validate-cocina) should be used for testing. This must be run on sdr-deploy since it requires deploying a branch of cocina-models.
+If there is a possibility that a model or validation change will conflict with some existing objects then [validate-cocina](https://github.com/sul-dlss/dor-services-app/blob/main/bin/validate-cocina) should be used for testing. This must be run on sdr-infra since it requires deploying a branch of cocina-models.
 
-1. Create a cocina-models branch containing the proposed change and push to Github.
-2. On sdr-deploy, check out `main`, update the `Gemfile` so that cocina-models references the branch, and `bundle install`.
+1. Create a cocina-models branch containing the proposed change and push to GitHub.
+2. On sdr-infra, check out `main`, update the `Gemfile` so that cocina-models references the branch, and `bundle install`.
 3. Select the appropriate database.
 For QA:
 ```
