@@ -230,8 +230,11 @@ module Cocina
           # Write nodes within MODS subject
           def write_topic(subject, subject_value, is_parallel: false, type: nil, subject_values_have_same_authority: true)
             type ||= subject_value.type
-            topic_attributes = topic_attributes_for(subject, subject_value, type, is_parallel: is_parallel,
-                                                                                  subject_values_have_same_authority: subject_values_have_same_authority)
+            topic_attributes = topic_attributes_for(subject,
+                                                    subject_value,
+                                                    type,
+                                                    is_parallel: is_parallel,
+                                                    subject_values_have_same_authority: subject_values_have_same_authority)
             case type
             when 'person'
               xml.name topic_attributes.merge(type: 'personal') do
@@ -395,6 +398,7 @@ module Cocina
               write_name_part(subject_value)
               write_display_form(display_values)
               write_roles(subject_value.note)
+              write_identifier(subject.identifier)
               write_other_notes(subject.note, 'description')
               write_other_notes(subject.note, 'affiliation')
             end
@@ -425,6 +429,12 @@ module Cocina
             Array(notes).filter do |note|
               note.type == 'role'
             end.each { |role| RoleWriter.write(xml: xml, role: role) }
+          end
+
+          def write_identifier(identifiers)
+            identifiers.each do |identifier|
+              xml.nameIdentifier identifier.value, type: identifier.source.code
+            end
           end
 
           def write_other_notes(notes, type)

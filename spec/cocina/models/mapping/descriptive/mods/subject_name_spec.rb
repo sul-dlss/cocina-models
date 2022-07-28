@@ -1369,7 +1369,7 @@ RSpec.describe 'MODS subject name <--> cocina mappings' do
 
   describe 'Name subject with RWO identifier' do
     # bh354nc2071
-    xit 'new mapping - not implemented' do
+    it_behaves_like 'MODS cocina mapping' do
       let(:mods) do
         <<~XML
           <subject>
