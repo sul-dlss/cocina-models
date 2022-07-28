@@ -339,7 +339,8 @@ module Cocina
                          end
             notes = name_notes_for(full_name[:role], node)
             name_attrs[:note] = notes unless notes.empty?
-            name_attrs.merge(attrs)
+            name_attrs[:identifier] = full_name[:identifier]
+            name_attrs.compact.merge(attrs)
           end
 
           def name_notes_for(roles, name_node)
