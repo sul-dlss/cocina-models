@@ -68,7 +68,15 @@ module Cocina
           Date.edtf!(value)
           true
         rescue StandardError
-          false
+          # NOTE: the upstream EDTF implementation in the `edtf` gem does not
+          #       allow a valid pattern that we use (possibly because only level
+          #       0 of the spec was implemented?):
+          #
+          # * Y-20555
+          #
+          # So we catch the false positives from the upstream gem and allow
+          # this pattern to validate
+          /\AY-?\d{5,}\Z/.match?(value)
         end
 
         def valid_iso8601?(value)
@@ -90,7 +98,7 @@ module Cocina
           #
           # So we catch the false positives from the upstream gem and allow
           # these two patterns to validate
-          /\A\d{4}(-0[1-9]|1[0-2])?\Z/.match?(value)
+          /\A\d{4}(-0[1-9]|-1[0-2])?\Z/.match?(value)
         end
 
         def druid
