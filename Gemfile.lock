@@ -38,9 +38,9 @@ GEM
       activesupport
     diff-lcs (1.5.0)
     docile (1.4.0)
-    dry-container (0.10.0)
+    dry-container (0.10.1)
       concurrent-ruby (~> 1.0)
-    dry-core (0.8.0)
+    dry-core (0.8.1)
       concurrent-ruby (~> 1.0)
     dry-inflector (0.3.0)
     dry-logic (1.2.0)
