@@ -207,4 +207,12 @@ RSpec.describe Cocina::Models do
       expect(cocina_object_with_metadata).to match_cocina_object_with(expected.to_h)
     end
   end
+
+  describe '.druid_regex' do
+    subject(:druid_regex) { described_class.druid_regex }
+
+    it 'matches druids' do
+      expect(druid_regex).to match('druid:bc123df4567')
+    end
+  end
 end
