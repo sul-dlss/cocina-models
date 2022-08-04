@@ -153,5 +153,12 @@ module Cocina
       raise ValidationError, 'Type field not found'
     end
     private_class_method :type_for
+
+    def self.druid_regex
+      @druid_regex ||= begin
+        str = Openapi3Parser.load_file('openapi.yml').components.schemas['Druid'].pattern
+        Regexp.new(str)
+      end
+    end
   end
 end
