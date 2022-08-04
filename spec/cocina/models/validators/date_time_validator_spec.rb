@@ -82,6 +82,8 @@ RSpec.describe Cocina::Models::Validators::DateTimeValidator do
         ['edtf', '-3999', true],
         ['iso8601', '-3999', false],
         ['w3cdtf', '-3999', false],
+        ['edtf', 'Y-20555', true],
+        ['edtf', 'Y20555', true],
         ['edtf', '20220608', false],
         ['edtf', '20220608T1204', false],
         ['edtf', '20220608T120435', false],
@@ -102,7 +104,12 @@ RSpec.describe Cocina::Models::Validators::DateTimeValidator do
         ['w3cdtf', '202206081204', false],
         ['w3cdtf', '20220608120435', false],
         ['w3cdtf', '20220608T120435.123', false],
-        ['w3cdtf', '20220608120435.123', false]
+        ['w3cdtf', '20220608120435.123', false],
+        ['w3cdtf', '1997-7', false],
+        ['w3cdtf', '1997-00', false],
+        ['w3cdtf', '1997-13', false],
+        ['w3cdtf', '1997-1', false],
+        ['w3cdtf', '1997-111', false]
       ].each do |code, value, valid|
         context "with #{valid ? 'valid' : 'invalid'} #{code} value #{value}" do
           let(:props) do
