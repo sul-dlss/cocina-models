@@ -254,16 +254,8 @@ RSpec.describe 'MODS identifier <--> cocina mappings' do
             <identifier/>
           XML
         end
-
-        let(:roundtrip_mods) do
-          <<~XML
-          XML
-        end
-
-        let(:cocina) do
-          {
-          }
-        end
+        let(:roundtrip_mods) { '' }
+        let(:cocina) { {} }
       end
     end
   end
