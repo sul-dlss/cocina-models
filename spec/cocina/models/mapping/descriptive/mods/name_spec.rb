@@ -2816,17 +2816,8 @@ RSpec.describe 'MODS name <--> cocina mappings' do
           </name>
         XML
       end
-
-      let(:roundtrip_mods) do
-        <<~XML
-        XML
-      end
-
-      let(:cocina) do
-        {
-        }
-      end
-
+      let(:roundtrip_mods) { '' }
+      let(:cocina) { {} }
       let(:warnings) do
         [
           Notification.new(msg: 'name/namePart missing value'),
@@ -3095,17 +3086,8 @@ RSpec.describe 'MODS name <--> cocina mappings' do
             </name>
           XML
         end
-
-        let(:roundtrip_mods) do
-          <<~XML
-          XML
-        end
-
-        let(:cocina) do
-          {
-          }
-        end
-
+        let(:roundtrip_mods) { '' }
+        let(:cocina) { {} }
         let(:warnings) { [Notification.new(msg: 'Missing name/namePart element')] }
       end
     end

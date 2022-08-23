@@ -605,16 +605,8 @@ RSpec.describe 'MODS note <--> cocina mappings' do
             <note/>
           XML
         end
-
-        let(:roundtrip_mods) do
-          <<~XML
-          XML
-        end
-
-        let(:cocina) do
-          {
-          }
-        end
+        let(:roundtrip_mods) { '' }
+        let(:cocina) { {} }
       end
     end
   end
