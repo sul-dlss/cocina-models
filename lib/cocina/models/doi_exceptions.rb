@@ -3,7 +3,7 @@
 module Cocina
   module Models
     DoiExceptions = Types::String.constrained(
-      format: %r{^10\.(25740/(VA90-CT15|syxa-m256|12qf-5243|65j8-6114)|25936/629T-BX79)$}i
+      format: %r{^10\.(25740/([vV][aA]90-[cC][tT]15|[sS][yY][xX][aA]-[mM]256|12[qQ][fF]-5243|65[jJ]8-6114)|25936/629[tT]-[bB][xX]79)$}i
     )
   end
 end

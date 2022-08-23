@@ -902,9 +902,9 @@ components:
         - $ref: '#/components/schemas/DoiExceptions'
     DoiExceptions:
       type: string
-      description: pre-existing Digital Object Identifiers (https://www.doi.org) not matching the pattern
-      pattern: '^10\.(25740\/(VA90-CT15|syxa-m256|12qf-5243|65j8-6114)|25936\/629T-BX79)$'
-      example: '10.25740/12qf-5243'
+      description: pre-existing Digital Object Identifiers (https://www.doi.org) not matching the pattern (case insensitive)
+      pattern: '^10\.(25740\/([vV][aA]90-[cC][tT]15|[sS][yY][xX][aA]-[mM]256|12[qQ][fF]-5243|65[jJ]8-6114)|25936\/629[tT]-[bB][xX]79)$'
+      example: '10.25740/12qF-5243'
     DoiPattern:
       type: string
       description: Digital Object Identifier (https://www.doi.org) regex pattern
