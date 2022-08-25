@@ -100,7 +100,7 @@ module Cocina
           # these two patterns to validate
           #
           # Also have a temporary exemption for MM/DD/YY
-          %r{\A((\d{4}(-0[1-9]|-1[0-2])?)|(\d{2}/\d{2}/\d{2}))\Z}.match?(value)
+          %r{\A((\d{4}(-0[1-9]|-1[0-2])?)|(\d{1,2}/\d{1,2}/\d{2}))\Z}.match?(value)
         end
 
         def druid
