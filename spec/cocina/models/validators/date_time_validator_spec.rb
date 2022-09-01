@@ -84,6 +84,10 @@ RSpec.describe Cocina::Models::Validators::DateTimeValidator do
         ['w3cdtf', '-3999', false],
         ['edtf', 'Y-20555', true],
         ['edtf', 'Y20555', true],
+        ['edtf', '0800', true],
+        ['edtf', '800', true], # temporary exception for format violation
+        ['edtf', '-800', true], # temporary exception for format violation
+        ['edtf', '1', true], # temporary exception for format violation
         ['edtf', '20220608', false],
         ['edtf', '20220608T1204', false],
         ['edtf', '20220608T120435', false],
