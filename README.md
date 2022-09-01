@@ -87,6 +87,38 @@ RAILS_ENV=production bin/validate-cocina -p 8
 ```
 5. Check `validate-cocina.csv` for validation errors.
 
+## Running Reports in DSA
+
+Custom reports stored in dor-services-app can be run similarly to validation testing described above.
+
+1. Go the sdr-infra box:
+
+```
+ssh deploy@sdr-infra
+```
+
+2. Go to the dor-services-app directory and reset to main if needed (verify nobody else is using this first though):
+
+```
+cd dor-services-app
+git status # see if there are any unsaved changes, if so, you may need to git stash them
+git pull # OR git reset --hard main   to just ditch any local unsaved changes
+```
+
+3. Connect to the desired database by setting the environment variables as described in the section above.  This must be done each time you SSH back into the box to run a new report.
+
+4. Run the report (good idea to do it in a screen or via background process in case you get disconnected):
+
+```
+bundle exec bin/rails r -e production "BadIso8601Dates.report" > BadIso8601Dates.csv
+```
+
+5. When done, you can pull the report to your laptop as needed:
+
+```
+scp deploy@sdr-infra:/opt/app/deploy/dor-services-app/BadIso8601Dates.csv BadIso8601Dates.csv
+```
+
 ## Releasing
 
 ### Step 0: Share intent to change the models
