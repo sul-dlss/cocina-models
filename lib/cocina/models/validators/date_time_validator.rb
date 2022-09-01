@@ -96,11 +96,9 @@ module Cocina
           # * YYYY
           # * YYYY-MM
           #
-          # So we catch the false positives from the upstream gem and allow
+          # This catches the false positives from the upstream gem and allow
           # these two patterns to validate
-          #
-          # Also have a temporary exemption for MM/DD/YY
-          %r{\A((\d{4}(-0[1-9]|-1[0-2])?)|(\d{1,2}/\d{1,2}/\d{2}))\Z}.match?(value)
+          /\A\d{4}(-0[1-9]|-1[0-2])?\Z/.match?(value)
         end
 
         def druid
