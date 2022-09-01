@@ -55,7 +55,8 @@ If there is a possibility that a model or validation change will conflict with s
 
 1. Create a cocina-models branch containing the proposed change and push to GitHub.
 2. On sdr-infra, check out `main`, update the `Gemfile` so that cocina-models references the branch, and `bundle install`.
-3. Select the appropriate database.
+3. Select the appropriate environment vars below - they are set to values in puppet.  (first 2 lines are the same;  last two lines use different variables)
+
 For QA:
 ```
 export DATABASE_NAME="dor_services"
