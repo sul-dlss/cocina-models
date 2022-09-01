@@ -78,8 +78,6 @@ RSpec.describe Cocina::Models::Validators::DateTimeValidator do
         ['w3cdtf', '1997-07-16T19:20+01:00', true],
         ['w3cdtf', '1997-07-16T19:20:30+01:00', true],
         ['w3cdtf', '1997-07-16T19:20:30.45+01:00', true],
-        ['w3cdtf', '09/14/07', true], # Temporary exemption for bad data
-        ['w3cdtf', '9/6/14', true], # Temporary exemption for bad data
         # Type-specific cases
         ['edtf', '-3999', true],
         ['iso8601', '-3999', false],
