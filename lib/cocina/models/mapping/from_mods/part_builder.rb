@@ -34,7 +34,7 @@ module Cocina
             values.concat(extent_values.flatten)
             values.concat(part_note_value_for(part_element, 'text'))
             values.concat(part_note_value_for(part_element, 'date'))
-            values.reject!(&:blank?)
+            values.compact_blank!
 
             return if values.empty?
 
@@ -50,7 +50,7 @@ module Cocina
             values.concat(extent_values)
             values.concat(part_note_value_for(part_element, 'text'))
             values.concat(part_note_value_for(part_element, 'date'))
-            values.reject!(&:blank?)
+            values.compact_blank!
 
             return if values.empty?
 
@@ -83,7 +83,7 @@ module Cocina
             detail_values.concat(part_note_value_for(detail_node, 'number'))
             detail_values.concat(part_note_value_for(detail_node, 'caption'))
             detail_values.concat(part_note_value_for(detail_node, 'title'))
-            detail_values.reject!(&:blank?)
+            detail_values.compact_blank!
             if detail_values.present?
               detail_values.concat(part_note_value_for(detail_node, 'detail type',
                                                        xpath: '@type'))
@@ -101,7 +101,7 @@ module Cocina
             extent_values = []
             extent_values.concat(part_note_value_for(extent_node, 'list'))
             extent_values << pages_for(extent_node)
-            extent_values.reject!(&:blank?)
+            extent_values.compact_blank!
             if extent_values.present?
               extent_values.concat(part_note_value_for(extent_node, 'extent unit',
                                                        xpath: '@unit'))
