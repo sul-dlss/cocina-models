@@ -336,3 +336,10 @@ RSpec/Capybara/SpecificMatcher: # new in 2.12
   Enabled: false
 RSpec/Rails/HaveHttpStatus: # new in 2.12
   Enabled: false
+
+RSpec/ClassCheck: # new in 2.13
+  Enabled: true
+RSpec/NoExpectationExample: # new in 2.13
+  Enabled: true
+RSpec/Capybara/SpecificFinders: # new in 2.13
+  Enabled: true

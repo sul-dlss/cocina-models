@@ -21,7 +21,7 @@ RSpec.describe Cocina::Generator::SchemaRef do
       end
 
       it 'handles required' do
-        expect(policy.administrative).to be_kind_of(Cocina::Models::AdminPolicyAdministrative)
+        expect(policy.administrative).to be_a(Cocina::Models::AdminPolicyAdministrative)
       end
     end
 

@@ -24,7 +24,7 @@ RSpec.describe Cocina::Models::Validators::OpenApiValidator do
   # AdminPolicy.externalIdentifier must be a valid druid
   context 'when valid' do
     it 'does not raise' do
-      validate
+      expect { validate }.not_to raise_error
     end
   end
 
@@ -85,7 +85,7 @@ RSpec.describe Cocina::Models::Validators::OpenApiValidator do
     end
 
     it 'does not raise' do
-      validate
+      expect { validate }.not_to raise_error
     end
   end
 
@@ -115,7 +115,7 @@ RSpec.describe Cocina::Models::Validators::OpenApiValidator do
     let(:clazz) { Cocina::Models::DRO }
 
     it 'does not raise' do
-      validate
+      expect { validate }.not_to raise_error
     end
   end
 
@@ -175,7 +175,7 @@ RSpec.describe Cocina::Models::Validators::OpenApiValidator do
     let(:clazz) { Cocina::Models::DRO }
 
     it 'does not raise' do
-      validate
+      expect { validate }.not_to raise_error
     end
   end
 end

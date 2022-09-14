@@ -62,7 +62,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
 
     describe 'when a valid Description' do
       it 'does not raise' do
-        validate
+        expect { validate }.not_to raise_error
       end
     end
 
@@ -71,7 +71,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
       let(:clazz) { Cocina::Models::RequestDescription }
 
       it 'does not raise' do
-        validate
+        expect { validate }.not_to raise_error
       end
     end
 
