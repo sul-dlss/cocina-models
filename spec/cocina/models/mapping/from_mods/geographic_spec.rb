@@ -221,8 +221,13 @@ RSpec.describe Cocina::Models::Mapping::FromMods::Geographic do
       XML
     end
 
+    before do
+      allow(notifier).to receive(:warn)
+    end
+
     it 'does not warn' do
       build
+      expect(notifier).not_to have_received(:warn)
     end
   end
 

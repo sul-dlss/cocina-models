@@ -66,7 +66,7 @@ RSpec.describe Cocina::Models::Validators::DarkValidator do
 
   context 'when a valid DRO' do
     it 'does not raise' do
-      validate
+      expect { validate }.not_to raise_error
     end
   end
 
@@ -75,7 +75,7 @@ RSpec.describe Cocina::Models::Validators::DarkValidator do
     let(:clazz) { Cocina::Models::RequestDRO }
 
     it 'does not raise' do
-      validate
+      expect { validate }.not_to raise_error
     end
   end
 
@@ -83,7 +83,7 @@ RSpec.describe Cocina::Models::Validators::DarkValidator do
     let(:clazz) { Cocina::Models::DROWithMetadata }
 
     it 'does not raise' do
-      validate
+      expect { validate }.not_to raise_error
     end
   end
 
@@ -92,7 +92,7 @@ RSpec.describe Cocina::Models::Validators::DarkValidator do
     let(:clazz) { Cocina::Models::Identification }
 
     it 'does not raise' do
-      validate
+      expect { validate }.not_to raise_error
     end
   end
 
@@ -119,7 +119,7 @@ RSpec.describe Cocina::Models::Validators::DarkValidator do
     let(:view) { 'world' }
 
     it 'is valid' do
-      validate
+      expect { validate }.not_to raise_error
     end
   end
 
@@ -139,7 +139,7 @@ RSpec.describe Cocina::Models::Validators::DarkValidator do
       let(:mime_type) { 'application/warc' }
 
       it 'is valid' do
-        validate
+        expect { validate }.not_to raise_error
       end
     end
   end
@@ -148,7 +148,7 @@ RSpec.describe Cocina::Models::Validators::DarkValidator do
     let(:publish) { true }
 
     it 'is valid' do
-      validate
+      expect { validate }.not_to raise_error
     end
   end
 
@@ -158,7 +158,7 @@ RSpec.describe Cocina::Models::Validators::DarkValidator do
 
     context 'when valid' do
       it 'does not raise' do
-        validate
+        expect { validate }.not_to raise_error
       end
     end
 
@@ -176,7 +176,7 @@ RSpec.describe Cocina::Models::Validators::DarkValidator do
     let(:file_access) { {} }
 
     it 'does not raise' do
-      validate
+      expect { validate }.not_to raise_error
     end
   end
 end

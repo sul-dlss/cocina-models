@@ -42,7 +42,7 @@ RSpec.describe Cocina::Models::Validators::AssociatedNameValidator do
       let(:props) { {} }
 
       it 'does not raise' do
-        validate
+        expect { validate }.not_to raise_error
       end
     end
 
@@ -75,13 +75,13 @@ RSpec.describe Cocina::Models::Validators::AssociatedNameValidator do
       end
 
       it 'does not raise' do
-        validate
+        expect { validate }.not_to raise_error
       end
     end
 
     context 'when valid Description with name title group' do
       it 'does not raise' do
-        validate
+        expect { validate }.not_to raise_error
       end
     end
 
@@ -115,7 +115,7 @@ RSpec.describe Cocina::Models::Validators::AssociatedNameValidator do
       let(:props) { { relatedResource: [desc_props] } }
 
       it 'does not raise' do
-        validate
+        expect { validate }.not_to raise_error
       end
     end
 

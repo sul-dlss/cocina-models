@@ -13,7 +13,7 @@ RSpec.describe Cocina::Models do
     context 'with a collection type' do
       let(:data) { build(:collection).to_h }
 
-      it { is_expected.to be_kind_of Cocina::Models::Collection }
+      it { is_expected.to be_a Cocina::Models::Collection }
     end
 
     context 'with an invalid DRO (openapi)' do
@@ -35,19 +35,19 @@ RSpec.describe Cocina::Models do
     context 'with a DRO type' do
       let(:data) { build(:dro).to_h }
 
-      it { is_expected.to be_kind_of Cocina::Models::DRO }
+      it { is_expected.to be_a Cocina::Models::DRO }
     end
 
     context 'with an AdminPolicy type' do
       let(:data) { build(:admin_policy).to_h }
 
-      it { is_expected.to be_kind_of Cocina::Models::AdminPolicy }
+      it { is_expected.to be_a Cocina::Models::AdminPolicy }
     end
 
     context 'with keys as strings' do
       let(:data) { build(:dro).to_h.deep_stringify_keys }
 
-      it { is_expected.to be_kind_of Cocina::Models::DRO }
+      it { is_expected.to be_a Cocina::Models::DRO }
     end
 
     context 'with an invalid type' do
@@ -85,7 +85,7 @@ RSpec.describe Cocina::Models do
         }
       end
 
-      it { is_expected.to be_kind_of Cocina::Models::RequestCollection }
+      it { is_expected.to be_a Cocina::Models::RequestCollection }
     end
 
     context 'with a DRO type' do
@@ -101,7 +101,7 @@ RSpec.describe Cocina::Models do
         }
       end
 
-      it { is_expected.to be_kind_of Cocina::Models::RequestDRO }
+      it { is_expected.to be_a Cocina::Models::RequestDRO }
     end
 
     context 'with an AdminPolicy type' do
@@ -118,7 +118,7 @@ RSpec.describe Cocina::Models do
         }
       end
 
-      it { is_expected.to be_kind_of Cocina::Models::RequestAdminPolicy }
+      it { is_expected.to be_a Cocina::Models::RequestAdminPolicy }
     end
 
     context 'with keys as symbols' do
@@ -134,7 +134,7 @@ RSpec.describe Cocina::Models do
         }
       end
 
-      it { is_expected.to be_kind_of Cocina::Models::RequestDRO }
+      it { is_expected.to be_a Cocina::Models::RequestDRO }
     end
 
     context 'with an invalid version' do
@@ -184,7 +184,7 @@ RSpec.describe Cocina::Models do
 
     let(:cocina_object) { build(:dro_with_metadata) }
 
-    it { is_expected.to be_kind_of Cocina::Models::DRO }
+    it { is_expected.to be_a Cocina::Models::DRO }
   end
 
   describe '.with_metadata' do
@@ -203,7 +203,7 @@ RSpec.describe Cocina::Models do
     end
 
     it 'returns a DROWithMetadata' do
-      expect(cocina_object_with_metadata).to be_kind_of Cocina::Models::DROWithMetadata
+      expect(cocina_object_with_metadata).to be_a Cocina::Models::DROWithMetadata
       expect(cocina_object_with_metadata).to match_cocina_object_with(expected.to_h)
     end
   end

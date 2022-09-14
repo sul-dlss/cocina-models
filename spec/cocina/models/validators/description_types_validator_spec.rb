@@ -66,7 +66,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
 
     describe 'when a valid Description' do
       it 'does not raise' do
-        validate
+        expect { validate }.not_to raise_error
       end
     end
 
@@ -75,7 +75,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
       let(:clazz) { Cocina::Models::RequestDescription }
 
       it 'does not raise' do
-        validate
+        expect { validate }.not_to raise_error
       end
     end
 
@@ -115,7 +115,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
       let(:contributor_type) { 'PERson' }
 
       it 'is case insensitive' do
-        validate
+        expect { validate }.not_to raise_error
       end
     end
 
@@ -252,7 +252,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
       end
 
       it 'ignores parallelEvent and does not raise' do
-        validate
+        expect { validate }.not_to raise_error
       end
     end
 
@@ -338,7 +338,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
       end
 
       it 'ignores parallelContributor and does not raise' do
-        validate
+        expect { validate }.not_to raise_error
       end
     end
 
@@ -419,7 +419,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
       end
 
       it 'does not raise' do
-        validate
+        expect { validate }.not_to raise_error
       end
     end
   end

@@ -18,7 +18,7 @@ RSpec.describe Cocina::Models::Validators::PurlValidator do
     end
 
     it 'does not raise' do
-      validate
+      expect { validate }.not_to raise_error
     end
   end
 
@@ -46,7 +46,7 @@ RSpec.describe Cocina::Models::Validators::PurlValidator do
     let(:clazz) { Cocina::Models::RequestDRO }
 
     it 'does not raise' do
-      validate
+      expect { validate }.not_to raise_error
     end
   end
 
@@ -60,7 +60,7 @@ RSpec.describe Cocina::Models::Validators::PurlValidator do
     end
 
     it 'does not raise' do
-      validate
+      expect { validate }.not_to raise_error
     end
   end
 end

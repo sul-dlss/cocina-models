@@ -417,8 +417,13 @@ RSpec.describe Cocina::Models::Mapping::FromMods::Description do
       XML
     end
 
+    before do
+      allow(notifier).to receive(:warn)
+    end
+
     it 'does not warn' do
       descriptive
+      expect(notifier).not_to have_received(:warn)
     end
   end
 
@@ -437,8 +442,13 @@ RSpec.describe Cocina::Models::Mapping::FromMods::Description do
       XML
     end
 
+    before do
+      allow(notifier).to receive(:warn)
+    end
+
     it 'does not warn' do
       descriptive
+      expect(notifier).not_to have_received(:warn)
     end
   end
 
@@ -457,8 +467,13 @@ RSpec.describe Cocina::Models::Mapping::FromMods::Description do
       XML
     end
 
+    before do
+      allow(notifier).to receive(:warn)
+    end
+
     it 'does not warn' do
       descriptive
+      expect(notifier).not_to have_received(:warn)
     end
   end
 
