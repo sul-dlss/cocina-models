@@ -76,8 +76,7 @@ module Cocina
           #
           # So we catch the false positives from the upstream gem and allow
           # this pattern to validate
-          /\AY-?\d{5,}\Z/.match?(value) ||
-            /\A-?\d{1,3}\Z/.match?(value) # temporarily allow format violations
+          /\AY-?\d{5,}\Z/.match?(value)
         end
 
         def valid_iso8601?(value)
