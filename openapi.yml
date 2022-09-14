@@ -1459,7 +1459,7 @@ components:
           description: Width in pixels
           type: integer
     Purl:
-      description: Stanford persistent URL associated with the related resource. Note this is http, not https.
+      description: Stanford persistent URL associated with the related resource.
       type: string
       format: uri
       # Canonical URI is https
