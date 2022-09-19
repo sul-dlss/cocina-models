@@ -12,7 +12,7 @@ module Cocina
             'genre' => :genre,
             'occupation' => :occupation
           }.freeze
-          DEORDINAL_REGEX = /(?<=[0-9])(?:st|nd|rd|th)/.freeze
+          DEORDINAL_REGEX = /(?<=[0-9])(?:st|nd|rd|th)/
 
           # @params [Nokogiri::XML::Builder] xml
           # @params [Array<Cocina::Models::DescriptiveValue>] subjects

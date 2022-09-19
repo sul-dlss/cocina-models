@@ -6,8 +6,7 @@ require:
   - rubocop-rake
 
 AllCops:
-  # dor-services-app is stuck at ruby 2 until we get off Fedora3
-  TargetRubyVersion: 2.7
+  TargetRubyVersion: 3.0
 
 # ----- Layout ------
 

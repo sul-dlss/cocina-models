@@ -6,9 +6,9 @@ module Cocina
       module ToMods
         # Maps geo extension from cocina to MODS
         class Geographic # rubocop:disable Metrics/ClassLength
-          TYPE_REGEX = /^type$/.freeze
-          MEDIA_REGEX = /^media type$/.freeze
-          DATA_FORMAT_REGEX = /^data format$/.freeze
+          TYPE_REGEX = /^type$/
+          MEDIA_REGEX = /^media type$/
+          DATA_FORMAT_REGEX = /^data format$/
 
           ABOUT_URI_PREFIX = 'http://purl.stanford.edu/'
 
