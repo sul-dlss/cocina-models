@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cocina-models (0.84.5)
+    cocina-models (0.85.0)
       activesupport
       deprecation
       dry-struct (~> 1.0)
