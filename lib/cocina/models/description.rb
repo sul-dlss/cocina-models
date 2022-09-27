@@ -20,7 +20,7 @@ module Cocina
       attribute? :adminMetadata, DescriptiveAdminMetadata.optional
       # URL or other pointer to the location of the resource description.
       attribute? :valueAt, Types::Strict::String
-      # Stanford persistent URL associated with the related resource.
+      # Stanford persistent URL associated with the related resource. Note this is http, not https.
       attribute :purl, Types::Strict::String
     end
   end
