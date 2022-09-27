@@ -2,8 +2,9 @@
 
 module Cocina
   module Models
-    # Property model for describing agents contributing in some way to the creation and history of the resource.
-    class Contributor < Struct
+    # DEPRECATED
+    # Value model for multiple representations of information about the same contributor (e.g. in different languages).
+    class DescriptiveParallelContributor < Struct
       attribute :name, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # Entity type of the contributor (person, organization, etc.). See https://github.com/sul-dlss/cocina-models/blob/main/docs/description_types.md for valid types.
       attribute? :type, Types::Strict::String
@@ -14,7 +15,7 @@ module Cocina
       attribute :note, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # URL or other pointer to the location of the contributor information.
       attribute? :valueAt, Types::Strict::String
-      attribute :parallelContributor, Types::Strict::Array.of(DescriptiveParallelContributor).default([].freeze)
+      attribute? :valueLanguage, DescriptiveValueLanguage.optional
     end
   end
 end
