@@ -148,9 +148,13 @@ module Cocina
     end
 
     def self.type_for(dyn)
-      dyn.with_indifferent_access.fetch('type')
-    rescue KeyError
-      raise ValidationError, 'Type field not found'
+      # Intentionally checking both string- and symbol-type keys in the hash via `#[]`
+      #  instead of `#with_indifferent_access` (and/or `#fetch`) in order to be more memory-efficient
+      object_type = dyn[:type] || dyn['type']
+
+      raise(ValidationError, 'Type field not found') unless object_type
+
+      object_type
     end
     private_class_method :type_for
 
