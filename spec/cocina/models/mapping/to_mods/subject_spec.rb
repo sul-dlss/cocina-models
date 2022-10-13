@@ -304,4 +304,73 @@ RSpec.describe Cocina::Models::Mapping::ToMods::Subject do
       XML
     end
   end
+
+  context 'when it has a name subject with an identifier uri' do
+    let(:subjects) do
+      [
+        Cocina::Models::DescriptiveValue.new(
+          { value: 'Genu, Fetras',
+            type: 'person',
+            identifier: [
+              {
+                uri: 'https://www.wikidata.org/wiki/Q99810743'
+              }
+            ],
+            source: {
+              code: 'wikidata'
+            } }
+        )
+      ]
+    end
+
+    it 'builds the xml' do
+      expect(xml).to be_equivalent_to <<~XML
+        <mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://www.loc.gov/mods/v3" version="3.6"
+          xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+          <subject authority="wikidata">
+          <name type="personal">
+             <namePart>Genu, Fetras</namePart>
+             <nameIdentifier>https://www.wikidata.org/wiki/Q99810743</nameIdentifier>
+          </name>
+          </subject>
+        </mods>
+      XML
+    end
+  end
+
+  context 'when it has a name subject with an identifier value' do
+    let(:subjects) do
+      [
+        Cocina::Models::DescriptiveValue.new(
+          { type: 'person',
+            value: 'Kleinschmidt, Angeline',
+            identifier: [
+              {
+                value: 'https://www.wikidata.org/wiki/Q99810910',
+                type: 'Wikidata',
+                source: {
+                  code: 'wikidata'
+                }
+              }
+            ] }
+        )
+      ]
+    end
+
+    it 'builds the xml' do
+      expect(xml).to be_equivalent_to <<~XML
+        <mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://www.loc.gov/mods/v3" version="3.6"
+          xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+          <subject>
+            <name type="personal">
+              <namePart>Kleinschmidt, Angeline</namePart>
+              <nameIdentifier type="wikidata">https://www.wikidata.org/wiki/Q99810910</nameIdentifier>
+            </name>
+          </subject>
+        </mods>
+      XML
+    end
+  end
 end
