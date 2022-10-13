@@ -433,11 +433,7 @@ module Cocina
 
           def write_identifier(identifiers)
             identifiers.each do |identifier|
-              if identifier.uri.present?
-                xml.nameIdentifier identifier.uri
-              elsif identifier.value.present? || identifier.code.present?
-                xml.nameIdentifier identifier&.value || identifier&.code, type: identifier.source&.code || identifier.source&.uri || identifier.source&.value
-              end
+              xml.nameIdentifier identifier.value, type: identifier.source.code
             end
           end
 
