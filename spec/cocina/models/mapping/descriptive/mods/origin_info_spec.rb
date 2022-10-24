@@ -1356,8 +1356,7 @@ RSpec.describe 'MODS originInfo <--> cocina mappings' do
         end
 
         let(:roundtrip_cocina) do
-          {
-          }
+          {}
         end
 
         let(:mods) { '' }
@@ -1369,8 +1368,7 @@ RSpec.describe 'MODS originInfo <--> cocina mappings' do
         let(:mods) { '' }
 
         let(:cocina) do
-          {
-          }
+          {}
         end
       end
     end
@@ -1385,8 +1383,7 @@ RSpec.describe 'MODS originInfo <--> cocina mappings' do
         end
 
         let(:roundtrip_cocina) do
-          {
-          }
+          {}
         end
 
         let(:mods) { '' }
@@ -1404,8 +1401,7 @@ RSpec.describe 'MODS originInfo <--> cocina mappings' do
         let(:roundtrip_mods) { '' }
 
         let(:cocina) do
-          {
-          }
+          {}
         end
       end
     end
@@ -1428,8 +1424,7 @@ RSpec.describe 'MODS originInfo <--> cocina mappings' do
         let(:roundtrip_mods) { '' }
 
         let(:cocina) do
-          {
-          }
+          {}
         end
       end
     end

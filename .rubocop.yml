@@ -20,6 +20,10 @@ Layout/LineLength:
 Layout/SpaceAroundMethodCallOperator:
   Enabled: true
 
+# This cop throws an error in 1.37.1
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
+
 # ----- Lint ------
 
 Lint/BinaryOperatorWithIdenticalOperands:

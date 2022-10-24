@@ -3163,8 +3163,7 @@ RSpec.describe 'MODS name <--> cocina mappings' do
         end
 
         let(:roundtrip_cocina) do
-          {
-          }
+          {}
         end
 
         let(:mods) do
@@ -3211,8 +3210,7 @@ RSpec.describe 'MODS name <--> cocina mappings' do
         end
 
         let(:roundtrip_cocina) do
-          {
-          }
+          {}
         end
 
         let(:mods) do
@@ -3285,8 +3283,7 @@ RSpec.describe 'MODS name <--> cocina mappings' do
       # NOTE: cocina -> MODS
       it_behaves_like 'cocina MODS mapping' do
         let(:cocina) do
-          {
-          }
+          {}
         end
 
         let(:mods) { '' }
@@ -3303,8 +3300,7 @@ RSpec.describe 'MODS name <--> cocina mappings' do
         end
 
         let(:roundtrip_cocina) do
-          {
-          }
+          {}
         end
 
         let(:mods) { '' }
@@ -3321,8 +3317,7 @@ RSpec.describe 'MODS name <--> cocina mappings' do
         end
 
         let(:roundtrip_cocina) do
-          {
-          }
+          {}
         end
 
         let(:mods) { '' }
@@ -3334,8 +3329,7 @@ RSpec.describe 'MODS name <--> cocina mappings' do
         let(:mods) { '' }
 
         let(:cocina) do
-          {
-          }
+          {}
         end
       end
     end
@@ -3351,8 +3345,7 @@ RSpec.describe 'MODS name <--> cocina mappings' do
         let(:roundtrip_mods) { '' }
 
         let(:cocina) do
-          {
-          }
+          {}
         end
 
         let(:warnings) do
