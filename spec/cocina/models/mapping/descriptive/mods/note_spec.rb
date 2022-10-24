@@ -557,8 +557,7 @@ RSpec.describe 'MODS note <--> cocina mappings' do
         end
 
         let(:roundtrip_cocina) do
-          {
-          }
+          {}
         end
 
         let(:mods) { '' }
@@ -570,8 +569,7 @@ RSpec.describe 'MODS note <--> cocina mappings' do
         let(:mods) { '' }
 
         let(:cocina) do
-          {
-          }
+          {}
         end
       end
     end
@@ -586,8 +584,7 @@ RSpec.describe 'MODS note <--> cocina mappings' do
         end
 
         let(:roundtrip_cocina) do
-          {
-          }
+          {}
         end
 
         let(:mods) do
