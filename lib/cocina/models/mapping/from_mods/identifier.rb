@@ -42,7 +42,7 @@ module Cocina
           def identifiers
             (resource_element.xpath('mods:identifier', mods: Description::DESC_METADATA_NS) +
               resource_element.xpath('mods:recordIdentifier',
-                                     mods: Description::DESC_METADATA_NS)).reject { |identifier_node| identifier_node.text.blank? && identifier_node.attributes.size.zero? }
+                                     mods: Description::DESC_METADATA_NS)).reject { |identifier_node| identifier_node.text.blank? && identifier_node.attributes.empty? }
           end
         end
       end
