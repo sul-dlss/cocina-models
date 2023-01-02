@@ -105,9 +105,9 @@ module Cocina
             return unless start_node
 
             # remove node if there are no element children, there is no text value and there are no attributes
-            if start_node.elements.size.zero? &&
+            if start_node.elements.empty? &&
                start_node.text.blank? &&
-               start_node.attributes.size.zero? &&
+               start_node.attributes.empty? &&
                start_node.name != 'etal'
               parent = start_node.parent
               start_node.remove

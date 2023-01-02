@@ -31,7 +31,7 @@ module Cocina
           end
 
           def build
-            return if identifier_element.text.blank? && identifier_element.attributes.size.zero?
+            return if identifier_element.text.blank? && identifier_element.attributes.empty?
 
             {
               displayLabel: identifier_element['displayLabel']
