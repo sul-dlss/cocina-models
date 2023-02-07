@@ -19,14 +19,12 @@ module Cocina
       def generate
         clean_output
 
-        # rubocop:disable Style/HashEachMethods
-        # This is not a Hash
-        schemas.keys.each do |schema_name|
+        filepaths = schemas.keys.filter_map do |schema_name|
           schema = schema_for(schema_name)
           generate_for(schema) if schema
         end
-        # rubocop:enable Style/HashEachMethods
 
+        auto_format(filepaths)
         generate_vocab
         generate_descriptive_docs
       end
@@ -38,7 +36,8 @@ module Cocina
 
         FileUtils.mkdir_p(options[:output])
 
-        generate_for(schema)
+        filepath = generate_for(schema)
+        auto_format(filepath)
       end
 
       desc 'generate_vocab', 'generate vocab'
@@ -108,11 +107,15 @@ module Cocina
       end
 
       def generate_for(schema)
-        filepath = "#{options[:output]}/#{schema.filename}"
-        FileUtils.rm_f(filepath)
+        "#{options[:output]}/#{schema.filename}".tap do |filepath|
+          FileUtils.rm_f(filepath)
 
-        create_file filepath, schema.generate
-        run("rubocop -a #{filepath} > /dev/null")
+          create_file filepath, schema.generate
+        end
+      end
+
+      def auto_format(*filepaths)
+        run("rubocop -a #{filepaths.join(' ')} > /dev/null")
       end
 
       NO_CLEAN = [
