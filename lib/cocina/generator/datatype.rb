@@ -11,7 +11,7 @@ module Cocina
           module Cocina
             module Models
               #{name} = Types::String.constrained(
-                format: /#{schema_doc.pattern}/i
+                format: /#{schema_doc.pattern}/
               )
             end
           end

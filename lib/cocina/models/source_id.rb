@@ -3,7 +3,7 @@
 module Cocina
   module Models
     SourceId = Types::String.constrained(
-      format: /^.+:.+$/i
+      format: /^.+:.+$/
     )
   end
 end

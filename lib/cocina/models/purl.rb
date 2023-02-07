@@ -3,7 +3,7 @@
 module Cocina
   module Models
     Purl = Types::String.constrained(
-      format: %r{^https://}i
+      format: %r{^https://}
     )
   end
 end

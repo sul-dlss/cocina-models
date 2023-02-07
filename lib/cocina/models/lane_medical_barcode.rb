@@ -3,7 +3,7 @@
 module Cocina
   module Models
     LaneMedicalBarcode = Types::String.constrained(
-      format: /^245[0-9]{8}$/i
+      format: /^245[0-9]{8}$/
     )
   end
 end
