@@ -19,7 +19,7 @@ module Cocina
       attribute :identifier, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute? :standard, Standard.optional
       attribute :subject, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
-      # Stanford persistent URL associated with the related resource. Note this is http, not https.
+      # Stanford persistent URL associated with the related resource.
       attribute? :purl, Types::Strict::String
       attribute? :access, DescriptiveAccessMetadata.optional
       attribute :relatedResource, Types::Strict::Array.of(RelatedResource).default([].freeze)

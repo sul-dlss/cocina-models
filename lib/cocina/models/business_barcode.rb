@@ -3,7 +3,7 @@
 module Cocina
   module Models
     BusinessBarcode = Types::String.constrained(
-      format: /^2050[0-9]{7}$/i
+      format: /^2050[0-9]{7}$/
     )
   end
 end
