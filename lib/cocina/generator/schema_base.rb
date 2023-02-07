@@ -68,11 +68,9 @@ module Cocina
         when 'boolean'
           'Strict::Bool'
         else
-          if any_datatype?(doc)
-            'Nominal::Any'
-          else
-            raise "#{schema_doc.type} not supported"
-          end
+          return 'Nominal::Any' if any_datatype?(doc)
+
+          raise "#{schema_doc.type} not supported"
         end
       end
 
