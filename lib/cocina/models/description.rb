@@ -21,7 +21,7 @@ module Cocina
       # URL or other pointer to the location of the resource description.
       attribute? :valueAt, Types::Strict::String
       # Stanford persistent URL associated with the related resource.
-      attribute :purl, Types::Strict::String
+      attribute :purl, Purl
     end
   end
 end

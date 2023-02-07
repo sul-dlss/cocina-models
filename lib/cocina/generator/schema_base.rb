@@ -60,18 +60,38 @@ module Cocina
       end
 
       def dry_datatype(doc)
+        return doc.name if doc.name.present? && Cocina::Models.const_defined?(doc.name)
+
+        datatype_from_doc_type(doc) ||
+          datatype_from_doc_names(doc) ||
+          raise("#{doc.type} not supported")
+      end
+
+      def datatype_from_doc_type(doc)
         case doc.type
         when 'integer'
-          'Strict::Integer'
+          'Types::Strict::Integer'
         when 'string'
           string_dry_datatype(doc)
         when 'boolean'
-          'Strict::Bool'
+          'Types::Strict::Bool'
         else
-          return 'Nominal::Any' if any_datatype?(doc)
+          return 'Types::Nominal::Any' if any_datatype?(doc)
 
           raise "#{schema_doc.type} not supported"
         end
+      end
+
+      def datatype_from_doc_names(doc)
+        if defined_datatypes?(doc)
+          doc.one_of.map(&:name).join(' | ')
+        elsif any_datatype?(doc)
+          'Types::Nominal::Any'
+        end
+      end
+
+      def defined_datatypes?(doc)
+        doc.one_of&.map(&:name).all? { |name| name.present? && Cocina::Models.const_defined?(name) }
       end
 
       def any_datatype?(doc)
@@ -79,12 +99,15 @@ module Cocina
       end
 
       def string_dry_datatype(doc)
-        case doc.format
-        when 'date-time'
-          'Params::DateTime'
-        else
-          'Strict::String'
-        end
+        format = case doc.format
+                 when 'date-time'
+                   'Types::Params::DateTime'
+                 else
+                   'Types::Strict::String'
+                 end
+        return format unless doc.pattern
+
+        "Types::Strict::String.constrained(format: /#{doc.pattern}/)"
       end
 
       def preamble

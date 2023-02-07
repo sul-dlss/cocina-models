@@ -9,7 +9,7 @@ module Cocina
       end
 
       def array_of_type
-        schema_doc.items.name || "Types::#{dry_datatype(schema_doc.items)}"
+        schema_doc.items.name || dry_datatype(schema_doc.items)
       end
     end
   end

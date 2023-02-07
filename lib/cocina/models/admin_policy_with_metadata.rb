@@ -12,10 +12,10 @@ module Cocina
 
       # The version of Cocina with which this object conforms.
       # example: 1.2.3
-      attribute :cocinaVersion, Types::Strict::String.default(Cocina::Models::VERSION)
+      attribute :cocinaVersion, CocinaVersion.default(VERSION)
       attribute :type, Types::Strict::String.enum(*AdminPolicyWithMetadata::TYPES)
       # example: druid:bc123df4567
-      attribute :externalIdentifier, Types::Strict::String
+      attribute :externalIdentifier, Druid
       attribute :label, Types::Strict::String
       attribute :version, Types::Strict::Integer
       attribute(:administrative, AdminPolicyAdministrative.default { AdminPolicyAdministrative.new })
