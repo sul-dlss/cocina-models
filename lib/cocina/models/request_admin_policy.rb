@@ -12,7 +12,7 @@ module Cocina
 
       # The version of Cocina with which this object conforms.
       # example: 1.2.3
-      attribute :cocinaVersion, Types::Strict::String.default(Cocina::Models::VERSION)
+      attribute :cocinaVersion, CocinaVersion.default(VERSION)
       attribute :type, Types::Strict::String.enum(*RequestAdminPolicy::TYPES)
       attribute :label, Types::Strict::String
       attribute :version, Types::Strict::Integer.default(1).enum(1)

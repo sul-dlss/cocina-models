@@ -11,9 +11,9 @@ module Cocina
       attribute? :disseminationWorkflow, Types::Strict::String
       attribute :collectionsForRegistration, Types::Strict::Array.of(Types::Strict::String).default([].freeze)
       # example: druid:bc123df4567
-      attribute :hasAdminPolicy, Types::Strict::String
+      attribute :hasAdminPolicy, Druid
       # example: druid:bc123df4567
-      attribute :hasAgreement, Types::Strict::String
+      attribute :hasAgreement, Druid
       attribute :roles, Types::Strict::Array.of(AccessRole).default([].freeze)
     end
   end

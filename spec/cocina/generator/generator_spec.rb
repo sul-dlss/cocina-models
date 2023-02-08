@@ -14,6 +14,11 @@ RSpec.describe Cocina::Generator::Generator do
     expect(File.exist?('lib/cocina/models/request_dro.rb')).to be true
   end
 
+  it 'generates union types' do
+    expect(File).to exist('lib/cocina/models/barcode.rb')
+    expect(File).to exist('lib/cocina/models/doi.rb')
+  end
+
   it 'leaves files alone' do
     expect(File.exist?('lib/cocina/models/version.rb')).to be true
     expect(File.exist?('lib/cocina/models/checkable.rb')).to be true

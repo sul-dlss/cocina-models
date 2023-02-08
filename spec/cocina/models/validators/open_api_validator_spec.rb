@@ -119,6 +119,64 @@ RSpec.describe Cocina::Models::Validators::OpenApiValidator do
     end
   end
 
+  describe 'union types' do
+    let(:props) do
+      {
+        externalIdentifier: 'druid:bc123df4567',
+        label: 'My item',
+        type: Cocina::Models::ObjectType.object,
+        version: 1,
+        description: {
+          title: [{ value: 'Test DRO' }],
+          purl: 'https://purl.stanford.edu/bc123df4567'
+        },
+        administrative: {
+          hasAdminPolicy: 'druid:bc123df4567'
+        },
+        access: {},
+        identification: {
+          barcode: barcode,
+          sourceId: 'sul:123'
+        },
+        structural: {}
+      }
+    end
+
+    let(:clazz) { Cocina::Models::DRO }
+
+    context 'with a business barcode' do
+      let(:barcode) { '20501234567' }
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'with a lane medical barcode' do
+      let(:barcode) { '24512345678' }
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'with a catkey barcode' do
+      let(:barcode) { '12345-67890' }
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'with a standard barcode' do
+      let(:barcode) { '36105123456789' }
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+  end
+
   context 'when invalid' do
     let(:props) do
       {

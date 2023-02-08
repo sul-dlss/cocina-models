@@ -4,15 +4,16 @@ module Cocina
   module Generator
     # Base class for generating from openapi
     class SchemaBase
-      attr_reader :schema_doc, :key, :required, :nullable, :parent, :relaxed
+      attr_reader :schema_doc, :key, :required, :nullable, :parent, :relaxed, :schemas
 
-      def initialize(schema_doc, key: nil, required: false, nullable: false, parent: nil, relaxed: false)
+      def initialize(schema_doc, key: nil, required: false, nullable: false, parent: nil, relaxed: false, schemas: [])
         @schema_doc = schema_doc
         @key = key
         @required = required
         @nullable = nullable
         @parent = parent
         @relaxed = relaxed
+        @schemas = schemas
       end
 
       def filename
@@ -60,18 +61,38 @@ module Cocina
       end
 
       def dry_datatype(doc)
+        return doc.name if doc.name.present? && schemas.include?(doc.name)
+
+        datatype_from_doc_type(doc) ||
+          datatype_from_doc_names(doc) ||
+          raise("#{doc.type} not supported")
+      end
+
+      def datatype_from_doc_type(doc)
         case doc.type
         when 'integer'
-          'Strict::Integer'
+          'Types::Strict::Integer'
         when 'string'
           string_dry_datatype(doc)
         when 'boolean'
-          'Strict::Bool'
+          'Types::Strict::Bool'
         else
-          return 'Nominal::Any' if any_datatype?(doc)
+          return 'Types::Nominal::Any' if any_datatype?(doc)
 
           raise "#{schema_doc.type} not supported"
         end
+      end
+
+      def datatype_from_doc_names(doc)
+        if defined_datatypes?(doc)
+          doc.one_of.map(&:name).join(' | ')
+        elsif any_datatype?(doc)
+          'Types::Nominal::Any'
+        end
+      end
+
+      def defined_datatypes?(doc)
+        doc.one_of&.map(&:name).all? { |name| name.present? && schemas.include?(name) }
       end
 
       def any_datatype?(doc)
@@ -79,12 +100,15 @@ module Cocina
       end
 
       def string_dry_datatype(doc)
-        case doc.format
-        when 'date-time'
-          'Params::DateTime'
-        else
-          'Strict::String'
-        end
+        format = case doc.format
+                 when 'date-time'
+                   'Types::Params::DateTime'
+                 else
+                   'Types::Strict::String'
+                 end
+        return format unless doc.pattern
+
+        "Types::Strict::String.constrained(format: /#{doc.pattern}/)"
       end
 
       def preamble

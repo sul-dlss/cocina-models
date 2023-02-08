@@ -16,7 +16,7 @@ module Cocina
       private
 
       def type
-        "Types::#{dry_datatype(schema_doc)}#{optional}#{default}#{enum}"
+        "#{dry_datatype(schema_doc)}#{optional}#{default}#{enum}"
       end
 
       def enum
@@ -33,7 +33,7 @@ module Cocina
 
       def default
         # Provide version as default for cocinaVersion
-        return '.default(Cocina::Models::VERSION)' if name == 'cocinaVersion'
+        return '.default(VERSION)' if name == 'cocinaVersion'
 
         # If type is boolean and default is false, erroneously getting a nil.
         # Assuming that if required, then default is false.
