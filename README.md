@@ -119,7 +119,7 @@ bundle exec bin/rails r -e production "BadIso8601Dates.report" > BadIso8601Dates
 ```
 scp deploy@sdr-infra:/opt/app/deploy/dor-services-app/BadIso8601Dates.csv BadIso8601Dates.csv
 ```
-
+ 
 ## Releasing
 
 ### Step 0: Share intent to change the models
