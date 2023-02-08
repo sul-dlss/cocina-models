@@ -83,6 +83,28 @@ RSpec.describe Cocina::Generator::Schema do
     end
   end
 
+  context 'when schema references another custom type' do
+    let(:policy) do
+      Cocina::Models::AdminPolicy.new(
+        {
+          externalIdentifier: 'druid:iaminvalid',
+          label: 'My admin policy',
+          type: Cocina::Models::ObjectType.admin_policy,
+          version: 1,
+          administrative: {
+            hasAdminPolicy: 'druid:bc123df4567',
+            hasAgreement: 'druid:bc123df4567',
+            accessTemplate: {}
+          }
+        }, false, false
+      )
+    end
+
+    it 'does not validate' do
+      expect { policy }.to raise_error(Dry::Struct::Error)
+    end
+  end
+
   context 'when validatable' do
     # A model is validatable when there is a validation path in the openapi. For example, /validate/AdminPolicy
     # Its initializer then accepts a third argument which indicates whether to validate.
@@ -106,6 +128,14 @@ RSpec.describe Cocina::Generator::Schema do
 
     it 'cannot be validated' do
       expect { administrative }.to raise_error(ArgumentError)
+    end
+  end
+
+  context 'when property has a pattern and data does not match pattern' do
+    let(:catalog_link) { Cocina::Models::CatalogLink.new({ catalog: 'symphony', catalogRecordId: 'foobar' }) }
+
+    it 'cannot be validated' do
+      expect { catalog_link }.to raise_error(Dry::Struct::Error)
     end
   end
 end

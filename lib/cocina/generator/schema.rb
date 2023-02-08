@@ -111,7 +111,8 @@ module Cocina
                                                    # different oneOf schemas. Validation is still performed
                                                    # by openAPI.
                                                    relaxed: true,
-                                                   parent: self)
+                                                   parent: self,
+                                                   schemas: schemas)
           end
         end
       end
@@ -122,7 +123,8 @@ module Cocina
                                                  key: key,
                                                  required: doc.requires?(key),
                                                  nullable: properties_doc.nullable?,
-                                                 parent: self)
+                                                 parent: self,
+                                                 schemas: schemas)
         end
       end
     end

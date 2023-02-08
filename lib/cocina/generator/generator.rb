@@ -5,7 +5,7 @@ require 'fileutils'
 module Cocina
   module Generator
     # Class for generating Cocina models from openapi.
-    class Generator < Thor
+    class Generator < Thor # rubocop:disable Metrics/ClassLength
       include Thor::Actions
 
       class_option :openapi, desc: 'Path of openapi.yml', default: 'openapi.yml'
@@ -100,9 +100,13 @@ module Cocina
 
         case schema_doc.type
         when 'object'
-          Schema.new(schema_doc)
+          Schema.new(schema_doc, schemas: schemas.keys)
         when 'string'
-          Datatype.new(schema_doc)
+          Datatype.new(schema_doc, schemas: schemas.keys)
+        when NilClass
+          return unless schema_doc.one_of.map(&:name).all? { |ref_schema_name| schemas.keys.include?(ref_schema_name) }
+
+          UnionType.new(schema_doc)
         end
       end
 

@@ -4,15 +4,16 @@ module Cocina
   module Generator
     # Base class for generating from openapi
     class SchemaBase
-      attr_reader :schema_doc, :key, :required, :nullable, :parent, :relaxed
+      attr_reader :schema_doc, :key, :required, :nullable, :parent, :relaxed, :schemas
 
-      def initialize(schema_doc, key: nil, required: false, nullable: false, parent: nil, relaxed: false)
+      def initialize(schema_doc, key: nil, required: false, nullable: false, parent: nil, relaxed: false, schemas: [])
         @schema_doc = schema_doc
         @key = key
         @required = required
         @nullable = nullable
         @parent = parent
         @relaxed = relaxed
+        @schemas = schemas
       end
 
       def filename
@@ -60,7 +61,7 @@ module Cocina
       end
 
       def dry_datatype(doc)
-        return doc.name if doc.name.present? && Cocina::Models.const_defined?(doc.name)
+        return doc.name if doc.name.present? && schemas.include?(doc.name)
 
         datatype_from_doc_type(doc) ||
           datatype_from_doc_names(doc) ||
@@ -91,7 +92,7 @@ module Cocina
       end
 
       def defined_datatypes?(doc)
-        doc.one_of&.map(&:name).all? { |name| name.present? && Cocina::Models.const_defined?(name) }
+        doc.one_of&.map(&:name).all? { |name| name.present? && schemas.include?(name) }
       end
 
       def any_datatype?(doc)
