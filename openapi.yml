@@ -2041,7 +2041,7 @@ components:
         catalogRecordId:
           description: Record identifier that is unique within the context of the linked record's catalog.
           type: string
-          pattern: '^\d+(:\d+)*$'
+          pattern: '^\d+$'
           example: '11403803'
       required:
         - catalog

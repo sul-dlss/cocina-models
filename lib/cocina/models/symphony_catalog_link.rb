@@ -11,7 +11,7 @@ module Cocina
       attribute :refresh, Types::Strict::Bool.default(false)
       # Record identifier that is unique within the context of the linked record's catalog.
       # example: 11403803
-      attribute :catalogRecordId, Types::Strict::String.constrained(format: /^\d+(:\d+)*$/)
+      attribute :catalogRecordId, Types::Strict::String.constrained(format: /^\d+$/)
     end
   end
 end

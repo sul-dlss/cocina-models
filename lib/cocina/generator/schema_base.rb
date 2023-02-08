@@ -63,8 +63,8 @@ module Cocina
       def dry_datatype(doc)
         return doc.name if doc.name.present? && schemas.include?(doc.name)
 
-        datatype_from_doc_type(doc) ||
-          datatype_from_doc_names(doc) ||
+        datatype_from_doc_names(doc) ||
+          datatype_from_doc_type(doc) ||
           raise("#{doc.type} not supported")
       end
 
@@ -84,19 +84,17 @@ module Cocina
       end
 
       def datatype_from_doc_names(doc)
-        if defined_datatypes?(doc)
-          doc.one_of.map(&:name).join(' | ')
-        elsif any_datatype?(doc)
-          'Types::Nominal::Any'
-        end
+        return unless defined_datatypes?(doc)
+
+        doc.one_of.map(&:name).join(' | ')
       end
 
       def defined_datatypes?(doc)
-        doc.one_of&.map(&:name).all? { |name| name.present? && schemas.include?(name) }
+        doc.one_of&.map(&:name)&.all? { |name| name.present? && schemas.include?(name) }
       end
 
       def any_datatype?(doc)
-        relaxed || doc.one_of&.map(&:type).all? { |o| %w[integer string].include?(o) }
+        relaxed || doc.one_of&.map(&:type)&.all? { |o| %w[integer string].include?(o) }
       end
 
       def string_dry_datatype(doc)

@@ -132,10 +132,39 @@ RSpec.describe Cocina::Generator::Schema do
   end
 
   context 'when property has a pattern and data does not match pattern' do
-    let(:catalog_link) { Cocina::Models::CatalogLink.new({ catalog: 'symphony', catalogRecordId: 'foobar' }) }
+    let(:catalog_link) { Cocina::Models::SymphonyCatalogLink.new({ catalog: 'symphony', catalogRecordId: 'foobar' }) }
 
     it 'cannot be validated' do
       expect { catalog_link }.to raise_error(Dry::Struct::Error)
+    end
+  end
+
+  # NOTE: Using catalog links as an example to test
+  describe 'union types' do
+    let(:union_type) { Cocina::Models::CatalogLink[link_hash] }
+
+    context 'when one of the included types is supplied' do
+      let(:link_hash) { { catalog: 'symphony', catalogRecordId: '123' } }
+
+      it 'accepts the value' do
+        expect { union_type }.not_to raise_error
+      end
+    end
+
+    context 'when a different one of the included types is supplied' do
+      let(:link_hash) { { catalog: 'previous folio', catalogRecordId: 'a789' } }
+
+      it 'accepts the value' do
+        expect { union_type }.not_to raise_error
+      end
+    end
+
+    context 'when an invalid value is supplied' do
+      let(:link_hash) { { catalog: 'previous symphony', catalogRecordId: 'a789' } }
+
+      it 'cannot be validated' do
+        expect { union_type }.to raise_error(Dry::Struct::Error, /invalid type for :catalogRecordId violates constraints/)
+      end
     end
   end
 end
