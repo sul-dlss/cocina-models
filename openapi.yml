@@ -196,19 +196,6 @@ components:
       required:
         - identifier
         - type
-    Administrative:
-      type: object
-      additionalProperties: false
-      properties:
-        hasAdminPolicy:
-          $ref: '#/components/schemas/Druid'
-        releaseTags:
-          description: Tags for release
-          type: array
-          items:
-            $ref: '#/components/schemas/ReleaseTag'
-      required:
-        - hasAdminPolicy
     AdminPolicy:
       type: object
       additionalProperties: false
@@ -236,40 +223,19 @@ components:
         - label
         - type
         - version
-    AdminPolicyAdministrative:
-      description: Administrative properties for an AdminPolicy
+    Administrative:
       type: object
       additionalProperties: false
       properties:
-        accessTemplate:
-          $ref: '#/components/schemas/AdminPolicyAccessTemplate'
-        registrationWorkflow:
-          description: When you register an item with this admin policy, these are the workflows that are available.
-          type: array
-          items:
-            type: string
-        disseminationWorkflow:
-          description: An additional workflow to start for objects managed by this admin policy once the end-accession workflow step is complete
-          example: wasCrawlPreassemblyWF
-          type: string
-        collectionsForRegistration:
-          description: When you register an item with this admin policy, these are the collections that are available.
-          type: array
-          items:
-            type: string
         hasAdminPolicy:
           $ref: '#/components/schemas/Druid'
-        hasAgreement:
-          $ref: '#/components/schemas/Druid'
-        roles:
-          description: The access roles conferred by this AdminPolicy (used by Argo)
+        releaseTags:
+          description: Tags for release
           type: array
           items:
-            $ref: '#/components/schemas/AccessRole'
+            $ref: '#/components/schemas/ReleaseTag'
       required:
         - hasAdminPolicy
-        - hasAgreement
-        - accessTemplate
     AdminPolicyAccessTemplate:
       description: 'Provides the template of access settings that is copied to the items goverend by an AdminPolicy. This is almost the same as DROAccess, but it provides no defaults and has no embargo.'
       type: object
@@ -328,6 +294,40 @@ components:
           description: The license governing reuse of the Collection. Should be an IRI for known licenses (i.e. CC, RightsStatement.org URI, etc.).
           type: string
           nullable: true
+    AdminPolicyAdministrative:
+      description: Administrative properties for an AdminPolicy
+      type: object
+      additionalProperties: false
+      properties:
+        accessTemplate:
+          $ref: '#/components/schemas/AdminPolicyAccessTemplate'
+        registrationWorkflow:
+          description: When you register an item with this admin policy, these are the workflows that are available.
+          type: array
+          items:
+            type: string
+        disseminationWorkflow:
+          description: An additional workflow to start for objects managed by this admin policy once the end-accession workflow step is complete
+          example: wasCrawlPreassemblyWF
+          type: string
+        collectionsForRegistration:
+          description: When you register an item with this admin policy, these are the collections that are available.
+          type: array
+          items:
+            type: string
+        hasAdminPolicy:
+          $ref: '#/components/schemas/Druid'
+        hasAgreement:
+          $ref: '#/components/schemas/Druid'
+        roles:
+          description: The access roles conferred by this AdminPolicy (used by Argo)
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessRole'
+      required:
+        - hasAdminPolicy
+        - hasAgreement
+        - accessTemplate
     # AdminPolicyWithMetadata schema should not be copied to sdr-api and dor-services-app.
     AdminPolicyWithMetadata:
       description: Admin Policy with addition object metadata.
@@ -358,37 +358,11 @@ components:
       type: string
       pattern: '^2050[0-9]{7}$'
       example: '20503740296'
-    LaneMedicalBarcode:
-      description: The barcode associated with a Lane Medical Library DRO object, prefixed with 245
-      type: string
-      pattern: '^245[0-9]{8}$'
-      example: '24503259768'
     CatalogLink:
-      type: object
-      additionalProperties: false
-      properties:
-        catalog:
-          description: Catalog that is the source of the linked record.
-          type: string
-          enum:
-            - symphony
-            - previous symphony
-          example: symphony
-        refresh:
-          description: Only one of the catkeys should be designated for refreshing.
-            This means that this key is the one used to pull metadata from the catalog
-            if there is more than one key present.
-          type: boolean
-          default: false
-        catalogRecordId:
-          description: Record identifier that is unique within the context of the linked record's catalog.
-          type: string
-          pattern: '^\d+(:\d+)*$'
-          example: '11403803'
-      required:
-        - catalog
-        - catalogRecordId
-        - refresh
+      description: 'A linkage between an object and a catalog record'
+      oneOf:
+        - $ref: '#/components/schemas/FolioCatalogLink'
+        - $ref: '#/components/schemas/SymphonyCatalogLink'
     CatkeyBarcode:
       description: The barcode associated with a DRO object based on catkey, prefixed with a catkey followed by a hyphen
       type: string
@@ -432,7 +406,7 @@ components:
       additionalProperties: false
       properties:
         cocinaVersion:
-            $ref: '#/components/schemas/CocinaVersion'
+          $ref: '#/components/schemas/CocinaVersion'
         type:
           description: The content type of the Collection. Selected from an established set of values.
           type: string
@@ -580,6 +554,155 @@ components:
       required:
         - view
         - download
+    CreatedInFolioIdentifier:
+      description: A record identifier created in Folio
+      type: string
+      pattern: '^in\d+$'
+      example: 'in11403803'
+    DOI:
+      description: Digital Object Identifier (https://www.doi.org)
+      oneOf:
+        - $ref: '#/components/schemas/DoiPattern'
+        - $ref: '#/components/schemas/DoiExceptions'
+    DRO:
+      description: Domain-defined abstraction of a 'work'. Digital Repository Objects' abstraction is describable for our domain’s purposes, i.e. for management needs within our system.
+      type: object
+      additionalProperties: false
+      properties:
+        cocinaVersion:
+          $ref: '#/components/schemas/CocinaVersion'
+        type:
+          description: The content type of the DRO. Selected from an established set of values.
+          type: string
+          enum:
+            - 'https://cocina.sul.stanford.edu/models/object'
+            - 'https://cocina.sul.stanford.edu/models/3d'
+            - 'https://cocina.sul.stanford.edu/models/agreement'
+            - 'https://cocina.sul.stanford.edu/models/book'
+            - 'https://cocina.sul.stanford.edu/models/document'
+            - 'https://cocina.sul.stanford.edu/models/geo'
+            - 'https://cocina.sul.stanford.edu/models/image'
+            - 'https://cocina.sul.stanford.edu/models/page'
+            - 'https://cocina.sul.stanford.edu/models/photograph'
+            - 'https://cocina.sul.stanford.edu/models/manuscript'
+            - 'https://cocina.sul.stanford.edu/models/map'
+            - 'https://cocina.sul.stanford.edu/models/media'
+            - 'https://cocina.sul.stanford.edu/models/track'
+            - 'https://cocina.sul.stanford.edu/models/webarchive-binary'
+            - 'https://cocina.sul.stanford.edu/models/webarchive-seed'
+        externalIdentifier:
+          $ref: '#/components/schemas/Druid'
+        label:
+          description: Primary processing label (can be same as title) for a DRO.
+          type: string
+        version:
+          description: Version for the DRO within SDR.
+          type: integer
+        access:
+          $ref: '#/components/schemas/DROAccess'
+        administrative:
+          $ref: '#/components/schemas/Administrative'
+        description:
+          $ref: '#/components/schemas/Description'
+        identification:
+          $ref: '#/components/schemas/Identification'
+        structural:
+          $ref: '#/components/schemas/DROStructural'
+        geographic:
+          $ref: '#/components/schemas/Geographic'
+      required:
+        - cocinaVersion
+        - access
+        - administrative
+        - description
+        - externalIdentifier
+        - label
+        - type
+        - version
+        - identification
+        - structural
+    DROAccess:
+      type: object
+      additionalProperties: false
+      allOf:
+        - $ref: "#/components/schemas/Access"
+        - type: object
+          properties:
+            copyright:
+              description: The human readable copyright statement that applies
+              example: Copyright World Trade Organization
+              type: string
+              nullable: true
+            embargo:
+              $ref: '#/components/schemas/Embargo'
+            useAndReproductionStatement:
+              description: The human readable use and reproduction statement that applies
+              example: Property rights reside with the repository. Literary rights reside with the creators of the documents or their heirs. To obtain permission to publish or reproduce, please contact the Public Services Librarian of the Dept. of Special Collections (http://library.stanford.edu/spc).
+              type: string
+              nullable: true
+            license:
+              description: The license governing reuse of the DRO. Should be an IRI for known licenses (i.e. CC, RightsStatement.org URI, etc.).
+              type: string
+              nullable: true
+              enum:
+                - 'https://www.gnu.org/licenses/agpl.txt'
+                - 'https://www.apache.org/licenses/LICENSE-2.0'
+                - 'https://opensource.org/licenses/BSD-2-Clause'
+                - 'https://opensource.org/licenses/BSD-3-Clause'
+                - 'https://creativecommons.org/licenses/by/4.0/legalcode'
+                - 'https://creativecommons.org/licenses/by-nc/4.0/legalcode'
+                - 'https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode'
+                - 'https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode'
+                - 'https://creativecommons.org/licenses/by-nd/4.0/legalcode'
+                - 'https://creativecommons.org/licenses/by-sa/4.0/legalcode'
+                - 'https://creativecommons.org/publicdomain/zero/1.0/legalcode'
+                - 'https://opensource.org/licenses/cddl1'
+                - 'https://www.eclipse.org/legal/epl-2.0'
+                - 'https://www.gnu.org/licenses/gpl-3.0-standalone.html'
+                - 'https://www.isc.org/downloads/software-support-policy/isc-license/'
+                - 'https://www.gnu.org/licenses/lgpl-3.0-standalone.html'
+                - 'https://opensource.org/licenses/MIT'
+                - 'https://www.mozilla.org/MPL/2.0/'
+                - 'https://opendatacommons.org/licenses/by/1-0/'
+                - 'http://opendatacommons.org/licenses/odbl/1.0/' # Non cannonical, but in some of our data
+                - 'https://opendatacommons.org/licenses/odbl/1-0/'
+                - 'https://creativecommons.org/publicdomain/mark/1.0/'
+                - 'https://opendatacommons.org/licenses/pddl/1-0/'
+                - 'https://creativecommons.org/licenses/by/3.0/legalcode'
+                - 'https://creativecommons.org/licenses/by-sa/3.0/legalcode'
+                - 'https://creativecommons.org/licenses/by-nd/3.0/legalcode'
+                - 'https://creativecommons.org/licenses/by-nc/3.0/legalcode'
+                - 'https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode'
+                - 'https://creativecommons.org/licenses/by-nc-nd/3.0/legalcode'
+                - 'https://cocina.sul.stanford.edu/licenses/none' # Only used in some legacy ETDs and not actually permitted per the Project Chimera docs.
+    DROStructural:
+      description: Structural metadata
+      type: object
+      additionalProperties: false
+      properties:
+        contains:
+          description: Filesets that contain the digital representations (Files)
+          type: array
+          items:
+            $ref: '#/components/schemas/FileSet'
+        hasMemberOrders:
+          description: Provided sequences or orderings of members, including some metadata about each sequence (i.e. sequence label, sequence type, if the sequence is primary, etc.).
+          type: array
+          items:
+            $ref: '#/components/schemas/Sequence'
+        isMemberOf:
+          description: Collections that this DRO is a member of
+          type: array
+          items:
+            $ref: '#/components/schemas/Druid'
+    # DROWithMetadata schema should not be copied to sdr-api and dor-services-app.
+    DROWithMetadata:
+      description: DRO with addition object metadata.
+      type: object
+      additionalProperties: false
+      allOf:
+        - $ref: "#/components/schemas/DRO"
+        - $ref: "#/components/schemas/ObjectMetadata"
     DarkAccess:
       type: object
       properties:
@@ -895,11 +1018,6 @@ components:
               $ref: '#/components/schemas/Standard'
               # description: An alphabet or other notation used to represent a
               #   language or other symbolic system of the descriptive element value.
-    DOI:
-      description: Digital Object Identifier (https://www.doi.org)
-      oneOf:
-        - $ref: '#/components/schemas/DoiPattern'
-        - $ref: '#/components/schemas/DoiExceptions'
     DoiExceptions:
       type: string
       description: pre-existing Digital Object Identifiers (https://www.doi.org) not matching the pattern (case insensitive)
@@ -911,145 +1029,6 @@ components:
       # The prod and test prefixes are permitted
       pattern: '^10\.(25740|80343)\/[b-df-hjkmnp-tv-z]{2}[0-9]{3}[b-df-hjkmnp-tv-z]{2}[0-9]{4}$'
       example: '10.25740/bc123df4567'
-    DRO:
-      description: Domain-defined abstraction of a 'work'. Digital Repository Objects' abstraction is describable for our domain’s purposes, i.e. for management needs within our system.
-      type: object
-      additionalProperties: false
-      properties:
-        cocinaVersion:
-          $ref: '#/components/schemas/CocinaVersion'
-        type:
-          description: The content type of the DRO. Selected from an established set of values.
-          type: string
-          enum:
-            - 'https://cocina.sul.stanford.edu/models/object'
-            - 'https://cocina.sul.stanford.edu/models/3d'
-            - 'https://cocina.sul.stanford.edu/models/agreement'
-            - 'https://cocina.sul.stanford.edu/models/book'
-            - 'https://cocina.sul.stanford.edu/models/document'
-            - 'https://cocina.sul.stanford.edu/models/geo'
-            - 'https://cocina.sul.stanford.edu/models/image'
-            - 'https://cocina.sul.stanford.edu/models/page'
-            - 'https://cocina.sul.stanford.edu/models/photograph'
-            - 'https://cocina.sul.stanford.edu/models/manuscript'
-            - 'https://cocina.sul.stanford.edu/models/map'
-            - 'https://cocina.sul.stanford.edu/models/media'
-            - 'https://cocina.sul.stanford.edu/models/track'
-            - 'https://cocina.sul.stanford.edu/models/webarchive-binary'
-            - 'https://cocina.sul.stanford.edu/models/webarchive-seed'
-        externalIdentifier:
-          $ref: '#/components/schemas/Druid'
-        label:
-          description: Primary processing label (can be same as title) for a DRO.
-          type: string
-        version:
-          description: Version for the DRO within SDR.
-          type: integer
-        access:
-          $ref: '#/components/schemas/DROAccess'
-        administrative:
-          $ref: '#/components/schemas/Administrative'
-        description:
-          $ref: '#/components/schemas/Description'
-        identification:
-          $ref: '#/components/schemas/Identification'
-        structural:
-          $ref: '#/components/schemas/DROStructural'
-        geographic:
-          $ref: '#/components/schemas/Geographic'
-      required:
-        - cocinaVersion
-        - access
-        - administrative
-        - description
-        - externalIdentifier
-        - label
-        - type
-        - version
-        - identification
-        - structural
-    DROAccess:
-      type: object
-      additionalProperties: false
-      allOf:
-        - $ref: "#/components/schemas/Access"
-        - type: object
-          properties:
-            copyright:
-              description: The human readable copyright statement that applies
-              example: Copyright World Trade Organization
-              type: string
-              nullable: true
-            embargo:
-              $ref: '#/components/schemas/Embargo'
-            useAndReproductionStatement:
-              description: The human readable use and reproduction statement that applies
-              example: Property rights reside with the repository. Literary rights reside with the creators of the documents or their heirs. To obtain permission to publish or reproduce, please contact the Public Services Librarian of the Dept. of Special Collections (http://library.stanford.edu/spc).
-              type: string
-              nullable: true
-            license:
-              description: The license governing reuse of the DRO. Should be an IRI for known licenses (i.e. CC, RightsStatement.org URI, etc.).
-              type: string
-              nullable: true
-              enum:
-                - 'https://www.gnu.org/licenses/agpl.txt'
-                - 'https://www.apache.org/licenses/LICENSE-2.0'
-                - 'https://opensource.org/licenses/BSD-2-Clause'
-                - 'https://opensource.org/licenses/BSD-3-Clause'
-                - 'https://creativecommons.org/licenses/by/4.0/legalcode'
-                - 'https://creativecommons.org/licenses/by-nc/4.0/legalcode'
-                - 'https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode'
-                - 'https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode'
-                - 'https://creativecommons.org/licenses/by-nd/4.0/legalcode'
-                - 'https://creativecommons.org/licenses/by-sa/4.0/legalcode'
-                - 'https://creativecommons.org/publicdomain/zero/1.0/legalcode'
-                - 'https://opensource.org/licenses/cddl1'
-                - 'https://www.eclipse.org/legal/epl-2.0'
-                - 'https://www.gnu.org/licenses/gpl-3.0-standalone.html'
-                - 'https://www.isc.org/downloads/software-support-policy/isc-license/'
-                - 'https://www.gnu.org/licenses/lgpl-3.0-standalone.html'
-                - 'https://opensource.org/licenses/MIT'
-                - 'https://www.mozilla.org/MPL/2.0/'
-                - 'https://opendatacommons.org/licenses/by/1-0/'
-                - 'http://opendatacommons.org/licenses/odbl/1.0/' # Non cannonical, but in some of our data
-                - 'https://opendatacommons.org/licenses/odbl/1-0/'
-                - 'https://creativecommons.org/publicdomain/mark/1.0/'
-                - 'https://opendatacommons.org/licenses/pddl/1-0/'
-                - 'https://creativecommons.org/licenses/by/3.0/legalcode'
-                - 'https://creativecommons.org/licenses/by-sa/3.0/legalcode'
-                - 'https://creativecommons.org/licenses/by-nd/3.0/legalcode'
-                - 'https://creativecommons.org/licenses/by-nc/3.0/legalcode'
-                - 'https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode'
-                - 'https://creativecommons.org/licenses/by-nc-nd/3.0/legalcode'
-                - 'https://cocina.sul.stanford.edu/licenses/none' # Only used in some legacy ETDs and not actually permitted per the Project Chimera docs.
-    DROStructural:
-      description: Structural metadata
-      type: object
-      additionalProperties: false
-      properties:
-        contains:
-          description: Filesets that contain the digital representations (Files)
-          type: array
-          items:
-            $ref: '#/components/schemas/FileSet'
-        hasMemberOrders:
-          description: Provided sequences or orderings of members, including some metadata about each sequence (i.e. sequence label, sequence type, if the sequence is primary, etc.).
-          type: array
-          items:
-            $ref: '#/components/schemas/Sequence'
-        isMemberOf:
-          description: Collections that this DRO is a member of
-          type: array
-          items:
-            $ref: '#/components/schemas/Druid'
-    # DROWithMetadata schema should not be copied to sdr-api and dor-services-app.
-    DROWithMetadata:
-      description: DRO with addition object metadata.
-      type: object
-      additionalProperties: false
-      allOf:
-        - $ref: "#/components/schemas/DRO"
-        - $ref: "#/components/schemas/ObjectMetadata"
     Druid:
       type: string
       pattern: '^druid:[b-df-hjkmnp-tv-z]{2}[0-9]{3}[b-df-hjkmnp-tv-z]{2}[0-9]{4}$'
@@ -1250,6 +1229,34 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/File'
+    FolioCatalogLink:
+      description: A linkage between an object and a Folio catalog record
+      type: object
+      additionalProperties: false
+      properties:
+        catalog:
+          description: Catalog that is the source of the linked record.
+          type: string
+          enum:
+            - folio
+            - previous folio
+          example: folio
+        refresh:
+          description: Only one of the catkeys should be designated for refreshing.
+            This means that this key is the one used to pull metadata from the catalog
+            if there is more than one key present.
+          type: boolean
+          default: false
+        catalogRecordId:
+          description: Record identifier that is unique within the context of the linked record's catalog.
+          oneOf:
+            - $ref: '#/components/schemas/MigratedFromSymphonyIdentifier'
+            - $ref: '#/components/schemas/MigratedFromVoyagerIdentifier'
+            - $ref: '#/components/schemas/CreatedInFolioIdentifier'
+      required:
+        - catalog
+        - catalogRecordId
+        - refresh
     Geographic:
       description: Geographic metadata
       type: object
@@ -1276,6 +1283,11 @@ components:
           $ref: '#/components/schemas/SourceId'
       required:
         - sourceId
+    LaneMedicalBarcode:
+      description: The barcode associated with a Lane Medical Library DRO object, prefixed with 245
+      type: string
+      pattern: '^245[0-9]{8}$'
+      example: '24503259768'
     Language:
       description: Languages, scripts, symbolic systems, and notations used in all
         or part of a resource or its descriptive metadata.
@@ -1428,6 +1440,16 @@ components:
       required:
         - type
         - digest
+    MigratedFromSymphonyIdentifier:
+      description: A record identifier migrated from Symphony
+      type: string
+      pattern: '^a\d+$'
+      example: 'a11403803'
+    MigratedFromVoyagerIdentifier:
+      description: A record identifier migrated from Voyager
+      type: string
+      pattern: '^L\d+$'
+      example: 'L11403803'
     # ObjectMetadata schema should not be copied to sdr-api and dor-services-app.
     ObjectMetadata:
       description: Metadata for a cocina object.
@@ -1569,18 +1591,6 @@ components:
           example: Searchworks
         release:
           type: boolean
-    RequestAdministrative:
-      type: object
-      additionalProperties: false
-      allOf:
-        - $ref: "#/components/schemas/Administrative"
-        - type: object
-          additionalProperties: false
-          properties:
-            partOfProject:
-              description: Internal project this resource is a part of. This governs routing of messages about this object.
-              example: Google Books
-              type: string
     RequestAdminPolicy:
       description: Same as an AdminPolicy, but doesn't have an externalIdentifier as one will be created
       type: object
@@ -1609,6 +1619,18 @@ components:
         - label
         - type
         - version
+    RequestAdministrative:
+      type: object
+      additionalProperties: false
+      allOf:
+        - $ref: "#/components/schemas/Administrative"
+        - type: object
+          additionalProperties: false
+          properties:
+            partOfProject:
+              description: Internal project this resource is a part of. This governs routing of messages about this object.
+              example: Google Books
+              type: string
     RequestCollection:
       description: Same as a Collection, but doesn't have an externalIdentifier as one will be created
       type: object
@@ -1646,6 +1668,75 @@ components:
         - label
         - type
         - version
+    RequestDRO:
+      description: A request to create a DRO.  This has the same general structure as a DRO but doesn't have externalIdentifier and doesn't require the access subschema. If no access subschema is provided, these values will be inherited from the AdminPolicy.
+      type: object
+      additionalProperties: false
+      properties:
+        cocinaVersion:
+          $ref: '#/components/schemas/CocinaVersion'
+        type:
+          type: string
+          enum:
+            - 'https://cocina.sul.stanford.edu/models/object'
+            - 'https://cocina.sul.stanford.edu/models/3d'
+            - 'https://cocina.sul.stanford.edu/models/agreement'
+            - 'https://cocina.sul.stanford.edu/models/book'
+            - 'https://cocina.sul.stanford.edu/models/document'
+            - 'https://cocina.sul.stanford.edu/models/geo'
+            - 'https://cocina.sul.stanford.edu/models/image'
+            - 'https://cocina.sul.stanford.edu/models/page'
+            - 'https://cocina.sul.stanford.edu/models/photograph'
+            - 'https://cocina.sul.stanford.edu/models/manuscript'
+            - 'https://cocina.sul.stanford.edu/models/map'
+            - 'https://cocina.sul.stanford.edu/models/media'
+            - 'https://cocina.sul.stanford.edu/models/track'
+            - 'https://cocina.sul.stanford.edu/models/webarchive-binary'
+            - 'https://cocina.sul.stanford.edu/models/webarchive-seed'
+        label:
+          type: string
+        version:
+          type: integer
+          default: 1
+          enum:
+            - 1
+        access:
+          $ref: '#/components/schemas/DROAccess'
+        administrative:
+          $ref: '#/components/schemas/RequestAdministrative'
+        description:
+          $ref: '#/components/schemas/RequestDescription'
+        identification:
+          $ref: '#/components/schemas/RequestIdentification'
+        structural:
+          $ref: '#/components/schemas/RequestDROStructural'
+        geographic:
+          $ref: '#/components/schemas/Geographic'
+      required:
+        - cocinaVersion
+        - administrative
+        - identification
+        - label
+        - type
+        - version
+    RequestDROStructural:
+      description: Structural metadata
+      type: object
+      additionalProperties: false
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestFileSet'
+        hasMemberOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sequence'
+        isMemberOf:
+          description: Collections that this DRO is a member of
+          type: array
+          items:
+            $ref: '#/components/schemas/Druid'
     RequestDescription:
       description: Description that is included in a request to create a DRO. This is the same as a Description, except excludes PURL.
       type: object
@@ -1719,75 +1810,6 @@ components:
           type: string
       required:
         - title
-    RequestDRO:
-      description: A request to create a DRO.  This has the same general structure as a DRO but doesn't have externalIdentifier and doesn't require the access subschema. If no access subschema is provided, these values will be inherited from the AdminPolicy.
-      type: object
-      additionalProperties: false
-      properties:
-        cocinaVersion:
-          $ref: '#/components/schemas/CocinaVersion'
-        type:
-          type: string
-          enum:
-            - 'https://cocina.sul.stanford.edu/models/object'
-            - 'https://cocina.sul.stanford.edu/models/3d'
-            - 'https://cocina.sul.stanford.edu/models/agreement'
-            - 'https://cocina.sul.stanford.edu/models/book'
-            - 'https://cocina.sul.stanford.edu/models/document'
-            - 'https://cocina.sul.stanford.edu/models/geo'
-            - 'https://cocina.sul.stanford.edu/models/image'
-            - 'https://cocina.sul.stanford.edu/models/page'
-            - 'https://cocina.sul.stanford.edu/models/photograph'
-            - 'https://cocina.sul.stanford.edu/models/manuscript'
-            - 'https://cocina.sul.stanford.edu/models/map'
-            - 'https://cocina.sul.stanford.edu/models/media'
-            - 'https://cocina.sul.stanford.edu/models/track'
-            - 'https://cocina.sul.stanford.edu/models/webarchive-binary'
-            - 'https://cocina.sul.stanford.edu/models/webarchive-seed'
-        label:
-          type: string
-        version:
-          type: integer
-          default: 1
-          enum:
-            - 1
-        access:
-          $ref: '#/components/schemas/DROAccess'
-        administrative:
-          $ref: '#/components/schemas/RequestAdministrative'
-        description:
-          $ref: '#/components/schemas/RequestDescription'
-        identification:
-          $ref: '#/components/schemas/RequestIdentification'
-        structural:
-          $ref: '#/components/schemas/RequestDROStructural'
-        geographic:
-          $ref: '#/components/schemas/Geographic'
-      required:
-        - cocinaVersion
-        - administrative
-        - identification
-        - label
-        - type
-        - version
-    RequestDROStructural:
-      description: Structural metadata
-      type: object
-      additionalProperties: false
-      properties:
-        contains:
-          type: array
-          items:
-            $ref: '#/components/schemas/RequestFileSet'
-        hasMemberOrders:
-          type: array
-          items:
-            $ref: '#/components/schemas/Sequence'
-        isMemberOf:
-          description: Collections that this DRO is a member of
-          type: array
-          items:
-            $ref: '#/components/schemas/Druid'
     RequestFile:
       type: object
       additionalProperties: false
@@ -1971,27 +1993,6 @@ components:
       nullable: true
       pattern: '^36105[0-9]{9}$'
       example: '36105010362304'
-    Title:
-      type: object
-      additionalProperties: false
-      allOf:
-        - $ref: "#/components/schemas/DescriptiveValue"
-        - anyOf:
-            - type: object
-              required:
-                - value
-            - type: object
-              required:
-                - structuredValue
-            - type: object
-              required:
-                - parallelValue
-            - type: object
-              required:
-                - groupedValue
-            - type: object
-              required:
-                - valueAt
     StanfordAccess:
       type: object
       properties:
@@ -2019,6 +2020,54 @@ components:
       required:
         - view
         - download
+    SymphonyCatalogLink:
+      description: A linkage between an object and a Symphony catalog record
+      type: object
+      additionalProperties: false
+      properties:
+        catalog:
+          description: Catalog that is the source of the linked record.
+          type: string
+          enum:
+            - symphony
+            - previous symphony
+          example: symphony
+        refresh:
+          description: Only one of the catkeys should be designated for refreshing.
+            This means that this key is the one used to pull metadata from the catalog
+            if there is more than one key present.
+          type: boolean
+          default: false
+        catalogRecordId:
+          description: Record identifier that is unique within the context of the linked record's catalog.
+          type: string
+          pattern: '^\d+$'
+          example: '11403803'
+      required:
+        - catalog
+        - catalogRecordId
+        - refresh
+    Title:
+      type: object
+      additionalProperties: false
+      allOf:
+        - $ref: "#/components/schemas/DescriptiveValue"
+        - anyOf:
+            - type: object
+              required:
+                - value
+            - type: object
+              required:
+                - structuredValue
+            - type: object
+              required:
+                - parallelValue
+            - type: object
+              required:
+                - groupedValue
+            - type: object
+              required:
+                - valueAt
     WorldAccess:
       type: object
       properties:
