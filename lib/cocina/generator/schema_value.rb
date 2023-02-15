@@ -5,7 +5,6 @@ module Cocina
     # Class for generating from an openapi value
     class SchemaValue < SchemaBase
       def generate
-        # optional has to come before default or the default value that gets set will be nil.
         if required && !relaxed
           "#{preamble}attribute :#{name.camelize(:lower)}, #{type}"
         else
@@ -16,6 +15,7 @@ module Cocina
       private
 
       def type
+        # optional has to come before default or the default value that gets set will be nil.
         "#{dry_datatype(schema_doc)}#{optional}#{default}#{enum}"
       end
 

@@ -24,10 +24,16 @@ module Cocina
         key || schema_doc.name
       end
 
-      # Allows nillable values to be set to nil. This is useful when doing
-      # an update and you want to clear out a value.
+      # Allows nullable values to be set to nil. This is useful when doing an
+      # update and you want to clear out a value. The logic also permits custom
+      # types (e.g., `Barcode`, `SourceId`) to be nullable if they are not
+      # required.
       def optional
-        nullable || relaxed ? '.optional' : ''
+        return '.optional' if nullable ||
+                              relaxed ||
+                              (custom_type? && !required)
+
+        ''
       end
 
       def quote(item)
@@ -58,6 +64,11 @@ module Cocina
         return '' unless relaxed
 
         "# Validation of this property is relaxed. See the openapi for full validation.\n"
+      end
+
+      # dry-types-based types contain the word `Types` (e.g., `Types::String`), and custom types (e.g., `SourceId`) do not
+      def custom_type?
+        !dry_datatype(schema_doc).match?('Types')
       end
 
       def dry_datatype(doc)
