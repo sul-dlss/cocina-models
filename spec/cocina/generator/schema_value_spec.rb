@@ -143,6 +143,15 @@ RSpec.describe Cocina::Generator::SchemaValue do
         expect(access.download).to eq 'none'
       end
     end
+
+    context 'when property is custom' do
+      let(:identification) { Cocina::Models::Identification.new(sourceId: 'foo:bar', barcode: '36105123456789') }
+      let(:updated_identification) { identification.new(barcode: nil) }
+
+      it 'allows nulling the property' do
+        expect(updated_identification.barcode).to be_nil
+      end
+    end
   end
 
   context 'when property is nullable' do

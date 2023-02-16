@@ -20,7 +20,7 @@ module Cocina
       attribute? :standard, Standard.optional
       attribute :subject, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # Stanford persistent URL associated with the related resource.
-      attribute? :purl, Purl
+      attribute? :purl, Purl.optional
       attribute? :access, DescriptiveAccessMetadata.optional
       attribute :relatedResource, Types::Strict::Array.of(RelatedResource).default([].freeze)
       attribute? :adminMetadata, DescriptiveAdminMetadata.optional
