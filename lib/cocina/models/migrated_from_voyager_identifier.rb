@@ -2,8 +2,6 @@
 
 module Cocina
   module Models
-    MigratedFromVoyagerIdentifier = Types::String.constrained(
-      format: /^L\d+$/
-    )
+    MigratedFromVoyagerIdentifier = Types::String.constrained(format: /^L\d+$/)
   end
 end

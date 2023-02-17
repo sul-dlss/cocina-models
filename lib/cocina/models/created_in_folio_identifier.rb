@@ -2,8 +2,6 @@
 
 module Cocina
   module Models
-    CreatedInFolioIdentifier = Types::String.constrained(
-      format: /^in\d+$/
-    )
+    CreatedInFolioIdentifier = Types::String.constrained(format: /^in\d+$/)
   end
 end

@@ -2,8 +2,6 @@
 
 module Cocina
   module Models
-    MigratedFromSymphonyIdentifier = Types::String.constrained(
-      format: /^a\d+$/
-    )
+    MigratedFromSymphonyIdentifier = Types::String.constrained(format: /^a\d+$/)
   end
 end

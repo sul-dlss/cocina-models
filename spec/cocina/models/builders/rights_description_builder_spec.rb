@@ -16,7 +16,7 @@ RSpec.describe Cocina::Models::Builders::RightsDescriptionBuilder do
   end
 
   context 'when access is limited by controlled digital lending' do
-    let(:access_template) { { controlledDigitalLending: true, view: 'world', download: 'world' } }
+    let(:access_template) { { controlledDigitalLending: true, view: 'stanford', download: 'none' } }
 
     it 'returns the controlled digital lending rights description' do
       expect(builder_build).to eq('controlled digital lending')
@@ -71,8 +71,8 @@ RSpec.describe Cocina::Models::Builders::RightsDescriptionBuilder do
     end
   end
 
-  context 'with access location-based/world' do
-    let(:access_template) { { view: 'location-based', download: 'world', location: 'm&m' } }
+  context 'with access location-based/location-based' do
+    let(:access_template) { { view: 'location-based', download: 'location-based', location: 'm&m' } }
 
     it 'returns the location rights description' do
       expect(builder_build).to eq(['location: m&m'])
@@ -95,8 +95,8 @@ RSpec.describe Cocina::Models::Builders::RightsDescriptionBuilder do
     end
   end
 
-  context 'with access stanford/world' do
-    let(:access_template) { { view: 'stanford', download: 'world' } }
+  context 'with access stanford/stanford' do
+    let(:access_template) { { view: 'stanford', download: 'stanford' } }
 
     it 'returns the stanford rights description' do
       expect(builder_build).to eq(['stanford'])
