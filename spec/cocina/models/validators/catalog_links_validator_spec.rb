@@ -104,7 +104,7 @@ RSpec.describe Cocina::Models::Validators::CatalogLinksValidator do
         end
       end
 
-      context 'with multiple catalog links including multiple refresh' do
+      context 'with multiple symphony catalog links including multiple refresh' do
         let(:catalog_links) do
           [
             {
@@ -125,6 +125,51 @@ RSpec.describe Cocina::Models::Validators::CatalogLinksValidator do
             Cocina::Models::ValidationError,
             /Multiple catalog links have 'refresh' property set to true \(only one allowed\)/
           )
+        end
+      end
+
+      context 'with multiple folio catalog links including multiple refresh' do
+        let(:catalog_links) do
+          [
+            {
+              catalog: 'folio',
+              catalogRecordId: 'a111',
+              refresh: true
+            },
+            {
+              catalog: 'folio',
+              catalogRecordId: 'a222',
+              refresh: true
+            }
+          ]
+        end
+
+        it 'raises a validation error' do
+          expect { validate }.to raise_error(
+            Cocina::Models::ValidationError,
+            /Multiple catalog links have 'refresh' property set to true \(only one allowed\)/
+          )
+        end
+      end
+
+      context 'with a symphony and folio catalog with refresh' do
+        let(:catalog_links) do
+          [
+            {
+              catalog: 'symphony',
+              catalogRecordId: '111',
+              refresh: true
+            },
+            {
+              catalog: 'folio',
+              catalogRecordId: 'a222',
+              refresh: true
+            }
+          ]
+        end
+
+        it 'validates' do
+          expect { validate }.not_to raise_error
         end
       end
     end
