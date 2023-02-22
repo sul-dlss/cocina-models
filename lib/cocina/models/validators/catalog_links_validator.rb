@@ -19,22 +19,33 @@ module Cocina
         def validate
           return unless meets_preconditions?
 
-          return if refresh_catalog_links.length <= MAX_REFRESH_CATALOG_LINKS
-
-          raise ValidationError, "Multiple catalog links have 'refresh' property set to true " \
-                                 "(only one allowed) #{refresh_catalog_links}"
+          validate_catalog('symphony')
+          validate_catalog('folio')
         end
 
         private
 
         attr_reader :clazz, :attributes
 
-        def meets_preconditions?
-          (dro? || collection?) && Array(attributes.dig(:identification, :catalogLinks)).any?
+        def validate_catalog(catalog)
+          refresh_catalog_links = refresh_catalog_links_for(catalog)
+
+          return if refresh_catalog_links.length <= MAX_REFRESH_CATALOG_LINKS
+
+          raise ValidationError, "Multiple catalog links have 'refresh' property set to true " \
+                                 "(only one allowed) #{refresh_catalog_links}"
         end
 
-        def refresh_catalog_links
-          attributes.dig(:identification, :catalogLinks).select { |catalog_link| catalog_link[:refresh] }
+        def catalog_links
+          @catalog_links ||= Array(attributes.dig(:identification, :catalogLinks))
+        end
+
+        def meets_preconditions?
+          (dro? || collection?) && catalog_links.any?
+        end
+
+        def refresh_catalog_links_for(catalog)
+          catalog_links.select { |catalog_link| catalog_link[:catalog] == catalog && catalog_link[:refresh] }
         end
 
         def dro?
