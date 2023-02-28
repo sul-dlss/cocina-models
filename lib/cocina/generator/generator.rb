@@ -124,7 +124,6 @@ module Cocina
 
       NO_CLEAN = [
         'checkable.rb',
-        'license.rb',
         'validatable.rb',
         'version.rb',
         'vocabulary.rb'

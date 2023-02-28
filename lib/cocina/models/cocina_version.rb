@@ -2,8 +2,6 @@
 
 module Cocina
   module Models
-    CocinaVersion = Types::String.constrained(
-      format: /^\d+\.\d+\.\d+$/
-    )
+    CocinaVersion = Types::String.constrained(format: /^\d+\.\d+\.\d+$/)
   end
 end

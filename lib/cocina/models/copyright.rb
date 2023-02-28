@@ -2,6 +2,6 @@
 
 module Cocina
   module Models
-    Purl = Types::String.constrained(format: %r{^https://})
+    Copyright = Types::String
   end
 end
