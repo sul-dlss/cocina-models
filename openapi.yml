@@ -1158,9 +1158,9 @@ components:
             - previous folio
           example: folio
         refresh:
-          description: Only one of the catkeys should be designated for refreshing.
-            This means that this key is the one used to pull metadata from the catalog
-            if there is more than one key present.
+          description: Only one of the Folio instance HRIDs should be designated for refreshing.
+            This means that this HRID is the one used to pull metadata from the catalog
+            if there is more than one HRID present.
           type: boolean
           default: false
         catalogRecordId:
