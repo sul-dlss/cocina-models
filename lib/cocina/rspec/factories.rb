@@ -90,7 +90,7 @@ module Cocina
 
       # rubocop:disable Metrics/ParameterLists
       def self.build_request_dro_properties(type:, version:, label:, title:, source_id:, admin_policy_id:,
-                                            barcode: nil, catkeys: [], collection_ids: [])
+                                            barcode: nil, catkeys: [], folio_instance_hrids: [], collection_ids: [])
         {
           type: type,
           version: version,
@@ -112,6 +112,11 @@ module Cocina
               { catalog: 'symphony', catalogRecordId: catkey, refresh: index.zero? }
             end
           end
+          if folio_instance_hrids.present?
+            props[:identification][:catalogLinks] = folio_instance_hrids.map.with_index do |folio_id, index|
+              { catalog: 'folio', catalogRecordId: folio_id, refresh: index.zero? }
+            end
+          end
           props[:identification][:barcode] = barcode if barcode
         end
       end
@@ -130,7 +135,7 @@ module Cocina
       end
 
       # rubocop:disable Metrics/ParameterLists
-      def self.build_request_collection_properties(type:, version:, label:, title:, admin_policy_id:, source_id: nil, catkeys: [])
+      def self.build_request_collection_properties(type:, version:, label:, title:, admin_policy_id:, source_id: nil, catkeys: [], folio_instance_hrids: [])
         {
           type: type,
           version: version,
@@ -145,6 +150,11 @@ module Cocina
           if catkeys.present?
             props[:identification][:catalogLinks] = catkeys.map.with_index do |catkey, index|
               { catalog: 'symphony', catalogRecordId: catkey, refresh: index.zero? }
+            end
+          end
+          if folio_instance_hrids.present?
+            props[:identification][:catalogLinks] = folio_instance_hrids.map.with_index do |folio_id, index|
+              { catalog: 'folio', catalogRecordId: folio_id, refresh: index.zero? }
             end
           end
           props[:identification][:sourceId] = source_id if source_id
