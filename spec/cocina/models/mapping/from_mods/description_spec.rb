@@ -88,84 +88,69 @@ RSpec.describe Cocina::Models::Mapping::FromMods::Description do
 
     it 'has a url' do
       expect(descriptive[:purl]).to eq('https://purl.stanford.edu/bb196dd3409')
-      expect(descriptive[:note]).to match_array [
-        {
-          value: 'http://ennejah.info/',
-          type: 'system details',
-          displayLabel: 'Original site'
-        },
-        {
-          type: 'abstract',
-          value: 'Official site of opposition candidate Boulkheir, "the Mauritanian Obama," ' \
-                 'for the 2009 Mauritania presidential election. The election was held July 18, 2009. ' \
-                 'Boulkheir came in second place with 16.3 percent of the vote. Elected ' \
-                 '"Président de l’Assemblée Nationale" in 2007. Boulkheir also had 5 Facebook pages including ' \
-                 '"SOUTENONS TOUS LE CANDIDAT OFFICIEL DU FNDD: MESS3OUD 0ULD BOULKHEIR" and ' \
-                 '"mess3oud ould belkhier LE CANDIDAT DU FNDD ET LE NOTRE VOTONS POUR LUI".'
-        },
-        {
-          value: 'Site closed after 2010.'
-        },
-        {
-          value: 'Archived by Stanford University Libraries, Humanities and Area Studies Resource Group'
-        },
-        {
-          value: 'California Digital Library Web Archiving Service',
-          displayLabel: 'Web archiving service'
-        }
-      ]
-      expect(descriptive[:language]).to match_array [
-        {
-          value: 'Arabic',
-          code: 'ara',
-          uri: 'http://id.loc.gov/vocabulary/iso639-2/ara',
-          source: {
-            code: 'iso639-2b',
-            uri: 'http://id.loc.gov/vocabulary/iso639-2'
-          }
-        },
-        {
-          value: 'French',
-          code: 'fre',
-          uri: 'http://id.loc.gov/vocabulary/iso639-2/fre',
-          source: {
-            code: 'iso639-2b',
-            uri: 'http://id.loc.gov/vocabulary/iso639-2'
-          }
-        }
-      ]
-      expect(descriptive[:contributor]).to match_array [{
-        name: [{
-          value: 'Stanford University. Libraries. Humanities and Area Studies Resource Group'
-        }],
-        type: 'organization',
-        role: [{
-          value: 'collector',
-          code: 'col',
-          uri: 'http://id.loc.gov/vocabulary/relators/col',
-          source: {
-            code: 'marcrelator',
-            uri: 'http://id.loc.gov/vocabulary/relators/'
-          }
-        }]
-      }, {
-        name: [{
-          value: 'Joe McNopart'
-        }]
-      }]
-      expect(descriptive[:form]).to match_array [
-        { source: { value: 'MODS resource types' }, type: 'resource type', value: 'text' },
-        { source: { code: 'local' }, type: 'genre', value: 'archived website' },
-        {
-          value: 'electronic',
-          type: 'form',
-          source: {
-            code: 'marcform'
-          }
-        },
-        { value: 'text/html', type: 'media type', source: { value: 'IANA media types' } },
-        { value: 'born digital', type: 'digital origin', source: { value: 'MODS digital origin terms' } }
-      ]
+      expect(descriptive[:note]).to contain_exactly({
+                                                      value: 'http://ennejah.info/',
+                                                      type: 'system details',
+                                                      displayLabel: 'Original site'
+                                                    }, {
+                                                      type: 'abstract',
+                                                      value: 'Official site of opposition candidate Boulkheir, "the Mauritanian Obama," ' \
+                                                             'for the 2009 Mauritania presidential election. The election was held July 18, 2009. ' \
+                                                             'Boulkheir came in second place with 16.3 percent of the vote. Elected ' \
+                                                             '"Président de l’Assemblée Nationale" in 2007. Boulkheir also had 5 Facebook pages including ' \
+                                                             '"SOUTENONS TOUS LE CANDIDAT OFFICIEL DU FNDD: MESS3OUD 0ULD BOULKHEIR" and ' \
+                                                             '"mess3oud ould belkhier LE CANDIDAT DU FNDD ET LE NOTRE VOTONS POUR LUI".'
+                                                    }, {
+                                                      value: 'Site closed after 2010.'
+                                                    }, {
+                                                      value: 'Archived by Stanford University Libraries, Humanities and Area Studies Resource Group'
+                                                    }, {
+                                                      value: 'California Digital Library Web Archiving Service',
+                                                      displayLabel: 'Web archiving service'
+                                                    })
+      expect(descriptive[:language]).to contain_exactly({
+                                                          value: 'Arabic',
+                                                          code: 'ara',
+                                                          uri: 'http://id.loc.gov/vocabulary/iso639-2/ara',
+                                                          source: {
+                                                            code: 'iso639-2b',
+                                                            uri: 'http://id.loc.gov/vocabulary/iso639-2'
+                                                          }
+                                                        }, {
+                                                          value: 'French',
+                                                          code: 'fre',
+                                                          uri: 'http://id.loc.gov/vocabulary/iso639-2/fre',
+                                                          source: {
+                                                            code: 'iso639-2b',
+                                                            uri: 'http://id.loc.gov/vocabulary/iso639-2'
+                                                          }
+                                                        })
+      expect(descriptive[:contributor]).to contain_exactly({
+                                                             name: [{
+                                                               value: 'Stanford University. Libraries. Humanities and Area Studies Resource Group'
+                                                             }],
+                                                             type: 'organization',
+                                                             role: [{
+                                                               value: 'collector',
+                                                               code: 'col',
+                                                               uri: 'http://id.loc.gov/vocabulary/relators/col',
+                                                               source: {
+                                                                 code: 'marcrelator',
+                                                                 uri: 'http://id.loc.gov/vocabulary/relators/'
+                                                               }
+                                                             }]
+                                                           }, {
+                                                             name: [{
+                                                               value: 'Joe McNopart'
+                                                             }]
+                                                           })
+      expect(descriptive[:form]).to contain_exactly({ source: { value: 'MODS resource types' }, type: 'resource type', value: 'text' }, { source: { code: 'local' }, type: 'genre', value: 'archived website' }, {
+                                                      value: 'electronic',
+                                                      type: 'form',
+                                                      source: {
+                                                        code: 'marcform'
+                                                      }
+                                                    }, { value: 'text/html', type: 'media type', source: { value: 'IANA media types' } }, { value: 'born digital', type: 'digital origin', source: { value: 'MODS digital origin terms' } })
       expect(descriptive[:subject].size).to eq 2
     end
   end
@@ -271,134 +256,109 @@ RSpec.describe Cocina::Models::Mapping::FromMods::Description do
     end
 
     it 'has a url' do
-      expect(descriptive[:note]).to match_array [
-        {
-          value: 'Blah blah blah, I believe in science!',
-          displayLabel: 'Abstract'
-        },
-        {
-          value: 'John Doe Jr.',
-          type: 'statement of responsibility'
-        },
-        {
-          value: 'Thesis Ph.D. Stanford University 2020.',
-          type: 'thesis'
-        },
-        {
-          value: 'Submitted to the Department of Computer Science.'
-        }
-      ]
-      expect(descriptive[:language]).to match_array [
-        {
-          code: 'eng',
-          source: {
-            code: 'iso639-2b'
-          }
-        }
-      ]
-      expect(descriptive[:contributor]).to match_array [
-        {
-          name: [{
-            value: 'Doe, John Jr.'
-          }],
-          type: 'person',
-          status: 'primary',
-          role: [{
-            value: 'author'
-          }]
-        },
-        {
-          name: [{
-            value: 'Doe, John Sr.'
-          }],
-          type: 'person',
-          role: [
-            { value: 'degree supervisor' },
-            {
-              code: 'ths',
-              source: {
-                code: 'marcrelator'
-              }
-            }
-          ]
-        },
-        {
-          name: [{
-            value: 'Doe, Jane'
-          }],
-          type: 'person',
-          role: [
-            { value: 'degree committee member' },
-            {
-              code: 'ths',
-              source: {
-                code: 'marcrelator'
-              }
-            }
-          ]
-        },
-        {
-          name: [{
-            value: 'Majors, Brad'
-          }],
-          type: 'person',
-          role: [
-            { value: 'degree committee member' },
-            {
-              code: 'ths',
-              source: {
-                code: 'marcrelator'
-              }
-            }
-          ]
-        },
-        {
-          name: [{
-            structuredValue: [
-              { value: 'Stanford University' },
-              { value: 'Department of Computer Science.' }
-            ]
-          }],
-          type: 'organization'
-        }
-      ]
-      expect(descriptive[:form]).to match_array [
-        { source: { code: 'marcgt' }, type: 'genre', value: 'theses' },
-        { source: { code: 'rdacontent' }, type: 'genre', value: 'text' },
-        { source: { value: 'MODS resource types' }, type: 'resource type', value: 'text' },
-        {
-          value: 'electronic resource',
-          type: 'form',
-          source: {
-            code: 'marccategory'
-          }
-        },
-        {
-          value: 'remote',
-          type: 'form',
-          source: {
-            code: 'marcsmd'
-          }
-        },
-        {
-          value: 'computer',
-          type: 'media',
-          source: {
-            code: 'rdamedia'
-          }
-        },
-        {
-          value: 'online resource',
-          type: 'carrier',
-          source: {
-            code: 'rdacarrier'
-          }
-        },
-        { value: 'estampe', type: 'technique' },
-        { value: 'eau-forte', type: 'material' },
-        { value: 'gravure au pointillé', type: 'material' },
-        { value: '1 online resource.', type: 'extent' }
-      ]
+      expect(descriptive[:note]).to contain_exactly({
+                                                      value: 'Blah blah blah, I believe in science!',
+                                                      displayLabel: 'Abstract'
+                                                    }, {
+                                                      value: 'John Doe Jr.',
+                                                      type: 'statement of responsibility'
+                                                    }, {
+                                                      value: 'Thesis Ph.D. Stanford University 2020.',
+                                                      type: 'thesis'
+                                                    }, {
+                                                      value: 'Submitted to the Department of Computer Science.'
+                                                    })
+      expect(descriptive[:language]).to contain_exactly({
+                                                          code: 'eng',
+                                                          source: {
+                                                            code: 'iso639-2b'
+                                                          }
+                                                        })
+      expect(descriptive[:contributor]).to contain_exactly({
+                                                             name: [{
+                                                               value: 'Doe, John Jr.'
+                                                             }],
+                                                             type: 'person',
+                                                             status: 'primary',
+                                                             role: [{
+                                                               value: 'author'
+                                                             }]
+                                                           }, {
+                                                             name: [{
+                                                               value: 'Doe, John Sr.'
+                                                             }],
+                                                             type: 'person',
+                                                             role: [
+                                                               { value: 'degree supervisor' },
+                                                               {
+                                                                 code: 'ths',
+                                                                 source: {
+                                                                   code: 'marcrelator'
+                                                                 }
+                                                               }
+                                                             ]
+                                                           }, {
+                                                             name: [{
+                                                               value: 'Doe, Jane'
+                                                             }],
+                                                             type: 'person',
+                                                             role: [
+                                                               { value: 'degree committee member' },
+                                                               {
+                                                                 code: 'ths',
+                                                                 source: {
+                                                                   code: 'marcrelator'
+                                                                 }
+                                                               }
+                                                             ]
+                                                           }, {
+                                                             name: [{
+                                                               value: 'Majors, Brad'
+                                                             }],
+                                                             type: 'person',
+                                                             role: [
+                                                               { value: 'degree committee member' },
+                                                               {
+                                                                 code: 'ths',
+                                                                 source: {
+                                                                   code: 'marcrelator'
+                                                                 }
+                                                               }
+                                                             ]
+                                                           }, {
+                                                             name: [{
+                                                               structuredValue: [
+                                                                 { value: 'Stanford University' },
+                                                                 { value: 'Department of Computer Science.' }
+                                                               ]
+                                                             }],
+                                                             type: 'organization'
+                                                           })
+      expect(descriptive[:form]).to contain_exactly({ source: { code: 'marcgt' }, type: 'genre', value: 'theses' }, { source: { code: 'rdacontent' }, type: 'genre', value: 'text' }, { source: { value: 'MODS resource types' }, type: 'resource type', value: 'text' }, {
+                                                      value: 'electronic resource',
+                                                      type: 'form',
+                                                      source: {
+                                                        code: 'marccategory'
+                                                      }
+                                                    }, {
+                                                      value: 'remote',
+                                                      type: 'form',
+                                                      source: {
+                                                        code: 'marcsmd'
+                                                      }
+                                                    }, {
+                                                      value: 'computer',
+                                                      type: 'media',
+                                                      source: {
+                                                        code: 'rdamedia'
+                                                      }
+                                                    }, {
+                                                      value: 'online resource',
+                                                      type: 'carrier',
+                                                      source: {
+                                                        code: 'rdacarrier'
+                                                      }
+                                                    }, { value: 'estampe', type: 'technique' }, { value: 'eau-forte', type: 'material' }, { value: 'gravure au pointillé', type: 'material' }, { value: '1 online resource.', type: 'extent' })
     end
   end
 
