@@ -108,7 +108,6 @@ module Cocina
             # rubocop:enable Metrics/CyclomaticComplexity
             # rubocop:enable Metrics/AbcSize
 
-            # rubocop:disable Naming/PredicateName
             def has_authority?(nodes)
               nodes_to_a(nodes).all? { |node| node[:authority] }
             end
@@ -116,7 +115,6 @@ module Cocina
             def has_same_authority?(nodes, same_node)
               nodes_to_a(nodes).all? { |node| same_node[:authority] == node[:authority] || (lcsh_or_naf?(same_node) && lcsh_or_naf?(node)) }
             end
-            # rubocop:enable Naming/PredicateName
 
             def lcsh_or_naf?(node)
               %w[lcsh naf].include?(node[:authority])
@@ -136,7 +134,6 @@ module Cocina
             end
 
             # rubocop:disable Naming/MethodName
-            # rubocop:disable Naming/PredicateName
             def has_authorityURI?(nodes)
               nodes_to_a(nodes).all? { |node| node[:authorityURI] }
             end
@@ -156,9 +153,8 @@ module Cocina
             def add_valueURI(nodes, from_node)
               nodes_to_a(nodes).each { |node| node[:valueURI] = from_node[:valueURI] }
             end
-            # rubocop:enable Naming/MethodName
-            # rubocop:enable Naming/PredicateName
 
+            # rubocop:enable Naming/MethodName
             def nodes_to_a(nodes)
               nodes.is_a?(Nokogiri::XML::NodeSet) ? nodes : [nodes]
             end

@@ -111,6 +111,11 @@ Metrics/PerceivedComplexity:
     - 'lib/cocina/models/mapping/to_mods/*'
     - 'lib/cocina/models/mapping/normalizers/**/*'
 
+
+Naming/PredicateName:
+  ForbiddenPrefixes:
+    - is_
+
 # ----- RSpec ------
 
 RSpec/BeEq: # new in 2.9.0
