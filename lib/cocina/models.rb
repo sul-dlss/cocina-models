@@ -75,6 +75,8 @@ module Cocina
     end
     # rubocop:enable Naming/MethodName
 
+    METADATA_KEYS = %i[created modified lock].freeze
+
     # @param [Hash] dyn a ruby hash representation of the JSON serialization of a collection or DRO
     # @param [boolean] validate
     # @return [DRO,Collection,AdminPolicy]
@@ -84,11 +86,11 @@ module Cocina
     def self.build(dyn, validate: true)
       clazz = case type_for(dyn)
               when *DRO::TYPES
-                DRO
+                has_metadata?(dyn) ? DROWithMetadata : DRO
               when *Collection::TYPES
-                Collection
+                has_metadata?(dyn) ? ColectionWithMetadata : Collection
               when *AdminPolicy::TYPES
-                AdminPolicy
+                has_metadata?(dyn) ? AdminPolicyWithMetadata : AdminPolicy
               else
                 raise UnknownTypeError, "Unknown type: '#{dyn.with_indifferent_access.fetch('type')}'"
               end
@@ -119,7 +121,7 @@ module Cocina
     # @param [DROWithMetadata,CollectionWithMetadata,AdminPolicyWithMetadata] cocina_object
     # @return [DRO,Collection,AdminPolicy]
     def self.without_metadata(cocina_object)
-      build(cocina_object.to_h.except(:created, :modified, :lock), validate: false)
+      build(cocina_object.to_h.except(*METADATA_KEYS), validate: false)
     end
 
     # Adds metadata to a DRO, Collection, AdminPolicy
@@ -157,6 +159,13 @@ module Cocina
       object_type
     end
     private_class_method :type_for
+
+    def self.has_metadata?(dyn)
+      # Intentionally checking both string- and symbol-type keys in the hash via `#[]`
+      #  instead of `#with_indifferent_access` (and/or `#fetch`) in order to be more memory-efficient
+      METADATA_KEYS.any? { |key| dyn[key] || dyn[key.to_s] }
+    end
+    private_class_method :has_metadata?
 
     def self.druid_regex
       @druid_regex ||= begin

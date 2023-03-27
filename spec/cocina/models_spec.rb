@@ -38,6 +38,12 @@ RSpec.describe Cocina::Models do
       it { is_expected.to be_a Cocina::Models::DRO }
     end
 
+    context 'with a DRO with metadata' do
+      let(:data) { build(:dro_with_metadata).to_h }
+
+      it { is_expected.to be_a Cocina::Models::DROWithMetadata }
+    end
+
     context 'with an AdminPolicy type' do
       let(:data) { build(:admin_policy).to_h }
 
