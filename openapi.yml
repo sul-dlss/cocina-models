@@ -479,6 +479,8 @@ components:
         parallelContributor:
           description: For multiple representations of information about the same contributor (e.g. in different languages).
           type: array
+          nullable: true
+          default: null
           items:
             $ref: "#/components/schemas/DescriptiveParallelContributor"
     ControlledDigitalLendingAccess:
