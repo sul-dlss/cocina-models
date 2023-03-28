@@ -6,6 +6,7 @@ module Cocina
     module Mapping
       module FromMods
         # Helper class - provides subject authority codes
+        # rubocop:disable Metrics/CollectionLiteralLength
         class SubjectAuthorityCodes
           # Subject codes: https://id.loc.gov/vocabulary/subjectSchemes.html
           # curl https://id.loc.gov/vocabulary/subjectSchemes.madsrdf.json | jq '[.[0]."http://www.loc.gov/mads/rdf/v1#hasMADSSchemeMember"[]."@id"[44:]]'
@@ -787,6 +788,7 @@ module Cocina
             + CARTOGRAPHIC_CODES + OCCUPATION_CODES + COUNTRY_CODES + GEOGRAPHIC_CODES \
             + ISO_CODES + MARC_CODES + PARKER + OTHER_CODES
         end
+        # rubocop:enable Metrics/CollectionLiteralLength
       end
     end
   end
