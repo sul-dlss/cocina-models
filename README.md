@@ -132,7 +132,7 @@ The release process is much like any other gem. First bump the version in `lib/c
 ```
 bundle exec rake release
 ```
-which pushes the gem to rubygems.org.  Next write up the release notes: https://github.com/sul-dlss/cocina-models/releases .
+which pushes the gem to rubygems.org.
 
 ### Step 2: Update client gems coupled to the models
 
