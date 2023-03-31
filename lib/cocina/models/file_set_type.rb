@@ -10,14 +10,10 @@ module Cocina
       property :document
       property :file
       property :image
-      property :'main-augmented'
-      property :'main-original'
       property :media
       property :object
       property :page
-      property :permissions
       property :preview
-      property :supplement
       property :thumb
       property :video
     end
