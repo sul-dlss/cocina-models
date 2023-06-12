@@ -70,9 +70,6 @@ module Cocina
             }.compact
           end
 
-          # rubocop:disable Lint/RedundantSafeNavigation
-          # remove disable when this is resolved: https://github.com/rubocop/rubocop/issues/11918
-
           # this can be present for type text and/or code, but we only want one.
           def language_value_uri_for(code_language_term, text_language_term)
             code_language_term&.attribute('valueURI')&.to_s || text_language_term&.attribute('valueURI')&.to_s
@@ -90,8 +87,6 @@ module Cocina
 
             }.compact
           end
-
-          # rubocop:enable Lint/RedundantSafeNavigation
 
           def status
             status_value = language_element[:usage] || language_element[:status]
