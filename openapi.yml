@@ -234,6 +234,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ReleaseTag'
+        versionTags:
+          description: Tags for user-designated versions
+          type: array
+          items:
+            $ref: '#/components/schemas/VersionTag'
       required:
         - hasAdminPolicy
     AdminPolicyAccessTemplate:
@@ -388,7 +393,7 @@ components:
         access:
           $ref: '#/components/schemas/CollectionAccess'
         administrative:
-          $ref: '#/components/schemas/Administrative'
+          $ref: '#/components/schemas/CollectionAdministrative'
         description:
           $ref: '#/components/schemas/Description'
         identification:
@@ -421,6 +426,19 @@ components:
           $ref: "#/components/schemas/UseAndReproductionStatement"
         license:
           $ref: "#/components/schemas/License"
+    CollectionAdministrative:
+      type: object
+      additionalProperties: false
+      properties:
+        hasAdminPolicy:
+          $ref: '#/components/schemas/Druid'
+        releaseTags:
+          description: Tags for release
+          type: array
+          items:
+            $ref: '#/components/schemas/ReleaseTag'
+      required:
+        - hasAdminPolicy
     CollectionIdentification:
       type: object
       additionalProperties: false
@@ -2016,6 +2034,38 @@ components:
       example: Property rights reside with the repository. Literary rights reside with the creators of the documents or their heirs. To obtain permission to publish or reproduce, please contact the Public Services Librarian of the Dept. of Special Collections (http://library.stanford.edu/spc).
       type: string
       nullable: true
+    VersionTag:
+      description: A tag that indicates a user-designated version of the object.
+        The tag is a mapping from a tag version (designated by user) to a version in SDR (maintained by system).
+        The mapping may be updated to point to a different version.
+        The absence of version tags should be taken to imply a version tag with tagVersion of 1 and mapping to the latest version.
+      type: object
+      additionalProperties: false
+      required:
+        - release
+      # Questions:
+      # * Should tag versions be an integer or string?
+      # * If an integer, is it necessary or can it be inferred from the order of the tags?
+      # * Should there be a description field?
+      # * Should there be a release (boolean) field to indicate that the version should be publicly displayed?
+      # * Should there be a DOI field?
+      # * Is who field necessary?
+      # * Is date field necessary?
+      properties:
+        tagVersion:
+          description: Tag version for this object.
+          type: integer
+        version:
+          description: Version for the object within SDR (i.e., the top-level version in Cocina model).
+          type: integer        
+        who:
+          description: Who designated this version.
+          type: string
+          example: petucket
+        date:
+          description: When was the version tag created.
+          type: string
+          format: date-time
     WorldAccess:
       type: object
       properties:
