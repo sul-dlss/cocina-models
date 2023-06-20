@@ -4,13 +4,13 @@ require 'spec_helper'
 
 RSpec.describe Cocina::Models::Administrative do
   describe 'release tags array' do
-    let(:administrative1) do
+    let(:administrative1) do # rubocop:disable RSpec/IndexedLet
       described_class.new({
                             hasAdminPolicy: 'druid:bc123df4567'
                           })
     end
 
-    let(:administrative2) do
+    let(:administrative2) do # rubocop:disable RSpec/IndexedLet
       described_class.new({
                             hasAdminPolicy: 'druid:bc123df4567',
                             releaseTags: []
