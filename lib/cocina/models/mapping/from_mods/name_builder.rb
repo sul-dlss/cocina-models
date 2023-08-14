@@ -235,7 +235,7 @@ module Cocina
             cocina_roles = role_nodes.filter_map { |role_node| role_for(role_node) }.presence
             return if cocina_roles.blank?
 
-            return 'event' if cocina_roles.first[:value] == 'event'
+            'event' if cocina_roles.first[:value] == 'event'
           end
 
           def activity_date?(name_part_node)
