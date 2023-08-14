@@ -145,7 +145,7 @@ module Cocina
             return if raw_type.blank?
 
             first_event_type = event_type(origin_info_nodes.first)
-            return first_event_type if origin_info_nodes.all? { |node| event_type(node) == first_event_type }
+            first_event_type if origin_info_nodes.all? { |node| event_type(node) == first_event_type }
           end
 
           # @return String displayLabel for the cocina event if it is the same for all the origin_info_nodes, o.w. nil
@@ -154,7 +154,7 @@ module Cocina
             return if raw_label.blank?
 
             first_label = display_label(origin_info_nodes.first)
-            return first_label if origin_info_nodes.all? { |node| display_label(node) == first_label }
+            first_label if origin_info_nodes.all? { |node| display_label(node) == first_label }
           end
 
           def add_info_to_event(event, origin_info_node)

@@ -93,7 +93,8 @@ module Cocina
 
           def build_subject
             return [build_subject_for_center_point] unless centerpoint.empty?
-            return build_subject_for_bounding_box unless envelope.empty?
+
+            build_subject_for_bounding_box unless envelope.empty?
           end
 
           def build_subject_for_center_point
