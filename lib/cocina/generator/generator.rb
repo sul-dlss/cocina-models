@@ -24,6 +24,11 @@ module Cocina
           generate_for(schema) if schema
         end
 
+        %w[DRO Collection AdminPolicy].each do |schema_name|
+          schema = schema_for(schema_name, lite: true)
+          filepaths << generate_for(schema)
+        end
+
         auto_format(filepaths)
         generate_vocab
         generate_descriptive_docs
@@ -94,13 +99,13 @@ module Cocina
         @schemas ||= Openapi3Parser.load_file(options[:openapi]).components.schemas
       end
 
-      def schema_for(schema_name)
+      def schema_for(schema_name, lite: false)
         schema_doc = schemas[schema_name]
         return nil if schema_doc.nil?
 
         case schema_doc.type
         when 'object'
-          Schema.new(schema_doc, schemas: schemas.keys)
+          Schema.new(schema_doc, schemas: schemas.keys, lite: lite)
         when 'string'
           Datatype.new(schema_doc, schemas: schemas.keys)
         when NilClass

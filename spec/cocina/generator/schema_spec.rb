@@ -167,4 +167,29 @@ RSpec.describe Cocina::Generator::Schema do
       end
     end
   end
+
+  describe 'lite schemas' do
+    context 'when validating' do
+      let(:dro) { Cocina::Models::DROLite.new({}, false, true) }
+
+      it 'cannot be validated' do
+        expect { dro }.to raise_error(ArgumentError)
+      end
+    end
+
+    context 'when missing referenced attributes' do
+      let(:policy) do
+        Cocina::Models::AdminPolicyLite.new(
+          externalIdentifier: 'druid:bc123df4567',
+          label: 'My admin policy',
+          type: Cocina::Models::ObjectType.admin_policy,
+          version: 1
+        )
+      end
+
+      it 'is relaxed' do
+        expect(policy.administrative).to be_nil
+      end
+    end
+  end
 end

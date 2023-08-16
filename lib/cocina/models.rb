@@ -23,6 +23,7 @@ class CocinaModelsInflector < Zeitwerk::Inflector
     'dro' => 'DRO',
     'request_dro' => 'RequestDRO',
     'dro_access' => 'DROAccess',
+    'dro_lite' => 'DROLite',
     'dro_structural' => 'DROStructural',
     'dro_with_metadata' => 'DROWithMetadata',
     'request_dro_structural' => 'RequestDROStructural',
@@ -115,6 +116,31 @@ module Cocina
                 raise UnknownTypeError, "Unknown type: '#{dyn.with_indifferent_access.fetch('type')}'"
               end
       clazz.new(dyn, false, validate)
+    end
+
+    # Build "lite" versions of DROs, Collections, and AdminPolicies.
+    # Lite versions do not require attributes that are required in the normal versions.
+    # For example, "description" is required for a DRO, but optional for a DROLite.
+    # Lite versions also are not validated / validatable.
+    # Lite versions are useful for instantiating partially populated cocina objects similar to an
+    # ActiveRecord instantiated using .select (See https://guides.rubyonrails.org/active_record_querying.html#selecting-specific-fields)
+    # @param [Hash] dyn a ruby hash representation of the JSON serialization of a Collection, DRO, or AdminPolicy
+    # @return [DROLite,CollectionLite,AdminPolicyLite]
+    # @raises [UnknownTypeError] if a valid type is not found in the data
+    # @raises [ValidationError] if a type field cannot be found in the data
+    def self.build_lite(dyn)
+      clazz = case type_for(dyn)
+              when *DRO::TYPES
+                DROLite
+              when *Collection::TYPES
+                CollectionLite
+              when *AdminPolicy::TYPES
+                AdminPolicyLite
+              else
+                raise UnknownTypeError, "Unknown type: '#{dyn.with_indifferent_access.fetch('type')}'"
+              end
+      # dyn for lite may contain extra keys
+      clazz.new(dyn.with_indifferent_access.slice(*clazz.attribute_names))
     end
 
     # Coerces DROWithMetadata, CollectionWithMetadata, AdminPolicyWithMetadata to DRO, Collection, AdminPolicy
