@@ -35,7 +35,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'openapi3_parser' # Parsing openapi doc
   # Match these version requirements to what committee wants,
   # so that our client (non-committee) users have the same dependencies.
-  spec.add_dependency 'openapi_parser', '>= 0.11.1', '< 1.0'
+  spec.add_dependency 'openapi_parser', '~> 1.0'
   spec.add_dependency 'rss' # used for date/time validation
   spec.add_dependency 'super_diff'
   spec.add_dependency 'thor'
