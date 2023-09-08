@@ -4,9 +4,9 @@ module Cocina
   module Generator
     # Base class for generating from openapi
     class SchemaBase
-      attr_reader :schema_doc, :key, :required, :nullable, :parent, :relaxed, :schemas
+      attr_reader :schema_doc, :key, :required, :nullable, :parent, :relaxed, :schemas, :lite
 
-      def initialize(schema_doc, key: nil, required: false, nullable: false, parent: nil, relaxed: false, schemas: [])
+      def initialize(schema_doc, key: nil, required: false, nullable: false, parent: nil, relaxed: false, schemas: [], lite: false)
         @schema_doc = schema_doc
         @key = key
         @required = required
@@ -14,6 +14,7 @@ module Cocina
         @parent = parent
         @relaxed = relaxed
         @schemas = schemas
+        @lite = lite
       end
 
       def filename
@@ -21,7 +22,7 @@ module Cocina
       end
 
       def name
-        key || schema_doc.name
+        "#{key || schema_doc.name}#{lite ? 'Lite' : ''}"
       end
 
       # Allows nullable values to be set to nil. This is useful when doing an

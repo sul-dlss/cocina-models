@@ -185,6 +185,64 @@ RSpec.describe Cocina::Models do
     end
   end
 
+  describe '.build_lite' do
+    subject(:model_build) { described_class.build_lite(data) }
+
+    context 'with a collection type' do
+      let(:data) { build(:collection).to_h }
+
+      it { is_expected.to be_a Cocina::Models::CollectionLite }
+    end
+
+    context 'with a DRO type' do
+      let(:data) { build(:dro).to_h }
+
+      it { is_expected.to be_a Cocina::Models::DROLite }
+    end
+
+    context 'with an AdminPolicy type' do
+      let(:data) { build(:admin_policy).to_h }
+
+      it { is_expected.to be_a Cocina::Models::AdminPolicyLite }
+    end
+
+    context 'with extra fields' do
+      let(:data) do
+        data = build(:dro).to_h
+        data[:extra] = 'field'
+        data
+      end
+
+      it { is_expected.to be_a Cocina::Models::DROLite }
+    end
+
+    context 'with keys as strings' do
+      let(:data) { build(:dro).to_h.deep_stringify_keys }
+
+      it { is_expected.to be_a Cocina::Models::DROLite }
+    end
+
+    context 'with an invalid type' do
+      let(:data) do
+        { 'type' => 'foo' }
+      end
+
+      it 'raises an error' do
+        expect { model_build }.to raise_error Cocina::Models::UnknownTypeError, "Unknown type: 'foo'"
+      end
+    end
+
+    context 'without a type' do
+      let(:data) do
+        {}
+      end
+
+      it 'raises an error' do
+        expect { model_build }.to raise_error Cocina::Models::ValidationError
+      end
+    end
+  end
+
   describe '.without_metadata' do
     subject(:cocina_object_without_metadata) { described_class.without_metadata(cocina_object) }
 

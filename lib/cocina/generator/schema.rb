@@ -71,7 +71,7 @@ module Cocina
       end
 
       def validatable?
-        !schema_doc.node_context.document.paths["/validate/#{schema_doc.name}"].nil?
+        !schema_doc.node_context.document.paths["/validate/#{schema_doc.name}"].nil? && !lite
       end
 
       def properties
@@ -119,12 +119,14 @@ module Cocina
 
       def schema_properties_for(doc)
         doc.properties.map do |key, properties_doc|
-          property_class_for(properties_doc).new(properties_doc,
-                                                 key: key,
-                                                 required: doc.requires?(key),
-                                                 nullable: properties_doc.nullable?,
-                                                 parent: self,
-                                                 schemas: schemas)
+          clazz = property_class_for(properties_doc)
+          clazz.new(properties_doc,
+                    key: key,
+                    required: doc.requires?(key),
+                    relaxed: lite && clazz != SchemaValue,
+                    nullable: properties_doc.nullable?,
+                    parent: self,
+                    schemas: schemas)
         end
       end
     end

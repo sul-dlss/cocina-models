@@ -15,10 +15,13 @@ module Cocina
       SUPPORTED_TYPES = %i[
         admin_policy
         admin_policy_with_metadata
+        admin_policy_lite
         collection
         collection_with_metadata
+        collection_lite
         dro
         dro_with_metadata
+        dro_lite
         request_admin_policy
         request_collection
         request_dro
@@ -86,6 +89,10 @@ module Cocina
 
       def self.build_dro(attributes)
         Cocina::Models.build(build_dro_properties(**DRO_DEFAULTS.merge(attributes)))
+      end
+
+      def self.build_dro_lite(attributes)
+        Cocina::Models.build_lite(build_dro_properties(**DRO_DEFAULTS.merge(attributes)))
       end
 
       # rubocop:disable Metrics/ParameterLists
@@ -166,12 +173,20 @@ module Cocina
         Cocina::Models.build(build_collection_properties(**COLLECTION_DEFAULTS.merge(attributes)))
       end
 
+      def self.build_collection_lite(attributes)
+        Cocina::Models.build_lite(build_collection_properties(**COLLECTION_DEFAULTS.merge(attributes)))
+      end
+
       def self.build_request_collection(attributes)
         Cocina::Models.build_request(build_request_collection_properties(**REQUEST_COLLECTION_DEFAULTS.merge(attributes)))
       end
 
       def self.build_admin_policy(attributes)
         Cocina::Models.build(build_admin_policy_properties(**ADMIN_POLICY_DEFAULTS.merge(attributes)))
+      end
+
+      def self.build_admin_policy_lite(attributes)
+        Cocina::Models.build_lite(build_admin_policy_properties(**ADMIN_POLICY_DEFAULTS.merge(attributes)))
       end
 
       def self.build_request_admin_policy(attributes)

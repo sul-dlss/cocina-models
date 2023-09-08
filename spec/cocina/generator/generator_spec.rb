@@ -12,6 +12,7 @@ RSpec.describe Cocina::Generator::Generator do
   it 'generates models for schemas' do
     expect(File.exist?('lib/cocina/models/dro.rb')).to be true
     expect(File.exist?('lib/cocina/models/request_dro.rb')).to be true
+    expect(File.exist?('lib/cocina/models/dro_lite.rb')).to be true
   end
 
   it 'generates union types' do
