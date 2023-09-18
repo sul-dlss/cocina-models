@@ -9,14 +9,14 @@ module Cocina
           # NOTE: H2 is the first case of structured form values we're implementing
           H2_SOURCE_LABEL = 'Stanford self-deposit resource types'
           PHYSICAL_DESCRIPTION_TAG = {
-            'reformatting quality' => :reformattingQuality,
-            'form' => :form,
-            'media type' => :internetMediaType,
-            'extent' => :extent,
-            'digital origin' => :digitalOrigin,
-            'media' => :form,
             'carrier' => :form,
+            'digital origin' => :digitalOrigin,
+            'extent' => :extent,
+            'form' => :form,
             'material' => :form,
+            'media' => :form,
+            'media type' => :internetMediaType,
+            'reformatting quality' => :reformattingQuality,
             'technique' => :form
           }.freeze
 
@@ -183,10 +183,7 @@ module Cocina
               attributes = {
                 unit: unit_for(form_value)
               }.tap do |attrs|
-                if PHYSICAL_DESCRIPTION_TAG.fetch(form_type) == :form && form_type != 'form'
-                  attrs[:type] =
-                    form_type
-                end
+                attrs[:type] = form_type if PHYSICAL_DESCRIPTION_TAG.fetch(form_type) == :form && form_type != 'form'
               end.compact
 
               xml.public_send PHYSICAL_DESCRIPTION_TAG.fetch(form_type), form_value.value,
