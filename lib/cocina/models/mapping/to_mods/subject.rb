@@ -298,7 +298,7 @@ module Cocina
 
           def time_range(subject)
             subject.structuredValue.each do |point|
-              xml.temporal point.value, point: point.type, encoding: subject.encoding.code
+              xml.temporal point.value, point: point.type, encoding: subject.encoding&.code
             end
           end
 
