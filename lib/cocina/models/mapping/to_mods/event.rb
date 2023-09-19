@@ -77,7 +77,7 @@ module Cocina
                 write_location(loc)
               end
               Array(names).each do |name|
-                xml.publisher name.value, name_attributes(name)
+                xml.publisher name.value, name_attributes(name) if name
               end
               Array(notes).each do |note|
                 write_note(note)
