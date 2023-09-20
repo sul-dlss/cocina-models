@@ -87,9 +87,15 @@ module Cocina
           # rubocop:enable Metrics/ParameterLists
 
           def write_note(note)
-            attributes = {}
-            attributes[:authority] = note.source.code if note&.source&.code
-            xml.send(note_tag_for(note), note.value, attributes)
+            if note.parallelValue.present?
+              note.parallelValue.each do |parallel_note|
+                write_note(parallel_note)
+              end
+            else
+              attributes = {}
+              attributes[:authority] = note.source.code if note&.source&.code
+              xml.send(note_tag_for(note), note.value, attributes)
+            end
           end
 
           def note_tag_for(note)
