@@ -32,7 +32,7 @@ RSpec.describe Cocina::Models::Mapping::ToMods::Description do
     end
   end
 
-  context 'when it has an abstract' do
+  context 'when it has an abstract and frequency' do
     let(:druid) { 'druid:aa666bb1234' }
     let(:descriptive) do
       Cocina::Models::Description.new(
@@ -73,6 +73,21 @@ RSpec.describe Cocina::Models::Mapping::ToMods::Description do
                 value: '1980'
               }
             ]
+          },
+          {
+            note: [
+              {
+                parallelValue: [
+                  {
+                    value: 'monthly',
+                    type: 'frequency'
+                  },
+                  {
+                    value: 'Another value'
+                  }
+                ]
+              }
+            ]
           }
         ]
       )
@@ -96,6 +111,10 @@ RSpec.describe Cocina::Models::Mapping::ToMods::Description do
           </subject>
           <originInfo eventType="creation">
             <dateCreated>1980</dateCreated>
+          </originInfo>
+          <originInfo>
+            <frequency>monthly</frequency>
+            <edition>Another value</edition>
           </originInfo>
           <location>
             <url usage="primary display">https://purl.stanford.edu/aa666bb1234</url>
