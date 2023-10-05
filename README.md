@@ -51,7 +51,7 @@ Beyond what is necessary to test the generator, the Cocina model classes are not
 
 ## Testing validation changes
 
-If there is a possibility that a model or validation change will conflict with some existing objects then [validate-cocina](https://github.com/sul-dlss/dor-services-app/blob/main/bin/validate-cocina) should be used for testing. This must be run on sdr-infra since it requires deploying a branch of cocina-models.
+If there is a possibility that a model, mapping, or validation change will conflict with some existing objects then [validate-cocina](https://github.com/sul-dlss/dor-services-app/blob/main/bin/validate-cocina) should be used for testing. This must be run on sdr-infra since it requires deploying a branch of cocina-models.
 
 1. Create a cocina-models branch containing the proposed change and push to GitHub.
 2. On sdr-infra, check out `main`, update the `Gemfile` so that cocina-models references the branch, and `bundle install`.
@@ -120,7 +120,12 @@ bundle exec bin/rails r -e production "BadIso8601Dates.report" > BadIso8601Dates
 scp deploy@sdr-infra:/opt/app/deploy/dor-services-app/BadIso8601Dates.csv BadIso8601Dates.csv
 ```
 
-## Releasing
+## Releasing a patch change
+A patch change is a change that (1) does not affect the data model; (2) does not alter the openapi.yml; and more broadly (3) does not matter if some applications have the change and others do not.
+
+A patch change can be released as part of regular dependency updates or selectively released for individual applications.
+
+## Releasing major or minor change
 
 ### Step 0: Share intent to change the models
 
@@ -136,9 +141,7 @@ which pushes the gem to rubygems.org.
 
 ### Step 2: Update client gems coupled to the models
 
-**NOTE**: You may skip this step if the new release is a patch-level bump only, as the client gems are pinned to a minor release of cocina-models.  However, a PR to update Gemfile.lock with the new cocina-models version is welcome ... and not a blocker.
-
-If this is a minor or major cocina-models version change, release new versions of [sdr-client](https://github.com/sul-dlss/sdr-client) and [dor-services-client](https://github.com/sul-dlss/dor-services-client/) pinned to use the new cocina-models version because applications such as [Argo](https://github.com/sul-dlss/argo) depend on both of these gems using the same models.
+Release new versions of [sdr-client](https://github.com/sul-dlss/sdr-client) and [dor-services-client](https://github.com/sul-dlss/dor-services-client/) pinned to use the new cocina-models version because applications such as [Argo](https://github.com/sul-dlss/argo) depend on both of these gems using the same models.
 
 ### Step 3: Update services directly coupled to the models
 
