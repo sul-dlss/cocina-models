@@ -9,11 +9,7 @@ require 'yaml'
 require 'openapi_parser'
 require 'openapi3_parser'
 require 'active_support'
-require 'active_support/core_ext/class/attribute'
-require 'active_support/core_ext/enumerable'
-require 'active_support/core_ext/hash/indifferent_access'
-require 'active_support/core_ext/string'
-require 'active_support/core_ext/object/deep_dup'
+require 'active_support/core_ext'
 require 'thor'
 
 # Help Zeitwerk find some of our classes
