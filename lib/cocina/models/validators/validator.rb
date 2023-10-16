@@ -18,16 +18,9 @@ module Cocina
 
         def self.validate(clazz, attributes)
           # This gets rid of nested model objects.
-          # Once DSA is on Rails 6, this can be:
-          # attributes_hash = attributes.to_h.deep_transform_values do |value|
-          #   value.class.name.starts_with?('Cocina::Models') ? value.to_h : value
-          # end.with_indifferent_access
-          # And add require 'active_support/core_ext/hash/deep_transform_values' to models file.
-
-          # In the meantime, copying code.
-          attributes_hash = deep_transform_values(attributes.to_h) do |value|
+          attributes_hash = attributes.to_h.deep_transform_values do |value|
             value.class.name.starts_with?('Cocina::Models') ? value.to_h : value
-          end.deep_symbolize_keys.with_indifferent_access
+          end.with_indifferent_access
           VALIDATORS.each { |validator| validator.validate(clazz, attributes_hash) }
         end
 

@@ -48,7 +48,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
           type: 'related to'
         }
       ]
-    }
+    }.with_indifferent_access
   end
 
   let(:contributor_type) { 'person' }
