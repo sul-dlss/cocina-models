@@ -35,7 +35,7 @@ module Cocina
 
         def validate_hash(hash, path)
           hash.each do |key, obj|
-            if key == :type
+            if key.to_sym == :type
               validate_type(obj, path)
             else
               validate_obj(obj, path + [key])
@@ -55,8 +55,10 @@ module Cocina
         end
 
         def validate_type(type, path)
+          clean_path = clean_path(path)
           valid_types.each do |type_signature, types|
-            next unless match?(path, type_signature)
+            next unless match?(clean_path, type_signature)
+
             break if types.include?(type.downcase)
 
             error_paths << "#{path_to_s(path)} (#{type})"
@@ -64,15 +66,15 @@ module Cocina
           end
         end
 
-        def match?(path, type_signature)
-          clean_path(path).last(type_signature.length) == type_signature
+        def match?(clean_path, type_signature)
+          clean_path.last(type_signature.length) == type_signature
         end
 
         # Some part of the path are ignored for the purpose of matching.
         def clean_path(path)
           new_path = path.reject do |part|
-            part.is_a?(Integer) || %i[parallelValue parallelContributor parallelEvent].include?(part)
-          end
+            part.is_a?(Integer) || %i[parallelValue parallelContributor parallelEvent].include?(part.to_sym)
+          end.map(&:to_sym)
           # This needs to happen after parallelValue is removed
           # to handle structuredValue > parallelValue > structuredValue
           new_path.reject.with_index do |part, index|
