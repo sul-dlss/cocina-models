@@ -356,6 +356,8 @@ identifier:
   - value: DOI
     code: doi
   - value: druid
+  - value: FOLIO
+    description: FOLIO HRID for the source record of the metadata.
   - value: GTIN-14 ID
     code: gtin-14
   - value: Handle
