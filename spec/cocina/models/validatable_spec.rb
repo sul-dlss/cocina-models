@@ -57,6 +57,7 @@ RSpec.describe Cocina::Models::Validatable do
       end
 
       it 'raises ValidationError' do
+        skip('DescriptionTypesValidator has been temporarily disabled')
         expect { Cocina::Models::DRO.new(props) }.to raise_error(Cocina::Models::ValidationError, /Unrecognized types in description/)
       end
     end

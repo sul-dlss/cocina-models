@@ -11,7 +11,9 @@ module Cocina
           PurlValidator,
           CatalogLinksValidator,
           AssociatedNameValidator,
-          DescriptionTypesValidator,
+          # Removing until production data can be remediated and/or additional types can be added to configuration.
+          # See also spec/cocina/models/validatable_spec.rb:59
+          # DescriptionTypesValidator,
           DescriptionValuesValidator,
           DateTimeValidator
         ].freeze
