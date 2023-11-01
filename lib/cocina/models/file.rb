@@ -22,6 +22,8 @@ module Cocina
       attribute :version, Types::Strict::Integer
       # MIME Type of the File.
       attribute? :hasMimeType, Types::Strict::String
+      # BCP 47 language tag: https://www.rfc-editor.org/rfc/rfc4646.txt -- other applications (like media players) expect language codes of this format, see e.g. https://videojs.com/guides/text-tracks/#srclang
+      attribute? :languageTag, Types::Strict::String.optional
       # Use for the File.
       attribute? :use, Types::Strict::String
       attribute :hasMessageDigests, Types::Strict::Array.of(MessageDigest).default([].freeze)

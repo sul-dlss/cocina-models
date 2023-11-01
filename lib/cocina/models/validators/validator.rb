@@ -15,7 +15,8 @@ module Cocina
           # See also spec/cocina/models/validatable_spec.rb:59
           # DescriptionTypesValidator,
           DescriptionValuesValidator,
-          DateTimeValidator
+          DateTimeValidator,
+          LanguageTagValidator
         ].freeze
 
         def self.validate(clazz, attributes)

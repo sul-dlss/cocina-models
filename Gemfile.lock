@@ -8,6 +8,7 @@ PATH
       dry-types (~> 1.1)
       edtf
       equivalent-xml
+      i18n
       jsonpath
       nokogiri
       openapi3_parser
