@@ -54,6 +54,17 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
       }
     end
 
+    let(:blank_title_props) do
+      {
+        title: [
+          {
+            value: ' ',
+            parallelValue: [{ value: 'A title' }, { value: 'Another title' }]
+          }
+        ]
+      }
+    end
+
     let(:request_desc_props) do
       desc_props.dup.tap do |props|
         props.delete(:purl)
@@ -82,6 +93,16 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
         expect do
           validate
         end.to raise_error(Cocina::Models::ValidationError, 'Multiple value, groupedValue, structuredValue, and parallelValue in description: title1, relatedResource1.title1')
+      end
+    end
+
+    describe 'when a blank value in description' do
+      let(:props) { blank_title_props }
+
+      it 'is not valid' do
+        expect do
+          validate
+        end.to raise_error(Cocina::Models::ValidationError, 'Blank value in description: title1')
       end
     end
   end
