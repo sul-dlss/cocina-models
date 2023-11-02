@@ -13,7 +13,7 @@ module Cocina
       attribute? :size, Types::Strict::Integer
       attribute :version, Types::Strict::Integer
       attribute? :hasMimeType, Types::Strict::String
-      attribute? :languageTag, Types::Strict::String.optional
+      attribute? :languageTag, Types::Strict::String
       attribute? :externalIdentifier, Types::Strict::String
       attribute? :use, Types::Strict::String
       attribute :hasMessageDigests, Types::Strict::Array.of(MessageDigest).default([].freeze)

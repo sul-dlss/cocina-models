@@ -363,6 +363,8 @@ _Path: identifier.type_
   * document number
   * DOI
   * druid
+  * FOLIO
+    * FOLIO HRID for the source record of the metadata.
   * GTIN-14 ID
   * Handle
   * inventory number
