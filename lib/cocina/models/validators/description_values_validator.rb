@@ -53,9 +53,8 @@ module Cocina
         end
 
         def validate_values_for_blanks(hash, path)
-          return unless hash[:value] && hash[:value].is_a?(String) && hash[:value].blank? # rubocop:disable Style/SafeNavigation
-          puts hash
-          puts "hash[:value] = #{hash[:value]}"
+          return unless hash[:value] && hash[:value].is_a?(String) && /\A\s+\z/.match?(hash[:value]) # rubocop:disable Style/SafeNavigation
+
           error_paths_blank << path_to_s(path)
         end
 
