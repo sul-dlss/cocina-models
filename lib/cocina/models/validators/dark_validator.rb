@@ -39,12 +39,7 @@ module Cocina
         end
 
         def invalid_files
-          @invalid_files ||=
-            [].tap do |invalid_files|
-              files.each do |file|
-                invalid_files << file if invalid?(file)
-              end
-            end
+          @invalid_files ||= files.select { |file| invalid?(file) }
         end
 
         def invalid_filenames
