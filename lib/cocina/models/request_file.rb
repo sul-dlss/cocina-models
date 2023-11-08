@@ -13,9 +13,11 @@ module Cocina
       attribute? :size, Types::Strict::Integer
       attribute :version, Types::Strict::Integer
       attribute? :hasMimeType, Types::Strict::String
-      attribute? :languageTag, Types::Strict::String
+      # BCP 47 language tag: https://www.rfc-editor.org/rfc/rfc4646.txt -- other applications (like media players) expect language codes of this format, see e.g. https://videojs.com/guides/text-tracks/#srclang
+      attribute? :languageTag, LanguageTag.optional
       attribute? :externalIdentifier, Types::Strict::String
-      attribute? :use, Types::Strict::String
+      # Use for the File.
+      attribute? :use, FileUse.optional
       attribute :hasMessageDigests, Types::Strict::Array.of(MessageDigest).default([].freeze)
       attribute(:access, FileAccess.default { FileAccess.new })
       attribute(:administrative, FileAdministrative.default { FileAdministrative.new })
