@@ -12,6 +12,8 @@ The data model is expressed in an OpenAPI specification that lives in this codeb
 
 Note that the data model encodes properties as camelCase, which the team believes to be consistent with other HTTP APIs and the original design of the Cocina data model. While using camelCase in Ruby code may look and feel wrong, we did explore automagic conversion between camelCase in the model and snake_case in the Ruby context. We ultimately concluded that we have enough representations of the data model in enough codebases to reasonably worry about data inconsistency problems, none of which we need in our work on SDR.
 
+For more about the model for description see https://consul.stanford.edu/display/DIGMETADATA/Digital+Object+Metadata+Documentation#DigitalObjectMetadataDocumentation-Cocinamodel
+
 ## Configuration
 
 Set the PURL url base:
