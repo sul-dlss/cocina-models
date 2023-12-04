@@ -118,7 +118,7 @@ RSpec.shared_examples 'MODS cocina mapping' do
 
   context 'when mapping to MODS (from cocina)' do
     let(:expected_mods_ng) do
-      Cocina::Models::Mapping::Normalizers::ModsNormalizer.normalize_purl_and_missing_title(mods_ng_xml: (roundtrip_mods_ng || orig_mods_ng), druid: local_druid,
+      Cocina::Models::Mapping::Normalizers::ModsNormalizer.normalize_purl_and_missing_title(mods_ng_xml: roundtrip_mods_ng || orig_mods_ng, druid: local_druid,
                                                                                             label: label)
     end
 
