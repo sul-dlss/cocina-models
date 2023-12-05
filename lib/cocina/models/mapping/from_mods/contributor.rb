@@ -37,7 +37,7 @@ module Cocina
           def build
             grouped_altrepgroup_name_nodes, other_name_nodes = AltRepGroup.split(nodes: deduped_name_nodes)
             check_altrepgroup_type_inconsistency(grouped_altrepgroup_name_nodes)
-            contributors = grouped_altrepgroup_name_nodes.map { |name_nodes| build_name_nodes(name_nodes) } + \
+            contributors = grouped_altrepgroup_name_nodes.map { |name_nodes| build_name_nodes(name_nodes) } +
                            other_name_nodes.map { |name_node| build_name_nodes([name_node]) }
             contrib_level_type_and_status(contributors)
             adjust_primary(contributors.compact).presence
@@ -110,7 +110,7 @@ module Cocina
                                         end
             end
 
-            result.each { |_k, role_nodes| role_nodes.uniq! { |role_node| name_node_comparitor(role_node) } }
+            result.each_value { |role_nodes| role_nodes.uniq! { |role_node| name_node_comparitor(role_node) } }
           end
 
           def check_altrepgroup_type_inconsistency(grouped_altrepgroup_name_nodes)

@@ -174,7 +174,7 @@ module Cocina
                                             [role_node]
                                           end
               end
-              result.each { |_k, role_nodes| role_nodes.uniq! { |role_node| name_node_comparitor(role_node) } }
+              result.each_value { |role_nodes| role_nodes.uniq! { |role_node| name_node_comparitor(role_node) } }
             end
 
             def normalize_type

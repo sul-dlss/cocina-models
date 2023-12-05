@@ -38,7 +38,7 @@ module Cocina
 
         build_type = type.to_s.delete_suffix(WITH_METADATA_SUFFIX)
 
-        fixture = public_send("build_#{build_type}".to_sym, attributes)
+        fixture = public_send("build_#{build_type}".to_sym, attributes) # rubocop:disable Lint/SymbolConversion
         return fixture unless type.end_with?(WITH_METADATA_SUFFIX)
 
         Cocina::Models.with_metadata(fixture, 'abc123')
