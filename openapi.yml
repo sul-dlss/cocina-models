@@ -330,6 +330,7 @@ components:
       pattern: '^[0-9]+-[0-9]+$'
       example: '6772719-1001'
     CitationOnlyAccess:
+      description: A type of access for an object wherein users can see the metadata and a list of files, but the files will not have view or download access
       type: object
       properties:
         view:
