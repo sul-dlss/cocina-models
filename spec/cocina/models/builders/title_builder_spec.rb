@@ -10,6 +10,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
   let(:add_punctuation) { true }
   let(:druid) { 'druid:bc753qt7345' }
   let(:main_title) { described_class.main_title(cocina_titles) }
+  let(:full_title) { described_class.full_title(cocina_titles) }
 
   context 'with a DRO instead of cocina_titles (deprecated)' do
     subject(:builder_build) { described_class.build(cocina_object, strategy: strategy, add_punctuation: add_punctuation) }
@@ -18,10 +19,9 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       allow(Deprecation).to receive(:warn)
     end
 
-    let(:cocina_object) do
-      build(:dro, id: druid).new(description: description)
-    end
-
+    let(:main_title) { described_class.main_title(cocina_object) }
+    let(:full_title) { described_class.full_title(cocina_object) }
+    let(:cocina_object) { build(:dro, id: druid).new(description: description) }
     let(:description) do
       {
         title: [
@@ -31,13 +31,13 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       }
     end
 
-    it '.build returns the first title as a string and logs a deprecation' do
+    it '.build returns the title as a string and logs a deprecation' do
       expect(builder_build).to eq('However am I going to be')
       expect(Deprecation).to have_received(:warn)
     end
   end
 
-  context 'with a DescriptiveValue (such as a subject with type = title)' do
+  context 'with a DescriptiveValue (such as a subject with type = title) that is a parallelValue' do
     let(:cocina_titles) { descriptive_values.map { |hash| Cocina::Models::DescriptiveValue.new(hash) } }
     let(:strategy) { :all }
     let(:add_punctuation) { false }
@@ -60,8 +60,12 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       expect(builder_build).to eq [['The master and Margarita', 'Мастер и Маргарита']]
     end
 
-    it 'main_title returns the expected string' do
+    it '.main_title returns the first title string' do
       expect(main_title).to eq 'The master and Margarita'
+    end
+
+    it '.full_title returns the first title string from parallel value' do
+      expect(full_title).to eq 'The master and Margarita'
     end
   end
 
@@ -73,8 +77,12 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       ]
     end
 
-    it 'main_title is first title' do
+    it '.main_title is first title' do
       expect(main_title).to eq 'However am I going to be'
+    end
+
+    it '.full_title is first title' do
+      expect(full_title).to eq 'However am I going to be'
     end
 
     context 'with a :first strategy' do
@@ -114,12 +122,16 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       end
     end
 
-    it 'main title returns primary title string' do
+    it '.main title returns primary title string' do
       expect(main_title).to eq 'A very silly primary title'
+    end
+
+    it '.full title returns primary title string' do
+      expect(full_title).to eq 'A very silly primary title'
     end
   end
 
-  context 'with a main title' do
+  context 'with a main title (but no structuredValue)' do
     let(:titles) do
       [
         # NOTE:  these should be in a structuredValue so it gives weird results
@@ -142,8 +154,12 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       end
     end
 
-    it 'main_title is ... main title' do
-      expect(main_title).to eq 'A very silly subtitle' # due to example weirdness
+    it 'main_title is ... first value because this should be a structuredValue' do
+      expect(main_title).to eq 'A very silly subtitle'
+    end
+
+    it 'full_title is ... first value because this should be a structuredValue' do
+      expect(full_title).to eq 'A very silly subtitle'
     end
   end
 
@@ -183,8 +199,12 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       expect(builder_build).to eq('ti1:nonSort brisk junket : ti1:subTitle. ti1:partNumber, ti1:partName')
     end
 
-    it 'main_title returns the main title with nonsorting characters' do
+    it '.main_title returns the main title with nonsorting characters' do
       expect(main_title).to eq 'ti1:nonSort brisk junket'
+    end
+
+    it '.full_title returns the reconstructed title without punctuation' do
+      expect(full_title).to eq('ti1:nonSort brisk junket ti1:subTitle ti1:partNumber ti1:partName')
     end
   end
 
@@ -213,7 +233,11 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     end
 
     it '.build returns the reconstructed nested structured title' do
-      expect(builder_build).to eq('brisk junketti1:nonSort')
+      expect(builder_build).to eq('ti1:nonSort brisk junket')
+    end
+
+    it '.full_title returns the reconstructed nested structured title' do
+      expect(full_title).to eq('ti1:nonSort brisk junket')
     end
 
     it 'main_title returns the first main title starting with nonsorting characters' do
@@ -242,7 +266,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     end
 
     context 'when add punctuation is default true' do
-      it '.build returns the reconstructed structured title' do
+      it '.build returns the reconstructed structured title with punctuation' do
         expect(builder_build).to eq('ti1:partNumber, ti1:partName')
       end
     end
@@ -255,7 +279,11 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       end
     end
 
-    it 'main_title returns the empty string' do
+    it '.full_title returns the reconstructed structured title without punctuation' do
+      expect(full_title).to eq 'ti1:partNumber ti1:partName'
+    end
+
+    it '.main_title returns the empty string' do
       expect(main_title).to eq ''
     end
   end
@@ -280,13 +308,17 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       ]
     end
 
-    it 'main_title returns the value for type "title"' do
+    it '.main_title returns the value for type "title"' do
       expect(main_title).to eq 'A random title'
     end
 
-    context 'when add punctuation is default true' do
-      it '.build returns the structured title' do
-        expect(builder_build).to eq('A random subtitleA random title')
+    it '.full_title returns the reconstructed structured title without punctuation' do
+      expect(full_title).to eq('A random title A random subtitle')
+    end
+
+    context 'when add punctuation is default (true)' do
+      it '.build returns the reconstructed structured title' do
+        expect(builder_build).to eq('A random title : A random subtitle')
       end
     end
 
@@ -294,7 +326,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       let(:add_punctuation) { false }
 
       it '.build returns the structured title without punctuation' do
-        expect(builder_build).to eq('A random subtitleA random title')
+        expect(builder_build).to eq('A random title A random subtitle')
       end
     end
   end
@@ -327,9 +359,13 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       expect(main_title).to eq 'A Title'
     end
 
+    it 'full_title returns value for type "title" without punctuation' do
+      expect(full_title).to eq 'A Title The first subtitle The second subtitle'
+    end
+
     context 'when add punctuation is default true' do
       it '.build returns the reconstructed structured title with punctuation' do
-        expect(builder_build).to eq('The first subtitle : The second subtitleA Title')
+        expect(builder_build).to eq('A Title : The first subtitle : The second subtitle')
       end
     end
 
@@ -337,7 +373,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       let(:add_punctuation) { false }
 
       it '.build returns the reconstructed structured title without punctuation' do
-        expect(builder_build).to eq('The first subtitle The second subtitleA Title')
+        expect(builder_build).to eq('A Title The first subtitle The second subtitle')
       end
     end
   end
@@ -368,6 +404,10 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     it 'main_title returns the untyped value (rather than subtitle)' do
       expect(main_title).to eq 'A Random Title'
     end
+
+    it 'full_title returns the untyped value (rather than subtitle)' do
+      expect(full_title).to eq 'A Random Title'
+    end
   end
 
   context 'when multiple nonsorting characters with note' do
@@ -395,8 +435,12 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       expect(builder_build).to eq('The  means to prosperity')
     end
 
-    it 'main_title returns the title with non sorting characters included' do
+    it '.main_title returns the title with non sorting characters included' do
       expect(main_title).to eq 'The  means to prosperity'
+    end
+
+    it '.full_title returns the title with non sorting characters included' do
+      expect(full_title).to eq 'The  means to prosperity'
     end
   end
 
@@ -419,8 +463,12 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       expect(builder_build).to eq('The means to prosperity')
     end
 
-    it 'main_title returns the title with non sorting characters included' do
+    it '.main_title returns the title with non sorting characters included' do
       expect(main_title).to eq('The means to prosperity')
+    end
+
+    it '.full_title returns the title with non sorting characters included' do
+      expect(full_title).to eq('The means to prosperity')
     end
   end
 
@@ -443,8 +491,12 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       expect(builder_build).to eq('The-means to prosperity')
     end
 
-    it 'main_title returns the title with non sorting characters included' do
+    it '.main_title returns the title with non sorting characters included' do
       expect(main_title).to eq('The-means to prosperity')
+    end
+
+    it '.full_title returns the title with non sorting characters included' do
+      expect(full_title).to eq('The-means to prosperity')
     end
   end
 
@@ -467,8 +519,12 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       expect(builder_build).to eq('L\'means to prosperity')
     end
 
-    it 'main_title returns the title with non sorting characters included' do
+    it '.main_title returns the title with non sorting characters included' do
       expect(main_title).to eq('L\'means to prosperity')
+    end
+
+    it '.full_title returns the title with non sorting characters included' do
+      expect(full_title).to eq('L\'means to prosperity')
     end
   end
 end
