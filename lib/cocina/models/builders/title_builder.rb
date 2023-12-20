@@ -40,6 +40,14 @@ module Cocina
           new(strategy: :first, add_punctuation: false).build(titles)
         end
 
+        # "additional titles" are all title data except for full_title.  We want to able able to index it separately so
+        #   we can boost matches on it in search results (boost matching these strings lower than other titles present)
+        # @param [[Array<Cocina::Models::Title,Cocina::Models::DescriptiveValue>] titles the titles to consider
+        # @return [Array<String>] the values for Solr
+        def self.additional_titles(titles)
+          new(strategy: :all, add_punctuation: false).build(titles) - [full_title(titles)]
+        end
+
         def initialize(strategy:, add_punctuation:)
           @strategy = strategy
           @add_punctuation = add_punctuation
@@ -54,7 +62,7 @@ module Cocina
           if strategy == :first
             extract_title(cocina_title)
           else
-            cocina_titles.map { |one| extract_title(one) }
+            cocina_titles.map { |ctitle| extract_title(ctitle) }.flatten
           end
         end
 
@@ -127,7 +135,8 @@ module Cocina
           end
         end
 
-        # This handles 'main title', 'uniform' or 'translated'
+        # This is called when there is no primary title and no untyped title
+        # @return [Cocina::Models::Title, Array<Cocina::Models::Title>] first title or all titles
         def other_title(titles)
           if strategy == :first
             titles.first
