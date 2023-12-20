@@ -6,8 +6,7 @@ module Cocina
   module Models
     module Builders
       # TitleBuilder selects the prefered title from the cocina object for solr indexing
-      # rubocop:disable Metrics/ClassLength
-      class TitleBuilder
+      class TitleBuilder # rubocop:disable Metrics/ClassLength
         extend Deprecation
         # @param [[Array<Cocina::Models::Title,Cocina::Models::DescriptiveValue>] titles the titles to consider
         # @param [Symbol] strategy ":first" is the strategy for selection when primary or display
@@ -31,6 +30,14 @@ module Cocina
         # @return [String] the main title value for Solr
         def self.main_title(titles)
           new(strategy: :first, add_punctuation: false).main_title(titles)
+        end
+
+        # the "full title" is the title WITH subtitle, part name, etc.  We want to able able to index it separately so
+        #   we can boost matches on it in search results (boost matching this string higher than other titles present)
+        # @param [[Array<Cocina::Models::Title,Cocina::Models::DescriptiveValue>] titles the titles to consider
+        # @return [String] the title value for Solr
+        def self.full_title(titles)
+          new(strategy: :first, add_punctuation: false).build(titles)
         end
 
         def initialize(strategy:, add_punctuation:)
@@ -133,14 +140,15 @@ module Cocina
         # @return [String] the title value from combining the pieces of the structured_values by type and order
         #   with desired punctuation per specs
         #
-        # rubocop:disable Metrics/BlockLength
         # rubocop:disable Metrics/CyclomaticComplexity
         # rubocop:disable Metrics/MethodLength
         # rubocop:disable Metrics/PerceivedComplexity
         def title_from_structured_values(title)
-          result = ''
+          # parse out the parts
+          main_title = ''
+          subtitle = ''
+          non_sort_value = ''
           part_name_number = ''
-          # combine pieces of the cocina structuredValue into a single title
           title.structuredValue.each do |structured_value|
             # There can be a structuredValue inside a structuredValue.  For example,
             #   a uniform title where both the name and the title have internal StructuredValue
@@ -153,38 +161,35 @@ module Cocina
             case structured_value.type&.downcase
             when 'nonsorting characters'
               non_sort_value = "#{value}#{non_sorting_padding(title, value)}"
-              result = if result.present?
-                         "#{result}#{non_sort_value}"
-                       else
-                         non_sort_value
-                       end
             when 'part name', 'part number'
-              if part_name_number.blank?
-                part_name_number = part_name_number(title.structuredValue)
-                result = if !add_punctuation?
-                           [result, part_name_number].join(' ')
-                         elsif result.present?
-                           "#{result.sub(/[ .,]*$/, '')}. #{part_name_number}. "
-                         else
-                           "#{part_name_number}. "
-                         end
-              end
+              part_name_number = part_name_number(title.structuredValue) if part_name_number.blank?
             when 'main title', 'title'
-              result = "#{result}#{value}"
+              main_title = value
             when 'subtitle'
-              # subtitle is preceded by space colon space, unless it is at the beginning of the title string
-              result = if !add_punctuation?
-                         [result, value].join(' ')
-                       elsif result.present?
-                         "#{result.sub(/[. :]+$/, '')} : #{value.sub(/^:/, '').strip}"
-                       else
-                         result = value.sub(/^:/, '').strip
-                       end
+              # combine multiple subtitles into a single string
+              subtitle = if !add_punctuation?
+                           if subtitle.present?
+                             [subtitle, value].join(' ')
+                           else
+                             value
+                           end
+                         elsif subtitle.present?
+                           # subtitle is preceded by space colon space, unless it is at the beginning of the title string
+                           "#{subtitle.sub(/[. :]+$/, '')} : #{value.sub(/^:/, '').strip}"
+                         else
+                           value.sub(/^:/, '').strip
+                         end
             end
           end
-          result
+
+          # combine the parts into a single title string
+          if add_punctuation?
+            combine_with_punctuation(non_sort_value: non_sort_value, main_title: main_title, subtitle: subtitle,
+                                     part_name_number: part_name_number)
+          else
+            ["#{non_sort_value}#{main_title}", subtitle, part_name_number].select(&:presence).join(' ')
+          end
         end
-        # rubocop:enable Metrics/BlockLength
         # rubocop:enable Metrics/CyclomaticComplexity
         # rubocop:enable Metrics/MethodLength
         # rubocop:enable Metrics/PerceivedComplexity
@@ -215,6 +220,28 @@ module Cocina
           end
           result
         end
+
+        # Thank MARC and catalog cards for this mess. We need to add punctuation.
+        # rubocop:disable Metrics/MethodLength
+        def combine_with_punctuation(non_sort_value:, main_title:, subtitle:, part_name_number:)
+          result = "#{non_sort_value}#{main_title}"
+          if subtitle.present?
+            result = if result.present?
+                       "#{result.sub(/[. :]+$/, '')} : #{subtitle.sub(/^:/, '').strip}"
+                     else
+                       result = subtitle
+                     end
+          end
+          if part_name_number.present?
+            result = if result.present?
+                       "#{result.sub(/[ .,]*$/, '')}. #{part_name_number}."
+                     else
+                       "#{part_name_number}."
+                     end
+          end
+          result
+        end
+        # rubocop:enable Metrics/MethodLength
 
         def remove_trailing_punctuation(title)
           title.sub(%r{[ .,;:/\\]+$}, '')
@@ -260,7 +287,6 @@ module Cocina
           end
         end
       end
-      # rubocop:enable Metrics/ClassLength
     end
   end
 end
