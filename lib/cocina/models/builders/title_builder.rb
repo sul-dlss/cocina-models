@@ -24,22 +24,39 @@ module Cocina
           new(strategy: strategy, add_punctuation: add_punctuation).build(titles)
         end
 
+        # the "main title" is the title withOUT subtitle, part name, etc.  We want to index it separately so
+        #   we can boost matches on it in search results (boost matching this string higher than matching full title string)
+        #   e.g. "The Hobbit" (main_title) vs "The Hobbit, or, There and Back Again (full_title)
+        # @param [[Array<Cocina::Models::Title,Cocina::Models::DescriptiveValue>] titles the titles to consider
+        # @return [String] the main title value for Solr
+        def self.main_title(titles)
+          new(strategy: :first, add_punctuation: false).main_title(titles)
+        end
+
         def initialize(strategy:, add_punctuation:)
           @strategy = strategy
           @add_punctuation = add_punctuation
         end
 
-        # @param [[Array<Cocina::Models::Title>] titles the titles to consider
+        # @param [[Array<Cocina::Models::Title>] cocina_titles the titles to consider
         # @return [String] the title value for Solr
-        def build(titles)
-          cocina_title = primary_title(titles) || untyped_title(titles)
-          cocina_title = other_title(titles) if cocina_title.blank?
+        def build(cocina_titles)
+          cocina_title = primary_title(cocina_titles) || untyped_title(cocina_titles)
+          cocina_title = other_title(cocina_titles) if cocina_title.blank?
 
           if strategy == :first
             extract_title(cocina_title)
           else
-            cocina_title.map { |one| extract_title(one) }
+            cocina_titles.map { |one| extract_title(one) }
           end
+        end
+
+        def main_title(titles)
+          cocina_title = primary_title(titles) || untyped_title(titles)
+          cocina_title = other_title(titles) if cocina_title.blank?
+
+          cocina_title = cocina_title.first if cocina_title.is_a?(Array)
+          extract_main_title(cocina_title)
         end
 
         private
@@ -55,6 +72,16 @@ module Cocina
                      return build(cocina_title.parallelValue)
                    end
           remove_trailing_punctuation(result.strip) if result.present?
+        end
+
+        def extract_main_title(cocina_title)
+          if cocina_title.value
+            cocina_title.value # covers both title and main title types
+          elsif cocina_title.structuredValue.present?
+            main_title_from_structured_values(cocina_title)
+          elsif cocina_title.parallelValue.present?
+            main_title(cocina_title.parallelValue)
+          end
         end
 
         def add_punctuation?
@@ -102,15 +129,16 @@ module Cocina
           end
         end
 
-        # rubocop:disable Metrics/BlockLength
-        # rubocop:disable Metrics/CyclomaticComplexity
-        # rubocop:disable Metrics/PerceivedComplexity
-        # rubocop:disable Metrics/MethodLength
         # @param [Cocina::Models::Title] title with structured values
         # @return [String] the title value from combining the pieces of the structured_values by type and order
         #   with desired punctuation per specs
+        #
+        # rubocop:disable Metrics/BlockLength
+        # rubocop:disable Metrics/CyclomaticComplexity
+        # rubocop:disable Metrics/MethodLength
+        # rubocop:disable Metrics/PerceivedComplexity
         def title_from_structured_values(title)
-          structured_title = ''
+          result = ''
           part_name_number = ''
           # combine pieces of the cocina structuredValue into a single title
           title.structuredValue.each do |structured_value|
@@ -125,41 +153,68 @@ module Cocina
             case structured_value.type&.downcase
             when 'nonsorting characters'
               non_sort_value = "#{value}#{non_sorting_padding(title, value)}"
-              structured_title = if structured_title.present?
-                                   "#{structured_title}#{non_sort_value}"
-                                 else
-                                   non_sort_value
-                                 end
+              result = if result.present?
+                         "#{result}#{non_sort_value}"
+                       else
+                         non_sort_value
+                       end
             when 'part name', 'part number'
               if part_name_number.blank?
                 part_name_number = part_name_number(title.structuredValue)
-                structured_title = if !add_punctuation?
-                                     [structured_title, part_name_number].join(' ')
-                                   elsif structured_title.present?
-                                     "#{structured_title.sub(/[ .,]*$/, '')}. #{part_name_number}. "
-                                   else
-                                     "#{part_name_number}. "
-                                   end
+                result = if !add_punctuation?
+                           [result, part_name_number].join(' ')
+                         elsif result.present?
+                           "#{result.sub(/[ .,]*$/, '')}. #{part_name_number}. "
+                         else
+                           "#{part_name_number}. "
+                         end
               end
             when 'main title', 'title'
-              structured_title = "#{structured_title}#{value}"
+              result = "#{result}#{value}"
             when 'subtitle'
               # subtitle is preceded by space colon space, unless it is at the beginning of the title string
-              structured_title = if !add_punctuation?
-                                   [structured_title, value].join(' ')
-                                 elsif structured_title.present?
-                                   "#{structured_title.sub(/[. :]+$/, '')} : #{value.sub(/^:/, '').strip}"
-                                 else
-                                   structured_title = value.sub(/^:/, '').strip
-                                 end
+              result = if !add_punctuation?
+                         [result, value].join(' ')
+                       elsif result.present?
+                         "#{result.sub(/[. :]+$/, '')} : #{value.sub(/^:/, '').strip}"
+                       else
+                         result = value.sub(/^:/, '').strip
+                       end
             end
           end
-          structured_title
+          result
         end
-        # rubocop:enable Metrics/MethodLength
         # rubocop:enable Metrics/BlockLength
         # rubocop:enable Metrics/CyclomaticComplexity
+        # rubocop:enable Metrics/MethodLength
         # rubocop:enable Metrics/PerceivedComplexity
+
+        # main_title is title.structuredValue.value with type 'main title' (or just title.value)
+        # @param [Cocina::Models::Title] title with structured values
+        # @return [String] the main title value
+        def main_title_from_structured_values(cocina_title) # rubocop:disable Metrics/MethodLength
+          result = ''
+          # combine pieces of the cocina structuredValue into a single title
+          cocina_title.structuredValue.each do |structured_value|
+            # There can be a structuredValue inside a structuredValue.  For example,
+            #   a uniform title where both the name and the title have internal StructuredValue
+            return main_title_from_structured_values(structured_value) if structured_value.structuredValue.present?
+
+            value = structured_value.value&.strip
+            next unless value
+
+            case structured_value.type&.downcase
+            when 'nonsorting characters'
+              non_sort_value = "#{value}#{non_sorting_padding(cocina_title, value)}"
+              result = "#{non_sort_value}#{result}" # non-sorting characters are at the beginning of the title
+            when 'main title'
+              result = "#{result}#{value}"
+            when 'title'
+              result = value
+            end
+          end
+          result
+        end
 
         def remove_trailing_punctuation(title)
           title.sub(%r{[ .,;:/\\]+$}, '')
