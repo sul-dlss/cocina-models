@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cocina-models (0.93.0)
+    cocina-models (0.93.1)
       activesupport
       deprecation
       dry-struct (~> 1.0)
@@ -84,7 +84,7 @@ GEM
     minitest (5.20.0)
     multi_json (1.15.0)
     mutex_m (0.2.0)
-    nokogiri (1.15.5)
+    nokogiri (1.16.0)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     openapi3_parser (0.9.2)
