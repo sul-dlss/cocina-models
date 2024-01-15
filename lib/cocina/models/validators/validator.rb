@@ -27,12 +27,12 @@ module Cocina
           VALIDATORS.each { |validator| validator.validate(clazz, attributes_hash) }
         end
 
-        def self.deep_transform_values(object, &block)
+        def self.deep_transform_values(object, ...)
           case object
           when Hash
-            object.transform_values { |value| deep_transform_values(value, &block) }
+            object.transform_values { |value| deep_transform_values(value, ...) }
           when Array
-            object.map { |e| deep_transform_values(e, &block) }
+            object.map { |e| deep_transform_values(e, ...) }
           else
             yield(object)
           end
