@@ -356,6 +356,7 @@ identifier:
   - value: DOI
     code: doi
   - value: druid
+  - value: EUR-OP
   - value: FOLIO
     description: FOLIO HRID for the source record of the metadata.
   - value: GTIN-14 ID
@@ -391,6 +392,8 @@ identifier:
   - value: PMCID
   - value: PMID
   - value: record id
+  - value: ROR
+    code: ror
   - value: Senate Number
   - value: Series
   - value: SICI
@@ -432,6 +435,9 @@ note:
   - value: additions
     description: Resources added after initial acquisition.
   - value: admin
+    status: deprecated
+    use: administrative
+  - value: administrative
     description: Administrative or internal use.
   - value: affiliation
     description: Institution with which a person or other entity is associated.
@@ -561,6 +567,7 @@ note:
   - value: table of contents
   - value: target audience
   - value: technical note
+    description: Technological requirements for accessing or using the resource.
   - value: thesis
   - value: transcript
   - value: translation
@@ -712,6 +719,8 @@ subject.structuredValue:
     description: An individual identity.
   - value: place
     description: A geographic location associated with the content of a resource.
+  - value: point coordinates
+    description: The latitude and longitude of a place associated with the content of a resource.
   - value: region
     description: An area that incorporates more than one first-order jurisdiction.
   - value: south
