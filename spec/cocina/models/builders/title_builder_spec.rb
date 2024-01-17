@@ -57,20 +57,20 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       }]
     end
 
-    it '.build returns the expected title strings from parallel value' do
+    it '.build returns both title strings from parallel value' do
       expect(builder_build).to eq ['The master and Margarita', 'Мастер и Маргарита']
     end
 
-    it '.main_title returns the first title string' do
-      expect(main_title).to eq 'The master and Margarita'
+    it '.main_title returns both title strings from parallel value' do
+      expect(main_title).to eq ['The master and Margarita', 'Мастер и Маргарита']
     end
 
-    it '.full_title returns the first title string from parallel value' do
-      expect(full_title).to eq 'The master and Margarita'
+    it '.full_title returns both title strings from parallel value' do
+      expect(full_title).to eq ['The master and Margarita', 'Мастер и Маргарита']
     end
 
-    it '.additional_titles returns the second title string from parallel value' do
-      expect(additional_titles).to eq ['Мастер и Маргарита']
+    it '.additional_titles returns empty array' do
+      expect(additional_titles).to eq []
     end
   end
 
@@ -82,29 +82,31 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       ]
     end
 
-    it '.main_title is first title' do
-      expect(main_title).to eq 'However am I going to be'
+    it '.main_title contains first title' do
+      expect(main_title).to eq ['However am I going to be']
     end
 
-    it '.full_title is first title' do
-      expect(full_title).to eq 'However am I going to be'
+    it '.full_title contains first title' do
+      expect(full_title).to eq ['However am I going to be']
     end
 
-    it '.additional_titles is second title' do
+    it '.additional_titles contains second title' do
       expect(additional_titles).to eq ['A second title']
     end
 
-    context 'with a :first strategy' do
-      it '.build returns the first title' do
-        expect(builder_build).to eq('However am I going to be')
+    describe '.build' do
+      context 'with :first strategy' do
+        it 'returns the first title' do
+          expect(builder_build).to eq('However am I going to be')
+        end
       end
-    end
 
-    context 'with an :all strategy' do
-      let(:strategy) { :all }
+      context 'with :all strategy' do
+        let(:strategy) { :all }
 
-      it '.build returns an array with each title string' do
-        expect(builder_build).to eq(['However am I going to be', 'A second title'])
+        it 'returns an array with each title string' do
+          expect(builder_build).to eq(['However am I going to be', 'A second title'])
+        end
       end
     end
   end
@@ -112,75 +114,79 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
   context 'with a primary title' do
     let(:titles) do
       [
-        { value: 'A very silly secondary title' },
-        { value: 'A very silly primary title', status: 'primary' }
+        { value: 'secondary title' },
+        { value: 'primary title', status: 'primary' }
       ]
     end
 
-    context 'with a :first strategy' do
-      it '.build returns primary title string' do
-        expect(builder_build).to eq('A very silly primary title')
+    describe '.build' do
+      context 'with :first strategy' do
+        it 'returns primary title string' do
+          expect(builder_build).to eq('primary title')
+        end
+      end
+
+      context 'with :all strategy' do
+        let(:strategy) { :all }
+
+        it 'returns an array with each title string' do
+          expect(builder_build).to eq(['secondary title', 'primary title'])
+        end
       end
     end
 
-    context 'with an :all strategy' do
-      let(:strategy) { :all }
-
-      it '.build returns an array with each title string' do
-        expect(builder_build).to eq(['A very silly secondary title', 'A very silly primary title'])
-      end
+    it '.main_title contains primary title string' do
+      expect(main_title).to eq ['primary title']
     end
 
-    it '.main_title returns primary title string' do
-      expect(main_title).to eq 'A very silly primary title'
+    it '.full_title contains primary title string' do
+      expect(full_title).to eq ['primary title']
     end
 
-    it '.full_title returns primary title string' do
-      expect(full_title).to eq 'A very silly primary title'
-    end
-
-    it '.additional_titles returns non-primary title string(s)' do
-      expect(additional_titles).to eq ['A very silly secondary title']
+    it '.additional_titles contains non-primary title string(s)' do
+      expect(additional_titles).to eq ['secondary title']
     end
   end
 
-  context 'with a main title (but no structuredValue)' do
+  context 'with a main title (without structuredValue)' do
     let(:titles) do
       [
         # NOTE:  these should be in a structuredValue; because they are not, we get weird results
-        { value: 'A very silly subtitle', type: 'subtitle' },
-        { value: 'A very silly main title', type: 'main title' }
+        { value: 'zee subtitle', type: 'subtitle' },
+        { value: 'zer main title', type: 'main title' }
       ]
     end
 
-    context 'with a :first strategy' do
-      it '.build returns the first title' do
-        expect(builder_build).to eq('A very silly subtitle')
+    describe '.build' do
+      context 'with :first strategy' do
+        it 'returns the first title' do
+          expect(builder_build).to eq('zee subtitle')
+        end
+      end
+
+      context 'with :all strategy' do
+        let(:strategy) { :all }
+
+        it 'returns the main title' do
+          expect(builder_build).to eq(['zee subtitle', 'zer main title'])
+        end
       end
     end
 
-    context 'with an :all strategy' do
-      let(:strategy) { :all }
-
-      it '.build returns the main title' do
-        expect(builder_build).to eq(['A very silly subtitle', 'A very silly main title'])
-      end
+    it 'main_title is first value' do
+      expect(main_title).to eq 'zee subtitle'
     end
 
-    it 'main_title is ... first value because this should be a structuredValue' do
-      expect(main_title).to eq 'A very silly subtitle'
+    it 'full_title is first value' do
+      expect(full_title).to eq 'zee subtitle'
     end
 
-    it 'full_title is ... first value because this should be a structuredValue' do
-      expect(full_title).to eq 'A very silly subtitle'
-    end
-
-    it 'additional_titles is second value because this should be a structuredValue' do
-      expect(additional_titles).to eq ['A very silly main title']
+    it 'additional_titles is second value' do
+      expect(additional_titles).to eq ['zer main title']
     end
   end
 
-  context 'when the title is in a structuredValue' do
+  context 'when structuredValue' do
     # from a spreadsheet upload integration test
     #   https://argo-stage.stanford.edu/view/sk561pf3505
     let(:titles) do
@@ -210,7 +216,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       ]
     end
 
-    it '.build returns the reconstructed title' do
+    it '.build returns the reconstructed title with punctuation' do
       expect(builder_build).to eq('ti1:nonSort brisk junket : ti1:subTitle. ti1:partNumber, ti1:partName')
     end
 
@@ -227,7 +233,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     end
   end
 
-  context 'when the titles are in nested structuredValues' do
+  context 'when nested structuredValues' do
     # from a spreadsheet upload integration test
     #   https://argo-stage.stanford.edu/view/sk561pf3505
     let(:titles) do
@@ -251,16 +257,16 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       ]
     end
 
-    it '.build returns the reconstructed nested structured title' do
-      expect(builder_build).to eq('ti1:nonSort brisk junket')
+    it '.build returns the reconstructed nested structuredValue' do
+      expect(builder_build).to eq 'brisk junket ti1:nonSort'
     end
 
-    it '.full_title returns the reconstructed nested structured title' do
-      expect(full_title).to eq('ti1:nonSort brisk junket')
+    it '.full_title returns the reconstructed nested structuredValue' do
+      expect(full_title).to eq 'brisk junket ti1:nonSort'
     end
 
-    it '.main_title returns the first main title starting with nonsorting characters' do
-      expect(main_title).to eq 'ti1:nonSort brisk junket'
+    it '.main_title returns the (first) main title with nonsorting characters' do
+      expect(main_title).to eq 'brisk junket ti1:nonSort'
     end
 
     it '.additional_titles is empty as there is only one title' do
@@ -287,7 +293,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     end
 
     context 'when add punctuation is default true' do
-      it '.build returns the reconstructed structured title with punctuation' do
+      it '.build returns the reconstructed structuredValue with punctuation' do
         expect(builder_build).to eq('ti1:partNumber, ti1:partName')
       end
     end
@@ -295,12 +301,12 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     context 'when add punctuation is false' do
       let(:add_punctuation) { false }
 
-      it '.build returns the reconstructed structured title without punctuation' do
+      it '.build returns the reconstructed structuredValue without punctuation' do
         expect(builder_build).to eq('ti1:partNumber ti1:partName')
       end
     end
 
-    it '.full_title returns the reconstructed structured title without punctuation' do
+    it '.full_title returns the reconstructed structuredValue without punctuation' do
       expect(full_title).to eq 'ti1:partNumber ti1:partName'
     end
 
@@ -313,16 +319,16 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     end
   end
 
-  context 'when a subtitle is in a structuredValue' do
+  context 'when structuredValue with subtitle' do
     let(:titles) do
       [
         structuredValue: [
           {
-            value: 'A random subtitle',
+            value: 'A starting subtitle',
             type: 'subtitle'
           },
           {
-            value: 'A random title',
+            value: 'A following title',
             type: 'title'
           }
         ]
@@ -330,33 +336,35 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     end
 
     it '.main_title returns the value for type "title"' do
-      expect(main_title).to eq 'A random title'
+      expect(main_title).to eq 'A following title'
     end
 
-    it '.full_title returns the reconstructed structured title without punctuation' do
-      expect(full_title).to eq('A random title A random subtitle')
+    it '.full_title returns the reconstructed structuredValue without punctuation' do
+      expect(full_title).to eq('A starting subtitle A following title')
     end
 
     it '.additional_titles is empty as there is only one title' do
       expect(additional_titles).to eq []
     end
 
-    context 'when add punctuation is default (true)' do
-      it '.build returns the reconstructed structured title' do
-        expect(builder_build).to eq('A random title : A random subtitle')
+    describe '.build' do
+      context 'when add punctuation is default (true)' do
+        it 'returns the reconstructed structuredValue' do
+          expect(builder_build).to eq('A starting subtitleA following title')
+        end
       end
-    end
 
-    context 'when add punctuation is false' do
-      let(:add_punctuation) { false }
+      context 'when add punctuation is false' do
+        let(:add_punctuation) { false }
 
-      it '.build returns the structured title without punctuation' do
-        expect(builder_build).to eq('A random title A random subtitle')
+        it 'returns the structuredValue without punctuation' do
+          expect(builder_build).to eq('A starting subtitle A following title')
+        end
       end
     end
   end
 
-  context 'when multiple subtitles are in a structuredValue' do
+  context 'when structuredValue with multiple subtitles' do
     let(:titles) do
       [
         structuredValue: [
@@ -381,29 +389,31 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     end
 
     it '.full_title returns value for type "title" without punctuation' do
-      expect(full_title).to eq 'A Title The first subtitle The second subtitle'
+      expect(full_title).to eq 'The first subtitle The second subtitle A Title '
     end
 
     it '.additional_titles is empty as there is only one title' do
       expect(additional_titles).to eq []
     end
 
-    context 'when add punctuation is default true' do
-      it '.build returns the reconstructed structured title with punctuation' do
-        expect(builder_build).to eq('A Title : The first subtitle : The second subtitle')
+    describe '.build' do
+      context 'when add punctuation is true (default)' do
+        it 'returns the reconstructed structuredValue with punctuation' do
+          expect(builder_build).to eq('The first subtitle : The second subtitleA Title')
+        end
       end
-    end
 
-    context 'when add punctuation is false' do
-      let(:add_punctuation) { false }
+      context 'when add punctuation is false' do
+        let(:add_punctuation) { false }
 
-      it '.build returns the reconstructed structured title without punctuation' do
-        expect(builder_build).to eq('A Title The first subtitle The second subtitle')
+        it 'returns the reconstructed structuredValue without punctuation' do
+          expect(builder_build).to eq('The first subtitle The second subtitle A Title')
+        end
       end
     end
   end
 
-  context 'when the titles are in a parallelValue' do
+  context 'when parallelValue, one of type subtitle' do
     let(:titles) do
       [
         parallelValue: [
@@ -456,15 +466,15 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       ]
     end
 
-    it '.build returns the title with non sorting characters included' do
+    it '.build returns the title with (count) non sorting characters included' do
       expect(builder_build).to eq('The  means to prosperity')
     end
 
-    it '.main_title returns the title with non sorting characters included' do
+    it '.main_title returns the title with (count) non sorting characters included' do
       expect(main_title).to eq 'The  means to prosperity'
     end
 
-    it '.full_title returns the title with non sorting characters included' do
+    it '.full_title returns the title with (count) non sorting characters included' do
       expect(full_title).to eq 'The  means to prosperity'
     end
   end
@@ -657,13 +667,13 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       expect(actual_result.size).to eq(5)
     end
 
-    context 'with a :first strategy' do
+    context 'with :first strategy' do
       it '.build returns the primary title' do
         expect(builder_build).to eq('Sefer Bet nadiv : sheʼelot u-teshuvot, ḥidushe Torah, derashot')
       end
     end
 
-    context 'with an :all strategy' do
+    context 'with :all strategy' do
       let(:strategy) { :all }
 
       # QUESTION:  shouldn't the uniform titles start with the associated name?
@@ -752,7 +762,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       expect(actual_result.size).to eq(7)
     end
 
-    context 'with a :first strategy' do
+    context 'with :first strategy' do
       # QUESTION:  should this be uniform title?
       # see https://github.com/sul-dlss/cocina-models/issues/657
       it '.build returns the first title' do
@@ -760,7 +770,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       end
     end
 
-    context 'with an :all strategy' do
+    context 'with :all strategy' do
       let(:strategy) { :all }
 
       it '.build returns an array with each title string' do
