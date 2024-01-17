@@ -27,7 +27,7 @@ module Cocina
         #   we can boost matches on it in search results (boost matching this string higher than matching full title string)
         #   e.g. "The Hobbit" (main_title) vs "The Hobbit, or, There and Back Again (full_title)
         # @param [[Array<Cocina::Models::Title,Cocina::Models::DescriptiveValue>] titles the titles to consider
-        # @return [String] the main title value for Solr
+        # @return [Array<String>] the main title value(s) for Solr - array due to possible parallelValue
         def self.main_title(titles)
           new(strategy: :first, add_punctuation: false).main_title(titles)
         end
@@ -35,9 +35,9 @@ module Cocina
         # the "full title" is the title WITH subtitle, part name, etc.  We want to able able to index it separately so
         #   we can boost matches on it in search results (boost matching this string higher than other titles present)
         # @param [[Array<Cocina::Models::Title,Cocina::Models::DescriptiveValue>] titles the titles to consider
-        # @return [String] the title value for Solr
+        # @return [Array<String>] the full title value(s) for Solr - array due to possible parallelValue
         def self.full_title(titles)
-          new(strategy: :first, add_punctuation: false).build(titles)
+          [new(strategy: :first, add_punctuation: false, only_one_parallel_value: false).build(titles)].flatten.compact
         end
 
         # "additional titles" are all title data except for full_title.  We want to able able to index it separately so
@@ -45,16 +45,19 @@ module Cocina
         # @param [[Array<Cocina::Models::Title,Cocina::Models::DescriptiveValue>] titles the titles to consider
         # @return [Array<String>] the values for Solr
         def self.additional_titles(titles)
-          new(strategy: :all, add_punctuation: false).build(titles) - [full_title(titles)]
+          [new(strategy: :all, add_punctuation: false).build(titles)].flatten - full_title(titles)
         end
 
-        def initialize(strategy:, add_punctuation:)
+        def initialize(strategy:, add_punctuation:, only_one_parallel_value: true)
           @strategy = strategy
           @add_punctuation = add_punctuation
+          @only_one_parallel_value = only_one_parallel_value
         end
 
         # @param [[Array<Cocina::Models::Title>] cocina_titles the titles to consider
         # @return [String] the title value for Solr
+        #
+        # rubocop:disable Metrics/PerceivedComplexity
         def build(cocina_titles)
           cocina_title = primary_title(cocina_titles) || untyped_title(cocina_titles)
           cocina_title = other_title(cocina_titles) if cocina_title.blank?
@@ -62,15 +65,21 @@ module Cocina
           if strategy == :first
             extract_title(cocina_title)
           else
-            cocina_titles.map { |ctitle| extract_title(ctitle) }.flatten
+            result = cocina_titles.map { |ctitle| extract_title(ctitle) }.flatten
+            if only_one_parallel_value? && result.length == 1
+              result.first
+            else
+              result
+            end
           end
         end
+        # rubocop:enable Metrics/PerceivedComplexity
 
+        # @return [Array<String>] the main title value(s) for Solr - can be array due to parallel titles
         def main_title(titles)
           cocina_title = primary_title(titles) || untyped_title(titles)
           cocina_title = other_title(titles) if cocina_title.blank?
 
-          cocina_title = cocina_title.first if cocina_title.is_a?(Array)
           extract_main_title(cocina_title)
         end
 
@@ -78,41 +87,67 @@ module Cocina
 
         attr_reader :strategy
 
+        # rubocop:disable Metrics/CyclomaticComplexity
+        # rubocop:disable Metrics/MethodLength
+        # rubocop:disable Metrics/PerceivedComplexity
         def extract_title(cocina_title)
-          result = if cocina_title.value
-                     cocina_title.value
-                   elsif cocina_title.structuredValue.present?
-                     rebuild_structured_value(cocina_title)
-                   elsif cocina_title.parallelValue.present?
-                     return build(cocina_title.parallelValue)
-                   end
-          remove_trailing_punctuation(result.strip) if result.present?
+          title_values = if cocina_title.value
+                           cocina_title.value
+                         elsif cocina_title.structuredValue.present?
+                           rebuild_structured_value(cocina_title)
+                         elsif cocina_title.parallelValue.present?
+                           primary = cocina_title.parallelValue.find { |pvalue| pvalue.status == 'primary' }
+                           if primary && only_one_parallel_value? && strategy == :first
+                             extract_title(primary)
+                           elsif only_one_parallel_value? && strategy == :first
+                             untyped = cocina_title.parallelValue.find { |pvalue| pvalue.type.blank? }
+                             extract_title(untyped || cocina_title.parallelValue.first)
+                           else
+                             cocina_title.parallelValue.map { |pvalue| extract_title(pvalue) }
+                           end
+                         end
+          result = [title_values].flatten.compact.map { |val| remove_trailing_punctuation(val.strip) }
+          result.length == 1 ? result.first : result
         end
+        # rubocop:enable Metrics/CyclomaticComplexity
+        # rubocop:enable Metrics/MethodLength
+        # rubocop:enable Metrics/PerceivedComplexity
 
-        def extract_main_title(cocina_title)
-          if cocina_title.value
-            cocina_title.value # covers both title and main title types
-          elsif cocina_title.structuredValue.present?
-            main_title_from_structured_values(cocina_title)
-          elsif cocina_title.parallelValue.present?
-            main_title(cocina_title.parallelValue)
-          end
+        # @return [Array<String>] the main title value(s) for Solr - can be array due to parallel titles
+        def extract_main_title(cocina_title) # rubocop:disable Metrics/PerceivedComplexity
+          result = if cocina_title.value
+                     cocina_title.value # covers both title and main title types
+                   elsif cocina_title.structuredValue.present?
+                     main_title_from_structured_values(cocina_title)
+                   elsif cocina_title.parallelValue.present?
+                     primary = cocina_title.parallelValue.find { |pvalue| pvalue.status == 'primary' }
+                     if primary
+                       extract_main_title(primary)
+                     else
+                       cocina_title.parallelValue.map { |pvalue| extract_main_title(pvalue) }
+                     end
+                   end
+          return [] if result.blank?
+
+          [result].flatten.compact.map(&:strip)
         end
 
         def add_punctuation?
           @add_punctuation
         end
 
+        def only_one_parallel_value?
+          @only_one_parallel_value
+        end
+
         # @return [Cocina::Models::Title, nil] title that has status=primary
-        def primary_title(titles)
-          primary_title = titles.find do |title|
-            title.status == 'primary'
-          end
+        def primary_title(cocina_titles)
+          primary_title = cocina_titles.find { |title| title.status == 'primary' }
           return primary_title if primary_title.present?
 
           # NOTE: structuredValues would only have status primary assigned as a sibling, not as an attribute
 
-          titles.find do |title|
+          cocina_titles.find do |title|
             title.parallelValue&.find do |parallel_title|
               parallel_title.status == 'primary'
             end
@@ -168,12 +203,7 @@ module Cocina
             case structured_value.type&.downcase
             when 'nonsorting characters'
               padding = non_sorting_padding(cocina_title, value)
-              non_sort_value = "#{value}#{padding}"
-              result = if result.present?
-                         [result, padding, non_sort_value].join
-                       else
-                         non_sort_value
-                       end
+              result = add_non_sorting_value(result, value, padding)
             when 'part name', 'part number'
               if part_name_number.blank?
                 part_name_number = part_name_number(cocina_title.structuredValue)
@@ -186,7 +216,7 @@ module Cocina
                          end
               end
             when 'main title', 'title'
-              result = if add_punctuation?
+              result = if add_punctuation? || result.ends_with?(' ') || result.ends_with?('-') || result.ends_with?('\'')
                          [result, value].join
                        else
                          [remove_trailing_punctuation(result), remove_trailing_punctuation(value)].select(&:presence).join(' ')
@@ -213,11 +243,14 @@ module Cocina
         # main_title is title.structuredValue.value with type 'main title' (or just title.value)
         # @param [Cocina::Models::Title] title with structured values
         # @return [String] the main title value
-        def main_title_from_structured_values(cocina_title) # rubocop:disable Metrics/MethodLength
+        #
+        # rubocop:disable Metrics/MethodLength
+        # rubocop:disable Metrics/PerceivedComplexity
+        def main_title_from_structured_values(cocina_title)
           result = ''
           # combine pieces of the cocina structuredValue into a single title
           cocina_title.structuredValue.each do |structured_value|
-            # There can be a structuredValue inside a structuredValue.  For example,
+            # There can be a structuredValue inside a structuredValue, for example,
             #   a uniform title where both the name and the title have internal StructuredValue
             return main_title_from_structured_values(structured_value) if structured_value.structuredValue.present?
 
@@ -226,20 +259,34 @@ module Cocina
 
             case structured_value.type&.downcase
             when 'nonsorting characters'
-              non_sort_value = "#{value}#{non_sorting_padding(cocina_title, value)}"
-              result = "#{non_sort_value}#{result}" # non-sorting characters are at the beginning of the title
-            when 'main title'
-              result = "#{result}#{value}"
-            when 'title'
-              result = value
+              padding = non_sorting_padding(cocina_title, value)
+              result = add_non_sorting_value(result, value, padding)
+            when 'main title', 'title'
+              result = if ['\'', '-'].include?(result.last)
+                         [result, value].join
+                       else
+                         [remove_trailing_punctuation(result).strip, remove_trailing_punctuation(value).strip].select(&:presence).join(' ')
+                       end
             end
           end
+
           result
         end
+        # rubocop:enable Metrics/MethodLength
+        # rubocop:enable Metrics/PerceivedComplexity
 
         # Thank MARC and catalog cards for this mess.
         def remove_trailing_punctuation(title)
-          title.sub(%r{[ .,;:/\\]+$}, '')
+          title.sub(%r{[.,;:/\\]+$}, '')
+        end
+
+        def add_non_sorting_value(title_so_far, non_sorting_value, padding)
+          non_sort_value = "#{non_sorting_value}#{padding}"
+          if title_so_far.present?
+            [title_so_far, padding, non_sort_value].join
+          else
+            non_sort_value
+          end
         end
 
         def non_sorting_padding(title, non_sorting_value)
