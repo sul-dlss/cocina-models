@@ -363,6 +363,7 @@ _Path: identifier.type_
   * document number
   * DOI
   * druid
+  * EUR-OP
   * FOLIO
     * FOLIO HRID for the source record of the metadata.
   * GTIN-14 ID
@@ -385,6 +386,7 @@ _Path: identifier.type_
   * PMCID
   * PMID
   * record id
+  * ROR
   * Senate Number
   * Series
   * SICI
@@ -417,6 +419,8 @@ _Path: note.type_
   * additions
     * Resources added after initial acquisition.
   * admin
+    * Deprecated. Preferred usage: administrative
+  * administrative
     * Administrative or internal use.
   * affiliation
     * Institution with which a person or other entity is associated.
@@ -507,6 +511,8 @@ _Path: note.type_
   * performers
   * preferred citation
     * The preferred form for citing a resource.
+  * presentation
+    * Technical requirements for accessing the resource, such as emulation environments.
   * provenance
     * The resource's origins and history.
   * publications
@@ -539,6 +545,7 @@ _Path: note.type_
   * table of contents
   * target audience
   * technical note
+    * Technology requirements for accessing or using the resource. 
   * thesis
   * transcript
   * translation
@@ -695,6 +702,8 @@ _Path: subject.structuredValue.type_
     * An individual identity.
   * place
     * A geographic location associated with the content of a resource.
+  * point coordinates
+    * The latitude and longitude of a place associated with the content of a resource.
   * region
     * An area that incorporates more than one first-order jurisdiction.
   * south
