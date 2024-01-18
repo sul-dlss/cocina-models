@@ -427,6 +427,8 @@ note:
   - value: access note
     status: deprecated
     use: access
+  - value: access restriction
+    description: Information about restrictions on who may or how to access a resource.
   - value: acquisition
     description: The transfer of a resource to a repository.
   - value: action
@@ -548,6 +550,9 @@ note:
   - value: reproduction
   - value: research
   - value: restriction
+  - value: restriction on access
+    status: deprecated
+    use: access restriction
   - value: rubric
   - value: scope and content
   - value: secfol

@@ -411,6 +411,8 @@ _Path: note.type_
     * Information about gaining access to a resource.
   * access note
     * Deprecated. Preferred usage: access
+  * access restriction
+    * Information about restrictions on who may or how to access a resource.
   * acquisition
     * The transfer of a resource to a repository.
   * action
@@ -526,6 +528,8 @@ _Path: note.type_
   * reproduction
   * research
   * restriction
+  * restriction on access
+    * Deprecated. Preferred usage: access restriction
   * rubric
   * scope and content
   * secfol
