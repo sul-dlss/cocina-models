@@ -143,7 +143,7 @@ which pushes the gem to rubygems.org.
 
 ### Step 2: Update client gems coupled to the models
 
-Release new versions of [sdr-client](https://github.com/sul-dlss/sdr-client) and [dor-services-client](https://github.com/sul-dlss/dor-services-client/) pinned to use the new cocina-models version because applications such as [Argo](https://github.com/sul-dlss/argo) depend on both of these gems using the same models.
+Release new versions of [sdr-client](https://github.com/sul-dlss/sdr-client), [dor-services-client](https://github.com/sul-dlss/dor-services-client/), and [dor_indexing](https://github.com/sul-dlss/dor_indexing/) pinned to use the new cocina-models version because applications such as [Argo](https://github.com/sul-dlss/argo) depend on both of these gems using the same models.
 
 ### Step 3: Update services directly coupled to the models
 
