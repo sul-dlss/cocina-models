@@ -199,6 +199,8 @@ module Cocina
         # @return [String] the title value from combining the pieces of the structured_values by type and order
         #   with desired punctuation per specs
         #
+        # for punctuaion funky town, thank MARC and catalog cards
+        #
         # rubocop:disable Metrics/AbcSize
         # rubocop:disable Metrics/CyclomaticComplexity
         # rubocop:disable Metrics/MethodLength
@@ -214,7 +216,7 @@ module Cocina
             value = structured_value.value&.strip
             next unless value
 
-            # additional types ignored here:  name, uniform ...
+            # additional types ignored here, e.g. name, uniform ...
             case structured_value.type&.downcase
             when 'nonsorting characters'
               padding = non_sorting_padding(cocina_title, value)
@@ -225,12 +227,15 @@ module Cocina
                 result = if !add_punctuation?
                            [result, part_name_number].join(' ')
                          elsif result.present?
+                           # part name/number is preceded by period space, unless it is at the beginning of the title string
                            "#{result.sub(/[ .,]*$/, '')}. #{part_name_number}. "
                          else
                            "#{part_name_number}. "
                          end
               end
             when 'main title', 'title'
+              # nonsorting characters ending with hyphen, apostrophe or space should be slammed against the main title,
+              #   even if we are not adding punctuation
               result = if add_punctuation? || result.ends_with?(' ') || result.ends_with?('-') || result.ends_with?('\'')
                          [result, value].join
                        else
