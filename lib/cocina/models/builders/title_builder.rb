@@ -85,6 +85,8 @@ module Cocina
         end
         # rubocop:enable Metrics/PerceivedComplexity
 
+        # this is the single "short title" - the title without subtitle, part name, etc.
+        #    this may be useful for boosting and exact matching for search results
         # @return [Array<String>] the main title value(s) for Solr - can be array due to parallel titles
         def main_title(titles)
           cocina_title = primary_title(titles) || untyped_title(titles)
