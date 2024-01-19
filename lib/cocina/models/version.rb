@@ -2,6 +2,6 @@
 
 module Cocina
   module Models
-    VERSION = '0.93.1'
+    VERSION = '0.94.0'
   end
 end
