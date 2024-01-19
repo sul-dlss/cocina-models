@@ -299,7 +299,7 @@ module Cocina
 
         # Thank MARC and catalog cards for this mess.
         def remove_trailing_punctuation(title)
-          title.sub(%r{[.,;:/\\]+$}, '')
+          title.sub(%r{[ .,;:/\\]+$}, '')
         end
 
         def add_non_sorting_value(title_so_far, non_sorting_value, padding)
