@@ -49,6 +49,14 @@ module Cocina
           [new(strategy: :all, add_punctuation: false).build(titles)].flatten - full_title(titles)
         end
 
+        # @param strategy [Symbol] ":first" selects a single title value based on precedence of
+        #   primary, untyped, first occurrence. ":all" returns an array containing all the values.
+        # @param add_punctuation [boolean] whether the title should be formmated with punctuation (think of a structured
+        #   value coming from a MARC record, which is designed for catalog cards.)
+        # @param only_one_parallel_value [boolean] when true, choose one of the parallel values according to precedence
+        #   of primary, untyped, first occurrence.  When false, return an array containing all the parallel values.
+        #   Why? Think of e.g. title displayed in blacklight search results vs boosting values for ranking of search
+        #   results
         def initialize(strategy:, add_punctuation:, only_one_parallel_value: true)
           @strategy = strategy
           @add_punctuation = add_punctuation
@@ -143,9 +151,6 @@ module Cocina
           @add_punctuation
         end
 
-        # in order to return a single value, we need to choose one of the parallel values
-        #   otherwise, we will return an array containing all the parallel values
-        #   (e.g. title displayed in blacklight search results vs boosting values for search result rankings)
         def only_one_parallel_value?
           @only_one_parallel_value
         end
