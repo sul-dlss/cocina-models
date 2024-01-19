@@ -12,7 +12,8 @@ module Cocina
         # @param [Symbol] strategy ":first" is the strategy for selection when primary or display
         #   title are missing
         # @param [Boolean] add_punctuation determines if the title should be formmated with punctuation
-        # @return [String] the title value for Solr
+        # @return [String, Array] the title value for Solr - for :first strategy, a string; for :all strategy, an array
+        #   (e.g. title displayed in blacklight search results vs boosting values for search result rankings)
         def self.build(titles, strategy: :first, add_punctuation: true)
           if titles.respond_to?(:description)
             Deprecation.warn(self,
@@ -55,7 +56,8 @@ module Cocina
         end
 
         # @param [[Array<Cocina::Models::Title>] cocina_titles the titles to consider
-        # @return [String] the title value for Solr
+        # @return [String, Array] the title value for Solr - for :first strategy, a string; for :all strategy, an array
+        #   (e.g. title displayed in blacklight search results vs boosting values for search result rankings)
         #
         # rubocop:disable Metrics/PerceivedComplexity
         def build(cocina_titles)
@@ -87,30 +89,35 @@ module Cocina
 
         attr_reader :strategy
 
-        # rubocop:disable Metrics/CyclomaticComplexity
-        # rubocop:disable Metrics/MethodLength
-        # rubocop:disable Metrics/PerceivedComplexity
         def extract_title(cocina_title)
           title_values = if cocina_title.value
                            cocina_title.value
                          elsif cocina_title.structuredValue.present?
                            rebuild_structured_value(cocina_title)
                          elsif cocina_title.parallelValue.present?
-                           primary = cocina_title.parallelValue.find { |pvalue| pvalue.status == 'primary' }
-                           if primary && only_one_parallel_value? && strategy == :first
-                             extract_title(primary)
-                           elsif only_one_parallel_value? && strategy == :first
-                             untyped = cocina_title.parallelValue.find { |pvalue| pvalue.type.blank? }
-                             extract_title(untyped || cocina_title.parallelValue.first)
-                           else
-                             cocina_title.parallelValue.map { |pvalue| extract_title(pvalue) }
-                           end
+                           extract_title_parallel_values(cocina_title)
                          end
           result = [title_values].flatten.compact.map { |val| remove_trailing_punctuation(val.strip) }
           result.length == 1 ? result.first : result
         end
-        # rubocop:enable Metrics/CyclomaticComplexity
-        # rubocop:enable Metrics/MethodLength
+
+        # stategy :first says to return a single value (default: true)
+        # only_one_parallel_value? says to return a single value, even if that value is a parallelValue (default: false)
+        #
+        # rubocop:disable Metrics/PerceivedComplexity
+        def extract_title_parallel_values(cocina_title)
+          primary = cocina_title.parallelValue.find { |pvalue| pvalue.status == 'primary' }
+          if primary && only_one_parallel_value? && strategy == :first
+            # we have a primary title and we know we want a single value
+            extract_title(primary)
+          elsif only_one_parallel_value? && strategy == :first
+            # no primary value;  algorithm says prefer an untyped value over a typed value for single value
+            untyped = cocina_title.parallelValue.find { |pvalue| pvalue.type.blank? }
+            extract_title(untyped || cocina_title.parallelValue.first)
+          else
+            cocina_title.parallelValue.map { |pvalue| extract_title(pvalue) }
+          end
+        end
         # rubocop:enable Metrics/PerceivedComplexity
 
         # @return [Array<String>] the main title value(s) for Solr - can be array due to parallel titles
@@ -136,6 +143,9 @@ module Cocina
           @add_punctuation
         end
 
+        # in order to return a single value, we need to choose one of the parallel values
+        #   otherwise, we will return an array containing all the parallel values
+        #   (e.g. title displayed in blacklight search results vs boosting values for search result rankings)
         def only_one_parallel_value?
           @only_one_parallel_value
         end
