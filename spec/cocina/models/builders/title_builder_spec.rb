@@ -122,6 +122,38 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     end
   end
 
+  context 'with untyped title ending with space then trailing punctuation' do
+    let(:titles) do
+      [
+        { value: 'Rosie the dog /' }
+      ]
+    end
+
+    it '.main_title ends before the space' do
+      expect(main_title).to eq ['Rosie the dog']
+    end
+
+    it '.full_title ends before the space' do
+      expect(full_title).to eq ['Rosie the dog']
+    end
+
+    describe '.build' do
+      context 'with :first strategy' do
+        it 'returns value up to the space' do
+          expect(builder_build).to eq('Rosie the dog')
+        end
+      end
+
+      context 'with :all strategy' do
+        let(:strategy) { :all }
+
+        it 'returns single string value up to the space' do
+          expect(builder_build).to eq('Rosie the dog')
+        end
+      end
+    end
+  end
+
   context 'with a primary title' do
     let(:titles) do
       [
@@ -227,8 +259,20 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       ]
     end
 
-    it '.build returns the reconstructed title with punctuation' do
-      expect(builder_build).to eq('ti1:nonSort brisk junket : ti1:subTitle. ti1:partNumber, ti1:partName')
+    describe '.build' do
+      context 'with :first strategy' do
+        it 'returns the reconstructed title with punctuation' do
+          expect(builder_build).to eq('ti1:nonSort brisk junket : ti1:subTitle. ti1:partNumber, ti1:partName')
+        end
+      end
+
+      context 'with :all strategy' do
+        let(:strategy) { :all }
+
+        it 'returns the reconstructed title with punctuation (as a String)' do
+          expect(builder_build).to eq('ti1:nonSort brisk junket : ti1:subTitle. ti1:partNumber, ti1:partName')
+        end
+      end
     end
 
     it '.main_title returns the main title with nonsorting characters' do
@@ -422,6 +466,51 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
 
         it 'returns the reconstructed structuredValue without punctuation' do
           expect(builder_build).to eq('The first subtitle The second subtitle A Title')
+        end
+      end
+    end
+  end
+
+  context 'when structuredValue in strange order' do
+    let(:titles) do
+      [
+        structuredValue: [
+          {
+            value: 'Series 1',
+            type: 'part number'
+          },
+          {
+            value: 'A',
+            type: 'nonsorting characters'
+          },
+          {
+            value: 'Vinsky',
+            type: 'main title'
+          }
+        ]
+      ]
+    end
+
+    it '.main_title respects order of occurrence (and ignores part number)' do
+      expect(main_title).to eq ['A Vinsky']
+    end
+
+    it '.full_title respects order of occurrence (no punctuation)' do
+      expect(full_title).to eq ['Series 1 A Vinsky']
+    end
+
+    describe '.build' do
+      context 'with :first strategy' do
+        it 'uses correct punctuation and respects order of occurrence' do
+          expect(builder_build).to eq('Series 1. A Vinsky')
+        end
+      end
+
+      context 'with :all strategy' do
+        let(:strategy) { :all }
+
+        it 'returns String using correct punctuation and respects order of occurrence' do
+          expect(builder_build).to eq('Series 1. A Vinsky')
         end
       end
     end
