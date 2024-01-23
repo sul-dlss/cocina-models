@@ -146,7 +146,7 @@ module Cocina
                    end
           return [] if result.blank?
 
-          [result].flatten.compact.map(&:strip)
+          [result].flatten.compact.map { |val| remove_trailing_punctuation(val) }
         end
 
         def add_punctuation?
@@ -305,7 +305,7 @@ module Cocina
         def add_non_sorting_value(title_so_far, non_sorting_value, padding)
           non_sort_value = "#{non_sorting_value}#{padding}"
           if title_so_far.present?
-            [title_so_far, padding, non_sort_value].join
+            [title_so_far.strip, padding, non_sort_value].join
           else
             non_sort_value
           end
