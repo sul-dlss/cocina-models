@@ -13,14 +13,15 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
         { value: 'A title' },
         { parallelValue: [{ value: 'A title' }, { value: 'Another title' }] },
         { groupedValue: [{ value: 'A title' }, { value: 'Another title' }] },
-        { structuredValue: [{ value: 'A title' }, { value: 'Another title' }] },
+        { structuredValue: [{ value: 'A title', type: 'main title' }, { value: 'Another title', type: 'subtitle' }] },
         { valueAt: 'abc123' }
       ],
       purl: 'https://purl.stanford.edu/bc123df4567',
       relatedResource: [
         {
           title: [
-            { value: 'A related title' }
+            { value: 'A related title' },
+            { structuredValue: [{ value: 'A related title', type: 'main title' }]}
           ],
           type: 'related to'
         }
@@ -65,6 +66,43 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
       }
     end
 
+    let(:no_title_type_props) do
+      {
+        title: [
+          {
+            structuredValue: [{ value: 'A title' }]
+          }
+        ]
+      }
+    end
+
+    let(:multiple_title_structured_value_props) do
+      {
+        title: [
+          {
+            structuredValue: [{ value: 'A title', type: 'main title' }, { value: 'Another title' }]
+          }
+        ]
+      }
+    end
+
+    let(:related_resource_no_title_type_props) do
+      {
+        title: [
+          { value: 'A title' }
+        ],
+        purl: 'https://purl.stanford.edu/bc123df4567',
+        relatedResource: [
+          {
+            title: [
+              { structuredValue: [{ value: 'A related title'}] }
+            ],
+            type: 'related to'
+          }
+        ]
+      }
+    end
+
     let(:request_desc_props) do
       desc_props.dup.tap do |props|
         props.delete(:purl)
@@ -103,6 +141,36 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
         expect do
           validate
         end.to raise_error(Cocina::Models::ValidationError, 'Blank value in description: title1')
+      end
+    end
+
+    describe 'when a no type for title structuredValue in description' do
+      let(:props) { no_title_type_props }
+
+      it 'is not valid' do
+        expect do
+          validate
+        end.to raise_error(Cocina::Models::ValidationError, 'Missing type for value in description: title1.structuredValue1')
+      end
+    end
+
+    describe 'when no type for second structuredValue title in description' do
+      let(:props) { multiple_title_structured_value_props }
+
+      it 'is not valid' do
+        expect do
+          validate
+        end.to raise_error(Cocina::Models::ValidationError, 'Missing type for value in description: title1.structuredValue2')
+      end
+    end
+
+    describe 'when no type for related resource structured value title in description' do
+      let(:props) { related_resource_no_title_type_props }
+
+      it 'is not valid' do
+        expect do
+          validate
+        end.to raise_error(Cocina::Models::ValidationError, 'Missing type for value in description: relatedResource1.title1.structuredValue1')
       end
     end
   end

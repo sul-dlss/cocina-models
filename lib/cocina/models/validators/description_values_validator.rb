@@ -14,6 +14,7 @@ module Cocina
           @attributes = attributes
           @error_paths_multiple = []
           @error_paths_blank = []
+          @error_paths_missing_title_type = []
         end
 
         def validate
@@ -23,11 +24,12 @@ module Cocina
 
           raise ValidationError, "Multiple value, groupedValue, structuredValue, and parallelValue in description: #{error_paths_multiple.join(', ')}" unless error_paths_multiple.empty?
           raise ValidationError, "Blank value in description: #{error_paths_blank.join(', ')}" unless error_paths_blank.empty?
+          raise ValidationError, "Missing type for value in description: #{error_paths_missing_title_type.join(', ')}" unless error_paths_missing_title_type.empty?
         end
 
         private
 
-        attr_reader :clazz, :attributes, :error_paths_blank, :error_paths_multiple
+        attr_reader :clazz, :attributes, :error_paths_blank, :error_paths_multiple, :error_paths_missing_title_type
 
         def meets_preconditions?
           [Cocina::Models::Description, Cocina::Models::RequestDescription].include?(clazz)
@@ -36,6 +38,7 @@ module Cocina
         def validate_hash(hash, path)
           validate_values_for_blanks(hash, path)
           validate_values_for_multiples(hash, path)
+          validate_title_type(hash, path)
           hash.each do |key, obj|
             validate_obj(obj, path + [key])
           end
@@ -62,6 +65,18 @@ module Cocina
           return unless hash.count { |key, value| %i[value groupedValue structuredValue parallelValue].include?(key) && value.present? } > 1
 
           error_paths_multiple << path_to_s(path)
+        end
+
+        def validate_title_type(hash, path)
+          # only apply to title.structuredValue or relatedResource.title.structuredValue with value
+          return unless hash[:value] && (path.first == :title || related_resource_title?(path)) && path.include?(:structuredValue)
+
+          # if there is a "value" key, make sure there is also a "type" key, only for title.structuredValue
+          error_paths_missing_title_type << path_to_s(path) unless hash[:type]
+        end
+
+        def related_resource_title?(path)
+          path.first == :relatedResource && path.third == :title
         end
 
         def path_to_s(path)
