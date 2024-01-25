@@ -201,6 +201,16 @@ module Cocina
         # @return [String] the title value from combining the pieces of the structured_values by type and order
         #   with desired punctuation per specs
         #
+        # - nonsorting characters value is followed by a space, unless the nonsorting
+        #   character count note has a numeric value equal to the length of the
+        #   nonsorting characters value, in which case no space is inserted
+        # - subtitle is preceded by space colon space, unless it is at the beginning
+        #   of the title string
+        # - partName and partNumber are always separated from each other by comma space
+        # - first partName or partNumber in the string is preceded by period space
+        # - partName or partNumber before nonsorting characters or main title is followed
+        #   by period space
+        #
         # for punctuaion funky town, thank MARC and catalog cards
         #
         # rubocop:disable Metrics/AbcSize
@@ -245,7 +255,7 @@ module Cocina
                        end
             when 'subtitle'
               result = if !add_punctuation?
-                         [result, value].select(&:presence).join(' ')
+                         [result, value.sub(/^:/, '').strip].select(&:presence).join(' ')
                        elsif result.present?
                          # subtitle is preceded by space colon space, unless it is at the beginning of the title string
                          "#{result.sub(/[. :]+$/, '')} : #{value.sub(/^:/, '').strip}"
