@@ -103,6 +103,56 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
       }
     end
 
+    let(:related_resource_parallel_value_no_type_props) do
+      {
+        title: [
+          { value: 'A title' }
+        ],
+        purl: 'https://purl.stanford.edu/bc123df4567',
+        relatedResource: [
+          { title: [
+            {
+              parallelValue: [
+                {
+                  structuredValue: [
+                    {
+                      value: 'Les',
+                      type: 'nonsorting characters'
+                    },
+                    {
+                      value: 'misérables'
+                    }
+                  ]
+                }
+              ]
+            }
+          ]}
+        ]
+      }
+    end
+
+    let(:parallel_structured_props) do
+      {
+        title: [
+          {
+            parallelValue: [
+              {
+                structuredValue: [
+                  {
+                    value: 'Les',
+                    type: 'nonsorting characters'
+                  },
+                  {
+                    value: 'misérables'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    end
+
     let(:request_desc_props) do
       desc_props.dup.tap do |props|
         props.delete(:purl)
@@ -171,6 +221,26 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
         expect do
           validate
         end.to raise_error(Cocina::Models::ValidationError, 'Missing type for value in description: relatedResource1.title1.structuredValue1')
+      end
+    end
+
+    describe 'when no type for related resource parallelValue structured value title in description' do
+      let(:props) { related_resource_parallel_value_no_type_props }
+
+      it 'is not valid' do
+        expect do
+          validate
+        end.to raise_error(Cocina::Models::ValidationError, 'Missing type for value in description: relatedResource1.title1.parallelValue1.structuredValue2')
+      end
+    end
+
+    describe 'when structuredValue with no type within parallelValue' do
+      let(:props) { parallel_structured_props }
+
+      it 'is not valid' do
+        expect do
+          validate
+        end.to raise_error(Cocina::Models::ValidationError, 'Missing type for value in description: title1.parallelValue1.structuredValue2')
       end
     end
   end

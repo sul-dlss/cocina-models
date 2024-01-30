@@ -68,7 +68,7 @@ module Cocina
         end
 
         def validate_title_type(hash, path)
-          # only apply to title.structuredValue or relatedResource.title.structuredValue with value
+          # only apply to title.structuredValue, title.parallelValue.structuredValue, or relatedResource.title with a value
           return unless hash[:value] && (path.first == :title || related_resource_title?(path)) && path.include?(:structuredValue)
 
           # if there is a "value" key, make sure there is also a "type" key, only for title.structuredValue
@@ -76,7 +76,8 @@ module Cocina
         end
 
         def related_resource_title?(path)
-          path.first == :relatedResource && path.third == :title
+          # title is directly within relatedResource, e.g [:relatedResource, 0, :title, 0, :structuredValue, 0])
+          path.first == :relatedResource && path[2] == :title
         end
 
         def path_to_s(path)
