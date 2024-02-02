@@ -4,9 +4,7 @@ require 'spec_helper'
 
 RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
   let(:clazz) { Cocina::Models::Description }
-
-  let(:props) { desc_props }
-
+  let(:props) { desc_props.with_indifferent_access }
   let(:desc_props) do
     {
       title: [
@@ -166,7 +164,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
     end
 
     describe 'when a valid RequestDescription' do
-      let(:props) { request_desc_props }
+      let(:props) { request_desc_props.with_indifferent_access }
       let(:clazz) { Cocina::Models::RequestDescription }
 
       it 'does not raise' do
@@ -175,7 +173,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
     end
 
     describe 'when an invalid Description' do
-      let(:props) { invalid_desc_props }
+      let(:desc_props) { invalid_desc_props }
 
       it 'is not valid' do
         expect do
@@ -185,7 +183,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
     end
 
     describe 'when a blank value in description' do
-      let(:props) { blank_title_props }
+      let(:desc_props) { blank_title_props }
 
       it 'is not valid' do
         expect do
@@ -195,7 +193,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
     end
 
     describe 'when a no type for title structuredValue in description' do
-      let(:props) { no_title_type_props }
+      let(:desc_props) { no_title_type_props }
 
       it 'is not valid' do
         expect do
@@ -205,7 +203,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
     end
 
     describe 'when no type for second structuredValue title in description' do
-      let(:props) { multiple_title_structured_value_props }
+      let(:desc_props) { multiple_title_structured_value_props }
 
       it 'is not valid' do
         expect do
@@ -215,7 +213,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
     end
 
     describe 'when no type for related resource structured value title in description' do
-      let(:props) { related_resource_no_title_type_props }
+      let(:desc_props) { related_resource_no_title_type_props }
 
       it 'is not valid' do
         expect do
@@ -225,7 +223,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
     end
 
     describe 'when no type for related resource parallelValue structured value title in description' do
-      let(:props) { related_resource_parallel_value_no_type_props }
+      let(:desc_props) { related_resource_parallel_value_no_type_props }
 
       it 'is not valid' do
         expect do
@@ -235,7 +233,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
     end
 
     describe 'when structuredValue with no type within parallelValue' do
-      let(:props) { parallel_structured_props }
+      let(:desc_props) { parallel_structured_props }
 
       it 'is not valid' do
         expect do
