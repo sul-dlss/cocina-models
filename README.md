@@ -143,7 +143,7 @@ which pushes the gem to rubygems.org.
 
 ### Step 2: Update client gems coupled to the models
 
-Release new versions of [sdr-client](https://github.com/sul-dlss/sdr-client), [dor-services-client](https://github.com/sul-dlss/dor-services-client/), and [dor_indexing](https://github.com/sul-dlss/dor_indexing/) pinned to use the new cocina-models version because applications such as [Argo](https://github.com/sul-dlss/argo) and [Dor-Services-App](https://github.com/sul-dlss/dor-services-app)depend on these gems using the same models.
+Release new versions of [sdr-client](https://github.com/sul-dlss/sdr-client), [dor-services-client](https://github.com/sul-dlss/dor-services-client/), and [dor_indexing](https://github.com/sul-dlss/dor_indexing/) pinned to use the new cocina-models version because applications such as [Argo](https://github.com/sul-dlss/argo) and [Dor-Services-App](https://github.com/sul-dlss/dor-services-app) depend on these gems using the same models.
 
 ### Step 3: Update services directly coupled to the models
 
@@ -164,9 +164,9 @@ This can be accomplished by copying and pasting the cocina-models schemas to the
 
 If step 3A was needed, use the same PRs to also bump the versions of cocina-models, sdr-client, and dor-services-client in these applications/services. Why? When [dor-services-app](https://github.com/sul-dlss/dor-services-app), for example, is updated to use the new models (via the auto-update script), these clients should be updated at the same time or there is risk of models produced by dor-services-app not being acceptable to the clients.
 
-With or without step 3A, perform `bundle update` for cocina-models, sdr-client, dor-services-client and dor_indexing* gems in the listed services and then make PRs for those repos.
+With or without step 3A, perform `bundle update` for cocina-models, sdr-client, dor-services-client and dor_indexing gems in the listed services and then make PRs for those repos. You may need to update how these gems are pinned in the `Gemfile` in order to bump them. 
 
-* dor_indexing gem is used by dor_indexing_app and dor-services-app only.
+NOTE: dor_indexing gem is used by dor-services-app and dor_indexing_app only. dor_indexing_app does NOT need to be updated in this step. 
 
 #### Step 3C: Merge 'em
 
@@ -182,12 +182,14 @@ There are scripts to help with updating other dependent applications:
 
 There is a Jenkins CI job that you can run manually to create all the PRs you need. Head to https://sul-ci-prod.stanford.edu/job/SUL-DLSS/job/access-update-scripts/job/cocina-level2-updates/ and then click `Build Now`. Click the new build that is created and then `Console Output` to watch the build. Once it has completed, you can proceed with the next step.
 
-If for some reason the above method does not work, the sul-dlss/access-update-scripts repo has a script for this: `cocina_level2_prs.rb`. You will need a github access token with scopes of "read:org" and "repo" (see https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) to run it, as noted in the comments at the top of that script.
+If for some reason the above method does not work, the sul-dlss/access-update-scripts repo has a script for this: [`cocina_level2_prs.rb`](https://github.com/sul-dlss/access-update-scripts/blob/master/cocina_level2_prs.rb). You will need a github access token with scopes of "read:org" and "repo" (see https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) to run it, as noted in the comments at the top of that script.
 
 #### Step 4B: Merge the Cocina Level 2 PRs
 
-[sul-dlss/access-update-scripts](https://github.com/sul-dlss/access-update-scripts) has a switch in the `merge-all.rb` script for this, as noted in the comments at the top of that script. (`REPOS_PATH=infrastructure GH_ACCESS_TOKEN=abc123 COCINA_LEVEL2= ./merge-all.rb`)
-
+[sul-dlss/access-update-scripts](https://github.com/sul-dlss/access-update-scripts) has a switch in the `merge-all.rb` script for this, as noted in the comments at the top of that script. 
+```
+REPOS_PATH=infrastructure GH_ACCESS_TOKEN=abc123 COCINA_LEVEL2= ./merge-all.rb
+```
 ### Step 5: Deploy all affected applications together
 
 [sul-dlss/sdr-deploy](https://github.com/sul-dlss/sdr-deploy) has a flag (-c) in the deploy script to limit deploys to cocina dependent applications.  Refer to instructions in the [sdr-deploy/README](https://github.com/sul-dlss/sdr-deploy/blob/main/README.md#only-deploy-repos-related-to-cocina-models-update).
