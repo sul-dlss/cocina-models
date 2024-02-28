@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'dry-types', '~> 1.1'
   spec.add_dependency 'edtf' # used for date/time validation
   spec.add_dependency 'equivalent-xml' # for diffing MODS
+  spec.add_dependency 'geo_coord' # for validating map coordinates
   spec.add_dependency 'i18n' # for validating BCP 47 language tags, according to RFC 4646
   spec.add_dependency 'jsonpath' # used for date/time validation
   spec.add_dependency 'nokogiri'
