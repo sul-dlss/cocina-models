@@ -51,20 +51,24 @@ module Cocina
           else
             raise ValidationError, "Invalid map coordinates for #{druid}: #{coordinate_text}"
           end
-        rescue ArgumentError
+        rescue ArgumentError, InvalidLatLongError
           raise ValidationError, "Invalid map coordinates for #{druid}: #{coordinate_text}"
         end
 
         # Coordinate validation from:
-        # https://github.com/iiif-prezi/osullivan/blob/main/lib/iiif/v3/presentation/nav_place.rb
+        # https://github.com/iiif-prezi/osullivan/blob/a2a53e1949660e71b0429d58c1224d85697b07df/lib/iiif/v3/presentation/nav_place.rb
         COORD_REGEX = /(?<hemisphere>[NSEW]) (?<degrees>\d+)[°⁰*] ?(?<minutes>\d+)?[ʹ']? ?(?<seconds>\d+)?[ʺ"]?/
 
+        # Custom error type so we can catch it separately
+        class InvalidLatLongError < StandardError; end
+
         # Attempt to parse a single coordinate from longitude/latitude strings
-        # Raises ArgumentError if the coordinate is invalid
+        # Raises InvalidLatLongError if the lat/long aren't parseable
+        # Raises ArgumentError if the lat/long are out of bounds/invalid
         def parse_coord(long_str, lat_str)
           long = long_str.match(COORD_REGEX)
           lat = lat_str.match(COORD_REGEX)
-          raise ArgumentError unless long && lat
+          raise InvalidLatLongError unless long && lat
 
           Geo::Coord.new(
             latd: lat[:degrees], latm: lat[:minutes], lats: lat[:seconds], lath: lat[:hemisphere],
