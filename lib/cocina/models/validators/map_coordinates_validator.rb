@@ -18,6 +18,8 @@ module Cocina
 
         # Valid if no coordinates, or all coordinates are parseable
         def validate
+          return unless coordinates.any?
+
           coordinates.map(&method(:parse))
         end
 
