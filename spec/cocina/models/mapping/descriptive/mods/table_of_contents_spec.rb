@@ -36,17 +36,7 @@ RSpec.describe 'MODS tableOfContents <--> cocina mappings' do
         {
           note: [
             {
-              structuredValue: [
-                {
-                  value: 'Chapter 1.'
-                },
-                {
-                  value: 'Chapter 2.'
-                },
-                {
-                  value: 'Chapter 3.'
-                }
-              ],
+              value: 'Chapter 1. -- Chapter 2. -- Chapter 3.',
               type: 'table of contents'
             }
           ]
