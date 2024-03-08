@@ -141,12 +141,7 @@ module Cocina
             }.tap do |attributes|
               value_language = LanguageScript.build(node: node)
               attributes[:valueLanguage] = value_language if value_language
-              value_parts = node.content.split(' -- ')
-              if value_parts.size == 1
-                attributes[:value] = node.content
-              elsif value_parts.present?
-                attributes[:structuredValue] = value_parts.map { |value_part| { value: value_part } }
-              end
+              attributes[:value] = node.content if node.content.present?
             end.compact
           end
 
