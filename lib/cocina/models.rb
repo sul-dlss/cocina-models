@@ -85,7 +85,7 @@ module Cocina
               when *DRO::TYPES
                 has_metadata?(dyn) ? DROWithMetadata : DRO
               when *Collection::TYPES
-                has_metadata?(dyn) ? ColectionWithMetadata : Collection
+                has_metadata?(dyn) ? CollectionWithMetadata : Collection
               when *AdminPolicy::TYPES
                 has_metadata?(dyn) ? AdminPolicyWithMetadata : AdminPolicy
               else
