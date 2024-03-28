@@ -83,7 +83,7 @@ export DATABASE_HOSTNAME=$DOR_SERVICES_DB_PROD_HOST
 export DATABASE_PASSWORD=$DOR_SERVICES_DB_PROD_PWD
 ```
 
-4. Run `bin/validate-cocina`:
+4. Run `bin/validate-cocina` (_NOTE:_ You likely want to run this in a screen session, as it can take many hours to complete, especially against prod):
 ```
 export RUBYOPT='-W:no-deprecated -W:no-experimental'
 RAILS_ENV=production bin/validate-cocina -p 8
