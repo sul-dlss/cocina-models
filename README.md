@@ -143,7 +143,7 @@ which pushes the gem to rubygems.org.
 
 ### Step 2: Update client gems coupled to the models
 
-Release new versions of [sdr-client](https://github.com/sul-dlss/sdr-client), [dor-services-client](https://github.com/sul-dlss/dor-services-client/), and [dor_indexing](https://github.com/sul-dlss/dor_indexing/) pinned to use the new cocina-models version because applications such as [Argo](https://github.com/sul-dlss/argo) and [Dor-Services-App](https://github.com/sul-dlss/dor-services-app) depend on these gems using the same models.
+Release new versions of [sdr-client](https://github.com/sul-dlss/sdr-client) and [dor-services-client](https://github.com/sul-dlss/dor-services-client/) pinned to use the new cocina-models version because applications such as [Argo](https://github.com/sul-dlss/argo) and [Dor-Services-App](https://github.com/sul-dlss/dor-services-app) depend on these gems using the same models.
 
 ### Step 3: Update services directly coupled to the models
 
@@ -164,9 +164,7 @@ This can be accomplished by copying and pasting the cocina-models schemas to the
 
 If step 3A was needed, use the same PRs to also bump the versions of cocina-models, sdr-client, and dor-services-client in these applications/services. Why? When [dor-services-app](https://github.com/sul-dlss/dor-services-app), for example, is updated to use the new models (via the auto-update script), these clients should be updated at the same time or there is risk of models produced by dor-services-app not being acceptable to the clients.
 
-With or without step 3A, perform `bundle update` for cocina-models, sdr-client, dor-services-client and dor_indexing gems in the listed services and then make PRs for those repos. You may need to update how these gems are pinned in the `Gemfile` in order to bump them. 
-
-NOTE: dor_indexing gem is used by dor-services-app and dor_indexing_app only. dor_indexing_app does NOT need to be updated in this step. 
+With or without step 3A, perform `bundle update` for cocina-models, sdr-client, and dor-services-client gems in the listed services and then make PRs for those repos. You may need to update how these gems are pinned in the `Gemfile` in order to bump them.
 
 #### Step 3C: Merge 'em
 
@@ -186,7 +184,7 @@ If for some reason the above method does not work, the sul-dlss/access-update-sc
 
 #### Step 4B: Merge the Cocina Level 2 PRs
 
-[sul-dlss/access-update-scripts](https://github.com/sul-dlss/access-update-scripts) has a switch in the `merge-all.rb` script for this, as noted in the comments at the top of that script. 
+[sul-dlss/access-update-scripts](https://github.com/sul-dlss/access-update-scripts) has a switch in the `merge-all.rb` script for this, as noted in the comments at the top of that script.
 ```
 REPOS_PATH=infrastructure GH_ACCESS_TOKEN=abc123 COCINA_LEVEL2= ./merge-all.rb
 ```
