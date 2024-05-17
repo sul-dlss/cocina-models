@@ -2,7 +2,6 @@
 
 require 'edtf'
 require 'jsonpath'
-require 'rss'
 
 module Cocina
   module Models
@@ -87,18 +86,7 @@ module Cocina
         end
 
         def valid_w3cdtf?(value)
-          Time.w3cdtf(value)
-          true
-        rescue StandardError
-          # NOTE: the upstream W3CDTF implementation in the `rss` gem does not
-          #       allow two patterns that should be valid per the specification:
-          #
-          # * YYYY
-          # * YYYY-MM
-          #
-          # This catches the false positives from the upstream gem and allow
-          # these two patterns to validate
-          /\A\d{4}(-0[1-9]|-1[0-2])?\Z/.match?(value)
+          W3cdtfValidator.validate(value)
         end
 
         def druid
