@@ -129,6 +129,10 @@ A patch change can be released as part of regular dependency updates or selectiv
 
 ## Releasing major or minor change
 
+NOTE: If dependency updates are about to be released, you have the option of shortening the process and stopping after Step 3. This is because Steps 4 onwards will be taken care of by the regular dependency updates process (basically the updating of cocina-models, dor-services-client and sdr-client as needed in the rest of the associated apps).  You still do need to manually bump some gems and the pinned version of cocina-models in a couple apps and get those PRs approved and merged, as described in Steps 1-3 below.
+
+IMPORTANT: If you do opt to skip steps 4 onward, you should NOT merge the cocina-models bump dor-services-app and sdr-api PRs you created in step 3 until you are ready to finish the dependency updates process.  You can have them reviewed and approved, but if you merge, you will greatly increase the risk of issues if the main branch of DSA or sdr-api are deployed after steps 1-3 are complete but before the rest of the apps are updated to use the new cocina-models via regular dependency updates. The fix for this is to either roll-back DSA and sdr-api to the previous release tag, or proceed forwards with step 4-5.
+
 ### Step 0: Share intent to change the models
 
 Send a note to `#dlss-infra-chg-mgmt` on Slack to let people know what is changing and when.
@@ -164,7 +168,7 @@ This can be accomplished by copying and pasting the cocina-models schemas to the
 
 If step 3A was needed, use the same PRs to also bump the versions of cocina-models, sdr-client, and dor-services-client in these applications/services. Why? When [dor-services-app](https://github.com/sul-dlss/dor-services-app), for example, is updated to use the new models (via the auto-update script), these clients should be updated at the same time or there is risk of models produced by dor-services-app not being acceptable to the clients.
 
-With or without step 3A, perform `bundle update` for cocina-models, sdr-client, and dor-services-client gems in the listed services and then make PRs for those repos. You may need to update how these gems are pinned in the `Gemfile` in order to bump them.
+With or without step 3A, perform `bundle update` for cocina-models, sdr-client, and dor-services-client gems in the listed services and then make PRs for those repos. You may first need to update how these gems are pinned in the `Gemfile` in order to bump them.  Note that dor-services-app only needs a bump to cocina-models gem and sdr-api only needs a bump to cocina-models and dor-services-client gems.
 
 #### Step 3C: Merge 'em
 
