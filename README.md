@@ -133,7 +133,7 @@ NOTE: If dependency updates are about to be released, you have the option of sho
 
 IMPORTANT: If you do opt to skip steps 4 onward, you should NOT merge the cocina-models bump dor-services-app and sdr-api PRs you created in step 3 until you are ready to finish the dependency updates process.  You can have them reviewed and approved, but if you merge, you will greatly increase the risk of issues if the main branch of DSA or sdr-api are deployed after steps 1-3 are complete but before the rest of the apps are updated to use the new cocina-models via regular dependency updates. The fix for this is to either roll-back DSA and sdr-api to the previous release tag, or proceed forwards with step 4-5.
 
-Before you release a major or minor change, think about if this release will include new validations.  Even if your change didn't make any changes that would affect validation, there may be other unreleased changes since the pervious version of the gem was cut and released.  Best practice is to scan back through the commit history until you get to the last version bump and see if there any significant changes that may affect validation.
+Before you release a major or minor change, think about if this release will include new validations.  Even if your change didn't make any changes that would affect validation, there may be other unreleased changes since the previous version of the gem was cut and released.  Best practice is to scan back through the commit history until you get to the last version bump and see if there any significant changes that may affect validation.
 
 If unsure, ask the team or ask for help to just run the validation report anyway (as described above).
 
