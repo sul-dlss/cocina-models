@@ -96,7 +96,7 @@ module Cocina
       end
 
       # rubocop:disable Metrics/ParameterLists
-      def self.build_request_dro_properties(type:, version:, label:, title:, source_id:, admin_policy_id:,
+      def self.build_request_dro_properties(type:, version:, label:, title:, source_id:, admin_policy_id:, reading_order: nil,
                                             barcode: nil, catkeys: [], folio_instance_hrids: [], collection_ids: [])
         {
           type: type,
@@ -125,6 +125,7 @@ module Cocina
             end
           end
           props[:identification][:barcode] = barcode if barcode
+          props[:structural][:hasMemberOrders] = [{ viewingDirection: reading_order }] if reading_order.present?
         end
       end
       # rubocop:enable Metrics/ParameterLists
