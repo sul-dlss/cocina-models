@@ -53,10 +53,10 @@ Beyond what is necessary to test the generator, the Cocina model classes are not
 
 ## Testing validation changes
 
-If there is a possibility that a model, mapping, or validation change will conflict with some existing objects then [validate-cocina](https://github.com/sul-dlss/dor-services-app/blob/main/bin/validate-cocina) should be used for testing. This must be run on sdr-infra since it requires deploying a branch of cocina-models.
+If there is a possibility that a model, mapping, or validation change will conflict with some existing objects then [validate-cocina](https://github.com/sul-dlss/dor-services-app/blob/main/bin/validate-cocina) should be used for testing. This must be run on the `sdr-infra` VM since it requires deploying a branch of cocina-models.
 
 1. Create a cocina-models branch containing the proposed change and push to GitHub.
-2. On sdr-infra, check out `main`, update the `Gemfile` so that cocina-models references the branch, and `bundle install`.
+2. On the `sdr-infra` VM, while logged in as the `deploy` user, check out `main`, update the `Gemfile` so that cocina-models references the branch, and `bundle install`.
 3. Select the appropriate environment vars below - they are set to values in puppet.  (first 2 lines are the same;  last two lines use different variables)
 
 For QA:
@@ -94,32 +94,39 @@ RAILS_ENV=production bin/validate-cocina -p 8
 
 Custom reports stored in dor-services-app can be run similarly to validation testing described above.
 
-1. Go the sdr-infra box:
+1. Connect to the `sdr-infra` box:
 
-```
-ssh deploy@sdr-infra
+```shell
+ssh sdr-infra
 ```
 
-2. Go to the dor-services-app directory and reset to main if needed (verify nobody else is using this first though):
+1. Start a shell as the `deploy` user:
 
+```shell
+# you may or may not need to supply the `-n SUNETID` argument
+ksu deploy
 ```
-cd dor-services-app
+
+1. Go to the `~/dor-services-app` directory and reset to main if needed (verify nobody else is using this first though):
+
+```shell
+cd ~/dor-services-app
 git status # see if there are any unsaved changes, if so, you may need to git stash them
 git pull # OR git reset --hard main   to just ditch any local unsaved changes
 ```
 
-3. Connect to the desired database by setting the environment variables as described in the section above.  This must be done each time you SSH back into the box to run a new report.
+1. Connect to the desired database by setting the environment variables as described in the section above.  This must be done each time you SSH back into the box to run a new report.
 
-4. Run the report (good idea to do it in a screen or via background process in case you get disconnected):
+1. Run the report (good idea to do it in a screen or via background process in case you get disconnected):
 
-```
+```shell
 bundle exec bin/rails r -e production "BadIso8601Dates.report" > BadIso8601Dates.csv
 ```
 
-5. When done, you can pull the report to your laptop as needed:
+1. When done, you can pull the report to your laptop as needed:
 
-```
-scp deploy@sdr-infra:/opt/app/deploy/dor-services-app/BadIso8601Dates.csv BadIso8601Dates.csv
+```shell
+scp sdr-infra:/opt/app/deploy/dor-services-app/BadIso8601Dates.csv .
 ```
 
 ## Releasing a patch change
