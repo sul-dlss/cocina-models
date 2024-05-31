@@ -127,11 +127,12 @@ module Cocina
         run("rubocop -a #{filepaths.join(' ')} > /dev/null")
       end
 
-      NO_CLEAN = [
-        'checkable.rb',
-        'validatable.rb',
-        'version.rb',
-        'vocabulary.rb'
+      NO_CLEAN = %w[
+        checkable.rb
+        utils.rb
+        validatable.rb
+        version.rb
+        vocabulary.rb
       ].freeze
 
       def clean_output
