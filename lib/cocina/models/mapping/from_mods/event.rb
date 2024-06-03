@@ -196,9 +196,8 @@ module Cocina
           end
 
           def build_date_values(origin_info_node)
-            date_values = []
-            DATE_ELEMENTS_2_TYPE.each do |mods_el_name, cocina_type|
-              date_values << build_date_desc_values(mods_el_name, origin_info_node, cocina_type)
+            date_values = DATE_ELEMENTS_2_TYPE.map do |mods_el_name, cocina_type|
+              build_date_desc_values(mods_el_name, origin_info_node, cocina_type)
             end
             date_values.flatten.compact
           end

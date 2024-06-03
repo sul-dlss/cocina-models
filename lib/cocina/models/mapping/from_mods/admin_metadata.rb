@@ -73,9 +73,8 @@ module Cocina
           end
 
           def build_note
-            notes = []
-            record_origins.each do |record_origin|
-              notes << {
+            notes = record_origins.map do |record_origin|
+              {
                 type: 'record origin',
                 value: record_origin.text
               }
