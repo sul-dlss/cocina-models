@@ -15,7 +15,7 @@ module Cocina
 
       def new(*args)
         validate = args.first.delete(:validate) if args.present?
-        new_model = super(*args)
+        new_model = super
         Validators::Validator.validate(new_model.class, new_model) if validate || validate.nil?
         new_model
       end

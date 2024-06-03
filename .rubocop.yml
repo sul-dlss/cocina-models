@@ -303,7 +303,7 @@ RSpec/SubjectDeclaration: # new in 2.5
   Enabled: true
 FactoryBot/SyntaxMethods: # new in 2.7
   Enabled: true
-RSpec/Rails/AvoidSetupHook: # new in 2.4
+RSpecRails/AvoidSetupHook: # new in 2.4
   Enabled: true
 Style/NestedFileDirname: # new in 1.26
   Enabled: true
@@ -343,7 +343,7 @@ RSpec/ChangeByZero: # new in 2.11.0
   Enabled: true
 Capybara/SpecificMatcher: # new in 2.12
   Enabled: false
-RSpec/Rails/HaveHttpStatus: # new in 2.12
+RSpecRails/HaveHttpStatus: # new in 2.12
   Enabled: false
 
 RSpec/ClassCheck: # new in 2.13
@@ -394,9 +394,9 @@ FactoryBot/ConsistentParenthesesStyle: # new in 2.14
   Enabled: true
 FactoryBot/FactoryNameStyle: # new in 2.16
   Enabled: true
-RSpec/Rails/InferredSpecType: # new in 2.14
+RSpecRails/InferredSpecType: # new in 2.14
   Enabled: true
-RSpec/Rails/MinitestAssertions: # new in 2.17
+RSpecRails/MinitestAssertions: # new in 2.17
   Enabled: true
 Style/RedundantHeredocDelimiterQuotes: # new in 1.45
   Enabled: true
@@ -411,7 +411,7 @@ RSpec/RedundantAround: # new in 2.19
   Enabled: true
 RSpec/SkipBlockInsideExample: # new in 2.19
   Enabled: true
-RSpec/Rails/TravelAround: # new in 2.19
+RSpecRails/TravelAround: # new in 2.19
   Enabled: true
 
 Lint/DuplicateMatchPattern: # new in 1.50
@@ -457,7 +457,7 @@ Style/YAMLFileRead: # new in 1.53
   Enabled: true
 RSpec/ReceiveMessages: # new in 2.23
   Enabled: true
-RSpec/Rails/NegationBeValid: # new in 2.23
+RSpecRails/NegationBeValid: # new in 2.23
   Enabled: true
 
 Lint/ItWithoutArgumentsInBlock: # new in 1.59
@@ -497,4 +497,17 @@ RSpec/SpecFilePathSuffix: # new in 2.24
 RSpec/IsExpectedSpecify: # new in 2.27
   Enabled: true
 RSpec/RepeatedSubjectCall: # new in 2.27
+  Enabled: true
+
+Style/MapIntoArray: # new in 1.63
+  Enabled: true
+Style/SendWithLiteralMethodName: # new in 1.64
+  Enabled: true
+Style/SuperArguments: # new in 1.64
+  Enabled: true
+RSpec/EmptyOutput: # new in 2.29
+  Enabled: true
+RSpec/ExpectInLet: # new in 2.30
+  Enabled: true
+RSpec/UndescriptiveLiteralsDescription: # new in 2.29
   Enabled: true

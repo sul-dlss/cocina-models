@@ -71,11 +71,7 @@ module Cocina
         def self.contributor_name_value_slices(contributor)
           return if contributor&.name.blank?
 
-          slices = []
-          Array(contributor.name).each do |contrib_name|
-            slices << value_slices(contrib_name)
-          end
-          slices.flatten
+          Array(contributor.name).map { |contrib_name| value_slices(contrib_name) }.flatten
         end
 
         # @params [Cocina::Models::DescriptiveValue] desc_value
