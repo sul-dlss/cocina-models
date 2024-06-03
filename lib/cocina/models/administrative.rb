@@ -5,7 +5,6 @@ module Cocina
     class Administrative < Struct
       # example: druid:bc123df4567
       attribute :hasAdminPolicy, Druid
-      attribute :releaseTags, Types::Strict::Array.of(ReleaseTag).default([].freeze)
     end
   end
 end
