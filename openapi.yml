@@ -229,11 +229,6 @@ components:
       properties:
         hasAdminPolicy:
           $ref: '#/components/schemas/Druid'
-        releaseTags:
-          description: Tags for release
-          type: array
-          items:
-            $ref: '#/components/schemas/ReleaseTag'
       required:
         - hasAdminPolicy
     AdminPolicyAccessTemplate:
@@ -1528,35 +1523,6 @@ components:
         valueAt:
           description: URL or other pointer to the location of the related resource information.
           type: string
-    ReleaseTag:
-      description: A tag that indicates the item or collection should be released.
-      type: object
-      additionalProperties: false
-      required:
-        - release
-        - what
-      properties:
-        who:
-          description: Who did this release
-          type: string
-          example: petucket
-        what:
-          description: What is being released. This item or the whole collection.
-          type: string
-          enum:
-            - self
-            - collection
-          example: self
-        date:
-          description: When did this action happen
-          type: string
-          format: date-time
-        to:
-          description: What platform is it released to
-          type: string
-          example: Searchworks
-        release:
-          type: boolean
     RequestAdminPolicy:
       description: Same as an AdminPolicy, but doesn't have an externalIdentifier as one will be created
       type: object

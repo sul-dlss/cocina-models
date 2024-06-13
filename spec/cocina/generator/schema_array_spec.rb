@@ -4,40 +4,6 @@ require 'spec_helper'
 
 RSpec.describe Cocina::Generator::SchemaArray do
   # This tests the outcome of running exe/generator generate against openapi.yml.
-  context 'when an array of schemas' do
-    # Administrative.releaseTags is an array of ReleaseTags
-
-    let(:administrative) do
-      Cocina::Models::Administrative.new(releaseTags: [
-                                           {
-                                             who: 'Justin',
-                                             what: 'collection',
-                                             date: '2018-11-23T00:44:52Z',
-                                             to: 'Searchworks',
-                                             release: true
-                                           },
-                                           {
-                                             who: 'Other Justin',
-                                             what: 'self',
-                                             date: '2017-10-20T15:42:15Z',
-                                             to: 'Searchworks',
-                                             release: false
-                                           }
-                                         ],
-                                         hasAdminPolicy: 'druid:bc123df4567')
-    end
-
-    it 'maps schemas' do
-      expect(administrative.releaseTags.size).to eq(2)
-      tag = administrative.releaseTags.first
-      expect(tag.who).to eq('Justin')
-      expect(tag.what).to eq('collection')
-      expect(tag.date).to eq DateTime.parse '2018-11-23T00:44:52Z'
-      expect(tag.to).to eq('Searchworks')
-      expect(tag.release).to be true
-    end
-  end
-
   context 'when array is required' do
     # Description.title is required
     context 'when array is provided' do

@@ -214,16 +214,7 @@ RSpec.describe Cocina::Models::Validators::OpenApiValidator do
           useAndReproductionStatement: 'Property rights reside with the repository.'
         },
         administrative: {
-          hasAdminPolicy: 'druid:ww057vk7675',
-          releaseTags: [
-            {
-              who: 'cspitzer',
-              what: 'self',
-              date: DateTime.new,
-              to: 'Searchworks',
-              release: true
-            }
-          ]
+          hasAdminPolicy: 'druid:ww057vk7675'
         },
         structural: {},
         identification: { sourceId: 'sul:123' }

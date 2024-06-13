@@ -5,7 +5,6 @@ module Cocina
     class RequestAdministrative < Struct
       # example: druid:bc123df4567
       attribute :hasAdminPolicy, Druid
-      attribute :releaseTags, Types::Strict::Array.of(ReleaseTag).default([].freeze)
       # Internal project this resource is a part of. This governs routing of messages about this object.
       # example: Google Books
       attribute? :partOfProject, Types::Strict::String
