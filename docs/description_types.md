@@ -352,6 +352,8 @@ _Path: identifier.type_
   * Apis ID
   * ARK
   * arXiv
+  * Bates range
+    * Used in law, medicine, and business for documents as they are scanned or processed, such as for pretrial discovery.
   * case identifier
   * case number
   * CCP
@@ -364,6 +366,8 @@ _Path: identifier.type_
   * DOI
   * druid
   * EUR-OP
+  * filing number
+    * Used when placing a paper in the official custody of the clerk of court to enter into the case records.
   * FOLIO
     * FOLIO HRID for the source record of the metadata.
   * GTIN-14 ID

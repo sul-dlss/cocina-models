@@ -344,6 +344,8 @@ identifier:
     code: ark
   - value: arXiv
     code: arxiv
+  - value: Bates range
+    description: Used in law, medicine, and business for documents as they are scanned or processed, such as for pretrial discovery.
   - value: case identifier
   - value: case number
   - value: CCP
@@ -357,6 +359,8 @@ identifier:
     code: doi
   - value: druid
   - value: EUR-OP
+  - value: filing number
+    description: Used when placing a paper in the official custody of the clerk of court to enter into the case records.
   - value: FOLIO
     description: FOLIO HRID for the source record of the metadata.
   - value: GTIN-14 ID
