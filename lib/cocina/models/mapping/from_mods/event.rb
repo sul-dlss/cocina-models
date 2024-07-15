@@ -421,7 +421,6 @@ module Cocina
             cocina_desc_val
           end
 
-          # rubocop:disable Metrics/CyclomaticComplexity
           def build_structured_date(date_nodes)
             return if date_nodes.blank?
 
@@ -432,13 +431,12 @@ module Cocina
               next if node.text.blank? && node.attributes.empty?
 
               new_node = node.deep_dup
-              new_node.remove_attribute('encoding') if common_attribs[:encoding].present? || node[:encoding]&.size&.zero?
-              new_node.remove_attribute('qualifier') if common_attribs[:qualifier].present? || node[:qualifier]&.size&.zero?
+              new_node.remove_attribute('encoding') if common_attribs[:encoding].present? || node[:encoding]&.empty?
+              new_node.remove_attribute('qualifier') if common_attribs[:qualifier].present? || node[:qualifier]&.empty?
               build_date(new_node)
             end
             { structuredValue: dates }.merge(common_attribs).compact
           end
-          # rubocop:enable Metrics/CyclomaticComplexity
 
           # Per Arcadia, keyDate should only appear once in an originInfo.
           # If keyDate is on a date of type point and is on both the start and end points, then
