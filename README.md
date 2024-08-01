@@ -140,7 +140,7 @@ Send a note to `#dlss-infra-chg-mgmt` on Slack to let people know what is changi
 
 ### Step 1: Cut the release
 
-The release process is much like any other gem. First bump the version in `lib/cocina/models/version.rb`, and commit the result. Then run:
+The release process is much like any other gem. First bump the version in `lib/cocina/models/version.rb`, then `bundle install` so that `Gemfile.lock` is updated, then commit and push those changes. Then run:
 ```
 bundle exec rake release
 ```
