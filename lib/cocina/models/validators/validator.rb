@@ -15,7 +15,8 @@ module Cocina
           DescriptionValuesValidator,
           DateTimeValidator,
           LanguageTagValidator,
-          ReservedFilenameValidator
+          ReservedFilenameValidator,
+          WasSeedValidator
         ].freeze
 
         def self.validate(clazz, attributes)
