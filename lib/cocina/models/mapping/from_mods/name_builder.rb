@@ -290,10 +290,8 @@ module Cocina
           end
 
           def build_affiliation_notes(name_node)
-            [].tap do |parts|
-              name_node.xpath('mods:affiliation', mods: Description::DESC_METADATA_NS).each do |affiliation_node|
-                parts << { value: affiliation_node.text, type: 'affiliation' }
-              end
+            name_node.xpath('mods:affiliation', mods: Description::DESC_METADATA_NS).map do |affiliation_node|
+              { value: affiliation_node.text, type: 'affiliation' }
             end
           end
 
