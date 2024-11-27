@@ -62,7 +62,8 @@ module Cocina
         version: 1,
         label: 'factory collection label',
         title: 'factory collection title',
-        admin_policy_id: 'druid:hv992ry2431'
+        admin_policy_id: 'druid:hv992ry2431',
+        source_id: 'sulcollection:1234'
       }.freeze
 
       REQUEST_COLLECTION_DEFAULTS = COLLECTION_DEFAULTS.except(:id)
