@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cocina-models (0.99.1)
+    cocina-models (0.99.2)
       activesupport
       commonmarker (= 2.0.1)
       deprecation
