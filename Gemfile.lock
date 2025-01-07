@@ -3,7 +3,7 @@ PATH
   specs:
     cocina-models (0.99.2)
       activesupport
-      commonmarker (= 2.0.1)
+      commonmarker (~> 2.0, != 2.0.2)
       deprecation
       dry-struct (~> 1.0)
       dry-types (~> 1.1)

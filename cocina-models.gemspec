@@ -25,7 +25,11 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 3.0'
 
   spec.add_dependency 'activesupport'
-  spec.add_dependency 'commonmarker', '2.0.1' # There is a breaking change in 2.0.2 with openapi3_parser
+  if RUBY_VERSION >= '3.4' # rubocop:disable Gemspec/RubyVersionGlobalsUsage
+    spec.add_dependency 'commonmarker', '>= 2.0.2' # commonmarker <= 2.0.1 is incompatible with Ruby 3.4
+  else
+    spec.add_dependency 'commonmarker', '~> 2.0', '!= 2.0.2' # commonmarker 2.0.2 includes a breaking change in Rubies < 3.4
+  end
   spec.add_dependency 'deprecation'
   spec.add_dependency 'dry-struct', '~> 1.0'
   spec.add_dependency 'dry-types', '~> 1.1'
