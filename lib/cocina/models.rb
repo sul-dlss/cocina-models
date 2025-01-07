@@ -7,7 +7,6 @@ require 'dry-types'
 require 'json'
 require 'yaml'
 require 'openapi_parser'
-require 'openapi3_parser'
 require 'active_support'
 require 'active_support/core_ext'
 require 'thor'
@@ -39,6 +38,17 @@ loader.push_dir(File.absolute_path("#{__FILE__}/../.."))
 loader.ignore("#{__dir__}/rspec.rb")
 loader.ignore("#{__dir__}/rspec")
 loader.setup
+
+module OpenAPIParser
+  module Schemas
+    # Patch OpenAPIParser::Schemas::Schema so it can tell us its name, the way Openapi3Parser schemas do.
+    class Schema
+      def name
+        object_reference.split('/').last
+      end
+    end
+  end
+end
 
 module Cocina
   # Provides Ruby objects for the repository and serializing them to/from JSON.
@@ -191,7 +201,10 @@ module Cocina
 
     def self.druid_regex
       @druid_regex ||= begin
-        str = Openapi3Parser.load_file('openapi.yml').components.schemas['Druid'].pattern
+        str = OpenAPIParser.parse(YAML.load_file('openapi.yml'), strict_reference_validation: true)
+                           .find_object('#/components')
+                           .schemas['Druid']
+                           .pattern
         Regexp.new(str)
       end
     end

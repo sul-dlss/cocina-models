@@ -50,7 +50,7 @@ module Cocina
       end
 
       def deprecation
-        return '' unless schema_doc.deprecated?
+        return '' unless schema_doc.deprecated
 
         "# DEPRECATED\n"
       end
