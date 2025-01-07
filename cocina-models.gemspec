@@ -25,7 +25,6 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 3.0'
 
   spec.add_dependency 'activesupport'
-  spec.add_dependency 'commonmarker', '2.0.1' # There is a breaking change in 2.0.2 with openapi3_parser
   spec.add_dependency 'deprecation'
   spec.add_dependency 'dry-struct', '~> 1.0'
   spec.add_dependency 'dry-types', '~> 1.1'
