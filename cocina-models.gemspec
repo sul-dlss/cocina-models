@@ -25,11 +25,6 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 3.0'
 
   spec.add_dependency 'activesupport'
-  if RUBY_VERSION >= '3.4' # rubocop:disable Gemspec/RubyVersionGlobalsUsage
-    spec.add_dependency 'commonmarker', '>= 2.0.2' # commonmarker <= 2.0.1 is incompatible with Ruby 3.4
-  else
-    spec.add_dependency 'commonmarker', '~> 2.0', '!= 2.0.2' # commonmarker 2.0.2 includes a breaking change in Rubies < 3.4
-  end
   spec.add_dependency 'deprecation'
   spec.add_dependency 'dry-struct', '~> 1.0'
   spec.add_dependency 'dry-types', '~> 1.1'
@@ -38,7 +33,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'i18n' # for validating BCP 47 language tags, according to RFC 4646
   spec.add_dependency 'jsonpath' # used for date/time validation
   spec.add_dependency 'nokogiri'
-  spec.add_dependency 'openapi3_parser' # Parsing openapi doc
   # Match these version requirements to what committee wants,
   # so that our client (non-committee) users have the same dependencies.
   spec.add_dependency 'openapi_parser', '~> 1.0'

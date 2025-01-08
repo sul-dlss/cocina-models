@@ -51,7 +51,7 @@ module Cocina
       }.freeze
 
       def vocabs
-        type_properties = schemas.values.map { |schema| schema.properties['type'] }.compact
+        type_properties = schemas.values.map { |schema| schema.properties&.[]('type') }.compact
         type_properties.map(&:enum).flat_map(&:to_a)
                        .filter { |vocab| vocab.start_with?(BASE) }
                        .uniq
