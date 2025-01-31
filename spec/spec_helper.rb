@@ -10,6 +10,11 @@ require 'support/matchers/deep_ignore_order_matcher'
 require 'simplecov'
 SimpleCov.start do
   add_filter 'spec'
+  if ENV['CI']
+    require 'simplecov_json_formatter'
+
+    formatter SimpleCov::Formatter::JSONFormatter
+  end
 end
 
 # This will find any constants that Zeitwerk has trouble inflecting
