@@ -51,6 +51,8 @@ contributor:
 contributor.identifier:
   - value: ORCID
     description: Identifier from orcid.org.
+  - value: ROR
+    code: ror
   - value: Wikidata
     description: Identifier from wikidata.org.
 contributor.name:
