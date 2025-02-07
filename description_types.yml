@@ -601,6 +601,8 @@ note.groupedValue:
   - value: title
   - value: text
 relatedResource:
+  - value: derived from
+    description: The source from which the resource was derived, such as a raw data set before processing.
   - value: has original version
     description: An initial form of the resource.
   - value: has other format
@@ -609,6 +611,8 @@ relatedResource:
     description: A constituent unit of the resource.
   - value: has version
     description: A version of the resource with different intellectual content.
+  - value: identical to
+    description: A version of the resource with the same content and format.
   - value: in series
     description: The name of a series of publications to which the resource belongs.
   - value: other relation type
@@ -625,8 +629,16 @@ relatedResource:
     description: A generically related resource.
   - value: reviewed by
     description: A review of the resource.
+  - value: source of
+    description: Additional materials derived from the resource, such as a processed data set.
   - value: succeeded by
     description: A successor to the resource, such as a subsequent journal title.
+  - value: supplemented by
+    description: An auxiliary supplement to the resource.
+  - value: supplement to
+    description: The primary object which the resource supplements.
+  - value: version of record
+    description: The version of the resource that is preferred for citation and reference.
 subject:
   - value: classification
     description: A coded reference to the main subjects of the resource according to a larger system.
