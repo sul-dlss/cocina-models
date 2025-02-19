@@ -51,14 +51,18 @@ module Cocina
               item[:displayLabel] = related_item['displayLabel']
               if related_item['type']
                 item[:type] = normalized_type_for(related_item['type'])
-              elsif related_item['otherType']
-                item[:type] = 'related to'
-                item[:note] ||= []
-                item[:note] <<
-                  { type: 'other relation type', value: related_item['otherType'] }.tap do |note|
-                    note[:uri] = related_item['otherTypeURI'] if related_item['otherTypeURI']
-                    note[:source] = { value: related_item['otherTypeAuth'] } if related_item['otherTypeAuth']
-                  end
+              elsif (other_type = related_item['otherType'])
+                if Cocina::Models::Mapping::ToMods::RelatedResource::OTHER_TYPES.include?(other_type)
+                  item[:type] = other_type
+                else
+                  item[:type] = 'related to'
+                  item[:note] ||= []
+                  item[:note] <<
+                    { type: 'other relation type', value: related_item['otherType'] }.tap do |note|
+                      note[:uri] = related_item['otherTypeURI'] if related_item['otherTypeURI']
+                      note[:source] = { value: related_item['otherTypeAuth'] } if related_item['otherTypeAuth']
+                    end
+                end
               end
             end.compact
           end
