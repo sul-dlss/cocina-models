@@ -55,6 +55,7 @@ _Path: contributor.type_
 _Path: contributor.identifier.type_
   * ORCID
     * Identifier from orcid.org.
+  * ROR
   * Wikidata
     * Identifier from wikidata.org.
 ## Contributor name types
@@ -576,6 +577,8 @@ _Path: note.groupedValue.type_
   * text
 # RelatedResource types
 _Path: relatedResource.type_
+  * derived from
+    * The source from which the resource was derived, such as a raw data set before processing.
   * has original version
     * An initial form of the resource.
   * has other format
@@ -584,6 +587,8 @@ _Path: relatedResource.type_
     * A constituent unit of the resource.
   * has version
     * A version of the resource with different intellectual content.
+  * identical to
+    * A version of the resource with the same content and format.
   * in series
     * The name of a series of publications to which the resource belongs.
   * other relation type
@@ -600,8 +605,16 @@ _Path: relatedResource.type_
     * A generically related resource.
   * reviewed by
     * A review of the resource.
+  * source of
+    * Additional materials derived from the resource, such as a processed data set.
   * succeeded by
     * A successor to the resource, such as a subsequent journal title.
+  * supplemented by
+    * An auxiliary supplement to the resource.
+  * supplement to
+    * The primary object which the resource supplements.
+  * version of record
+    * The version of the resource that is preferred for citation and reference.
 # Subject types
 _Path: subject.type_
   * classification
