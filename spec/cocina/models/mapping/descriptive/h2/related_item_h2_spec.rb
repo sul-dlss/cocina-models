@@ -30,6 +30,37 @@ RSpec.describe 'Cocina --> MODS mappings for relatedItem' do
     end
   end
 
+  # Related resource types that does not map to MODS
+  # See https://github.com/sul-dlss/cocina-models/issues/773
+  describe 'OtherType related citation' do
+    it_behaves_like 'cocina MODS mapping' do
+      let(:mods) do
+        <<~XML
+          <relatedItem otherType="source of">
+            <titleInfo>
+              <title>A paper</title>
+            </titleInfo>
+          </relatedItem>
+        XML
+      end
+
+      let(:cocina) do
+        {
+          relatedResource: [
+            {
+              title: [
+                {
+                  value: 'A paper'
+                }
+              ],
+              type: 'source of'
+            }
+          ]
+        }
+      end
+    end
+  end
+
   describe 'Related link with title' do
     it_behaves_like 'cocina MODS mapping' do
       let(:mods) do

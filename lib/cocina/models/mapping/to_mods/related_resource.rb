@@ -22,6 +22,15 @@ module Cocina
             'succeeded by' => 'succeeding'
           }.freeze
 
+          OTHER_TYPES = [
+            'supplement to',
+            'supplemented by',
+            'derived from',
+            'source of',
+            'version of record',
+            'identical to'
+          ].freeze
+
           DETAIL_TYPES = {
             'location within source' => 'part',
             'volume' => 'volume',
@@ -85,7 +94,13 @@ module Cocina
 
           def attributes_for(related, other_type_note)
             {}.tap do |attrs|
-              attrs[:type] = TYPES.fetch(related.type) if related.type
+              if related.type
+                if (mapped_type = TYPES[related.type])
+                  attrs[:type] = mapped_type
+                elsif OTHER_TYPES.include?(related.type)
+                  attrs[:otherType] = related.type
+                end
+              end
               attrs[:displayLabel] = related.displayLabel
 
               if other_type_note
