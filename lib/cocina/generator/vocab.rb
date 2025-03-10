@@ -49,6 +49,7 @@ module Cocina
         'ObjectType' => BASE,
         'FileSetType' => "#{BASE}resources/"
       }.freeze
+      private_constant :BASE, :URIS
 
       def vocabs
         type_properties = schemas.values.map { |schema| schema.properties&.[]('type') }.compact

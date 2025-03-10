@@ -136,6 +136,7 @@ module Cocina
         version.rb
         vocabulary.rb
       ].freeze
+      private_constant :NO_CLEAN
 
       def clean_output
         FileUtils.mkdir_p(options[:output])
