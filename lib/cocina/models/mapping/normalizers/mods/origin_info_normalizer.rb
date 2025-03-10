@@ -56,6 +56,7 @@ module Cocina
             end
 
             LEGACY_EVENT_TYPES_2_TYPE = Cocina::Models::Mapping::FromMods::Event::LEGACY_EVENT_TYPES_2_TYPE
+            private_constant :LEGACY_EVENT_TYPES_2_TYPE
 
             # because eventType is a relatively new addition to the MODS schema, records converted from MARC to MODS prior
             #   to its introduction used displayLabel as a stopgap measure, with certain values
