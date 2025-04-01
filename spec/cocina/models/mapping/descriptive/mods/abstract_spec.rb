@@ -77,7 +77,7 @@ RSpec.describe 'MODS abstract <--> cocina mappings' do
     end
   end
 
-  describe 'Abstract with type "summary"' do
+  describe 'Abstract with type' do
     it_behaves_like 'MODS cocina mapping' do
       let(:mods) do
         <<~XML
@@ -91,54 +91,6 @@ RSpec.describe 'MODS abstract <--> cocina mappings' do
             {
               value: 'This is a summary.',
               type: 'summary'
-            }
-          ]
-        }
-      end
-    end
-  end
-
-  describe 'Abstract with type "Summary"' do
-    it_behaves_like 'MODS cocina mapping' do
-      let(:mods) do
-        <<~XML
-          <abstract type="Summary">This is a summary.</abstract>
-        XML
-      end
-
-      let(:roundtrip_mods) do
-        <<~XML
-          <abstract type="summary">This is a summary.</abstract>
-        XML
-      end
-
-      let(:cocina) do
-        {
-          note: [
-            {
-              value: 'This is a summary.',
-              type: 'summary'
-            }
-          ]
-        }
-      end
-    end
-  end
-
-  describe 'Abstract with type "scope and content"' do
-    it_behaves_like 'MODS cocina mapping' do
-      let(:mods) do
-        <<~XML
-          <abstract type="scope and content">This is a scope and content note.</abstract>
-        XML
-      end
-
-      let(:cocina) do
-        {
-          note: [
-            {
-              value: 'This is a scope and content note.',
-              type: 'scope and content'
             }
           ]
         }
@@ -168,7 +120,7 @@ RSpec.describe 'MODS abstract <--> cocina mappings' do
     end
   end
 
-  describe 'Abstract with displayLabel "Summary" and no type' do
+  describe 'Abstract with displayLabel and no type' do
     it_behaves_like 'MODS cocina mapping' do
       let(:mods) do
         <<~XML
@@ -182,189 +134,6 @@ RSpec.describe 'MODS abstract <--> cocina mappings' do
             {
               value: 'Summary',
               displayLabel: 'Summary'
-            }
-          ]
-        }
-      end
-    end
-  end
-
-  describe 'Abstract with displayLabel "Subject" and no type' do
-    it_behaves_like 'MODS cocina mapping' do
-      let(:mods) do
-        <<~XML
-          <abstract displayLabel="Subject">Subject</abstract>
-        XML
-      end
-
-      let(:cocina) do
-        {
-          note: [
-            {
-              value: 'Subject',
-              displayLabel: 'Subject'
-            }
-          ]
-        }
-      end
-    end
-  end
-
-  describe 'Abstract with displayLabel "Review" and no type' do
-    it_behaves_like 'MODS cocina mapping' do
-      let(:mods) do
-        <<~XML
-          <abstract displayLabel="Review">Review</abstract>
-        XML
-      end
-
-      let(:cocina) do
-        {
-          note: [
-            {
-              value: 'Review',
-              displayLabel: 'Review'
-            }
-          ]
-        }
-      end
-    end
-  end
-
-  describe 'Abstract with displayLabel "Scope and content" and no type' do
-    it_behaves_like 'MODS cocina mapping' do
-      let(:mods) do
-        <<~XML
-          <abstract displayLabel="Scope and content">Scope and content</abstract>
-        XML
-      end
-
-      let(:cocina) do
-        {
-          note: [
-            {
-              value: 'Scope and content',
-              displayLabel: 'Scope and content'
-            }
-          ]
-        }
-      end
-    end
-  end
-
-  describe 'Abstract with scope and content displayLabel and no type, nonstandard capitalization' do
-    # normalize this displayLabel to be lowercase after first letter
-    it_behaves_like 'MODS cocina mapping' do
-      let(:mods) do
-        <<~XML
-          <abstract displayLabel="Scope and Content">Scope and content</abstract>
-        XML
-      end
-
-      let(:roundtrip_mods) do
-        <<~XML
-          <abstract displayLabel="Scope and content">Scope and content</abstract>
-        XML
-      end
-
-      let(:cocina) do
-        {
-          note: [
-            {
-              value: 'Scope and content',
-              displayLabel: 'Scope and content'
-            }
-          ]
-        }
-      end
-    end
-  end
-
-  describe 'Abstract with displayLabel "Abstract" and no type' do
-    it_behaves_like 'MODS cocina mapping' do
-      let(:mods) do
-        <<~XML
-          <abstract displayLabel="Abstract">Abstract</abstract>
-        XML
-      end
-
-      let(:cocina) do
-        {
-          note: [
-            {
-              value: 'Abstract',
-              displayLabel: 'Abstract'
-            }
-          ]
-        }
-      end
-    end
-  end
-
-  describe 'Abstract with displayLabel "Content advice" and no type' do
-    it_behaves_like 'MODS cocina mapping' do
-      let(:mods) do
-        <<~XML
-          <abstract displayLabel="Content advice">Content advice</abstract>
-        XML
-      end
-
-      let(:cocina) do
-        {
-          note: [
-            {
-              value: 'Content advice',
-              displayLabel: 'Content advice'
-            }
-          ]
-        }
-      end
-    end
-  end
-
-  describe 'Abstract with content advice displayLabel and no type, nonstandard capitalization' do
-    # normalize this displayLabel to be lowercase after first letter
-    it_behaves_like 'MODS cocina mapping' do
-      let(:mods) do
-        <<~XML
-          <abstract displayLabel="Content Advice">Content advice</abstract>
-        XML
-      end
-
-      let(:roundtrip_mods) do
-        <<~XML
-          <abstract displayLabel="Content advice">Content advice</abstract>
-        XML
-      end
-
-      let(:cocina) do
-        {
-          note: [
-            {
-              value: 'Content advice',
-              displayLabel: 'Content advice'
-            }
-          ]
-        }
-      end
-    end
-  end
-
-  describe 'Abstract with other displayLabel, capitalization retained' do
-    it_behaves_like 'MODS cocina mapping' do
-      let(:mods) do
-        <<~XML
-          <abstract displayLabel="Summary from Barnes Catalogue of Works">A summary.</abstract>
-        XML
-      end
-
-      let(:cocina) do
-        {
-          note: [
-            {
-              value: 'A summary.',
-              type: 'abstract',
-              displayLabel: 'Summary from Barnes Catalogue of Works'
             }
           ]
         }
