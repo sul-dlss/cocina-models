@@ -11,6 +11,10 @@ module Cocina
       attribute :refresh, Types::Strict::Bool.default(false)
       # Record identifier that is unique within the context of the linked record's catalog.
       attribute :catalogRecordId, MigratedFromSymphonyIdentifier | MigratedFromVoyagerIdentifier | CreatedInFolioIdentifier
+      # Label for use in display of serials via Folio record
+      attribute? :partLabel, Types::Strict::String
+      # Sorting information for use in display of serials via Folio record
+      attribute? :sortKey, Types::Strict::String
     end
   end
 end
