@@ -172,6 +172,44 @@ RSpec.describe Cocina::Models::Validators::CatalogLinksValidator do
           expect { validate }.not_to raise_error
         end
       end
+
+      context 'with a partLabel and sortKey' do
+        let(:catalog_links) do
+          [
+            {
+              catalog: 'folio',
+              catalogRecordId: 'in111',
+              refresh: true,
+              partLabel: 'Part 1',
+              sortKey: '1'
+            }
+          ]
+        end
+
+        it 'validates' do
+          expect { validate }.not_to raise_error
+        end
+      end
+
+      context 'with a sortKey and no partLabel' do
+        let(:catalog_links) do
+          [
+            {
+              catalog: 'folio',
+              catalogRecordId: 'in111',
+              refresh: true,
+              sortKey: '1'
+            }
+          ]
+        end
+
+        it 'raises a validation error' do
+          expect { validate }.to raise_error(
+            Cocina::Models::ValidationError,
+            /partLabel must also be present if a sortKey is used in catalog link/
+          )
+        end
+      end
     end
   end
 

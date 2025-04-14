@@ -21,6 +21,7 @@ module Cocina
 
           validate_catalog('symphony')
           validate_catalog('folio')
+          validate_sort_key
         end
 
         private
@@ -34,6 +35,16 @@ module Cocina
 
           raise ValidationError, "Multiple catalog links have 'refresh' property set to true " \
                                  "(only one allowed) #{refresh_catalog_links}"
+        end
+
+        def validate_sort_key
+          serials_links = catalog_links.select { |catalog_link| catalog_link[:catalog] == 'folio' && catalog_link[:sortKey].present? }
+          serials_links.each do |catalog_link|
+            # If partLabel is present, skip validation
+            next if catalog_link[:partLabel].present?
+
+            raise ValidationError, "partLabel must also be present if a sortKey is used in catalog link #{catalog_link}"
+          end
         end
 
         def catalog_links
