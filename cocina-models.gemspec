@@ -35,15 +35,17 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'nokogiri'
   # Match these version requirements to what committee wants,
   # so that our client (non-committee) users have the same dependencies.
-  spec.add_dependency 'openapi_parser', '~> 1.0'
+  spec.add_dependency 'openapi_parser', '~> 2.0'
   spec.add_dependency 'super_diff'
   spec.add_dependency 'thor'
   spec.add_dependency 'zeitwerk', '~> 2.1'
 
   spec.add_development_dependency 'bundler', '~> 2.0'
   spec.add_development_dependency 'committee'
+  spec.add_development_dependency 'debug'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.add_development_dependency 'rspec_junit_formatter' # For CircleCI
   spec.add_development_dependency 'rubocop', '~> 1.24'
   spec.add_development_dependency 'rubocop-rake'
   spec.add_development_dependency 'rubocop-rspec'
