@@ -23,7 +23,7 @@ module Cocina
                              'It must be called with an array of titles')
             titles = titles.description.title
           end
-          new(strategy: strategy, add_punctuation: add_punctuation).build(titles, part_label: part_label)
+          new(strategy: strategy, add_punctuation: add_punctuation, part_label: part_label).build(titles)
         end
 
         # the "main title" is the title withOUT subtitle, part name, etc.  We want to index it separately so
@@ -59,10 +59,12 @@ module Cocina
         #   of primary, untyped, first occurrence.  When false, return an array containing all the parallel values.
         #   Why? Think of e.g. title displayed in blacklight search results vs boosting values for ranking of search
         #   results
-        def initialize(strategy:, add_punctuation:, only_one_parallel_value: true)
+        # @param part_label [String] the partLabel to add for digital serials display
+        def initialize(strategy:, add_punctuation:, only_one_parallel_value: true, part_label: nil)
           @strategy = strategy
           @add_punctuation = add_punctuation
           @only_one_parallel_value = only_one_parallel_value
+          @part_label = part_label
         end
 
         # @param [Array<Cocina::Models::Title>] cocina_titles the titles to consider
@@ -71,12 +73,12 @@ module Cocina
         #   (e.g. title displayed in blacklight search results vs boosting values for search result rankings)
         #
         # rubocop:disable Metrics/PerceivedComplexity
-        def build(cocina_titles, part_label: nil)
+        def build(cocina_titles)
           cocina_title = primary_title(cocina_titles) || untyped_title(cocina_titles)
           cocina_title = other_title(cocina_titles) if cocina_title.blank?
           if strategy == :first
             result = extract_title(cocina_title)
-            add_part_label(result, part_label: part_label)
+            add_part_label(result)
           else
             result = cocina_titles.map { |ctitle| extract_title(ctitle) }.flatten
             if only_one_parallel_value? && result.length == 1
@@ -100,9 +102,9 @@ module Cocina
 
         private
 
-        attr_reader :strategy
+        attr_reader :strategy, :part_label
 
-        def add_part_label(title, part_label: nil)
+        def add_part_label(title)
           # when a digital serial
           title = "#{title.sub(/[ .,]*$/, '')}, #{part_label}" if part_label.present?
           title
