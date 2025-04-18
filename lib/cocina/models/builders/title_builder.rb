@@ -8,26 +8,28 @@ module Cocina
       # TitleBuilder selects the prefered title from the cocina object for solr indexing
       class TitleBuilder # rubocop:disable Metrics/ClassLength
         extend Deprecation
-        # @param [[Array<Cocina::Models::Title,Cocina::Models::DescriptiveValue>] titles the titles to consider
+        # @param [Array<Cocina::Models::Title,Cocina::Models::DescriptiveValue>] titles the titles to consider
+        # @param [Array<Cocina::Models::FolioCatalogLink>] catalog_links the folio catalog links to check for digital serials part labels
         # @param [Symbol] strategy ":first" is the strategy for selection when primary or display
         #   title are missing
         # @param [Boolean] add_punctuation determines if the title should be formmated with punctuation
         # @return [String, Array] the title value for Solr - for :first strategy, a string; for :all strategy, an array
         #   (e.g. title displayed in blacklight search results vs boosting values for search result rankings)
-        def self.build(titles, strategy: :first, add_punctuation: true)
+        def self.build(titles, catalog_links: [], strategy: :first, add_punctuation: true)
+          part_label = catalog_links.find { |link| link.catalog == 'folio' }&.partLabel
           if titles.respond_to?(:description)
             Deprecation.warn(self,
                              "Calling TitleBuilder.build with a #{titles.class} is deprecated. " \
                              'It must be called with an array of titles')
             titles = titles.description.title
           end
-          new(strategy: strategy, add_punctuation: add_punctuation).build(titles)
+          new(strategy: strategy, add_punctuation: add_punctuation, part_label: part_label).build(titles)
         end
 
         # the "main title" is the title withOUT subtitle, part name, etc.  We want to index it separately so
         #   we can boost matches on it in search results (boost matching this string higher than matching full title string)
         #   e.g. "The Hobbit" (main_title) vs "The Hobbit, or, There and Back Again (full_title)
-        # @param [[Array<Cocina::Models::Title,Cocina::Models::DescriptiveValue>] titles the titles to consider
+        # @param [Array<Cocina::Models::Title,Cocina::Models::DescriptiveValue>] titles the titles to consider
         # @return [Array<String>] the main title value(s) for Solr - array due to possible parallelValue
         def self.main_title(titles)
           new(strategy: :first, add_punctuation: false).main_title(titles)
@@ -35,7 +37,7 @@ module Cocina
 
         # the "full title" is the title WITH subtitle, part name, etc.  We want to able able to index it separately so
         #   we can boost matches on it in search results (boost matching this string higher than other titles present)
-        # @param [[Array<Cocina::Models::Title,Cocina::Models::DescriptiveValue>] titles the titles to consider
+        # @param [Array<Cocina::Models::Title,Cocina::Models::DescriptiveValue>] titles the titles to consider
         # @return [Array<String>] the full title value(s) for Solr - array due to possible parallelValue
         def self.full_title(titles)
           [new(strategy: :first, add_punctuation: false, only_one_parallel_value: false).build(titles)].flatten.compact
@@ -43,7 +45,7 @@ module Cocina
 
         # "additional titles" are all title data except for full_title.  We want to able able to index it separately so
         #   we can boost matches on it in search results (boost matching these strings lower than other titles present)
-        # @param [[Array<Cocina::Models::Title,Cocina::Models::DescriptiveValue>] titles the titles to consider
+        # @param [Array<Cocina::Models::Title,Cocina::Models::DescriptiveValue>] titles the titles to consider
         # @return [Array<String>] the values for Solr
         def self.additional_titles(titles)
           [new(strategy: :all, add_punctuation: false).build(titles)].flatten - full_title(titles)
@@ -57,13 +59,16 @@ module Cocina
         #   of primary, untyped, first occurrence.  When false, return an array containing all the parallel values.
         #   Why? Think of e.g. title displayed in blacklight search results vs boosting values for ranking of search
         #   results
-        def initialize(strategy:, add_punctuation:, only_one_parallel_value: true)
+        # @param part_label [String] the partLabel to add for digital serials display
+        def initialize(strategy:, add_punctuation:, only_one_parallel_value: true, part_label: nil)
           @strategy = strategy
           @add_punctuation = add_punctuation
           @only_one_parallel_value = only_one_parallel_value
+          @part_label = part_label
         end
 
-        # @param [[Array<Cocina::Models::Title>] cocina_titles the titles to consider
+        # @param [Array<Cocina::Models::Title>] cocina_titles the titles to consider
+        # @param [String, nil] part_label the partLabel to add to the title for digital serials
         # @return [String, Array] the title value for Solr - for :first strategy, a string; for :all strategy, an array
         #   (e.g. title displayed in blacklight search results vs boosting values for search result rankings)
         #
@@ -71,9 +76,9 @@ module Cocina
         def build(cocina_titles)
           cocina_title = primary_title(cocina_titles) || untyped_title(cocina_titles)
           cocina_title = other_title(cocina_titles) if cocina_title.blank?
-
           if strategy == :first
-            extract_title(cocina_title)
+            result = extract_title(cocina_title)
+            add_part_label(result)
           else
             result = cocina_titles.map { |ctitle| extract_title(ctitle) }.flatten
             if only_one_parallel_value? && result.length == 1
@@ -97,7 +102,13 @@ module Cocina
 
         private
 
-        attr_reader :strategy
+        attr_reader :strategy, :part_label
+
+        def add_part_label(title)
+          # when a digital serial
+          title = "#{title.sub(/[ .,]*$/, '')}, #{part_label}" if part_label.present?
+          title
+        end
 
         def extract_title(cocina_title)
           title_values = if cocina_title.value
