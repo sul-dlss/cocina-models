@@ -12,6 +12,14 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
   let(:main_title) { described_class.main_title(cocina_titles) }
   let(:full_title) { described_class.full_title(cocina_titles) }
   let(:additional_titles) { described_class.additional_titles(cocina_titles) }
+  let(:catalog_links) do
+    [{
+      catalog: 'folio',
+      catalogRecordId: 'a11403803',
+      partLabel: 'Part 1'
+    }]
+  end
+  let(:links) { catalog_links.map { |hash| Cocina::Models::FolioCatalogLink.new(hash) } }
 
   context 'with a DRO instead of cocina_titles (deprecated)' do
     subject(:builder_build) { described_class.build(cocina_object, strategy: strategy, add_punctuation: add_punctuation) }
@@ -119,6 +127,27 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
           expect(builder_build).to eq('Simple untyped')
         end
       end
+
+      context 'with a partLabel' do
+        subject(:builder_build) { described_class.build(cocina_titles, catalog_links: links, strategy: strategy, add_punctuation: add_punctuation) }
+
+        it 'returns the title with partLabel' do
+          expect(builder_build).to eq('Simple untyped, Part 1')
+        end
+      end
+
+      context 'with catalogLinks and no partLabel' do
+        let(:catalog_links) do
+          [{
+            catalog: 'folio',
+            catalogRecordId: 'a11403803'
+          }]
+        end
+
+        it 'returns the title' do
+          expect(builder_build).to eq('Simple untyped')
+        end
+      end
     end
   end
 
@@ -190,6 +219,14 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
           expect(builder_build).to eq('Trailing')
         end
       end
+
+      context 'with a partLabel' do
+        subject(:builder_build) { described_class.build(cocina_titles, catalog_links: links, strategy: strategy, add_punctuation: add_punctuation) }
+
+        it 'returns the title with partLabel' do
+          expect(builder_build).to eq('Trailing, Part 1')
+        end
+      end
     end
   end
 
@@ -255,6 +292,14 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       context 'with :first strategy' do
         it 'returns the first title' do
           expect(builder_build).to eq('Primary Title')
+        end
+      end
+
+      context 'with a partLabel' do
+        subject(:builder_build) { described_class.build(cocina_titles, catalog_links: links, strategy: strategy, add_punctuation: add_punctuation) }
+
+        it 'returns the title with partLabel' do
+          expect(builder_build).to eq('Primary Title, Part 1')
         end
       end
 
@@ -553,6 +598,14 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       context 'with :first strategy' do
         it 'returns the reconstructed title with punctuation' do
           expect(builder_build).to eq('A title : a subtitle. Vol. 1, Supplement')
+        end
+      end
+
+      context 'with a partLabel' do
+        subject(:builder_build) { described_class.build(cocina_titles, catalog_links: links, strategy: strategy, add_punctuation: add_punctuation) }
+
+        it 'returns the title with partLabel' do
+          expect(builder_build).to eq('A title : a subtitle. Vol. 1, Supplement, Part 1')
         end
       end
 
