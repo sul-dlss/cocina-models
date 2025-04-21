@@ -245,7 +245,8 @@ module Cocina
               padding = non_sorting_padding(cocina_title, value)
               result = add_non_sorting_value(result, value, padding)
             when 'part name', 'part number'
-              if part_name_number.blank?
+              # if there is a partLabel, do not use structuredValue part name/number
+              if part_name_number.blank? && part_label.blank?
                 part_name_number = part_name_number(cocina_title.structuredValue)
                 result = if !add_punctuation?
                            [result, part_name_number].join(' ')
