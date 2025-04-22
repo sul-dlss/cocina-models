@@ -39,8 +39,9 @@ module Cocina
         #   we can boost matches on it in search results (boost matching this string higher than other titles present)
         # @param [Array<Cocina::Models::Title,Cocina::Models::DescriptiveValue>] titles the titles to consider
         # @return [Array<String>] the full title value(s) for Solr - array due to possible parallelValue
-        def self.full_title(titles)
-          [new(strategy: :first, add_punctuation: false, only_one_parallel_value: false).build(titles)].flatten.compact
+        def self.full_title(titles, catalog_links: [])
+          part_label = catalog_links.find { |link| link.catalog == 'folio' }&.partLabel
+          [new(strategy: :first, add_punctuation: false, only_one_parallel_value: false, part_label: part_label).build(titles)].flatten.compact
         end
 
         # "additional titles" are all title data except for full_title.  We want to able able to index it separately so

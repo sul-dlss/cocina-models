@@ -921,7 +921,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     end
 
     it '.full_title returns the reconstructed title pieces without added punctuation' do
-      expect(full_title).to eq ['Nothing Series 666 Vol. 1']
+      expect(full_title).to eq ['Nothing, Part 1']
     end
 
     it '.build returns the reconstructed value with punctuation and uses partLabel' do
