@@ -38,6 +38,7 @@ module Cocina
         # the "full title" is the title WITH subtitle, part name, etc.  We want to able able to index it separately so
         #   we can boost matches on it in search results (boost matching this string higher than other titles present)
         # @param [Array<Cocina::Models::Title,Cocina::Models::DescriptiveValue>] titles the titles to consider
+        # @param [Array<Cocina::Models::FolioCatalogLink>] catalog_links the folio catalog links to check for digital serials part labels
         # @return [Array<String>] the full title value(s) for Solr - array due to possible parallelValue
         def self.full_title(titles, catalog_links: [])
           part_label = catalog_links.find { |link| link.catalog == 'folio' }&.partLabel
@@ -69,7 +70,6 @@ module Cocina
         end
 
         # @param [Array<Cocina::Models::Title>] cocina_titles the titles to consider
-        # @param [String, nil] part_label the partLabel to add to the title for digital serials
         # @return [String, Array] the title value for Solr - for :first strategy, a string; for :all strategy, an array
         #   (e.g. title displayed in blacklight search results vs boosting values for search result rankings)
         #
@@ -79,7 +79,8 @@ module Cocina
           cocina_title = other_title(cocina_titles) if cocina_title.blank?
           if strategy == :first
             result = extract_title(cocina_title)
-            add_part_label(result)
+            result = add_part_label(result) if part_label.present?
+            result
           else
             result = cocina_titles.map { |ctitle| extract_title(ctitle) }.flatten
             if only_one_parallel_value? && result.length == 1
@@ -107,8 +108,8 @@ module Cocina
 
         def add_part_label(title)
           # when a digital serial
-          title = "#{title.sub(/[ .,]*$/, '')}, #{part_label}" if part_label.present?
-          title
+          title = title.sub(/[ .,]*$/, '').to_s
+          add_punctuation? ? "#{title}, #{part_label}" : "#{title} #{part_label}"
         end
 
         def extract_title(cocina_title)
@@ -246,8 +247,9 @@ module Cocina
               padding = non_sorting_padding(cocina_title, value)
               result = add_non_sorting_value(result, value, padding)
             when 'part name', 'part number'
-              # if there is a partLabel, do not use structuredValue part name/number
-              if part_name_number.blank? && part_label.blank?
+              # even if there is a partLabel, use any existing structuredValue
+              # part name/number that remains for non-digital serials purposes
+              if part_name_number.blank?
                 part_name_number = part_name_number(cocina_title.structuredValue)
                 result = if !add_punctuation?
                            [result, part_name_number].join(' ')
