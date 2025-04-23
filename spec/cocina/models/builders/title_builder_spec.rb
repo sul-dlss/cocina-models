@@ -583,7 +583,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
             type: 'subtitle'
           },
           {
-            value: 'Vol. 1',
+            value: 'First series',
             type: 'part number'
           },
           {
@@ -597,15 +597,15 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     describe '.build' do
       context 'with :first strategy' do
         it 'returns the reconstructed title with punctuation' do
-          expect(builder_build).to eq('A title : a subtitle. Vol. 1, Supplement')
+          expect(builder_build).to eq('A title : a subtitle. First series, Supplement')
         end
       end
 
-      context 'with a partLabel' do
+      context 'with a partLabel and a part name / part number' do
         subject(:builder_build) { described_class.build(cocina_titles, catalog_links: links, strategy: strategy, add_punctuation: add_punctuation) }
 
         it 'returns the title with partLabel' do
-          expect(builder_build).to eq('A title : a subtitle. Vol. 1, Supplement, Part 1')
+          expect(builder_build).to eq('A title : a subtitle. First series, Supplement, Part 1')
         end
       end
 
@@ -613,7 +613,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
         let(:strategy) { :all }
 
         it 'returns the reconstructed title with punctuation (as a String)' do
-          expect(builder_build).to eq('A title : a subtitle. Vol. 1, Supplement')
+          expect(builder_build).to eq('A title : a subtitle. First series, Supplement')
         end
       end
     end
@@ -623,7 +623,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     end
 
     it '.full_title returns the reconstructed title without punctuation' do
-      expect(full_title).to eq ['A title a subtitle Vol. 1 Supplement']
+      expect(full_title).to eq ['A title a subtitle First series Supplement']
     end
 
     it '.additional_titles is empty as there is only one title' do
@@ -754,6 +754,33 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     end
   end
 
+  context 'with a structuredValue with part name part number and a catalog link' do
+    subject(:builder_build) { described_class.build(cocina_titles, catalog_links: links, strategy: strategy, add_punctuation: add_punctuation) }
+
+    let(:titles) do
+      [
+        structuredValue: [
+          {
+            value: 'Some Title',
+            type: 'main title'
+          },
+          {
+            value: 'First part number',
+            type: 'part number'
+          },
+          {
+            value: 'A part label',
+            type: 'part name'
+          }
+        ]
+      ]
+    end
+
+    it 'uses the partLabel from the catalogLinks' do
+      expect(builder_build).to eq('Some Title. First part number, A part label, Part 1')
+    end
+  end
+
   context 'with structuredValue with subtitle' do
     let(:titles) do
       [
@@ -862,6 +889,44 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
 
     it '.build returns the reconstructed value with punctuation' do
       expect(builder_build).to eq('Nothing. Series 666, Vol. 1')
+    end
+  end
+
+  context 'with structuredValue is subtitle, part name, part number and partLabel' do
+    subject(:builder_build) { described_class.build(cocina_titles, catalog_links: links, strategy: strategy, add_punctuation: add_punctuation) }
+
+    let(:full_title) { described_class.full_title(cocina_titles, catalog_links: links) }
+    let(:titles) do
+      [
+        {
+          structuredValue: [
+            {
+              value: 'Nothing',
+              type: 'subtitle'
+            },
+            {
+              value: 'Series 666',
+              type: 'part name'
+            },
+            {
+              value: 'Vol. 1',
+              type: 'part number'
+            }
+          ]
+        }
+      ]
+    end
+
+    it '.main_title has no value' do
+      expect(main_title).to eq []
+    end
+
+    it '.full_title returns the reconstructed title pieces without added punctuation and with partLabel' do
+      expect(full_title).to eq ['Nothing Series 666 Vol. 1 Part 1']
+    end
+
+    it '.build returns the reconstructed value with punctuation and uses partLabel' do
+      expect(builder_build).to eq('Nothing. Series 666, Vol. 1, Part 1')
     end
   end
 
