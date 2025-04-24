@@ -5,19 +5,19 @@ require 'spec_helper'
 RSpec.describe Cocina::Models::Mapping::ToMods::Title do
   subject(:xml) { writer.to_xml }
 
+  let(:catalog_links) { [] }
+  let(:contributors) { [] }
   let(:writer) do
     Nokogiri::XML::Builder.new do |xml|
       xml.mods('xmlns' => 'http://www.loc.gov/mods/v3',
                'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
                'version' => '3.6',
                'xsi:schemaLocation' => 'http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd') do
-        described_class.write(xml: xml, titles: titles, contributors: contributors,
+        described_class.write(xml: xml, titles: titles, contributors: contributors, catalog_links: catalog_links,
                               id_generator: Cocina::Models::Mapping::ToMods::IdGenerator.new)
       end
     end
   end
-
-  let(:contributors) { [] }
 
   describe 'title' do
     context 'when there is a title with language' do
@@ -58,64 +58,70 @@ RSpec.describe Cocina::Models::Mapping::ToMods::Title do
       let(:titles) do
         [
           Cocina::Models::Title.new(
-            {
-              structuredValue: [
-                {
-                  type: 'title',
-                  structuredValue: [
-                    {
-                      value: 'Concertos, recorder, string orchestra',
-                      type: 'main title'
-                    },
-                    {
-                      value: 'RV 441, C minor',
-                      type: 'part number'
-                    }
-                  ]
-                }
-              ],
-              type: 'uniform',
-              note: [
-                {
-                  type: 'associated name',
-                  structuredValue: [
-                    {
-                      value: 'Vivaldi, Antonio',
-                      type: 'name'
-                    },
-                    {
-                      value: '1678-1741',
-                      type: 'life dates'
-                    }
-                  ]
-                }
-              ]
-            }
+            structuredValue: [
+              {
+                type: 'title',
+                structuredValue: [
+                  {
+                    value: 'Concertos, recorder, string orchestra',
+                    type: 'main title'
+                  },
+                  {
+                    value: 'RV 441, C minor',
+                    type: 'part number'
+                  }
+                ]
+              }
+            ],
+            type: 'uniform',
+            note: [
+              {
+                type: 'associated name',
+                structuredValue: [
+                  {
+                    value: 'Vivaldi, Antonio',
+                    type: 'name'
+                  },
+                  {
+                    value: '1678-1741',
+                    type: 'life dates'
+                  }
+                ]
+              }
+            ]
           )
         ]
       end
-
       let(:contributors) do
         [
           Cocina::Models::Contributor.new(
-            {
-              name: [
-                {
-                  structuredValue: [
-                    {
-                      value: 'Vivaldi, Antonio',
-                      type: 'name'
-                    },
-                    {
-                      value: '1678-1741',
-                      type: 'life dates'
-                    }
-                  ]
-                }
-              ],
-              type: 'person',
-              status: 'primary'
-            }
+            name: [
+              {
+                structuredValue: [
+                  {
+                    value: 'Vivaldi, Antonio',
+                    type: 'name'
+                  },
+                  {
+                    value: '1678-1741',
+                    type: 'life dates'
+                  }
+                ]
+              }
+            ],
+            type: 'person',
+            status: 'primary'
+          )
+        ]
+      end
+      let(:catalog_links) do
+        [
+          Cocina::Models::FolioCatalogLink.new(
+            catalog: 'folio',
+            catalogRecordId: 'in12345',
+            refresh: true,
+            partLabel: 'RV 442, F major',
+            sortKey: ''
           )
         ]
       end
@@ -127,7 +133,7 @@ RSpec.describe Cocina::Models::Mapping::ToMods::Title do
             xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
             <titleInfo type="uniform" nameTitleGroup="1">
               <title>Concertos, recorder, string orchestra</title>
-              <partNumber>RV 441, C minor</partNumber>
+              <partNumber>RV 442, F major</partNumber>
             </titleInfo>
             <name type="personal" usage="primary" nameTitleGroup="1">
               <namePart>Vivaldi, Antonio</namePart>
