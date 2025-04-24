@@ -11,30 +11,29 @@ module Cocina
           TAG_NAME = Cocina::Models::Mapping::FromMods::Title::TYPES.invert.merge('activity dates' => 'date').freeze
           NAME_TYPES = ['name', 'forename', 'surname', 'life dates', 'term of address'].freeze
 
+          def self.write(...)
+            new(...).write
+          end
+
           # @params [Nokogiri::XML::Builder] xml
           # @params [Array<Cocina::Models::Title>] titles
+          # @params [IdGenerator] id_generator
           # @params [Array<Cocina::Models::Contributor>] contributors
           # @params [Hash] additional_attrs for title
-          # @params [IdGenerator] id_generator
-          def self.write(xml:, titles:, id_generator:, contributors: [], additional_attrs: {})
-            new(xml: xml, titles: titles, contributors: contributors, additional_attrs: additional_attrs,
-                id_generator: id_generator).write
-          end
-
-          def initialize(xml:, titles:, additional_attrs:, contributors: [], id_generator: {})
+          # @params [Array<Cocina::Models::CatalogLink>] catalog_links a list of catalog
+          #   links which may contain part label and sort key information
+          def initialize(xml:, titles:, id_generator:, contributors: [], additional_attrs: {}, catalog_links: []) # rubocop:disable Metrics/ParameterLists
             @xml = xml
             @titles = titles
-            @contributors = contributors
-            @name_title_vals_index = {}
-            @additional_attrs = additional_attrs
             @id_generator = id_generator
+            @contributors = contributors
+            @additional_attrs = additional_attrs
+            @catalog_links = catalog_links
+            @name_title_vals_index = {}
           end
 
-          # rubocop:disable Metrics/AbcSize
-          # rubocop:disable Metrics/BlockLength
-          # rubocop:disable Metrics/CyclomaticComplexity
-          def write
-            titles.each do |title|
+          def write # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity
+            titles.each do |title| # rubocop:disable Metrics/BlockLength
               name_title_vals_index = name_title_vals_index_for(title)
 
               if title.valueAt
@@ -78,13 +77,10 @@ module Cocina
               end
             end
           end
-          # rubocop:enable Metrics/AbcSize
-          # rubocop:enable Metrics/BlockLength
-          # rubocop:enable Metrics/CyclomaticComplexity
 
           private
 
-          attr_reader :xml, :titles, :contributors, :name_title_vals_index, :id_generator, :additional_attrs
+          attr_reader :xml, :titles, :contributors, :name_title_vals_index, :id_generator, :additional_attrs, :catalog_links
 
           def write_xlink(title:)
             attrs = { 'xlink:href' => title.valueAt }
@@ -173,9 +169,21 @@ module Cocina
             title_info_attrs = title_info_attrs_for(title).merge(title_info_attrs)
             xml.titleInfo(with_uri_info(title, title_info_attrs)) do
               title_parts = flatten_structured_value(title)
-              title_parts_without_names = title_parts_without_names(title_parts)
+              write_title_parts!(title_parts: title_parts_without_names(title_parts), title: title)
+            end
+          end
 
-              title_parts_without_names.each do |title_part|
+          def write_title_parts!(title_parts:, title:)
+            # If title parts contain the main title and a part label has been
+            # recorded in a catalog link, short-circuit the usual title part
+            # parsing and pull the part label from the catalog link instead of
+            # from descriptive metadata
+            if (main_title = title_parts.find { |part| part.type == 'main title' }&.value) &&
+               (part_label = catalog_links.find { |link| link.catalog == 'folio' && link.partLabel.present? }&.partLabel)
+              xml.title(main_title)
+              xml.partNumber(part_label)
+            else
+              title_parts.each do |title_part|
                 title_type = tag_name_for(title_part)
                 title_value = title_value_for(title_part, title_type, title)
                 xml.public_send(title_type, title_value) if title_part.note.blank?
