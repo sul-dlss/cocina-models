@@ -123,15 +123,16 @@ A patch change is a change that (1) does not affect the data model; (2) does not
 
 A patch change can be released as part of regular dependency updates or selectively released for individual applications.
 
-## Releasing major or minor change
-
-NOTE: If dependency updates are about to be released, you have the option of shortening the process and stopping after Step 3. This is because Steps 4 onwards will be taken care of by the regular dependency updates process (basically the updating of cocina-models, dor-services-client and sdr-client as needed in the rest of the associated apps).  You still do need to manually bump some gems and the pinned version of cocina-models in a couple apps and get those PRs approved and merged, as described in Steps 1-3 below.
-
-IMPORTANT: If you do opt to skip steps 4 onward, you should NOT merge the cocina-models bump dor-services-app and sdr-api PRs you created in step 3 until you are ready to finish the dependency updates process.  You can have them reviewed and approved, but if you merge, you will greatly increase the risk of issues if the main branch of DSA or sdr-api are deployed after steps 1-3 are complete but before the rest of the apps are updated to use the new cocina-models via regular dependency updates. The fix for this is to either roll-back DSA and sdr-api to the previous release tag, or proceed forwards with step 4-5.
+## Releasing a major or minor change
 
 Before you release a major or minor change, think about if this release will include new validations.  Even if your change didn't make any changes that would affect validation, there may be other unreleased changes since the previous version of the gem was cut and released.  Best practice is to scan back through the commit history until you get to the last version bump and see if there any significant changes that may affect validation.
 
 If unsure, ask the team or ask for help to just run the validation report anyway (as described above).
+
+### Partial release process
+NOTE: If dependency updates are about to be released, you have the option of shortening the process and stopping after Step 3. This is because Steps 4 onwards will be taken care of by the regular dependency updates process (basically the updating of cocina-models, dor-services-client and sdr-client as needed in the rest of the associated apps).  You still do need to manually bump some gems and the pinned version of cocina-models in the directly coupled apps and get those PRs approved and merged, as described in Steps 1-3 below.
+
+IMPORTANT: If you do opt to skip steps 4 onward, you should NOT merge the dor-services-app and sdr-api PRs you created in step 3 until you are ready to finish the dependency updates process.  You can have them reviewed and approved, but if you merge, you will greatly increase the risk of issues if the main branch of DSA or sdr-api are deployed after steps 1-3 are complete but before the rest of the apps are updated to use the new cocina-models via regular dependency updates. The fix for this is to either roll back DSA and sdr-api to the previous release tag, or proceed forwards with step 4-5.
 
 ### Step 0: Share intent to change the models
 
@@ -139,7 +140,11 @@ Send a note to `#dlss-infra-chg-mgmt` on Slack to let people know what is changi
 
 ### Step 1: Cut the release
 
-The release process is much like any other gem. First bump the version in `lib/cocina/models/version.rb`, then `bundle install` so that `Gemfile.lock` is updated, then commit and push those changes. Then run:
+The release process is much like any other gem. While on main:
+1. Bump the version in `lib/cocina/models/version.rb`
+2. `bundle install` so that `Gemfile.lock` is updated.
+3. Commit those changes. 
+4. Run:
 ```
 bundle exec rake release
 ```
@@ -147,7 +152,11 @@ which pushes the gem to rubygems.org.
 
 ### Step 2: Update client gems coupled to the models
 
-Release new versions of [sdr-client](https://github.com/sul-dlss/sdr-client) and [dor-services-client](https://github.com/sul-dlss/dor-services-client/) pinned to use the new cocina-models version because applications such as [Argo](https://github.com/sul-dlss/argo) and [Dor-Services-App](https://github.com/sul-dlss/dor-services-app) depend on these gems using the same models.
+Release new versions of [sdr-client](https://github.com/sul-dlss/sdr-client) and [dor-services-client](https://github.com/sul-dlss/dor-services-client/):
+1. Pin the new cocina-models version in the clients' `gemspec` files.
+2. Bump the version as described in each client's README release instructions.
+
+Applications such as [Argo](https://github.com/sul-dlss/argo) and [Dor-Services-App](https://github.com/sul-dlss/dor-services-app) depend on these gems using the same models.
 
 ### Step 3: Update services directly coupled to the models
 
@@ -156,27 +165,31 @@ This list of services is known to include:
 * [sul-dlss/sdr-api](https://github.com/sul-dlss/sdr-api)
 * [sul-dlss/dor-services-app](https://github.com/sul-dlss/dor-services-app/)
 
-**NOTE**: You can skip step 3A if there have not been any changes to the `cocina-models` OpenAPI spec since the prior release.
 
 #### Step 3A: Update API specifications
 
-The cocina-models gem is used in applications that have an API specification that accepts Cocina models. Make sure that the `openapi.yml` for these applications include the `openapi.yml` schema changes made in cocina-models.
+**NOTE**: You can skip step 3A if there have not been any changes to the `cocina-models` OpenAPI spec since the prior release.
 
-This can be accomplished by copying and pasting the cocina-models schemas to the openapi.yml of the associated project. By convention, these schemas are listed first in the `openapi.yml` of the associated projects, followed by the application-specific schemas.
+The cocina-models gem is used in applications that have an API specification that accepts Cocina models. Make sure that the `openapi.yml` for these two applications includes the `openapi.yml` schema changes made in cocina-models.
+
+Copy and paste the cocina-models schemas to each project's `openapi.yml`. By convention, these schemas are listed first, followed by the application-specific schemas.
 
 #### Step 3B: Bump gems and create the PRs
 
-If step 3A was needed, use the same PRs to also bump the versions of cocina-models, sdr-client, and dor-services-client in these applications/services. Why? When [dor-services-app](https://github.com/sul-dlss/dor-services-app), for example, is updated to use the new models (via the auto-update script), these clients should be updated at the same time or there is risk of models produced by dor-services-app not being acceptable to the clients.
+If you updated the `openapi.yml` in step 3A, use the same PR for step 3B. Why? When [dor-services-app](https://github.com/sul-dlss/dor-services-app), for example, is updated to use the new models (via the auto-update script), these clients should be updated at the same time or there is risk of models produced by dor-services-app not being acceptable to the clients.
 
-With or without step 3A, perform `bundle update` for cocina-models, sdr-client, and dor-services-client gems in the listed services and then make PRs for those repos. You may first need to update how these gems are pinned in the `Gemfile` in order to bump them.  Note that dor-services-app only needs a bump to cocina-models gem and sdr-api only needs a bump to cocina-models and dor-services-client gems.
+1. Perform `bundle update --conservative cocina-models dor-services-client` in the  services above and make PRs for those repos if they don't already exist. You may first need to update how these gems are pinned in the `Gemfile` in order to bump them.
+2. Note that sdr-client is not currently used in these applications, but if it were, would also need to be bumped to the latest release. 
 
 #### Step 3C: Merge 'em
 
-Get the directly coupled services PRs merged before the deploy in step 5.
+Get the directly coupled services PRs merged before the deploy in step 5. 
+
+See the IMPORTANT note above about the timing of merging these PRs if you are waiting for dependency updates to make the updates to other dependent applications.
 
 ### Step 4: Update other dependent applications
 
-Once the above listed steps have been completed, all applications that use cocina-models should be updated and released at the same time.  "Cocina Level 2" describes this set of updates. The applications that use cocina-models are those in [this list](https://github.com/sul-dlss/access-update-scripts/blob/master/infrastructure/projects.yml) that are NOT marked with `cocina_level2: false`.
+All applications that use cocina-models should be updated and released at the same time.  "Cocina Level 2" describes this set of updates. The applications that use cocina-models are those in [this list](https://github.com/sul-dlss/access-update-scripts/blob/master/infrastructure/projects.yml) that are NOT marked with `cocina_level2: false`.
 
 There are scripts to help with updating other dependent applications:
 
@@ -192,13 +205,12 @@ If for some reason the above method does not work, the sul-dlss/access-update-sc
 ```
 REPOS_PATH=infrastructure GH_ACCESS_TOKEN=abc123 COCINA_LEVEL2= ./merge-all.rb
 ```
-### Step 5: Deploy all affected applications together
+### Step 5: Deploy and test
 
+#### Step 5A: Deploy to Stage or QA
 [sul-dlss/sdr-deploy](https://github.com/sul-dlss/sdr-deploy) has a flag (-c) in the deploy script to limit deploys to cocina dependent applications.  Refer to instructions in the [sdr-deploy/README](https://github.com/sul-dlss/sdr-deploy/blob/main/README.md#only-deploy-repos-related-to-cocina-models-update).
 
 Note that running the integration tests is currently the best way we have to check for unintended effects and/or bugs when rolling out cocina-models changes.
-
-#### Step 5A: Deploy to QA and/or Stage
 
 #### Step 5B: Run infrastructure_integration_tests
 
