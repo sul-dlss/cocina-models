@@ -512,3 +512,12 @@ Style/ItAssignment: # new in 1.70
   Enabled: true
 Style/RedundantFormat: # new in 1.72
   Enabled: true
+
+Style/ComparableBetween: # new in 1.74
+  Enabled: true
+Style/HashFetchChain: # new in 1.75
+  Enabled: true
+Style/ItBlockParameter: # new in 1.75
+  Enabled: true
+RSpec/IncludeExamples: # new in 3.6
+  Enabled: true
