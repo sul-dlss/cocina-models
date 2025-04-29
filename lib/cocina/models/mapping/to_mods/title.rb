@@ -185,6 +185,8 @@ module Cocina
             else
               title_parts.each do |title_part|
                 title_type = tag_name_for(title_part)
+                raise "Unknown title type for: #{title_part.to_h}" unless title_type
+
                 title_value = title_value_for(title_part, title_type, title)
                 xml.public_send(title_type, title_value) if title_part.note.blank?
               end

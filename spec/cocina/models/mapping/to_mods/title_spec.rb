@@ -404,4 +404,24 @@ RSpec.describe Cocina::Models::Mapping::ToMods::Title do
       XML
     end
   end
+
+  context 'when it is missing type in a structured value' do
+    let(:titles) do
+      [
+        Cocina::Models::Title.new(
+          structuredValue: [
+            {
+              value: 'Concertos, recorder, string orchestra'
+            }
+          ]
+        )
+      ]
+    end
+
+    it 'raises an unknown title type error' do
+      expect { xml }.to raise_error('Unknown title type for: {structuredValue: [], parallelValue: [], ' \
+                                    'groupedValue: [], value: "Concertos, recorder, string orchestra", ' \
+                                    'identifier: [], note: [], appliesTo: []}')
+    end
+  end
 end
