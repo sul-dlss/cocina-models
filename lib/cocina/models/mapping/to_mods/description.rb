@@ -11,12 +11,13 @@ module Cocina
           # @param [Cocina::Models::Description] description
           # @param [string] druid
           # @return [Nokogiri::XML::Document]
-          def self.transform(description, druid)
-            new(description, druid).transform
+          def self.transform(description, druid, identification: nil)
+            new(description, druid, identification).transform
           end
 
-          def initialize(description, druid)
+          def initialize(description, druid, identification)
             @description = description
+            @identification = identification
             @druid = druid
           end
 
@@ -24,14 +25,14 @@ module Cocina
           def transform
             Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
               xml.mods(mods_attributes) do
-                ModsWriter.write(xml: xml, description: description, druid: druid)
+                ModsWriter.write(xml: xml, description: description, druid: druid, identification: identification)
               end
             end.doc
           end
 
           private
 
-          attr_reader :description, :druid
+          attr_reader :description, :druid, :identification
 
           def mods_version
             @mods_version ||= begin

@@ -9,11 +9,13 @@ module Cocina
           # @params [Nokogiri::XML::Builder] xml
           # @param [Cocina::Models::Description] description
           # @param [string] druid
-          def self.write(xml:, description:, druid:, id_generator: IdGenerator.new)
+          # @param [Cocina::Models::Identification] identification
+          def self.write(xml:, description:, druid:, id_generator: IdGenerator.new, identification: nil)
             # ID Generator makes sure that different writers create unique altRepGroups and nameTitleGroups.
             if description.title
+              catalog_links = identification&.catalogLinks.present? ? identification.catalogLinks.select { |link| link.catalog == 'folio' } : []
               Title.write(xml: xml, titles: description.title, contributors: description.contributor,
-                          id_generator: id_generator)
+                          id_generator: id_generator, catalog_links: catalog_links)
             end
             Contributor.write(xml: xml, contributors: description.contributor, titles: description.title,
                               id_generator: id_generator)
