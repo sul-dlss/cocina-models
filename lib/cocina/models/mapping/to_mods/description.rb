@@ -10,6 +10,7 @@ module Cocina
         class Description
           # @param [Cocina::Models::Description] description
           # @param [string] druid
+          # @param [Cocina::Models::Identification] identification
           # @return [Nokogiri::XML::Document]
           def self.transform(description, druid, identification: nil)
             new(description, druid, identification).transform

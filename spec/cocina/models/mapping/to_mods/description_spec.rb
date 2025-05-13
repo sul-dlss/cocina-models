@@ -124,6 +124,52 @@ RSpec.describe Cocina::Models::Mapping::ToMods::Description do
     end
   end
 
+  context 'with identification with catalog links' do
+    subject(:xml) { described_class.transform(descriptive, druid, identification: identification).to_xml }
+
+    let(:druid) { 'druid:aa666bb1234' }
+    let(:descriptive) do
+      Cocina::Models::Description.new(
+        title: [
+          { structuredValue: [
+            { value: 'Gaudy night',
+              type: 'main title' }
+          ] }
+        ],
+        purl: 'https://purl.stanford.edu/aa666bb1234'
+      )
+    end
+    let(:identification) do
+      Cocina::Models::Identification.new(
+        catalogLinks: [
+          {
+            catalog: 'folio',
+            catalogRecordId: 'a1234567',
+            partLabel: 'May 2025',
+            refresh: true
+          }
+        ],
+        sourceId: 'sul:source_id'
+      )
+    end
+
+    it 'builds the xml' do
+      expect(xml).to be_equivalent_to <<~XML
+        <mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://www.loc.gov/mods/v3" version="3.7"
+          xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-7.xsd">
+          <titleInfo>
+            <title>Gaudy night</title>
+            <partNumber>May 2025</partNumber>
+          </titleInfo>
+          <location>
+            <url usage="primary display">https://purl.stanford.edu/aa666bb1234</url>
+          </location>
+        </mods>
+      XML
+    end
+  end
+
   context 'with a MODS version specified in note' do
     let(:druid) { 'druid:aa666bb1234' }
     let(:descriptive) do
