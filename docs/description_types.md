@@ -577,6 +577,10 @@ _Path: note.groupedValue.type_
   * text
 # RelatedResource types
 _Path: relatedResource.type_
+  * described by
+    * A related resource that is described by the content of the resource.
+  * describes
+    * A related resource which the resource describes.
   * derived from
     * The source from which the resource was derived, such as a raw data set before processing.
   * has original version
