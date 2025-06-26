@@ -601,6 +601,10 @@ note.groupedValue:
   - value: title
   - value: text
 relatedResource:
+  - value: described by
+    description: A related resource that is described by the content of the resource.
+  - value: describes
+    description: A related resource which the resource describes.
   - value: derived from
     description: The source from which the resource was derived, such as a raw data set before processing.
   - value: has original version
