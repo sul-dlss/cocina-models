@@ -424,4 +424,39 @@ RSpec.describe Cocina::Models::Mapping::ToMods::Title do
                                     'identifier: [], note: [], appliesTo: []}')
     end
   end
+
+  context 'when it is a basic title that is a primary title and there is a partLabel' do
+    let(:titles) do
+      [
+        Cocina::Models::Title.new(
+          value: "People's Computers",
+          status: 'primary'
+        )
+      ]
+    end
+    let(:catalog_links) do
+      [
+        Cocina::Models::FolioCatalogLink.new(
+          catalog: 'folio',
+          catalogRecordId: 'in12345',
+          refresh: true,
+          partLabel: 'Volume 6, number 1, July/August 1977',
+          sortKey: ''
+        )
+      ]
+    end
+
+    it 'builds the xml' do
+      expect(xml).to be_equivalent_to <<~XML
+        <mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://www.loc.gov/mods/v3" version="3.6"
+          xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+          <titleInfo usage="primary">
+            <title>People's Computers</title>
+            <partNumber>Volume 6, number 1, July/August 1977</partNumber>
+          </titleInfo>
+        </mods>
+      XML
+    end
+  end
 end

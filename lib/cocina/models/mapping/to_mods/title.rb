@@ -92,6 +92,10 @@ module Cocina
 
             xml.titleInfo(title_info_attrs) do
               xml.title(title.value)
+              if title.status == 'primary' &&
+                 (part_label = catalog_links.find { |link| link.catalog == 'folio' && link.partLabel.present? }&.partLabel)
+                xml.partNumber(part_label)
+              end
             end
           end
 
