@@ -11,6 +11,7 @@ module Cocina
       attribute? :status, Types::Strict::String
       attribute :role, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute :identifier, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
+      attribute :affiliation, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute :note, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # URL or other pointer to the location of the contributor information.
       attribute? :valueAt, Types::Strict::String
