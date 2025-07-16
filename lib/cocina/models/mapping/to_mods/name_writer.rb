@@ -75,6 +75,7 @@ module Cocina
                 write_name(name)
               end
               write_identifier(contributor) if contributor.identifier.present?
+              write_affiliation(contributor)
               write_note(contributor)
               write_roles(contributor)
               xml.etal if contributor.type == 'unspecified others'
@@ -145,6 +146,7 @@ module Cocina
                 write_basic(parallel_name)
               end
               write_identifier(contributor) if contributor.identifier.present?
+              write_affiliation(contributor)
               write_note(contributor)
               write_roles(contributor)
             end
@@ -171,6 +173,7 @@ module Cocina
               end
               write_display_form(display_type_parallel_name) if display_type_parallel_name.present?
               write_identifier(contributor) if contributor.identifier.present?
+              write_affiliation(contributor)
               write_note(contributor)
               write_roles(contributor)
             end
@@ -252,14 +255,17 @@ module Cocina
             end
           end
 
+          def write_affiliation(contributor)
+            Array(contributor.affiliation).each do |affiliation|
+              xml.affiliation affiliation.structuredValue.map(&:value).join(', ')
+            end
+          end
+
           def write_note(contributor)
             Array(contributor.note).each do |note|
-              case note.type
-              when 'affiliation'
-                xml.affiliation note.value
-              when 'description'
-                xml.description note.value
-              end
+              next unless note.type == 'description'
+
+              xml.description note.value
             end
           end
 
