@@ -241,16 +241,11 @@ RSpec.describe 'MODS name <--> cocina mappings' do
                   }
                 }
               ],
-              affiliation: [
-                {
-                  structuredValue: [
-                    {
-                      value: 'Stanford University'
-                    }
-                  ]
-                }
-              ],
               note: [
+                {
+                  value: 'Stanford University',
+                  type: 'affiliation'
+                },
                 {
                   value: 'Professor of English',
                   type: 'description'
@@ -353,16 +348,14 @@ RSpec.describe 'MODS name <--> cocina mappings' do
                 }
               ],
               type: 'person',
-              affiliation: [
+              note: [
                 {
-                  structuredValue: [
-                    { value: 'University of Zurich' }
-                  ]
+                  value: 'University of Zurich',
+                  type: 'affiliation'
                 },
                 {
-                  structuredValue: [
-                    { value: 'Swiss Finance Institute' }
-                  ]
+                  value: 'Swiss Finance Institute',
+                  type: 'affiliation'
                 }
               ]
             }
@@ -428,11 +421,10 @@ RSpec.describe 'MODS name <--> cocina mappings' do
                   ]
                 }
               ],
-              affiliation: [
+              note: [
                 {
-                  structuredValue: [
-                    { value: 'Stanford Law School graduate, J.S.D. (2007)' }
-                  ]
+                  value: 'Stanford Law School graduate, J.S.D. (2007)',
+                  type: 'affiliation'
                 }
               ],
               type: 'person',
@@ -1646,11 +1638,10 @@ RSpec.describe 'MODS name <--> cocina mappings' do
                   uri: 'https://id.loc.gov/authorities/names/123'
                 }
               ],
-              affiliation: [
+              note: [
                 {
-                  structuredValue: [
-                    { value: 'Stanford' }
-                  ]
+                  value: 'Stanford',
+                  type: 'affiliation'
                 }
               ]
             }

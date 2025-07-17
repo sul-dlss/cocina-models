@@ -257,15 +257,22 @@ module Cocina
 
           def write_affiliation(contributor)
             Array(contributor.affiliation).each do |affiliation|
-              xml.affiliation affiliation.structuredValue.map(&:value).join(', ')
+              if affiliation.structuredValue.present?
+                xml.affiliation affiliation.structuredValue.map(&:value).join(', ')
+              else
+                xml.affiliation affiliation.value
+              end
             end
           end
 
           def write_note(contributor)
             Array(contributor.note).each do |note|
-              next unless note.type == 'description'
-
-              xml.description note.value
+              case note.type
+              when 'affiliation'
+                xml.affiliation note.value
+              when 'description'
+                xml.description note.value
+              end
             end
           end
 

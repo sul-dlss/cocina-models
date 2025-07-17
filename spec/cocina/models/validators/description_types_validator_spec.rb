@@ -157,12 +157,11 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
                   type: 'Wikidata'
                 }
               ],
-              affiliation: [
-                {
-                  value: 'Stanford University'
-                }
-              ],
               note: [
+                {
+                  value: 'Stanford University',
+                  type: 'affiliation'
+                },
                 {
                   value: 'Professor of English',
                   type: 'description'

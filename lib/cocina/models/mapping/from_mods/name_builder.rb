@@ -40,10 +40,9 @@ module Cocina
               type: type_for(name_elements.first['type']),
               status: name_elements.filter_map { |name_element| name_element['usage'] }.first
             }.compact
-            affiliations = name_elements.flat_map { |name_node| build_affiliation(name_node) }.compact.uniq.presence
-
-            { name: [names], affiliation: affiliations }.tap do |attrs|
+            { name: [names] }.tap do |attrs|
               attrs[:role] = name_elements.flat_map { |name_node| build_roles(name_node) }.compact.uniq.presence
+              attrs[:note] = name_elements.flat_map { |name_node| build_affiliation_notes(name_node) }.compact.uniq.presence
             end.compact
           end
 
@@ -88,15 +87,11 @@ module Cocina
 
           def common_name(name_node, name, is_parallel: false)
             {
-              note: build_notes(name_node),
+              note: build_notes(name_node, is_parallel: is_parallel),
               identifier: build_identifier(name_node)
             }.tap do |attrs|
               roles = build_roles(name_node)
               attrs[:role] = roles unless name.nil?
-              next if is_parallel
-
-              affiliations = build_affiliation(name_node)
-              attrs[:affiliation] = affiliations unless affiliations.empty?
             end.compact
           end
 
@@ -280,7 +275,7 @@ module Cocina
             end.presence
           end
 
-          def build_notes(name_node)
+          def build_notes(name_node, is_parallel:)
             [].tap do |parts|
               description = name_node.xpath('mods:description', mods: Description::DESC_METADATA_NS).first
               if description
@@ -290,12 +285,13 @@ module Cocina
                            { value: description.text, type: 'description' }
                          end
               end
+              parts.concat(build_affiliation_notes(name_node)) unless is_parallel
             end.presence
           end
 
-          def build_affiliation(name_node)
+          def build_affiliation_notes(name_node)
             name_node.xpath('mods:affiliation', mods: Description::DESC_METADATA_NS).map do |affiliation_node|
-              { structuredValue: [{ value: affiliation_node.text }] }
+              { value: affiliation_node.text, type: 'affiliation' }
             end
           end
 
