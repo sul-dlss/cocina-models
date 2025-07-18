@@ -205,6 +205,14 @@ If for some reason the above method does not work, the sul-dlss/access-update-sc
 ```
 REPOS_PATH=infrastructure GH_ACCESS_TOKEN=abc123 COCINA_LEVEL2= ./merge-all.rb
 ```
+
+### Step 4C: Update purl-fetcher
+Create a branch and update cocina-models:
+```
+bundle update --conservative cocina-models
+```
+Once merged, it will deploy to stage via CD. 
+
 ### Step 5: Deploy and test
 
 #### Step 5A: Deploy to Stage or QA
@@ -219,6 +227,8 @@ It is safest to ensure _all_ the integration tests run cleanly.  However, patch 
 #### Step 5C: Deploy to Production
 
 **[Turn off Google Books](https://sul-gbooks-prod.stanford.edu/features) when deploying to production.** This avoids failed deposit due to a temporary Cocina model mismatch. Unlike other applications, the deposits will fail without retry and require manual remediation.
+
+In addition to deploying infrastructure apps via sdr-deploy, tag and cut a release of purl-fetcher. That will trigger its deploy to production. 
 
 ## Usage conventions
 
