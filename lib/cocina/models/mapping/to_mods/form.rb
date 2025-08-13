@@ -226,7 +226,14 @@ module Cocina
 
           def datacite_resource_type
             self_deposit_types = forms.find do |candidate|
-              candidate.source.value == 'Stanford self-deposit resource types'
+              # Why do we need to verify that `candidate.source` is non-nil
+              # here? Before this change, our datacite resource-type handling
+              # could safely assume that the descriptive form metadata was
+              # constrained to the H2/H3 shape. As of August 2025, we're minting
+              # DOIs for ETDs which have their own descriptive form metadata
+              # (now including datacite resource types), and this assumption no
+              # longer holds. One of the ETD form values includes no source.
+              candidate.source&.value == 'Stanford self-deposit resource types'
             end
             return unless self_deposit_types
 
