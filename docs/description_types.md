@@ -110,6 +110,8 @@ _Path: contributor.note.type_
 _Path: event.type_
   * acquisition
     * The transferral of ownership of a resource to a repository.
+  * broadcast
+    * Live transmission of the resource to a wide audience.
   * capture
     * A record of the resource in a fixed form at a specific time.
   * collection
@@ -163,6 +165,8 @@ _Path: event.date.type_
     * Deprecated.
   * acquisition
     * The transferral of ownership of a resource to a repository.
+  * broadcast
+    * Live transmission of the resource to a wide audience.
   * capture
     * A record of the resource in a fixed form at a specific time.
   * collection

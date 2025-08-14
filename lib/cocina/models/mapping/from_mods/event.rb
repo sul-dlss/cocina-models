@@ -22,6 +22,7 @@ module Cocina
           # a preferred vocabulary, if you will
           EVENT_TYPES = [
             'acquisition',
+            'broadcast',
             'capture',
             'collection',
             'copyright',
