@@ -102,6 +102,8 @@ contributor.note:
 event:
   - value: acquisition
     description: The transferral of ownership of a resource to a repository.
+  - value: broadcast
+    description: Live transmission of the resource to a wide audience.
   - value: capture
     description: A record of the resource in a fixed form at a specific time.
   - value: collection
@@ -154,6 +156,8 @@ event.date:
     status: deprecated
   - value: acquisition
     description: The transferral of ownership of a resource to a repository.
+  - value: broadcast
+    description: Live transmission of the resource to a wide audience.
   - value: capture
     description: A record of the resource in a fixed form at a specific time.
   - value: collection
