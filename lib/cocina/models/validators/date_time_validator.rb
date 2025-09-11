@@ -64,6 +64,8 @@ module Cocina
         end
 
         def valid_edtf?(value)
+          return false if value == 'XXXX' # Not permitted by the spec, but allowed in the gem. https://github.com/inukshuk/edtf-ruby/issues/41
+
           Date.edtf!(value)
           true
         rescue StandardError
