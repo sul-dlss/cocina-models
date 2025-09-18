@@ -68,6 +68,8 @@ contributor.name:
     description: Name used that differs from legal or primary form of name.
   - value: surname
     description: Last or family name or names.
+  - value: translation
+    description: Latinized or other translated version of the name not following a formal transliteration scheme.
   - value: transliteration
     description: Name originally in non-Latin script presented phonetically using Latin characters.
 contributor.name.structuredValue:

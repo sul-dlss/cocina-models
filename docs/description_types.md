@@ -72,6 +72,8 @@ _Path: contributor.name.type_
     * Name used that differs from legal or primary form of name.
   * surname
     * Last or family name or names.
+  * translation
+    * Latinized or other translated version of the name not following a formal transliteration scheme.
   * transliteration
     * Name originally in non-Latin script presented phonetically using Latin characters.
 ### Contributor name part types for structured value
