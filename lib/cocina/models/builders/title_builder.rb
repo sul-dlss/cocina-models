@@ -8,6 +8,7 @@ module Cocina
       # TitleBuilder selects the prefered title from the cocina object for solr indexing
       class TitleBuilder # rubocop:disable Metrics/ClassLength
         extend Deprecation
+
         # @param [Array<Cocina::Models::Title,Cocina::Models::DescriptiveValue>] titles the titles to consider
         # @param [Array<Cocina::Models::FolioCatalogLink>] catalog_links the folio catalog links to check for digital serials part labels
         # @param [Symbol] strategy ":first" is the strategy for selection when primary or display
