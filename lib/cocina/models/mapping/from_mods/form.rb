@@ -7,8 +7,8 @@ module Cocina
         # Maps relevant MODS physicalDescription, typeOfResource and genre from descMetadata to cocina form
         # rubocop:disable Metrics/ClassLength
         class Form
-          # NOTE: H2 is the first case of structured form (genre/typeOfResource) values we're implementing
-          H2_GENRE_TYPE_PREFIX = 'H2 '
+          # NOTE: H3 is the first case of structured form (genre/typeOfResource) values we're implementing
+          H3_GENRE_TYPE_PREFIX = 'H3 '
 
           # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
           # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] description_builder
@@ -137,16 +137,16 @@ module Cocina
 
           def add_structured_genre(forms)
             # The only use case we're supporting for structured forms at the
-            # moment is for H2. Assume these are H2 values.
+            # moment is for H3. Assume these are H3 values.
             forms << {
               type: 'resource type',
               source: {
-                value: Cocina::Models::Mapping::ToMods::Form::H2_SOURCE_LABEL
+                value: Cocina::Models::Mapping::ToMods::Form::H3_SOURCE_LABEL
               },
               structuredValue: structured_genre.map do |genre|
                 {
                   value: genre.text,
-                  type: genre.attributes['type'].value.delete_prefix(H2_GENRE_TYPE_PREFIX)
+                  type: genre.attributes['type'].value.delete_prefix(H3_GENRE_TYPE_PREFIX)
                 }
               end
             }
@@ -360,7 +360,7 @@ module Cocina
 
           # returns genre at the root and inside subjects excluding structured genres
           def basic_genre
-            resource_element.xpath("mods:genre[not(@type) or not(starts-with(@type, '#{H2_GENRE_TYPE_PREFIX}'))]",
+            resource_element.xpath("mods:genre[not(@type) or not(starts-with(@type, '#{H3_GENRE_TYPE_PREFIX}'))]",
                                    mods: Description::DESC_METADATA_NS)
           end
 
@@ -370,7 +370,7 @@ module Cocina
 
           # returns structured genres at the root and inside subjects, which are combined to form a single, structured Cocina element
           def structured_genre
-            resource_element.xpath("mods:genre[@type and starts-with(@type, '#{H2_GENRE_TYPE_PREFIX}')]",
+            resource_element.xpath("mods:genre[@type and starts-with(@type, '#{H3_GENRE_TYPE_PREFIX}')]",
                                    mods: Description::DESC_METADATA_NS)
           end
         end

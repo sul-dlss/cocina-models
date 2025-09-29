@@ -60,7 +60,7 @@ RSpec.describe Cocina::Models::Mapping::ToMods::Form do
         <mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xmlns="http://www.loc.gov/mods/v3" version="3.6"
           xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
-         <genre type="H2 type">Image</genre>
+         <genre type="H3 type">Image</genre>
          <typeOfResource>still image</typeOfResource>
          <extension displayLabel="datacite">
            <resourceType resourceTypeGeneral="Image">Image</resourceType>
@@ -125,7 +125,7 @@ RSpec.describe Cocina::Models::Mapping::ToMods::Form do
         <mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xmlns="http://www.loc.gov/mods/v3" version="3.6"
           xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
-          <genre type="H2 type">Academic thesis</genre>
+          <genre type="H3 type">Academic thesis</genre>
           <extension displayLabel="datacite">
             <resourceType resourceTypeGeneral="Dissertation">Academic thesis</resourceType>
           </extension>

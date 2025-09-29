@@ -319,9 +319,9 @@ _Path: form.type_
 ## Form part types for structured value
 _Path: form.structuredValue.type_
   * type
-    * Used for H2 deposits.
+    * Used for H3 deposits.
   * subtype
-    * Used for H2 deposits.
+    * Used for H3 deposits.
 ## Geographic form types
 _Path: geographic.form.type_
   * data format

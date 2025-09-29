@@ -2,15 +2,15 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Cocina --> MODS mappings for form (H2 specific)' do
-  # Mapping of H2 types and subtypes to genre and MODS type of resource:
+RSpec.describe 'Cocina --> MODS mappings for form (H3 specific)' do
+  # Mapping of H3 types and subtypes to genre and MODS type of resource:
   # https://docs.google.com/spreadsheets/d/1EiGgVqtb6PUJE2cI_jhqnAoiQkiwZtar4tF7NHwSMz8/edit?usp=sharing
-  # H2>DataCite mapping: Data>Dataset, Image>Image, Mixed Materials>Collection, Music>Other,
+  # H3>DataCite mapping: Data>Dataset, Image>Image, Mixed Materials>Collection, Music>Other,
   # Other>Other, Software/Code>Software, Sound>Sound, Text>Text, Video>Video
   # DataCite term always maps to resourceTypeGeneral
-  # H2 subtype maps to resourceType
-  # If multiple H2 subtypes, concatenate with semicolon space
-  # If no H2 subtype, map H2 type to resourceType
+  # H3 subtype maps to resourceType
+  # If multiple H3 subtypes, concatenate with semicolon space
+  # If no H3 subtype, map H3 type to resourceType
   describe 'type only, resource type with URI' do
     # User enters type: Data, subtype: nil
     it_behaves_like 'cocina MODS mapping' do
@@ -65,7 +65,7 @@ RSpec.describe 'Cocina --> MODS mappings for form (H2 specific)' do
 
       let(:mods) do
         <<~XML
-          <genre type="H2 type">Data</genre>
+          <genre type="H3 type">Data</genre>
           <typeOfResource authorityURI="http://id.loc.gov/vocabulary/resourceTypes/" valueURI="http://id.loc.gov/vocabulary/resourceTypes/dat">Dataset</typeOfResource>
           <genre authority="lcgft" valueURI="https://id.loc.gov/authorities/genreForms/gf2018026119">Data sets</genre>
           <genre authority="local">dataset</genre>
@@ -119,8 +119,8 @@ RSpec.describe 'Cocina --> MODS mappings for form (H2 specific)' do
 
       let(:mods) do
         <<~XML
-          <genre type="H2 type">Text</genre>
-          <genre type="H2 subtype">Article</genre>
+          <genre type="H3 type">Text</genre>
+          <genre type="H3 subtype">Article</genre>
           <typeOfResource>text</typeOfResource>
           <extension displayLabel="datacite">
             <resourceType resourceTypeGeneral="Text">Article</resourceType>
@@ -191,9 +191,9 @@ RSpec.describe 'Cocina --> MODS mappings for form (H2 specific)' do
 
       let(:mods) do
         <<~XML
-          <genre type="H2 type">Software/Code</genre>
-          <genre type="H2 subtype">Code</genre>
-          <genre type="H2 subtype">Documentation</genre>
+          <genre type="H3 type">Software/Code</genre>
+          <genre type="H3 subtype">Code</genre>
+          <genre type="H3 subtype">Documentation</genre>
           <typeOfResource>software, multimedia</typeOfResource>
           <genre authority="marcgt" valueURI="http://id.loc.gov/vocabulary/marcgt/com">computer program</genre>
           <typeOfResource>text</typeOfResource>
@@ -240,8 +240,8 @@ RSpec.describe 'Cocina --> MODS mappings for form (H2 specific)' do
 
       let(:mods) do
         <<~XML
-          <genre type="H2 type">Other</genre>
-          <genre type="H2 subtype">Dance notation</genre>
+          <genre type="H3 type">Other</genre>
+          <genre type="H3 subtype">Dance notation</genre>
           <extension displayLabel="datacite">
             <resourceType resourceTypeGeneral="Other">Dance notation</resourceType>
           </extension>

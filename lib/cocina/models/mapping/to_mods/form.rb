@@ -6,8 +6,8 @@ module Cocina
       module ToMods
         # Maps forms from cocina to MODS XML
         class Form # rubocop:disable Metrics/ClassLength
-          # NOTE: H2 is the first case of structured form values we're implementing
-          H2_SOURCE_LABEL = 'Stanford self-deposit resource types'
+          # NOTE: H3 is the first case of structured form values we're implementing
+          H3_SOURCE_LABEL = 'Stanford self-deposit resource types'
           PHYSICAL_DESCRIPTION_TAG = {
             'carrier' => :form,
             'digital origin' => :digitalOrigin,
@@ -229,7 +229,7 @@ module Cocina
               # Why do we need to verify that `candidate.source` is non-nil
               # here? Before this change, our datacite resource-type handling
               # could safely assume that the descriptive form metadata was
-              # constrained to the H2/H3 shape. As of August 2025, we're minting
+              # constrained to the H3/H3 shape. As of August 2025, we're minting
               # DOIs for ETDs which have their own descriptive form metadata
               # (now including datacite resource types), and this assumption no
               # longer holds. One of the ETD form values includes no source.
@@ -272,11 +272,11 @@ module Cocina
 
           def write_structured(form)
             # The only use case we're supporting for structured forms at the
-            # moment is for H2. Short-circuit if that's not what we get.
-            return if form.source.value != H2_SOURCE_LABEL
+            # moment is for H3. Short-circuit if that's not what we get.
+            return if form.source.value != H3_SOURCE_LABEL
 
             form.structuredValue.each do |genre|
-              xml.genre genre.value, type: "H2 #{genre.type}"
+              xml.genre genre.value, type: "H3 #{genre.type}"
             end
           end
 

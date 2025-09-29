@@ -30,7 +30,7 @@ RSpec.describe Cocina::Models::Mapping::ToMods::RelatedResource do
     end
   end
 
-  context 'when it has a related item with the generic "related to" type (related link from H2)' do
+  context 'when it has a related item with the generic "related to" type (related link from H3)' do
     let(:resources) do
       [
         Cocina::Models::RelatedResource.new(
@@ -67,7 +67,7 @@ RSpec.describe Cocina::Models::Mapping::ToMods::RelatedResource do
     end
   end
 
-  context 'when it has a related item with the generic "related to" type (related work from H2)' do
+  context 'when it has a related item with the generic "related to" type (related work from H3)' do
     let(:resources) do
       [
         Cocina::Models::RelatedResource.new(

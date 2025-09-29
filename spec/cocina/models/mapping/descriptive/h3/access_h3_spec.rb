@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Cocina --> MODS mappings for access (H2 specific)' do
+RSpec.describe 'Cocina --> MODS mappings for access (H3 specific)' do
   describe 'Contact email' do
     it_behaves_like 'cocina MODS mapping' do
       let(:cocina) do
