@@ -7,22 +7,6 @@ module Cocina
         # Transform the Cocina::Models::Description relatedResource attributes to the DataCite relatedItem attributes
         #  see https://support.datacite.org/reference/dois-2#put_dois-id
         class RelatedResource
-          RELATION_TYPE_MAP = {
-            'supplement to' => 'IsSupplementTo',
-            'supplemented by' => 'IsSupplementedBy',
-            'referenced by' => 'IsReferencedBy',
-            'references' => 'References',
-            'derived from' => 'IsDerivedFrom',
-            'source of' => 'IsSourceOf',
-            'version of record' => 'IsVersionOf',
-            'identical to' => 'IsIdenticalTo',
-            'has version' => 'HasVersion',
-            'preceded by' => 'Continues',
-            'succeeded by' => 'IsContinuedBy',
-            'part of' => 'IsPartOf',
-            'has part' => 'HasPart'
-          }.freeze
-
           # @param [Cocina::Models::RelatedResource] related_resource
           # @return [Hash] Hash of DataCite relatedItem attributes, conforming to the expectations of HTTP PUT
           # request to DataCite or nil if blank
@@ -97,7 +81,7 @@ module Cocina
           attr_reader :related_resource
 
           def relation_type
-            RELATION_TYPE_MAP.fetch(related_resource.type, 'References')
+            related_resource.dataCiteRelationType || 'References'
           end
 
           def related_resource_blank?
