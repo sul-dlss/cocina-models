@@ -5,23 +5,23 @@ module Cocina
     # A common interface for interrogating a model instance's type
     module Checkable
       def admin_policy?
-        (self.class::TYPES & AdminPolicy::TYPES).any?
+        self.class::TYPES.intersect?(AdminPolicy::TYPES)
       end
 
       def collection?
-        (self.class::TYPES & Collection::TYPES).any?
+        self.class::TYPES.intersect?(Collection::TYPES)
       end
 
       def dro?
-        (self.class::TYPES & DRO::TYPES).any?
+        self.class::TYPES.intersect?(DRO::TYPES)
       end
 
       def file?
-        (self.class::TYPES & File::TYPES).any?
+        self.class::TYPES.intersect?(File::TYPES)
       end
 
       def file_set?
-        (self.class::TYPES & FileSet::TYPES).any?
+        self.class::TYPES.intersect?(FileSet::TYPES)
       end
     end
   end

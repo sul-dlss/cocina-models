@@ -80,8 +80,8 @@ module Cocina
 
       REQUEST_ADMIN_POLICY_DEFAULTS = ADMIN_POLICY_DEFAULTS.except(:id)
 
-      def self.build_dro_properties(id:, **kwargs)
-        build_request_dro_properties(**kwargs)
+      def self.build_dro_properties(id:, **)
+        build_request_dro_properties(**)
           .merge(externalIdentifier: id)
           .tap do |props|
           props[:description][:purl] = "https://purl.stanford.edu/#{id.delete_prefix('druid:')}"
@@ -134,8 +134,8 @@ module Cocina
         Cocina::Models.build_request(build_request_dro_properties(**REQUEST_DRO_DEFAULTS.merge(attributes)))
       end
 
-      def self.build_collection_properties(id:, **kwargs)
-        build_request_collection_properties(**kwargs)
+      def self.build_collection_properties(id:, **)
+        build_request_collection_properties(**)
           .merge(externalIdentifier: id)
           .tap do |props|
           props[:description][:purl] = "https://purl.stanford.edu/#{id.delete_prefix('druid:')}"
@@ -194,8 +194,8 @@ module Cocina
         Cocina::Models.build_request(build_request_admin_policy_properties(**REQUEST_ADMIN_POLICY_DEFAULTS.merge(attributes)))
       end
 
-      def self.build_admin_policy_properties(id:, **kwargs)
-        build_request_admin_policy_properties(**kwargs)
+      def self.build_admin_policy_properties(id:, **)
+        build_request_admin_policy_properties(**)
           .merge(externalIdentifier: id)
           .tap do |props|
           props[:description][:purl] = "https://purl.stanford.edu/#{id.delete_prefix('druid:')}"
