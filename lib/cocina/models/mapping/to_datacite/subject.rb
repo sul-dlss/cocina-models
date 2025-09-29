@@ -7,23 +7,23 @@ module Cocina
         # Transform the Cocina::Models::Description subjects attributes to the DataCite subjects attributes
         #  see https://support.datacite.org/reference/dois-2#put_dois-id
         class Subject
-          # @param [Cocina::Models::Description] cocina_desc
+          # @param [Cocina::Models::Description] description
           # @return [NilClass,Array<Hash>] list of DataCite subjects attributes, conforming to the expectations of
           # HTTP PUT request to DataCite
-          def self.build(cocina_desc)
-            new(cocina_desc).call
+          def self.build(...)
+            new(...).call
           end
 
-          def initialize(cocina_desc)
-            @cocina_desc = cocina_desc
+          def initialize(description:)
+            @description = description
           end
 
           # @return [NilClass,Array<Hash>] list of DataCite subjects attributes, conforming to the expectations of
           # HTTP PUT request to DataCite
           def call
-            return if cocina_desc&.subject.blank?
+            return if description&.subject.blank?
 
-            results = cocina_desc.subject.map do |cocina_subject|
+            results = description.subject.map do |cocina_subject|
               subject(cocina_subject)
             end
             results.compact.presence
@@ -31,7 +31,7 @@ module Cocina
 
           private
 
-          attr_reader :cocina_desc
+          attr_reader :description
 
           def subject(cocina_subject)
             return if cocina_subject.blank?

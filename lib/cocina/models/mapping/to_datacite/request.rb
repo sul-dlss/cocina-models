@@ -24,18 +24,18 @@ module Cocina
 
           delegate :access, :description, :identification, to: :cocina_object
 
-          def call
+          def call # rubocop:disable Metrics/MethodLength
             {
               event: 'publish',
               url: description.purl,
               identifiers: Identifiers.build(identification:),
-              titles: Titles.build(description),
+              titles: Titles.build(description:),
               publisher: { name: 'Stanford Digital Repository' }, # per DataCite schema
               publicationYear: publication_year,
-              subjects: Subject.build(description),
+              subjects: Subject.build(description:),
               dates: [],
               language: 'en',
-              types: Types.build(description),
+              types: Types.build(description:),
               alternateIdentifiers: AlternateIdentifiers.build(description:),
               relatedIdentifiers: related_identifiers,
               # attributes[:sizes] = Sizes.build(cocina_object: cocina_object)
@@ -45,7 +45,7 @@ module Cocina
               descriptions: Descriptions.build(description:),
               # attributes[:geoLocations] = GeoLocations.build(cocina_object: cocina_object)
               relatedItems: related_items
-            }.merge(ContributorAttributes.build(description)).compact
+            }.merge(ContributorAttributes.build(description:)).compact
           end
 
           private
@@ -61,13 +61,13 @@ module Cocina
 
           def related_identifiers
             Array(description&.relatedResource).filter_map do |related_resource|
-              RelatedResource.related_identifier_attributes(related_resource)
+              RelatedResource.related_identifier_attributes(related_resource:)
             end
           end
 
           def related_items
             Array(description&.relatedResource).filter_map do |related_resource|
-              RelatedResource.related_item_attributes(related_resource)
+              RelatedResource.related_item_attributes(related_resource:)
             end
           end
         end
