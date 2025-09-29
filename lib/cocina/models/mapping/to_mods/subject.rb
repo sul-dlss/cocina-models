@@ -91,8 +91,8 @@ module Cocina
 
           def geographic_and_geographic_code?(subject, subject_values)
             subject.type == 'place' &&
-              subject_values.count(&:value) == 1 &&
-              subject_values.count(&:code) == 1
+              subject_values.one?(&:value) &&
+              subject_values.one?(&:code)
           end
 
           # rubocop:disable Metrics/CyclomaticComplexity

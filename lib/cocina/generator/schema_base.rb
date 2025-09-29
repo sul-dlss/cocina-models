@@ -22,7 +22,7 @@ module Cocina
       end
 
       def name
-        "#{key || schema_doc.name}#{lite ? 'Lite' : ''}"
+        "#{key || schema_doc.name}#{'Lite' if lite}"
       end
 
       # Allows nullable values to be set to nil. This is useful when doing an
