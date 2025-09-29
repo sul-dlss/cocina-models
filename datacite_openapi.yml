@@ -427,6 +427,9 @@ components:
     RelationType:
       type: string
       enum:
+        - 'IsCitedBy'
+        - 'Cites'
+        - 'IsSupplementTo'
         - 'IsSupplementedBy'
         - 'IsContinuedBy'
         - 'Continues'
@@ -440,6 +443,7 @@ components:
         - 'IsPreviousVersionOf'
         - 'IsPartOf'
         - 'HasPart'
+        - 'IsPublishedIn'
         - 'IsReferencedBy'
         - 'References'
         - 'IsDocumentedBy'
