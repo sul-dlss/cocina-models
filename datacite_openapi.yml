@@ -1,0 +1,649 @@
+openapi: 3.0.0
+info:
+  description: Specification for DataCite Requests
+  version: 1.0.0
+  title: DataCite Requests API
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+paths:
+  /validate/DRO:
+    post:
+      summary: Validate a DataCite Request for a DRO
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Request'
+      responses:
+        '200':
+          description: noop
+components:
+  schemas:
+    Affiliation:
+      type: object
+      properties:
+        affiliationIdentifier:
+          type: string
+          format: uri
+        affiliationIdentifierScheme:
+          type: string
+          enum:
+            - 'ROR'
+            - 'ISNI'
+        name:
+          type: string
+        schemeUri:
+          type: string
+          format: uri
+          enum:
+            - 'https://ror.org/'
+            - 'http://isni.org/'
+      additionalProperties: false
+    AlternateIdentifier:
+      type: object
+      properties:
+        alternateIdentifierType:
+          type: string
+        alternateIdentifier:
+          type: string
+      additionalProperties: false
+    Contributor:
+      type: object
+      properties:
+        lang:
+          type: string
+        name:
+          type: string
+        nameType:
+          type: string
+        givenName:
+          type: string
+        familyName:
+          type: string
+        affiliation:
+          type: array
+          items:
+            $ref: '#/components/schemas/Affiliation'
+        nameIdentifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/NameIdentifier'
+        contributorType:
+          type: string
+          enum:
+            - 'ContactPerson'
+            - 'DataCollector'
+            - 'DataCurator'
+            - 'DataManager'
+            - 'Distributor'
+            - 'Editor'
+            - 'HostingInstitution'
+            - 'Producer'
+            - 'ProjectLeader'
+            - 'ProjectManager'
+            - 'RegistrationAgency'
+            - 'RegistrationAuthority'
+            - 'RelatedPerson'
+            - 'Researcher'
+            - 'ResearchGroup'
+            - 'RightsHolder'
+            - 'Sponsor'
+            - 'Supervisor'
+            - 'Translator'
+            - 'WorkPackageLeader'
+            - 'Other'
+      additionalProperties: false
+    Creator:
+      type: object
+      properties:
+        name:
+          type: string
+        nameType:
+          type: string
+        givenName:
+          type: string
+        familyName:
+          type: string
+        affiliation:
+          type: array
+          items:
+            $ref: '#/components/schemas/Affiliation'
+        nameIdentifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/NameIdentifier'
+      additionalProperties: false
+    Date:
+      type: object
+      properties:
+        date:
+          type: string
+        dateType:
+          type: string
+          enum:
+            - 'Accepted'
+            - 'Available'
+            - 'Copyrighted'
+            - 'Collected'
+            - 'Coverage'
+            - 'Created'
+            - 'Issued'
+            - 'Submitted'
+            - 'Updated'
+            - 'Valid'
+            - 'Withdrawn'
+            - 'Other'
+        dateInformation:
+          type: string
+      additionalProperties: false
+    Description:
+      type: object
+      properties:
+        lang:
+          type: string
+        description:
+          type: string
+        descriptionType:
+          type: string
+          enum:
+            - 'Abstract'
+            - 'Methods'
+            - 'SeriesInformation'
+            - 'TableOfContents'
+            - 'TechnicalInfo'
+            - 'Other'
+      additionalProperties: false
+    FundingReference:
+      type: object
+      properties:
+        funderName:
+          type: string
+        funderIdentifier:
+          type: string
+          format: uri
+        funderIdentifierType:
+          type: string
+          enum:
+            - 'ROR'
+            - 'Crossref Funder ID'
+            - 'ISNI'
+            - 'GRID'
+            - 'Other'
+        schemeUri:
+          type: string
+          format: uri
+        awardNumber:
+          type: string
+        awardUri:
+          type: string
+          format: uri
+        awardTitle:
+          type: string
+      additionalProperties: false
+    GeoLocation:
+      type: object
+      properties:
+        geoLocationPlace:
+          type: string
+        goeLocationBox:
+          $ref: '#/components/schemas/GeoLocationBox'
+        geoLocationPoint:
+          $ref: '#/components/schemas/GeoLocationPoint'
+        geoLocationPolygon:
+          $ref: '#/components/schemas/GeoLocationPolygon'
+      additionalProperties: false
+    GeoLocationBox:
+      type: object
+      properties:
+        westBoundLongitude:
+          type: number
+        eastBoundLongitude:
+          type: number
+        southBoundLatitude:
+          type: number
+        northBoundLatitude:
+          type: number
+      additionalProperties: false
+      required:
+        - westBoundLongitude
+        - eastBoundLongitude
+        - southBoundLatitude
+        - northBoundLatitude
+    GeoLocationPoint:
+      type: object
+      properties:
+        pointLongitude:
+          type: number
+        pointLatitude:
+          type: number
+      additionalProperties: false
+      required:
+        - pointLongitude
+        - pointLatitude
+    GeoLocationPolygon:
+      type: object
+      properties:
+        polygonPoint:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeoLocationPoint'
+        inPolygonPoint:
+          $ref: '#/components/schemas/GeoLocationPoint'
+      additionalProperties: false
+    Identifier:
+      type: object
+      properties:
+        identifier:
+          type: string
+        identifierType:
+          type: string
+          enum:
+            - 'DOI'
+      additionalProperties: false
+      required:
+        - identifier
+        - identifierType
+    NameIdentifier:
+      type: object
+      properties:
+        nameIdentifier:
+          type: string
+          format: uri
+        nameIdentifierScheme:
+          type: string
+          enum:
+            - 'ROR'
+            - 'ISNI'
+            - 'ORCID'
+        schemeUri:
+          type: string
+          format: uri
+          enum:
+            - 'https://ror.org/'
+            - 'http://isni.org/'
+            - 'https://orcid.org/'
+      additionalProperties: false
+    Publisher:
+      type: object
+      properties:
+        lang:
+          type: string
+        publisherIdentifier:
+          type: string
+          format: uri
+        publisherIdentifierScheme:
+          type: string
+          enum:
+            - 'ROR'
+            - 're3data'
+            - 'VIAF'
+            - 'Wikidata'
+            - 'Crossref Funder ID'
+            - 'ISNI'
+            - 'OpenDOAR'
+            - 'FAIRsharing'
+            - 'ISSN'
+        name:
+          type: string
+        schemeUri:
+          type: string
+          format: uri
+          enum:
+            - 'https://ror.org/'
+            - 'https://isni.org/'
+            - 'https://www.wikidata.org/wiki/'
+            - 'https://www.re3data.org/'
+            - 'https://viaf.org/'
+      additionalProperties: false
+    RelatedIdentifier:
+      type: object
+      properties:
+        relatedIdentifier:
+          type: string
+        relatedIdentifierType:
+          type: string
+          enum:
+            - 'ARK'
+            - 'arXiv'
+            - 'bibcode'
+            - 'CSTR'
+            - 'DOI'
+            - 'EAN13'
+            - 'EISSN'
+            - 'Handle'
+            - 'IGSN'
+            - 'ISBN'
+            - 'ISSN'
+            - 'ISTC'
+            - 'LISSN'
+            - 'LSID'
+            - 'PMID'
+            - 'PURL'
+            - 'RRID'
+            - 'UPC'
+            - 'URL'
+            - 'URN'
+            - 'w3id'
+        relationType:
+          $ref: '#/components/schemas/RelationType'
+        relatedMetadataScheme:
+          type: string
+        schemeUri:
+          type: string
+          format: uri
+        schemeType:
+          type: string
+        resourceTypeGeneral:
+          $ref: '#/components/schemas/ResourceTypeGeneral'
+      additionalProperties: false
+    RelatedItem:
+      type: object
+      properties:
+        relatedItemType:
+          $ref: '#/components/schemas/ResourceTypeGeneral'
+        relationType:
+          $ref: '#/components/schemas/RelationType'
+        relatedItemIdentifier:
+          $ref: '#/components/schemas/RelatedItemIdentifier'
+        creators:
+          type: array
+          items:
+            $ref: '#/components/schemas/Creator'
+        titles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Title'
+        publicationYear:
+          type: string
+        volume:
+          type: string
+        issue:
+          type: string
+        number:
+          type: string
+        numberType:
+          type: string
+          enum:
+            - 'Article'
+            - 'Chapter'
+            - 'Report'
+            - 'Other'
+        firstPage:
+          type: string
+        lastPage:
+          type: string
+        publisher:
+          $ref: '#/components/schemas/Publisher'
+        edition:
+          type: string
+        contributors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contributor'
+      additionalProperties: false
+    RelatedItemIdentifier:
+      type: object
+      properties:
+        relatedItemIdentifier:
+          type: string
+        relatedItemIdentifierType:
+          type: string
+          enum:
+            - 'ARK'
+            - 'arXiv'
+            - 'bibcode'
+            - 'CSTR'
+            - 'DOI'
+            - 'EAN13'
+            - 'EISSN'
+            - 'Handle'
+            - 'IGSN'
+            - 'ISBN'
+            - 'ISSN'
+            - 'ISTC'
+            - 'LISSN'
+            - 'LSID'
+            - 'PMID'
+            - 'PURL'
+            - 'RRID'
+            - 'UPC'
+            - 'URL'
+            - 'URN'
+            - 'w3id'
+        relationType:
+          $ref: '#/components/schemas/RelationType'
+        relatedMetadataScheme:
+          type: string
+        schemeUri:
+          type: string
+          format: uri
+        schemeType:
+          type: string
+        resourceTypeGeneral:
+          $ref: '#/components/schemas/ResourceTypeGeneral'
+      additionalProperties: false
+    RelationType:
+      type: string
+      enum:
+        - 'IsSupplementedBy'
+        - 'IsContinuedBy'
+        - 'Continues'
+        - 'IsDescribedBy'
+        - 'Describes'
+        - 'HasMetadata'
+        - 'IsMetadataFor'
+        - 'HasVersion'
+        - 'IsVersionOf'
+        - 'IsNewVersionOf'
+        - 'IsPreviousVersionOf'
+        - 'IsPartOf'
+        - 'HasPart'
+        - 'IsReferencedBy'
+        - 'References'
+        - 'IsDocumentedBy'
+        - 'Documents'
+        - 'IsCompiledBy'
+        - 'Compiles'
+        - 'IsVariantFormOf'
+        - 'IsOriginalFormOf'
+        - 'IsIdenticalTo'
+        - 'IsReviewedBy'
+        - 'Reviews'
+        - 'IsDerivedFrom'
+        - 'IsSourceOf'
+        - 'IsRequiredBy'
+        - 'Requires'
+        - 'IsObsoletedBy'
+        - 'Obsoletes'
+        - 'IsCollectedBy'
+        - 'Collects'
+        - 'IsTranslationOf'
+        - 'HasTranslation'
+    Request:
+      type: object
+      additionalProperties: false
+      properties:
+        event:
+          type: string
+          enum:
+            - 'publish'
+        url:
+          type: string
+        identifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Identifier'
+        creators:
+          type: array
+          items:
+            $ref: '#/components/schemas/Creator'
+        titles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Title'
+        publisher:
+          $ref: '#/components/schemas/Publisher'
+        publicationYear:
+          type: string
+        subjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Subject'
+        contributors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contributor'
+        dates:
+          type: array
+          items:
+            $ref: '#/components/schemas/Date'
+        language:
+          type: string
+        types:
+          $ref: '#/components/schemas/ResourceType'
+        alternateIdentifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlternateIdentifier'
+        relatedIdentifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedIdentifier'
+        sizes:
+          type: array
+          items:
+            type: string
+        formats:
+          type: array
+          items:
+            type: string
+        version:
+          type: integer
+        rightsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rights'
+        descriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Description'
+        geoLocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeoLocation'
+        fundingReferences:
+          type: array
+          items:
+            $ref: '#/components/schemas/FundingReference'
+        relatedItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedItem'
+      required:
+        - creators
+        - identifiers
+        - publicationYear
+        - publisher
+        - titles
+        - types
+    ResourceType:
+      type: object
+      properties:
+        resourceType:
+          type: string
+        resourceTypeGeneral:
+          $ref: '#/components/schemas/ResourceTypeGeneral'
+      additionalProperties: false
+      required:
+        - resourceType
+    ResourceTypeGeneral:
+      type: string
+      enum:
+        - 'Audiovisual'
+        - 'Award'
+        - 'Book'
+        - 'BookChapter'
+        - 'Collection'
+        - 'ComputationalNotebook'
+        - 'ConferencePaper'
+        - 'ConferenceProceeding'
+        - 'DataPaper'
+        - 'Dataset'
+        - 'Dissertation'
+        - 'Event'
+        - 'Image'
+        - 'InteractiveResource'
+        - 'Instrument'
+        - 'Journal'
+        - 'JournalArticle'
+        - 'Model'
+        - 'OutputManagementPlan'
+        - 'PeerReview'
+        - 'PhysicalObject'
+        - 'Preprint'
+        - 'Project'
+        - 'Report'
+        - 'Service'
+        - 'Software'
+        - 'Sound'
+        - 'Standard'
+        - 'StudyRegistration'
+        - 'Text'
+        - 'Workflow'
+        - 'Other'
+      additionalProperties: false
+    Rights:
+      type: object
+      properties:
+        lang:
+          type: string
+        rights:
+          type: string
+        rightsUri:
+          type: string
+          format: uri
+        schemeUri:
+          type: string
+          format: uri
+        rightsIdentifier:
+          type: string
+        rightsIdentifierScheme:
+          type: string
+      additionalProperties: false
+    Subject:
+      type: object
+      properties:
+        lang:
+          type: string
+        subject:
+          type: string
+        schemeUri:
+          type: string
+          format: uri
+        valueUri:
+          type: string
+          format: uri
+        subjectScheme:
+          type: string
+        classificationCode:
+          type: string
+      additionalProperties: false
+    Title:
+      type: object
+      properties:
+        lang:
+          type: string
+        title:
+          type: string
+        titleType:
+          type: string
+          enum:
+            - 'AlternativeTitle'
+            - 'Subtitle'
+            - 'TranslatedTitle'
+            - 'Other'
+      required:
+        - title
+      additionalProperties: false

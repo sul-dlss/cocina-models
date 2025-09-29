@@ -310,14 +310,16 @@ RSpec.describe Cocina::Models::Mapping::ToDatacite::Request do
             title: 'title'
           }
         ],
-        publisher: 'Stanford Digital Repository',
+        publisher: {
+          name: 'Stanford Digital Repository'
+        },
         publicationYear: '2025',
         subjects: [
           {
             subject: 'Marine biology',
             subjectScheme: 'fast',
-            valueURI: 'http://id.worldcat.org/fast/1009447',
-            schemeURI: 'http://id.worldcat.org/fast/'
+            valueUri: 'http://id.worldcat.org/fast/1009447',
+            schemeUri: 'http://id.worldcat.org/fast/'
           }
         ],
         dates: [],
@@ -369,8 +371,10 @@ RSpec.describe Cocina::Models::Mapping::ToDatacite::Request do
                 title: 'https://doi.org/10.1234/example.doi'
               }
             ],
-            relatedItemIdentifier: 'https://doi.org/10.1234/example.doi',
-            relatedItemIdentifierType: 'DOI'
+            relatedItemIdentifier: {
+              relatedItemIdentifier: 'https://doi.org/10.1234/example.doi',
+              relatedItemIdentifierType: 'DOI'
+            }
           }
         ],
         creators: [
