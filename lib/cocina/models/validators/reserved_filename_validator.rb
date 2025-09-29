@@ -28,7 +28,7 @@ module Cocina
         attr_reader :clazz, :attributes
 
         def dro?
-          (clazz::TYPES & DRO::TYPES).any? && attributes[:externalIdentifier].present?
+          clazz::TYPES.intersect?(DRO::TYPES) && attributes[:externalIdentifier].present?
         rescue NameError
           false
         end

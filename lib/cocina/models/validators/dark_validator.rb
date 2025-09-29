@@ -33,7 +33,7 @@ module Cocina
         end
 
         def dro?
-          (clazz::TYPES & DRO::TYPES).any?
+          clazz::TYPES.intersect?(DRO::TYPES)
         rescue NameError
           false
         end
