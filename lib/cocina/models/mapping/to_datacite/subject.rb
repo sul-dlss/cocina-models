@@ -46,11 +46,11 @@ module Cocina
           def fast_subject(cocina_subject)
             {
               subjectScheme: 'fast',
-              schemeURI: 'http://id.worldcat.org/fast/'
+              schemeUri: 'http://id.worldcat.org/fast/'
 
             }.tap do |attribs|
               attribs[:subject] = cocina_subject.value if cocina_subject.value.present?
-              attribs[:valueURI] = cocina_subject.uri if cocina_subject.uri.present?
+              attribs[:valueUri] = cocina_subject.uri if cocina_subject.uri.present?
             end
           end
 

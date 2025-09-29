@@ -30,7 +30,7 @@ module Cocina
               url: description.purl,
               identifiers: Identifiers.build(identification:),
               titles: Titles.build(description),
-              publisher: 'Stanford Digital Repository', # per DataCite schema
+              publisher: { name: 'Stanford Digital Repository' }, # per DataCite schema
               publicationYear: publication_year,
               subjects: Subject.build(description),
               dates: [],

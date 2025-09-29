@@ -55,13 +55,17 @@ module Cocina
             }.tap do |attribs|
               attribs[:titles] = [title: related_item_title] if related_item_title
               if related_item_identifier_url
-                attribs[:relatedItemIdentifier] = related_item_identifier_url
-                attribs[:relatedItemIdentifierType] = 'URL'
+                attribs[:relatedItemIdentifier] = {
+                  relatedItemIdentifier: related_item_identifier_url,
+                  relatedItemIdentifierType: 'URL'
+                }
               end
 
               if related_item_doi
-                attribs[:relatedItemIdentifier] = related_item_doi
-                attribs[:relatedItemIdentifierType] = 'DOI'
+                attribs[:relatedItemIdentifier] = {
+                  relatedItemIdentifier: related_item_doi,
+                  relatedItemIdentifierType: 'DOI'
+                }
               end
             end
           end
