@@ -276,7 +276,7 @@ module Cocina
             return if form.source.value != H3_SOURCE_LABEL
 
             form.structuredValue.each do |genre|
-              xml.genre genre.value, type: "H3 #{genre.type}"
+              xml.genre genre.value, type: "Self deposit #{genre.type}"
             end
           end
 

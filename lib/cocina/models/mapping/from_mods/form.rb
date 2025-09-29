@@ -8,7 +8,7 @@ module Cocina
         # rubocop:disable Metrics/ClassLength
         class Form
           # NOTE: H3 is the first case of structured form (genre/typeOfResource) values we're implementing
-          H3_GENRE_TYPE_PREFIX = 'H3 '
+          H3_GENRE_TYPE_PREFIX = 'Self deposit '
 
           # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
           # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] description_builder
