@@ -6,7 +6,7 @@ module Cocina
       module ToDatacite
         # Transform the Cocina::Models::Description form attributes to the DataCite types attributes
         #  see https://support.datacite.org/reference/dois-2#put_dois-id
-        class ContributorAttributes
+        class ContributorAttributes # rubocop:disable Metrics/ClassLength
           DATACITE_PERSON_CONTRIBUTOR_TYPES = {
             'copyright holder' => 'RightsHolder',
             'compiler' => 'DataCollector',
@@ -27,14 +27,14 @@ module Cocina
             'sponsor' => 'Sponsor'
           }.freeze
 
-          # @param [Cocina::Models::Description] cocina_desc
+          # @param [Cocina::Models::Description] description
           # @return [Hash] Hash of DataCite attributes containing creators, contributors, and fundingReferences keys
-          def self.build(cocina_desc)
-            new(cocina_desc).call
+          def self.build(...)
+            new(...).call
           end
 
-          def initialize(cocina_desc)
-            @cocina_desc = cocina_desc
+          def initialize(description:)
+            @description = description
           end
 
           # @return [Hash] Hash of DataCite attributes containing creators, contributors, and fundingReferences keys
@@ -48,22 +48,22 @@ module Cocina
 
           private
 
-          attr_reader :cocina_desc
+          attr_reader :description
 
           def cocina_creators
-            @cocina_creators ||= Array(cocina_desc.contributor).select do |cocina_contributor|
+            @cocina_creators ||= Array(description.contributor).select do |cocina_contributor|
               datacite_creator?(cocina_contributor)
             end
           end
 
           def cocina_contributors
-            @cocina_contributors ||= Array(cocina_desc.contributor).select do |cocina_contributor|
+            @cocina_contributors ||= Array(description.contributor).select do |cocina_contributor|
               datacite_publisher?(cocina_contributor)
             end
           end
 
           def cocina_funders
-            @cocina_funders ||= Array(cocina_desc.contributor).select do |cocina_contributor|
+            @cocina_funders ||= Array(description.contributor).select do |cocina_contributor|
               datacite_funder?(cocina_contributor)
             end
           end
@@ -108,7 +108,7 @@ module Cocina
             datacite_creator(cocina_contributor).merge({ contributorType: contributor_type(cocina_contributor) })
           end
 
-          def personal_name(cocina_contributor)
+          def personal_name(cocina_contributor) # rubocop:disable Metrics/MethodLength
             {
               nameType: 'Personal',
               nameIdentifiers: name_identifiers(cocina_contributor).presence,

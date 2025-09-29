@@ -27,26 +27,26 @@ module Cocina
           # @return [Hash] Hash of DataCite relatedItem attributes, conforming to the expectations of HTTP PUT
           # request to DataCite or nil if blank
           #  see https://support.datacite.org/reference/dois-2#put_dois-id
-          def self.related_item_attributes(related_resource)
-            new(related_resource).related_item_attributes
+          def self.related_item_attributes(...)
+            new(...).related_item_attributes
           end
 
           # @param [Cocina::Models::RelatedResource] related_resource
           # @return [Hash] Hash of DataCite relatedIdentifier attributes, conforming to the expectations of HTTP PUT
           # request to DataCite or nil if blank
           #  see https://support.datacite.org/reference/dois-2#put_dois-id
-          def self.related_identifier_attributes(related_resource)
-            new(related_resource).related_identifier_attributes
+          def self.related_identifier_attributes(...)
+            new(...).related_identifier_attributes
           end
 
-          def initialize(related_resource)
+          def initialize(related_resource:)
             @related_resource = related_resource
           end
 
           # @return [Hash,nil] Array of DataCite relatedItem attributes, conforming to the expectations of HTTP PUT
           # request to DataCite or nil if blank
           #  see https://support.datacite.org/reference/dois-2#put_dois-id
-          def related_item_attributes
+          def related_item_attributes # rubocop:disable Metrics/MethodLength
             return if related_resource_blank?
 
             {

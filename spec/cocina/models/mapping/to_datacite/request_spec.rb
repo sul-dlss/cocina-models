@@ -7,7 +7,7 @@ RSpec.describe Cocina::Models::Mapping::ToDatacite::Request do
   let(:cocina_object) do
     Cocina::Models::DRO.new(externalIdentifier: druid,
                             type: Cocina::Models::ObjectType.object,
-                            label:,
+                            label: label,
                             version: 1,
                             description: {
                               contributor: [
@@ -239,7 +239,7 @@ RSpec.describe Cocina::Models::Mapping::ToDatacite::Request do
                                   value: 'My paper is about dolphins.'
                                 }
                               ],
-                              purl:,
+                              purl: purl,
                               relatedResource: [
                                 {
                                   note: [
@@ -276,7 +276,7 @@ RSpec.describe Cocina::Models::Mapping::ToDatacite::Request do
                             },
                             identification: {
                               sourceId: 'sul:8.559351',
-                              doi:
+                              doi: doi
                             },
                             access: {
                               license: 'https://creativecommons.org/publicdomain/mark/1.0/'
@@ -294,7 +294,7 @@ RSpec.describe Cocina::Models::Mapping::ToDatacite::Request do
   let(:apo_druid) { 'druid:pp000pp0000' }
   let(:url) { nil }
 
-  it 'populates the attributes hash correctly' do
+  it 'populates the attributes hash correctly' do # rubocop:disable RSpec/ExampleLength
     expect(request).to eq(
       {
         event: 'publish',

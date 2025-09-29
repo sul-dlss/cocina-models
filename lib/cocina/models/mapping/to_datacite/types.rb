@@ -7,15 +7,15 @@ module Cocina
         # Transform the Cocina::Models::Description form attributes to the DataCite types attributes
         #  see https://support.datacite.org/reference/dois-2#put_dois-id
         class Types
-          # @param [Cocina::Models::Description] cocina_desc
+          # @param [Cocina::Models::Description] description
           # @return [NilClass, Hash] the DataCite types attributes, conforming to the expectations of HTTP PUT request
           # to DataCite
-          def self.build(cocina_desc)
-            new(cocina_desc).call
+          def self.build(...)
+            new(...).call
           end
 
-          def initialize(cocina_desc)
-            @cocina_desc = cocina_desc
+          def initialize(description:)
+            @description = description
           end
 
           # @return [NilClass, Hash] the DataCite types attributes, conforming to the expectations of HTTP PUT request
@@ -31,11 +31,11 @@ module Cocina
 
           private
 
-          attr_reader :cocina_desc
+          attr_reader :description
 
           # @return String DataCite resourceTypeGeneral value
           def resource_type_general
-            @resource_type_general ||= Array(cocina_desc.form).find do |cocina_form|
+            @resource_type_general ||= Array(description.form).find do |cocina_form|
               datacite_resource_types_form?(cocina_form)
             end&.value
           end
@@ -43,7 +43,7 @@ module Cocina
           # @return [String] DataCite resourceType value
           def resource_type
             @resource_type ||= begin
-              self_deposit_form = Array(cocina_desc.form).find { |cocina_form| self_deposit_form?(cocina_form) }
+              self_deposit_form = Array(description.form).find { |cocina_form| self_deposit_form?(cocina_form) }
 
               subtypes = self_deposit_subtypes(self_deposit_form)
               if subtypes.blank?
