@@ -62,22 +62,30 @@ module Cocina
         end
 
         def validate_values_for_multiples(hash, path)
-          return unless hash.count { |key, value| %i[value groupedValue structuredValue parallelValue].include?(key) && value.present? } > 1
+          return unless hash.count { |key, value| %w[value groupedValue structuredValue parallelValue].include?(key) && value.present? } > 1
 
           error_paths_multiple << path_to_s(path)
         end
 
         def validate_title_type(hash, path)
           # only apply to title.structuredValue, title.parallelValue.structuredValue, or relatedResource.title with a value
-          return unless hash[:value] && (path.first == :title || related_resource_title?(path)) && path.include?(:structuredValue)
+          return unless hash[:value] && (structured_value_title?(path) || related_resource_title?(path))
 
           # if there is a "value" key, make sure there is also a "type" key, only for title.structuredValue
           error_paths_missing_title_type << path_to_s(path) unless hash[:type]
         end
 
         def related_resource_title?(path)
-          # title is directly within relatedResource, e.g [:relatedResource, 0, :title, 0, :structuredValue, 0])
-          path.first == :relatedResource && path[2] == :title
+          # title is within relatedResource, e.g ["relatedResource", 0, "title", 0, "structuredValue", 0])
+          structured_value_path = path[4] == 'structuredValue' || (path[4] == 'parallelValue' && path[6] == 'structuredValue')
+          path.first == 'relatedResource' && path[2] == 'title' && structured_value_path
+        end
+
+        def structured_value_title?(path)
+          # title path includes a structuredValue directly or within a parallelValue
+          # e.g. ["title", 0, "structuredValue", 0] or ["title", 0, "parallelValue", 0, "structuredValue", 0])
+          structured_value_path = path[2] == 'structuredValue' || (path[2] == 'parallelValue' && path[4] == 'structuredValue')
+          path.first == 'title' && structured_value_path
         end
 
         def path_to_s(path)
