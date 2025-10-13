@@ -99,6 +99,8 @@ contributor.note:
     description: Institution with which the contributor is associated.
   - value: citation status
     description: Indicator of whether the contributor should be included in the citation.
+  - value: contact email
+    description: Preferred email contact for contributor.
   - value: description
     description: Biographical information about the contributor.
 event:

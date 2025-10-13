@@ -106,6 +106,8 @@ _Path: contributor.note.type_
     * Institution with which the contributor is associated.
   * citation status
     * Indicator of whether the contributor should be included in the citation.
+  * contact email
+    * Preferred email contact for contributor.
   * description
     * Biographical information about the contributor.
 # Event types
