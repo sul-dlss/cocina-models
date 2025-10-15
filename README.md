@@ -91,7 +91,7 @@ RAILS_ENV=production bin/validate-cocina -p 8
 
 ## Running Reports in DSA
 
-Custom reports stored in dor-services-app can be run similarly to validation testing described above.
+Custom reports stored in dor-services-app can be run similarly to validation testing described above.  The reports are stored in the `app/reports` directory in dor-services-app.  Examine some of the reports in that folder to see the pattern of how they are structured and run.  Since they need to access to the SDR datastore to run, you can run them on the `sdr-infra` box, which has read-only access to each environment (qa/stage/prod).
 
 1. Connect to the `sdr-infra` box:
     ```shell
@@ -102,20 +102,35 @@ Custom reports stored in dor-services-app can be run similarly to validation tes
     # you may or may not need to supply the `-n SUNETID` argument
     ksu deploy
     ```
-1. Go to the `~/dor-services-app` directory and reset to main if needed (verify nobody else is using this first though):
+1. Go to the home directory of the deploy user.  If you have previously run reports, you may have a directory for your username in here.  If not, you will create it:
     ```shell
-    cd ~/dor-services-app
-    git status # see if there are any unsaved changes, if so, you may need to git stash them
-    git pull # OR git reset --hard main   to just ditch any local unsaved changes
+    cd ~
+    ls -al # do you see a folder for your sunet?  if so, go to the next step, if not create it below and then clone DSA
+    mkdir [SUNETID] # make a directory for yourself so you can run reports in isolation from others being run
+    cd [SUNETID]
+    git clone https://github.com/sul-dlss/dor-services-app.git # check out the DSA code
     ```
+1. Change to your directory (if not already there from the previous step) and checkout the correct branch of DSA:
+   ```shell
+   cd [SUNETID]
+   cd dor-services-app
+   git checkout [BRANCH] # if your report is not merged into main, you can checkout your branch here
+   ```   
 1. Connect to the desired database by setting the environment variables as described in the section above.  This must be done each time you SSH back into the box to run a new report.
+   For example, to run a report against production SDR:
+   ```shell
+    export DATABASE_NAME="dor_services"
+    export DATABASE_USERNAME=$DOR_SERVICES_DB_USER
+    export DATABASE_HOSTNAME=$DOR_SERVICES_DB_PROD_HOST
+    export DATABASE_PASSWORD=$DOR_SERVICES_DB_PROD_PWD
+    ```
 1. Run the report (good idea to do it in a screen or via background process in case you get disconnected):
     ```shell
     bundle exec bin/rails r -e production "BadIso8601Dates.report" > BadIso8601Dates.csv
     ```
 1. When done, you can pull the report to your laptop as needed:
     ```shell
-    scp sdr-infra:/opt/app/deploy/dor-services-app/BadIso8601Dates.csv .
+    scp sdr-infra:/opt/app/deploy/[SUNETID]/dor-services-app/BadIso8601Dates.csv .
     ```
 
 ## Releasing a patch change
