@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Cocina --> MODS mappings for event (h2 specific)' do
+RSpec.describe 'Cocina --> MODS mappings for event (H3 specific)' do
   describe 'Publication date: 2021-01-01' do
     it_behaves_like 'cocina MODS mapping' do
       let(:cocina) do
