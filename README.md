@@ -91,32 +91,8 @@ RAILS_ENV=production bin/validate-cocina -p 8
 
 ## Running Reports in DSA
 
-Custom reports stored in dor-services-app can be run similarly to validation testing described above.
+See https://github.com/sul-dlss/dor-services-app/blob/main/README.md#running-reports
 
-1. Connect to the `sdr-infra` box:
-    ```shell
-    ssh sdr-infra
-    ```
-1. Start a shell as the `deploy` user:
-    ```shell
-    # you may or may not need to supply the `-n SUNETID` argument
-    ksu deploy
-    ```
-1. Go to the `~/dor-services-app` directory and reset to main if needed (verify nobody else is using this first though):
-    ```shell
-    cd ~/dor-services-app
-    git status # see if there are any unsaved changes, if so, you may need to git stash them
-    git pull # OR git reset --hard main   to just ditch any local unsaved changes
-    ```
-1. Connect to the desired database by setting the environment variables as described in the section above.  This must be done each time you SSH back into the box to run a new report.
-1. Run the report (good idea to do it in a screen or via background process in case you get disconnected):
-    ```shell
-    bundle exec bin/rails r -e production "BadIso8601Dates.report" > BadIso8601Dates.csv
-    ```
-1. When done, you can pull the report to your laptop as needed:
-    ```shell
-    scp sdr-infra:/opt/app/deploy/dor-services-app/BadIso8601Dates.csv .
-    ```
 
 ## Releasing a patch change
 A patch change is a change that (1) does not affect the data model; (2) does not alter the openapi.yml; and more broadly (3) does not matter if some applications have the change and others do not.
@@ -143,7 +119,7 @@ Send a note to `#dlss-infra-chg-mgmt` on Slack to let people know what is changi
 The release process is much like any other gem. While on main:
 1. Bump the version in `lib/cocina/models/version.rb`
 2. `bundle install` so that `Gemfile.lock` is updated.
-3. Commit those changes. 
+3. Commit those changes.
 4. Run:
 ```
 bundle exec rake release
@@ -179,11 +155,11 @@ Copy and paste the cocina-models schemas to each project's `openapi.yml`. By con
 If you updated the `openapi.yml` in step 3A, use the same PR for step 3B. Why? When [dor-services-app](https://github.com/sul-dlss/dor-services-app), for example, is updated to use the new models (via the auto-update script), these clients should be updated at the same time or there is risk of models produced by dor-services-app not being acceptable to the clients.
 
 1. Perform `bundle update --conservative cocina-models dor-services-client` in the  services above and make PRs for those repos if they don't already exist. You may first need to update how these gems are pinned in the `Gemfile` in order to bump them.
-2. Note that sdr-client is not currently used in these applications, but if it were, would also need to be bumped to the latest release. 
+2. Note that sdr-client is not currently used in these applications, but if it were, would also need to be bumped to the latest release.
 
 #### Step 3C: Merge 'em
 
-Get the directly coupled services PRs merged before the deploy in step 5. 
+Get the directly coupled services PRs merged before the deploy in step 5.
 
 See the IMPORTANT note above about the timing of merging these PRs if you are waiting for dependency updates to make the updates to other dependent applications.
 
@@ -211,7 +187,7 @@ Create a branch and update cocina-models:
 ```
 bundle update --conservative cocina-models
 ```
-Once merged, it will deploy to stage via CD. 
+Once merged, it will deploy to stage via CD.
 
 ### Step 5: Deploy and test
 
@@ -228,7 +204,7 @@ It is safest to ensure _all_ the integration tests run cleanly.  However, patch 
 
 **[Turn off Google Books](https://sul-gbooks-prod.stanford.edu/features) when deploying to production.** This avoids failed deposit due to a temporary Cocina model mismatch. Unlike other applications, the deposits will fail without retry and require manual remediation.
 
-In addition to deploying infrastructure apps via sdr-deploy, tag and cut a release of purl-fetcher. That will trigger its deploy to production. 
+In addition to deploying infrastructure apps via sdr-deploy, tag and cut a release of purl-fetcher. That will trigger its deploy to production.
 
 ## Usage conventions
 
