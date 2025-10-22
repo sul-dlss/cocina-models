@@ -941,7 +941,7 @@ components:
     DoiExceptions:
       type: string
       description: pre-existing Digital Object Identifiers (https://www.doi.org) not matching the pattern (case insensitive)
-      pattern: '^10\.(25740\/([vV][aA]90-[cC][tT]15|[sS][yY][xX][aA]-[mM]256|12[qQ][fF]-5243|65[jJ]8-6114)|25936\/629[tT]-[bB][xX]79)$'
+      pattern: '^10\.(25740\/[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}|25936\/629[tT]-[bB][xX]79)$'
       example: '10.25740/12qF-5243'
     DoiPattern:
       type: string
