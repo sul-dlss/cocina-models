@@ -97,7 +97,7 @@ module Cocina
             if parallel_name_values.size == 1
               contrib_name_value_slice = Cocina::Models::Builders::NameTitleGroupBuilder.value_slices(parallel_name_values.first)
               name_title_group = name_title_vals_index[contrib_name_value_slice]&.values&.first
-              write_name_from_parallel(contributor, contributor.name.first, parallel_name_values, name_title_group, nil)
+              write_name_from_parallel(contributor, contributor.name.first, parallel_name_values.first, name_title_group, nil)
             elsif parallel_name_values.size == 2 && display_type_parallel_name
               contrib_name_value_slice = Cocina::Models::Builders::NameTitleGroupBuilder.value_slices(parallel_name_values.first)
               name_title_group = name_title_vals_index[contrib_name_value_slice]&.values&.first

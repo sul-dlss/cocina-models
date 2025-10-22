@@ -100,4 +100,49 @@ RSpec.describe Cocina::Models::Mapping::ToMods::NameWriter do
       XML
     end
   end
+
+  context 'when there is a single parallel name value' do
+    let(:contributor) do
+      Cocina::Models::Contributor.new(
+        {
+          name: [
+            {
+              parallelValue: [
+                {
+                  value: 'Булгаков, Михаил Афанасьевич',
+                  status: 'primary',
+                  valueLanguage: {
+                    code: 'rus',
+                    source: {
+                      code: 'iso639-2b'
+                    },
+                    valueScript: {
+                      code: 'Cyrl',
+                      source: {
+                        code: 'iso15924'
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          type: 'person',
+          status: 'primary'
+        }
+      )
+    end
+
+    it 'builds the xml' do
+      expect(xml).to be_equivalent_to <<~XML
+        <mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://www.loc.gov/mods/v3" version="3.6"
+          xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+          <name usage="primary" type="personal" script="Cyrl" lang="rus">
+            <namePart>Булгаков, Михаил Афанасьевич</namePart>
+          </name>
+        </mods>
+      XML
+    end
+  end
 end
