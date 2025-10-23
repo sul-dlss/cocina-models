@@ -2,6 +2,6 @@
 
 module Cocina
   module Models
-    DOI = DoiPattern | DoiExceptions
+    DOI = LibrariesDOI | RepositoryDOI | PreregisteredRepositoryDOI
   end
 end
