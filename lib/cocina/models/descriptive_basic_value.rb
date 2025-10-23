@@ -2,14 +2,16 @@
 
 module Cocina
   module Models
-    # Basic value model for descriptive elements. Can only have one of value, parallelValue, groupedValue, or structuredValue.
+    # Basic value model for descriptive elements. Can only have one of value, parallelValue,
+    # groupedValue, or structuredValue.
     class DescriptiveBasicValue < Struct
       attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute :parallelValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute :groupedValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # String or integer value of the descriptive element.
       attribute? :value, Types::Nominal::Any
-      # Type of value provided by the descriptive element. See https://github.com/sul-dlss/cocina-models/blob/main/docs/description_types.md for valid types.
+      # Type of value provided by the descriptive element. See https://github.com/sul-dlss/cocina-models/blob/main/docs/description_types.md
+      # for valid types.
       attribute? :type, Types::Strict::String
       # Status of the descriptive element value relative to other instances of the element.
       attribute? :status, Types::Strict::String
@@ -23,7 +25,8 @@ module Cocina
       attribute? :source, Source.optional
       # The preferred display label to use for the descriptive element in access systems.
       attribute? :displayLabel, Types::Strict::String
-      # A term providing information about the circumstances of the statement (e.g., approximate dates).
+      # A term providing information about the circumstances of the statement (e.g., approximate
+      # dates).
       attribute? :qualifier, Types::Strict::String
       attribute :note, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute? :valueLanguage, DescriptiveValueLanguage.optional

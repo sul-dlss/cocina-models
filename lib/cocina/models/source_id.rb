@@ -2,7 +2,14 @@
 
 module Cocina
   module Models
-    # Unique identifier in some other system. This is because a large proportion of what is deposited in SDR, historically and currently, are representations of objects that are also represented in other systems. For example, digitized paper and A/V collections have physical manifestations, and those physical objects are managed in systems that have their own identifiers. Similarly, books have barcodes, archival materials have collection numbers and physical locations, etc. The sourceId allows determining if an item has been deposited before and where to look for the original item if you're looking at its SDR representation. The format is: "namespace:identifier"
+    # Unique identifier in some other system. This is because a large proportion of what
+    # is deposited in SDR, historically and currently, are representations of objects that
+    # are also represented in other systems. For example, digitized paper and A/V collections
+    # have physical manifestations, and those physical objects are managed in systems that
+    # have their own identifiers. Similarly, books have barcodes, archival materials have
+    # collection numbers and physical locations, etc. The sourceId allows determining if
+    # an item has been deposited before and where to look for the original item if you're
+    # looking at its SDR representation. The format is: "namespace:identifier"
 
     SourceId = Types::String.constrained(format: /^.+:.+$/)
   end

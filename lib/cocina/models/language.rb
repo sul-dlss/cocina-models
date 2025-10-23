@@ -2,7 +2,8 @@
 
 module Cocina
   module Models
-    # Languages, scripts, symbolic systems, and notations used in all or part of a resource or its descriptive metadata.
+    # Languages, scripts, symbolic systems, and notations used in all or part of a resource
+    # or its descriptive metadata.
     class Language < Struct
       attribute :appliesTo, Types::Strict::Array.of(DescriptiveBasicValue).default([].freeze)
       # Code value of the descriptive element.
@@ -13,11 +14,13 @@ module Cocina
       attribute :groupedValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute :note, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute :parallelValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
-      # present for mapping to additional schemas in the future and for consistency but not otherwise used
+      # present for mapping to additional schemas in the future and for consistency but not
+      # otherwise used
       attribute? :qualifier, Types::Strict::String
       attribute? :script, DescriptiveValue.optional
       attribute? :source, Source.optional
-      # Status of the language relative to other parallel language elements (e.g. the primary language)
+      # Status of the language relative to other parallel language elements (e.g. the primary
+      # language)
       attribute? :status, Types::Strict::String.enum('primary')
       attribute? :standard, Standard.optional
       attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)

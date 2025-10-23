@@ -46,7 +46,15 @@ module Cocina
       def description
         return '' unless schema_doc.description
 
-        "# #{schema_doc.description}\n"
+        to_multiline_comment(schema_doc.description)
+      end
+
+      def to_multiline_comment(string)
+        string
+          .split(/(.{80,}?) /)
+          .compact_blank
+          .map { |comment_chunk| "# #{comment_chunk}\n" }
+          .join
       end
 
       def deprecation

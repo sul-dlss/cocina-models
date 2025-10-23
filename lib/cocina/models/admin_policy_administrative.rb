@@ -6,7 +6,8 @@ module Cocina
     class AdminPolicyAdministrative < Struct
       attribute(:accessTemplate, AdminPolicyAccessTemplate.default { AdminPolicyAccessTemplate.new })
       attribute :registrationWorkflow, Types::Strict::Array.of(Types::Strict::String).default([].freeze)
-      # An additional workflow to start for objects managed by this admin policy once the end-accession workflow step is complete
+      # An additional workflow to start for objects managed by this admin policy once the
+      # end-accession workflow step is complete
       # example: wasCrawlPreassemblyWF
       attribute? :disseminationWorkflow, Types::Strict::String
       attribute :collectionsForRegistration, Types::Strict::Array.of(Types::Strict::String).default([].freeze)

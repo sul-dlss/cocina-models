@@ -2,7 +2,8 @@
 
 module Cocina
   module Models
-    # Property model for indicating the vocabulary, authority, or other origin for a term, code, or identifier.
+    # Property model for indicating the vocabulary, authority, or other origin for a term,
+    # code, or identifier.
     class Source < Struct
       # Code representing the value source.
       attribute? :code, Types::Strict::String

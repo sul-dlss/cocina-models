@@ -2,7 +2,8 @@
 
 module Cocina
   module Models
-    # Description that is included in a request to create a DRO. This is the same as a Description, except excludes PURL.
+    # Description that is included in a request to create a DRO. This is the same as a
+    # Description, except excludes PURL.
     class RequestDescription < Struct
       include Validatable
 

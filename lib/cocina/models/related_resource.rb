@@ -6,7 +6,8 @@ module Cocina
     class RelatedResource < Struct
       # The relationship of the related resource to the described resource.
       attribute? :type, Types::Strict::String
-      # The DataCite relationType describing the relationship from the related resource to the described resource. See https://datacite-metadata-schema.readthedocs.io/en/4.6/appendices/appendix-1/relationType
+      # The DataCite relationType describing the relationship from the related resource to
+      # the described resource. See https://datacite-metadata-schema.readthedocs.io/en/4.6/appendices/appendix-1/relationType
       attribute? :dataCiteRelationType, Types::Strict::String.enum('IsCitedBy', 'Cites', 'IsSupplementTo', 'IsSupplementedBy', 'IsContinuedBy', 'Continues', 'Describes', 'IsDescribedBy', 'HasMetadata', 'IsMetadataFor', 'HasVersion', 'IsVersionOf', 'IsNewVersionOf', 'IsPreviousVersionOf', 'IsPartOf', 'HasPart', 'IsPublishedIn', 'IsReferencedBy', 'References', 'IsDocumentedBy', 'Documents', 'IsCompiledBy', 'Compiles', 'IsVariantFormOf', 'IsOriginalFormOf', 'IsIdenticalTo', 'IsReviewedBy', 'Reviews', 'IsDerivedFrom', 'IsSourceOf', 'IsRequiredBy', 'Requires', 'Obsoletes', 'IsObsoletedBy', 'IsCollectedBy', 'Collects', 'IsTranslationOf', 'HasTranslation')
       # Status of the related resource relative to other related resources.
       attribute? :status, Types::Strict::String
