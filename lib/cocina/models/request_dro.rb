@@ -2,7 +2,9 @@
 
 module Cocina
   module Models
-    # A request to create a DRO.  This has the same general structure as a DRO but doesn't have externalIdentifier and doesn't require the access subschema. If no access subschema is provided, these values will be inherited from the AdminPolicy.
+    # A request to create a DRO.  This has the same general structure as a DRO but doesn't
+    # have externalIdentifier and doesn't require the access subschema. If no access subschema
+    # is provided, these values will be inherited from the AdminPolicy.
     class RequestDRO < Struct
       include Validatable
 

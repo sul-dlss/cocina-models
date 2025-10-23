@@ -5,5 +5,5 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in cocina-models.gemspec
 gemspec
 
-gem 'byebug'
+gem 'debug'
 gem 'rspec_junit_formatter' # For CircleCI

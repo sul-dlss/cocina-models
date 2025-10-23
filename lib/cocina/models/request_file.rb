@@ -13,7 +13,8 @@ module Cocina
       attribute? :size, Types::Strict::Integer
       attribute :version, Types::Strict::Integer
       attribute? :hasMimeType, Types::Strict::String
-      # BCP 47 language tag: https://www.rfc-editor.org/rfc/rfc4646.txt -- other applications (like media players) expect language codes of this format, see e.g. https://videojs.com/guides/text-tracks/#srclang
+      # BCP 47 language tag: https://www.rfc-editor.org/rfc/rfc4646.txt -- other applications
+      # (like media players) expect language codes of this format, see e.g. https://videojs.com/guides/text-tracks/#srclang
       attribute? :languageTag, LanguageTag.optional
       attribute? :externalIdentifier, Types::Strict::String
       # Use for the File (e.g. "transcription" for OCR).

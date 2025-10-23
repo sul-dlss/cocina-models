@@ -2,7 +2,8 @@
 
 module Cocina
   module Models
-    # Binaries that are the basis of what our domain manages. Binaries here do not include metadata files generated for the domain's own management purposes.
+    # Binaries that are the basis of what our domain manages. Binaries here do not include
+    # metadata files generated for the domain's own management purposes.
     class File < Struct
       include Checkable
 
@@ -10,7 +11,8 @@ module Cocina
 
       # The content type of the File.
       attribute :type, Types::Strict::String.enum(*File::TYPES)
-      # Identifier for the resource within the SDR architecture but outside of the repository. UUID. Constant across resource versions. What clients will use calling the repository.
+      # Identifier for the resource within the SDR architecture but outside of the repository.
+      # UUID. Constant across resource versions. What clients will use calling the repository.
       attribute :externalIdentifier, Types::Strict::String
       # Primary processing label (can be same as title) for a File.
       attribute :label, Types::Strict::String
@@ -22,7 +24,8 @@ module Cocina
       attribute :version, Types::Strict::Integer
       # MIME Type of the File.
       attribute? :hasMimeType, Types::Strict::String
-      # BCP 47 language tag: https://www.rfc-editor.org/rfc/rfc4646.txt -- other applications (like media players) expect language codes of this format, see e.g. https://videojs.com/guides/text-tracks/#srclang
+      # BCP 47 language tag: https://www.rfc-editor.org/rfc/rfc4646.txt -- other applications
+      # (like media players) expect language codes of this format, see e.g. https://videojs.com/guides/text-tracks/#srclang
       attribute? :languageTag, LanguageTag.optional
       # Use for the File (e.g. "transcription" for OCR).
       attribute? :use, FileUse.optional

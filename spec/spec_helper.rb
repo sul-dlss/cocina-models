@@ -3,7 +3,7 @@
 require 'bundler/setup'
 require 'cocina/models'
 require 'cocina/rspec'
-require 'byebug'
+require 'debug'
 require 'equivalent-xml/rspec_matchers'
 require 'support/mods_mapping_spec_helper'
 require 'support/matchers/deep_ignore_order_matcher'

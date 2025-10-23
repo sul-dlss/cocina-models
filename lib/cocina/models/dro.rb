@@ -2,7 +2,8 @@
 
 module Cocina
   module Models
-    # Domain-defined abstraction of a 'work'. Digital Repository Objects' abstraction is describable for our domain’s purposes, i.e. for management needs within our system.
+    # Domain-defined abstraction of a 'work'. Digital Repository Objects' abstraction is
+    # describable for our domain’s purposes, i.e. for management needs within our system.
     class DRO < Struct
       include Validatable
 
