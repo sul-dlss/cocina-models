@@ -11,6 +11,7 @@ module Cocina
       attribute? :uri, Types::Strict::String
       # String describing the value source.
       attribute? :value, Types::Strict::String
+      # Other information related to the value source.
       attribute :note, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # The version of the value source.
       attribute? :version, Types::Strict::String

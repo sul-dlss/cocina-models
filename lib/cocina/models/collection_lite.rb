@@ -24,9 +24,14 @@ module Cocina
       attribute :label, Types::Strict::String
       # Version for the Collection within SDR.
       attribute :version, Types::Strict::Integer
+      # Access metadata for collections
+      # Validation of this property is relaxed. See the openapi for full validation.
       attribute? :access, CollectionAccess.optional
+      # Validation of this property is relaxed. See the openapi for full validation.
       attribute? :administrative, Administrative.optional
+      # Validation of this property is relaxed. See the openapi for full validation.
       attribute? :description, Description.optional
+      # Validation of this property is relaxed. See the openapi for full validation.
       attribute? :identification, CollectionIdentification.optional
     end
   end

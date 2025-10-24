@@ -11,6 +11,7 @@ module Cocina
     # an item has been deposited before and where to look for the original item if you're
     # looking at its SDR representation. The format is: "namespace:identifier"
 
+    # example: sul:PC0170_s3_Fiesta_Bowl_2012-01-02_210609_2026
     SourceId = Types::String.constrained(format: /^.+:.+$/)
   end
 end

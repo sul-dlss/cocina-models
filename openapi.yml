@@ -521,9 +521,15 @@ components:
     DOI:
       description: Digital Object Identifier (https://www.doi.org)
       oneOf:
-        - $ref: '#/components/schemas/LibrariesDOI'
         - $ref: '#/components/schemas/RepositoryDOI'
         - $ref: '#/components/schemas/PreregisteredRepositoryDOI'
+        - $ref: '#/components/schemas/LibrariesDOI'
+        - $ref: '#/components/schemas/DOIExceptions'
+    DOIExceptions:
+      type: string
+      description: "The DOI (Digital Object Identifier, https://www.doi.org) pattern for objects in SDR that do not adhere to any of the other DOI patterns in the spec. This is a short list of known exceptions only. Please note that DOIs are *not* case-sensitive, so we allow for uppercase and lowercase letters with these exceptions."
+      pattern: '^10\.25936\/[jJ][mM]709[hH][cC]8700|10\.18735\/4[nN][sS][eE]-8871|10\.18735\/952[xX]-[wW]447|10\.18735\/0[mM][wW]1-[qQ][qQ]72$'
+      example: '10.18735/0mw1-qq72'
     DRO:
       description: Domain-defined abstraction of a 'work'. Digital Repository Objects' abstraction is describable for our domain’s purposes, i.e. for management needs within our system.
       type: object

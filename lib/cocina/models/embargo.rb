@@ -18,7 +18,10 @@ module Cocina
       # example: 2029-06-22T07:00:00.000+00:00
       attribute :releaseDate, Types::Params::DateTime
       # The human readable use and reproduction statement that applies
-      # example: Property rights reside with the repository. Literary rights reside with the creators of the documents or their heirs. To obtain permission to publish or reproduce, please contact the Public Services Librarian of the Dept. of Special Collections (http://library.stanford.edu/spc).
+      # example: Property rights reside with the repository. Literary rights reside with
+      # the creators of the documents or their heirs. To obtain permission to publish or
+      # reproduce, please contact the Public Services Librarian of the Dept. of Special Collections
+      # (http://library.stanford.edu/spc).
       attribute? :useAndReproductionStatement, UseAndReproductionStatement.optional
     end
   end

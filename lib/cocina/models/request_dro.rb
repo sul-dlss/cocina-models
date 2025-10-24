@@ -34,9 +34,14 @@ module Cocina
       attribute :version, Types::Strict::Integer.default(1).enum(1)
       attribute? :access, DROAccess.optional
       attribute(:administrative, RequestAdministrative.default { RequestAdministrative.new })
+      # Description that is included in a request to create a DRO. This is the same as a
+      # Description, except excludes PURL.
       attribute? :description, RequestDescription.optional
+      # Same as a Identification, but requires a sourceId and doesn't permit a DOI.
       attribute(:identification, RequestIdentification.default { RequestIdentification.new })
+      # Structural metadata
       attribute? :structural, RequestDROStructural.optional
+      # Geographic metadata
       attribute? :geographic, Geographic.optional
     end
   end

@@ -20,8 +20,11 @@ module Cocina
       attribute :type, Types::Strict::String.enum(*RequestCollection::TYPES)
       attribute :label, Types::Strict::String
       attribute :version, Types::Strict::Integer.default(1).enum(1)
+      # Access metadata for collections
       attribute(:access, CollectionAccess.default { CollectionAccess.new })
       attribute(:administrative, RequestAdministrative.default { RequestAdministrative.new })
+      # Description that is included in a request to create a DRO. This is the same as a
+      # Description, except excludes PURL.
       attribute? :description, RequestDescription.optional
       attribute? :identification, CollectionIdentification.optional
     end

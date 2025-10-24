@@ -10,7 +10,7 @@ module Cocina
 
           module Cocina
             module Models
-              #{name} = #{type_names}
+              #{preamble}#{name} = #{type_names}
             end
           end
         RUBY

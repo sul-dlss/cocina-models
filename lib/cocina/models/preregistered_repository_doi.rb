@@ -6,6 +6,7 @@ module Cocina
     # before an SDR object has been registered---i.e., before it has a druid, which is
     # a common pattern as of 2025. Please note that DOIs are *not* case-sensitive so both
     # cases of letters should be permitted.
+    # example: 10.80343/12qF-5243
     PreregisteredRepositoryDOI = Types::String.constrained(format: %r{^10\.(25740|80343)/[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}$})
   end
 end

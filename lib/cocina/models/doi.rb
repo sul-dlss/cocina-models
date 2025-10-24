@@ -2,6 +2,7 @@
 
 module Cocina
   module Models
-    DOI = LibrariesDOI | RepositoryDOI | PreregisteredRepositoryDOI
+    # Digital Object Identifier (https://www.doi.org)
+    DOI = RepositoryDOI | PreregisteredRepositoryDOI | LibrariesDOI | DOIExceptions
   end
 end

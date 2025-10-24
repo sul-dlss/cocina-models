@@ -16,7 +16,10 @@ module Cocina
       attribute :type, Types::Strict::String.enum(*RequestAdminPolicy::TYPES)
       attribute :label, Types::Strict::String
       attribute :version, Types::Strict::Integer.default(1).enum(1)
+      # Administrative properties for an AdminPolicy
       attribute(:administrative, AdminPolicyAdministrative.default { AdminPolicyAdministrative.new })
+      # Description that is included in a request to create a DRO. This is the same as a
+      # Description, except excludes PURL.
       attribute? :description, RequestDescription.optional
     end
   end

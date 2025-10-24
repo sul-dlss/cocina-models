@@ -66,7 +66,7 @@ module Cocina
       def example
         return '' unless schema_doc.example
 
-        "# example: #{schema_doc.example}\n"
+        to_multiline_comment("example: #{schema_doc.example}")
       end
 
       def relaxed_comment

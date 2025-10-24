@@ -39,7 +39,9 @@ module Cocina
       attribute(:administrative, Administrative.default { Administrative.new })
       attribute(:description, Description.default { Description.new })
       attribute(:identification, Identification.default { Identification.new })
+      # Structural metadata
       attribute(:structural, DROStructural.default { DROStructural.new })
+      # Geographic metadata
       attribute? :geographic, Geographic.optional
       # When the object was created.
       attribute? :created, Types::Params::DateTime
