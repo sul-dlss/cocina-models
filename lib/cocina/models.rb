@@ -15,6 +15,7 @@ require 'thor'
 class CocinaModelsInflector < Zeitwerk::Inflector
   INFLECTIONS = {
     'doi' => 'DOI',
+    'doi_exceptions' => 'DOIExceptions',
     'dro' => 'DRO',
     'dro_access' => 'DROAccess',
     'dro_lite' => 'DROLite',

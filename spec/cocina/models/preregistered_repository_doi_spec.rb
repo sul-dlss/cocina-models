@@ -53,6 +53,14 @@ RSpec.describe Cocina::Models::PreregisteredRepositoryDOI do
     end
   end
 
+  context 'with a known DOI exception' do
+    let(:doi) { '10.18735/4nse-8871' }
+
+    it 'fails to validate' do
+      expect { exception }.to raise_error(Dry::Types::ConstraintError)
+    end
+  end
+
   context 'with an empty string' do
     let(:doi) { '' }
 
