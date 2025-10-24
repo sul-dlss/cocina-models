@@ -10,7 +10,7 @@ module Cocina
 
           module Cocina
             module Models
-              #{description}#{name} = Types::String#{pattern}#{enum}
+              #{preamble}#{name} = Types::String#{pattern}#{enum}
             end
           end
         RUBY

@@ -7,7 +7,7 @@ module Cocina
       GENERIC_ITEMS_NAME = 'items'
 
       def generate
-        "attribute :#{name.camelize(:lower)}, Types::Strict::Array.of(#{array_of_type}).default([].freeze)"
+        "#{preamble}attribute :#{name.camelize(:lower)}, Types::Strict::Array.of(#{array_of_type}).default([].freeze)"
       end
 
       def array_of_type

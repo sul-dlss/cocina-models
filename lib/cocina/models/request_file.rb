@@ -24,8 +24,10 @@ module Cocina
       # Indicates if text that has been verified for accessibility/correctness.
       attribute? :correctedForAccessibility, Types::Strict::Bool.default(false)
       attribute :hasMessageDigests, Types::Strict::Array.of(MessageDigest).default([].freeze)
+      # Access metadata for files
       attribute(:access, FileAccess.default { FileAccess.new })
       attribute(:administrative, FileAdministrative.default { FileAdministrative.new })
+      # Presentation data for the File.
       attribute? :presentation, Presentation.optional
     end
   end

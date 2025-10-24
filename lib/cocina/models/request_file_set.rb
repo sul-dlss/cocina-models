@@ -21,6 +21,7 @@ module Cocina
       attribute :type, Types::Strict::String.enum(*RequestFileSet::TYPES)
       attribute :label, Types::Strict::String
       attribute :version, Types::Strict::Integer
+      # Structural metadata
       attribute(:structural, RequestFileSetStructural.default { RequestFileSetStructural.new })
     end
   end

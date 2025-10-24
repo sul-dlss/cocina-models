@@ -52,11 +52,12 @@ module Cocina
       private_constant :BASE, :URIS
 
       def vocabs
-        type_properties = schemas.values.map { |schema| schema.properties&.[]('type') }.compact
-        type_properties.map(&:enum).flat_map(&:to_a)
-                       .filter { |vocab| vocab.start_with?(BASE) }
-                       .uniq
-                       .sort
+        schemas.values
+               .filter_map { |schema| schema.properties&.[]('type')&.enum }
+               .flat_map(&:to_a)
+               .select { |vocab| vocab.start_with?(BASE) }
+               .uniq
+               .sort
       end
 
       def names

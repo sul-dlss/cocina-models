@@ -18,6 +18,7 @@ module Cocina
       attribute :externalIdentifier, Druid
       attribute :label, Types::Strict::String
       attribute :version, Types::Strict::Integer
+      # Administrative properties for an AdminPolicy
       attribute(:administrative, AdminPolicyAdministrative.default { AdminPolicyAdministrative.new })
       attribute? :description, Description.optional
       # When the object was created.
