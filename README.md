@@ -128,7 +128,7 @@ which pushes the gem to rubygems.org.
 
 ### Step 2: Update client gems coupled to the models
 
-Release new versions of [sdr-client](https://github.com/sul-dlss/sdr-client), [dor-services-client](https://github.com/sul-dlss/dor-services-client/), [datacite-ruby](https://github.com/sul-dlss/datacite-ruby):
+Release new versions of [sdr-client](https://github.com/sul-dlss/sdr-client) and [dor-services-client](https://github.com/sul-dlss/dor-services-client/):
 1. Pin the new cocina-models version in the clients' `gemspec` files.
 2. Bump the version as described in each client's README release instructions.
 
