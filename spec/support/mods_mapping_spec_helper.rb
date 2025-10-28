@@ -185,7 +185,7 @@ RSpec.shared_examples 'MODS cocina mapping' do
   end
 end
 
-# When starting from cocina, e.g., H2 and roundtrips.
+# When starting from cocina, e.g., H3 and roundtrips.
 RSpec.shared_examples 'cocina MODS mapping' do
   # Required: mods, cocina
   # Optional: druid, roundtrip_cocina, warnings, errors, mods_attributes, label
@@ -309,7 +309,7 @@ RSpec.shared_examples 'cocina MODS mapping' do
   end
 end
 
-# When starting from cocina, e.g., H2 and does not (intentionally) roundtrip.
+# When starting from cocina, e.g., H3 and does not (intentionally) roundtrip.
 RSpec.shared_examples 'cocina to MODS only mapping' do
   # Required: mods, cocina
   # Optional: druid, label
