@@ -29,6 +29,7 @@ module Cocina
             add_types(forms)
             add_physical_descriptions(forms)
             add_subject_cartographics(forms)
+            add_etd_resource_type(forms)
             Primary.adjust(forms, 'genre', notifier, match_type: true)
             Primary.adjust(forms, 'resource type', notifier, match_type: true)
           end
@@ -185,6 +186,28 @@ module Cocina
                 attrs[:value] = 'MODS resource types'
               end
             end
+          end
+
+          def add_etd_resource_type(forms)
+            thesis_node = resource_element.xpath('mods:note[@type="thesis"]', mods: Description::DESC_METADATA_NS).first
+            return unless thesis_node
+
+            doi_node = resource_element.xpath('mods:identifier[@type="doi"]', mods: Description::DESC_METADATA_NS).first
+            return unless doi_node
+
+            forms.push({
+                         source: {
+                           value: 'DataCite resource types'
+                         },
+                         type: 'resource type',
+                         value: 'Dissertation'
+                       }, {
+                         source: {
+                           value: 'Stanford self-deposit resource types'
+                         },
+                         type: 'resource type',
+                         structuredValue: [{ type: 'subtype', value: 'Academic thesis' }]
+                       })
           end
 
           def manuscript_form

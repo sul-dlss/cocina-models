@@ -170,4 +170,34 @@ RSpec.describe Cocina::Models::Mapping::FromMods::Form do
       end
     end
   end
+
+  describe 'add_etd_resource_type' do
+    context 'when a dissertation' do
+      let(:xml) do
+        <<~XML
+          <note type="thesis">Thesis Ph.D. Stanford University 2020.</note>
+          <identifier type="doi" displayLabel="DOI">https://doi.org/10.1234/abcd</identifier>
+        XML
+      end
+
+      it 'builds the cocina data structure' do
+        expect(build).to eq [
+          {
+            source: {
+              value: 'DataCite resource types'
+            },
+            type: 'resource type',
+            value: 'Dissertation'
+          },
+          {
+            source: {
+              value: 'Stanford self-deposit resource types'
+            },
+            type: 'resource type',
+            structuredValue: [{ type: 'subtype', value: 'Academic thesis' }]
+          }
+        ]
+      end
+    end
+  end
 end
