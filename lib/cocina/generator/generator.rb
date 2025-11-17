@@ -96,9 +96,9 @@ module Cocina
       end
 
       def schemas
-        @schemas ||= OpenAPIParser.parse(YAML.load_file(options[:openapi]), strict_reference_validation: true)
-                                  .find_object('#/components')
-                                  .schemas
+        @schemas ||= Cocina::OpenApiWrapper.parse(YAML.load_file(options[:openapi]), strict_reference_validation: true)
+                                           .components
+                                           .schemas
       end
 
       def schema_for(schema_name, lite: false)

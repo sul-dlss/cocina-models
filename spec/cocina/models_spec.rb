@@ -149,6 +149,9 @@ RSpec.describe Cocina::Models do
           'type' => 'https://cocina.sul.stanford.edu/models/book',
           'label' => 'bar',
           'version' => 5,
+          'identification' => {
+            'sourceId' => 'sul:123'
+          },
           'administrative' => {
             'hasAdminPolicy' => 'druid:bc123df4567',
             'hasAgreement' => 'druid:bc123df4567'
@@ -160,7 +163,7 @@ RSpec.describe Cocina::Models do
         expect do
           build
         end.to raise_error Cocina::Models::ValidationError,
-                           "5 isn't part of the enum in #/components/schemas/RequestDRO/properties/version"
+                           'When validating RequestDRO: value at `/version` is not one of: [1]'
       end
     end
 
@@ -263,7 +266,7 @@ RSpec.describe Cocina::Models do
     let(:props) { cocina_object.to_h }
 
     let(:expected) do
-      Cocina::Models::DROWithMetadata.new(props.merge({ lock: 'abc123', created: date, modified: date }))
+      Cocina::Models::DROWithMetadata.new(props.merge({ lock: 'abc123', created: date.to_s, modified: date.to_s }))
     end
 
     it 'returns a DROWithMetadata' do

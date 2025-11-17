@@ -110,7 +110,8 @@ module Cocina
       end
 
       def defined_datatypes?(doc)
-        doc.one_of&.map(&:name)&.all? { |name| name.present? && schemas.include?(name) }
+        doc.one_of.present? &&
+          doc.one_of.map(&:name)&.all? { |name| name.present? && schemas.include?(name) }
       end
 
       def any_datatype?(doc)
