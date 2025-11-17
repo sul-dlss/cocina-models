@@ -6,7 +6,7 @@ require 'dry-struct'
 require 'dry-types'
 require 'json'
 require 'yaml'
-require 'openapi_parser'
+require 'json_schemer'
 require 'active_support'
 require 'active_support/core_ext'
 require 'thor'
@@ -205,10 +205,10 @@ module Cocina
 
     def self.druid_regex
       @druid_regex ||= begin
-        str = OpenAPIParser.parse(YAML.load_file('openapi.yml'), strict_reference_validation: true)
-                           .find_object('#/components')
-                           .schemas['Druid']
-                           .pattern
+        str = Cocina::OpenApiWrapper.parse(YAML.load_file('openapi.yml'), strict_reference_validation: true)
+                                    .components
+                                    .schemas['Druid']
+                                    .pattern
         Regexp.new(str)
       end
     end
