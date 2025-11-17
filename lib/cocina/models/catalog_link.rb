@@ -3,6 +3,8 @@
 module Cocina
   module Models
     # A linkage between an object and a catalog record
-    CatalogLink = FolioCatalogLink | SymphonyCatalogLink
+    class CatalogLink < BaseModel
+      # Union of: FolioCatalogLink, SymphonyCatalogLink
+    end
   end
 end

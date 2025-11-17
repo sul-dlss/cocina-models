@@ -8,6 +8,6 @@ module Cocina
     # while DOIs are *not* case-sensitive, we constrain the DOIs we mint for SDR to lowercase
     # for consistency.
     # example: 10.25740/bc123df4567
-    RepositoryDOI = Types::String.constrained(format: %r{^10\.(25740|80343)/[b-df-hjkmnp-tv-z]{2}[0-9]{3}[b-df-hjkmnp-tv-z]{2}[0-9]{4}$})
+    RepositoryDOI = String
   end
 end

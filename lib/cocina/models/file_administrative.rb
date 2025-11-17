@@ -2,10 +2,8 @@
 
 module Cocina
   module Models
-    class FileAdministrative < Struct
-      attribute :publish, Types::Strict::Bool.default(false)
-      attribute :sdrPreserve, Types::Strict::Bool.default(true)
-      attribute :shelve, Types::Strict::Bool.default(false)
+    class FileAdministrative < BaseModel
+      attr_accessor :publish, :sdrPreserve, :shelve
     end
   end
 end

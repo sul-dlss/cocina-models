@@ -2,9 +2,8 @@
 
 module Cocina
   module Models
-    class Administrative < Struct
-      # example: druid:bc123df4567
-      attribute :hasAdminPolicy, Druid
+    class Administrative < BaseModel
+      attr_accessor :hasAdminPolicy
     end
   end
 end

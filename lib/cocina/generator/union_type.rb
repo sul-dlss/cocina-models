@@ -10,14 +10,16 @@ module Cocina
 
           module Cocina
             module Models
-              #{preamble}#{name} = #{type_names}
+              #{preamble}class #{name} < BaseModel
+                # Union of: #{type_names}
+              end
             end
           end
         RUBY
       end
 
       def type_names
-        schema_doc.one_of.map(&:name).join(' | ')
+        schema_doc.one_of.map(&:name).join(', ')
       end
     end
   end

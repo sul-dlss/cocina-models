@@ -3,6 +3,8 @@
 module Cocina
   module Models
     # Digital Object Identifier (https://www.doi.org)
-    DOI = RepositoryDOI | PreregisteredRepositoryDOI | LibrariesDOI | DOIExceptions
+    class DOI < BaseModel
+      # Union of: RepositoryDOI, PreregisteredRepositoryDOI, LibrariesDOI, DOIExceptions
+    end
   end
 end

@@ -3,8 +3,8 @@
 module Cocina
   module Models
     # Structural metadata
-    class RequestFileSetStructural < Struct
-      attribute :contains, Types::Strict::Array.of(RequestFile).default([].freeze)
+    class RequestFileSetStructural < BaseModel
+      attr_accessor :contains
     end
   end
 end

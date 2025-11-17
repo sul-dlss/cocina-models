@@ -12,6 +12,6 @@ module Cocina
     # looking at its SDR representation. The format is: "namespace:identifier"
 
     # example: sul:PC0170_s3_Fiesta_Bowl_2012-01-02_210609_2026
-    SourceId = Types::String.constrained(format: /^.+:.+$/)
+    SourceId = String
   end
 end

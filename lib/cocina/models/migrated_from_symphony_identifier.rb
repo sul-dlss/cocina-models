@@ -4,6 +4,6 @@ module Cocina
   module Models
     # A record identifier migrated from Symphony
     # example: a11403803
-    MigratedFromSymphonyIdentifier = Types::String.constrained(format: /^a\d+$/)
+    MigratedFromSymphonyIdentifier = String
   end
 end

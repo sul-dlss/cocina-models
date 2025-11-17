@@ -80,35 +80,39 @@ Metrics/BlockLength:
     - cocina-models.gemspec
     - spec/cocina/**/*
     - lib/cocina/rspec/matchers.rb
-    - 'spec/support/mods_mapping_spec_helper.rb'
+    - "spec/support/mods_mapping_spec_helper.rb"
 
 # Offense count: 16
 # Configuration parameters: CountComments, CountAsOne.
 Metrics/ClassLength:
   Max: 100
   Exclude:
-    - 'lib/cocina/rspec/factories.rb'
+    - "lib/cocina/rspec/factories.rb"
 
 Metrics/MethodLength:
   Max: 14
   Exclude:
-    - 'spec/cocina/models/file_access_spec.rb'
-    - 'spec/cocina/models/dro_access_spec.rb'
-    - 'lib/cocina/rspec/factories.rb'
-    - 'lib/cocina/models/mapping/to_mods/*'
-    - 'lib/cocina/models/mapping/from_mods/*'
-    - 'lib/cocina/models/mapping/normalizers/mods/origin_info_normalizer.rb'
-    - 'lib/cocina/models/mapping/normalizers/mods/subject_normalizer.rb'
-    - 'lib/cocina/models/mapping/normalizers/mods_normalizer.rb'
+    - "spec/cocina/models/file_access_spec.rb"
+    - "spec/cocina/models/dro_access_spec.rb"
+    - "lib/cocina/rspec/factories.rb"
+    - "lib/cocina/models/mapping/to_mods/*"
+    - "lib/cocina/models/mapping/from_mods/*"
+    - "lib/cocina/models/mapping/normalizers/mods/origin_info_normalizer.rb"
+    - "lib/cocina/models/mapping/normalizers/mods/subject_normalizer.rb"
+    - "lib/cocina/models/mapping/normalizers/mods_normalizer.rb"
 
 # Offense count: 37
 # Configuration parameters: IgnoredMethods.
 Metrics/PerceivedComplexity:
   # Max: 20
   Exclude:
-    - 'lib/cocina/models/mapping/from_mods/*'
-    - 'lib/cocina/models/mapping/to_mods/*'
-    - 'lib/cocina/models/mapping/normalizers/**/*'
+    - "lib/cocina/models/mapping/from_mods/*"
+    - "lib/cocina/models/mapping/to_mods/*"
+    - "lib/cocina/models/mapping/normalizers/**/*"
+
+Naming/MethodName:
+  Exclude:
+    - "lib/cocina/models/**/*"
 
 Naming/PredicatePrefix:
   ForbiddenPrefixes:

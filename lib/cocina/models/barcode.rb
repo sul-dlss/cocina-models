@@ -3,6 +3,8 @@
 module Cocina
   module Models
     # A barcode
-    Barcode = BusinessBarcode | LaneMedicalBarcode | CatkeyBarcode | StandardBarcode
+    class Barcode < BaseModel
+      # Union of: BusinessBarcode, LaneMedicalBarcode, CatkeyBarcode, StandardBarcode
+    end
   end
 end

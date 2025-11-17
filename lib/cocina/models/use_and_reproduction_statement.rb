@@ -7,6 +7,6 @@ module Cocina
     # the creators of the documents or their heirs. To obtain permission to publish or
     # reproduce, please contact the Public Services Librarian of the Dept. of Special Collections
     # (http://library.stanford.edu/spc).
-    UseAndReproductionStatement = Types::String
+    UseAndReproductionStatement = String
   end
 end

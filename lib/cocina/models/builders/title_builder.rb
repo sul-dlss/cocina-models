@@ -180,6 +180,7 @@ module Cocina
 
           cocina_titles.find do |title|
             title.parallelValue&.find do |parallel_title|
+              parallel_title = Cocina::Models::Title.new(parallel_title.to_h)
               parallel_title.status == 'primary'
             end
           end

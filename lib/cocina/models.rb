@@ -2,11 +2,10 @@
 
 require 'cocina/models/version'
 require 'zeitwerk'
-require 'dry-struct'
-require 'dry-types'
 require 'json'
 require 'yaml'
-require 'openapi_parser'
+require 'cocina/open_api_wrapper'
+require 'active_model'
 require 'active_support'
 require 'active_support/core_ext'
 require 'thor'
@@ -43,17 +42,6 @@ loader.ignore("#{__dir__}/rspec.rb")
 loader.ignore("#{__dir__}/rspec")
 loader.setup
 
-module OpenAPIParser
-  module Schemas
-    # Patch OpenAPIParser::Schemas::Schema so it can tell us its name, the way Openapi3Parser schemas do.
-    class Schema
-      def name
-        object_reference.split('/').last
-      end
-    end
-  end
-end
-
 module Cocina
   # Provides Ruby objects for the repository and serializing them to/from JSON.
   module Models
@@ -64,15 +52,42 @@ module Cocina
     # Raised when the type attribute is missing or an error occurs validating against openapi.
     class ValidationError < Error; end
 
-    # Base class for Cocina Structs
-    class Struct < Dry::Struct
-      transform_keys(&:to_sym)
-      schema schema.strict
-    end
+    # Base class for Cocina models using ActiveModel
+    class BaseModel
+      include ActiveModel::API
 
-    # DRY Types
-    module Types
-      include Dry.Types()
+      def initialize(attributes = {})
+        attrs = attributes.respond_to?(:to_h) ? attributes.to_h : attributes
+        attrs.with_indifferent_access.each do |key, value|
+          if respond_to?("#{key}=")
+            processed_value = process_nested_object(key, value)
+            public_send("#{key}=", processed_value)
+          end
+        end
+      end
+
+      def to_h
+        instance_variables.each_with_object({}) do |var, hash|
+          key = var.to_s.delete('@')
+          value = instance_variable_get(var)
+          hash[key] = value.respond_to?(:to_h) ? value.to_h : value
+        end
+      end
+
+      private
+
+      def process_nested_object(key, value)
+        return value unless value.is_a?(Hash)
+
+        # Try to find a matching class for this nested object
+        class_name = key.to_s.camelize
+        if Models.const_defined?(class_name)
+          Models.const_get(class_name).new(value)
+        else
+          # If no matching class, return as-is (Hash)
+          value
+        end
+      end
     end
 
     ##
@@ -89,12 +104,10 @@ module Cocina
     METADATA_KEYS = %i[created modified lock].freeze
 
     # @param [Hash] dyn a ruby hash representation of the JSON serialization of a collection or DRO
-    # @param [boolean] validate
     # @return [DRO,Collection,AdminPolicy]
     # @raises [UnknownTypeError] if a valid type is not found in the data
     # @raises [ValidationError] if a type field cannot be found in the data
-    # @raises [ValidationError] if hash representation fails openapi validation
-    def self.build(dyn, validate: true)
+    def self.build(dyn)
       clazz = case type_for(dyn)
               when *DRO::TYPES
                 has_metadata?(dyn) ? DROWithMetadata : DRO
@@ -105,16 +118,14 @@ module Cocina
               else
                 raise UnknownTypeError, "Unknown type: '#{dyn.with_indifferent_access.fetch('type')}'"
               end
-      clazz.new(dyn, false, validate)
+      clazz.new(dyn)
     end
 
     # @param [Hash] dyn a ruby hash representation of the JSON serialization of a request for a Collection or DRO
-    # @param [boolean] validate
     # @return [RequestDRO,RequestCollection,RequestAdminPolicy]
     # @raises [UnknownTypeError] if a valid type is not found in the data
     # @raises [ValidationError] if a type field cannot be found in the data
-    # @raises [ValidationError] if hash representation fails openapi validation
-    def self.build_request(dyn, validate: true)
+    def self.build_request(dyn)
       clazz = case type_for(dyn)
               when *DRO::TYPES
                 RequestDRO
@@ -125,7 +136,7 @@ module Cocina
               else
                 raise UnknownTypeError, "Unknown type: '#{dyn.with_indifferent_access.fetch('type')}'"
               end
-      clazz.new(dyn, false, validate)
+      clazz.new(dyn)
     end
 
     # Build "lite" versions of DROs, Collections, and AdminPolicies.
@@ -137,7 +148,6 @@ module Cocina
     # @param [Hash] dyn a ruby hash representation of the JSON serialization of a Collection, DRO, or AdminPolicy
     # @return [DROLite,CollectionLite,AdminPolicyLite]
     # @raises [UnknownTypeError] if a valid type is not found in the data
-    # @raises [ValidationError] if a type field cannot be found in the data
     def self.build_lite(dyn)
       clazz = case type_for(dyn)
               when *DRO::TYPES
@@ -149,15 +159,14 @@ module Cocina
               else
                 raise UnknownTypeError, "Unknown type: '#{dyn.with_indifferent_access.fetch('type')}'"
               end
-      # dyn for lite may contain extra keys
-      clazz.new(dyn.with_indifferent_access.slice(*clazz.attribute_names))
+      clazz.new(dyn)
     end
 
     # Coerces DROWithMetadata, CollectionWithMetadata, AdminPolicyWithMetadata to DRO, Collection, AdminPolicy
     # @param [DROWithMetadata,CollectionWithMetadata,AdminPolicyWithMetadata] cocina_object
     # @return [DRO,Collection,AdminPolicy]
     def self.without_metadata(cocina_object)
-      build(cocina_object.to_h.except(*METADATA_KEYS), validate: false)
+      build(cocina_object.to_h.except(*METADATA_KEYS))
     end
 
     # Adds metadata to a DRO, Collection, AdminPolicy
@@ -182,7 +191,7 @@ module Cocina
               else
                 AdminPolicyWithMetadata
               end
-      clazz.new(props, false, false)
+      clazz.new(props)
     end
 
     def self.type_for(dyn)
@@ -205,10 +214,10 @@ module Cocina
 
     def self.druid_regex
       @druid_regex ||= begin
-        str = OpenAPIParser.parse(YAML.load_file('openapi.yml'), strict_reference_validation: true)
-                           .find_object('#/components')
-                           .schemas['Druid']
-                           .pattern
+        wrapper = Cocina::OpenApiWrapper.parse('openapi.yml', strict_reference_validation: true)
+        str = wrapper.find_object('#/components')
+                     .schemas['Druid']
+                     .pattern
         Regexp.new(str)
       end
     end

@@ -4,17 +4,8 @@ module Cocina
   module Models
     # Property model for indicating the vocabulary, authority, or other origin for a term,
     # code, or identifier.
-    class Source < Struct
-      # Code representing the value source.
-      attribute? :code, Types::Strict::String
-      # URI for the value source.
-      attribute? :uri, Types::Strict::String
-      # String describing the value source.
-      attribute? :value, Types::Strict::String
-      # Other information related to the value source.
-      attribute :note, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
-      # The version of the value source.
-      attribute? :version, Types::Strict::String
+    class Source < BaseModel
+      attr_accessor :code, :uri, :value, :note, :version
     end
   end
 end

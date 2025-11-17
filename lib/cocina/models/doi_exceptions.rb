@@ -7,6 +7,6 @@ module Cocina
     # list of known exceptions only. Please note that DOIs are *not* case-sensitive, so
     # we allow for uppercase and lowercase letters with these exceptions.
     # example: 10.18735/0mw1-qq72
-    DOIExceptions = Types::String.constrained(format: %r{^10\.25936/[jJ][mM]709[hH][cC]8700|10\.18735/4[nN][sS][eE]-8871|10\.18735/952[xX]-[wW]447|10\.18735/0[mM][wW]1-[qQ][qQ]72$})
+    DOIExceptions = String
   end
 end

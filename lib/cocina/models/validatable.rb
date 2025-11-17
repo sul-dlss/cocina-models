@@ -7,9 +7,9 @@ module Cocina
       extend ActiveSupport::Concern
 
       class_methods do
-        def new(attributes = default_attributes, safe = false, validate = true, &)
+        def new(attributes, validate: true, &)
           Validators::Validator.validate(self, attributes) if validate
-          super(attributes, safe, &)
+          super(attributes)
         end
       end
 

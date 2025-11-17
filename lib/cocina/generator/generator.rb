@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'fileutils'
+require_relative '../open_api_wrapper'
 
 module Cocina
   module Generator
@@ -96,11 +97,12 @@ module Cocina
       end
 
       def schemas
-        @schemas ||= OpenAPIParser.parse(YAML.load_file(options[:openapi]), strict_reference_validation: true)
-                                  .find_object('#/components')
-                                  .schemas
+        @schemas ||= Cocina::OpenApiWrapper.parse(options[:openapi], strict_reference_validation: true)
+                                           .find_object('#/components')
+                                           .schemas
       end
 
+      require 'debug'
       def schema_for(schema_name, lite: false)
         schema_doc = schemas[schema_name]
         return nil if schema_doc.nil?

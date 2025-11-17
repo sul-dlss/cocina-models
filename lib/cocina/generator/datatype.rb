@@ -10,22 +10,19 @@ module Cocina
 
           module Cocina
             module Models
-              #{preamble}#{name} = Types::String#{pattern}#{enum}
+              #{preamble}#{name} = String
             end
           end
         RUBY
       end
 
+      # Pattern and enum constraints are no longer enforced
       def pattern
-        return unless schema_doc.pattern
-
-        ".constrained(format: /#{schema_doc.pattern}/)"
+        # No pattern constraints in simplified version
       end
 
       def enum
-        return unless schema_doc.enum
-
-        ".enum(#{schema_doc.enum.map { |item| quote(item) }.join(', ')})"
+        # No enum constraints in simplified version
       end
     end
   end

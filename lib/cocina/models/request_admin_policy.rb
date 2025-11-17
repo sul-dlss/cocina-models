@@ -3,24 +3,14 @@
 module Cocina
   module Models
     # Same as an AdminPolicy, but doesn't have an externalIdentifier as one will be created
-    class RequestAdminPolicy < Struct
+    class RequestAdminPolicy < BaseModel
+      attr_accessor :cocinaVersion, :type, :label, :version, :administrative, :description
+
       include Validatable
 
-      include Checkable
-
-      TYPES = ['https://cocina.sul.stanford.edu/models/admin_policy'].freeze
-
-      # The version of Cocina with which this object conforms.
-      # example: 1.2.3
-      attribute :cocinaVersion, CocinaVersion.default(VERSION)
-      attribute :type, Types::Strict::String.enum(*RequestAdminPolicy::TYPES)
-      attribute :label, Types::Strict::String
-      attribute :version, Types::Strict::Integer.default(1).enum(1)
-      # Administrative properties for an AdminPolicy
-      attribute(:administrative, AdminPolicyAdministrative.default { AdminPolicyAdministrative.new })
-      # Description that is included in a request to create a DRO. This is the same as a
-      # Description, except excludes PURL.
-      attribute? :description, RequestDescription.optional
+      TYPES = [
+        'https://cocina.sul.stanford.edu/models/admin_policy'
+      ].freeze
     end
   end
 end

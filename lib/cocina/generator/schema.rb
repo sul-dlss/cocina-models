@@ -2,24 +2,21 @@
 
 module Cocina
   module Generator
-    # Class for generating from an openapi schema
+    # Class for generating Data classes from OpenAPI schemas
     class Schema < SchemaBase
-      def schema_properties
-        @schema_properties ||= (properties + all_of_properties + one_of_properties).uniq(&:key)
-      end
-
       def generate
+        attributes = collect_attributes
+        type_constants = collect_type_constants
+
         <<~RUBY
           # frozen_string_literal: true
 
           module Cocina
-            module Models#{'              '}
-              #{preamble}class #{name} < Struct
-
+            module Models
+              #{preamble}class #{name} < BaseModel
+                #{attributes.map { |attr| "attr_accessor #{attr}" }.join("\n        ")}
                 #{validate}
-                #{types}
-
-                #{model_attributes}
+                #{type_constants}
               end
             end
           end
@@ -27,40 +24,6 @@ module Cocina
       end
 
       private
-
-      def property_class_for(properties_doc)
-        case properties_doc.type
-        when 'object'
-          # As a useful simplification, all objects must be references to schemas.
-          raise "Must use a reference for #{schema_doc.inspect}" unless properties_doc.name
-
-          SchemaRef
-        when 'array'
-          SchemaArray
-        else
-          SchemaValue
-        end
-      end
-
-      def model_attributes
-        schema_properties.map(&:generate).join("\n")
-      end
-
-      def types
-        type_schema_property = schema_properties.find { |schema_property| schema_property.key == 'type' }
-        return '' if type_schema_property.nil?
-
-        type_schema_doc = type_schema_property.schema_doc
-        return '' if type_schema_doc.enum.nil?
-
-        types_list = type_schema_doc.enum.map { |item| "'#{item}'" }.join(",\n ")
-
-        <<~RUBY
-          include Checkable
-
-          TYPES = [#{types_list}].freeze
-        RUBY
-      end
 
       def validate
         return '' unless validatable?
@@ -74,60 +37,79 @@ module Cocina
         !schema_doc.root.paths.path["/validate/#{schema_doc.name}"].nil? && !lite
       end
 
-      def properties
-        schema_properties_for(schema_doc)
-      end
+      def collect_attributes
+        attributes = []
 
-      def all_of_properties
-        all_of_properties_for(schema_doc)
-      end
-
-      def one_of_properties
-        one_of_properties_for(schema_doc)
-      end
-
-      def all_of_properties_for(doc)
-        return [] if doc.all_of.nil?
-
-        doc.all_of.map do |all_of_schema|
-          # All of for this + recurse
-          schema_properties_for(all_of_schema) +
-            all_of_properties_for(all_of_schema) +
-            one_of_properties_for(all_of_schema)
-        end.flatten
-      end
-
-      def one_of_properties_for(doc)
-        return [] if doc.one_of.nil?
-
-        # All properties must be objects.
-        raise 'All properties for oneOf must be objects' unless doc.one_of.all? { |schema| schema.type == 'object' }
-
-        doc.one_of.flat_map do |one_of_doc|
-          one_of_doc.properties.map do |key, properties_doc|
-            property_class_for(properties_doc).new(properties_doc,
-                                                   key: key,
-                                                   # The property does less validation because may vary between
-                                                   # different oneOf schemas. Validation is still performed
-                                                   # by openAPI.
-                                                   relaxed: true,
-                                                   parent: self,
-                                                   schemas: schemas)
+        # Get properties from the schema
+        if schema_doc.properties && !schema_doc.properties.empty?
+          schema_doc.properties.each_key do |prop_name|
+            attributes << ":#{prop_name.camelize(:lower)}"
           end
         end
+
+        # Get properties from allOf schemas
+        if schema_doc.all_of
+          schema_doc.all_of.each do |all_of_schema|
+            next unless all_of_schema.properties
+
+            all_of_schema.properties.each_key do |prop_name|
+              attr_name = ":#{prop_name.camelize(:lower)}"
+              attributes << attr_name unless attributes.include?(attr_name)
+            end
+          end
+        end
+
+        # Get properties from oneOf schemas
+        if schema_doc.one_of
+          schema_doc.one_of.each do |one_of_schema|
+            next unless one_of_schema.properties
+
+            one_of_schema.properties.each_key do |prop_name|
+              attr_name = ":#{prop_name.camelize(:lower)}"
+              attributes << attr_name unless attributes.include?(attr_name)
+            end
+          end
+        end
+
+        # Ensure we have at least one attribute for Data.define
+        attributes << ':data' if attributes.empty?
+
+        attributes.uniq
       end
 
-      def schema_properties_for(doc)
-        Array(doc.properties).map do |key, properties_doc|
-          clazz = property_class_for(properties_doc)
-          clazz.new(properties_doc,
-                    key: key,
-                    required: doc.required&.include?(key),
-                    relaxed: lite && clazz != SchemaValue,
-                    nullable: properties_doc.nullable,
-                    parent: self,
-                    schemas: schemas)
+      def collect_type_constants
+        # Find type property and create TYPES constant if it has enum values
+        type_prop = find_type_property
+        return '' unless type_prop && type_prop.enum
+
+        types_list = type_prop.enum.map { |item| "'#{item}'" }.join(",\n        ")
+
+        <<~RUBY.strip
+          TYPES = [
+            #{types_list}
+          ].freeze
+        RUBY
+      end
+
+      def find_type_property
+        # Look for 'type' property in main schema
+        return schema_doc.properties['type'] if schema_doc.properties && schema_doc.properties['type']
+
+        # Look in allOf schemas
+        if schema_doc.all_of
+          schema_doc.all_of.each do |all_of_schema|
+            return all_of_schema.properties['type'] if all_of_schema.properties && all_of_schema.properties['type']
+          end
         end
+
+        # Look in oneOf schemas
+        if schema_doc.one_of
+          schema_doc.one_of.each do |one_of_schema|
+            return one_of_schema.properties['type'] if one_of_schema.properties && one_of_schema.properties['type']
+          end
+        end
+
+        nil
       end
     end
   end

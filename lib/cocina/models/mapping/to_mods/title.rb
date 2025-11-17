@@ -34,6 +34,7 @@ module Cocina
 
           def write # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity
             titles.each do |title| # rubocop:disable Metrics/BlockLength
+              debugger
               name_title_vals_index = name_title_vals_index_for(title)
 
               if title.valueAt

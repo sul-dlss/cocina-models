@@ -3,9 +3,8 @@
 module Cocina
   module Models
     # Geographic metadata
-    class Geographic < Struct
-      # Geographic ISO 19139 XML metadata
-      attribute :iso19139, Types::Strict::String
+    class Geographic < BaseModel
+      attr_accessor :iso19139
     end
   end
 end

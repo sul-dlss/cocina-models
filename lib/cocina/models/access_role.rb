@@ -3,11 +3,8 @@
 module Cocina
   module Models
     # Access role conferred by an AdminPolicy to objects within it. (used by Argo)
-    class AccessRole < Struct
-      # Name of role
-      attribute :name, Types::Strict::String.enum('dor-apo-depositor', 'dor-apo-manager', 'dor-apo-viewer', 'sdr-administrator', 'sdr-viewer', 'hydrus-collection-creator', 'hydrus-collection-manager', 'hydrus-collection-depositor', 'hydrus-collection-item-depositor', 'hydrus-collection-reviewer', 'hydrus-collection-viewer')
-      # The users and groups that are members of the role
-      attribute :members, Types::Strict::Array.of(AccessRoleMember).default([].freeze)
+    class AccessRole < BaseModel
+      attr_accessor :name, :members
     end
   end
 end

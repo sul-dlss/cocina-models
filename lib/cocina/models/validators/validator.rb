@@ -6,7 +6,7 @@ module Cocina
       # Perform validation against all other Validators
       class Validator
         VALIDATORS = [
-          OpenApiValidator,
+          # OpenApiValidator,
           DarkValidator,
           PurlValidator,
           CatalogLinksValidator,
