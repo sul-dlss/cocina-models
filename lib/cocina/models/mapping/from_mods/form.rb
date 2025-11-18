@@ -9,6 +9,7 @@ module Cocina
         class Form
           # NOTE: H2 is the first case of structured form (genre/typeOfResource) values we're implementing
           H2_GENRE_TYPE_PREFIX = 'H2 '
+          H2_SOURCE_LABEL = 'Stanford self-deposit resource types'
 
           # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
           # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] description_builder
@@ -142,7 +143,7 @@ module Cocina
             forms << {
               type: 'resource type',
               source: {
-                value: Cocina::Models::Mapping::ToMods::Form::H2_SOURCE_LABEL
+                value: H2_SOURCE_LABEL
               },
               structuredValue: structured_genre.map do |genre|
                 {
