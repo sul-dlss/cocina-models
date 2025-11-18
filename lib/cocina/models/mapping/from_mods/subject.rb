@@ -55,8 +55,6 @@ module Cocina
             }.compact.presence
           end
 
-          # rubocop:disable Metrics/CyclomaticComplexity
-          # rubocop:disable Metrics/AbcSize
           def build_subject(subject_node)
             if subject_node['xlink:href']
               return { valueAt: subject_node['xlink:href'] } if subject_node.elements.empty?
@@ -96,8 +94,6 @@ module Cocina
               simple_item(first_child_node, attrs)
             end
           end
-          # rubocop:enable Metrics/CyclomaticComplexity
-          # rubocop:enable Metrics/AbcSize
 
           def temporal_range?(children_nodes)
             children_nodes.all? { |node| node.name == 'temporal' && node['point'] }
