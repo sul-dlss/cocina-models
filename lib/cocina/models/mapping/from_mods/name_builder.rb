@@ -7,7 +7,7 @@ module Cocina
       module FromMods
         # Maps a name
         class NameBuilder
-          UNCITED_DESCRIPTION = Cocina::Models::Mapping::ToMods::NameWriter::UNCITED_DESCRIPTION
+          UNCITED_DESCRIPTION = 'not included in citation'
           TYPE_FOR_ROLES = Cocina::Models::Mapping::FromMods::Contributor::ROLES.merge('event' => 'event').freeze
 
           # @param [Array<Nokogiri::XML::Element>] name_elements (multiple if parallel)

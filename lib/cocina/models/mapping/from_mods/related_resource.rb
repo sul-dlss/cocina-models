@@ -5,9 +5,42 @@ module Cocina
     module Mapping
       module FromMods
         # Maps MODS relatedItem to cocina relatedResource
-        class RelatedResource
-          TYPES = Cocina::Models::Mapping::ToMods::RelatedResource::TYPES.invert.freeze
-          DETAIL_TYPES = Cocina::Models::Mapping::ToMods::RelatedResource::DETAIL_TYPES.invert.freeze
+        class RelatedResource # rubocop:disable Metrics/ClassLength
+          # see https://docs.google.com/spreadsheets/d/1d5PokzgXqNykvQeckG2ND43B6i9_CsjfIVwS_IsphS8/edit#gid=0
+          TYPES = {
+            'has original version' => 'original',
+            'has other format' => 'otherFormat',
+            'has part' => 'constituent',
+            'has version' => 'otherVersion',
+            'in series' => 'series',
+            'part of' => 'host',
+            'preceded by' => 'preceding',
+            'related to' => nil, # 'related to' is a null type by design
+            'reviewed by' => 'reviewOf',
+            'referenced by' => 'isReferencedBy',
+            'references' => 'references',
+            'succeeded by' => 'succeeding'
+          }.invert.freeze
+
+          DETAIL_TYPES = {
+            'location within source' => 'part',
+            'volume' => 'volume',
+            'issue' => 'issue',
+            'chapter' => 'chapter',
+            'section' => 'section',
+            'paragraph' => 'paragraph',
+            'track' => 'track',
+            'marker' => 'marker'
+          }.invert.freeze
+
+          OTHER_TYPES = [
+            'supplement to',
+            'supplemented by',
+            'derived from',
+            'source of',
+            'version of record',
+            'identical to'
+          ].freeze
 
           # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
           # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] description_builder
@@ -52,7 +85,7 @@ module Cocina
               if related_item['type']
                 item[:type] = normalized_type_for(related_item['type'])
               elsif (other_type = related_item['otherType'])
-                if Cocina::Models::Mapping::ToMods::RelatedResource::OTHER_TYPES.include?(other_type)
+                if OTHER_TYPES.include?(other_type)
                   item[:type] = other_type
                 else
                   item[:type] = 'related to'
