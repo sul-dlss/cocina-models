@@ -445,7 +445,7 @@ RSpec.describe 'MODS name <--> cocina mappings' do
         <<~XML
           <name type="personal">
             <namePart>Burnett, Michael W.</namePart>
-            <nameIdentifier>https://orcid.org/0000-0001-5126-5568</nameIdentifier>
+            <nameIdentifier>http://geocities.com/burnett</nameIdentifier>
           </name>
         XML
       end
@@ -462,13 +462,61 @@ RSpec.describe 'MODS name <--> cocina mappings' do
               type: 'person',
               identifier: [
                 {
-                  value: 'https://orcid.org/0000-0001-5126-5568'
+                  value: 'http://geocities.com/burnett'
                 }
               ]
             }
           ]
         }
       end
+    end
+  end
+
+  describe 'Name with ORCID nameIdentifier' do
+    it_behaves_like 'MODS cocina mapping' do
+      let(:mods) do
+        <<~XML
+          <name type="personal">
+            <namePart>Burnett, Michael W.</namePart>
+            <nameIdentifier>https://orcid.org/0000-0001-5126-5568</nameIdentifier>
+          </name>
+        XML
+      end
+
+      let(:roundtrip_mods) do
+        <<~XML
+          <name type="personal">
+            <namePart>Burnett, Michael W.</namePart>
+            <nameIdentifier typeURI="https://orcid.org" type="orcid">0000-0001-5126-5568</nameIdentifier>
+          </name>
+        XML
+      end
+
+      let(:cocina) do
+        {
+          contributor: [
+            {
+              name: [
+                {
+                  value: 'Burnett, Michael W.'
+                }
+              ],
+              type: 'person',
+              identifier: [
+                {
+                  value: '0000-0001-5126-5568',
+                  type: 'ORCID',
+                  source: {
+                    uri: 'https://orcid.org'
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      end
+
+      let(:skip_normalization) { true }
     end
   end
 

@@ -6,6 +6,8 @@ module Cocina
       module FromMods
         # Builds cocina identifier
         class IdentifierBuilder
+          ORCID_PREFIX = 'https://orcid.org/'
+
           # @param [Nokogiri::XML::Element] identifier_element identifier element
           # @return [Hash] a hash that can be mapped to a cocina model
           def self.build_from_identifier(identifier_element:)
@@ -40,7 +42,7 @@ module Cocina
                 attrs[:uri] = identifier_element.text
               else
                 attrs[:type] = cocina_type
-                attrs[:value] = identifier_element.text
+                attrs[:value] = value
                 attrs[:source] = build_source
               end
               attrs[:status] = 'invalid' if identifier_element['invalid'] == 'yes'
@@ -54,15 +56,28 @@ module Cocina
           def types_for(type)
             return ['uri', 'uri', IdentifierType::STANDARD_IDENTIFIER_SCHEMES] if type == 'uri'
 
+            type = 'orcid' if orcid?
+
             IdentifierType.cocina_type_for_mods_type(type)
+          end
+
+          def value
+            value = identifier_element.text
+            return value.delete_prefix(ORCID_PREFIX) if orcid?
+
+            value
           end
 
           def build_source
             {
-              uri: identifier_element['typeURI']
+              uri: orcid? ? 'https://orcid.org' : identifier_element['typeURI']
             }.tap do |props|
               props[:code] = mods_type unless props[:uri]
             end.compact.presence
+          end
+
+          def orcid?
+            identifier_element.text.starts_with?(ORCID_PREFIX)
           end
         end
       end
