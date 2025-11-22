@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Cocina --> MODS mappings for adminMetadata (H2 specific)' do
+RSpec.describe 'Cocina --> MODS mappings for adminMetadata (H3 specific)' do
   describe 'New record' do
     let(:create_date) { '2018-10-25' }
 
