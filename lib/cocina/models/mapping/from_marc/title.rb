@@ -6,22 +6,6 @@ module Cocina
       module FromMarc
         # Maps titles
         class Title
-          TYPES = {
-            'nonSort' => 'nonsorting characters',
-            'title' => 'main title'
-            # 'subTitle' => 'subtitle',
-            # 'partNumber' => 'part number',
-            # 'partName' => 'part name',
-            # 'date' => 'life dates',
-            # 'given' => 'forename',
-            # 'family' => 'surname',
-            # 'uniform' => 'title'
-          }.freeze
-
-          # PERSON_TYPE = 'name'
-
-          # NAME_TYPES = ['person', 'forename', 'surname', 'life dates'].freeze
-
           # @param [Hash] marc MARC record from FOLIO
           # @param [boolean] require_title notify if true and title is missing.
           # @param [Cocina::Models::Mapping::ErrorNotifier] notifier

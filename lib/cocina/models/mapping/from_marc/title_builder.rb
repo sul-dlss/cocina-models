@@ -6,18 +6,20 @@ module Cocina
       module FromMarc
         # Maps titles
         class TitleBuilder
-          # @param [Hash] marc MARC record from FOLIO
-          # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
-          # @return [Hash] a hash that can be mapped to a cocina model
-          def self.build(marc:, notifier:)
-            new(marc: marc, notifier: notifier).build
+          # @see #initialize
+          # @see #build
+          def self.build(...)
+            new(...).build
           end
 
+          # @param [Hash] marc MARC record from FOLIO
+          # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
           def initialize(marc:, notifier:)
             @marc = marc
             @notifier = notifier
           end
 
+          # @return [Hash] a hash that can be mapped to a cocina model
           def build
             title_fields = %w[245 246 240 130 740]
             unless title_fields.any? { |field| fields.any? { |f| f.key?(field) } }
@@ -25,9 +27,9 @@ module Cocina
               return nil
             end
 
-            # Is this a basic title or a title with parts
+            # Return a basic title
+            # TODO: implement structured values
             basic_title if basic_title?
-            # return structured_value(title_field)
           end
 
           private

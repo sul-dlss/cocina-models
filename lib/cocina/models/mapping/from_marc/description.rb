@@ -12,12 +12,12 @@ module Cocina
             new(...).props
           end
 
-          # @param [TitleBuilder] title_builder - defaults to Title class
           # @param [Hash] marc MARC record from FOLIO
-          # @oaram [String] label
+          # @param [String] label
           # @param [String] druid
+          # @param [TitleBuilder] title_builder - defaults to Title class
           # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
-          def initialize(title_builder: nil, marc:, label:, druid:, notifier: nil)
+          def initialize(marc:, label:, druid:, title_builder: nil, notifier: nil)
             @title_builder = title_builder || Title
             @marc = marc
             @notifier = notifier || ErrorNotifier.new(druid: druid)
