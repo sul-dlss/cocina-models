@@ -28,12 +28,12 @@ module Cocina
           def props
             return nil if marc.nil?
 
-            props = DescriptionBuilder.build(title_builder: title_builder,
-                                             marc: marc,
-                                             notifier: notifier,
-                                             purl: druid ? Cocina::Models::Mapping::Purl.for(druid: druid) : nil)
-            props[:title] = [{ value: label }] unless props.key?(:title)
-            props
+            DescriptionBuilder.build(title_builder: title_builder,
+                                     marc: marc,
+                                     notifier: notifier,
+                                     purl: druid ? Cocina::Models::Mapping::Purl.for(druid: druid) : nil).tap do |properties|
+              properties[:title] = [{ value: label }] unless properties.key?(:title)
+            end
           end
 
           private
