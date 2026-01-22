@@ -25,7 +25,7 @@ module Cocina
           # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
           # @param [TitleBuilder] title_builder - defaults to Title class
           # @param [String] purl
-          # @return [Hash] a hash that can be mapped to a cocina description model
+          # @return [Hash] a hash that can be mapped to a Cocina Description model
           def self.build(marc:, notifier:, title_builder: Title, purl: nil)
             new(title_builder: title_builder, notifier: notifier).build(marc: marc, purl: purl)
           end
@@ -35,7 +35,7 @@ module Cocina
             @notifier = notifier
           end
 
-          # @return [Hash] a hash that can be mapped to a cocina description model
+          # @return [Hash] a hash that can be mapped to a Cocina Description model
           def build(marc:, purl: nil, require_title: true)
             cocina_description = {}
             title_result = title_builder.build(marc: marc, require_title: require_title,

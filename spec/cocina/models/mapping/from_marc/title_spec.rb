@@ -35,7 +35,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Title do
       let(:marc) do
         {
           'fields' => [
-            { '245' => { 'ind1' => '1', 'ind2' => '0', 'subfields' => [{ 'a' => 'Gaudy night /' }, {'c' => 'Dorothy L. Sayers'}] } }
+            { '245' => { 'ind1' => '1', 'ind2' => '0', 'subfields' => [{ 'a' => 'Gaudy night /' }, {'c' => 'by Dorothy L. Sayers'}] } }
           ]
         }
       end
