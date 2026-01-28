@@ -11,7 +11,7 @@ module Cocina
             # note: Note,
             language: Language,
             contributor: Contributor,
-            # event: Event,
+            event: Event,
             # subject: Subject,
             # form: Form,
             identifier: Identifier
