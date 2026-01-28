@@ -10,6 +10,7 @@ require 'openapi_parser'
 require 'active_support'
 require 'active_support/core_ext'
 require 'thor'
+require 'marc'
 
 # Help Zeitwerk find some of our classes
 class CocinaModelsInflector < Zeitwerk::Inflector

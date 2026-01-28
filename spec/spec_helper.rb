@@ -17,9 +17,6 @@ SimpleCov.start do
   end
 end
 
-# This will find any constants that Zeitwerk has trouble inflecting
-Zeitwerk::Loader.eager_load_all
-
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = '.rspec_status'
