@@ -47,15 +47,8 @@ module Cocina
             tag = marc['245']
 
             title = tag.subfields.find { |subfield| subfield.code == 'a' }
-            title_value = strip_punctuation(title.value)
+            title_value = Util.strip_punctuation(title.value)
             [{ value: title_value }]
-          end
-
-          def strip_punctuation(value)
-            # Remove set of punctuation characters at the end of the subfield
-            escaped_chars = Regexp.escape(':;/[, ')
-            regex = /[#{escaped_chars}]+\z/
-            value.gsub(regex, '')
           end
         end
       end
