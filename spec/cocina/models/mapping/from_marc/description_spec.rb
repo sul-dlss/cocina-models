@@ -8,9 +8,10 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Description do
   end
 
   let(:notifier) { instance_double(Cocina::Models::Mapping::ErrorNotifier) }
+  let(:marc) { MARC::Record.new_from_hash(marc_hash) }
 
   context 'when the mapping is successful' do
-    let(:marc) do
+    let(:marc_hash) do
       {
         'fields' => [
           { '245' => { 'ind1' => '1', 'ind2' => '0', 'subfields' => [{ 'a' => 'Gaudy night /' }, { 'c' => 'by Dorothy L. Sayers' }] } }
@@ -27,7 +28,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Description do
   end
 
   context 'when the MARC has no title' do
-    let(:marc) do
+    let(:marc_hash) do
       {
         'fields' => []
       }

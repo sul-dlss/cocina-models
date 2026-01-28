@@ -21,7 +21,7 @@ module Cocina
             # access: Access
           }.freeze
 
-          # @param [Hash] marc MARC record
+          # @param [MARC::Record] marc MARC record from FOLIO
           # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
           # @param [TitleBuilder] title_builder - defaults to Title class
           # @param [String] purl

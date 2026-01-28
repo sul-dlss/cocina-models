@@ -10,9 +10,10 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Title do
 
     let(:notifier) { instance_double(Cocina::Models::Mapping::ErrorNotifier) }
     let(:require_title) { true }
+    let(:marc) { MARC::Record.new_from_hash(marc_hash) }
 
     context 'with no title fields' do
-      let(:marc) do
+      let(:marc_hash) do
         {
           'fields' => [
             { 'xxx' => { 'subfields' => [{ 'a' => 'nothing' }] } }
@@ -32,7 +33,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Title do
     end
 
     context 'with a basic title field' do
-      let(:marc) do
+      let(:marc_hash) do
         {
           'fields' => [
             { '245' => { 'ind1' => '1', 'ind2' => '0', 'subfields' => [{ 'a' => 'Gaudy night /' }, {'c' => 'by Dorothy L. Sayers'}] } }
