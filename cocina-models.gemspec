@@ -32,6 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'equivalent-xml' # for diffing MODS
   spec.add_dependency 'i18n' # for validating BCP 47 language tags, according to RFC 4646
   spec.add_dependency 'jsonpath' # used for date/time validation
+  spec.add_dependency 'marc', '~> 1.3'
   spec.add_dependency 'nokogiri'
   # Match these version requirements to what committee wants,
   # so that our client (non-committee) users have the same dependencies.

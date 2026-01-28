@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'marc'
+
 module Cocina
   module Models
     module Mapping
@@ -12,7 +14,7 @@ module Cocina
             new(...).props
           end
 
-          # @param [Hash] marc MARC record from FOLIO
+          # @param [MARC::Record] marc MARC record from FOLIO
           # @param [String] label
           # @param [String] druid
           # @param [TitleBuilder] title_builder - defaults to Title class
