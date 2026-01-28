@@ -11,7 +11,7 @@ module Cocina
             # note: Note,
             # language: Language,
             # contributor: Contributor,
-            # event: Event,
+            event: Event
             # subject: Subject,
             # form: Form,
             # identifier: Identifier,
@@ -44,7 +44,7 @@ module Cocina
             cocina_description[:purl] = purl
 
             BUILDERS.each do |description_property, builder|
-              result = builder.build(marc: marc, description_builder: self)
+              result = builder.build(marc: marc)
               cocina_description.merge!(description_property => result) if result.present?
             end
             cocina_description
