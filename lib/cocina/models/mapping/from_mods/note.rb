@@ -54,14 +54,6 @@ module Cocina
             }.tap do |attributes|
               value_language = LanguageScript.build(node: node)
               attributes[:valueLanguage] = value_language if value_language
-              if node['ID']
-                attributes[:identifier] = [
-                  {
-                    value: node['ID'],
-                    type: 'anchor'
-                  }
-                ]
-              end
             end.compact
           end
 
