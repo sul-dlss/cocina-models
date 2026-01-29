@@ -1,0 +1,56 @@
+//// Language
+
+// Language - multiple with deduplication
+// 008/35-37, 041 $a, $b, $d, $e, $f, $g, $h, $j
+// a12365535
+{
+    "008": "170419p20172015fr opnn  di       n fre d"
+},
+{
+    "041": {
+        "ind1": "0",
+        "ind2": " ",
+        "subfields": [
+            {
+                "d": "fre"
+            },
+            {
+                "d": "ger"
+            },
+            {
+                "d": "ita"
+            },
+            {
+                "e": "fre"
+            },
+            {
+                "e": "eng"
+            },
+            {
+                "e": "ger"
+            },
+            {
+                "e": "ita"
+            },
+            {
+                "n": "fre"
+            },
+            {
+                "n": "ger"
+            },
+            {
+                "n": "ita"
+            },
+            {
+                "g": "eng"
+            },
+            {
+                "g": "fre"
+            },
+            {
+                "g": "ger"
+            }
+        ]
+    }
+}
+{ language: [ { code: "fre" }, { code: "ger" }, { code: "ita"}, { code: "eng" } ] }

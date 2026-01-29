@@ -1,0 +1,66 @@
+// When multiple subfields are mapped together, concatenate with space in the order given
+
+//// Access
+
+// Local call number/shelfmark
+// 099
+// in00000067610
+{
+    "099": {
+        "ind1": " ",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "MSS CODEX 1556 F"
+            }
+        ]
+    }
+}
+{ access: { physicalLocation: [ { value: "MSS CODEX 1556 F", type: "shelf locator" } ] } }
+
+// URL
+// 856 $uyz3
+// a13290862
+{
+    "856": {
+        "ind1": "4",
+        "ind2": "0",
+        "subfields": [
+            {
+                "3": "Current issue"
+            },
+            {
+                "u": "https://purl.fdlp.gov/GPO/gpo121603"
+            }
+        ]
+    }
+}
+{ access: { url: [ { value: "https://purl.fdlp.gov/GPO/gpo121603", displayLabel: "Current issue" } ] } }
+
+// URL
+// 856 $uyz3
+// in00000845662
+{
+    "856": {
+        "ind1": "4",
+        "ind2": "0",
+        "subfields": [
+            {
+                "z": "Available to Stanford-affiliated users."
+            },
+            {
+                "u": "https://doi.org/10.1017/9781009675338"
+            },
+            {
+                "x": "WMS"
+            },
+            {
+                "y": "Cambridge University Press"
+            }
+        ]
+    }
+}
+{ access: { 
+    url: [ { value: "https://doi.org/10.1017/9781009675338", 
+    note: [ { value: "Available to Stanford-affiliated users." }, { value: "Cambridge University Press" } ] } ] } 
+}

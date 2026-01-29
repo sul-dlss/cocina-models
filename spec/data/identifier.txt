@@ -1,0 +1,288 @@
+// When multiple subfields are mapped together, concatenate with space in the order given
+
+//// Identifier
+
+// For all identifiers: strip leading and trailing spaces
+
+// LCCN
+// 010 $a
+// a5566265
+{
+    "010": {
+        "ind1": " ",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "  2005203496"
+            }
+        ]
+    }
+}
+{ identifier: [ { value: "2005203496", type: "LCCN" } ] }
+
+// ISBN
+// 020 $aq
+// in00000872854
+{
+    "020": {
+        "ind1": " ",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "9783032051035"
+            },
+            {
+                "q": "(electronic bk.)"
+            }
+        ]
+    }
+}
+{ identifier: [ { value: "9783032051035 (electronic bk.)", type: "ISBN" } ] }
+
+// ISSN
+// 022 $a
+// in00000199573
+{
+    "022": {
+        "ind1": "0",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "3065-7024"
+            },
+            {
+                "2": "1"
+            }
+        ]
+    }
+}
+{ identifier: [ { value: "3065-7024", type: "ISSN" } ] }
+
+// ISRC
+// 024 $adq if ind1 = 0
+// constructed
+{
+    "022": {
+        "ind1": "0",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "3065-7024"
+            },
+            {
+                "d": "1"
+            },
+            {
+                "q": "(compact disc)"
+            }
+        ]
+    }
+}
+{ identifier: [ { value: "3065-7024 1 (compact disc)", type: "ISRC" } ] }
+
+
+// UPC
+// 024 $adq if ind1 = 1
+// a12365535
+{
+    "024": {
+        "ind1": "1",
+        "ind2": "0",
+        "subfields": [
+            {
+                "a": "190295849016"
+            }
+        ]
+    }
+}
+{ identifier: [ { value: "190295849016", type: "UPC" } ] }
+
+// ISMN
+// 024 $adq if ind1 = 2
+// LC example
+{
+    "024": {
+        "ind1": "2",
+        "ind2": "0",
+        "subfields": [
+            {
+                "a": "M570406210"
+            },
+            {
+                "q": "parts"
+            },
+            {
+                "q": "sewn"
+            }
+        ]
+    }
+}
+{ identifier: [ { value: "M570406210 parts sewn", type: "ISMN" } ] }
+
+// International Article Number
+// 024 $adq if ind1 = 3
+// a12365535
+{
+    "024": {
+        "ind1": "3",
+        "ind2": "0",
+        "subfields": [
+            {
+                "a": "0190295849016"
+            }
+        ]
+    }
+}
+{ identifier: [ { value: "0190295849016", type: "International Article Number" } ] }
+
+// SICI
+// 024 $adq if ind1 = 4
+// LC example
+{
+    "024": {
+        "ind1": "4",
+        "ind2": "0",
+        "subfields": [
+            {
+                "a": "a875623247541986340134QTP1"
+            }
+        ]
+    }
+}
+{ identifier: [ { value: "a875623247541986340134QTP1", type: "SICI" } ] }
+
+// DOI
+// 024 $adq if ind1 = 7 and $2 = doi
+// in00000872854
+{
+    "024": {
+        "ind1": "7",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "10.1007/978-3-032-05103-5"
+            },
+            {
+                "2": "doi"
+            }
+        ]
+    }
+}
+{ identifier: [ { value: "10.1007/978-3-032-05103-5", type: "DOI" } ] }
+
+// Source code in $2 (not DOI)
+// 024 $adq if ind1 = 7
+// LC example
+{
+    "024": {
+        "ind1": "7",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "0A3200912B4A1057"
+            },
+            {
+                "2": "istc"
+            }
+        ]
+    }
+}
+{ identifier: [ { value: "0A3200912B4A1057", source: { code: "istc" } } ] }
+
+// Issue number
+// 028 $abq if ind1 = 0
+// a12365535
+{
+    "028": {
+        "ind1": "0",
+        "ind2": "2",
+        "subfields": [
+            {
+                "a": "560930"
+            },
+            {
+                "b": "Erato/Warner Classics"
+            }
+        ]
+    }
+}
+{ identifier: [ { value: "ERA560930 Erato/Warner Classics ", type: "issue number" } ] }
+
+// Matrix number
+// 028 $abq if ind1 = 1
+// LC example
+{
+    "028": {
+        "ind1": "1",
+        "ind2": "0",
+        "subfields": [
+            {
+                "a": "J-18961M-A"
+            },
+            {
+                "b": "Country Line"
+            }
+        ]
+    }
+}
+{ identifier: [ { value: "J-18961M-A Country Line", type: "matrix number" } ] }
+
+// Music plate number
+// 028 $abq if ind1 = 2
+// LC example
+{
+    "028": {
+        "ind1": "2",
+        "ind2": "2",
+        "subfields": [
+            {
+                "a": "B. & H. 8797"
+            },
+            {
+                "b": "Breitkopf & Hartel"
+            }
+        ]
+    }
+}
+{ identifier: [ { value: "B. & H. 8797 Breitkopf & Hartel", type: "music plate" } ] }
+
+// Music publisher number
+// 028 $abq if ind1 = 3
+// constructed
+{
+    "028": {
+        "ind1": "3",
+        "ind2": "2",
+        "subfields": [
+            {
+                "a": "12345"
+            },
+            {
+                "b": "Columbia"
+            }
+        ]
+    }
+}
+{ identifier: [ { value: "12345 Columbia", type: "music publisher" } ] }
+
+// Videorecording publisher number
+// 028 $abq if ind1 = 4
+// based on a5703972
+{
+    "028": {
+        "ind1": "4",
+        "ind2": "2",
+        "subfields": [
+            {
+                "a": "440 073 032-9"
+            },
+            {
+                "b": "Deutsche Grammophon"
+            },
+            {
+                "q": "(set and guide)"
+            }
+        ]
+    }
+}
+{ identifier: [ { value: "440 073 032-9 Deutsche Grammophon (set and guide)" } ] }

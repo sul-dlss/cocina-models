@@ -1,0 +1,480 @@
+// When multiple subfields are mapped together, concatenate with space in the order given
+// Linked 880 fields should be mapped the same as an instance of the main field given in the $6, 
+//   except for the title 245 which uses parallelValue - i.e., an 880 field with a $6 containing 
+//   246 should be mapped the same as a 100 field
+
+//// Contributor
+// For all contributors: 
+//   - Strip comma from end of name and period from end of role
+//   - Map role code to term and downcase: https://github.com/sul-dlss/SearchWorks/blob/main/lib/constants.rb
+//   - Ignore invalid role codes - do not map
+//   - Deduplicate role terms
+
+// Contributor - person, primary
+// 100 $abcdjq if ind1=0 or 1
+// a895166
+{
+    "100": {
+        "ind1": "1",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "Sayers, Dorothy L."
+            },
+            {
+                "q": "(Dorothy Leigh),"
+            },
+            {
+                "d": "1893-1957."
+            },
+            {
+                "0": "(SIRSI)100978"
+            }
+        ]
+    }
+}
+{ contributor: [ { type: "person", status: "primary", name: [ { value: "Sayers, Dorothy L. (Dorothy Leigh), 1893-1957." } ] } ] }
+
+// Contributor - family, primary
+// 100 $abcdjq if ind1=3
+// a4090014
+{
+    "100": {
+        "ind1": "3",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "Packard family."
+            }
+        ]
+    }
+}
+{ contributor: [ { type: "family", status: "primary", name: [ { value: "Packard family." } ] } ] }
+
+// Contributor - organization, primary
+// 110 $abcdn
+// a9803970
+{
+    "110": {
+        "ind1": "1",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "Ghana."
+            },
+            {
+                "0": "(SIRSI)168717"
+            }
+        ]
+    }
+}
+{ contributor: [ { type: "organization", status: "primary", name: [ { value: "Ghana." } ] } ] }
+
+// Contributor - event, primary
+// 111 $acdenq
+// a5171170
+{
+    "111": {
+        "ind1": "2",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "SIGGRAPH (Conference)"
+            },
+            {
+                "n": "(29th :"
+            },
+            {
+                "d": "2002 :"
+            },
+            {
+                "c": "San Antonio, Tex.)"
+            },
+            {
+                "0": "(SIRSI)566144"
+            }
+        ]
+    }
+}
+{ contributor: [ { type: "event", status: "primary", name: [ { value: "SIGGRAPH (Conference) (29th : 2002 : San Antonio. Tex.)" } ] } ] }
+
+// Contributor - person
+// 700 $abcdjq if ind1=0 or 1 and $t not present
+// based on a14185492
+{
+    "700": {
+        "ind1": "1",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "Street, Stephen"
+            },
+            {
+                "c": "(Double bassist)."
+            }
+        ]
+    }
+}
+{ contributor: [ { type: "person", name: [ { value: "Street, Stephen (Double bassist)." } ] } ] }
+
+// Contributor - family
+// 700 $abcdjq if ind1=3 and $t not present
+// a4090014
+{
+    "700": {
+        "ind1": "3",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "Gouzigian family."
+            }
+        ]
+    }
+}
+{ contributor: [ { type: "family", name: [ { value: "Gouzigian family." } ] } ] }
+
+// Contributor - organization
+// 710 $abcd if $t not present
+// a9803970
+{
+    "710": {
+        "ind1": "1",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "Ghana"
+            },
+            {
+                "b": "Ministry of Tourism (2009-2013)"
+            },
+            {
+                "0": "(SIRSI)168717"
+            }
+        ]
+    }
+}
+{ contributor: [ { type: "organization", name: [ { value: "Ghana Ministry of Tourism (2009-2013)" } ] } ] }
+
+// Contributor - event
+// 711 $acdenq if $t not present
+// in00000381224
+{
+    "711": {
+        "ind1": "2",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "Simulation Solutions Conference."
+            },
+            {
+                "0": "http://id.loc.gov/authorities/names/no2005090352"
+            }
+        ]
+    }
+}
+{ contributor: [ { type: "event", name: [ { value: "Simulation Solutions Conference." } ] } ] }
+
+// Contributor - person
+// 720 $a if ind1=1
+// constructed
+{
+    "720": {
+        "ind1": "1",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "Blacklock, Joseph"
+            }
+        ]
+    }
+}
+{ contributor: [ { type: "person", name: [ { value: "Blacklock, Joseph" } ] } ] }
+
+// Contributor
+// 720 $a if ind1 is blank
+// constructed
+{
+    "720": {
+        "ind1": " ",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "Vonderrohe, Robert, 1934-"
+            }
+        ]
+    }
+}
+{ contributor: [ { name: [ { value: "Vonderrohe, Robert, 1934-" } ] } ] }
+
+// Contributor with role terms
+// 100 $abcdjq with $e
+// Strip comma from end of name and period from end of role
+// in00000723963
+{
+    "100": {
+        "ind1": "1",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "Wagner, Richard,"
+            },
+            {
+                "d": "1813-1883,"
+            },
+            {
+                "e": "composer,"
+            },
+            {
+                "e": "librettist."
+            },
+            {
+                "0": "http://id.loc.gov/authorities/names/n79089831"
+            },
+            {
+                "1": "https://id.oclc.org/worldcat/entity/E39PBJvMCYbW9m9kmHKrwph4MP"
+            }
+        ]
+    }
+}
+{ contributor: [ { type: "person", status: "primary", name: [ { value: "Wagner, Richard, 1813-1883", role: [ { value: "composer" }, { value: "librettist" } ] } ] } ] }
+
+// Contributor with different role term and code
+// 700 $abcdjq with $e4
+// Map role code to term
+// in00000714805
+{
+    "700": {
+        "ind1": "1",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "Cao, Rosa,"
+            },
+            {
+                "e": "degree committee member."
+            },
+            {
+                "4": "ths"
+            },
+            {
+                "0": "http://id.loc.gov/authorities/names/no2019143165"
+            }
+        ]
+    }
+}
+{ contributor: [ { type: "person", name: [ { value: "Cao, Rosa", role: [ { value: "degree committee member" }, { value: "thesis advisor" } ] } ] } ] }
+
+// Contributor with same role term and code
+// 700 $abcdjq with $e4
+// Deduplicate role terms
+// based on in00000714805
+{
+    "700": {
+        "ind1": "1",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "Cao, Rosa,"
+            },
+            {
+                "e": "degree committee member."
+            },
+            {
+                "4": "dgc"
+            },
+            {
+                "0": "http://id.loc.gov/authorities/names/no2019143165"
+            }
+        ]
+    }
+}
+{ contributor: [ { type: "person", name: [ { value: "Cao, Rosa", role: [ { value: "degree committee member" } ] } ] } ] }
+
+// Contributor with role term - event
+// 711 $acdenq with $j if $t not present
+// based on in00000381224
+{
+    "711": {
+        "ind1": "2",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "Simulation Solutions Conference."
+            },
+            {
+                "j": "creator."
+            },
+            {
+                "0": "http://id.loc.gov/authorities/names/no2005090352"
+            }
+        ]
+    }
+}
+{ contributor: [ { type: "event", name: [ { value: "Simulation Solutions Conference." } ], role: [ { value: "creator" } ] } ] }
+
+// Contributor with invalid role code
+// 700 $abcdjq with $e4
+// based on in00000714805
+{
+    "700": {
+        "ind1": "1",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "Cao, Rosa,"
+            },
+            {
+                "e": "degree committee member."
+            },
+            {
+                "4": "tsh"
+            },
+            {
+                "0": "http://id.loc.gov/authorities/names/no2019143165"
+            }
+        ]
+    }
+}
+{ contributor: [ { type: "person", name: [ { value: "Cao, Rosa", role: [ { value: "degree committee member" } ] } ] } ] }
+
+// Contributor with ORCID identifier
+// 100 $a1 if $1 contains "orcid"
+// based on in00000870077
+// **see https://github.com/sul-dlss/cocina-models/issues/898
+{
+    "100": {
+        "ind1": "1",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "Velez, Vannessa Naomi."
+            },
+            {
+                "1": "https://orcid.org/0009-0005-5256-569X"
+            }
+        ]
+    }
+}
+{ contributor: [ { type: "person", status: "primary", name: [ { value: "Velez, Vannessa Naomi." } ], identifier: [ { value: "0009-0005-5256-569X", type: "ORCID" } ] } ] }
+
+// Contributor with other identifier
+// 710 $a1 if $1 does not contain "orcid"
+// in00000870077
+// **see https://github.com/sul-dlss/cocina-models/issues/898
+{
+    "710": {
+        "ind1": "2",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "Stanford University."
+            },
+            {
+                "b": "School of Humanities and Sciences."
+            },
+            {
+                "0": "http://id.loc.gov/authorities/names/no2009155385"
+            },
+            {
+                "1": "https://ror.org/00f54p054"
+            }
+        ]
+    }
+}
+{ contributor: [ { type: "organization", name: [ { value: "Stanford University." } ], identifier: [ { uri: "https://ror.org/00f54p054" } ] } ] }
+
+// Contributor in multiple scripts
+// 100/880
+// a13162356
+{
+    "100": {
+        "ind1": "1",
+        "ind2": " ",
+        "subfields": [
+            {
+                "6": "880-01"
+            },
+            {
+                "a": "Smagina, S. A."
+            },
+            {
+                "e": "author."
+            },
+            {
+                "0": "http://id.loc.gov/authorities/names/no2011031220"
+            },
+            {
+                "0": "(SIRSI)3726444"
+            }
+        ]
+    }
+},
+{
+    "880": {
+        "ind1": "1",
+        "ind2": " ",
+        "subfields": [
+            {
+                "6": "100-01"
+            },
+            {
+                "a": "Смагина, С. А,"
+            },
+            {
+                "e": "author."
+            }
+        ]
+    }
+}
+{ contributor: [ 
+    { type: "person", name: [ { value: "Smagina, S. A." } ], role: [ { value: "author" } ] },
+    { type: "person", name: [ { value: "Смагина, С. А" } ], role: [ { value: "author" } ] } 
+] }
+
+// Contributor in multiple scripts
+// 700/880
+// a13355277
+{
+    "700": {
+        "ind1": "1",
+        "ind2": " ",
+        "subfields": [
+            {
+                "6": "880-05"
+            },
+            {
+                "a": "Lukin, Alexander,"
+            },
+            {
+                "e": "editor."
+            },
+            {
+                "0": "http://id.loc.gov/authorities/names/nb99131940"
+            },
+            {
+                "0": "(SIRSI)1666028"
+            }
+        ]
+    }
+},
+{
+    "880": {
+        "ind1": "1",
+        "ind2": " ",
+        "subfields": [
+            {
+                "6": "700-05"
+            },
+            {
+                "a": "Лукин, Александр ,"
+            },
+            {
+                "e": "author."
+            }
+        ]
+    }
+}
+{ contributor: [ 
+    { type: "person", name: [ { value: "Lukin, Alexander" } ], role: [ { value: "editor" } ] },
+    { type: "person", name: [ { value: "Лукин, Александр" } ], role: [ { value: "author" } ] } 
+] }

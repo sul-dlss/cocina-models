@@ -1,0 +1,66 @@
+//// Admin metadata
+// Original cataloging agency
+// 040 $a
+// Date record created
+// 008/00-05
+// Date record last updated
+// 005
+// Record identifier
+// 001
+// Conversion statement
+// generated - insert today's date
+{
+    "001": "in00000144356"
+},
+{
+    "008": "240703c20249999mnuuu         0    0eng d"
+},
+{
+    "005": "20250614160727.3"
+},
+{
+    "040": {
+        "ind1": " ",
+        "ind2": " ",
+        "subfields": [
+            {
+                "a": "UCX"
+            },
+            {
+                "b": "eng"
+            },
+            {
+                "e": "rda"
+            },
+            {
+                "c": "UCX"
+            },
+            {
+                "d": "OCLCO"
+            },
+            {
+                "d": "RCJ"
+            },
+            {
+                "d": "UtOrBLW"
+            }
+        ]
+    }
+}
+ { adminMetadata: {
+  contributor: [ { 
+    type: "organization", 
+    name: [ { code: "UCX", source: { code: "marcorg" } } ]
+  } ],
+  event: [ {
+    type: "creation",
+    date: [ { value: "240703", encoding: { code: "marc" } } ]
+  }, {
+    type: "modification",
+    date: [ { value: "20250614", encoding: { code: "iso8601" } } ]
+  } ],
+  identifier: [ { value: "in00000144356", type: "FOLIO" } ],
+  note: [ { value: "Converted from MARC to Cocina {YYYY-MM-DD}", type: "record origin" } ]
+ } }
+
+
