@@ -36,10 +36,9 @@ module Cocina
           end
 
           # @return [Hash] a hash that can be mapped to a Cocina Description model
-          def build(marc:, purl: nil, require_title: true)
+          def build(marc:, purl: nil)
             cocina_description = {}
-            title_result = title_builder.build(marc: marc, require_title: require_title,
-                                               notifier: notifier)
+            title_result = title_builder.build(marc: marc, notifier: notifier)
             cocina_description[:title] = title_result if title_result.present?
             cocina_description[:purl] = purl
 
