@@ -5,11 +5,10 @@ require 'spec_helper'
 RSpec.describe Cocina::Models::Mapping::FromMarc::Title do
   describe '.build' do
     subject(:build) do
-      described_class.build(marc: marc, require_title: require_title, notifier: notifier)
+      described_class.build(marc:, notifier:)
     end
 
     let(:notifier) { instance_double(Cocina::Models::Mapping::ErrorNotifier) }
-    let(:require_title) { true }
     let(:marc) { MARC::Record.new_from_hash(marc_hash) }
 
     context 'with no title fields' do
