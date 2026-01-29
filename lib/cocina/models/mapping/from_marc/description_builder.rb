@@ -14,11 +14,11 @@ module Cocina
             event: Event,
             # subject: Subject,
             # form: Form,
-            identifier: Identifier
+            identifier: Identifier,
             # adminMetadata: AdminMetadata,
             # relatedResource: RelatedResource,
             # geographic: Geographic,
-            # access: Access
+            access: Access
           }.freeze
 
           # @param [MARC::Record] marc MARC record from FOLIO
