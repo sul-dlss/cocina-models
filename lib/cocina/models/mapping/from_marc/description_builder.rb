@@ -34,18 +34,18 @@ module Cocina
             @notifier = notifier
           end
 
-          # @return [Hash] a hash that can be mapped to a Cocina Description model
-          def build(marc:, purl: nil, require_title: true)
-            cocina_description = { purl: }
-
-            BUILDERS.each do |description_property, builder|
+          # @return [Hash, nil] a hash that can be mapped to a Cocina Description model
+          def build(marc:, purl: nil)
+            BUILDERS.filter_map do |description_property, builder|
               kwargs = { marc: }
-              kwargs.merge!(notifier:, require_title:) if builder.method(:build).parameters.map(&:second).include?(:notifier)
+              has_notifier = builder.method(:build).parameters.map(&:second).include?(:notifier)
+              kwargs.merge!(notifier:) if has_notifier
 
               result = builder.build(**kwargs)
-              cocina_description.merge!(description_property => result) if result.present?
-            end
-            cocina_description
+              break if result.nil? && has_notifier
+
+              { description_property => result } if result.present?
+            end&.reduce({ purl: }, :merge)
           end
 
           private
