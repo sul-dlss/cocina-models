@@ -347,7 +347,6 @@ identifier:
     use: accession number
   - value: accession number
   - value: alternate case number
-  - value: anchor
   - value: Apis ID
     code: apis
   - value: ARK
@@ -430,7 +429,7 @@ identifier:
     code: urn
   - value: videorecording identifier
     code: videorecording-identifier
-  - value: 'West Mat #'
+  - value: "West Mat #"
   - value: Wikidata
     code: wikidata
 note:

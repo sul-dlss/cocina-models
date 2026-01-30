@@ -357,7 +357,6 @@ _Path: identifier.type_
     * Deprecated. Preferred usage: accession number
   * accession number
   * alternate case number
-  * anchor
   * Apis ID
   * ARK
   * arXiv
