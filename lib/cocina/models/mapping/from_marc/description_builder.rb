@@ -40,7 +40,9 @@ module Cocina
             cocina_description = {}
             title_result = title_builder.build(marc: marc, require_title: require_title,
                                                notifier: notifier)
-            cocina_description[:title] = title_result if title_result.present?
+            return unless title_result.present?
+
+            cocina_description[:title] = title_result
             cocina_description[:purl] = purl
 
             BUILDERS.each do |description_property, builder|

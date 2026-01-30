@@ -15,16 +15,14 @@ module Cocina
           end
 
           # @param [MARC::Record] marc MARC record from FOLIO
-          # @param [String] label
           # @param [String] druid
           # @param [TitleBuilder] title_builder - defaults to Title class
           # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
-          def initialize(marc:, label:, druid:, title_builder: nil, notifier: nil)
+          def initialize(marc:, druid:, title_builder: nil, notifier: nil)
             @title_builder = title_builder || Title
             @marc = marc
             @notifier = notifier || ErrorNotifier.new(druid: druid)
             @druid = druid
-            @label = label
           end
 
           # @return [Hash] a hash that can be mapped to a Cocina Description model
@@ -34,14 +32,12 @@ module Cocina
             DescriptionBuilder.build(title_builder: title_builder,
                                      marc: marc,
                                      notifier: notifier,
-                                     purl: druid ? Cocina::Models::Mapping::Purl.for(druid: druid) : nil).tap do |properties|
-              properties[:title] = [{ value: label }] unless properties.key?(:title)
-            end
+                                     purl: druid ? Cocina::Models::Mapping::Purl.for(druid: druid) : nil)
           end
 
           private
 
-          attr_reader :title_builder, :marc, :notifier, :druid, :label
+          attr_reader :title_builder, :marc, :notifier, :druid
         end
       end
     end
