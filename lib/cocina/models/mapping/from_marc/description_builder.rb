@@ -8,7 +8,8 @@ module Cocina
         class DescriptionBuilder
           BUILDERS = {
             # TODO: implement these builders for MARC
-            # note: Note,
+            title: Title,
+            # NOTE: Note,
             language: Language,
             contributor: Contributor,
             event: Event,
@@ -23,28 +24,25 @@ module Cocina
 
           # @param [MARC::Record] marc MARC record from FOLIO
           # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
-          # @param [TitleBuilder] title_builder - defaults to Title class
           # @param [String] purl
           # @return [Hash] a hash that can be mapped to a Cocina Description model
-          def self.build(marc:, notifier:, title_builder: Title, purl: nil)
-            new(title_builder: title_builder, notifier: notifier).build(marc: marc, purl: purl)
+          def self.build(marc:, notifier:, purl: nil)
+            new(notifier: notifier).build(marc: marc, purl: purl)
           end
 
-          def initialize(notifier:, title_builder: Title)
-            @title_builder = title_builder
+          def initialize(notifier:)
             @notifier = notifier
           end
 
           # @return [Hash] a hash that can be mapped to a Cocina Description model
           def build(marc:, purl: nil, require_title: true)
-            cocina_description = {}
-            title_result = title_builder.build(marc: marc, require_title: require_title,
-                                               notifier: notifier)
-            cocina_description[:title] = title_result if title_result.present?
-            cocina_description[:purl] = purl
+            cocina_description = { purl: }
 
             BUILDERS.each do |description_property, builder|
-              result = builder.build(marc: marc)
+              kwargs = { marc: }
+              kwargs.merge!(notifier:, require_title:) if builder.method(:build).parameters.map(&:second).include?(:notifier)
+
+              result = builder.build(**kwargs)
               cocina_description.merge!(description_property => result) if result.present?
             end
             cocina_description
@@ -52,7 +50,7 @@ module Cocina
 
           private
 
-          attr_reader :notifier, :title_builder
+          attr_reader :notifier
         end
       end
     end
