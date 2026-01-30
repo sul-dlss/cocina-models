@@ -9,7 +9,7 @@ module Cocina
           BUILDERS = {
             # TODO: implement these builders for MARC
             # note: Note,
-            language: Language
+            language: Language,
             # contributor: Contributor,
             # event: Event,
             # subject: Subject,
