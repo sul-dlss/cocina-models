@@ -15,7 +15,7 @@ module Cocina
             # subject: Subject,
             # form: Form,
             identifier: Identifier,
-            # adminMetadata: AdminMetadata,
+            adminMetadata: AdminMetadata,
             # relatedResource: RelatedResource,
             # geographic: Geographic,
             access: Access

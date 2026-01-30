@@ -22,7 +22,10 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Description do
     it 'returns the descriptive metadata including title and purl' do
       expect(descriptive).to eq({
                                   title: [{ value: 'Gaudy night' }],
-                                  purl: 'https://purl.stanford.edu/bb196dd3409'
+                                  purl: 'https://purl.stanford.edu/bb196dd3409',
+                                  adminMetadata: {
+                                    note: [{ value: "Converted from MARC to Cocina #{Date.today.iso8601}", type: 'record origin' }]
+                                  }
                                 })
     end
   end
@@ -45,7 +48,10 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Description do
       expect(notifier).to have_received(:error).with('Missing title')
       expect(descriptive).to eq({
                                   title: [{ value: 'test label' }],
-                                  purl: 'https://purl.stanford.edu/bb196dd3409'
+                                  purl: 'https://purl.stanford.edu/bb196dd3409',
+                                  adminMetadata: {
+                                    note: [{ value: "Converted from MARC to Cocina #{Date.today.iso8601}", type: 'record origin' }]
+                                  }
                                 })
     end
   end
