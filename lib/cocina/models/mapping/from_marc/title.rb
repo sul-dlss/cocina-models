@@ -86,7 +86,7 @@ module Cocina
 
           def uniform_title
             [{
-              value: strip_punctuation(uniform_title_field.select { |subfield| %w[a d f g k l m n o p r s t].include? subfield.code }.map(&:value).join(' ')),
+              value: Util.strip_punctuation(uniform_title_field.select { |subfield| %w[a d f g k l m n o p r s t].include? subfield.code }.map(&:value).join(' ')),
               type: 'uniform'
             }]
           end
@@ -101,7 +101,7 @@ module Cocina
 
           def basic_title
             title = field245.subfields.find { |subfield| subfield.code == 'a' }
-            title_value = strip_punctuation(title.value)
+            title_value = Util.strip_punctuation(title.value)
             [{ value: title_value }]
           end
 
@@ -110,9 +110,9 @@ module Cocina
 
             title = field.subfields.find { |subfield| subfield.code == 'a' }
             nonsort_count = field.indicator2.to_i
-            non_sort = { value: strip_punctuation(title.value[0..(nonsort_count - 1)]), type: 'nonsorting characters' } unless nonsort_count.zero?
-            sortable = { value: strip_punctuation(title.value[nonsort_count..]), type: 'main title' }
-            subtitle = strip_punctuation(field.select { |subfield| %w[b f g k n p s].include? subfield.code }.map(&:value).join(' '))
+            non_sort = { value: Util.strip_punctuation(title.value[0..(nonsort_count - 1)]), type: 'nonsorting characters' } unless nonsort_count.zero?
+            sortable = { value: Util.strip_punctuation(title.value[nonsort_count..]), type: 'main title' }
+            subtitle = Util.strip_punctuation(field.select { |subfield| %w[b f g k n p s].include? subfield.code }.map(&:value).join(' '))
             subtitle_node = { value: subtitle, type: 'subtitle' } if subtitle.present?
             [{ structuredValue: [non_sort, sortable, subtitle_node].compact }]
           end
@@ -122,14 +122,7 @@ module Cocina
           end
 
           def value_for(field, subfields)
-            strip_punctuation(field.select { |subfield| subfields.include? subfield.code }.map(&:value).join(' '))
-          end
-
-          def strip_punctuation(value)
-            # Remove set of punctuation characters at the end of the subfield
-            escaped_chars = Regexp.escape(':;/[, ')
-            regex = /[#{escaped_chars}]+\z/
-            value.gsub(regex, '')
+            Util.strip_punctuation(field.select { |subfield| subfields.include? subfield.code }.map(&:value).join(' '))
           end
 
           attr_reader :marc, :notifier
