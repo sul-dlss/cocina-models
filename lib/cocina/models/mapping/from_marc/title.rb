@@ -7,11 +7,10 @@ module Cocina
         # Maps titles from MARC to cocina
         class Title
           # @param [MARC::Record] marc MARC record from FOLIO
-          # @param [boolean] require_title notify if true and title is missing.
           # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
           # @return [Hash] a hash that can be mapped to a cocina model
-          def self.build(marc:, notifier:, require_title: true)
-            new(marc: marc, notifier: notifier).build_with_validation(require_title: require_title)
+          def self.build(marc:, notifier:)
+            new(marc:, notifier:).build_with_validation
           end
 
           def initialize(marc:, notifier:)
@@ -19,9 +18,9 @@ module Cocina
             @notifier = notifier
           end
 
-          def build_with_validation(require_title: true)
+          def build_with_validation
             result = build
-            notifier.error('Missing title') if result.nil? && require_title
+            notifier.error('Missing title') if result.nil?
 
             result
           end
