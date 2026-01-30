@@ -14,7 +14,7 @@ module Cocina
             # event: Event,
             # subject: Subject,
             # form: Form,
-            # identifier: Identifier,
+            identifier: Identifier
             # adminMetadata: AdminMetadata,
             # relatedResource: RelatedResource,
             # geographic: Geographic,
