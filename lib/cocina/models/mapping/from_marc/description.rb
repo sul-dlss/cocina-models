@@ -17,10 +17,8 @@ module Cocina
           # @param [MARC::Record] marc MARC record from FOLIO
           # @param [String] label
           # @param [String] druid
-          # @param [TitleBuilder] title_builder - defaults to Title class
           # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
-          def initialize(marc:, label:, druid:, title_builder: nil, notifier: nil)
-            @title_builder = title_builder || Title
+          def initialize(marc:, label:, druid:, notifier: nil)
             @marc = marc
             @notifier = notifier || ErrorNotifier.new(druid: druid)
             @druid = druid
@@ -31,8 +29,7 @@ module Cocina
           def props
             return nil if marc.nil?
 
-            DescriptionBuilder.build(title_builder: title_builder,
-                                     marc: marc,
+            DescriptionBuilder.build(marc: marc,
                                      notifier: notifier,
                                      purl: druid ? Cocina::Models::Mapping::Purl.for(druid: druid) : nil).tap do |properties|
               properties[:title] = [{ value: label }] unless properties.key?(:title)
