@@ -17,7 +17,7 @@ module Cocina
             identifier: Identifier,
             adminMetadata: AdminMetadata,
             # relatedResource: RelatedResource,
-            # geographic: Geographic,
+            geographic: Geographic,
             access: Access
           }.freeze
 
