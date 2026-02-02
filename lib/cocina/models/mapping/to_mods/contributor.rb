@@ -30,12 +30,12 @@ module Cocina
           def write
             Array(contributors)
               .reject do |contributor|
-                NameTitleGroup.in_name_title_group?(contributor: contributor,
-                                                    titles: titles)
+              NameTitleGroup.in_name_title_group?(contributor: contributor,
+                                                  titles: titles)
             end
               .each do |contributor|
-                NameWriter.write(xml: xml, contributor: contributor,
-                                 id_generator: id_generator)
+              NameWriter.write(xml: xml, contributor: contributor,
+                               id_generator: id_generator)
             end
           end
 
