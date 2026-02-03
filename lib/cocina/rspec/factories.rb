@@ -84,7 +84,7 @@ module Cocina
         build_request_dro_properties(**)
           .merge(externalIdentifier: id)
           .tap do |props|
-          props[:description][:purl] = "https://purl.stanford.edu/#{id.delete_prefix('druid:')}"
+            props[:description][:purl] = "https://purl.stanford.edu/#{id.delete_prefix('druid:')}"
         end
       end
 
@@ -138,7 +138,7 @@ module Cocina
         build_request_collection_properties(**)
           .merge(externalIdentifier: id)
           .tap do |props|
-          props[:description][:purl] = "https://purl.stanford.edu/#{id.delete_prefix('druid:')}"
+            props[:description][:purl] = "https://purl.stanford.edu/#{id.delete_prefix('druid:')}"
         end
       end
 
@@ -198,7 +198,7 @@ module Cocina
         build_request_admin_policy_properties(**)
           .merge(externalIdentifier: id)
           .tap do |props|
-          props[:description][:purl] = "https://purl.stanford.edu/#{id.delete_prefix('druid:')}"
+            props[:description][:purl] = "https://purl.stanford.edu/#{id.delete_prefix('druid:')}"
         end
       end
 
