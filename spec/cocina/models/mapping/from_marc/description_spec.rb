@@ -4,7 +4,7 @@ require 'spec_helper'
 
 RSpec.describe Cocina::Models::Mapping::FromMarc::Description do
   subject(:descriptive) do
-    described_class.props(marc:, druid: 'druid:bb196dd3409', notifier: notifier, label: 'test label')
+    described_class.props(marc:, druid: 'druid:bb196dd3409', notifier: notifier)
   end
 
   let(:notifier) { instance_double(Cocina::Models::Mapping::ErrorNotifier) }
@@ -46,13 +46,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Description do
       descriptive
       expect(notifier).to have_received(:warn).with('No title fields found')
       expect(notifier).to have_received(:error).with('Missing title')
-      expect(descriptive).to eq({
-                                  title: [{ value: 'test label' }],
-                                  purl: 'https://purl.stanford.edu/bb196dd3409',
-                                  adminMetadata: {
-                                    note: [{ value: "Converted from MARC to Cocina #{Date.today.iso8601}", type: 'record origin' }]
-                                  }
-                                })
+      expect(descriptive).to be_nil
     end
   end
 
