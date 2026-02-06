@@ -14,7 +14,7 @@ module Cocina
             contributor: Contributor,
             event: Event,
             # subject: Subject,
-            # form: Form,
+            form: Form,
             identifier: Identifier,
             adminMetadata: AdminMetadata,
             # relatedResource: RelatedResource,
