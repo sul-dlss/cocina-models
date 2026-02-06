@@ -779,7 +779,8 @@ components:
             uri:
               description: URI value of the descriptive element.
               type: string
-              format: uri
+              # format is disabled because Committee doesn't do anything with it.
+              # format: uri
             standard:
               # description: Descriptive or content standard to which the value conforms.
               $ref: "#/components/schemas/Standard"
@@ -1282,7 +1283,8 @@ components:
         uri:
           description: URI value of the descriptive element.
           type: string
-          format: uri
+          # Format is disabled because committee doesn't do anything with it.
+          # format: uri
         value:
           description: Value of the descriptive element.
           type: string
@@ -1467,7 +1469,8 @@ components:
     Purl:
       description: Stanford persistent URL associated with the related resource.
       type: string
-      format: uri
+      # Format is disabled because committee doesn't do anything with it.
+      # format: uri
       # Canonical URI is https
       pattern: '^https:\/\/'
     RelatedResource:
@@ -1955,7 +1958,8 @@ components:
         uri:
           description: URI for the value source.
           type: string
-          format: uri
+          # format is disabled because Committee doesn't do anything with it.
+          # format: uri
         value:
           description: String describing the value source.
           type: string
@@ -1991,7 +1995,8 @@ components:
         uri:
           description: URI for the standard or encoding.
           type: string
-          format: uri
+          # format is disabled because Committee doesn't do anything with it.
+          # format: uri
         value:
           description: String describing the standard or encoding.
           type: string
