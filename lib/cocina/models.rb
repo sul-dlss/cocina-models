@@ -47,7 +47,7 @@ loader.setup
 module OpenAPIParser
   module Schemas
     # Patch OpenAPIParser::Schemas::Schema so it can tell us its name, the way Openapi3Parser schemas do.
-    class Schema
+    class Schema < Base
       def name
         object_reference.split('/').last
       end

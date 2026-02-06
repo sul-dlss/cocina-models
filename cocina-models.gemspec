@@ -34,9 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'jsonpath' # used for date/time validation
   spec.add_dependency 'marc', '~> 1.3'
   spec.add_dependency 'nokogiri'
-  # Match these version requirements to what committee wants,
-  # so that our client (non-committee) users have the same dependencies.
-  spec.add_dependency 'openapi_parser', '~> 1.0'
+  spec.add_dependency 'openapi_parser', '~> 2.0'
   spec.add_dependency 'super_diff'
   spec.add_dependency 'thor'
   spec.add_dependency 'zeitwerk', '~> 2.1'
