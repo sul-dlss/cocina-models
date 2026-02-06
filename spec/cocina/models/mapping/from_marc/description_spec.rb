@@ -23,6 +23,12 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Description do
       expect(descriptive).to eq({
                                   title: [{ value: 'Gaudy night' }],
                                   purl: 'https://purl.stanford.edu/bb196dd3409',
+                                  note: [
+                                    {
+                                      value: 'by Dorothy L. Sayers',
+                                      type: 'statement of responsibility'
+                                    }
+                                  ],
                                   adminMetadata: {
                                     note: [{ value: "Converted from MARC to Cocina #{Date.today.iso8601}", type: 'record origin' }]
                                   }
