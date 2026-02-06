@@ -193,7 +193,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 2.0)
+  bundler (>= 2.0, < 5)
   cocina-models!
   committee
   debug
