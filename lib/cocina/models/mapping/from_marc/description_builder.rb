@@ -17,7 +17,7 @@ module Cocina
             form: Form,
             identifier: Identifier,
             adminMetadata: AdminMetadata,
-            # relatedResource: RelatedResource,
+            relatedResource: RelatedResource,
             geographic: Geographic,
             access: Access
           }.freeze
