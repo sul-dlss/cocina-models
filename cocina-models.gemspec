@@ -32,17 +32,14 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'equivalent-xml' # for diffing MODS
   spec.add_dependency 'i18n' # for validating BCP 47 language tags, according to RFC 4646
   spec.add_dependency 'jsonpath' # used for date/time validation
+  spec.add_dependency 'json_schemer', '~> 2.0'
   spec.add_dependency 'marc', '~> 1.3'
   spec.add_dependency 'nokogiri'
-  # Match these version requirements to what committee wants,
-  # so that our client (non-committee) users have the same dependencies.
-  spec.add_dependency 'openapi_parser', '~> 1.0'
   spec.add_dependency 'super_diff'
   spec.add_dependency 'thor'
   spec.add_dependency 'zeitwerk', '~> 2.1'
 
   spec.add_development_dependency 'bundler', '>= 2.0', '< 5'
-  spec.add_development_dependency 'committee'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'rubocop', '~> 1.24'

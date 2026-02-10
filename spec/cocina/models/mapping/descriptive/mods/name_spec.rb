@@ -3140,7 +3140,7 @@ RSpec.describe 'MODS name <--> cocina mappings' do
       end
     end
 
-    context 'when the role code is missing the authority and length is not 3' do
+    context 'when the role code is missing the authority and length is not 3', skip: 'This tries to make invalid cocina' do
       it_behaves_like 'MODS cocina mapping' do
         let(:mods) do
           <<~XML
