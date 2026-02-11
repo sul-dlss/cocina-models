@@ -6,6 +6,8 @@ module Cocina
       module FromMarc
         # Maps language information from MARC records to Cocina models.
         class Language
+          VALID_CODES = YAML.load_file(::File.join(__dir__, 'marc_languages.yml')).fetch('marc_languages')
+
           # @see #initialize
           # @see #build
           def self.build(...)
@@ -20,12 +22,17 @@ module Cocina
           # 008/35-37, 041 $a, $b, $d, $e, $f, $g, $h, $j
           # @return [Array<Hash>] an array of language hashes
           def build
-            languages = (lang_from008 + lang_from041).compact.uniq
-
-            languages.map { |code| { code: code } }
+            (lang_from008 + lang_from041).uniq.compact
+              .filter_map { |code| { code: code } if valid_language_code(code) }
           end
 
           private
+
+          # @param [String] code language code
+          # @return [String] the code passed in, if found in the list of valid codes
+          def valid_language_code(code)
+            code if VALID_CODES.include?(code)
+          end
 
           def lang_from041
             return [] unless marc['041']
