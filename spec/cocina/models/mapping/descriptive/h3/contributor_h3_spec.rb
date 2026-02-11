@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Cocina --> MODS contributor mappings (H2 specific)' do
+RSpec.describe 'Cocina --> MODS contributor mappings (H3 specific)' do
   # Full role mapping: https://docs.google.com/spreadsheets/d/1CvEd_NODprNhM2D9VfvJBFs1jfAMEUr0kDxXHe2HkL4/edit?usp=sharing
   # First entry in "Authors to include in citation" receives "status": "primary", which maps to "usage=primary" in MODS.
 

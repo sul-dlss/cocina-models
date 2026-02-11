@@ -314,9 +314,9 @@ form:
   - value: type
 form.structuredValue:
   - value: type
-    description: Used for H2 deposits.
+    description: Used for H3 deposits.
   - value: subtype
-    description: Used for H2 deposits.
+    description: Used for H3 deposits.
 geographic.form:
   - value: data format
   - value: media type
