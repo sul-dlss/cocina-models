@@ -13,12 +13,16 @@ module Cocina
             value.gsub(regex, '')
           end
 
+          # Parse a MARC 880$6
+          # See https://www.loc.gov/marc/bibliographic/ecbdcntf.html
           def self.linked_field(marc, field)
             pointer = field.subfields.find { |subfield| subfield.code == '6' }
             return unless pointer
 
-            field_id, index = pointer.value.split('-')
-            marc.fields(field_id)[index.to_i - 1]
+            # Subfield $6 is formatted thusly:
+            #  $6 [linking tag]-[occurrence number]/[script identification code]/[field orientation code]
+            linking_tag, occurrence_number = pointer.value.split(%r{-|/})
+            marc.fields(linking_tag)[occurrence_number.to_i - 1]
           end
         end
       end
