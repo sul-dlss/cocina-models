@@ -5,7 +5,7 @@ module Cocina
     module Mapping
       module FromMarc
         # Maps form information from MARC records to Cocina models.
-        class Form
+        class Form # rubocop:disable Metrics/ClassLength
           # @see #initialize
           # @see #build
           def self.build(...)
@@ -27,6 +27,7 @@ module Cocina
               build_genre_form(marc['655']),
               build_cartographic(marc['255']),
               marc.fields.select { it.tag == '336' }.map { build_content_type(it) },
+              build_resource_types,
               build_dataset_genre
 
             ].flatten.compact
@@ -122,9 +123,160 @@ module Cocina
           end
 
           def build_dataset_genre
-            return unless marc['008'] && marc['008'].value[26] && marc.leader[6] == 'm'
+            return unless marc['008'] && marc['008'].value[26] == 'a' && marc.leader[6] == 'm'
 
-            { value: 'dataset', type: 'genre' }
+            { value: 'dataset', type: 'genre', source: { code: 'local' } }
+          end
+
+          def build_resource_types # rubocop:disable Metrics/CyclomaticComplexity,Metrics/MethodLength
+            return unless marc.leader
+
+            leader06 = marc.leader[6]
+            leader07 = marc.leader[7]
+
+            return build_collection_resource_type if leader07 == 'c'
+
+            case leader06
+            when 'a'
+              build_text_resource_type
+            when 'c'
+              build_notated_music_resource_type
+            when 'd'
+              build_manuscript_notated_music_resource_type
+            when 'e'
+              build_cartographic_resource_type
+            when 'f'
+              build_manuscript_cartographic_resource_type
+            when 'g'
+              build_moving_image_resource_type
+            when 'i'
+              build_sound_nonmusical_resource_type
+            when 'j'
+              build_sound_musical_resource_type
+            when 'k'
+              build_still_image_resource_type
+            when 'm'
+              build_software_multimedia_resource_type
+            when 'p'
+              build_manuscript_mixed_material_resource_type
+            when 'r'
+              build_three_dimensional_object_resource_type
+            when 't'
+              build_manuscript_text_resource_type
+            end
+          end
+
+          def build_collection_resource_type
+            [
+              { value: 'collection', type: 'resource type', source: { value: 'MODS resource types' } },
+              { value: 'Collection', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+            ]
+          end
+
+          def build_text_resource_type
+            [
+              { value: 'text', type: 'resource type', source: { value: 'MODS resource types' } },
+              { value: 'Text', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+            ]
+          end
+
+          def build_notated_music_resource_type
+            [
+              { value: 'notated music', type: 'resource type', source: { value: 'MODS resource types' } },
+              { value: 'Notated music', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+            ]
+          end
+
+          def build_manuscript_notated_music_resource_type
+            [
+              { value: 'manuscript', type: 'resource type', source: { value: 'MODS resource types' } },
+              { value: 'notated music', type: 'resource type', source: { value: 'MODS resource types' } },
+              { value: 'Manuscript', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
+              { value: 'Notated music', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+            ]
+          end
+
+          def build_cartographic_resource_type
+            [
+              { value: 'cartographic', type: 'resource type', source: { value: 'MODS resource types' } },
+              { value: 'Cartographic', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+            ]
+          end
+
+          def build_manuscript_cartographic_resource_type
+            [
+              { value: 'manuscript', type: 'resource type', source: { value: 'MODS resource types' } },
+              { value: 'cartographic', type: 'resource type', source: { value: 'MODS resource types' } },
+              { value: 'Manuscript', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
+              { value: 'Cartographic', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+            ]
+          end
+
+          def build_moving_image_resource_type
+            [
+              { value: 'moving image', type: 'resource type', source: { value: 'MODS resource types' } },
+              { value: 'Moving image', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+            ]
+          end
+
+          def build_sound_nonmusical_resource_type
+            [
+              { value: 'sound recording-nonmusical', type: 'resource type', source: { value: 'MODS resource types' } },
+              { value: 'Audio', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+            ]
+          end
+
+          def build_sound_musical_resource_type
+            [
+              { value: 'sound recording-musical', type: 'resource type', source: { value: 'MODS resource types' } },
+              { value: 'Audio', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+            ]
+          end
+
+          def build_still_image_resource_type
+            [
+              { value: 'still image', type: 'resource type', source: { value: 'MODS resource types' } },
+              { value: 'Still image', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+            ]
+          end
+
+          def build_software_multimedia_resource_type
+            base = [
+              { value: 'software, multimedia', type: 'resource type', source: { value: 'MODS resource types' } }
+            ]
+
+            base << if marc['008'] && marc['008'].value[26] == 'a'
+                      { value: 'Dataset', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+                    else
+                      { value: 'Digital', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+                    end
+
+            base
+          end
+
+          def build_manuscript_mixed_material_resource_type
+            [
+              { value: 'manuscript', type: 'resource type', source: { value: 'MODS resource types' } },
+              { value: 'mixed material', type: 'resource type', source: { value: 'MODS resource types' } },
+              { value: 'Manuscript', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
+              { value: 'Mixed material', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+            ]
+          end
+
+          def build_three_dimensional_object_resource_type
+            [
+              { value: 'three dimensional object', type: 'resource type', source: { value: 'MODS resource types' } },
+              { value: 'Artifact', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+            ]
+          end
+
+          def build_manuscript_text_resource_type
+            [
+              { value: 'manuscript', type: 'resource type', source: { value: 'MODS resource types' } },
+              { value: 'text', type: 'resource type', source: { value: 'MODS resource types' } },
+              { value: 'Manuscript', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
+              { value: 'Text', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+            ]
           end
 
           attr_reader :marc
