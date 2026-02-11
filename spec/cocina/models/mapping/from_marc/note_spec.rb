@@ -1132,7 +1132,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Note do
       end
     end
 
-    context 'with original version (534$3abcefklmnoptxz3)' do
+    context 'with original version (534$abcefklmnoptxz3)' do
       # LC example
       let(:marc_hash) do
         {
