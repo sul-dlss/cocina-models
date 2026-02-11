@@ -65,61 +65,170 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
     end
 
     context 'with Organization primary (110)' do
-      let(:marc_hash) do
-        {
-          'fields' => [
-            '110' => {
-              'ind1' => '1',
-              'ind2' => ' ',
-              'subfields' => [
-                {
-                  'a' => 'Ghana.'
-                },
-                {
-                  '0' => '(SIRSI)168717'
-                }
-              ]
-            }
-          ]
-        }
+      context 'with one script' do
+        let(:marc_hash) do
+          {
+            'fields' => [
+              '110' => {
+                'ind1' => '1',
+                'ind2' => ' ',
+                'subfields' => [
+                  {
+                    'a' => 'Ghana.'
+                  },
+                  {
+                    '0' => '(SIRSI)168717'
+                  }
+                ]
+              }
+            ]
+          }
+        end
+
+        it 'returns organization primary contributor' do
+          expect(build).to eq [{ type: 'organization', status: 'primary', name: [{ value: 'Ghana.' }] }]
+        end
       end
 
-      it 'returns organization primary contributor' do
-        expect(build).to eq [{ type: 'organization', status: 'primary', name: [{ value: 'Ghana.' }] }]
+      context 'with multiple scripts (110/880)' do
+        # See a3940765
+        let(:marc_hash) do
+          {
+            'fields' => [
+              '110' => {
+                'ind1' => '1',
+                'ind2' => ' ',
+                'subfields' => [
+                  {
+                    '6' => '880-01'
+                  },
+                  {
+                    'a' => 'United Arab Republic.'
+                  },
+                  {
+                    'b' => 'Idārat al-Taʻbiʼah al-ʻĀmmah.'
+                  },
+                  {
+                    '0' => 'http://id.loc.gov/authorities/names/n50078747'
+                  }
+                ]
+              },
+              '880' => {
+                'ind1' => '1',
+                'ind2' => ' ',
+                'subfields' => [
+                  {
+                    '6': '110-01//r'
+                  },
+                  {
+                    'a' => 'ادارة التعبئة العامة.'
+                  }
+                ]
+              }
+            ]
+          }
+        end
+
+        it 'returns organization primary contributor' do
+          expect(build).to eq [
+            { type: 'organization', status: 'primary', name: [{ value: 'United Arab Republic. Idārat al-Taʻbiʼah al-ʻĀmmah.' }] },
+            { type: 'organization', name: [{ value: 'ادارة التعبئة العامة.' }] }
+          ]
+        end
       end
     end
 
-    context 'with Event primary (111)' do
-      let(:marc_hash) do
-        {
-          'fields' => [
-            '111' => {
-              'ind1' => '2',
-              'ind2' => ' ',
-              'subfields' => [
-                {
-                  'a' => 'SIGGRAPH (Conference)'
-                },
-                {
-                  'n' => '(29th :'
-                },
-                {
-                  'd' => '2002 :'
-                },
-                {
-                  'c' => 'San Antonio, Tex.)'
-                },
-                {
-                  '0' => '(SIRSI)566144'
-                }
-              ]
-            }
-          ]
-        }
+    context 'with meeting primary (111)' do
+      context 'with one script' do
+        let(:marc_hash) do
+          {
+            'fields' => [
+              '111' => {
+                'ind1' => '2',
+                'ind2' => ' ',
+                'subfields' => [
+                  {
+                    'a' => 'SIGGRAPH (Conference)'
+                  },
+                  {
+                    'n' => '(29th :'
+                  },
+                  {
+                    'd' => '2002 :'
+                  },
+                  {
+                    'c' => 'San Antonio, Tex.)'
+                  },
+                  {
+                    '0' => '(SIRSI)566144'
+                  }
+                ]
+              }
+            ]
+          }
+        end
+
+        it 'returns event primary contributor' do
+          expect(build).to eq [{ type: 'event', status: 'primary', name: [{ value: 'SIGGRAPH (Conference) (29th : 2002 : San Antonio, Tex.)' }] }]
+        end
       end
 
-      it 'returns event primary contributor' do
-        expect(build).to eq [{ type: 'event', status: 'primary', name: [{ value: 'SIGGRAPH (Conference) (29th : 2002 : San Antonio, Tex.)' }] }]
+      context 'with multiple scripts (111/880)' do
+        let(:marc_hash) do
+          {
+            'fields' => [
+              '111' => {
+                'ind1' => '2',
+                'ind2' => ' ',
+                'subfields' => [
+                  {
+                    '6' => '880-1'
+                  },
+                  {
+                    'a' => 'Miz͡hnarodna naukovo-praktychna konferent͡sii͡a "Konstantynopolʹsʹkyĭ patriarkhat v istoriï Ukraïny : mynule, suchasne, maĭbutni͡e"'
+                  },
+                  {
+                    'd' => '(2016 :'
+                  },
+                  {
+                    'c' => 'Kyïv (Ukraine),'
+                  },
+                  {
+                    'j' => 'author.'
+                  }
+                ]
+              },
+              '880' => {
+                'ind1' => '2',
+                'ind2' => ' ',
+                'subfields' => [
+                  {
+                    '6' => '111-01'
+                  },
+                  {
+                    'a' => 'Міжнародна науково-практична конференція "Константинопольський патріархат в історії України : минуле, сучасне, майбутнє"'
+                  },
+                  {
+                    'd' => '(2016 :'
+                  },
+                  {
+                    'c' => 'Київ (Украіне)),'
+                  },
+                  {
+                    'j' => 'author.'
+                  }
+                ]
+              }
+            ]
+          }
+        end
+
+        it 'returns event primary contributor' do
+          expect(build).to eq [
+            { type: 'event', status: 'primary', name: [{ value: 'Miz͡hnarodna naukovo-praktychna konferent͡sii͡a "Konstantynopolʹsʹkyĭ patriarkhat v istoriï Ukraïny : mynule, suchasne, maĭbutni͡e" (2016 : Kyïv (Ukraine)' }], role: [{ value: 'author' }] },
+            { type: 'event', name: [{ value: 'Міжнародна науково-практична конференція "Константинопольський патріархат в історії України : минуле, сучасне, майбутнє" (2016 : Київ (Украіне))' }], role: [{ value: 'author' }] }
+          ]
+        end
       end
     end
 
@@ -171,55 +280,163 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
     end
 
     context 'with Organization contributor (710)' do
-      let(:marc_hash) do
-        {
-          'fields' => [
-            '710' => {
-              'ind1' => '1',
-              'ind2' => ' ',
-              'subfields' => [
-                {
-                  'a' => 'Ghana'
-                },
-                {
-                  'b' => 'Ministry of Tourism (2009-2013)'
-                },
-                {
-                  '0' => '(SIRSI)168717'
-                }
-              ]
-            }
-          ]
-        }
+      context 'with one script' do
+        let(:marc_hash) do
+          {
+            'fields' => [
+              '710' => {
+                'ind1' => '1',
+                'ind2' => ' ',
+                'subfields' => [
+                  {
+                    'a' => 'Ghana'
+                  },
+                  {
+                    'b' => 'Ministry of Tourism (2009-2013)'
+                  },
+                  {
+                    '0' => '(SIRSI)168717'
+                  }
+                ]
+              }
+            ]
+          }
+        end
+
+        it 'returns organization contributor' do
+          expect(build).to eq [{ type: 'organization', name: [{ value: 'Ghana Ministry of Tourism (2009-2013)' }] }]
+        end
       end
 
-      it 'returns organization contributor' do
-        expect(build).to eq [{ type: 'organization', name: [{ value: 'Ghana Ministry of Tourism (2009-2013)' }] }]
+      context 'with multiple scripts (710/880)' do
+        let(:marc_hash) do
+          {
+            'fields' => [
+              '710' => {
+                'ind1' => '1',
+                'ind2' => ' ',
+                'subfields' => [
+                  {
+                    '6' => '880-01'
+                  },
+                  {
+                    'a' => 'United Arab Republic.'
+                  },
+                  {
+                    'b' => 'Idārat al-Taʻbiʼah al-ʻĀmmah.'
+                  },
+                  {
+                    '0' => 'http://id.loc.gov/authorities/names/n50078747'
+                  }
+                ]
+              },
+              '880' => {
+                'ind1' => '1',
+                'ind2' => ' ',
+                'subfields' => [
+                  {
+                    '6' => '700-05//r'
+                  },
+                  {
+                    'a' => 'ادارة التعبئة العامة.'
+                  }
+                ]
+              }
+            ]
+          }
+        end
+
+        it 'returns separate contributors for each script with different roles' do
+          expect(build).to eq [
+            { type: 'organization', name: [{ value: 'United Arab Republic. Idārat al-Taʻbiʼah al-ʻĀmmah.' }] },
+            { type: 'organization', name: [{ value: 'ادارة التعبئة العامة.' }] }
+          ]
+        end
       end
     end
 
-    context 'with Event contributor (711)' do
-      let(:marc_hash) do
-        {
-          'fields' => [
-            '711' => {
-              'ind1' => '2',
-              'ind2' => ' ',
-              'subfields' => [
-                {
-                  'a' => 'Simulation Solutions Conference.'
-                },
-                {
-                  '0' => 'http://id.loc.gov/authorities/names/no2005090352'
-                }
-              ]
-            }
-          ]
-        }
+    context 'with meeting contributor (711)' do
+      context 'with one script' do
+        let(:marc_hash) do
+          {
+            'fields' => [
+              '711' => {
+                'ind1' => '2',
+                'ind2' => ' ',
+                'subfields' => [
+                  {
+                    'a' => 'Simulation Solutions Conference.'
+                  },
+                  {
+                    '0' => 'http://id.loc.gov/authorities/names/no2005090352'
+                  }
+                ]
+              }
+            ]
+          }
+        end
+
+        it 'returns event contributor' do
+          expect(build).to eq [{ type: 'event', name: [{ value: 'Simulation Solutions Conference.' }] }]
+        end
       end
 
-      it 'returns event contributor' do
-        expect(build).to eq [{ type: 'event', name: [{ value: 'Simulation Solutions Conference.' }] }]
+      context 'with multiple scripts (711/880)' do
+        let(:marc_hash) do
+          {
+            'fields' => [
+              '711' => {
+                'ind1' => '2',
+                'ind2' => ' ',
+                'subfields' => [
+                  {
+                    '6' => '880-1'
+                  },
+                  {
+                    'a' => 'Miz͡hnarodna naukovo-praktychna konferent͡sii͡a "Konstantynopolʹsʹkyĭ patriarkhat v istoriï Ukraïny : mynule, suchasne, maĭbutni͡e"'
+                  },
+                  {
+                    'd' => '(2016 :'
+                  },
+                  {
+                    'c' => 'Kyïv (Ukraine),'
+                  },
+                  {
+                    'j' => 'author.'
+                  }
+                ]
+              },
+              '880' => {
+                'ind1' => '2',
+                'ind2' => ' ',
+                'subfields' => [
+                  {
+                    '6' => '111-01'
+                  },
+                  {
+                    'a' => 'Міжнародна науково-практична конференція "Константинопольський патріархат в історії України : минуле, сучасне, майбутнє"'
+                  },
+                  {
+                    'd' => '(2016 :'
+                  },
+                  {
+                    'c' => 'Київ (Украіне)),'
+                  },
+                  {
+                    'j' => 'author.'
+                  }
+                ]
+              }
+            ]
+          }
+        end
+
+        it 'returns event contributor' do
+          expect(build).to eq [
+            { type: 'event', name: [{ value: 'Miz͡hnarodna naukovo-praktychna konferent͡sii͡a "Konstantynopolʹsʹkyĭ patriarkhat v istoriï Ukraïny : mynule, suchasne, maĭbutni͡e" (2016 : Kyïv (Ukraine)' }], role: [{ value: 'author' }] },
+            { type: 'event', name: [{ value: 'Міжнародна науково-практична конференція "Константинопольський патріархат в історії України : минуле, сучасне, майбутнє" (2016 : Київ (Украіне))' }], role: [{ value: 'author' }] }
+          ]
+        end
       end
     end
 
