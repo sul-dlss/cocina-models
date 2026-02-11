@@ -12,35 +12,102 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
     let(:marc) { MARC::Record.new_from_hash(marc_hash) }
 
     context 'with a publication event' do
-      let(:marc_hash) do
-        {
-          'fields' => [
-            '260' => {
-              'ind1' => ' ',
-              'ind2' => ' ',
-              'subfields' => [
-                {
-                  'a' => 'Basingstoke :'
-                },
-                {
-                  'b' => 'Macmillan,'
-                },
-                {
-                  'c' => '1997.'
-                }
-              ]
-            }
-          ]
-        }
+      context 'with a single script' do
+        let(:marc_hash) do
+          {
+            'fields' => [
+              '260' => {
+                'ind1' => ' ',
+                'ind2' => ' ',
+                'subfields' => [
+                  {
+                    'a' => 'Basingstoke :'
+                  },
+                  {
+                    'b' => 'Macmillan,'
+                  },
+                  {
+                    'c' => '1997.'
+                  }
+                ]
+              }
+            ]
+          }
+        end
+
+        it 'returns publication event' do
+          expect(build).to eq [{
+            type: 'publication',
+            place: [{ value: 'Basingstoke' }],
+            contributor: [{ name: [{ value: 'Macmillan' }], role: [{ value: 'publisher' }] }],
+            date: [{ value: '1997', type: 'publication' }]
+          }]
+        end
       end
 
-      it 'returns publication event' do
-        expect(build).to eq [{
-          type: 'publication',
-          place: [{ value: 'Basingstoke' }],
-          contributor: [{ name: [{ value: 'Macmillan' }], role: [{ value: 'publisher' }] }],
-          date: [{ value: '1997', type: 'publication' }]
-        }]
+      context 'with multiple scripts' do
+        let(:marc_hash) do
+          {
+            'fields' => [
+              '260' => {
+                'ind1' => ' ',
+                'ind2' => ' ',
+                'subfields' => [
+                  {
+                    '6' => '880-01'
+                  },
+                  {
+                    'a' => 'New York ;'
+                  },
+                  {
+                    'a' => 'Geneva :'
+                  },
+                  {
+                    'b' => 'United Nations,'
+                  },
+                  {
+                    'c' => '©2012.'
+                  }
+                ]
+              },
+              '880' => {
+                'ind1' => ' ',
+                'ind2' => ' ',
+                'subfields' => [
+                  {
+                    '6' => '260-04'
+                  },
+                  {
+                    'a' => 'Нью-Йорк ;'
+                  },
+                  {
+                    'a' => 'Женева :'
+                  },
+                  {
+                    'b' => 'Организация Объединенных Наций,'
+                  },
+                  {
+                    'c' => '2012.'
+                  }
+                ]
+              }
+            ]
+          }
+        end
+
+        it 'returns publication event' do
+          expect(build).to eq [{
+            type: 'publication',
+            place: [{ value: 'New York' }, { value: 'Geneva' }],
+            contributor: [{ name: [{ value: 'United Nations' }], role: [{ value: 'publisher' }] }],
+            date: [{ value: '©2012', type: 'publication' }]
+          }, {
+            type: 'publication',
+            place: [{ value: 'Нью-Йорк' }, { value: 'Женева' }],
+            contributor: [{ name: [{ value: 'Организация Объединенных Наций' }], role: [{ value: 'publisher' }] }],
+            date: [{ value: '2012', type: 'publication' }]
+          }]
+        end
       end
     end
 
@@ -279,33 +346,84 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
     end
 
     context 'with edition event (250)' do
-      let(:marc_hash) do
-        {
-          'fields' => [
-            '250' => {
-              'ind1' => ' ',
-              'ind2' => ' ',
-              'subfields' => [
-                {
-                  'a' => 'Ninth edition /'
-                },
-                {
-                  'b' => 'Jonathan S. Abramowitz, University of North Carolina at Chapel Hill, Mitchell J. Prinstein, University of North Carolina at Chapel Hill, Timothy J. Trull, University of Missouri-Columbia.'
-                }
-              ]
-            }
-          ]
-        }
+      context 'with multiple subfields' do
+        let(:marc_hash) do
+          {
+            'fields' => [
+              '250' => {
+                'ind1' => ' ',
+                'ind2' => ' ',
+                'subfields' => [
+                  {
+                    'a' => 'Ninth edition /'
+                  },
+                  {
+                    'b' => 'Jonathan S. Abramowitz, University of North Carolina at Chapel Hill, Mitchell J. Prinstein, University of North Carolina at Chapel Hill, Timothy J. Trull, University of Missouri-Columbia.'
+                  }
+                ]
+              }
+            ]
+          }
+        end
+
+        it 'returns publication event with edition note' do
+          expect(build).to eq [{
+            type: 'publication',
+            note: [{
+              type: 'edition',
+              value: 'Ninth edition / Jonathan S. Abramowitz, University of North Carolina at Chapel Hill, Mitchell J. Prinstein, University of North Carolina at Chapel Hill, Timothy J. Trull, University of Missouri-Columbia.'
+            }]
+          }]
+        end
       end
 
-      it 'returns publication event with edition note' do
-        expect(build).to eq [{
-          type: 'publication',
-          note: [{
-            type: 'edition',
-            value: 'Ninth edition / Jonathan S. Abramowitz, University of North Carolina at Chapel Hill, Mitchell J. Prinstein, University of North Carolina at Chapel Hill, Timothy J. Trull, University of Missouri-Columbia.'
+      context 'with a multiple scripts' do
+        let(:marc_hash) do
+          {
+            'fields' => [
+              '250' => {
+                'ind1' => ' ',
+                'ind2' => ' ',
+                'subfields' => [
+                  {
+                    '6' => '880-01'
+                  },
+                  {
+                    'a' => 'Rev. 2nd ed.'
+                  }
+                ]
+              },
+              '880' => {
+                'ind1' => ' ',
+                'ind2' => ' ',
+                'subfields' => [
+                  {
+                    '6' => '250-01/(N'
+                  },
+                  {
+                    'a' => 'Пересмотр. 2-e изд.'
+                  }
+                ]
+              }
+            ]
+          }
+        end
+
+        it 'returns publication event with edition note' do
+          expect(build).to eq [{
+            type: 'publication',
+            note: [{
+              type: 'edition',
+              value: 'Rev. 2nd ed.'
+            }]
+          }, {
+            type: 'publication',
+            note: [{
+              type: 'edition',
+              value: 'Пересмотр. 2-e изд.'
+            }]
           }]
-        }]
+        end
       end
     end
 
