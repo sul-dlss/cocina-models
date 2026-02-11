@@ -19,19 +19,15 @@ module Cocina
 
           # @return [Array<Hash>] an array of event hashes
           def build
-            linked_264_field = Util.linked_field(marc, marc['264']) if marc['264']
             [
               publication_from008,
               publication(marc['260']),
               manufacture(marc['260']),
-
               production(marc['264']),
-              production(linked_264_field),
-
               edition_statement(marc['250']),
               frequency_statement(marc['310']),
               mode_of_issuance(marc['334'])
-            ].compact
+            ].flatten.compact
           end
 
           MARC_264_INDICATOR2 = {
@@ -69,6 +65,13 @@ module Cocina
           def production(field)
             return unless field
 
+            fields = [build_production(field)]
+            alt_script_field = Util.linked_field(marc, field)
+            fields << build_production(alt_script_field) if alt_script_field
+            fields
+          end
+
+          def build_production(field)
             indicator = MARC_264_INDICATOR2.fetch(field.indicator2)
             return copyright(field) if indicator[:type] == 'copyright notice'
 
@@ -95,6 +98,13 @@ module Cocina
           def edition_statement(field)
             return unless field
 
+            fields = [build_edition_statement(field)]
+            alt_script_field = Util.linked_field(marc, field)
+            fields << build_edition_statement(alt_script_field) if alt_script_field
+            fields
+          end
+
+          def build_edition_statement(field)
             statement = field.subfields.select { %w[a b].include? it.code }.map(&:value).join(' ')
             { type: 'publication', note: [{ value: statement, type: 'edition' }]}
           end
@@ -116,13 +126,20 @@ module Cocina
           def publication(field)
             return unless field
 
-            publication_place = field.subfields.find { it.code == 'a' }&.value
+            fields = [build_publication(field)]
+            alt_script_field = Util.linked_field(marc, field)
+            fields << build_publication(alt_script_field) if alt_script_field
+            fields
+          end
+
+          def build_publication(field)
+            publication_places = field.subfields.filter_map { Util.strip_punctuation(it.value) if it.code == 'a' }
             publisher = field.subfields.find { it.code == 'b' }&.value
             publication_date = field.subfields.find { it.code == 'c' }.value.delete_suffix('.')
 
             {
               type: 'publication',
-              place: [{ value: Util.strip_punctuation(publication_place) }],
+              place: publication_places.map { { value: it } },
               contributor: [{ name: [{ value: Util.strip_punctuation(publisher) }], role: [{ value: 'publisher' }] }],
               date: [{ value: publication_date, type: 'publication' }]
             }
@@ -133,9 +150,9 @@ module Cocina
 
             manufacture_place = field.subfields.find { |subfield| subfield.code == 'e' }&.value
             manufacturer = field.subfields.find { |subfield| subfield.code == 'f' }&.value
-            manufacture_date = field.subfields.find { |subfield| subfield.code == 'g' }&.value
             return nil unless manufacture_place || manufacturer
 
+            manufacture_date = field.subfields.find { |subfield| subfield.code == 'g' }&.value
             {
               type: 'manufacture',
               place: [{ value: Util.strip_punctuation(manufacture_place) }],
