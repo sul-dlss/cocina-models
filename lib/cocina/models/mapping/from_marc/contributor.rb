@@ -51,7 +51,7 @@ module Cocina
             contributor[:name] = [build_personal_name(field)]
             contributor[:role] = build_roles(field)
             id = build_id(field).first
-            contributor[:identifier] = [{ value: id.delete_prefix('https://orcid.org/'), type: 'ORCID' }.compact_blank] if id&.start_with? 'https://orcid.org/'
+            contributor[:identifier] = [{ uri: id, type: 'ORCID' }.compact_blank] if id&.start_with? 'https://orcid.org/'
             contributor[:status] = 'primary' if primary
             contributor.compact_blank
           end

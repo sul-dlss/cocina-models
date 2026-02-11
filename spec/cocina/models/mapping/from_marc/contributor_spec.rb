@@ -426,6 +426,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
     end
 
     context 'with Contributor with ORCID identifier' do
+      # based on in00000870077
       let(:marc_hash) do
         {
           'fields' => [
@@ -446,7 +447,11 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
       end
 
       it 'returns contributor with ORCID identifier' do
-        expect(build).to eq [{ type: 'person', status: 'primary', name: [{ value: 'Velez, Vannessa Naomi.' }], identifier: [{ value: '0009-0005-5256-569X', type: 'ORCID' }] }]
+        expect(build).to eq [{
+          type: 'person', status: 'primary',
+          name: [{ value: 'Velez, Vannessa Naomi.' }],
+          identifier: [{ uri: 'https://orcid.org/0009-0005-5256-569X', type: 'ORCID' }]
+        }]
       end
     end
 
