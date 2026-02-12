@@ -19,28 +19,31 @@ module Cocina
 
           # @return [Array<Hash>] an array of contributor hashes
           def build
-            linked_100_field = Util.linked_field(marc, marc['100']) if marc['100']
-            linked_700_field = Util.linked_field(marc, marc['700']) if marc['700']
-
             [
-              build_personal(marc['100'], primary: true),
-              build_personal(linked_100_field),
-              build_corporate(marc['110'], primary: true),
-              build_event(marc['111'], primary: true),
-              build_personal(marc['700']),
-              build_personal(linked_700_field),
-              build_corporate(marc['710']),
-              build_event(marc['711']),
-              build_personal(marc['720'])
+              personal(marc['100'], primary: true),
+              corporate(marc['110'], primary: true),
+              event(marc['111'], primary: true),
+              personal(marc['700']),
+              corporate(marc['710']),
+              event(marc['711']),
+              personal(marc['720'])
 
-            ].compact
+            ].flatten.compact
           end
 
           private
 
-          def build_personal(field, primary: false)
+          def personal(field, primary: false)
             return unless field
 
+            linked_field = Util.linked_field(marc, field)
+
+            fields = [build_personal(field, primary:)]
+            fields << build_personal(linked_field) if linked_field
+            fields
+          end
+
+          def build_personal(field, primary: false)
             name_type = case field.indicator1
                         when '1', '2'
                           'person'
@@ -74,9 +77,17 @@ module Cocina
               expanded).uniq.compact_blank
           end
 
-          def build_corporate(field, primary: false)
+          def corporate(field, primary: false)
             return unless field
 
+            linked_field = Util.linked_field(marc, field)
+
+            fields = [build_corporate(field, primary:)]
+            fields << build_corporate(linked_field) if linked_field
+            fields
+          end
+
+          def build_corporate(field, primary: false)
             contributor = { type: 'organization' }
             name = field.subfields.select { |subfield| %w[a b q d].include? subfield.code }.map(&:value).join(' ')
             contributor[:name] = [{ value: name }]
@@ -87,11 +98,19 @@ module Cocina
             contributor
           end
 
-          def build_event(field, primary: false)
+          def event(field, primary: false)
             return unless field
 
+            linked_field = Util.linked_field(marc, field)
+
+            fields = [build_event(field, primary:)]
+            fields << build_event(linked_field) if linked_field
+            fields
+          end
+
+          def build_event(field, primary: false)
             contributor = { type: 'event' }
-            name = field.subfields.select { |subfield| %w[a n d c].include? subfield.code }.map(&:value).join(' ')
+            name = field.subfields.select { |subfield| %w[a n d c].include? subfield.code }.map(&:value).join(' ').delete_suffix(',')
             contributor[:name] = [{ value: name }]
             roles = build_roles(field, code: 'j')
             contributor[:role] = roles if roles.present?
