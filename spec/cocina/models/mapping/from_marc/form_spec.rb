@@ -484,7 +484,257 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Form do
       end
 
       it 'returns dataset genre' do
-        expect(build).to eq([{ value: 'dataset', type: 'genre' }])
+        expect(build).to eq([
+                              { value: 'software, multimedia', type: 'resource type', source: { value: 'MODS resource types' } },
+                              { value: 'Dataset', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
+                              { value: 'dataset', type: 'genre', source: { code: 'local' } }
+                            ])
+      end
+    end
+
+    context 'with collection (Leader/07 = c)' do
+      # see a6002746
+      let(:marc_hash) do
+        {
+          'leader' => '02711cpcaa22003617i 4500',
+          'fields' => []
+        }
+      end
+
+      it 'returns collection' do
+        expect(build).to eq [
+          { value: 'collection', type: 'resource type', source: { value: 'MODS resource types' } },
+          { value: 'Collection', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+        ]
+      end
+    end
+
+    context 'with text (Leader/06 = a)' do
+      # see a895166
+      let(:marc_hash) do
+        {
+          'leader' => '00970cam a2200289 i 4500',
+          'fields' => []
+        }
+      end
+
+      it 'returns text' do
+        expect(build).to eq [
+          { value: 'text', type: 'resource type', source: { value: 'MODS resource types' } },
+          { value: 'Text', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+        ]
+      end
+    end
+
+    context 'with notated music (Leader/06 = c)' do
+      let(:marc_hash) do
+        {
+          'leader' => '03914ccm a22004097i 4500'
+        }
+      end
+
+      it 'returns notated music' do
+        expect(build).to eq [
+          { value: 'notated music', type: 'resource type', source: { value: 'MODS resource types' } },
+          { value: 'Notated music', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+        ]
+      end
+    end
+
+    context 'with notated music, manuscript (Leader/06 = d)' do
+      let(:marc_hash) do
+        {
+          'leader' => '03914cdm a22004097i 4500'
+        }
+      end
+
+      it 'returns manuscript and notated music' do
+        expect(build).to eq [
+          { value: 'manuscript', type: 'resource type', source: { value: 'MODS resource types' } },
+          { value: 'notated music', type: 'resource type', source: { value: 'MODS resource types' } },
+          { value: 'Manuscript', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
+          { value: 'Notated music', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+        ]
+      end
+    end
+
+    context 'with cartographic (Leader/06 = e)' do
+      let(:marc_hash) do
+        {
+          'leader' => '03914cem a22004097i 4500'
+        }
+      end
+
+      it 'returns cartographic' do
+        expect(build).to eq [
+          { value: 'cartographic', type: 'resource type', source: { value: 'MODS resource types' } },
+          { value: 'Cartographic', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+        ]
+      end
+    end
+
+    context 'with cartographic, manuscript (Leader/06 = f)' do
+      let(:marc_hash) do
+        {
+          'leader' => '03914cfm a22004097i 4500'
+        }
+      end
+
+      it 'returns manuscript and cartographic' do
+        expect(build).to eq [
+          { value: 'manuscript', type: 'resource type', source: { value: 'MODS resource types' } },
+          { value: 'cartographic', type: 'resource type', source: { value: 'MODS resource types' } },
+          { value: 'Manuscript', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
+          { value: 'Cartographic', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+        ]
+      end
+    end
+
+    context 'with moving image (Leader/06 = g)' do
+      let(:marc_hash) do
+        {
+          'leader' => '03914cgm a22004097i 4500'
+        }
+      end
+
+      it 'returns moving image' do
+        expect(build).to eq [
+          { value: 'moving image', type: 'resource type', source: { value: 'MODS resource types' } },
+          { value: 'Moving image', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+        ]
+      end
+    end
+
+    context 'with sound recording, nonmusical (Leader/06 = i)' do
+      let(:marc_hash) do
+        {
+          'leader' => '03914cim a22004097i 4500'
+        }
+      end
+
+      it 'returns sound recording-nonmusical' do
+        expect(build).to eq [
+          { value: 'sound recording-nonmusical', type: 'resource type', source: { value: 'MODS resource types' } },
+          { value: 'Audio', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+        ]
+      end
+    end
+
+    context 'with sound recording, musical (Leader/06 = j)' do
+      let(:marc_hash) do
+        {
+          'leader' => '03914cjm a22004097i 4500'
+        }
+      end
+
+      it 'returns sound recording-musical' do
+        expect(build).to eq [
+          { value: 'sound recording-musical', type: 'resource type', source: { value: 'MODS resource types' } },
+          { value: 'Audio', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+        ]
+      end
+    end
+
+    context 'with still image (Leader/06 = k)' do
+      let(:marc_hash) do
+        {
+          'leader' => '03914ckm a22004097i 4500'
+        }
+      end
+
+      it 'returns still image' do
+        expect(build).to eq [
+          { value: 'still image', type: 'resource type', source: { value: 'MODS resource types' } },
+          { value: 'Still image', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+        ]
+      end
+    end
+
+    context 'with software/multimedia (Leader/06 = m and 008/26 not a)' do
+      let(:marc_hash) do
+        {
+          'leader' => '00584cmm a22001575  4500',
+          'fields' => [
+            { '008' => '181113m20149999miu        b  000 0 eng u' }
+          ]
+        }
+      end
+
+      it 'returns software, multimedia' do
+        expect(build).to eq [
+          { value: 'software, multimedia', type: 'resource type', source: { value: 'MODS resource types' } },
+          { value: 'Digital', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+        ]
+      end
+    end
+
+    context 'with software/multimedia, dataset (Leader/06 = m and 008/26 = a)' do
+      # a12827086
+      # updates dataset example from form mapping pt 1
+      let(:marc_hash) do
+        {
+          'leader' => '00584cmm a22001575  4500',
+          'fields' => [
+            { '008' => '181113m20149999miu        a  000 0 eng u' }
+          ]
+        }
+      end
+
+      it 'returns software, multimedia and dataset' do
+        expect(build).to eq [
+          { value: 'software, multimedia', type: 'resource type', source: { value: 'MODS resource types' } },
+          { value: 'Dataset', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
+          { value: 'dataset', type: 'genre', source: { code: 'local' } }
+        ]
+      end
+    end
+
+    context 'with mixed material, manuscript (Leader/06 = p)' do
+      let(:marc_hash) do
+        {
+          'leader' => '03914cpm a22004097i 4500'
+        }
+      end
+
+      it 'returns manuscript and mixed material' do
+        expect(build).to eq [
+          { value: 'manuscript', type: 'resource type', source: { value: 'MODS resource types' } },
+          { value: 'mixed material', type: 'resource type', source: { value: 'MODS resource types' } },
+          { value: 'Manuscript', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
+          { value: 'Mixed material', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+        ]
+      end
+    end
+
+    context 'with three dimensional object (Leader/06 = r)' do
+      let(:marc_hash) do
+        {
+          'leader' => '03914crm a22004097i 4500'
+        }
+      end
+
+      it 'returns three dimensional object' do
+        expect(build).to eq [
+          { value: 'three dimensional object', type: 'resource type', source: { value: 'MODS resource types' } },
+          { value: 'Artifact', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+        ]
+      end
+    end
+
+    context 'with text, manuscript (Leader/06 = t)' do
+      let(:marc_hash) do
+        {
+          'leader' => '03914ctm a22004097i 4500'
+        }
+      end
+
+      it 'returns manuscript and text' do
+        expect(build).to eq [
+          { value: 'manuscript', type: 'resource type', source: { value: 'MODS resource types' } },
+          { value: 'text', type: 'resource type', source: { value: 'MODS resource types' } },
+          { value: 'Manuscript', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
+          { value: 'Text', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+        ]
       end
     end
   end
