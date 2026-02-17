@@ -53,7 +53,7 @@ RSpec.describe Cocina::Models::Validatable do
     context 'when nested object is invalid' do
       # This is validated on the Description.
       let(:description_props) do
-        {title: [structuredValue: [{value: 'DRO title', type: 'partname'}]], purl: 'https://purl.stanford.edu/bc123df4567'}
+        {title: [{structuredValue: [{value: 'DRO title', type: 'partname'}]}], purl: 'https://purl.stanford.edu/bc123df4567'}
       end
 
       it 'raises ValidationError' do

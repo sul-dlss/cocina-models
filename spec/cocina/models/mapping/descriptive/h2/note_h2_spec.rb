@@ -29,8 +29,8 @@ RSpec.describe 'Cocina --> MODS mappings for note' do
       let(:cocina) do
         {
           note: [
-            type: 'preferred citation',
-            value: 'Me (2002). Our friend the dolphin.'
+            {type: 'preferred citation',
+             value: 'Me (2002). Our friend the dolphin.'}
           ]
         }
       end

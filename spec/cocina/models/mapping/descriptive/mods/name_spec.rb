@@ -1217,7 +1217,7 @@ RSpec.describe 'MODS name <--> cocina mappings' do
           contributor: [
             {
               name: [
-                structuredValue: [
+                {structuredValue: [
                   {
                     value: 'Sarmiento, Domingo Faustino',
                     type: 'name'
@@ -1226,14 +1226,14 @@ RSpec.describe 'MODS name <--> cocina mappings' do
                     type: 'life dates',
                     value: '1811-1888'
                   }
-                ]
+                ]}
               ],
               type: 'person',
               status: 'primary'
             },
             {
               name: [
-                structuredValue: [
+                {structuredValue: [
                   {
                     value: 'Rojas, Ricardo',
                     type: 'name'
@@ -1242,7 +1242,7 @@ RSpec.describe 'MODS name <--> cocina mappings' do
                     type: 'life dates',
                     value: '1882-1957'
                   }
-                ]
+                ]}
               ],
               type: 'person'
             }
@@ -2266,7 +2266,7 @@ RSpec.describe 'MODS name <--> cocina mappings' do
             },
             {
               name: [
-                value: 'Name 2'
+                {value: 'Name 2'}
               ],
               type: 'person'
             }

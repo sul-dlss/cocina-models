@@ -569,7 +569,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     #   https://argo-stage.stanford.edu/view/sk561pf3505
     let(:titles) do
       [
-        structuredValue: [
+        {structuredValue: [
           {
             value: 'A',
             type: 'nonsorting characters'
@@ -590,7 +590,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
             value: 'Supplement',
             type: 'part name'
           }
-        ]
+        ]}
       ]
     end
 
@@ -638,7 +638,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       # Yes, there can be a structuredValue inside a StructuredValue.  For example,
       # a uniform title where both the name and the title have internal StructuredValue
       [
-        structuredValue: [
+        {structuredValue: [
           {
             structuredValue: [
               {
@@ -651,7 +651,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
               }
             ]
           }
-        ]
+        ]}
       ]
     end
 
@@ -711,7 +711,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     #   https://argo-stage.stanford.edu/view/sk561pf3505
     let(:titles) do
       [
-        structuredValue: [
+        {structuredValue: [
           {
             value: 'ti1:partNumber',
             type: 'part number'
@@ -720,7 +720,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
             value: 'ti1:partName',
             type: 'part name'
           }
-        ]
+        ]}
       ]
     end
 
@@ -759,7 +759,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
 
     let(:titles) do
       [
-        structuredValue: [
+        {structuredValue: [
           {
             value: 'Some Title',
             type: 'main title'
@@ -772,7 +772,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
             value: 'A part label',
             type: 'part name'
           }
-        ]
+        ]}
       ]
     end
 
@@ -784,7 +784,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
   context 'with structuredValue with subtitle' do
     let(:titles) do
       [
-        structuredValue: [
+        {structuredValue: [
           {
             value: 'A starting subtitle',
             type: 'subtitle'
@@ -793,7 +793,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
             value: 'A following title',
             type: 'title'
           }
-        ]
+        ]}
       ]
     end
 
@@ -933,7 +933,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
   context 'with structuredValue with multiple subtitles' do
     let(:titles) do
       [
-        structuredValue: [
+        {structuredValue: [
           {
             value: 'The first subtitle',
             type: 'subtitle'
@@ -946,7 +946,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
             value: 'A Title',
             type: 'title'
           }
-        ]
+        ]}
       ]
     end
 
@@ -1039,7 +1039,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
   context 'with structuredValue with non-sorting not first' do
     let(:titles) do
       [
-        structuredValue: [
+        {structuredValue: [
           {
             value: 'Series 1',
             type: 'part number'
@@ -1052,7 +1052,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
             value: 'Vinsky',
             type: 'main title'
           }
-        ]
+        ]}
       ]
     end
 
@@ -1282,7 +1282,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
   context 'with nonsorting characters without count note' do
     let(:titles) do
       [
-        structuredValue: [
+        {structuredValue: [
           {
             value: 'The',
             type: 'nonsorting characters'
@@ -1290,7 +1290,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
             value: 'means to prosperity',
             type: 'main title'
           }
-        ]
+        ]}
       ]
     end
 
@@ -1310,7 +1310,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
   context 'with nonsorting characters ends in dash, without count note' do
     let(:titles) do
       [
-        structuredValue: [
+        {structuredValue: [
           {
             value: 'The-',
             type: 'nonsorting characters'
@@ -1318,7 +1318,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
             value: 'means to prosperity',
             type: 'main title'
           }
-        ]
+        ]}
       ]
     end
 
@@ -1350,7 +1350,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
   context 'with nonsorting characters ends in apostrophe, without count note' do
     let(:titles) do
       [
-        structuredValue: [
+        {structuredValue: [
           {
             value: 'L\'',
             type: 'nonsorting characters'
@@ -1358,7 +1358,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
             value: 'means to prosperity',
             type: 'main title'
           }
-        ]
+        ]}
       ]
     end
 
@@ -1663,7 +1663,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
   context 'with parallelValue, one of type subtitle' do
     let(:titles) do
       [
-        parallelValue: [
+        {parallelValue: [
           {
             value: 'subtitle',
             type: 'subtitle'
@@ -1671,7 +1671,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
           {
             value: 'A Random Title'
           }
-        ]
+        ]}
       ]
     end
 

@@ -105,7 +105,7 @@ RSpec.describe 'MODS subject topic <--> cocina mappings' do
       let(:cocina) do
         {
           subject: [
-            structuredValue: [
+            {structuredValue: [
               {
                 value: 'Poetry',
                 type: 'genre',
@@ -115,7 +115,7 @@ RSpec.describe 'MODS subject topic <--> cocina mappings' do
                 value: 'Prose',
                 type: 'genre'
               }
-            ]
+            ]}
           ]
         }
       end

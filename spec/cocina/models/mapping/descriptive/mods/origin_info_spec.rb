@@ -1486,11 +1486,11 @@ RSpec.describe 'MODS originInfo <--> cocina mappings' do
                 }
               ],
               note: [
-                type: 'issuance',
-                value: 'monographic',
-                source: {
-                  value: 'MODS issuance terms'
-                }
+                {type: 'issuance',
+                 value: 'monographic',
+                 source: {
+                   value: 'MODS issuance terms'
+                 }}
               ]
             }
           ]

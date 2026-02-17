@@ -16,7 +16,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
         let(:marc_hash) do
           {
             'fields' => [
-              '260' => {
+              {'260' => {
                 'ind1' => ' ',
                 'ind2' => ' ',
                 'subfields' => [
@@ -30,7 +30,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
                     'c' => '1997.'
                   }
                 ]
-              }
+              }}
             ]
           }
         end
@@ -49,48 +49,48 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
         let(:marc_hash) do
           {
             'fields' => [
-              '260' => {
-                'ind1' => ' ',
-                'ind2' => ' ',
-                'subfields' => [
-                  {
-                    '6' => '880-01'
-                  },
-                  {
-                    'a' => 'New York ;'
-                  },
-                  {
-                    'a' => 'Geneva :'
-                  },
-                  {
-                    'b' => 'United Nations,'
-                  },
-                  {
-                    'c' => '©2012.'
-                  }
-                ]
-              },
-              '880' => {
-                'ind1' => ' ',
-                'ind2' => ' ',
-                'subfields' => [
-                  {
-                    '6' => '260-04'
-                  },
-                  {
-                    'a' => 'Нью-Йорк ;'
-                  },
-                  {
-                    'a' => 'Женева :'
-                  },
-                  {
-                    'b' => 'Организация Объединенных Наций,'
-                  },
-                  {
-                    'c' => '2012.'
-                  }
-                ]
-              }
+              {'260' => {
+                 'ind1' => ' ',
+                 'ind2' => ' ',
+                 'subfields' => [
+                   {
+                     '6' => '880-01'
+                   },
+                   {
+                     'a' => 'New York ;'
+                   },
+                   {
+                     'a' => 'Geneva :'
+                   },
+                   {
+                     'b' => 'United Nations,'
+                   },
+                   {
+                     'c' => '©2012.'
+                   }
+                 ]
+               },
+               '880' => {
+                 'ind1' => ' ',
+                 'ind2' => ' ',
+                 'subfields' => [
+                   {
+                     '6' => '260-04'
+                   },
+                   {
+                     'a' => 'Нью-Йорк ;'
+                   },
+                   {
+                     'a' => 'Женева :'
+                   },
+                   {
+                     'b' => 'Организация Объединенных Наций,'
+                   },
+                   {
+                     'c' => '2012.'
+                   }
+                 ]
+               }}
             ]
           }
         end
@@ -115,7 +115,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
       let(:marc_hash) do
         {
           'fields' => [
-            '260' => {
+            {'260' => {
               'ind1' => ' ',
               'ind2' => ' ',
               'subfields' => [
@@ -138,7 +138,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
                   'g' => '1974)'
                 }
               ]
-            }
+            }}
           ]
         }
       end
@@ -162,7 +162,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
       let(:marc_hash) do
         {
           'fields' => [
-            '264' => {
+            {'264' => {
               'ind1' => ' ',
               'ind2' => '0',
               'subfields' => [
@@ -170,7 +170,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
                   'c' => 'approximately 1905-1930.'
                 }
               ]
-            }
+            }}
           ]
         }
       end
@@ -187,7 +187,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
       let(:marc_hash) do
         {
           'fields' => [
-            '264' => {
+            {'264' => {
               'ind1' => ' ',
               'ind2' => '1',
               'subfields' => [
@@ -204,7 +204,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
                   'c' => '[2017]'
                 }
               ]
-            }
+            }}
           ]
         }
       end
@@ -226,7 +226,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
       let(:marc_hash) do
         {
           'fields' => [
-            '264' => {
+            {'264' => {
               'ind1' => ' ',
               'ind2' => '2',
               'subfields' => [
@@ -240,7 +240,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
                   'c' => '[2009]'
                 }
               ]
-            }
+            }}
           ]
         }
       end
@@ -259,7 +259,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
       let(:marc_hash) do
         {
           'fields' => [
-            '264' => {
+            {'264' => {
               'ind1' => ' ',
               'ind2' => '3',
               'subfields' => [
@@ -273,7 +273,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
                   'c' => '[2010]'
                 }
               ]
-            }
+            }}
           ]
         }
       end
@@ -292,7 +292,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
       let(:marc_hash) do
         {
           'fields' => [
-            '264' => {
+            {'264' => {
               'ind1' => ' ',
               'ind2' => '4',
               'subfields' => [
@@ -300,7 +300,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
                   'c' => '℗2017'
                 }
               ]
-            }
+            }}
           ]
         }
       end
@@ -317,7 +317,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
       let(:marc_hash) do
         {
           'fields' => [
-            '264' => {
+            {'264' => {
               'ind1' => ' ',
               'ind2' => ' ',
               'subfields' => [
@@ -331,7 +331,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
                   'c' => '2018.'
                 }
               ]
-            }
+            }}
           ]
         }
       end
@@ -350,7 +350,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
         let(:marc_hash) do
           {
             'fields' => [
-              '250' => {
+              {'250' => {
                 'ind1' => ' ',
                 'ind2' => ' ',
                 'subfields' => [
@@ -361,7 +361,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
                     'b' => 'Jonathan S. Abramowitz, University of North Carolina at Chapel Hill, Mitchell J. Prinstein, University of North Carolina at Chapel Hill, Timothy J. Trull, University of Missouri-Columbia.'
                   }
                 ]
-              }
+              }}
             ]
           }
         end
@@ -381,30 +381,30 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
         let(:marc_hash) do
           {
             'fields' => [
-              '250' => {
-                'ind1' => ' ',
-                'ind2' => ' ',
-                'subfields' => [
-                  {
-                    '6' => '880-01'
-                  },
-                  {
-                    'a' => 'Rev. 2nd ed.'
-                  }
-                ]
-              },
-              '880' => {
-                'ind1' => ' ',
-                'ind2' => ' ',
-                'subfields' => [
-                  {
-                    '6' => '250-01/(N'
-                  },
-                  {
-                    'a' => 'Пересмотр. 2-e изд.'
-                  }
-                ]
-              }
+              {'250' => {
+                 'ind1' => ' ',
+                 'ind2' => ' ',
+                 'subfields' => [
+                   {
+                     '6' => '880-01'
+                   },
+                   {
+                     'a' => 'Rev. 2nd ed.'
+                   }
+                 ]
+               },
+               '880' => {
+                 'ind1' => ' ',
+                 'ind2' => ' ',
+                 'subfields' => [
+                   {
+                     '6' => '250-01/(N'
+                   },
+                   {
+                     'a' => 'Пересмотр. 2-e изд.'
+                   }
+                 ]
+               }}
             ]
           }
         end
@@ -431,7 +431,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
       let(:marc_hash) do
         {
           'fields' => [
-            '310' => {
+            {'310' => {
               'ind1' => ' ',
               'ind2' => ' ',
               'subfields' => [
@@ -439,7 +439,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
                   'a' => 'Annual'
                 }
               ]
-            }
+            }}
           ]
         }
       end
@@ -456,7 +456,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
       let(:marc_hash) do
         {
           'fields' => [
-            '334' => {
+            {'334' => {
               'ind1' => ' ',
               'ind2' => ' ',
               'subfields' => [
@@ -464,7 +464,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
                   'a' => 'single unit'
                 }
               ]
-            }
+            }}
           ]
         }
       end
@@ -480,42 +480,42 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Event do
       let(:marc_hash) do
         {
           'fields' => [
-            '264' => {
-              'ind1' => ' ',
-              'ind2' => '1',
-              'subfields' => [
-                {
-                  '6' => '880-01'
-                },
-                {
-                  'a' => 'Moskva :'
-                },
-                {
-                  'b' => 'Izdatelʹstvo "Vesʹ Mir",'
-                },
-                {
-                  'c' => '2019.'
-                }
-              ]
-            },
-            '880' => {
-              'ind1' => ' ',
-              'ind2' => '1',
-              'subfields' => [
-                {
-                  '6' => '264-03'
-                },
-                {
-                  'a' => 'Москва :'
-                },
-                {
-                  'b' => 'Издательство "Весь Мир",'
-                },
-                {
-                  'c' => '2019.'
-                }
-              ]
-            }
+            {'264' => {
+               'ind1' => ' ',
+               'ind2' => '1',
+               'subfields' => [
+                 {
+                   '6' => '880-01'
+                 },
+                 {
+                   'a' => 'Moskva :'
+                 },
+                 {
+                   'b' => 'Izdatelʹstvo "Vesʹ Mir",'
+                 },
+                 {
+                   'c' => '2019.'
+                 }
+               ]
+             },
+             '880' => {
+               'ind1' => ' ',
+               'ind2' => '1',
+               'subfields' => [
+                 {
+                   '6' => '264-03'
+                 },
+                 {
+                   'a' => 'Москва :'
+                 },
+                 {
+                   'b' => 'Издательство "Весь Мир",'
+                 },
+                 {
+                   'c' => '2019.'
+                 }
+               ]
+             }}
           ]
         }
       end
