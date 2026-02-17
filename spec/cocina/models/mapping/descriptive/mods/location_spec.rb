@@ -372,7 +372,7 @@ RSpec.describe 'MODS location <--> cocina mappings' do
                 value: 'https://stanford.idm.oclc.org/login?url=http://gateway.proquest.com/openurl?blah',
                 displayLabel: 'Coverage: V. 1 (Jan. 1922)-',
                 note: [
-                  value: 'Online table of contents from PCI available to Stanford-affiliated users:'
+                  {value: 'Online table of contents from PCI available to Stanford-affiliated users:'}
                 ]
               }
             ]
@@ -592,14 +592,14 @@ RSpec.describe 'MODS location <--> cocina mappings' do
               {
                 value: 'http://infoweb.newsbank.com/?db=SERIAL',
                 note: [
-                  value: 'Available to Stanford-affiliated users at READEX:'
+                  {value: 'Available to Stanford-affiliated users at READEX:'}
                 ],
                 status: 'primary'
               },
               {
                 value: 'http://web.lexis-nexis.com/congcomp/form/cong/s_pubadvanced.html?srcboxes=SSMaps&srcboxes=SerialSet',
                 note: [
-                  value: 'Available to Stanford-affiliated users at:'
+                  {value: 'Available to Stanford-affiliated users at:'}
                 ]
               },
               {

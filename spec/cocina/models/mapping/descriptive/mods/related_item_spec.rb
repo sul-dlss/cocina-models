@@ -700,14 +700,14 @@ RSpec.describe 'MODS relatedItem <--> cocina mappings' do
                 {
                   type: 'organization',
                   name: [
-                    structuredValue: [
+                    {structuredValue: [
                       {
                         value: 'Tunisia.'
                       },
                       {
                         value: 'Direction des travaux publics.'
                       }
-                    ]
+                    ]}
                   ]
                 }
               ]
@@ -847,7 +847,7 @@ RSpec.describe 'MODS relatedItem <--> cocina mappings' do
               type: 'person',
               status: 'primary',
               role: [
-                value: 'author'
+                {value: 'author'}
               ]
             }
           ],
@@ -877,7 +877,7 @@ RSpec.describe 'MODS relatedItem <--> cocina mappings' do
                 {
                   type: 'person',
                   name: [
-                    structuredValue: [
+                    {structuredValue: [
                       {
                         value: 'Moore, Douglas,',
                         type: 'name'
@@ -886,7 +886,7 @@ RSpec.describe 'MODS relatedItem <--> cocina mappings' do
                         value: '1893-1969',
                         type: 'life dates'
                       }
-                    ]
+                    ]}
                   ]
                 }
               ],

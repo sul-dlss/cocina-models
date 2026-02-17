@@ -41,7 +41,7 @@ RSpec.describe Cocina::Models::Mapping::ToMods::RelatedResource do
           ],
           access: {
             url: [
-              value: 'https://example.com/paper.html'
+              {value: 'https://example.com/paper.html'}
             ]
           },
           type: 'related to'

@@ -16,7 +16,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Note do
       let(:marc_hash) do
         {
           'fields' => [
-            '245' => {
+            {'245' => {
               'ind1' => '1',
               'ind2' => '0',
               'subfields' => [
@@ -24,7 +24,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Note do
                   'c' => 'Nicholas A. Robinson, Elizabeth Burleson, Lin-Heng Lye, and Kirk W. Junker, editors'
                 }
               ]
-            }
+            }}
           ]
         }
       end

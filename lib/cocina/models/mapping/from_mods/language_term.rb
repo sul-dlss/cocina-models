@@ -77,7 +77,7 @@ module Cocina
 
           def language_applies_to
             value = language_element['objectPart']
-            [value: value] if value.present?
+            [{value: value}] if value.present?
           end
 
           def language_source_for(code_language_term, text_language_term)

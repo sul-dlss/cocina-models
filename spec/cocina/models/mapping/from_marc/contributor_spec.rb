@@ -15,7 +15,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
       let(:marc_hash) do
         {
           'fields' => [
-            '100' => {
+            {'100' => {
               'ind1' => '1',
               'ind2' => ' ',
               'subfields' => [
@@ -32,7 +32,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
                   '0' => '(SIRSI)100978'
                 }
               ]
-            }
+            }}
           ]
         }
       end
@@ -46,7 +46,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
       let(:marc_hash) do
         {
           'fields' => [
-            '100' => {
+            {'100' => {
               'ind1' => '3',
               'ind2' => ' ',
               'subfields' => [
@@ -54,7 +54,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
                   'a' => 'Packard family.'
                 }
               ]
-            }
+            }}
           ]
         }
       end
@@ -69,7 +69,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
         let(:marc_hash) do
           {
             'fields' => [
-              '110' => {
+              {'110' => {
                 'ind1' => '1',
                 'ind2' => ' ',
                 'subfields' => [
@@ -80,7 +80,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
                     '0' => '(SIRSI)168717'
                   }
                 ]
-              }
+              }}
             ]
           }
         end
@@ -95,36 +95,36 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
         let(:marc_hash) do
           {
             'fields' => [
-              '110' => {
-                'ind1' => '1',
-                'ind2' => ' ',
-                'subfields' => [
-                  {
-                    '6' => '880-01'
-                  },
-                  {
-                    'a' => 'United Arab Republic.'
-                  },
-                  {
-                    'b' => 'Idārat al-Taʻbiʼah al-ʻĀmmah.'
-                  },
-                  {
-                    '0' => 'http://id.loc.gov/authorities/names/n50078747'
-                  }
-                ]
-              },
-              '880' => {
-                'ind1' => '1',
-                'ind2' => ' ',
-                'subfields' => [
-                  {
-                    '6': '110-01//r'
-                  },
-                  {
-                    'a' => 'ادارة التعبئة العامة.'
-                  }
-                ]
-              }
+              {'110' => {
+                 'ind1' => '1',
+                 'ind2' => ' ',
+                 'subfields' => [
+                   {
+                     '6' => '880-01'
+                   },
+                   {
+                     'a' => 'United Arab Republic.'
+                   },
+                   {
+                     'b' => 'Idārat al-Taʻbiʼah al-ʻĀmmah.'
+                   },
+                   {
+                     '0' => 'http://id.loc.gov/authorities/names/n50078747'
+                   }
+                 ]
+               },
+               '880' => {
+                 'ind1' => '1',
+                 'ind2' => ' ',
+                 'subfields' => [
+                   {
+                     '6': '110-01//r'
+                   },
+                   {
+                     'a' => 'ادارة التعبئة العامة.'
+                   }
+                 ]
+               }}
             ]
           }
         end
@@ -143,7 +143,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
         let(:marc_hash) do
           {
             'fields' => [
-              '111' => {
+              {'111' => {
                 'ind1' => '2',
                 'ind2' => ' ',
                 'subfields' => [
@@ -163,7 +163,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
                     '0' => '(SIRSI)566144'
                   }
                 ]
-              }
+              }}
             ]
           }
         end
@@ -177,48 +177,48 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
         let(:marc_hash) do
           {
             'fields' => [
-              '111' => {
-                'ind1' => '2',
-                'ind2' => ' ',
-                'subfields' => [
-                  {
-                    '6' => '880-1'
-                  },
-                  {
-                    'a' => 'Miz͡hnarodna naukovo-praktychna konferent͡sii͡a "Konstantynopolʹsʹkyĭ patriarkhat v istoriï Ukraïny : mynule, suchasne, maĭbutni͡e"'
-                  },
-                  {
-                    'd' => '(2016 :'
-                  },
-                  {
-                    'c' => 'Kyïv (Ukraine),'
-                  },
-                  {
-                    'j' => 'author.'
-                  }
-                ]
-              },
-              '880' => {
-                'ind1' => '2',
-                'ind2' => ' ',
-                'subfields' => [
-                  {
-                    '6' => '111-01'
-                  },
-                  {
-                    'a' => 'Міжнародна науково-практична конференція "Константинопольський патріархат в історії України : минуле, сучасне, майбутнє"'
-                  },
-                  {
-                    'd' => '(2016 :'
-                  },
-                  {
-                    'c' => 'Київ (Украіне)),'
-                  },
-                  {
-                    'j' => 'author.'
-                  }
-                ]
-              }
+              {'111' => {
+                 'ind1' => '2',
+                 'ind2' => ' ',
+                 'subfields' => [
+                   {
+                     '6' => '880-1'
+                   },
+                   {
+                     'a' => 'Miz͡hnarodna naukovo-praktychna konferent͡sii͡a "Konstantynopolʹsʹkyĭ patriarkhat v istoriï Ukraïny : mynule, suchasne, maĭbutni͡e"'
+                   },
+                   {
+                     'd' => '(2016 :'
+                   },
+                   {
+                     'c' => 'Kyïv (Ukraine),'
+                   },
+                   {
+                     'j' => 'author.'
+                   }
+                 ]
+               },
+               '880' => {
+                 'ind1' => '2',
+                 'ind2' => ' ',
+                 'subfields' => [
+                   {
+                     '6' => '111-01'
+                   },
+                   {
+                     'a' => 'Міжнародна науково-практична конференція "Константинопольський патріархат в історії України : минуле, сучасне, майбутнє"'
+                   },
+                   {
+                     'd' => '(2016 :'
+                   },
+                   {
+                     'c' => 'Київ (Украіне)),'
+                   },
+                   {
+                     'j' => 'author.'
+                   }
+                 ]
+               }}
             ]
           }
         end
@@ -236,7 +236,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
       let(:marc_hash) do
         {
           'fields' => [
-            '700' => {
+            {'700' => {
               'ind1' => '1',
               'ind2' => ' ',
               'subfields' => [
@@ -247,7 +247,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
                   'c' => '(Double bassist).'
                 }
               ]
-            }
+            }}
           ]
         }
       end
@@ -261,7 +261,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
       let(:marc_hash) do
         {
           'fields' => [
-            '700' => {
+            {'700' => {
               'ind1' => '3',
               'ind2' => ' ',
               'subfields' => [
@@ -269,7 +269,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
                   'a' => 'Gouzigian family.'
                 }
               ]
-            }
+            }}
           ]
         }
       end
@@ -284,7 +284,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
         let(:marc_hash) do
           {
             'fields' => [
-              '710' => {
+              {'710' => {
                 'ind1' => '1',
                 'ind2' => ' ',
                 'subfields' => [
@@ -298,7 +298,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
                     '0' => '(SIRSI)168717'
                   }
                 ]
-              }
+              }}
             ]
           }
         end
@@ -312,36 +312,36 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
         let(:marc_hash) do
           {
             'fields' => [
-              '710' => {
-                'ind1' => '1',
-                'ind2' => ' ',
-                'subfields' => [
-                  {
-                    '6' => '880-01'
-                  },
-                  {
-                    'a' => 'United Arab Republic.'
-                  },
-                  {
-                    'b' => 'Idārat al-Taʻbiʼah al-ʻĀmmah.'
-                  },
-                  {
-                    '0' => 'http://id.loc.gov/authorities/names/n50078747'
-                  }
-                ]
-              },
-              '880' => {
-                'ind1' => '1',
-                'ind2' => ' ',
-                'subfields' => [
-                  {
-                    '6' => '700-05//r'
-                  },
-                  {
-                    'a' => 'ادارة التعبئة العامة.'
-                  }
-                ]
-              }
+              {'710' => {
+                 'ind1' => '1',
+                 'ind2' => ' ',
+                 'subfields' => [
+                   {
+                     '6' => '880-01'
+                   },
+                   {
+                     'a' => 'United Arab Republic.'
+                   },
+                   {
+                     'b' => 'Idārat al-Taʻbiʼah al-ʻĀmmah.'
+                   },
+                   {
+                     '0' => 'http://id.loc.gov/authorities/names/n50078747'
+                   }
+                 ]
+               },
+               '880' => {
+                 'ind1' => '1',
+                 'ind2' => ' ',
+                 'subfields' => [
+                   {
+                     '6' => '700-05//r'
+                   },
+                   {
+                     'a' => 'ادارة التعبئة العامة.'
+                   }
+                 ]
+               }}
             ]
           }
         end
@@ -360,7 +360,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
         let(:marc_hash) do
           {
             'fields' => [
-              '711' => {
+              {'711' => {
                 'ind1' => '2',
                 'ind2' => ' ',
                 'subfields' => [
@@ -371,7 +371,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
                     '0' => 'http://id.loc.gov/authorities/names/no2005090352'
                   }
                 ]
-              }
+              }}
             ]
           }
         end
@@ -385,48 +385,48 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
         let(:marc_hash) do
           {
             'fields' => [
-              '711' => {
-                'ind1' => '2',
-                'ind2' => ' ',
-                'subfields' => [
-                  {
-                    '6' => '880-1'
-                  },
-                  {
-                    'a' => 'Miz͡hnarodna naukovo-praktychna konferent͡sii͡a "Konstantynopolʹsʹkyĭ patriarkhat v istoriï Ukraïny : mynule, suchasne, maĭbutni͡e"'
-                  },
-                  {
-                    'd' => '(2016 :'
-                  },
-                  {
-                    'c' => 'Kyïv (Ukraine),'
-                  },
-                  {
-                    'j' => 'author.'
-                  }
-                ]
-              },
-              '880' => {
-                'ind1' => '2',
-                'ind2' => ' ',
-                'subfields' => [
-                  {
-                    '6' => '111-01'
-                  },
-                  {
-                    'a' => 'Міжнародна науково-практична конференція "Константинопольський патріархат в історії України : минуле, сучасне, майбутнє"'
-                  },
-                  {
-                    'd' => '(2016 :'
-                  },
-                  {
-                    'c' => 'Київ (Украіне)),'
-                  },
-                  {
-                    'j' => 'author.'
-                  }
-                ]
-              }
+              {'711' => {
+                 'ind1' => '2',
+                 'ind2' => ' ',
+                 'subfields' => [
+                   {
+                     '6' => '880-1'
+                   },
+                   {
+                     'a' => 'Miz͡hnarodna naukovo-praktychna konferent͡sii͡a "Konstantynopolʹsʹkyĭ patriarkhat v istoriï Ukraïny : mynule, suchasne, maĭbutni͡e"'
+                   },
+                   {
+                     'd' => '(2016 :'
+                   },
+                   {
+                     'c' => 'Kyïv (Ukraine),'
+                   },
+                   {
+                     'j' => 'author.'
+                   }
+                 ]
+               },
+               '880' => {
+                 'ind1' => '2',
+                 'ind2' => ' ',
+                 'subfields' => [
+                   {
+                     '6' => '111-01'
+                   },
+                   {
+                     'a' => 'Міжнародна науково-практична конференція "Константинопольський патріархат в історії України : минуле, сучасне, майбутнє"'
+                   },
+                   {
+                     'd' => '(2016 :'
+                   },
+                   {
+                     'c' => 'Київ (Украіне)),'
+                   },
+                   {
+                     'j' => 'author.'
+                   }
+                 ]
+               }}
             ]
           }
         end
@@ -444,7 +444,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
       let(:marc_hash) do
         {
           'fields' => [
-            '720' => {
+            {'720' => {
               'ind1' => '1',
               'ind2' => ' ',
               'subfields' => [
@@ -452,7 +452,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
                   'a' => 'Blacklock, Joseph'
                 }
               ]
-            }
+            }}
           ]
         }
       end
@@ -466,7 +466,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
       let(:marc_hash) do
         {
           'fields' => [
-            '720' => {
+            {'720' => {
               'ind1' => ' ',
               'ind2' => ' ',
               'subfields' => [
@@ -474,7 +474,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
                   'a' => 'Vonderrohe, Robert, 1934-'
                 }
               ]
-            }
+            }}
           ]
         }
       end
@@ -488,7 +488,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
       let(:marc_hash) do
         {
           'fields' => [
-            '100' => {
+            {'100' => {
               'ind1' => '1',
               'ind2' => ' ',
               'subfields' => [
@@ -511,7 +511,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
                   '1' => 'https://id.oclc.org/worldcat/entity/E39PBJvMCYbW9m9kmHKrwph4MP'
                 }
               ]
-            }
+            }}
           ]
         }
       end
@@ -525,7 +525,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
       let(:marc_hash) do
         {
           'fields' => [
-            '700' => {
+            {'700' => {
               'ind1' => '1',
               'ind2' => ' ',
               'subfields' => [
@@ -542,7 +542,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
                   '0' => 'http://id.loc.gov/authorities/names/no2019143165'
                 }
               ]
-            }
+            }}
           ]
         }
       end
@@ -556,7 +556,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
       let(:marc_hash) do
         {
           'fields' => [
-            '700' => {
+            {'700' => {
               'ind1' => '1',
               'ind2' => ' ',
               'subfields' => [
@@ -573,7 +573,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
                   '0' => 'http://id.loc.gov/authorities/names/no2019143165'
                 }
               ]
-            }
+            }}
           ]
         }
       end
@@ -587,7 +587,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
       let(:marc_hash) do
         {
           'fields' => [
-            '711' => {
+            {'711' => {
               'ind1' => '2',
               'ind2' => ' ',
               'subfields' => [
@@ -601,7 +601,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
                   '0' => 'http://id.loc.gov/authorities/names/no2005090352'
                 }
               ]
-            }
+            }}
           ]
         }
       end
@@ -615,7 +615,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
       let(:marc_hash) do
         {
           'fields' => [
-            '700' => {
+            {'700' => {
               'ind1' => '1',
               'ind2' => ' ',
               'subfields' => [
@@ -632,7 +632,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
                   '0' => 'http://id.loc.gov/authorities/names/no2019143165'
                 }
               ]
-            }
+            }}
           ]
         }
       end
@@ -647,7 +647,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
       let(:marc_hash) do
         {
           'fields' => [
-            '100' => {
+            {'100' => {
               'ind1' => '1',
               'ind2' => ' ',
               'subfields' => [
@@ -658,7 +658,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
                   '1' => 'https://orcid.org/0009-0005-5256-569X'
                 }
               ]
-            }
+            }}
           ]
         }
       end
@@ -676,7 +676,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
       let(:marc_hash) do
         {
           'fields' => [
-            '710' => {
+            {'710' => {
               'ind1' => '2',
               'ind2' => ' ',
               'subfields' => [
@@ -693,7 +693,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
                   '1' => 'https://ror.org/00f54p054'
                 }
               ]
-            }
+            }}
           ]
         }
       end
@@ -707,42 +707,42 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
       let(:marc_hash) do
         {
           'fields' => [
-            '100' => {
-              'ind1' => '1',
-              'ind2' => ' ',
-              'subfields' => [
-                {
-                  '6' => '880-01'
-                },
-                {
-                  'a' => 'Smagina, S. A.'
-                },
-                {
-                  'e' => 'author.'
-                },
-                {
-                  '0' => 'http://id.loc.gov/authorities/names/no2011031220'
-                },
-                {
-                  '0' => '(SIRSI)3726444'
-                }
-              ]
-            },
-            '880' => {
-              'ind1' => '1',
-              'ind2' => ' ',
-              'subfields' => [
-                {
-                  '6' => '100-01'
-                },
-                {
-                  'a' => 'Смагина, С. А,'
-                },
-                {
-                  'e' => 'author.'
-                }
-              ]
-            }
+            {'100' => {
+               'ind1' => '1',
+               'ind2' => ' ',
+               'subfields' => [
+                 {
+                   '6' => '880-01'
+                 },
+                 {
+                   'a' => 'Smagina, S. A.'
+                 },
+                 {
+                   'e' => 'author.'
+                 },
+                 {
+                   '0' => 'http://id.loc.gov/authorities/names/no2011031220'
+                 },
+                 {
+                   '0' => '(SIRSI)3726444'
+                 }
+               ]
+             },
+             '880' => {
+               'ind1' => '1',
+               'ind2' => ' ',
+               'subfields' => [
+                 {
+                   '6' => '100-01'
+                 },
+                 {
+                   'a' => 'Смагина, С. А,'
+                 },
+                 {
+                   'e' => 'author.'
+                 }
+               ]
+             }}
           ]
         }
       end
@@ -759,42 +759,42 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Contributor do
       let(:marc_hash) do
         {
           'fields' => [
-            '700' => {
-              'ind1' => '1',
-              'ind2' => ' ',
-              'subfields' => [
-                {
-                  '6' => '880-01'
-                },
-                {
-                  'a' => 'Lukin, Alexander,'
-                },
-                {
-                  'e' => 'editor.'
-                },
-                {
-                  '0' => 'http://id.loc.gov/authorities/names/nb99131940'
-                },
-                {
-                  '0' => '(SIRSI)1666028'
-                }
-              ]
-            },
-            '880' => {
-              'ind1' => '1',
-              'ind2' => ' ',
-              'subfields' => [
-                {
-                  '6' => '700-05'
-                },
-                {
-                  'a' => 'Лукин, Александр ,'
-                },
-                {
-                  'e' => 'author.'
-                }
-              ]
-            }
+            {'700' => {
+               'ind1' => '1',
+               'ind2' => ' ',
+               'subfields' => [
+                 {
+                   '6' => '880-01'
+                 },
+                 {
+                   'a' => 'Lukin, Alexander,'
+                 },
+                 {
+                   'e' => 'editor.'
+                 },
+                 {
+                   '0' => 'http://id.loc.gov/authorities/names/nb99131940'
+                 },
+                 {
+                   '0' => '(SIRSI)1666028'
+                 }
+               ]
+             },
+             '880' => {
+               'ind1' => '1',
+               'ind2' => ' ',
+               'subfields' => [
+                 {
+                   '6' => '700-05'
+                 },
+                 {
+                   'a' => 'Лукин, Александр ,'
+                 },
+                 {
+                   'e' => 'author.'
+                 }
+               ]
+             }}
           ]
         }
       end
