@@ -7,13 +7,12 @@ module Cocina
         # Creates Cocina Description objects from MARC records
         class DescriptionBuilder
           BUILDERS = {
-            # TODO: implement these builders for MARC
             title: Title,
             note: Note,
             language: Language,
             contributor: Contributor,
             event: Event,
-            # subject: Subject,
+            subject: Subject,
             form: Form,
             identifier: Identifier,
             adminMetadata: AdminMetadata,
