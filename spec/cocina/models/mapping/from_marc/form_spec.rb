@@ -487,13 +487,12 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Form do
         expect(build).to eq([
                               { value: 'software, multimedia', type: 'resource type', source: { value: 'MODS resource types' } },
                               { value: 'Dataset', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
-                              { value: 'Dataset', type: 'resource type', source: { value: 'SearchWorks resource types' } },
                               { value: 'dataset', type: 'genre', source: { code: 'local' } }
                             ])
       end
     end
 
-    context 'with collection (Leader/07 = c & Leader/06 = p)' do
+    context 'with collection (Leader/07 = c)' do
       # see a6002746
       let(:marc_hash) do
         {
@@ -510,24 +509,6 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Form do
       end
     end
 
-    context 'with collection (Leader/07 = c & Leader/06 = a)' do
-      # see a6002746
-      let(:marc_hash) do
-        {
-          'leader' => '02711cacaa22003617i 4500',
-          'fields' => []
-        }
-      end
-
-      it 'returns collection' do
-        expect(build).to eq [
-          { value: 'collection', type: 'resource type', source: { value: 'MODS resource types' } },
-          { value: 'Collection', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
-          { value: 'Archive / Manuscript', type: 'resource type', source: { value: 'SearchWorks resource types' } }
-        ]
-      end
-    end
-
     context 'with text (Leader/06 = a)' do
       # see a895166
       let(:marc_hash) do
@@ -540,8 +521,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Form do
       it 'returns text' do
         expect(build).to eq [
           { value: 'text', type: 'resource type', source: { value: 'MODS resource types' } },
-          { value: 'Text', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
-          { value: 'Book', type: 'resource type', source: { value: 'SearchWorks resource types' } }
+          { value: 'Text', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
         ]
       end
     end
@@ -573,8 +553,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Form do
           { value: 'manuscript', type: 'resource type', source: { value: 'MODS resource types' } },
           { value: 'notated music', type: 'resource type', source: { value: 'MODS resource types' } },
           { value: 'Manuscript', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
-          { value: 'Notated music', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
-          { value: 'Archive / Manuscript', type: 'resource type', source: { value: 'SearchWorks resource types' } }
+          { value: 'Notated music', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
         ]
       end
     end
@@ -606,8 +585,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Form do
           { value: 'manuscript', type: 'resource type', source: { value: 'MODS resource types' } },
           { value: 'cartographic', type: 'resource type', source: { value: 'MODS resource types' } },
           { value: 'Manuscript', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
-          { value: 'Cartographic', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
-          { value: 'Archive / Manuscript', type: 'resource type', source: { value: 'SearchWorks resource types' } }
+          { value: 'Cartographic', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
         ]
       end
     end
@@ -672,23 +650,42 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Form do
       end
     end
 
-    context 'when record is Software/Multimedia' do
-      context 'when Leader/06 = m and 008[26] is not a/g/j' do
-        let(:marc) do
-          MARC::Record.new.tap do |r|
-            r.leader = '000000m00000000000000000'
-            # 26th position (index 25) = 'z', which is not in excluded_values
-            r.append(MARC::ControlField.new('008', '00000000000000000000000000z00000000000'))
-          end
-        end
+    context 'with software/multimedia (Leader/06 = m and 008/26 not a)' do
+      let(:marc_hash) do
+        {
+          'leader' => '00584cmm a22001575  4500',
+          'fields' => [
+            { '008' => '181113m20149999miu        b  000 0 eng u' }
+          ]
+        }
+      end
 
-        it 'returns Software/Multimedia' do
-          expect(build).to eq([
-                                { value: 'software, multimedia', type: 'resource type', source: { value: 'MODS resource types' } },
-                                { value: 'Digital', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
-                                { value: 'Software/Multimedia', type: 'resource type', source: { value: 'SearchWorks resource types' } }
-                              ])
-        end
+      it 'returns software, multimedia' do
+        expect(build).to eq [
+          { value: 'software, multimedia', type: 'resource type', source: { value: 'MODS resource types' } },
+          { value: 'Digital', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
+        ]
+      end
+    end
+
+    context 'with software/multimedia, dataset (Leader/06 = m and 008/26 = a)' do
+      # a12827086
+      # updates dataset example from form mapping pt 1
+      let(:marc_hash) do
+        {
+          'leader' => '00584cmm a22001575  4500',
+          'fields' => [
+            { '008' => '181113m20149999miu        a  000 0 eng u' }
+          ]
+        }
+      end
+
+      it 'returns software, multimedia and dataset' do
+        expect(build).to eq [
+          { value: 'software, multimedia', type: 'resource type', source: { value: 'MODS resource types' } },
+          { value: 'Dataset', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
+          { value: 'dataset', type: 'genre', source: { code: 'local' } }
+        ]
       end
     end
 
@@ -704,8 +701,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Form do
           { value: 'manuscript', type: 'resource type', source: { value: 'MODS resource types' } },
           { value: 'mixed material', type: 'resource type', source: { value: 'MODS resource types' } },
           { value: 'Manuscript', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
-          { value: 'Mixed material', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
-          { value: 'Archive / Manuscript', type: 'resource type', source: { value: 'SearchWorks resource types' } }
+          { value: 'Mixed material', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
         ]
       end
     end
@@ -737,318 +733,8 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Form do
           { value: 'manuscript', type: 'resource type', source: { value: 'MODS resource types' } },
           { value: 'text', type: 'resource type', source: { value: 'MODS resource types' } },
           { value: 'Manuscript', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
-          { value: 'Text', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
-          { value: 'Archive / Manuscript', type: 'resource type', source: { value: 'SearchWorks resource types' } },
-          { value: 'Book', type: 'resource type', source: { value: 'SearchWorks resource types' } }
+          { value: 'Text', type: 'resource type', source: { value: 'LC Resource Types Scheme' } }
         ]
-      end
-    end
-
-    context 'with 245$h manuscript' do
-      let(:marc_hash) do
-        {
-          'fields' => [
-            {
-              '245' => {
-                'ind1' => '1', 'ind2' => '0',
-                'subfields' => [{ 'h' => 'manuscript' }]
-              }
-            }
-          ]
-        }
-      end
-
-      it 'returns manuscript and text' do
-        expect(build).to eq [
-          { value: 'Archive / Manuscript', type: 'resource type', source: { value: 'SearchWorks resource types' } }
-        ]
-      end
-    end
-
-    context 'with 245$h manuscript/digital' do
-      let(:marc_hash) do
-        {
-          'fields' => [
-            {
-              '245' => {
-                'ind1' => '1', 'ind2' => '0',
-                'subfields' => [{ 'h' => 'manuscript/digital' }]
-              }
-            }
-          ]
-        }
-      end
-
-      it 'returns Archive / Manuscript' do
-        expect(build).to eq [
-          { value: 'Archive / Manuscript', type: 'resource type', source: { value: 'SearchWorks resource types' } }
-        ]
-      end
-    end
-
-    context 'with leader/07 = s and 008 byte 21 = m' do
-      let(:marc_hash) do
-        {
-          'leader' => 'p1952c0s  2200457Ia 4500',
-          'fields' => [
-            { '008' => '000000000000000000000m000000000000000000'}
-          ]
-        }
-      end
-
-      it 'returns Book' do
-        expect(build).to eq [
-          { value: 'Book', type: 'resource type', source: { value: 'SearchWorks resource types' } }
-        ]
-      end
-    end
-
-    context 'when 006[0] = s and 006[4] = m' do
-      let(:marc_hash) do
-        {
-          'leader' => '',
-          'fields' => [
-            { '006' => 's000m00000000000000'}
-          ]
-        }
-      end
-
-      it 'returns Book' do
-        expect(build).to eq [
-          { value: 'Book', type: 'resource type', source: { value: 'SearchWorks resource types' } }
-        ]
-      end
-    end
-
-    context 'when record is a Database' do
-      context 'when leader[7] = s and 008[21] = d' do
-        let(:marc) do
-          MARC::Record.new.tap do |r|
-            r.leader = '0000000s0000000000000000'
-            r.append(MARC::ControlField.new('008', '000000000000000000000d000000000000000000'))
-          end
-        end
-
-        it 'returns Database' do
-          expect(build).to eq [
-            { value: 'Database', type: 'resource type', source: { value: 'SearchWorks resource types' } }
-          ]
-        end
-      end
-
-      context 'when 006[0] = s and 006[4] = d' do
-        let(:marc) do
-          MARC::Record.new.tap do |r|
-            r.append(MARC::ControlField.new('006', 's000d00000000000000'))
-          end
-        end
-
-        it 'returns Database' do
-          expect(build).to eq [
-            { value: 'Database', type: 'resource type', source: { value: 'SearchWorks resource types' } }
-          ]
-        end
-      end
-
-      context 'when Leader/06 = m and 008[26] = j' do
-        let(:marc) do
-          MARC::Record.new.tap do |r|
-            r.leader = '000000m00000000000000000'
-            r.append(MARC::ControlField.new('008', '00000000000000000000000000j00000000000'))
-          end
-        end
-
-        it 'returns Database' do
-          expect(build).to eq([
-                                { value: 'software, multimedia', type: 'resource type', source: { value: 'MODS resource types' } },
-                                { value: 'Digital', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
-                                { value: 'Database', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
-                                { value: 'Database', type: 'resource type', source: { value: 'SearchWorks resource types' } }
-                              ])
-        end
-      end
-    end
-
-    context 'when record is an Image' do
-      context 'when Leader/06 = k and 008[33] matches [aciklnopst 0-9|]' do
-        let(:marc) do
-          MARC::Record.new.tap do |r|
-            r.leader = '000000k00000000000000000'
-            r.append(MARC::ControlField.new('008', '000000000000000000000000000000000a0000'))
-          end
-        end
-
-        it 'returns Image' do
-          expect(build).to eq [
-            { value: 'still image', type: 'resource type', source: { value: 'MODS resource types' } },
-            { value: 'Still image', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
-            { value: 'Image', type: 'resource type', source: { value: 'SearchWorks resource types' } }
-          ]
-        end
-      end
-
-      context 'when Leader/06 = g and 008[33] matches [ aciklnopst]' do
-        let(:marc) do
-          MARC::Record.new.tap do |r|
-            r.leader = '000000g00000000000000000'
-            r.append(MARC::ControlField.new('008', '000000000000000000000000000000000k0000'))
-          end
-        end
-
-        it 'returns Image' do
-          expect(build).to eq [
-            { value: 'moving image', type: 'resource type', source: { value: 'MODS resource types' } },
-            { value: 'Moving image', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
-            { value: 'Image', type: 'resource type', source: { value: 'SearchWorks resource types' } }
-          ]
-        end
-      end
-
-      context 'when record is an Image based on 245h terms' do
-        let(:marc) do
-          MARC::Record.new.tap do |r|
-            r.leader = '000000a00000000000000000'
-            r.append(MARC::DataField.new('245', '1', ' ',
-                                         MARC::Subfield.new('a', 'Example title'),
-                                         MARC::Subfield.new('h', 'This is a technical drawing')))
-          end
-        end
-
-        it 'returns Image' do
-          expect(build).to eq [
-            { value: 'text', type: 'resource type', source: { value: 'MODS resource types' } },
-            { value: 'Text', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
-            { value: 'Image', type: 'resource type', source: { value: 'SearchWorks resource types' } }
-          ]
-        end
-      end
-
-      context 'when record is an Image based on 007[0] = k|r and 245h = kit' do
-        let(:marc) do
-          MARC::Record.new.tap do |r|
-            r.leader = '000000a00000000000000000'
-            r.append(MARC::ControlField.new('007', 'k0000000000'))
-            r.append(MARC::DataField.new('245', '1', ' ',
-                                         MARC::Subfield.new('a', 'Example kit title'),
-                                         MARC::Subfield.new('h', 'kit')))
-          end
-        end
-
-        it 'returns Image' do
-          expect(build).to eq [
-            { value: 'text', type: 'resource type', source: { value: 'MODS resource types' } },
-            { value: 'Text', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
-            { value: 'Image', type: 'resource type', source: { value: 'SearchWorks resource types' } }
-          ]
-        end
-      end
-
-      context 'when record is an Image|Photo' do
-        context 'when 007[0] = k and 007[1] in [g, h, r, v]' do
-          let(:marc) do
-            MARC::Record.new.tap do |r|
-              r.leader = '000000a00000000000000000'
-              r.append(MARC::ControlField.new('007', 'kg0000000000'))
-            end
-          end
-
-          it 'returns Image|Photo' do
-            expect(build).to eq [
-              { value: 'text', type: 'resource type', source: { value: 'MODS resource types' } },
-              { value: 'Text', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
-              { value: 'Image|Photo', type: 'resource type', source: { value: 'SearchWorks resource types' } }
-            ]
-          end
-        end
-      end
-
-      context 'when record is an Image|Poster' do
-        context 'when 007[0] = k and 007[1] = k' do
-          let(:marc) do
-            MARC::Record.new.tap do |r|
-              r.leader = '000000a00000000000000000'
-              r.append(MARC::ControlField.new('007', 'kk0000000000'))
-            end
-          end
-
-          it 'returns Image|Poster' do
-            expect(build).to eq [
-              { value: 'text', type: 'resource type', source: { value: 'MODS resource types' } },
-              { value: 'Text', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
-              { value: 'Image|Poster', type: 'resource type', source: { value: 'SearchWorks resource types' } }
-            ]
-          end
-        end
-      end
-
-      context 'when record is an Image|Slide' do
-        context 'when 007[0] = g and 007[1] = s' do
-          let(:marc) do
-            MARC::Record.new.tap do |r|
-              r.leader = '000000a00000000000000000'
-              r.append(MARC::ControlField.new('007', 'gs0000000000'))
-            end
-          end
-
-          it 'returns Image|Slide' do
-            expect(build).to eq [
-              { value: 'text', type: 'resource type', source: { value: 'MODS resource types' } },
-              { value: 'Text', type: 'resource type', source: { value: 'LC Resource Types Scheme' } },
-              { value: 'Image|Slide', type: 'resource type', source: { value: 'SearchWorks resource types' } }
-            ]
-          end
-        end
-      end
-    end
-
-    context 'when the match is based on regex matching in a MARC subfield' do
-      context 'when 338h term contains piano roll terms' do
-        let(:marc) do
-          MARC::Record.new.tap do |r|
-            r.append(MARC::DataField.new('338', '1', ' ',
-                                         MARC::Subfield.new('a', 'This is a sentence containing the phrase piano roll')))
-          end
-        end
-
-        it 'returns Sound recording|Piano/Organ roll' do
-          expect(build).to eq [
-            { value: 'Sound recording', type: 'resource type', source: { value: 'SearchWorks resource types' } },
-            { value: 'Sound recording|Piano/Organ roll', type: 'resource type', source: { value: 'SearchWorks resource types' } }
-          ]
-        end
-      end
-
-      context 'when 245n contains video terms' do
-        let(:marc) do
-          MARC::Record.new.tap do |r|
-            r.leader = '000000000000000000000000'
-            r.append(MARC::DataField.new('245', '1', ' ',
-                                         MARC::Subfield.new('n', 'A set of video recordings')))
-          end
-        end
-
-        it 'returns Video/Film' do
-          expect(build).to eq [
-            { value: 'Video/Film', type: 'resource type', source: { value: 'SearchWorks resource types' } }
-          ]
-        end
-      end
-
-      context 'when 538a contains blu-ray terms' do
-        let(:marc) do
-          MARC::Record.new.tap do |r|
-            r.leader = '000000000000000000000000'
-            r.append(MARC::DataField.new('538', '1', ' ',
-                                         MARC::Subfield.new('a', 'A set of blu-ray discs')))
-          end
-        end
-
-        it 'returns Video/Film|Blu-ray' do
-          expect(build).to eq [
-            { value: 'Video/Film', type: 'resource type', source: { value: 'SearchWorks resource types' } },
-            { value: 'Video/Film|Blu-ray', type: 'resource type', source: { value: 'SearchWorks resource types' } }
-          ]
-        end
       end
     end
   end
