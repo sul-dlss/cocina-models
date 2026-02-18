@@ -30,7 +30,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::Description do
                                     }
                                   ],
                                   adminMetadata: {
-                                    note: [{ value: "Converted from MARC to Cocina #{Date.today.iso8601}", type: 'record origin' }]
+                                    note: [{ value: "Converted from MARC to Cocina #{Time.zone.today.iso8601}", type: 'record origin' }]
                                   }
                                 })
     end

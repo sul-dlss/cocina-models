@@ -66,7 +66,7 @@ module Cocina
           end
 
           def note
-            [{ value: "Converted from MARC to Cocina #{Date.today.iso8601}", type: 'record origin' }]
+            [{ value: "Converted from MARC to Cocina #{Time.zone.today.iso8601}", type: 'record origin' }]
           end
 
           attr_reader :marc

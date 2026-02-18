@@ -17,6 +17,13 @@ SimpleCov.start do
   end
 end
 
+# NOTE: This ensures that the test suite runs with a consistent timezone,
+# which is important for tests that involve date/time values.
+# If the timezone were not set, tests that rely on the current date or time
+# could fail when run in different environments or at different times of day.
+# If not set, Time.zone may be nil.
+Time.zone = 'UTC'
+
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = '.rspec_status'

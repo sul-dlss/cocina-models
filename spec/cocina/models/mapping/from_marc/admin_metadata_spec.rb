@@ -47,7 +47,7 @@ RSpec.describe Cocina::Models::Mapping::FromMarc::AdminMetadata do
                                      date: [{ value: '20250614', encoding: { code: 'iso8601' } }]
                                    }],
                                    identifier: [{ value: 'in00000144356', type: 'FOLIO' }],
-                                   note: [{ value: "Converted from MARC to Cocina #{Date.today.iso8601}", type: 'record origin' }]
+                                   note: [{ value: "Converted from MARC to Cocina #{Time.zone.today.iso8601}", type: 'record origin' }]
                                  })
       end
     end
