@@ -10,7 +10,6 @@ require 'json_schemer'
 require 'active_support'
 require 'active_support/core_ext'
 require 'thor'
-require 'marc'
 
 # Help Zeitwerk find some of our classes
 class CocinaModelsInflector < Zeitwerk::Inflector
@@ -23,7 +22,6 @@ class CocinaModelsInflector < Zeitwerk::Inflector
     'dro_structural' => 'DROStructural',
     'dro_with_metadata' => 'DROWithMetadata',
     'libraries_doi' => 'LibrariesDOI',
-    'marc_relators' => 'MARC_RELATORS',
     'preregistered_repository_doi' => 'PreregisteredRepositoryDOI',
     'repository_doi' => 'RepositoryDOI',
     'request_dro' => 'RequestDRO',
