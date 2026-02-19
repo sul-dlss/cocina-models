@@ -1461,6 +1461,9 @@ components:
       type: object
       #additionalProperties: false
       properties:
+        description:
+          description: Descriptive text about an image. This can be used as alt text or for indexing. This should be 130 characters or fewer as this is best practice for alt text.
+          type: string
         height:
           description: Height in pixels
           type: integer
