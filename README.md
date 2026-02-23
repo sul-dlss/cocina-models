@@ -54,6 +54,8 @@ Beyond what is necessary to test the generator, the Cocina model classes are not
 
 If there is a possibility that a model, mapping, or validation change will conflict with some existing objects then [validate-cocina](https://github.com/sul-dlss/dor-services-app/blob/main/bin/validate-cocina) should be used for testing. This must be run on the `sdr-infra` VM since it requires deploying a branch of cocina-models.
 
+For background on object validation, as it relates to migrating versions, see: https://github.com/sul-dlss/dor-services-app/wiki/Migrating-Cocina
+
 1. Create a cocina-models branch containing the proposed change and push to GitHub.
 2. On the `sdr-infra` VM, while logged in as the `deploy` user, check out `main`, update the `Gemfile` so that cocina-models references the branch, and `bundle install`.
 3. Select the appropriate environment vars below - they are set to values in puppet.  (first 2 lines are the same;  last two lines use different variables)
@@ -87,6 +89,13 @@ export DATABASE_PASSWORD=$DOR_SERVICES_DB_PROD_PWD
 export RUBYOPT='-W:no-deprecated -W:no-experimental'
 RAILS_ENV=production bin/validate-cocina -p 8
 ```
+
+To run against head_version and latest_closed_version (when the object is open) only, use the `-l` option for `latest_versions_only`
+```
+export RUBYOPT='-W:no-deprecated -W:no-experimental'
+RAILS_ENV=production bin/validate-cocina -p 8 -l
+```
+
 5. Check `validate-cocina.csv` for validation errors.
 
 ## Running Reports in DSA
