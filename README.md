@@ -7,7 +7,7 @@
 
 The cocina-models gem is a Ruby implementation of the Stanford Digital Repository (SDR) data model, which we named "Cocina." The data being modeled is oriented around digital repository objects.
 
-The data model is expressed in an OpenAPI specification that lives in this codebase. Expressing the model in such a spec allows for rich validation (using gems such as `OpenAPIParser` and `committee`). The gem provides a set of generators (see below) to generate Ruby classes from the specification, with modeling provided by dry-struct / dry-types. Together, these provide a way for consumers to validate objects against models and to manipulate those objects.
+The data model is expressed in an OpenAPI specification that lives in this codebase. Expressing the model in such a spec allows for rich validation (using gems such as `json_schemer`). The gem provides a set of generators (see below) to generate Ruby classes from the specification, with modeling provided by dry-struct / dry-types. Together, these provide a way for consumers to validate objects against models and to manipulate those objects.
 
 Note that the data model encodes properties as camelCase, which the team believes to be consistent with other HTTP APIs and the original design of the Cocina data model. While using camelCase in Ruby code may look and feel wrong, we did explore automagic conversion between camelCase in the model and snake_case in the Ruby context. We ultimately concluded that we have enough representations of the data model in enough codebases to reasonably worry about data inconsistency problems, none of which we need in our work on SDR.
 
@@ -20,9 +20,9 @@ Set the PURL url base:
 Cocina::Models::Mapping::Purl.base_url = Settings.release.purl_base_url
 ```
 
-## Generate models from openapi.yml
+## Generate models from schema.json
 
-Note that only a small subset of openapi is supported. If you are using a new openapi feature or pattern, verify that the model will be generated as expected.
+Note that only a small subset of JSON Schema is supported. If you are using a new JSON Schema feature or pattern, verify that the model will be generated as expected.
 
 ### All
 ```
@@ -46,9 +46,9 @@ exe/generator generate_descriptive_docs
 
 ## Testing
 
-The generator is tested via its output when run against `openapi.yml`, viz., the Cocina model classes. Thus, `generate` should be run after any changes to `openapi.yml`.
+The generator is tested via its output when run against `schema.json`, viz., the Cocina model classes. Thus, `generate` should be run after any changes to `schema.json`.
 
-Beyond what is necessary to test the generator, the Cocina model classes are not tested, i.e., they are assumed to be as specified in `openapi.yml`.
+Beyond what is necessary to test the generator, the Cocina model classes are not tested, i.e., they are assumed to be as specified in `schema.json`.
 
 ## Testing validation changes
 
@@ -104,7 +104,7 @@ See https://github.com/sul-dlss/dor-services-app/blob/main/README.md#running-rep
 
 
 ## Releasing a patch change
-A patch change is a change that (1) does not affect the data model; (2) does not alter the openapi.yml; and more broadly (3) does not matter if some applications have the change and others do not.
+A patch change is a change that (1) does not affect the data model; (2) does not alter the schema.json; and more broadly (3) does not matter if some applications have the change and others do not.
 
 A patch change can be released as part of regular dependency updates or selectively released for individual applications.
 
@@ -155,13 +155,11 @@ This list of services is known to include:
 
 **NOTE**: You can skip step 3A if there have not been any changes to the `cocina-models` OpenAPI spec since the prior release.
 
-The cocina-models gem is used in applications that have an API specification that accepts Cocina models. Make sure that the `openapi.yml` for these two applications includes the `openapi.yml` schema changes made in cocina-models.
-
-Copy and paste the cocina-models schemas to each project's `openapi.yml`. By convention, these schemas are listed first, followed by the application-specific schemas.
+The cocina-models gem is used in applications that have an API specification that accepts Cocina models.
 
 #### Step 3B: Bump gems and create the PRs
 
-If you updated the `openapi.yml` in step 3A, use the same PR for step 3B. Why? When [dor-services-app](https://github.com/sul-dlss/dor-services-app), for example, is updated to use the new models (via the auto-update script), these clients should be updated at the same time or there is risk of models produced by dor-services-app not being acceptable to the clients.
+If you updated the `schema.json` in step 3A, use the same PR for step 3B. Why? When [dor-services-app](https://github.com/sul-dlss/dor-services-app), for example, is updated to use the new models (via the auto-update script), these clients should be updated at the same time or there is risk of models produced by dor-services-app not being acceptable to the clients.
 
 1. Perform `bundle update --conservative cocina-models dor-services-client` in the  services above and make PRs for those repos if they don't already exist. You may first need to update how these gems are pinned in the `Gemfile` in order to bump them.
 2. Note that sdr-client is not currently used in these applications, but if it were, would also need to be bumped to the latest release.

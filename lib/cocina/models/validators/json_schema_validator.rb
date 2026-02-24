@@ -3,16 +3,14 @@
 module Cocina
   module Models
     module Validators
-      # Perform validation against openapi
-      class OpenApiValidator
+      # Perform validation against JSON schema
+      class JsonSchemaValidator
         def self.validate(clazz, attributes)
           return unless clazz.name
 
           method_name = clazz.name.split('::').last
 
-          if %w[DRO RequestDRO AdminPolicy RequestAdminPolicy Collection RequestCollection DROWithMetadata].include? method_name
-            attributes['cocinaVersion'] = Cocina::Models::VERSION
-          end
+          attributes['cocinaVersion'] = Cocina::Models::VERSION if %w[DRO RequestDRO AdminPolicy RequestAdminPolicy Collection RequestCollection DROWithMetadata].include? method_name
 
           errors = openapi.ref("#/components/schemas/#{method_name}").validate(attributes.as_json).to_a
           return unless errors.any?

@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Cocina::Generator::SchemaRef do
-  # This tests the outcome of running exe/generator generate against openapi.yml.
+  # This tests the outcome of running exe/generator generate against schema.json.
   context 'when referenced schema is required' do
     # AdminPolicy.administrative is a required AdminPolicyAdministrative
     context 'when provided' do

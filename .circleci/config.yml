@@ -12,4 +12,4 @@ workflows:
           before-test:
             - run:
                 name: validate openapi
-                command: bin/validate-openapi openapi.yml
+                command: bin/validate-schema schema.json

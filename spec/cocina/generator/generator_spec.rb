@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Cocina::Generator::Generator do
-  # This tests the outcome of running exe/generator generate against openapi.yml.
+  # This tests the outcome of running exe/generator generate against schema.json.
   it 'generates vocabs' do
     expect(File).to exist('lib/cocina/models/object_type.rb')
     expect(File).to exist('lib/cocina/models/file_set_type.rb')

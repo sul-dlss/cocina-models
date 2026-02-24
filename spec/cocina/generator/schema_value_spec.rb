@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Cocina::Generator::SchemaValue do
-  # This tests the outcome of running exe/generator generate against openapi.yml.
+  # This tests the outcome of running exe/generator generate against schema.json.
 
   context 'when property is an integer' do
     # RequestDRO.version is an integer

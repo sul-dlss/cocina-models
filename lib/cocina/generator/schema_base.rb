@@ -40,6 +40,8 @@ module Cocina
       def quote(item)
         return item unless schema_doc.type == 'string'
 
+        return 'nil' if item.nil?
+
         "'#{item}'"
       end
 

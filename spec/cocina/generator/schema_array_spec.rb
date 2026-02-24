@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Cocina::Generator::SchemaArray do
-  # This tests the outcome of running exe/generator generate against openapi.yml.
+  # This tests the outcome of running exe/generator generate against schema.json.
   context 'when array is required' do
     # Description.title is required
     context 'when array is provided' do

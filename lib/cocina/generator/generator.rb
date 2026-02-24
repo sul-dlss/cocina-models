@@ -8,7 +8,7 @@ module Cocina
     class Generator < Thor # rubocop:disable Metrics/ClassLength
       include Thor::Actions
 
-      class_option :openapi, desc: 'Path of openapi.yml', default: 'openapi.yml'
+      class_option :schema, desc: 'Path of schema.json', default: 'schema.json'
       class_option :output, desc: 'Path for output', default: 'lib/cocina/models'
 
       def self.source_root
@@ -96,9 +96,9 @@ module Cocina
       end
 
       def schemas
-        @schemas ||= Cocina::OpenApiWrapper.parse(YAML.load_file(options[:openapi]), strict_reference_validation: true)
-                                           .components
-                                           .schemas
+        file_content = File.read(options[:schema])
+        data = JSON.parse(file_content)
+        @schemas ||= Cocina::JsonSchemaWrapper.parse(data, strict_reference_validation: true).schemas
       end
 
       def schema_for(schema_name, lite: false)
