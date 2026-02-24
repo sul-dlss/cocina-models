@@ -4,10 +4,12 @@ orbs:
 workflows:
   build:
     jobs:
-      - ruby-rails/validate-api:
-          name: validate
       - ruby-rails/lint:
           name: lint
       - ruby-rails/test-gem:
           name: test
           context: dlss
+          before-test:
+            - run:
+                name: validate openapi
+                command: bin/validate-openapi openapi.yml
