@@ -55,10 +55,7 @@
           }
         }
       },
-      "required": [
-        "members",
-        "name"
-      ]
+      "required": ["members", "name"]
     },
     "AccessRoleMember": {
       "description": "Represents a user or group that is a member of an AccessRole",
@@ -67,19 +64,13 @@
         "type": {
           "description": "Name of role",
           "type": "string",
-          "enum": [
-            "sunetid",
-            "workgroup"
-          ]
+          "enum": ["sunetid", "workgroup"]
         },
         "identifier": {
           "type": "string"
         }
       },
-      "required": [
-        "identifier",
-        "type"
-      ]
+      "required": ["identifier", "type"]
     },
     "AdminPolicy": {
       "type": "object",
@@ -89,9 +80,7 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "https://cocina.sul.stanford.edu/models/admin_policy"
-          ]
+          "enum": ["https://cocina.sul.stanford.edu/models/admin_policy"]
         },
         "externalIdentifier": {
           "$ref": "#/$defs/Druid"
@@ -125,9 +114,7 @@
           "$ref": "#/$defs/Druid"
         }
       },
-      "required": [
-        "hasAdminPolicy"
-      ]
+      "required": ["hasAdminPolicy"]
     },
     "AdminPolicyAccessTemplate": {
       "description": "Provides the template of access settings that is copied to the items governed by an AdminPolicy. This is almost the same as DROAccess, but it provides no defaults and has no embargo.",
@@ -207,11 +194,7 @@
           }
         }
       },
-      "required": [
-        "hasAdminPolicy",
-        "hasAgreement",
-        "accessTemplate"
-      ]
+      "required": ["hasAdminPolicy", "hasAgreement", "accessTemplate"]
     },
     "AdminPolicyWithMetadata": {
       "description": "Admin Policy with addition object metadata.",
@@ -284,37 +267,25 @@
         "view": {
           "description": "Access level.",
           "type": "string",
-          "enum": [
-            "citation-only"
-          ]
+          "enum": ["citation-only"]
         },
         "download": {
           "description": "Download access level.",
           "type": "string",
-          "enum": [
-            "none"
-          ]
+          "enum": ["none"]
         },
         "location": {
           "description": "Not used for this access type, must be null.",
-          "type": "string",
-          "nullable": true,
-          "enum": [
-            null
-          ]
+          "type": ["string", "null"],
+          "enum": [null]
         },
         "controlledDigitalLending": {
           "type": "boolean",
           "default": false,
-          "enum": [
-            false
-          ]
+          "enum": [false]
         }
       },
-      "required": [
-        "view",
-        "download"
-      ]
+      "required": ["view", "download"]
     },
     "CocinaVersion": {
       "description": "The version of Cocina with which this object conforms.",
@@ -383,10 +354,7 @@
         "view": {
           "description": "Access level",
           "type": "string",
-          "enum": [
-            "world",
-            "dark"
-          ],
+          "enum": ["world", "dark"],
           "default": "dark"
         },
         "copyright": {
@@ -492,24 +460,17 @@
         "view": {
           "description": "Access level.",
           "type": "string",
-          "enum": [
-            "stanford"
-          ]
+          "enum": ["stanford"]
         },
         "download": {
           "description": "Download access level.",
           "type": "string",
-          "enum": [
-            "none"
-          ]
+          "enum": ["none"]
         },
         "location": {
           "description": "Not used for this access type, must be null.",
-          "type": "string",
-          "nullable": true,
-          "enum": [
-            null
-          ]
+          "type": ["string", "null"],
+          "enum": [null]
         },
         "controlledDigitalLending": {
           "description": "Available for controlled digital lending.",
@@ -517,16 +478,12 @@
           "default": false
         }
       },
-      "required": [
-        "view",
-        "download"
-      ]
+      "required": ["view", "download"]
     },
     "Copyright": {
       "description": "The human readable copyright statement that applies",
       "example": "Copyright World Trade Organization",
-      "type": "string",
-      "nullable": true
+      "type": ["string", "null"]
     },
     "CreatedInFolioIdentifier": {
       "description": "A record identifier created in Folio",
@@ -699,33 +656,24 @@
           "description": "Access level.",
           "type": "string",
           "default": "dark",
-          "enum": [
-            "dark"
-          ]
+          "enum": ["dark"]
         },
         "download": {
           "description": "Download access level.",
           "type": "string",
           "default": "none",
-          "enum": [
-            "none"
-          ]
+          "enum": ["none"]
         },
         "location": {
           "description": "Not used for this access type, must be null.",
-          "type": "string",
-          "nullable": true,
+          "type": ["string", "null"],
           "default": null,
-          "enum": [
-            null
-          ]
+          "enum": [null]
         },
         "controlledDigitalLending": {
           "type": "boolean",
           "default": false,
-          "enum": [
-            false
-          ]
+          "enum": [false]
         }
       }
     },
@@ -742,9 +690,7 @@
               "$ref": "#/$defs/Purl"
             }
           },
-          "required": [
-            "purl"
-          ]
+          "required": ["purl"]
         }
       ]
     },
@@ -1144,9 +1090,7 @@
               "$ref": "#/$defs/UseAndReproductionStatement"
             }
           },
-          "required": [
-            "releaseDate"
-          ]
+          "required": ["releaseDate"]
         }
       ]
     },
@@ -1224,9 +1168,7 @@
         "type": {
           "description": "The content type of the File.",
           "type": "string",
-          "enum": [
-            "https://cocina.sul.stanford.edu/models/file"
-          ]
+          "enum": ["https://cocina.sul.stanford.edu/models/file"]
         },
         "externalIdentifier": {
           "description": "Identifier for the resource within the SDR architecture but outside of the repository. UUID. Constant across resource versions. What clients will use calling the repository.",
@@ -1335,11 +1277,7 @@
           "default": false
         }
       },
-      "required": [
-        "publish",
-        "sdrPreserve",
-        "shelve"
-      ]
+      "required": ["publish", "sdrPreserve", "shelve"]
     },
     "FileSet": {
       "description": "Relevant groupings of Files. Also called a File Grouping.",
@@ -1400,8 +1338,7 @@
     },
     "FileUse": {
       "description": "Use for the File (e.g. 'transcription' for OCR).",
-      "type": "string",
-      "nullable": true
+      "type": ["string", "null"]
     },
     "FolioCatalogLink": {
       "description": "A linkage between an object and a Folio catalog record",
@@ -1410,10 +1347,7 @@
         "catalog": {
           "description": "Catalog that is the source of the linked record.",
           "type": "string",
-          "enum": [
-            "folio",
-            "previous folio"
-          ],
+          "enum": ["folio", "previous folio"],
           "example": "folio"
         },
         "refresh": {
@@ -1444,11 +1378,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "catalog",
-        "catalogRecordId",
-        "refresh"
-      ]
+      "required": ["catalog", "catalogRecordId", "refresh"]
     },
     "Geographic": {
       "description": "Geographic metadata",
@@ -1459,9 +1389,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "iso19139"
-      ]
+      "required": ["iso19139"]
     },
     "Identification": {
       "type": "object",
@@ -1482,9 +1410,7 @@
           "$ref": "#/$defs/SourceId"
         }
       },
-      "required": [
-        "sourceId"
-      ]
+      "required": ["sourceId"]
     },
     "LaneMedicalBarcode": {
       "description": "The barcode associated with a Lane Medical Library DRO object, prefixed with 245",
@@ -1547,9 +1473,7 @@
         "status": {
           "description": "Status of the language relative to other parallel language elements (e.g. the primary language)",
           "type": "string",
-          "enum": [
-            "primary"
-          ]
+          "enum": ["primary"]
         },
         "standard": {
           "$ref": "#/$defs/Standard"
@@ -1580,8 +1504,7 @@
     },
     "LanguageTag": {
       "description": "BCP 47 language tag: https://www.rfc-editor.org/rfc/rfc4646.txt -- other applications (like media players) expect language codes of this format, see e.g. https://videojs.com/guides/text-tracks/#srclang",
-      "type": "string",
-      "nullable": true
+      "type": ["string", "null"]
     },
     "LibrariesDOI": {
       "type": "string",
@@ -1591,8 +1514,7 @@
     },
     "License": {
       "description": "The license governing reuse of the DRO. Should be an IRI for known licenses (i.e. CC, RightsStatement.org URI, etc.).",
-      "type": "string",
-      "nullable": true,
+      "type": ["string", "null"],
       "enum": [
         null,
         "https://www.gnu.org/licenses/agpl.txt",
@@ -1633,43 +1555,25 @@
         "view": {
           "description": "Access level.",
           "type": "string",
-          "enum": [
-            "location-based"
-          ]
+          "enum": ["location-based"]
         },
         "download": {
           "description": "Download access level.",
           "type": "string",
-          "enum": [
-            "location-based",
-            "none"
-          ]
+          "enum": ["location-based", "none"]
         },
         "location": {
           "description": "If access or download is 'location-based', which location should have access.",
           "type": "string",
-          "enum": [
-            "spec",
-            "music",
-            "ars",
-            "art",
-            "hoover",
-            "m&m"
-          ]
+          "enum": ["spec", "music", "ars", "art", "hoover", "m&m"]
         },
         "controlledDigitalLending": {
           "type": "boolean",
           "default": false,
-          "enum": [
-            false
-          ]
+          "enum": [false]
         }
       },
-      "required": [
-        "view",
-        "download",
-        "location"
-      ]
+      "required": ["view", "download", "location"]
     },
     "LocationBasedDownloadAccess": {
       "type": "object",
@@ -1677,43 +1581,25 @@
         "view": {
           "description": "Access level.",
           "type": "string",
-          "enum": [
-            "stanford",
-            "world"
-          ]
+          "enum": ["stanford", "world"]
         },
         "download": {
           "description": "Download access level.",
           "type": "string",
-          "enum": [
-            "location-based"
-          ]
+          "enum": ["location-based"]
         },
         "location": {
           "description": "Which location should have download access.",
           "type": "string",
-          "enum": [
-            "spec",
-            "music",
-            "ars",
-            "art",
-            "hoover",
-            "m&m"
-          ]
+          "enum": ["spec", "music", "ars", "art", "hoover", "m&m"]
         },
         "controlledDigitalLending": {
           "type": "boolean",
           "default": false,
-          "enum": [
-            false
-          ]
+          "enum": [false]
         }
       },
-      "required": [
-        "view",
-        "download",
-        "location"
-      ]
+      "required": ["view", "download", "location"]
     },
     "MessageDigest": {
       "description": "The output of the message digest algorithm.",
@@ -1722,20 +1608,14 @@
         "type": {
           "description": "The algorithm that was used",
           "type": "string",
-          "enum": [
-            "md5",
-            "sha1"
-          ]
+          "enum": ["md5", "sha1"]
         },
         "digest": {
           "description": "The digest value hexidecimal encoded",
           "type": "string"
         }
       },
-      "required": [
-        "type",
-        "digest"
-      ]
+      "required": ["type", "digest"]
     },
     "MigratedFromSymphonyIdentifier": {
       "description": "A record identifier migrated from Symphony",
@@ -1768,9 +1648,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "lock"
-      ]
+      "required": ["lock"]
     },
     "PreregisteredRepositoryDOI": {
       "type": "string",
@@ -1957,9 +1835,7 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "https://cocina.sul.stanford.edu/models/admin_policy"
-          ]
+          "enum": ["https://cocina.sul.stanford.edu/models/admin_policy"]
         },
         "label": {
           "type": "string"
@@ -1967,9 +1843,7 @@
         "version": {
           "type": "integer",
           "default": 1,
-          "enum": [
-            1
-          ]
+          "enum": [1]
         },
         "administrative": {
           "$ref": "#/$defs/AdminPolicyAdministrative"
@@ -2027,9 +1901,7 @@
         "version": {
           "type": "integer",
           "default": 1,
-          "enum": [
-            1
-          ]
+          "enum": [1]
         },
         "access": {
           "$ref": "#/$defs/CollectionAccess"
@@ -2086,9 +1958,7 @@
         "version": {
           "type": "integer",
           "default": 1,
-          "enum": [
-            1
-          ]
+          "enum": [1]
         },
         "access": {
           "$ref": "#/$defs/DROAccess"
@@ -2236,18 +2106,14 @@
           "type": "string"
         }
       },
-      "required": [
-        "title"
-      ]
+      "required": ["title"]
     },
     "RequestFile": {
       "type": "object",
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "https://cocina.sul.stanford.edu/models/file"
-          ]
+          "enum": ["https://cocina.sul.stanford.edu/models/file"]
         },
         "label": {
           "type": "string"
@@ -2339,12 +2205,7 @@
           "$ref": "#/$defs/RequestFileSetStructural"
         }
       },
-      "required": [
-        "label",
-        "type",
-        "version",
-        "structural"
-      ]
+      "required": ["label", "type", "version", "structural"]
     },
     "RequestFileSetStructural": {
       "description": "Structural metadata",
@@ -2375,9 +2236,7 @@
           "$ref": "#/$defs/SourceId"
         }
       },
-      "required": [
-        "sourceId"
-      ]
+      "required": ["sourceId"]
     },
     "Sequence": {
       "description": "A sequence or ordering of resources within a Collection or Object.",
@@ -2393,10 +2252,7 @@
         "viewingDirection": {
           "description": "The direction that a sequence of canvases should be displayed to the user",
           "type": "string",
-          "enum": [
-            "right-to-left",
-            "left-to-right"
-          ]
+          "enum": ["right-to-left", "left-to-right"]
         }
       }
     },
@@ -2469,8 +2325,7 @@
     },
     "StandardBarcode": {
       "description": "The standard barcode associated with a DRO object, prefixed with 36105",
-      "type": "string",
-      "nullable": true,
+      "type": ["string", "null"],
       "pattern": "^36105[0-9]{9}$",
       "example": "36105010362304"
     },
@@ -2480,37 +2335,25 @@
         "view": {
           "description": "Access level.",
           "type": "string",
-          "enum": [
-            "stanford"
-          ]
+          "enum": ["stanford"]
         },
         "download": {
           "description": "Download access level.",
           "type": "string",
-          "enum": [
-            "stanford"
-          ]
+          "enum": ["stanford"]
         },
         "location": {
           "description": "Not used for this access type, must be null.",
-          "type": "string",
-          "nullable": true,
-          "enum": [
-            null
-          ]
+          "type": ["string", "null"],
+          "enum": [null]
         },
         "controlledDigitalLending": {
           "type": "boolean",
           "default": false,
-          "enum": [
-            false
-          ]
+          "enum": [false]
         }
       },
-      "required": [
-        "view",
-        "download"
-      ]
+      "required": ["view", "download"]
     },
     "SymphonyCatalogLink": {
       "description": "A linkage between an object and a Symphony catalog record",
@@ -2519,10 +2362,7 @@
         "catalog": {
           "description": "Catalog that is the source of the linked record.",
           "type": "string",
-          "enum": [
-            "symphony",
-            "previous symphony"
-          ],
+          "enum": ["symphony", "previous symphony"],
           "example": "symphony"
         },
         "refresh": {
@@ -2537,11 +2377,7 @@
           "example": "11403803"
         }
       },
-      "required": [
-        "catalog",
-        "catalogRecordId",
-        "refresh"
-      ]
+      "required": ["catalog", "catalogRecordId", "refresh"]
     },
     "Title": {
       "type": "object",
@@ -2553,33 +2389,23 @@
           "anyOf": [
             {
               "type": "object",
-              "required": [
-                "value"
-              ]
+              "required": ["value"]
             },
             {
               "type": "object",
-              "required": [
-                "structuredValue"
-              ]
+              "required": ["structuredValue"]
             },
             {
               "type": "object",
-              "required": [
-                "parallelValue"
-              ]
+              "required": ["parallelValue"]
             },
             {
               "type": "object",
-              "required": [
-                "groupedValue"
-              ]
+              "required": ["groupedValue"]
             },
             {
               "type": "object",
-              "required": [
-                "valueAt"
-              ]
+              "required": ["valueAt"]
             }
           ]
         }
@@ -2588,8 +2414,7 @@
     "UseAndReproductionStatement": {
       "description": "The human readable use and reproduction statement that applies",
       "example": "Property rights reside with the repository. Literary rights reside with the creators of the documents or their heirs. To obtain permission to publish or reproduce, please contact the Public Services Librarian of the Dept. of Special Collections (http://library.stanford.edu/spc).",
-      "type": "string",
-      "nullable": true
+      "type": ["string", "null"]
     },
     "WorldAccess": {
       "type": "object",
@@ -2597,39 +2422,25 @@
         "view": {
           "description": "Access level.",
           "type": "string",
-          "enum": [
-            "world"
-          ]
+          "enum": ["world"]
         },
         "download": {
           "description": "Download access level.",
           "type": "string",
-          "enum": [
-            "none",
-            "stanford",
-            "world"
-          ]
+          "enum": ["none", "stanford", "world"]
         },
         "location": {
           "description": "Not used for this access type, must be null.",
-          "type": "string",
-          "nullable": true,
-          "enum": [
-            null
-          ]
+          "type": ["string", "null"],
+          "enum": [null]
         },
         "controlledDigitalLending": {
           "type": "boolean",
           "default": false,
-          "enum": [
-            false
-          ]
+          "enum": [false]
         }
       },
-      "required": [
-        "view",
-        "download"
-      ]
+      "required": ["view", "download"]
     }
   }
 }

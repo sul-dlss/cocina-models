@@ -37,7 +37,7 @@ module Cocina
       desc 'generate_schema SCHEMA_NAME', 'generate for SCHEMA_NAME'
       def generate_schema(schema_name)
         schema = schema_for(schema_name)
-        raise 'Cannot generate' if schema.nil?
+        raise "Cannot find schema named #{schema_name}" if schema.nil?
 
         FileUtils.mkdir_p(options[:output])
 
@@ -108,7 +108,7 @@ module Cocina
         case schema_doc.type
         when 'object'
           Schema.new(schema_doc, schemas: schemas.keys, lite: lite)
-        when 'string'
+        when 'string', %w[string null]
           Datatype.new(schema_doc, schemas: schemas.keys)
         when NilClass
           return unless schema_doc.one_of.map(&:name).all? { |ref_schema_name| schemas.keys.include?(ref_schema_name) }

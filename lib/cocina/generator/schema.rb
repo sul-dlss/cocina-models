@@ -127,7 +127,7 @@ module Cocina
                     key: key,
                     required: doc.required&.include?(key),
                     relaxed: lite && clazz != SchemaValue,
-                    nullable: properties_doc.nullable,
+                    nullable: Array(properties_doc.type).include?('null'),
                     parent: self,
                     schemas: schemas)
         end
