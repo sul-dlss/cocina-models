@@ -21,6 +21,12 @@ RSpec.describe Cocina::Models::Validators::OpenApiValidator do
     }
   end
 
+  describe '#document' do
+    it 'returns a hash representation of the openapi document' do
+      expect(described_class.document).to be_a(Hash)
+    end
+  end
+
   # AdminPolicy.externalIdentifier must be a valid druid
   context 'when valid' do
     it 'does not raise' do
