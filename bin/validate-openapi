@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'bundler/setup'
+require 'cocina/models'
+
+filepath = ARGV[0]
+exit(1) unless JSONSchemer.valid_schema?(YAML.load_file(filepath))
