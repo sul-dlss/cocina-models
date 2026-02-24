@@ -38,7 +38,7 @@ module Cocina
       end
 
       def quote(item)
-        return item unless schema_doc.type == 'string'
+        return item unless ['string', %w[string null]].include?(schema_doc.type)
 
         return 'nil' if item.nil?
 
@@ -94,7 +94,7 @@ module Cocina
         case doc.type
         when 'integer'
           'Types::Strict::Integer'
-        when 'string'
+        when 'string', %w[string null]
           string_dry_datatype(doc)
         when 'boolean'
           'Types::Strict::Bool'
