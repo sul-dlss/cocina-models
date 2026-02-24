@@ -14,18 +14,22 @@ module Cocina
             attributes['cocinaVersion'] = Cocina::Models::VERSION
           end
 
-          errors = document.ref("#/components/schemas/#{method_name}").validate(attributes.as_json).to_a
+          errors = openapi.ref("#/components/schemas/#{method_name}").validate(attributes.as_json).to_a
           return unless errors.any?
 
           raise ValidationError, "When validating #{method_name}: " + errors.map { |e| e['error'] }.uniq.join(', ')
         end
 
-        # rubocop:disable Style/ClassVars
+        # @return [Hash] a hash representation of the openapi document
         def self.document
-          @@document ||= JSONSchemer.openapi(YAML.load_file(openapi_path))
+          @document ||= YAML.load_file(openapi_path)
         end
-        # rubocop:enable Style/ClassVars
-        private_class_method :document
+
+        # @return [JSONSchemer::OpenAPI]
+        def self.openapi
+          @openapi ||= JSONSchemer.openapi(YAML.load_file(openapi_path))
+        end
+        private_class_method :openapi
 
         def self.openapi_path
           ::File.expand_path('../../../../openapi.yml', __dir__)
