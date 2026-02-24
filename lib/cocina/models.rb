@@ -191,15 +191,5 @@ module Cocina
       METADATA_KEYS.any? { |key| dyn[key] || dyn[key.to_s] }
     end
     private_class_method :has_metadata?
-
-    def self.druid_regex
-      @druid_regex ||= begin
-        str = Cocina::OpenApiWrapper.parse(YAML.load_file('openapi.yml'), strict_reference_validation: true)
-                                    .components
-                                    .schemas['Druid']
-                                    .pattern
-        Regexp.new(str)
-      end
-    end
   end
 end
