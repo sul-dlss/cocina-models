@@ -21,8 +21,7 @@ RSpec.describe Cocina::Models::DROAccess do
       expect { dro('dark', 'world', nil, false) }.to raise_error(Cocina::Models::ValidationError)
       expect { dro('dark', 'stanford', nil, false) }.to raise_error(Cocina::Models::ValidationError)
       expect { dro('dark', 'none', 'art', false) }.to raise_error(Cocina::Models::ValidationError)
-      # Depends on https://github.com/ota42y/openapi_parser/pull/104
-      # expect {dro('dark', 'none', nil, true) }.to raise_error(Cocina::Models::ValidationError)
+      expect { dro('dark', 'none', nil, true) }.to raise_error(Cocina::Models::ValidationError)
     end
   end
 
@@ -33,8 +32,7 @@ RSpec.describe Cocina::Models::DROAccess do
       expect { dro('world', 'none', nil, false) }.not_to raise_error
       expect { dro('world', 'location-based', 'art', false) }.not_to raise_error
       expect { dro('world', 'location-based', nil, false) }.to raise_error(Cocina::Models::ValidationError)
-      # Depends on https://github.com/ota42y/openapi_parser/pull/104
-      # expect {dro('world', 'world', nil, true) }.not_to raise_error
+      expect { dro('world', 'world', nil, true) }.to raise_error(Cocina::Models::ValidationError)
     end
   end
 
@@ -46,8 +44,7 @@ RSpec.describe Cocina::Models::DROAccess do
       expect { dro('citation-only', 'world', nil, false) }.to raise_error(Cocina::Models::ValidationError)
       expect { dro('citation-only', 'stanford', nil, false) }.to raise_error(Cocina::Models::ValidationError)
       expect { dro('citation-only', 'none', 'art', false) }.to raise_error(Cocina::Models::ValidationError)
-      # Depends on https://github.com/ota42y/openapi_parser/pull/104
-      # expect {dro('citation-only', 'none', nil, true) }.to raise_error(Cocina::Models::ValidationError)
+      expect { dro('citation-only', 'none', nil, true) }.to raise_error(Cocina::Models::ValidationError)
     end
   end
 
@@ -72,9 +69,8 @@ RSpec.describe Cocina::Models::DROAccess do
       expect { dro('location-based', 'none', nil, false) }.to raise_error(Cocina::Models::ValidationError)
       expect { dro('location-based', 'stanford', 'art', false) }.to raise_error(Cocina::Models::ValidationError)
       expect { dro('location-based', 'world', 'art', false) }.to raise_error(Cocina::Models::ValidationError)
-      # Depends on https://github.com/ota42y/openapi_parser/pull/104
-      # expect {dro('location-based', 'location-based', 'art', true) }
-      #   .to raise_error(Cocina::Models::ValidationError)
+      expect { dro('location-based', 'location-based', 'art', true) }
+        .to raise_error(Cocina::Models::ValidationError)
     end
   end
 
