@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Cocina::Generator::Schema do
-  # This tests the outcome of running exe/generator generate against openapi.yml.
+  # This tests the outcome of running exe/generator generate against schema.json.
   context 'when properties' do
     # RequestFile.administrative is an object attribute.
     # RequestFile.hasMessageDigests is an array attribute.

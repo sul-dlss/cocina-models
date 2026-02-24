@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Cocina
-  # Wrapper for OpenAPI support using json_schemer
-  class OpenApiWrapper
+  # Wrapper for JSON Schema support using json_schemer
+  class JsonSchemaWrapper
     class OpenApiError < StandardError; end
     class MissingReferenceError < OpenApiError; end
 
@@ -18,30 +18,15 @@ module Cocina
       new(spec_hash, strict_reference_validation:)
     end
 
-    def components
-      @components ||= ComponentsWrapper.new(self)
-    end
-
     attr_reader :schemas, :spec
 
     private
 
     def initialize_schemas
-      return unless @spec.dig('components', 'schemas')
+      return unless @spec.key?('$defs')
 
-      spec['components']['schemas'].each do |name, schema|
+      spec.fetch('$defs').each do |name, schema|
         @schemas[name] = SchemaWrapper.new(schema, name, self)
-      end
-    end
-
-    # Wrapper for components section
-    class ComponentsWrapper
-      def initialize(parent)
-        @parent = parent
-      end
-
-      def schemas
-        @parent.schemas
       end
     end
 
@@ -65,7 +50,7 @@ module Cocina
         @schema_def['oneOf'].map do |schema|
           if schema['$ref']
             ref_name = schema['$ref'].split('/').last
-            SchemaWrapper.new(@parent.spec.dig('components', 'schemas', ref_name), ref_name, @parent)
+            SchemaWrapper.new(@parent.spec.dig('$defs', ref_name), ref_name, @parent)
           else
             SchemaWrapper.new(schema, nil, @parent)
           end
@@ -78,7 +63,7 @@ module Cocina
         @schema_def['allOf'].map do |schema|
           if schema['$ref']
             ref_name = schema['$ref'].split('/').last
-            SchemaWrapper.new(@parent.spec.dig('components', 'schemas', ref_name), ref_name, @parent)
+            SchemaWrapper.new(@parent.spec.dig('$defs', ref_name), ref_name, @parent)
           else
             SchemaWrapper.new(schema, nil, @parent)
           end
@@ -89,7 +74,7 @@ module Cocina
         @schema_def['properties']&.transform_values do |schema|
           if schema['$ref']
             ref_name = schema['$ref'].split('/').last
-            SchemaWrapper.new(@parent.spec.dig('components', 'schemas', ref_name), ref_name, @parent)
+            SchemaWrapper.new(@parent.spec.dig('$defs', ref_name), ref_name, @parent)
           else
             SchemaWrapper.new(schema, nil, @parent)
           end
@@ -137,7 +122,7 @@ module Cocina
 
         if @schema_def['items']['$ref']
           ref_name = @schema_def['items']['$ref'].split('/').last
-          SchemaWrapper.new(@parent.spec.dig('components', 'schemas', ref_name), ref_name, @parent)
+          SchemaWrapper.new(@parent.spec.dig('$defs', ref_name), ref_name, @parent)
         else
           SchemaWrapper.new(@schema_def['items'], Generator::SchemaArray::GENERIC_ITEMS_NAME, @parent)
         end

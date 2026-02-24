@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Cocina::Models::Validators::OpenApiValidator do
+RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
   let(:validate) { described_class.validate(clazz, props) }
 
   let(:clazz) { Cocina::Models::AdminPolicy }

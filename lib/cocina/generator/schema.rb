@@ -8,6 +8,9 @@ module Cocina
         @schema_properties ||= (properties + all_of_properties + one_of_properties).uniq(&:key)
       end
 
+      VALIDATE_TYPES = %w[DRO RequestDRO DROWithMetadata Collection RequestCollection CollectionWithMetadata AdminPolicy
+                          RequestAdminPolicy AdminPolicyWithMetadata Description RequestDescription].freeze
+
       def generate
         <<~RUBY
           # frozen_string_literal: true
@@ -71,7 +74,7 @@ module Cocina
       end
 
       def validatable?
-        !schema_doc.root.paths.path["/validate/#{schema_doc.name}"].nil? && !lite
+        VALIDATE_TYPES.include?(name) && !lite
       end
 
       def properties

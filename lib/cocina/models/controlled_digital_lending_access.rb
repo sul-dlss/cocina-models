@@ -8,7 +8,7 @@ module Cocina
       # Download access level.
       attribute :download, Types::Strict::String.enum('none')
       # Not used for this access type, must be null.
-      attribute? :location, Types::Strict::String.optional.enum('')
+      attribute? :location, Types::Strict::String.optional.enum(nil)
       # Available for controlled digital lending.
       attribute? :controlledDigitalLending, Types::Strict::Bool.default(false)
     end
