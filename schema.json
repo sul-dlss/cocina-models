@@ -848,7 +848,7 @@
             },
             "displayLabel": {
               "description": "The preferred display label to use for the descriptive element in access systems.",
-              "type": "string"
+              "type": ["string", "null"]
             },
             "qualifier": {
               "description": "A term providing information about the circumstances of the statement (e.g., approximate dates).",
@@ -969,7 +969,7 @@
             },
             "displayLabel": {
               "description": "The preferred display label to use for the event in access systems.",
-              "type": "string"
+              "type": ["string", "null"]
             },
             "date": {
               "description": "Dates associated with the event.",
@@ -1110,7 +1110,7 @@
             },
             "displayLabel": {
               "description": "The preferred display label to use for the event in access systems.",
-              "type": "string"
+              "type": ["string", "null"]
             },
             "date": {
               "description": "Dates associated with the event.",
@@ -1434,7 +1434,7 @@
         },
         "displayLabel": {
           "description": "The preferred display label to use for the descriptive element in access systems.",
-          "type": "string"
+          "type": ["string", "null"]
         },
         "encoding": {
           "$ref": "#/$defs/Standard"
@@ -1733,7 +1733,7 @@
         },
         "displayLabel": {
           "description": "The preferred display label to use for the related resource in access systems.",
-          "type": "string"
+          "type": ["string", "null"]
         },
         "title": {
           "description": "Titles of the related resource.",

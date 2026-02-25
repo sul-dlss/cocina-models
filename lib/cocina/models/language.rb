@@ -9,7 +9,7 @@ module Cocina
       # Code value of the descriptive element.
       attribute? :code, Types::Strict::String
       # The preferred display label to use for the descriptive element in access systems.
-      attribute? :displayLabel, Types::Strict::String
+      attribute? :displayLabel, Types::Strict::String.optional
       # Property model for indicating the encoding, standard, or syntax to which a value
       # conforms (e.g. RDA).
       attribute? :encoding, Standard.optional

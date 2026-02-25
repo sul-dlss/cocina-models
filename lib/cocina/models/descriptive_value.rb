@@ -30,7 +30,7 @@ module Cocina
       # code, or identifier.
       attribute? :source, Source.optional
       # The preferred display label to use for the descriptive element in access systems.
-      attribute? :displayLabel, Types::Strict::String
+      attribute? :displayLabel, Types::Strict::String.optional
       # A term providing information about the circumstances of the statement (e.g., approximate
       # dates).
       attribute? :qualifier, Types::Strict::String
