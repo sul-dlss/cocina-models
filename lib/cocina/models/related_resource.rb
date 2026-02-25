@@ -12,7 +12,7 @@ module Cocina
       # Status of the related resource relative to other related resources.
       attribute? :status, Types::Strict::String
       # The preferred display label to use for the related resource in access systems.
-      attribute? :displayLabel, Types::Strict::String
+      attribute? :displayLabel, Types::Strict::String.optional
       # Titles of the related resource.
       attribute :title, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # Agents contributing in some way to the creation and history of the related resource.

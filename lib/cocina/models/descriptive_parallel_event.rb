@@ -9,7 +9,7 @@ module Cocina
       # Description of the event (creation, publication, etc.).
       attribute? :type, Types::Strict::String
       # The preferred display label to use for the event in access systems.
-      attribute? :displayLabel, Types::Strict::String
+      attribute? :displayLabel, Types::Strict::String.optional
       # Dates associated with the event.
       attribute :date, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # Contributors associated with the event.
