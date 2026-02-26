@@ -433,6 +433,7 @@ identifier:
   - value: Wikidata
     code: wikidata
   - value: International Article Number
+  - value: ProQuest Module ID
 note:
   - value: abstract
     description: A short overview of a research article or other work.
