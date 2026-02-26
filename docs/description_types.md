@@ -415,6 +415,8 @@ _Path: identifier.type_
   * videorecording identifier
   * West Mat #
   * Wikidata
+  * International Article Number
+  * ProQuest Module ID
 # Note types
 _Path: note.type_
   * abstract
