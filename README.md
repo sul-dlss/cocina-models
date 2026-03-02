@@ -12,6 +12,10 @@ Note that the data model encodes properties as camelCase, which the team believe
 
 For more about the model for description see https://consul.stanford.edu/display/DIGMETADATA/Digital+Object+Metadata+Documentation#DigitalObjectMetadataDocumentation-Cocinamodel
 
+## Schema
+
+The [schema.json](schema.json) can also be viewed via JSON HERO: https://jsonhero.io/j/rynNH3NLBhcf and DOR Services App's openapi.yml: https://sul-dlss.github.io/dor-services-app/
+
 ## Configuration
 
 Set the PURL url base:
