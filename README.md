@@ -1,7 +1,6 @@
 [![CircleCI](https://circleci.com/gh/sul-dlss/cocina-models.svg?style=svg)](https://circleci.com/gh/sul-dlss/cocina-models)
 [![Test Coverage](https://codecov.io/github/sul-dlss/cocina-models/graph/badge.svg?token=FG1SRYCME2)](https://codecov.io/github/sul-dlss/cocina-models)
 [![Gem Version](https://badge.fury.io/rb/cocina-models.svg)](https://badge.fury.io/rb/cocina-models)
-[![OpenAPI Validator](http://validator.swagger.io/validator?url=https://raw.githubusercontent.com/sul-dlss/cocina-models/main/openapi.yml)](http://validator.swagger.io/validator/debug?url=https://raw.githubusercontent.com/sul-dlss/cocina-models/main/openapi.yml)
 
 # Cocina::Models
 
