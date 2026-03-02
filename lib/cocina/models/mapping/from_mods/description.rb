@@ -52,7 +52,7 @@ module Cocina
                   .values
                   .select { |nodes| nodes.size > 1 }
                   .each do |nodes|
-                    notifier.warn('Unpaired altRepGroup') if altrepgroup_error?(nodes)
+              notifier.warn('Unpaired altRepGroup') if altrepgroup_error?(nodes)
             end
           end
 
