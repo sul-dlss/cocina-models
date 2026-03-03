@@ -188,13 +188,6 @@ RSpec.describe Cocina::Models::Mapping::FromMods::Form do
             },
             type: 'resource type',
             value: 'Dissertation'
-          },
-          {
-            source: {
-              value: 'Stanford self-deposit resource types'
-            },
-            type: 'resource type',
-            structuredValue: [{ type: 'subtype', value: 'Academic thesis' }]
           }
         ]
       end
