@@ -73,7 +73,7 @@ module Cocina
         # Some part of the path are ignored for the purpose of matching.
         def clean_path(path)
           new_path = path.reject do |part|
-            part.is_a?(Integer) || %i[parallelValue parallelContributor parallelEvent].include?(part.to_sym)
+            part.is_a?(Integer) || %i[parallelValue parallelEvent].include?(part.to_sym)
           end.map(&:to_sym)
           # This needs to happen after parallelValue is removed
           # to handle structuredValue > parallelValue > structuredValue
