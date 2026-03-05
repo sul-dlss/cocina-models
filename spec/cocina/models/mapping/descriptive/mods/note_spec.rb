@@ -546,27 +546,6 @@ RSpec.describe 'MODS note <--> cocina mappings' do
       end
     end
 
-    context 'when cocina note is array with empty hash' do
-      # NOTE: cocina -> MODS
-      it_behaves_like 'cocina MODS mapping' do
-        let(:cocina) do
-          {
-            note: [{}]
-          }
-        end
-
-        let(:roundtrip_cocina) do
-          {}
-        end
-
-        let(:mods) do
-          <<~XML
-            <note/>
-          XML
-        end
-      end
-    end
-
     context 'when MODS is empty note element with no attributes' do
       it_behaves_like 'MODS cocina mapping' do
         let(:mods) do

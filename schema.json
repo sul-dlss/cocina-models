@@ -868,7 +868,61 @@
               "description": "URL or other pointer to the location of the value of the descriptive element.",
               "type": "string"
             }
-          }
+          },
+          "anyOf": [
+            {
+              "required": ["value"]
+            },
+            {
+              "required": ["code"]
+            },
+            {
+              "required": ["uri"]
+            },
+            {
+              "required": ["identifier"],
+              "properties": {
+                "identifier": {
+                  "minItems": 1
+                }
+              }
+            },
+            {
+              "required": ["note"],
+              "properties": {
+                "identifier": {
+                  "minItems": 1
+                }
+              }
+            },
+            {
+              "required": ["valueAt"]
+            },
+            {
+              "required": ["structuredValue"],
+              "properties": {
+                "identifier": {
+                  "minItems": 1
+                }
+              }
+            },
+            {
+              "required": ["parallelValue"],
+              "properties": {
+                "identifier": {
+                  "minItems": 1
+                }
+              }
+            },
+            {
+              "required": ["groupedValue"],
+              "properties": {
+                "identifier": {
+                  "minItems": 1
+                }
+              }
+            }
+          ]
         }
       ]
     },
