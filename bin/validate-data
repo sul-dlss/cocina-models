@@ -103,7 +103,7 @@ def worker_process(reader) # rubocop:disable Metrics/MethodLength
     rescue JSON::ParserError => e
       errors << { line: line_num, error: "JSON Parse Error: #{e.message}" }
     rescue Cocina::Models::ValidationError => e
-      errors << { line: line_num, error: "Validation Error: #{e.message}" }
+      errors << { line: line_num, error: "Validation Error: #{json['externalIdentifier']} - #{e.message}" }
     rescue Cocina::Models::UnknownTypeError => e
       errors << { line: line_num, error: "Unknown Type Error: #{e.message}" }
     rescue StandardError => e
