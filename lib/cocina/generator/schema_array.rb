@@ -2,7 +2,7 @@
 
 module Cocina
   module Generator
-    # Class for generating from an openapi array
+    # Class for generating from a JSON Schema array
     class SchemaArray < SchemaBase
       GENERIC_ITEMS_NAME = 'items'
 

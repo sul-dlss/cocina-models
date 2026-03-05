@@ -22,7 +22,7 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
   end
 
   describe '#document' do
-    it 'returns a hash representation of the openapi document' do
+    it 'returns a hash representation of the schema.json document' do
       expect(described_class.document).to be_a(Hash)
     end
   end

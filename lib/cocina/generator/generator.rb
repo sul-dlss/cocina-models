@@ -4,7 +4,7 @@ require 'fileutils'
 
 module Cocina
   module Generator
-    # Class for generating Cocina models from openapi.
+    # Class for generating Cocina models from JSON Schema.
     class Generator < Thor # rubocop:disable Metrics/ClassLength
       include Thor::Actions
 

@@ -2,7 +2,7 @@
 
 module Cocina
   module Generator
-    # Class for generating from an openapi value
+    # Class for generating from a JSON Schema value
     class SchemaValue < SchemaBase
       def generate
         if required && !relaxed

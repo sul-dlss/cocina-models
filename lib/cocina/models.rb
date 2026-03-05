@@ -50,7 +50,7 @@ module Cocina
     # Raised when the type attribute is not valid.
     class UnknownTypeError < Error; end
 
-    # Raised when the type attribute is missing or an error occurs validating against openapi.
+    # Raised when the type attribute is missing or an error occurs validating against the JSON schema.
     class ValidationError < Error; end
 
     # Base class for Cocina Structs
@@ -81,8 +81,7 @@ module Cocina
     # @param [boolean] validate
     # @return [DRO,Collection,AdminPolicy]
     # @raises [UnknownTypeError] if a valid type is not found in the data
-    # @raises [ValidationError] if a type field cannot be found in the data
-    # @raises [ValidationError] if hash representation fails openapi validation
+    # @raises [ValidationError] if hash representation fails validation
     def self.build(dyn, validate: true)
       clazz = case type_for(dyn)
               when *DRO::TYPES
@@ -101,8 +100,7 @@ module Cocina
     # @param [boolean] validate
     # @return [RequestDRO,RequestCollection,RequestAdminPolicy]
     # @raises [UnknownTypeError] if a valid type is not found in the data
-    # @raises [ValidationError] if a type field cannot be found in the data
-    # @raises [ValidationError] if hash representation fails openapi validation
+    # @raises [ValidationError] if hash representation fails validation
     def self.build_request(dyn, validate: true)
       clazz = case type_for(dyn)
               when *DRO::TYPES

@@ -2,7 +2,7 @@
 
 module Cocina
   module Generator
-    # Class for generating from an openapi schema
+    # Class for generating from a JSON schema
     class Schema < SchemaBase
       def schema_properties
         @schema_properties ||= (properties + all_of_properties + one_of_properties).uniq(&:key)
@@ -112,7 +112,7 @@ module Cocina
                                                    key: key,
                                                    # The property does less validation because may vary between
                                                    # different oneOf schemas. Validation is still performed
-                                                   # by openAPI.
+                                                   # by JSON Schema.
                                                    relaxed: true,
                                                    parent: self,
                                                    schemas: schemas)
