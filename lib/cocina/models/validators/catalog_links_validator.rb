@@ -38,7 +38,7 @@ module Cocina
         end
 
         def validate_sort_key
-          # TODO: remove this validation once we upgrade to OpenAPI 3.1 and can use dependentRequired in openapi.yml
+          # TODO: remove this validation by switching to dependentRequired in schema.json
           serials_links = catalog_links.select { |catalog_link| catalog_link[:catalog] == 'folio' && catalog_link[:sortKey].present? }
           serials_links.each do |catalog_link|
             # If partLabel is present, catalog_link is valid

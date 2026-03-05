@@ -16,7 +16,7 @@ RSpec.describe Cocina::Models do
       it { is_expected.to be_a Cocina::Models::Collection }
     end
 
-    context 'with an invalid DRO (openapi)' do
+    context 'with an invalid DRO (json schema validation)' do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/image',

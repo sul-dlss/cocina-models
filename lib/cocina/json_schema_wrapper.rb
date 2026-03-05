@@ -3,8 +3,7 @@
 module Cocina
   # Wrapper for JSON Schema support using json_schemer
   class JsonSchemaWrapper
-    class OpenApiError < StandardError; end
-    class MissingReferenceError < OpenApiError; end
+    class MissingReferenceError < StandardError; end
 
     def initialize(spec_hash, strict_reference_validation: true)
       @spec = spec_hash

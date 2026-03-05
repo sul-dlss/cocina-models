@@ -2,7 +2,7 @@
 
 module Cocina
   module Generator
-    # Base class for generating from openapi
+    # Base class for generating from a JSON Schema
     class SchemaBase
       attr_reader :schema_doc, :key, :required, :nullable, :parent, :relaxed, :schemas, :lite
 
@@ -74,7 +74,7 @@ module Cocina
       def relaxed_comment
         return '' unless relaxed
 
-        "# Validation of this property is relaxed. See the openapi for full validation.\n"
+        "# Validation of this property is relaxed. See the schema.json for full validation.\n"
       end
 
       # dry-types-based types contain the word `Types` (e.g., `Types::String`), and custom types (e.g., `SourceId`) do not

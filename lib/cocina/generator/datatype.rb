@@ -2,7 +2,7 @@
 
 module Cocina
   module Generator
-    # Class for generating from an openapi schema
+    # Class for generating from a JSON schema
     class Datatype < SchemaBase
       def generate
         <<~RUBY

@@ -106,7 +106,7 @@ RSpec.describe Cocina::Generator::Schema do
   end
 
   context 'when validatable' do
-    # A model is validatable when there is a validation path in the openapi. For example, /validate/AdminPolicy
+    # A model is validatable when it's in Cocina::Generator::Schema::VALIDATE_TYPES (e.g. AdminPolicy)
     # Its initializer then accepts a third argument which indicates whether to validate.
     let(:policy) do
       Cocina::Models::AdminPolicy.new({

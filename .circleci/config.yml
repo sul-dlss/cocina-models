@@ -11,5 +11,5 @@ workflows:
           context: dlss
           before-test:
             - run:
-                name: validate openapi
+                name: validate schema
                 command: bin/validate-schema schema.json

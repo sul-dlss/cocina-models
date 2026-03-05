@@ -16,9 +16,9 @@ module Cocina
       attribute :label, Types::Strict::String
       attribute :version, Types::Strict::Integer
       # Administrative properties for an AdminPolicy
-      # Validation of this property is relaxed. See the openapi for full validation.
+      # Validation of this property is relaxed. See the schema.json for full validation.
       attribute? :administrative, AdminPolicyAdministrative.optional
-      # Validation of this property is relaxed. See the openapi for full validation.
+      # Validation of this property is relaxed. See the schema.json for full validation.
       attribute? :description, Description.optional
     end
   end
