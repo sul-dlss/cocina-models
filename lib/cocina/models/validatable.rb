@@ -8,8 +8,13 @@ module Cocina
 
       class_methods do
         def new(attributes = default_attributes, safe = false, validate = true, &)
-          Validators::Validator.validate(self, attributes) if validate
+          # Prevent nested models from validating if validate = false
+          Thread.current[:top_level_validate] = validate unless Thread.current.key?(:top_level_validate)
+
+          Validators::Validator.validate(self, attributes) if Thread.current[:top_level_validate]
           super(attributes, safe, &)
+        ensure
+          Thread.current[:top_level_validate] = nil
         end
       end
 
