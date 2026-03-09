@@ -7,3 +7,4 @@ gemspec
 
 gem 'debug'
 gem 'rspec_junit_formatter' # For CircleCI
+gem 'ruby-progressbar'

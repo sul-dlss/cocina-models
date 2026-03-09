@@ -1,0 +1,282 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Validate JSONL (XZ compressed) files against the schema
+
+# Trap Ctrl+C to exit gracefully
+Signal.trap('INT') do
+  puts "\nTerminated"
+  exit(1)
+end
+
+Signal.trap('TERM') do
+  puts "\nTerminated"
+  exit(1)
+end
+
+require 'bundler/setup'
+require 'cocina/models'
+require 'json'
+require 'ruby-progressbar'
+require 'optparse'
+
+# Parse command line options
+def parse_options # rubocop:disable Metrics/MethodLength
+  options = {
+    processes: 12,
+    count: nil,
+    batch_size: 100
+  }
+
+  OptionParser.new do |opts|
+    opts.banner = 'Usage: validate-data FILENAME [options]'
+
+    opts.on('-p', '--processes NUM', Integer, 'Number of processes to use (default: 12)') do |p|
+      options[:processes] = p
+    end
+
+    opts.on('-c', '--count NUM', Integer, 'Total line count (skips counting pass if provided)') do |c|
+      options[:count] = c
+    end
+
+    opts.on('-b', '--batch-size NUM', Integer, 'Batch size for worker processing (default: 100)') do |b|
+      options[:batch_size] = b
+    end
+
+    opts.on('-h', '--help', 'Display this help message') do
+      puts opts
+      exit
+    end
+  end.parse!
+
+  # Filename is required as a positional argument
+  if ARGV.empty?
+    puts 'Error: FILENAME is required'
+    puts 'Usage: validate-data FILENAME [options]'
+    puts 'Run with --help for more information'
+    exit 1
+  end
+
+  options[:filename] = ARGV[0]
+  options
+end
+
+# Count lines in the file
+def count_lines(filename)
+  count = 0
+  IO.popen(['xzcat', filename]) do |io|
+    io.each_line { count += 1 }
+  end
+  count
+end
+
+# Get total line count (either from option or by counting)
+def get_total_lines(filename, provided_count)
+  if provided_count
+    puts "Using provided line count: #{provided_count}"
+    provided_count
+  else
+    puts 'Counting lines...'
+    total = count_lines(filename)
+    puts "Total lines to validate: #{total}"
+    total
+  end
+end
+
+# Worker process that reads batches from a pipe and validates
+def worker_process(reader) # rubocop:disable Metrics/MethodLength
+  errors = []
+
+  loop do
+    # Read length prefix (4 bytes)
+    length_data = reader.read(4)
+    break if length_data.nil? || length_data.empty?
+
+    length = length_data.unpack1('N')
+    data = reader.read(length)
+    batch = Marshal.load(data) # rubocop:disable Security/MarshalLoad
+
+    # Process each line in the batch
+    batch.each do |line_num, line_content|
+      json = JSON.parse(line_content)
+      Cocina::Models.build(json)
+    rescue JSON::ParserError => e
+      errors << { line: line_num, error: "JSON Parse Error: #{e.message}" }
+    rescue Cocina::Models::ValidationError => e
+      errors << { line: line_num, error: "Validation Error: #{e.message}" }
+    rescue Cocina::Models::UnknownTypeError => e
+      errors << { line: line_num, error: "Unknown Type Error: #{e.message}" }
+    rescue StandardError => e
+      errors << { line: line_num, error: "Error: #{e.class} - #{e.message}" }
+    end
+  end
+
+  errors
+end
+
+# Spawn worker processes
+def spawn_workers(num_processes) # rubocop:disable Metrics/MethodLength
+  workers = []
+  result_readers = []
+
+  num_processes.times do
+    work_reader, work_writer = IO.pipe
+    result_reader, result_writer = IO.pipe
+
+    pid = fork do
+      # Child process
+      work_writer.close
+      result_reader.close
+
+      errors = worker_process(work_reader)
+
+      # Send results back
+      result_writer.write(Marshal.dump(errors))
+      result_writer.close
+      work_reader.close
+      exit(0)
+    end
+
+    # Parent process
+    work_reader.close
+    result_writer.close
+
+    workers << { pid: pid, writer: work_writer }
+    result_readers << result_reader
+  end
+
+  [workers, result_readers]
+end
+
+# Send a batch to a worker
+def send_batch(worker, batch)
+  return if batch.empty?
+
+  data = Marshal.dump(batch)
+  worker[:writer].write([data.bytesize].pack('N'))
+  worker[:writer].write(data)
+end
+
+# Stream file and distribute work to workers
+def distribute_work(filename, workers, batch_size, total_lines) # rubocop:disable Metrics/MethodLength
+  line_number = 0
+  current_worker = 0
+  batch = []
+
+  # Create progress bar
+  progressbar = ProgressBar.create(
+    title: 'Validating',
+    total: total_lines,
+    format: '%t: |%B| %p%% %c/%C %a %e',
+    throttle_rate: 0.1
+  )
+
+  IO.popen(['xzcat', filename]) do |io|
+    io.each_line do |line|
+      line_number += 1
+      batch << [line_number, line]
+
+      # When batch is full, send to worker
+      if batch.size >= batch_size
+        worker = workers[current_worker]
+        send_batch(worker, batch)
+        batch = []
+        current_worker = (current_worker + 1) % workers.length
+      end
+
+      # Update progress bar
+      progressbar.increment
+    end
+  end
+
+  # Send any remaining lines in the last batch
+  if batch.any?
+    worker = workers[current_worker]
+    send_batch(worker, batch)
+  end
+
+  # Final progress update
+  progressbar.finish
+end
+
+# Collect results from all workers
+def collect_results(workers, result_readers)
+  # Close all worker input pipes to signal completion
+  workers.each { |w| w[:writer].close }
+
+  puts 'Collecting results from workers...'
+  all_errors = []
+
+  result_readers.each do |reader|
+    data = reader.read
+    worker_errors = Marshal.load(data) # rubocop:disable Security/MarshalLoad
+    all_errors.concat(worker_errors)
+    reader.close
+  end
+
+  # Wait for all workers to complete
+  workers.each { |w| Process.wait(w[:pid]) }
+
+  all_errors
+end
+
+# Print validation summary
+def print_summary(total_lines, errors, elapsed_time) # rubocop:disable Metrics/MethodLength
+  puts '=' * 80
+  puts 'VALIDATION SUMMARY'
+  puts '=' * 80
+  puts "Total lines processed: #{total_lines}"
+  puts "Lines with errors: #{errors.length}"
+  puts "Success rate: #{((total_lines - errors.length).to_f / total_lines * 100).round(2)}%"
+  puts "Time elapsed: #{elapsed_time.round(2)} seconds"
+  puts "Throughput: #{(total_lines / elapsed_time).round(0)} lines/second"
+
+  return unless errors.any?
+
+  puts "\n"
+  puts 'Error details:'
+  puts '-' * 80
+  # Sort errors by line number for better readability
+  errors.sort_by { |e| e[:line] }.each do |error|
+    puts "Line #{error[:line]}: #{error[:error]}"
+  end
+  puts "\n"
+  puts "Line numbers with errors: #{errors.sort_by { |e| e[:line] }.map { |e| e[:line] }.join(', ')}"
+end
+
+# Main execution
+def main
+  options = parse_options
+
+  puts "Validating file: #{options[:filename]}"
+  puts "Using #{options[:processes]} processes with batch size #{options[:batch_size]}"
+  puts '=' * 80
+
+  # Get total line count
+  total_lines = get_total_lines(options[:filename], options[:count])
+  puts '=' * 80
+
+  # Spawn worker processes
+  workers, result_readers = spawn_workers(options[:processes])
+
+  # Start timing
+  start_time = Time.now
+
+  # Distribute work to workers
+  distribute_work(options[:filename], workers, options[:batch_size], total_lines)
+
+  # Collect results
+  all_errors = collect_results(workers, result_readers)
+
+  # Calculate elapsed time
+  elapsed_time = Time.now - start_time
+
+  # Print summary
+  print_summary(total_lines, all_errors, elapsed_time)
+
+  # Exit with appropriate code
+  exit(all_errors.empty? ? 0 : 1)
+end
+
+# Run the script
+main

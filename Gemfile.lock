@@ -209,6 +209,7 @@ DEPENDENCIES
   rubocop (~> 1.24)
   rubocop-rake
   rubocop-rspec
+  ruby-progressbar
   simplecov
 
 CHECKSUMS
