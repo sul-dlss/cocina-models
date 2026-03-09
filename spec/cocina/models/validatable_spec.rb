@@ -67,8 +67,7 @@ RSpec.describe Cocina::Models::Validatable do
     it 'does not perform validation' do
       Cocina::Models::DRO.new(props, false, false)
       expect(Cocina::Models::Validators::Validator).not_to have_received(:validate).with(Cocina::Models::DRO, props)
-      # This is a flaw. Nested Validatables are still validated.
-      expect(Cocina::Models::Validators::Validator).to have_received(:validate).with(Cocina::Models::Description, description_props)
+      expect(Cocina::Models::Validators::Validator).not_to have_received(:validate).with(Cocina::Models::Description, description_props)
     end
   end
 
