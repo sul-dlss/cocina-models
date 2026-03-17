@@ -351,7 +351,7 @@ def ng_mods_for(snippet, mods_attributes)
   Nokogiri.XML(xml, nil, 'UTF-8', Nokogiri::XML::ParseOptions.new.strict)
 end
 
-Notification = Struct.new(:msg, :context, :times, keyword_init: true)
+Notification = Struct.new(:msg, :context, :times)
 
 # Builds titles for tests
 class TestTitleBuilder
