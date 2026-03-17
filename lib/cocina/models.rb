@@ -43,7 +43,7 @@ loader.ignore("#{__dir__}/rspec.rb")
 loader.ignore("#{__dir__}/rspec")
 loader.setup
 
-module Cocina
+module Cocina # rubocop:disable Style/OneClassPerFile
   # Provides Ruby objects for the repository and serializing them to/from JSON.
   module Models
     class Error < StandardError; end

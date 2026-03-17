@@ -540,7 +540,6 @@ Style/RedundantArrayFlatten: # new in 1.76
   Enabled: true
 Style/ArrayIntersectWithSingleElement: # new in 1.81
   Enabled: true
-
 Style/EmptyClassDefinition: # new in 1.83
   Enabled: true
 Style/ModuleMemberExistenceCheck: # new in 1.82
@@ -552,4 +551,30 @@ Style/ReverseFind: # new in 1.83
 RSpec/LeakyLocalVariable: # new in 3.8
   Enabled: true
 RSpec/Output: # new in 3.9
+  Enabled: true
+Lint/DataDefineOverride: # new in 1.85
+  Enabled: true
+Lint/UnreachablePatternBranch: # new in 1.85
+  Enabled: true
+Style/FileOpen: # new in 1.85
+  Enabled: true
+Style/MapJoin: # new in 1.85
+  Enabled: true
+Style/OneClassPerFile: # new in 1.85
+  Enabled: true
+Style/PartitionInsteadOfDoubleSelect: # new in 1.85
+  Enabled: true
+Style/PredicateWithKind: # new in 1.85
+  Enabled: true
+Style/ReduceToHash: # new in 1.85
+  Enabled: true
+Style/RedundantMinMaxBy: # new in 1.85
+  Enabled: true
+Style/RedundantStructKeywordInit: # new in 1.85
+  Enabled: true
+Style/SelectByKind: # new in 1.85
+  Enabled: true
+Style/SelectByRange: # new in 1.85
+  Enabled: true
+Style/TallyMethod: # new in 1.85
   Enabled: true
