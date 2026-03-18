@@ -125,6 +125,11 @@ def spawn_workers(num_processes) # rubocop:disable Metrics/MethodLength
 
     pid = fork do
       # Child process
+
+      # Close all writer pipes inherited from the parent for OTHER workers.
+      workers.each { |w| w[:writer].close }
+
+      # Now, close the handles for this specific worker that the child doesn't need.
       work_writer.close
       result_reader.close
 
