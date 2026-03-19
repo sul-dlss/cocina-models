@@ -1443,7 +1443,61 @@
         "valueLanguage": {
           "$ref": "#/$defs/DescriptiveValueLanguage"
         }
-      }
+      },
+      "anyOf": [
+        {
+          "required": ["value"]
+        },
+        {
+          "required": ["code"]
+        },
+        {
+          "required": ["uri"]
+        },
+        {
+          "required": ["note"],
+          "properties": {
+            "note": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["script"],
+          "properties": {
+            "script": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["valueAt"]
+        },
+        {
+          "required": ["structuredValue"],
+          "properties": {
+            "structuredValue": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["parallelValue"],
+          "properties": {
+            "parallelValue": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["groupedValue"],
+          "properties": {
+            "groupedValue": {
+              "minItems": 1
+            }
+          }
+        }
+      ]
     },
     "LanguageTag": {
       "description": "BCP 47 language tag: https://www.rfc-editor.org/rfc/rfc4646.txt -- other applications (like media players) expect language codes of this format, see e.g. https://videojs.com/guides/text-tracks/#srclang",
