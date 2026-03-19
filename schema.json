@@ -1526,7 +1526,65 @@
           }
         }
       ],
-      "unevaluatedProperties": false
+      "unevaluatedProperties": false,
+      "anyOf": [
+        {
+          "required": ["date"],
+          "properties": {
+            "date": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["contributor"],
+          "properties": {
+            "contributor": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["location"],
+          "properties": {
+            "location": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["identifier"],
+          "properties": {
+            "identifier": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["note"],
+          "properties": {
+            "note": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["structuredValue"],
+          "properties": {
+            "structuredValue": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["parallelEvent"],
+          "properties": {
+            "parallelEvent": {
+              "minItems": 1
+            }
+          }
+        }        
+      ]
     },
     "File": {
       "description": "Binaries that are the basis of what our domain manages. Binaries here do not include metadata files generated for the domain's own management purposes.",
