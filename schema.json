@@ -1102,6 +1102,56 @@
             }
           }
         }
+      ],
+      "anyOf": [
+        {
+          "required": ["date"],
+          "properties": {
+            "date": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["contributor"],
+          "properties": {
+            "contributor": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["location"],
+          "properties": {
+            "location": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["identifier"],
+          "properties": {
+            "identifier": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["note"],
+          "properties": {
+            "note": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["structuredValue"],
+          "properties": {
+            "structuredValue": {
+              "minItems": 1
+            }
+          }
+        }
       ]
     },
     "File": {
