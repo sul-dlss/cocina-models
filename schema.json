@@ -733,7 +733,57 @@
             "$ref": "#/$defs/DescriptiveValue"
           }
         }
-      }
+      },
+      "anyOf": [
+        {
+          "required": ["url"],
+          "properties": {
+            "url": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["physicalLocation"],
+          "properties": {
+            "physicalLocation": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["digitalLocation"],
+          "properties": {
+            "digitalLocation": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["accessContact"],
+          "properties": {
+            "accessContact": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["digitalRepository"],
+          "properties": {
+            "digitalRepository": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["note"],
+          "properties": {
+            "note": {
+              "minItems": 1
+            }
+          }
+        }
+      ]
     },
     "DescriptiveAdminMetadata": {
       "description": "Information about this resource description.",
@@ -882,7 +932,25 @@
             "$ref": "#/$defs/DescriptiveValue"
           }
         }
-      }
+      },
+      "anyOf": [
+        {
+          "required": ["form"],
+          "properties": {
+            "form": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["subject"],
+          "properties": {
+            "subject": {
+              "minItems": 1
+            }
+          }
+        }
+      ]
     },
     "DescriptiveGroupedValue": {
       "description": "Value model for a set of descriptive elements grouped together in an unstructured way.",
