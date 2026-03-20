@@ -444,6 +444,13 @@
         "valueAt": {
           "description": "URL or other pointer to the location of the contributor information.",
           "type": "string"
+        },
+        "parallelContributor": {
+          "description": "For multiple representations of information about the same contributor (e.g. in different languages).",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DescriptiveParallelContributor"
+          }
         }
       }
     },
@@ -893,6 +900,56 @@
           "items": {
             "$ref": "#/$defs/DescriptiveValue"
           }
+        }
+      }
+    },
+    "DescriptiveParallelContributor": {
+      "description": "Value model for multiple representations of information about the same contributor (e.g. in different languages).",
+      "deprecated": true,
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Names associated with a contributor.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DescriptiveValue"
+          }
+        },
+        "type": {
+          "description": "Entity type of the contributor (person, organization, etc.). See https://github.com/sul-dlss/cocina-models/blob/main/docs/description_types.md for valid types.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the contributor relative to other parallel contributors (e.g. the primary author among a group of contributors).",
+          "type": "string"
+        },
+        "role": {
+          "description": "Relationships of the contributor to the resource or to an event in its history.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DescriptiveValue"
+          }
+        },
+        "identifier": {
+          "description": "Identifiers and URIs associated with the contributor entity.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DescriptiveValue"
+          }
+        },
+        "note": {
+          "description": "Other information associated with the contributor.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DescriptiveValue"
+          }
+        },
+        "valueAt": {
+          "description": "URL or other pointer to the location of the contributor information.",
+          "type": "string"
+        },
+        "valueLanguage": {
+          "$ref": "#/$defs/DescriptiveValueLanguage"
         }
       }
     },
