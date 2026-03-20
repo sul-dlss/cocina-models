@@ -889,7 +889,25 @@
             "$ref": "#/$defs/DescriptiveValue"
           }
         }
-      }
+      },
+      "anyOf": [
+        {
+          "required": ["form"],
+          "properties": {
+            "form": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["subject"],
+          "properties": {
+            "subject": {
+              "minItems": 1
+            }
+          }
+        }
+      ]
     },
     "DescriptiveGroupedValue": {
       "description": "Value model for a set of descriptive elements grouped together in an unstructured way.",
