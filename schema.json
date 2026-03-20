@@ -452,7 +452,28 @@
             "$ref": "#/$defs/DescriptiveParallelContributor"
           }
         }
-      }
+      },
+      "anyOf": [
+        {
+          "required": ["valueAt"]
+        },
+        {
+          "required": ["name"],
+          "properties": {
+            "name": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": ["identifier"],
+          "properties": {
+            "identifier": {
+              "minItems": 1
+            }
+          }
+        }
+      ]
     },
     "ControlledDigitalLendingAccess": {
       "type": "object",

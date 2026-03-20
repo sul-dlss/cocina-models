@@ -1597,39 +1597,6 @@ RSpec.describe 'MODS name <--> cocina mappings' do
     end
   end
 
-  describe 'Name with et al.' do
-    it_behaves_like 'MODS cocina mapping' do
-      let(:mods) do
-        <<~XML
-          <name type="personal">
-            <namePart>Frydman, Judith</namePart>
-          </name>
-          <name>
-            <etal/>
-          </name>
-        XML
-      end
-
-      let(:cocina) do
-        {
-          contributor: [
-            {
-              name: [
-                {
-                  value: 'Frydman, Judith'
-                }
-              ],
-              type: 'person'
-            },
-            {
-              type: 'unspecified others'
-            }
-          ]
-        }
-      end
-    end
-  end
-
   describe 'Name with display label' do
     it_behaves_like 'MODS cocina mapping' do
       let(:mods) do
@@ -3344,23 +3311,6 @@ RSpec.describe 'MODS name <--> cocina mappings' do
         let(:cocina) do
           {
             contributor: []
-          }
-        end
-
-        let(:roundtrip_cocina) do
-          {}
-        end
-
-        let(:mods) { '' }
-      end
-    end
-
-    context 'when cocina contributor is array with empty hash' do
-      # NOTE: cocina -> MODS
-      it_behaves_like 'cocina MODS mapping' do
-        let(:cocina) do
-          {
-            contributor: [{}]
           }
         end
 
