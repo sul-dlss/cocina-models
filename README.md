@@ -16,6 +16,10 @@ For more about the model for description see https://consul.stanford.edu/display
 
 The [schema.json](schema.json) can also be viewed via JSON HERO: https://jsonhero.io/j/rynNH3NLBhcf and DOR Services App's openapi.yml: https://sul-dlss.github.io/dor-services-app/
 
+### Schema Design
+
+Our JSON Schema uses *terminal & mixin* composition strategy so we can enforce deep validation without running into **allOf** composition pitfalls. Terminal schemas (e.g., **DRO**, **Collection**, **AdminPolicy**, their **WithMetadata** variants, and **Request** variants) are the validation boundaries and generally set the `unevaluatedProperties: false` property. Reusable mixins (e.g., **DROMixin**, **CollectionMixin**, **AdminPolicyMixin**, and **AccessMixin**) are intentionally open and are composed into terminal schemas via **allOf** or **oneOf**, so these schemas **may not** take advantage of `unevaluatedProperties` to prevent unexpected properties.
+
 ## Configuration
 
 Set the PURL url base:

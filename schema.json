@@ -4,10 +4,18 @@
       "type": "object",
       "oneOf": [
         {
-          "$ref": "#/$defs/DarkAccess"
+          "$ref": "#/$defs/AccessMixin"
         },
         {
           "$ref": "#/$defs/CitationOnlyAccess"
+        }
+      ]
+    },
+    "AccessMixin": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/DarkAccess"
         },
         {
           "$ref": "#/$defs/ControlledDigitalLendingAccess"
@@ -55,7 +63,11 @@
           }
         }
       },
-      "required": ["members", "name"]
+      "required": [
+        "members",
+        "name"
+      ],
+      "unevaluatedProperties": false
     },
     "AccessRoleMember": {
       "description": "Represents a user or group that is a member of an AccessRole",
@@ -64,15 +76,22 @@
         "type": {
           "description": "Name of role",
           "type": "string",
-          "enum": ["sunetid", "workgroup"]
+          "enum": [
+            "sunetid",
+            "workgroup"
+          ]
         },
         "identifier": {
           "type": "string"
         }
       },
-      "required": ["identifier", "type"]
+      "required": [
+        "identifier",
+        "type"
+      ],
+      "unevaluatedProperties": false
     },
-    "AdminPolicy": {
+    "AdminPolicyMixin": {
       "type": "object",
       "properties": {
         "cocinaVersion": {
@@ -80,7 +99,9 @@
         },
         "type": {
           "type": "string",
-          "enum": ["https://cocina.sul.stanford.edu/models/admin_policy"]
+          "enum": [
+            "https://cocina.sul.stanford.edu/models/admin_policy"
+          ]
         },
         "externalIdentifier": {
           "$ref": "#/$defs/Druid"
@@ -107,6 +128,15 @@
         "version"
       ]
     },
+    "AdminPolicy": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/AdminPolicyMixin"
+        }
+      ],
+      "unevaluatedProperties": false
+    },
     "Administrative": {
       "type": "object",
       "properties": {
@@ -114,32 +144,17 @@
           "$ref": "#/$defs/Druid"
         }
       },
-      "required": ["hasAdminPolicy"]
+      "required": [
+        "hasAdminPolicy"
+      ],
+      "unevaluatedProperties": false
     },
     "AdminPolicyAccessTemplate": {
       "description": "Provides the template of access settings that is copied to the items governed by an AdminPolicy. This is almost the same as DROAccess, but it provides no defaults and has no embargo.",
       "type": "object",
-      "oneOf": [
+      "allOf": [
         {
-          "$ref": "#/$defs/DarkAccess"
-        },
-        {
-          "$ref": "#/$defs/CitationOnlyAccess"
-        },
-        {
-          "$ref": "#/$defs/ControlledDigitalLendingAccess"
-        },
-        {
-          "$ref": "#/$defs/LocationBasedAccess"
-        },
-        {
-          "$ref": "#/$defs/LocationBasedDownloadAccess"
-        },
-        {
-          "$ref": "#/$defs/StanfordAccess"
-        },
-        {
-          "$ref": "#/$defs/WorldAccess"
+          "$ref": "#/$defs/Access"
         }
       ],
       "properties": {
@@ -152,7 +167,8 @@
         "license": {
           "$ref": "#/$defs/License"
         }
-      }
+      },
+      "unevaluatedProperties": false
     },
     "AdminPolicyAdministrative": {
       "description": "Administrative properties for an AdminPolicy",
@@ -194,19 +210,25 @@
           }
         }
       },
-      "required": ["hasAdminPolicy", "hasAgreement", "accessTemplate"]
+      "required": [
+        "hasAdminPolicy",
+        "hasAgreement",
+        "accessTemplate"
+      ],
+      "unevaluatedProperties": false
     },
     "AdminPolicyWithMetadata": {
       "description": "Admin Policy with addition object metadata.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/$defs/AdminPolicy"
+          "$ref": "#/$defs/AdminPolicyMixin"
         },
         {
           "$ref": "#/$defs/ObjectMetadata"
         }
-      ]
+      ],
+      "unevaluatedProperties": false
     },
     "AppliesTo": {
       "description": "Property model for indicating the parts, aspects, or versions of the resource to which a descriptive element is applicable.",
@@ -276,25 +298,39 @@
         "view": {
           "description": "Access level.",
           "type": "string",
-          "enum": ["citation-only"]
+          "enum": [
+            "citation-only"
+          ]
         },
         "download": {
           "description": "Download access level.",
           "type": "string",
-          "enum": ["none"]
+          "enum": [
+            "none"
+          ]
         },
         "location": {
           "description": "Not used for this access type, must be null.",
-          "type": ["string", "null"],
-          "enum": [null]
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null
+          ]
         },
         "controlledDigitalLending": {
           "type": "boolean",
           "default": false,
-          "enum": [false]
+          "enum": [
+            false
+          ]
         }
       },
-      "required": ["view", "download"]
+      "required": [
+        "view",
+        "download"
+      ]
     },
     "CocinaVersion": {
       "description": "The version of Cocina with which this object conforms.",
@@ -302,7 +338,7 @@
       "pattern": "^\\d+\\.\\d+\\.\\d+$",
       "example": "1.2.3"
     },
-    "Collection": {
+    "CollectionMixin": {
       "description": "A group of Digital Repository Objects that indicate some type of conceptual grouping within the domain that is worth reusing across the system.",
       "type": "object",
       "properties": {
@@ -356,6 +392,16 @@
         "identification"
       ]
     },
+    "Collection": {
+      "description": "A group of Digital Repository Objects that indicate some type of conceptual grouping within the domain that is worth reusing across the system.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/CollectionMixin"
+        }
+      ],
+      "unevaluatedProperties": false
+    },
     "CollectionAccess": {
       "description": "Access metadata for collections",
       "type": "object",
@@ -363,7 +409,10 @@
         "view": {
           "description": "Access level",
           "type": "string",
-          "enum": ["world", "dark"],
+          "enum": [
+            "world",
+            "dark"
+          ],
           "default": "dark"
         },
         "copyright": {
@@ -375,7 +424,8 @@
         "license": {
           "$ref": "#/$defs/License"
         }
-      }
+      },
+      "unevaluatedProperties": false
     },
     "CollectionIdentification": {
       "type": "object",
@@ -389,19 +439,21 @@
         "sourceId": {
           "$ref": "#/$defs/SourceId"
         }
-      }
+      },
+      "unevaluatedProperties": false
     },
     "CollectionWithMetadata": {
       "description": "Collection with addition object metadata.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/$defs/Collection"
+          "$ref": "#/$defs/CollectionMixin"
         },
         {
           "$ref": "#/$defs/ObjectMetadata"
         }
-      ]
+      ],
+      "unevaluatedProperties": false
     },
     "Contributor": {
       "description": "Property model for describing agents contributing in some way to the creation and history of the resource.",
@@ -461,7 +513,8 @@
             "$ref": "#/$defs/DescriptiveParallelContributor"
           }
         }
-      }
+      },
+      "unevaluatedProperties": false
     },
     "ControlledDigitalLendingAccess": {
       "type": "object",
@@ -469,17 +522,26 @@
         "view": {
           "description": "Access level.",
           "type": "string",
-          "enum": ["stanford"]
+          "enum": [
+            "stanford"
+          ]
         },
         "download": {
           "description": "Download access level.",
           "type": "string",
-          "enum": ["none"]
+          "enum": [
+            "none"
+          ]
         },
         "location": {
           "description": "Not used for this access type, must be null.",
-          "type": ["string", "null"],
-          "enum": [null]
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null
+          ]
         },
         "controlledDigitalLending": {
           "description": "Available for controlled digital lending.",
@@ -487,12 +549,18 @@
           "default": false
         }
       },
-      "required": ["view", "download"]
+      "required": [
+        "view",
+        "download"
+      ]
     },
     "Copyright": {
       "description": "The human readable copyright statement that applies",
       "example": "Copyright World Trade Organization",
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "CreatedInFolioIdentifier": {
       "description": "A record identifier created in Folio",
@@ -523,13 +591,11 @@
       "pattern": "^10\\.25936\\/[jJ][mM]709[hH][cC]8700|10\\.18735\\/4[nN][sS][eE]-8871|10\\.18735\\/952[xX]-[wW]447|10\\.18735\\/0[mM][wW]1-[qQ][qQ]72$",
       "example": "10.18735/0mw1-qq72"
     },
-    "DRO": {
+    "DROMixin": {
       "description": "Domain-defined abstraction of a 'work'. Digital Repository Objects' abstraction is describable for our domain’s purposes, i.e. for management needs within our system.",
       "type": "object",
       "properties": {
-        "cocinaVersion": {
-          "$ref": "#/$defs/CocinaVersion"
-        },
+        "cocinaVersion": { "$ref": "#/$defs/CocinaVersion" },
         "type": {
           "description": "The content type of the DRO. Selected from an established set of values.",
           "type": "string",
@@ -551,9 +617,7 @@
             "https://cocina.sul.stanford.edu/models/webarchive-seed"
           ]
         },
-        "externalIdentifier": {
-          "$ref": "#/$defs/Druid"
-        },
+        "externalIdentifier": { "$ref": "#/$defs/Druid" },
         "label": {
           "description": "Primary processing label (can be same as title) for a DRO.",
           "type": "string"
@@ -562,24 +626,12 @@
           "description": "Version for the DRO within SDR.",
           "type": "integer"
         },
-        "access": {
-          "$ref": "#/$defs/DROAccess"
-        },
-        "administrative": {
-          "$ref": "#/$defs/Administrative"
-        },
-        "description": {
-          "$ref": "#/$defs/Description"
-        },
-        "identification": {
-          "$ref": "#/$defs/Identification"
-        },
-        "structural": {
-          "$ref": "#/$defs/DROStructural"
-        },
-        "geographic": {
-          "$ref": "#/$defs/Geographic"
-        }
+        "access": { "$ref": "#/$defs/DROAccess" },
+        "administrative": { "$ref": "#/$defs/Administrative" },
+        "description": { "$ref": "#/$defs/Description" },
+        "identification": { "$ref": "#/$defs/Identification" },
+        "structural": { "$ref": "#/$defs/DROStructural" },
+        "geographic": { "$ref": "#/$defs/Geographic" }
       },
       "required": [
         "cocinaVersion",
@@ -594,30 +646,38 @@
         "structural"
       ]
     },
-    "DROAccess": {
+    "DRO": {
+      "description": "Domain-defined abstraction of a 'work'. Digital Repository Objects' abstraction is describable for our domain’s purposes, i.e. for management needs within our system.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/$defs/Access"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "copyright": {
-              "$ref": "#/$defs/Copyright"
-            },
-            "embargo": {
-              "$ref": "#/$defs/Embargo"
-            },
-            "useAndReproductionStatement": {
-              "$ref": "#/$defs/UseAndReproductionStatement"
-            },
-            "license": {
-              "$ref": "#/$defs/License"
-            }
-          }
+          "$ref": "#/$defs/DROMixin"
         }
-      ]
+      ],
+      "unevaluatedProperties": false
+    },
+    "DROAccess": {
+      "type": "object",
+      "properties": {
+        "copyright": {
+          "$ref": "#/$defs/Copyright"
+        },
+        "embargo": {
+          "$ref": "#/$defs/Embargo"
+        },
+        "useAndReproductionStatement": {
+          "$ref": "#/$defs/UseAndReproductionStatement"
+        },
+        "license": {
+          "$ref": "#/$defs/License"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/$defs/Access"
+        }
+      ],
+      "unevaluatedProperties": false
     },
     "DROStructural": {
       "description": "Structural metadata",
@@ -644,19 +704,21 @@
             "$ref": "#/$defs/Druid"
           }
         }
-      }
+      },
+      "unevaluatedProperties": false
     },
     "DROWithMetadata": {
       "description": "DRO with addition object metadata.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/$defs/DRO"
+          "$ref": "#/$defs/DROMixin"
         },
         {
           "$ref": "#/$defs/ObjectMetadata"
         }
-      ]
+      ],
+      "unevaluatedProperties": false
     },
     "DarkAccess": {
       "type": "object",
@@ -665,43 +727,138 @@
           "description": "Access level.",
           "type": "string",
           "default": "dark",
-          "enum": ["dark"]
+          "enum": [
+            "dark"
+          ]
         },
         "download": {
           "description": "Download access level.",
           "type": "string",
           "default": "none",
-          "enum": ["none"]
+          "enum": [
+            "none"
+          ]
         },
         "location": {
           "description": "Not used for this access type, must be null.",
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "default": null,
-          "enum": [null]
+          "enum": [
+            null
+          ]
         },
         "controlledDigitalLending": {
           "type": "boolean",
           "default": false,
-          "enum": [false]
+          "enum": [
+            false
+          ]
         }
       }
     },
     "Description": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/$defs/RequestDescription"
+      "properties": {
+        "title": {
+          "description": "Titles of the resource.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/Title"
+          }
         },
-        {
-          "type": "object",
-          "properties": {
-            "purl": {
-              "$ref": "#/$defs/Purl"
-            }
-          },
-          "required": ["purl"]
+        "contributor": {
+          "description": "Agents contributing in some way to the creation and history of the resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Contributor"
+          }
+        },
+        "event": {
+          "description": "Events in the history of the resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Event"
+          }
+        },
+        "form": {
+          "description": "Characteristics of the resource's physical, digital, and intellectual form and genre, and of its process of creation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DescriptiveValue"
+          }
+        },
+        "geographic": {
+          "description": "Geographic description for items with coordinates or bounding boxes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DescriptiveGeographicMetadata"
+          }
+        },
+        "language": {
+          "description": "Languages, scripts, symbolic systems, and notations used in all or part of a resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Language"
+          }
+        },
+        "note": {
+          "description": "Additional information relevant to a resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DescriptiveValue"
+          }
+        },
+        "identifier": {
+          "description": "Identifiers and URIs associated with the resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DescriptiveValue"
+          }
+        },
+        "subject": {
+          "description": "Terms associated with the intellectual content of the resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DescriptiveValue"
+          }
+        },
+        "access": {
+          "$ref": "#/$defs/DescriptiveAccessMetadata"
+        },
+        "relatedResource": {
+          "description": "Other resources associated with the described resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RelatedResource"
+          }
+        },
+        "marcEncodedData": {
+          "description": "Data about the resource represented in MARC fixed fields and codes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DescriptiveValue"
+          }
+        },
+        "adminMetadata": {
+          "$ref": "#/$defs/DescriptiveAdminMetadata"
+        },
+        "valueAt": {
+          "description": "URL or other pointer to the location of the resource description.",
+          "type": "string"
+        },
+        "purl": {
+          "$ref": "#/$defs/Purl"
         }
-      ]
+      },
+      "required": [
+        "title",
+        "purl"
+      ],
+      "unevaluatedProperties": false
     },
     "DescriptiveAccessMetadata": {
       "description": "Information about how to access digital and physical versions of the object.",
@@ -749,7 +906,8 @@
             "$ref": "#/$defs/DescriptiveValue"
           }
         }
-      }
+      },
+      "unevaluatedProperties": false
     },
     "DescriptiveAdminMetadata": {
       "description": "Information about this resource description.",
@@ -797,7 +955,8 @@
             "$ref": "#/$defs/DescriptiveValue"
           }
         }
-      }
+      },
+      "unevaluatedProperties": false
     },
     "DescriptiveBasicValue": {
       "description": "Basic value model for descriptive elements. Can only have one of value, parallelValue, groupedValue, or structuredValue.",
@@ -857,7 +1016,10 @@
             },
             "displayLabel": {
               "description": "The preferred display label to use for the descriptive element in access systems.",
-              "type": ["string", "null"]
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "qualifier": {
               "description": "A term providing information about the circumstances of the statement (e.g., approximate dates).",
@@ -898,7 +1060,8 @@
             "$ref": "#/$defs/DescriptiveValue"
           }
         }
-      }
+      },
+      "unevaluatedProperties": false
     },
     "DescriptiveGroupedValue": {
       "description": "Value model for a set of descriptive elements grouped together in an unstructured way.",
@@ -960,7 +1123,8 @@
         "valueLanguage": {
           "$ref": "#/$defs/DescriptiveValueLanguage"
         }
-      }
+      },
+      "unevaluatedProperties": false
     },
     "DescriptiveParallelEvent": {
       "description": "Value model for multiple representations of information about the same event (e.g. in different languages).",
@@ -978,7 +1142,10 @@
             },
             "displayLabel": {
               "description": "The preferred display label to use for the event in access systems.",
-              "type": ["string", "null"]
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "date": {
               "description": "Dates associated with the event.",
@@ -1020,7 +1187,8 @@
             }
           }
         }
-      ]
+      ],
+      "unevaluatedProperties": false
     },
     "DescriptiveParallelValue": {
       "description": "Value model for multiple representations of the same information (e.g. in different languages).",
@@ -1049,31 +1217,132 @@
     "DescriptiveValue": {
       "description": "Default value model for descriptive elements.",
       "type": "object",
+      "properties": {
+        "appliesTo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DescriptiveBasicValue"
+          }
+        }
+      },
       "allOf": [
         {
-          "$ref": "#/$defs/DescriptiveBasicValue"
+          "$ref": "#/$defs/DescriptiveStructuredValue"
         },
         {
-          "$ref": "#/$defs/AppliesTo"
-        }
-      ]
-    },
-    "DescriptiveValueLanguage": {
-      "description": "Language of the descriptive element value",
-      "type": "object",
-      "allOf": [
+          "$ref": "#/$defs/DescriptiveParallelValue"
+        },
         {
-          "$ref": "#/$defs/Standard"
+          "$ref": "#/$defs/DescriptiveGroupedValue"
         },
         {
           "type": "object",
           "properties": {
-            "valueScript": {
+            "value": {
+              "description": "String or integer value of the descriptive element.",
+              "oneOf": [
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "type": {
+              "description": "Type of value provided by the descriptive element. See https://github.com/sul-dlss/cocina-models/blob/main/docs/description_types.md for valid types.",
+              "type": "string"
+            },
+            "status": {
+              "description": "Status of the descriptive element value relative to other instances of the element.",
+              "type": "string"
+            },
+            "code": {
+              "description": "Code value of the descriptive element.",
+              "type": "string"
+            },
+            "uri": {
+              "description": "URI value of the descriptive element.",
+              "type": "string"
+            },
+            "standard": {
               "$ref": "#/$defs/Standard"
+            },
+            "encoding": {
+              "$ref": "#/$defs/Standard"
+            },
+            "identifier": {
+              "description": "Identifiers and URIs associated with the descriptive element.",
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DescriptiveValue"
+              }
+            },
+            "source": {
+              "$ref": "#/$defs/Source"
+            },
+            "displayLabel": {
+              "description": "The preferred display label to use for the descriptive element in access systems.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "qualifier": {
+              "description": "A term providing information about the circumstances of the statement (e.g., approximate dates).",
+              "type": "string"
+            },
+            "note": {
+              "description": "Other information related to the descriptive element.",
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DescriptiveValue"
+              }
+            },
+            "valueLanguage": {
+              "$ref": "#/$defs/DescriptiveValueLanguage"
+            },
+            "valueAt": {
+              "description": "URL or other pointer to the location of the value of the descriptive element.",
+              "type": "string"
             }
           }
         }
-      ]
+      ],
+      "unevaluatedProperties": false
+    },
+    "DescriptiveValueLanguage": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Code representing the standard or encoding.",
+          "type": "string"
+        },
+        "uri": {
+          "description": "URI for the standard or encoding.",
+          "type": "string"
+        },
+        "value": {
+          "description": "String describing the standard or encoding.",
+          "type": "string"
+        },
+        "note": {
+          "description": "Other information related to the standard or encoding.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DescriptiveValue"
+          }
+        },
+        "version": {
+          "description": "The version of the standard or encoding.",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Source"
+        },
+        "valueScript": {
+          "$ref": "#/$defs/Standard"
+        }
+      },
+      "description": "Language of the descriptive element value",
+      "unevaluatedProperties": false
     },
     "Druid": {
       "type": "string",
@@ -1085,23 +1354,23 @@
       "allOf": [
         {
           "$ref": "#/$defs/Access"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "releaseDate": {
-              "description": "Date when the Collection is released from an embargo.",
-              "type": "string",
-              "format": "date-time",
-              "example": "2029-06-22T07:00:00.000+00:00"
-            },
-            "useAndReproductionStatement": {
-              "$ref": "#/$defs/UseAndReproductionStatement"
-            }
-          },
-          "required": ["releaseDate"]
         }
-      ]
+      ],
+      "properties": {
+        "releaseDate": {
+          "description": "Date when the Collection is released from an embargo.",
+          "type": "string",
+          "format": "date-time",
+          "example": "2029-06-22T07:00:00.000+00:00"
+        },
+        "useAndReproductionStatement": {
+          "$ref": "#/$defs/UseAndReproductionStatement"
+        }
+      },
+      "required": [
+        "releaseDate"
+      ],
+      "unevaluatedProperties": false
     },
     "Event": {
       "description": "Property model for describing events in the history of the resource.",
@@ -1119,7 +1388,10 @@
             },
             "displayLabel": {
               "description": "The preferred display label to use for the event in access systems.",
-              "type": ["string", "null"]
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "date": {
               "description": "Dates associated with the event.",
@@ -1168,7 +1440,8 @@
             }
           }
         }
-      ]
+      ],
+      "unevaluatedProperties": false
     },
     "File": {
       "description": "Binaries that are the basis of what our domain manages. Binaries here do not include metadata files generated for the domain's own management purposes.",
@@ -1177,7 +1450,9 @@
         "type": {
           "description": "The content type of the File.",
           "type": "string",
-          "enum": ["https://cocina.sul.stanford.edu/models/file"]
+          "enum": [
+            "https://cocina.sul.stanford.edu/models/file"
+          ]
         },
         "externalIdentifier": {
           "description": "Identifier for the resource within the SDR architecture but outside of the repository. UUID. Constant across resource versions. What clients will use calling the repository.",
@@ -1245,31 +1520,18 @@
         "access",
         "administrative",
         "hasMessageDigests"
-      ]
+      ],
+      "unevaluatedProperties": false
     },
     "FileAccess": {
       "description": "Access metadata for files",
       "type": "object",
-      "oneOf": [
+      "allOf": [
         {
-          "$ref": "#/$defs/DarkAccess"
-        },
-        {
-          "$ref": "#/$defs/ControlledDigitalLendingAccess"
-        },
-        {
-          "$ref": "#/$defs/LocationBasedAccess"
-        },
-        {
-          "$ref": "#/$defs/LocationBasedDownloadAccess"
-        },
-        {
-          "$ref": "#/$defs/StanfordAccess"
-        },
-        {
-          "$ref": "#/$defs/WorldAccess"
+          "$ref": "#/$defs/AccessMixin"
         }
-      ]
+      ],
+      "unevaluatedProperties": false
     },
     "FileAdministrative": {
       "type": "object",
@@ -1287,7 +1549,12 @@
           "default": false
         }
       },
-      "required": ["publish", "sdrPreserve", "shelve"]
+      "required": [
+        "publish",
+        "sdrPreserve",
+        "shelve"
+      ],
+      "unevaluatedProperties": false
     },
     "FileSet": {
       "description": "Relevant groupings of Files. Also called a File Grouping.",
@@ -1332,7 +1599,8 @@
         "type",
         "version",
         "structural"
-      ]
+      ],
+      "unevaluatedProperties": false
     },
     "FileSetStructural": {
       "description": "Structural metadata",
@@ -1344,11 +1612,15 @@
             "$ref": "#/$defs/File"
           }
         }
-      }
+      },
+      "unevaluatedProperties": false
     },
     "FileUse": {
       "description": "Use for the File (e.g. 'transcription' for OCR).",
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "FolioCatalogLink": {
       "description": "A linkage between an object and a Folio catalog record",
@@ -1357,7 +1629,10 @@
         "catalog": {
           "description": "Catalog that is the source of the linked record.",
           "type": "string",
-          "enum": ["folio", "previous folio"],
+          "enum": [
+            "folio",
+            "previous folio"
+          ],
           "example": "folio"
         },
         "refresh": {
@@ -1388,7 +1663,12 @@
           "type": "string"
         }
       },
-      "required": ["catalog", "catalogRecordId", "refresh"]
+      "required": [
+        "catalog",
+        "catalogRecordId",
+        "refresh"
+      ],
+      "unevaluatedProperties": false
     },
     "Geographic": {
       "description": "Geographic metadata",
@@ -1399,7 +1679,10 @@
           "type": "string"
         }
       },
-      "required": ["iso19139"]
+      "required": [
+        "iso19139"
+      ],
+      "unevaluatedProperties": false
     },
     "Identification": {
       "type": "object",
@@ -1420,7 +1703,10 @@
           "$ref": "#/$defs/SourceId"
         }
       },
-      "required": ["sourceId"]
+      "required": [
+        "sourceId"
+      ],
+      "unevaluatedProperties": false
     },
     "LaneMedicalBarcode": {
       "description": "The barcode associated with a Lane Medical Library DRO, prefixed with 245",
@@ -1444,7 +1730,10 @@
         },
         "displayLabel": {
           "description": "The preferred display label to use for the descriptive element in access systems.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "encoding": {
           "$ref": "#/$defs/Standard"
@@ -1483,7 +1772,9 @@
         "status": {
           "description": "Status of the language relative to other parallel language elements (e.g. the primary language)",
           "type": "string",
-          "enum": ["primary"]
+          "enum": [
+            "primary"
+          ]
         },
         "standard": {
           "$ref": "#/$defs/Standard"
@@ -1510,11 +1801,15 @@
         "valueLanguage": {
           "$ref": "#/$defs/DescriptiveValueLanguage"
         }
-      }
+      },
+      "unevaluatedProperties": false
     },
     "LanguageTag": {
       "description": "BCP 47 language tag: https://www.rfc-editor.org/rfc/rfc4646.txt -- other applications (like media players) expect language codes of this format, see e.g. https://videojs.com/guides/text-tracks/#srclang",
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "LibrariesDOI": {
       "type": "string",
@@ -1524,7 +1819,10 @@
     },
     "License": {
       "description": "The license governing reuse of the DRO. Should be an IRI for known licenses (i.e. CC, RightsStatement.org URI, etc.).",
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "enum": [
         null,
         "https://www.gnu.org/licenses/agpl.txt",
@@ -1565,25 +1863,43 @@
         "view": {
           "description": "Access level.",
           "type": "string",
-          "enum": ["location-based"]
+          "enum": [
+            "location-based"
+          ]
         },
         "download": {
           "description": "Download access level.",
           "type": "string",
-          "enum": ["location-based", "none"]
+          "enum": [
+            "location-based",
+            "none"
+          ]
         },
         "location": {
           "description": "If access or download is 'location-based', which location should have access.",
           "type": "string",
-          "enum": ["spec", "music", "ars", "art", "hoover", "m&m"]
+          "enum": [
+            "spec",
+            "music",
+            "ars",
+            "art",
+            "hoover",
+            "m&m"
+          ]
         },
         "controlledDigitalLending": {
           "type": "boolean",
           "default": false,
-          "enum": [false]
+          "enum": [
+            false
+          ]
         }
       },
-      "required": ["view", "download", "location"]
+      "required": [
+        "view",
+        "download",
+        "location"
+      ]
     },
     "LocationBasedDownloadAccess": {
       "type": "object",
@@ -1591,25 +1907,43 @@
         "view": {
           "description": "Access level.",
           "type": "string",
-          "enum": ["stanford", "world"]
+          "enum": [
+            "stanford",
+            "world"
+          ]
         },
         "download": {
           "description": "Download access level.",
           "type": "string",
-          "enum": ["location-based"]
+          "enum": [
+            "location-based"
+          ]
         },
         "location": {
           "description": "Which location should have download access.",
           "type": "string",
-          "enum": ["spec", "music", "ars", "art", "hoover", "m&m"]
+          "enum": [
+            "spec",
+            "music",
+            "ars",
+            "art",
+            "hoover",
+            "m&m"
+          ]
         },
         "controlledDigitalLending": {
           "type": "boolean",
           "default": false,
-          "enum": [false]
+          "enum": [
+            false
+          ]
         }
       },
-      "required": ["view", "download", "location"]
+      "required": [
+        "view",
+        "download",
+        "location"
+      ]
     },
     "MessageDigest": {
       "description": "The output of the message digest algorithm.",
@@ -1618,14 +1952,21 @@
         "type": {
           "description": "The algorithm that was used",
           "type": "string",
-          "enum": ["md5", "sha1"]
+          "enum": [
+            "md5",
+            "sha1"
+          ]
         },
         "digest": {
           "description": "The digest value hexidecimal encoded",
           "type": "string"
         }
       },
-      "required": ["type", "digest"]
+      "required": [
+        "type",
+        "digest"
+      ],
+      "unevaluatedProperties": false
     },
     "MigratedFromSymphonyIdentifier": {
       "description": "A record identifier migrated from Symphony",
@@ -1658,7 +1999,9 @@
           "type": "string"
         }
       },
-      "required": ["lock"]
+      "required": [
+        "lock"
+      ]
     },
     "PreregisteredRepositoryDOI": {
       "type": "string",
@@ -1678,7 +2021,8 @@
           "description": "Width in pixels",
           "type": "integer"
         }
-      }
+      },
+      "unevaluatedProperties": false
     },
     "Purl": {
       "description": "Stanford persistent URL associated with the related resource.",
@@ -1743,7 +2087,10 @@
         },
         "displayLabel": {
           "description": "The preferred display label to use for the related resource in access systems.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "title": {
           "description": "Titles of the related resource.",
@@ -1828,7 +2175,8 @@
           "description": "URL or other pointer to the location of the related resource information.",
           "type": "string"
         }
-      }
+      },
+      "unevaluatedProperties": false
     },
     "RepositoryDOI": {
       "type": "string",
@@ -1845,7 +2193,9 @@
         },
         "type": {
           "type": "string",
-          "enum": ["https://cocina.sul.stanford.edu/models/admin_policy"]
+          "enum": [
+            "https://cocina.sul.stanford.edu/models/admin_policy"
+          ]
         },
         "label": {
           "type": "string"
@@ -1853,7 +2203,9 @@
         "version": {
           "type": "integer",
           "default": 1,
-          "enum": [1]
+          "enum": [
+            1
+          ]
         },
         "administrative": {
           "$ref": "#/$defs/AdminPolicyAdministrative"
@@ -1868,25 +2220,25 @@
         "label",
         "type",
         "version"
-      ]
+      ],
+      "unevaluatedProperties": false
     },
     "RequestAdministrative": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/$defs/Administrative"
+      "properties": {
+        "hasAdminPolicy": {
+          "$ref": "#/$defs/Druid"
         },
-        {
-          "type": "object",
-          "properties": {
-            "partOfProject": {
-              "description": "Internal project this resource is a part of. This governs routing of messages about this object.",
-              "example": "Google Books",
-              "type": "string"
-            }
-          }
+        "partOfProject": {
+          "description": "Internal project this resource is a part of. This governs routing of messages about this object.",
+          "example": "Google Books",
+          "type": "string"
         }
-      ]
+      },
+      "required": [
+        "hasAdminPolicy"
+      ],
+      "unevaluatedProperties": false
     },
     "RequestCollection": {
       "description": "Same as a Collection, but doesn't have an externalIdentifier as one will be created",
@@ -1911,7 +2263,9 @@
         "version": {
           "type": "integer",
           "default": 1,
-          "enum": [1]
+          "enum": [
+            1
+          ]
         },
         "access": {
           "$ref": "#/$defs/CollectionAccess"
@@ -1933,7 +2287,8 @@
         "label",
         "type",
         "version"
-      ]
+      ],
+      "unevaluatedProperties": false
     },
     "RequestDRO": {
       "description": "A request to create a DRO.  This has the same general structure as a DRO but doesn't have externalIdentifier and doesn't require the access subschema. If no access subschema is provided, these values will be inherited from the AdminPolicy.",
@@ -1968,7 +2323,9 @@
         "version": {
           "type": "integer",
           "default": 1,
-          "enum": [1]
+          "enum": [
+            1
+          ]
         },
         "access": {
           "$ref": "#/$defs/DROAccess"
@@ -1996,7 +2353,8 @@
         "label",
         "type",
         "version"
-      ]
+      ],
+      "unevaluatedProperties": false
     },
     "RequestDROStructural": {
       "description": "Structural metadata",
@@ -2021,7 +2379,8 @@
             "$ref": "#/$defs/Druid"
           }
         }
-      }
+      },
+      "unevaluatedProperties": false
     },
     "RequestDescription": {
       "description": "Description that is included in a request to create a DRO. This is the same as a Description, except excludes PURL.",
@@ -2116,14 +2475,19 @@
           "type": "string"
         }
       },
-      "required": ["title"]
+      "required": [
+        "title"
+      ],
+      "unevaluatedProperties": false
     },
     "RequestFile": {
       "type": "object",
       "properties": {
         "type": {
           "type": "string",
-          "enum": ["https://cocina.sul.stanford.edu/models/file"]
+          "enum": [
+            "https://cocina.sul.stanford.edu/models/file"
+          ]
         },
         "label": {
           "type": "string"
@@ -2184,7 +2548,8 @@
         "access",
         "administrative",
         "hasMessageDigests"
-      ]
+      ],
+      "unevaluatedProperties": false
     },
     "RequestFileSet": {
       "type": "object",
@@ -2216,7 +2581,13 @@
           "$ref": "#/$defs/RequestFileSetStructural"
         }
       },
-      "required": ["label", "type", "version", "structural"]
+      "required": [
+        "label",
+        "type",
+        "version",
+        "structural"
+      ],
+      "unevaluatedProperties": false
     },
     "RequestFileSetStructural": {
       "description": "Structural metadata",
@@ -2228,7 +2599,8 @@
             "$ref": "#/$defs/RequestFile"
           }
         }
-      }
+      },
+      "unevaluatedProperties": false
     },
     "RequestIdentification": {
       "description": "Same as a Identification, but requires a sourceId and doesn't permit a DOI.",
@@ -2247,7 +2619,10 @@
           "$ref": "#/$defs/SourceId"
         }
       },
-      "required": ["sourceId"]
+      "required": [
+        "sourceId"
+      ],
+      "unevaluatedProperties": false
     },
     "Sequence": {
       "description": "A sequence or ordering of resources within a Collection or Object.",
@@ -2263,9 +2638,13 @@
         "viewingDirection": {
           "description": "The direction that a sequence of canvases should be displayed to the user",
           "type": "string",
-          "enum": ["right-to-left", "left-to-right"]
+          "enum": [
+            "right-to-left",
+            "left-to-right"
+          ]
         }
-      }
+      },
+      "unevaluatedProperties": false
     },
     "Source": {
       "description": "Property model for indicating the vocabulary, authority, or other origin for a term, code, or identifier.",
@@ -2294,7 +2673,8 @@
           "description": "The version of the value source.",
           "type": "string"
         }
-      }
+      },
+      "unevaluatedProperties": false
     },
     "SourceId": {
       "type": "string",
@@ -2332,11 +2712,15 @@
         "source": {
           "$ref": "#/$defs/Source"
         }
-      }
+      },
+      "unevaluatedProperties": false
     },
     "StandardBarcode": {
       "description": "The standard barcode associated with a DRO, prefixed with 36105",
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "pattern": "^36105[0-9]{9}$",
       "example": "36105010362304"
     },
@@ -2346,25 +2730,39 @@
         "view": {
           "description": "Access level.",
           "type": "string",
-          "enum": ["stanford"]
+          "enum": [
+            "stanford"
+          ]
         },
         "download": {
           "description": "Download access level.",
           "type": "string",
-          "enum": ["stanford"]
+          "enum": [
+            "stanford"
+          ]
         },
         "location": {
           "description": "Not used for this access type, must be null.",
-          "type": ["string", "null"],
-          "enum": [null]
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null
+          ]
         },
         "controlledDigitalLending": {
           "type": "boolean",
           "default": false,
-          "enum": [false]
+          "enum": [
+            false
+          ]
         }
       },
-      "required": ["view", "download"]
+      "required": [
+        "view",
+        "download"
+      ]
     },
     "SymphonyCatalogLink": {
       "description": "A linkage between an object and a Symphony catalog record",
@@ -2373,7 +2771,10 @@
         "catalog": {
           "description": "Catalog that is the source of the linked record.",
           "type": "string",
-          "enum": ["symphony", "previous symphony"],
+          "enum": [
+            "symphony",
+            "previous symphony"
+          ],
           "example": "symphony"
         },
         "refresh": {
@@ -2388,44 +2789,63 @@
           "example": "11403803"
         }
       },
-      "required": ["catalog", "catalogRecordId", "refresh"]
+      "required": [
+        "catalog",
+        "catalogRecordId",
+        "refresh"
+      ],
+      "unevaluatedProperties": false
     },
     "Title": {
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/$defs/DescriptiveValue"
-        },
-        {
           "anyOf": [
             {
               "type": "object",
-              "required": ["value"]
+              "required": [
+                "value"
+              ]
             },
             {
               "type": "object",
-              "required": ["structuredValue"]
+              "required": [
+                "structuredValue"
+              ]
             },
             {
               "type": "object",
-              "required": ["parallelValue"]
+              "required": [
+                "parallelValue"
+              ]
             },
             {
               "type": "object",
-              "required": ["groupedValue"]
+              "required": [
+                "groupedValue"
+              ]
             },
             {
               "type": "object",
-              "required": ["valueAt"]
+              "required": [
+                "valueAt"
+              ]
             }
           ]
+        },
+        {
+          "$ref": "#/$defs/DescriptiveValue"
         }
-      ]
+      ],
+      "unevaluatedProperties": false
     },
     "UseAndReproductionStatement": {
       "description": "The human readable use and reproduction statement that applies",
       "example": "Property rights reside with the repository. Literary rights reside with the creators of the documents or their heirs. To obtain permission to publish or reproduce, please contact the Public Services Librarian of the Dept. of Special Collections (http://library.stanford.edu/spc).",
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "WorldAccess": {
       "type": "object",
@@ -2433,25 +2853,41 @@
         "view": {
           "description": "Access level.",
           "type": "string",
-          "enum": ["world"]
+          "enum": [
+            "world"
+          ]
         },
         "download": {
           "description": "Download access level.",
           "type": "string",
-          "enum": ["none", "stanford", "world"]
+          "enum": [
+            "none",
+            "stanford",
+            "world"
+          ]
         },
         "location": {
           "description": "Not used for this access type, must be null.",
-          "type": ["string", "null"],
-          "enum": [null]
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null
+          ]
         },
         "controlledDigitalLending": {
           "type": "boolean",
           "default": false,
-          "enum": [false]
+          "enum": [
+            false
+          ]
         }
       },
-      "required": ["view", "download"]
+      "required": [
+        "view",
+        "download"
+      ]
     }
   }
 }
