@@ -181,6 +181,14 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
         expect { validate }.not_to raise_error
       end
     end
+
+    context 'with a California Historical Society (CHS) barcode' do
+      let(:barcode) { '405000111956' }
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
   end
 
   context 'when invalid' do

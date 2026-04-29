@@ -234,6 +234,9 @@
         },
         {
           "$ref": "#/$defs/StandardBarcode"
+        },
+        {
+          "$ref": "#/$defs/CaliforniaHistoricalSocietyBarcode"
         }
       ]
     },
@@ -242,6 +245,12 @@
       "type": "string",
       "pattern": "^2050[0-9]{7}$",
       "example": "20503740296"
+    },
+    "CaliforniaHistoricalSocietyBarcode": {
+      "description": "The barcode associated with a CHS DRO, prefixed with 405",
+      "type": "string",
+      "pattern": "^405[0-9]{9}$",
+      "example": "405000111956"
     },
     "CatalogLink": {
       "description": "A linkage between an object and a catalog record",

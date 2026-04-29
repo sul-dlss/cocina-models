@@ -3,6 +3,6 @@
 module Cocina
   module Models
     # A barcode
-    Barcode = BusinessBarcode | LaneMedicalBarcode | CatkeyBarcode | StandardBarcode
+    Barcode = BusinessBarcode | LaneMedicalBarcode | CatkeyBarcode | StandardBarcode | CaliforniaHistoricalSocietyBarcode
   end
 end
