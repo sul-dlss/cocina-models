@@ -241,7 +241,7 @@
       ]
     },
     "BusinessBarcode": {
-      "description": "The barcode associated with a business library DRO object, prefixed with 2050",
+      "description": "The barcode associated with a business library DRO, prefixed with 2050",
       "type": "string",
       "pattern": "^2050[0-9]{7}$",
       "example": "20503740296"
@@ -264,7 +264,7 @@
       ]
     },
     "CatkeyBarcode": {
-      "description": "The barcode associated with a DRO object based on catkey, prefixed with a catkey followed by a hyphen",
+      "description": "The barcode associated with a DRO based on catkey, prefixed with a catkey followed by a hyphen",
       "type": "string",
       "pattern": "^[0-9]+-[0-9]+$",
       "example": "6772719-1001"
@@ -1423,7 +1423,7 @@
       "required": ["sourceId"]
     },
     "LaneMedicalBarcode": {
-      "description": "The barcode associated with a Lane Medical Library DRO object, prefixed with 245",
+      "description": "The barcode associated with a Lane Medical Library DRO, prefixed with 245",
       "type": "string",
       "pattern": "^245[0-9]{8}$",
       "example": "24503259768"
@@ -2335,7 +2335,7 @@
       }
     },
     "StandardBarcode": {
-      "description": "The standard barcode associated with a DRO object, prefixed with 36105",
+      "description": "The standard barcode associated with a DRO, prefixed with 36105",
       "type": ["string", "null"],
       "pattern": "^36105[0-9]{9}$",
       "example": "36105010362304"
