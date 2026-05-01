@@ -125,9 +125,7 @@ Before you release a major or minor change, think about if this release will inc
 If unsure, ask the team or ask for help to just run the validation report anyway (as described above).
 
 ### Partial release process
-NOTE: If dependency updates are about to be released, you have the option of shortening the process and stopping after Step 3. This is because Steps 4 onwards will be taken care of by the regular dependency updates process (basically the updating of cocina-models, dor-services-client and sdr-client as needed in the rest of the associated apps).  You still do need to manually bump some gems and the pinned version of cocina-models in the directly coupled apps and get those PRs approved and merged, as described in Steps 1-3 below.
-
-IMPORTANT: If you do opt to skip steps 4 onward, you should NOT merge the dor-services-app and sdr-api PRs you created in step 3 until you are ready to finish the dependency updates process.  You can have them reviewed and approved, but if you merge, you will greatly increase the risk of issues if the main branch of DSA or sdr-api are deployed after steps 1-3 are complete but before the rest of the apps are updated to use the new cocina-models via regular dependency updates. The fix for this is to either roll back DSA and sdr-api to the previous release tag, or proceed forwards with step 4-5.
+NOTE: If dependency updates are about to be released, you have the option of shortening the process and stopping after Step 2. This is because Steps 3 onwards will be taken care of by the regular dependency updates process (basically the updating of cocina-models, dor-services-client and sdr-client as needed in the rest of the associated apps).  You still do need to manually bump some gems and get those PRs approved and merged, as described in Steps 1-2 below.
 
 ### Step 0: Share intent to change the models
 
@@ -163,8 +161,6 @@ This list of services is known to include:
 Perform `bundle update --conservative cocina-models dor-services-client` in the services above and make PRs for those repos. You may first need to update how these gems are pinned in the `Gemfile` in order to bump them.
 
 Get the directly coupled services PRs merged before the deploy in step 5.
-
-See the IMPORTANT note above about the timing of merging these PRs if you are waiting for dependency updates to make the updates to other dependent applications.
 
 ### Step 4: Update other dependent applications
 
