@@ -6,14 +6,12 @@ module Cocina
       # Perform validation against JSON schema
       class JsonSchemaValidator
         def self.validate(clazz, attributes)
-          return unless clazz.name
-
           method_name = clazz.name.split('::').last
 
-          attributes['cocinaVersion'] = Cocina::Models::VERSION if %w[DRO RequestDRO AdminPolicy RequestAdminPolicy Collection RequestCollection DROWithMetadata].include? method_name
+          attributes['cocinaVersion'] = Cocina::Models::VERSION if clazz.attribute_names.include?(:cocinaVersion)
 
           errors = schema.ref("#/$defs/#{method_name}").validate(attributes.as_json).to_a
-          return unless errors.any?
+          return if errors.empty?
 
           raise ValidationError, "When validating #{method_name}: " + errors.map { |e| e['error'] }.uniq.join(', ')
         end

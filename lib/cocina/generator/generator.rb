@@ -102,8 +102,10 @@ module Cocina
       end
 
       def schema_for(schema_name, lite: false)
+        return if schema_name.ends_with?('Mixin')
+
         schema_doc = schemas[schema_name]
-        return nil if schema_doc.nil?
+        return if schema_doc.nil?
 
         case schema_doc.type
         when 'object'

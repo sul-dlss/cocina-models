@@ -4,9 +4,7 @@ require 'spec_helper'
 
 RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
   let(:validate) { described_class.validate(clazz, props) }
-
   let(:clazz) { Cocina::Models::AdminPolicy }
-
   let(:props) do
     {
       externalIdentifier: 'druid:bc123df4567',
@@ -24,6 +22,28 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
   describe '#document' do
     it 'returns a hash representation of the schema.json document' do
       expect(described_class.document).to be_a(Hash)
+    end
+  end
+
+  context 'with an unexpected property' do
+    let(:props) do
+      {
+        externalIdentifier: 'druid:bc123df4567',
+        label: 'My admin policy',
+        type: Cocina::Models::ObjectType.admin_policy,
+        version: 1,
+        administrative: {
+          accessTemplate: {},
+          hasAdminPolicy: 'druid:bc123df4567',
+          hasAgreement: 'druid:bc123df4567',
+          releaseTags: [{to: 'Searchworks', who: 'mjgiarlo', what: 'self', release: true}]
+        }
+      }
+    end
+
+    it 'raises ValidationError' do
+      expect { validate }.to raise_error(Cocina::Models::ValidationError,
+                                         /When validating AdminPolicy: .+releaseTags.+is a disallowed unevaluated property/)
     end
   end
 

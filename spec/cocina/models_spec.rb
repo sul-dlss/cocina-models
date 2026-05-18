@@ -16,22 +16,6 @@ RSpec.describe Cocina::Models do
       it { is_expected.to be_a Cocina::Models::Collection }
     end
 
-    context 'with an invalid DRO (json schema validation)' do
-      let(:data) do
-        {
-          'type' => 'https://cocina.sul.stanford.edu/models/image',
-          'externalIdentifier' => 'foo',
-          'label' => 'bar',
-          'version' => 5,
-          'access' => {}
-        }
-      end
-
-      it 'raises' do
-        expect { model_build }.to raise_error(Cocina::Models::ValidationError)
-      end
-    end
-
     context 'with a DRO type' do
       let(:data) { build(:dro).to_h }
 
@@ -73,6 +57,321 @@ RSpec.describe Cocina::Models do
 
       it 'raises an error' do
         expect { model_build }.to raise_error Cocina::Models::ValidationError
+      end
+    end
+
+    context 'with unexpected properties' do
+      context 'when DRO' do
+        let(:data) { build(:dro).to_h.merge('unexpectedTopLevel' => 'nope') }
+
+        it 'rejects unknown top-level keys with a helpful message' do
+          expect { model_build }.to raise_error(Cocina::Models::ValidationError,
+                                                /When validating .+ property .+ is a disallowed unevaluated property/)
+        end
+      end
+
+      context 'when Collection' do
+        let(:data) { build(:collection).to_h.merge('unexpectedTopLevel' => 'nope') }
+
+        it 'rejects unknown top-level keys with a helpful message' do
+          expect { model_build }.to raise_error(Cocina::Models::ValidationError,
+                                                /When validating .+ property .+ is a disallowed unevaluated property/)
+        end
+      end
+
+      context 'when AdminPolicy' do
+        let(:data) { build(:admin_policy).to_h.merge('unexpectedTopLevel' => 'nope') }
+
+        it 'rejects unknown top-level keys with a helpful message' do
+          expect { model_build }.to raise_error(Cocina::Models::ValidationError,
+                                                /When validating .+ property .+ is a disallowed unevaluated property/)
+        end
+      end
+
+      context 'when DROWithMetadata' do
+        let(:data) { build(:dro).to_h.merge('lock' => 'abc123', 'unexpectedTopLevel' => 'nope') }
+
+        it 'rejects unknown top-level keys with a helpful message' do
+          expect { model_build }.to raise_error(Cocina::Models::ValidationError,
+                                                /When validating .+ property .+ is a disallowed unevaluated property/)
+        end
+      end
+
+      context 'when CollectionWithMetadata' do
+        let(:data) { build(:collection).to_h.merge('lock' => 'abc123', 'unexpectedTopLevel' => 'nope') }
+
+        it 'rejects unknown top-level keys with a helpful message' do
+          expect { model_build }.to raise_error(Cocina::Models::ValidationError,
+                                                /When validating .+ property .+ is a disallowed unevaluated property/)
+        end
+      end
+
+      context 'when AdminPolicyWithMetadata' do
+        let(:data) { build(:admin_policy).to_h.merge('lock' => 'abc123', 'unexpectedTopLevel' => 'nope') }
+
+        it 'rejects unknown top-level keys with a helpful message' do
+          expect { model_build }.to raise_error(Cocina::Models::ValidationError,
+                                                /When validating .+ property .+ is a disallowed unevaluated property/)
+        end
+      end
+
+      context 'when DRO has unexpected nested descriptive title property' do
+        let(:data) do
+          build(:dro).to_h.tap do |h|
+            h[:description][:title].first[:unexpectedNested] = 'nope'
+          end
+        end
+
+        it 'rejects unknown nested keys' do
+          expect { model_build }.to raise_error(
+            Cocina::Models::ValidationError,
+            /When validating .+unexpectedNested.+disallowed unevaluated property/
+          )
+        end
+      end
+
+      context 'when DRO has unexpected nested relatedResource property' do
+        let(:data) do
+          build(:dro).to_h.tap do |h|
+            h[:description][:relatedResource] = [{ type: 'has part', unexpectedNested: 'nope' }]
+          end
+        end
+
+        it 'rejects unknown nested keys' do
+          expect { model_build }.to raise_error(
+            Cocina::Models::ValidationError,
+            /When validating .+unexpectedNested.+disallowed unevaluated property/
+          )
+        end
+      end
+
+      context 'when AdminPolicy accessTemplate has unexpected nested property' do
+        let(:data) do
+          build(:admin_policy).to_h.tap do |h|
+            h[:administrative][:accessTemplate] = { view: 'world', download: 'world', unexpectedNested: 'nope' }
+          end
+        end
+
+        it 'rejects unknown nested keys' do
+          expect { model_build }.to raise_error(Cocina::Models::ValidationError, /unexpectedNested/)
+        end
+      end
+
+      context 'when DRO access has unexpected nested property' do
+        let(:data) do
+          build(:dro).to_h.tap do |h|
+            h[:access][:unexpectedNested] = 'nope'
+          end
+        end
+
+        it 'rejects unknown nested keys' do
+          expect { model_build }.to raise_error(Cocina::Models::ValidationError, /unexpectedNested/)
+        end
+      end
+
+      context 'when DRO has unexpected nested contributor property' do
+        let(:data) do
+          build(:dro).to_h.tap do |h|
+            h[:description][:contributor] = [{ name: [{ value: 'Jane Doe' }], unexpectedNested: 'nope' }]
+          end
+        end
+
+        it 'rejects unknown nested keys' do
+          expect { model_build }.to raise_error(
+            Cocina::Models::ValidationError,
+            /When validating .+unexpectedNested.+disallowed unevaluated property/
+          )
+        end
+      end
+
+      context 'when DRO has unexpected nested event property' do
+        let(:data) do
+          build(:dro).to_h.tap do |h|
+            h[:description][:event] = [{ type: 'creation', unexpectedNested: 'nope' }]
+          end
+        end
+
+        it 'rejects unknown nested keys' do
+          expect { model_build }.to raise_error(
+            Cocina::Models::ValidationError,
+            /When validating .+unexpectedNested.+disallowed unevaluated property/
+          )
+        end
+      end
+
+      context 'when DRO has unexpected nested property' do
+        let(:data) do
+          build(:dro).to_h.tap do |h|
+            h[:description][:language] = [{ value: 'English', unexpectedNested: 'nope' }]
+          end
+        end
+
+        it 'rejects unknown nested keys' do
+          expect { model_build }.to raise_error(Cocina::Models::ValidationError, /unexpectedNested/)
+        end
+      end
+
+      context 'when AdminPolicy role member has unexpected nested property' do
+        let(:data) do
+          build(:admin_policy).to_h.tap do |h|
+            h[:administrative][:roles] = [
+              {
+                name: 'dor-apo-manager',
+                members: [
+                  { type: 'sunetid', identifier: 'jdoe', unexpectedNested: 'nope' }
+                ]
+              }
+            ]
+          end
+        end
+
+        it 'rejects unknown nested keys' do
+          expect { model_build }.to raise_error(Cocina::Models::ValidationError, /unexpectedNested/)
+        end
+      end
+
+      context 'when DRO hasMemberOrders entry has unexpected nested property' do
+        let(:data) do
+          build(:dro).to_h.tap do |h|
+            h[:structural][:hasMemberOrders] = [
+              {
+                members: ['druid:bc123df4567'],
+                viewingDirection: 'left-to-right',
+                unexpectedNested: 'nope'
+              }
+            ]
+          end
+        end
+
+        it 'rejects unknown nested keys' do
+          expect { model_build }.to raise_error(Cocina::Models::ValidationError, /unexpectedNested/)
+        end
+      end
+
+      context 'when Collection catalogLink has unexpected nested property' do
+        let(:data) do
+          build(:collection).to_h.tap do |h|
+            h[:identification][:catalogLinks] = [
+              {
+                catalog: 'symphony',
+                refresh: false,
+                catalogRecordId: '11403803',
+                unexpectedNested: 'nope'
+              }
+            ]
+          end
+        end
+
+        it 'rejects unknown nested keys' do
+          expect { model_build }.to raise_error(Cocina::Models::ValidationError, /unexpectedNested/)
+        end
+      end
+
+      context 'when DRO file administrative has unexpected nested property' do
+        let(:data) do
+          build(:dro).to_h.tap do |h|
+            h[:structural][:contains] = [
+              {
+                type: 'https://cocina.sul.stanford.edu/models/resources/file',
+                externalIdentifier: 'https://cocina.sul.stanford.edu/fileSet/1',
+                label: 'File Set 1',
+                version: 1,
+                structural: {
+                  contains: [
+                    {
+                      type: 'https://cocina.sul.stanford.edu/models/file',
+                      externalIdentifier: 'https://cocina.sul.stanford.edu/file/1',
+                      label: 'file1',
+                      filename: 'file1.tif',
+                      version: 1,
+                      access: { view: 'world', download: 'world' },
+                      administrative: {
+                        publish: true,
+                        sdrPreserve: true,
+                        shelve: true,
+                        unexpectedNested: 'nope'
+                      },
+                      hasMessageDigests: [{ type: 'md5', digest: 'abc123' }]
+                    }
+                  ]
+                }
+              }
+            ]
+          end
+        end
+
+        it 'rejects unknown nested keys' do
+          expect { model_build }.to raise_error(Cocina::Models::ValidationError, /unexpectedNested/)
+        end
+      end
+
+      context 'when DRO message digest has unexpected nested property' do
+        let(:data) do
+          build(:dro).to_h.tap do |h|
+            h[:structural][:contains] = [
+              {
+                type: 'https://cocina.sul.stanford.edu/models/resources/file',
+                externalIdentifier: 'https://cocina.sul.stanford.edu/fileSet/1',
+                label: 'File Set 1',
+                version: 1,
+                structural: {
+                  contains: [
+                    {
+                      type: 'https://cocina.sul.stanford.edu/models/file',
+                      externalIdentifier: 'https://cocina.sul.stanford.edu/file/1',
+                      label: 'file1',
+                      filename: '1.tif',
+                      version: 1,
+                      access: { view: 'world', download: 'world' },
+                      administrative: { publish: true, sdrPreserve: true, shelve: true },
+                      hasMessageDigests: [{ type: 'md5', digest: 'abc123', unexpectedNested: 'nope' }]
+                    }
+                  ]
+                }
+              }
+            ]
+          end
+        end
+
+        it 'rejects unknown nested keys' do
+          expect { model_build }.to raise_error(Cocina::Models::ValidationError, /unexpectedNested/)
+        end
+      end
+
+      context 'when DRO administrative has unexpected nested property' do
+        let(:data) do
+          build(:dro).to_h.tap do |h|
+            h[:administrative][:unexpectedNested] = 'nope'
+          end
+        end
+
+        it 'rejects unknown nested keys' do
+          expect { model_build }.to raise_error(Cocina::Models::ValidationError, /unexpectedNested/)
+        end
+      end
+
+      context 'when DRO structural has unexpected nested property' do
+        let(:data) do
+          build(:dro).to_h.tap do |h|
+            h[:structural][:unexpectedNested] = 'nope'
+          end
+        end
+
+        it 'rejects unknown nested keys' do
+          expect { model_build }.to raise_error(Cocina::Models::ValidationError, /unexpectedNested/)
+        end
+      end
+
+      context 'when DRO geographic has unexpected nested property' do
+        let(:data) do
+          build(:dro).to_h.tap do |h|
+            h[:geographic] = { iso19139: '<xml/>', unexpectedNested: 'nope' }
+          end
+        end
+
+        it 'rejects unknown nested keys' do
+          expect { model_build }.to raise_error(Cocina::Models::ValidationError, /unexpectedNested/)
+        end
       end
     end
   end
@@ -153,8 +452,7 @@ RSpec.describe Cocina::Models do
             'sourceId' => 'sul:123'
           },
           'administrative' => {
-            'hasAdminPolicy' => 'druid:bc123df4567',
-            'hasAgreement' => 'druid:bc123df4567'
+            'hasAdminPolicy' => 'druid:bc123df4567'
           }
         }
       end
@@ -162,8 +460,8 @@ RSpec.describe Cocina::Models do
       it 'raises an error' do
         expect do
           build
-        end.to raise_error Cocina::Models::ValidationError,
-                           'When validating RequestDRO: value at `/version` is not one of: [1]'
+        end.to raise_error(Cocina::Models::ValidationError,
+                           'When validating RequestDRO: value at `/version` is not one of: [1]')
       end
     end
 
@@ -173,7 +471,7 @@ RSpec.describe Cocina::Models do
       end
 
       it 'raises an error' do
-        expect { build }.to raise_error Cocina::Models::UnknownTypeError, "Unknown type: 'foo'"
+        expect { build }.to raise_error(Cocina::Models::UnknownTypeError, "Unknown type: 'foo'")
       end
     end
 
@@ -183,7 +481,134 @@ RSpec.describe Cocina::Models do
       end
 
       it 'raises an error' do
-        expect { build }.to raise_error Cocina::Models::ValidationError
+        expect { build }.to raise_error(Cocina::Models::ValidationError)
+      end
+    end
+
+    context 'when RequestDRO description.title has unexpected property' do
+      let(:data) do
+        {
+          'type' => 'https://cocina.sul.stanford.edu/models/image',
+          'label' => 'bar',
+          'version' => 1,
+          'identification' => { 'sourceId' => 'sul:123' },
+          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' },
+          'description' => {
+            'title' => [{ 'value' => 'My title', 'unexpectedNested' => 'nope' }]
+          }
+        }
+      end
+
+      it 'rejects unknown nested keys' do
+        expect { build }.to raise_error(Cocina::Models::ValidationError, /unexpectedNested/)
+      end
+    end
+
+    context 'when RequestDRO administrative has unexpected property' do
+      let(:data) do
+        {
+          'type' => 'https://cocina.sul.stanford.edu/models/image',
+          'label' => 'bar',
+          'version' => 1,
+          'identification' => { 'sourceId' => 'sul:123' },
+          'administrative' => {
+            'hasAdminPolicy' => 'druid:bc123df4567',
+            'unexpectedNested' => 'nope'
+          }
+        }
+      end
+
+      it 'rejects unknown nested keys' do
+        expect { build }.to raise_error(Cocina::Models::ValidationError, /unexpectedNested/)
+      end
+    end
+
+    context 'when RequestDRO structural has unexpected property' do
+      let(:data) do
+        {
+          'type' => 'https://cocina.sul.stanford.edu/models/image',
+          'label' => 'bar',
+          'version' => 1,
+          'identification' => { 'sourceId' => 'sul:123' },
+          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' },
+          'structural' => { 'unexpectedNested' => 'nope' }
+        }
+      end
+
+      it 'rejects unknown nested keys' do
+        expect { build }.to raise_error(Cocina::Models::ValidationError, /unexpectedNested/)
+      end
+    end
+
+    context 'when RequestCollection access has unexpected property' do
+      let(:data) do
+        {
+          'type' => 'https://cocina.sul.stanford.edu/models/exhibit',
+          'label' => 'bar',
+          'version' => 1,
+          'access' => { 'view' => 'world', 'unexpectedNested' => 'nope' },
+          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
+        }
+      end
+
+      it 'rejects unknown nested keys' do
+        expect { build }.to raise_error(Cocina::Models::ValidationError, /unexpectedNested/)
+      end
+    end
+
+    context 'when RequestCollection identification has unexpected property' do
+      let(:data) do
+        {
+          'type' => 'https://cocina.sul.stanford.edu/models/exhibit',
+          'label' => 'bar',
+          'version' => 1,
+          'access' => {},
+          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' },
+          'identification' => { 'sourceId' => 'sul:123', 'unexpectedNested' => 'nope' }
+        }
+      end
+
+      it 'rejects unknown nested keys' do
+        expect { build }.to raise_error(Cocina::Models::ValidationError, /unexpectedNested/)
+      end
+    end
+
+    context 'when RequestAdminPolicy administrative has unexpected property' do
+      let(:data) do
+        {
+          'type' => 'https://cocina.sul.stanford.edu/models/admin_policy',
+          'label' => 'bar',
+          'version' => 1,
+          'administrative' => {
+            'hasAdminPolicy' => 'druid:bc123df4567',
+            'hasAgreement' => 'druid:bc123df4567',
+            'accessTemplate' => {},
+            'unexpectedNested' => 'nope'
+          }
+        }
+      end
+
+      it 'rejects unknown nested keys' do
+        expect { build }.to raise_error(Cocina::Models::ValidationError, /unexpectedNested/)
+      end
+    end
+
+    context 'when RequestAdminPolicy accessTemplate has unexpected property' do
+      let(:data) do
+        {
+          'type' => 'https://cocina.sul.stanford.edu/models/admin_policy',
+          'label' => 'bar',
+          'version' => 1,
+          'administrative' => {
+            'hasAdminPolicy' => 'druid:bc123df4567',
+            'hasAgreement' => 'druid:bc123df4567',
+            'accessTemplate' => { 'view' => 'world', 'download' => 'world', 'unexpectedNested' => 'nope' }
+          }
+        }
+      end
+
+      it 'rejects unknown nested keys' do
+        expect { build }.to raise_error(Cocina::Models::ValidationError, /unexpectedNested/)
       end
     end
   end
@@ -271,6 +696,48 @@ RSpec.describe Cocina::Models do
 
     it 'returns a DROWithMetadata' do
       expect(cocina_object_with_metadata).to be_a Cocina::Models::DROWithMetadata
+      expect(cocina_object_with_metadata).to match_cocina_object_with(expected.to_h)
+    end
+  end
+
+  describe '.with_metadata for Collection' do
+    subject(:cocina_object_with_metadata) do
+      described_class.with_metadata(cocina_object, 'abc123', created: date, modified: date)
+    end
+
+    let(:date) { DateTime.now }
+    let(:cocina_object) { build(:collection) }
+    let(:props) { cocina_object.to_h }
+
+    let(:expected) do
+      Cocina::Models::CollectionWithMetadata.new(
+        props.merge({ lock: 'abc123', created: date.iso8601, modified: date.iso8601 })
+      )
+    end
+
+    it 'returns a CollectionWithMetadata' do
+      expect(cocina_object_with_metadata).to be_a(Cocina::Models::CollectionWithMetadata)
+      expect(cocina_object_with_metadata).to match_cocina_object_with(expected.to_h)
+    end
+  end
+
+  describe '.with_metadata for AdminPolicy' do
+    subject(:cocina_object_with_metadata) do
+      described_class.with_metadata(cocina_object, 'abc123', created: date, modified: date)
+    end
+
+    let(:date) { DateTime.now }
+    let(:cocina_object) { build(:admin_policy) }
+    let(:props) { cocina_object.to_h }
+
+    let(:expected) do
+      Cocina::Models::AdminPolicyWithMetadata.new(
+        props.merge({ lock: 'abc123', created: date.iso8601, modified: date.iso8601 })
+      )
+    end
+
+    it 'returns an AdminPolicyWithMetadata' do
+      expect(cocina_object_with_metadata).to be_a(Cocina::Models::AdminPolicyWithMetadata)
       expect(cocina_object_with_metadata).to match_cocina_object_with(expected.to_h)
     end
   end

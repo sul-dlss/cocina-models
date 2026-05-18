@@ -5,21 +5,25 @@ module Cocina
     # Class for generating from a JSON schema
     class Schema < SchemaBase
       def schema_properties
-        @schema_properties ||= (properties + all_of_properties + one_of_properties).uniq(&:key)
+        @schema_properties ||= (
+          schema_properties_for(schema_doc) +
+          all_of_properties_for(schema_doc) +
+          one_of_properties_for(schema_doc)
+        ).uniq(&:key)
       end
 
-      VALIDATE_TYPES = %w[DRO RequestDRO DROWithMetadata Collection RequestCollection CollectionWithMetadata AdminPolicy
-                          RequestAdminPolicy AdminPolicyWithMetadata Description RequestDescription].freeze
+      VALIDATABLE_TYPES = %w[DRO RequestDRO DROWithMetadata Collection RequestCollection CollectionWithMetadata AdminPolicy
+                             RequestAdminPolicy AdminPolicyWithMetadata Description RequestDescription].freeze
 
       def generate
         <<~RUBY
           # frozen_string_literal: true
 
           module Cocina
-            module Models#{'              '}
+            module Models
               #{preamble}class #{name} < Struct
 
-                #{validate}
+                #{validatable}
                 #{types}
 
                 #{model_attributes}
@@ -65,68 +69,41 @@ module Cocina
         RUBY
       end
 
-      def validate
-        return '' unless validatable?
+      def validatable
+        return '' if VALIDATABLE_TYPES.exclude?(name)
 
         <<~RUBY
           include Validatable
         RUBY
       end
 
-      def validatable?
-        VALIDATE_TYPES.include?(name) && !lite
-      end
-
-      def properties
-        schema_properties_for(schema_doc)
-      end
-
-      def all_of_properties
-        all_of_properties_for(schema_doc)
-      end
-
-      def one_of_properties
-        one_of_properties_for(schema_doc)
-      end
-
       def all_of_properties_for(doc)
-        return [] if doc.all_of.nil?
-
-        doc.all_of.map do |all_of_schema|
-          # All of for this + recurse
+        Array(doc.all_of).flat_map do |all_of_schema|
           schema_properties_for(all_of_schema) +
             all_of_properties_for(all_of_schema) +
             one_of_properties_for(all_of_schema)
-        end.flatten
-      end
-
-      def one_of_properties_for(doc)
-        return [] if doc.one_of.nil?
-
-        # All properties must be objects.
-        raise 'All properties for oneOf must be objects' unless doc.one_of.all? { |schema| schema.type == 'object' }
-
-        doc.one_of.flat_map do |one_of_doc|
-          one_of_doc.properties.map do |key, properties_doc|
-            property_class_for(properties_doc).new(properties_doc,
-                                                   key: key,
-                                                   # The property does less validation because may vary between
-                                                   # different oneOf schemas. Validation is still performed
-                                                   # by JSON Schema.
-                                                   relaxed: true,
-                                                   parent: self,
-                                                   schemas: schemas)
-          end
         end
       end
 
-      def schema_properties_for(doc)
+      def one_of_properties_for(doc)
+        Array(doc.one_of).flat_map do |one_of_schema|
+          schema_properties_for(one_of_schema, relaxed: true) +
+            all_of_properties_for(one_of_schema) +
+            one_of_properties_for(one_of_schema)
+        end
+      end
+
+      def schema_properties_for(doc, relaxed: nil)
+        relax_all_properties = relaxed
+
         Array(doc.properties).map do |key, properties_doc|
           clazz = property_class_for(properties_doc)
+          relaxed = relax_all_properties.nil? ? lite && clazz != SchemaValue : relax_all_properties
+
           clazz.new(properties_doc,
                     key: key,
                     required: doc.required&.include?(key),
-                    relaxed: lite && clazz != SchemaValue,
+                    relaxed: relaxed,
                     nullable: Array(properties_doc.type).include?('null'),
                     parent: self,
                     schemas: schemas)

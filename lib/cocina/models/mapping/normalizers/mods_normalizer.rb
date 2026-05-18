@@ -394,13 +394,14 @@ module Cocina
           end
 
           def blank_ng_xml
-            Nokogiri::XML(<<~XML
-              <mods xmlns="http://www.loc.gov/mods/v3"#{' '}
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"#{' '}
-                version="3.6"#{' '}
-                xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd" />
-            XML
-                         )
+            Nokogiri::XML(
+              <<~XML
+                <mods xmlns="http://www.loc.gov/mods/v3"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  version="3.6"
+                  xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd" />
+              XML
+            )
           end
         end
       end
