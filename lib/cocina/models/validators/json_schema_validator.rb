@@ -39,6 +39,14 @@ module Cocina
           new(...).validate
         end
 
+        # @return [Hash] a hash representation of the schema.json document
+        def self.document
+          @document ||= begin
+            file_content = ::File.read(SCHEMA_PATH)
+            JSON.parse(file_content)
+          end
+        end
+
         # @param clazz [Class] the Cocina model class being validated (e.g., Cocina::Models::DRO)
         # @param attributes [Hash] the attributes of the model instance being validated
         def initialize(clazz, attributes)
@@ -69,15 +77,7 @@ module Cocina
 
         # @return [JSONSchemer::Schema]
         def schema
-          @schema ||= JSONSchemer.schema(document)
-        end
-
-        # @return [Hash] a hash representation of the schema.json document
-        def document
-          @document ||= begin
-            file_content = ::File.read(SCHEMA_PATH)
-            JSON.parse(file_content)
-          end
+          @schema ||= JSONSchemer.schema(self.class.document)
         end
 
         # @return [String] the method name derived from the class name
