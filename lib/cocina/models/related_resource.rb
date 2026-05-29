@@ -14,7 +14,7 @@ module Cocina
       # The preferred display label to use for the related resource in access systems.
       attribute? :displayLabel, Types::Strict::String.optional
       # Titles of the related resource.
-      attribute :title, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
+      attribute :title, Types::Strict::Array.of(Title).default([].freeze)
       # Agents contributing in some way to the creation and history of the related resource.
       attribute :contributor, Types::Strict::Array.of(Contributor).default([].freeze)
       # Events in the history of the related resource.
