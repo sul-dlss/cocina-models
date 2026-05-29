@@ -39,6 +39,11 @@ module Cocina
           new(...).validate
         end
 
+        # @return [JSONSchemer::Schema]
+        def self.schema
+          @schema ||= JSONSchemer.schema(document)
+        end
+
         # @return [Hash] a hash representation of the schema.json document
         def self.document
           @document ||= begin
@@ -77,7 +82,7 @@ module Cocina
 
         # @return [JSONSchemer::Schema]
         def schema
-          @schema ||= JSONSchemer.schema(self.class.document)
+          self.class.schema
         end
 
         # @return [String] the method name derived from the class name
