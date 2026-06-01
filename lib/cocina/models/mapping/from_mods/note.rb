@@ -33,7 +33,8 @@ module Cocina
           attr_reader :resource_element
 
           def abstracts
-            all_abstract_nodes = resource_element.xpath('mods:abstract', mods: Description::DESC_METADATA_NS).select do |node|
+            all_abstract_nodes = resource_element.xpath('mods:abstract',
+                                                        mods: Description::DESC_METADATA_NS).select do |node|
               note_present?(node)
             end
             altrepgroup_abstract_nodes, other_abstract_nodes = AltRepGroup.split(nodes: all_abstract_nodes)
@@ -116,7 +117,8 @@ module Cocina
           end
 
           def table_of_contents
-            all_toc_nodes = resource_element.xpath('mods:tableOfContents', mods: Description::DESC_METADATA_NS).select do |node|
+            all_toc_nodes = resource_element.xpath('mods:tableOfContents',
+                                                   mods: Description::DESC_METADATA_NS).select do |node|
               note_present?(node)
             end
             altrepgroup_toc_nodes, other_toc_nodes = AltRepGroup.split(nodes: all_toc_nodes)

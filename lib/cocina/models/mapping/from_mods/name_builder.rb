@@ -154,7 +154,9 @@ module Cocina
           end
 
           def build_structured_value_name(name_node, name_part_nodes)
-            vals = name_part_nodes.filter_map { |name_part_node| build_name_part(name_node, name_part_node, default_type: name_node['type'] != 'corporate').presence }
+            vals = name_part_nodes.filter_map do |name_part_node|
+              build_name_part(name_node, name_part_node, default_type: name_node['type'] != 'corporate').presence
+            end
             display_form_node = name_node.xpath('mods:displayForm', mods: Description::DESC_METADATA_NS).first
             if display_form_node.present?
               cocina_contrib_name =

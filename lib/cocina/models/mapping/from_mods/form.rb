@@ -59,7 +59,8 @@ module Cocina
 
           def build_cartographics(subject_node)
             carto_forms = []
-            subject_node.xpath('mods:cartographics[mods:scale]', mods: Description::DESC_METADATA_NS).each do |carto_node|
+            subject_node.xpath('mods:cartographics[mods:scale]',
+                               mods: Description::DESC_METADATA_NS).each do |carto_node|
               scale_nodes = carto_node.xpath('mods:scale', mods: Description::DESC_METADATA_NS).reject do |scale_node|
                 scale_node.text.blank?
               end

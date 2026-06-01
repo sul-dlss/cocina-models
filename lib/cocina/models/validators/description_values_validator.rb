@@ -22,9 +22,18 @@ module Cocina
 
           validate_obj(attributes, [])
 
-          raise ValidationError, "Multiple value, groupedValue, structuredValue, and parallelValue in description: #{error_paths_multiple.join(', ')}" unless error_paths_multiple.empty?
-          raise ValidationError, "Blank value in description: #{error_paths_blank.join(', ')}" unless error_paths_blank.empty?
-          raise ValidationError, "Missing type for value in description: #{error_paths_missing_title_type.join(', ')}" unless error_paths_missing_title_type.empty?
+          unless error_paths_multiple.empty?
+            raise ValidationError,
+                  "Multiple value, groupedValue, structuredValue, and parallelValue in description: #{error_paths_multiple.join(', ')}"
+          end
+          unless error_paths_blank.empty?
+            raise ValidationError,
+                  "Blank value in description: #{error_paths_blank.join(', ')}"
+          end
+          return if error_paths_missing_title_type.empty?
+
+          raise ValidationError,
+                "Missing type for value in description: #{error_paths_missing_title_type.join(', ')}"
         end
 
         private
@@ -62,7 +71,9 @@ module Cocina
         end
 
         def validate_values_for_multiples(hash, path)
-          return unless hash.count { |key, value| %w[value groupedValue structuredValue parallelValue].include?(key) && value.present? } > 1
+          return unless hash.count do |key, value|
+            %w[value groupedValue structuredValue parallelValue].include?(key) && value.present?
+          end > 1
 
           error_paths_multiple << path_to_s(path)
         end

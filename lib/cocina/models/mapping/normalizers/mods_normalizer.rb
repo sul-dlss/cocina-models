@@ -67,8 +67,10 @@ module Cocina
             normalize_location_physical_location
             normalize_purl_location
             normalize_empty_notes
-            @ng_xml = Cocina::Models::Mapping::Normalizers::Mods::TitleNormalizer.normalize(mods_ng_xml: ng_xml, label: label)
-            @ng_xml = Cocina::Models::Mapping::Normalizers::Mods::GeoExtensionNormalizer.normalize(mods_ng_xml: ng_xml, druid: druid)
+            @ng_xml = Cocina::Models::Mapping::Normalizers::Mods::TitleNormalizer.normalize(mods_ng_xml: ng_xml,
+                                                                                            label: label)
+            @ng_xml = Cocina::Models::Mapping::Normalizers::Mods::GeoExtensionNormalizer.normalize(mods_ng_xml: ng_xml,
+                                                                                                   druid: druid)
             normalize_empty_type_of_resource # Must be after normalize_empty_attributes
             normalize_notes
             normalize_abstracts
@@ -87,7 +89,9 @@ module Cocina
 
           def normalize_purl_and_missing_title
             normalize_purl_location
-            @ng_xml = Cocina::Models::Mapping::Normalizers::Mods::TitleNormalizer.normalize_missing_title(mods_ng_xml: ng_xml, label: label)
+            @ng_xml = Cocina::Models::Mapping::Normalizers::Mods::TitleNormalizer.normalize_missing_title(
+              mods_ng_xml: ng_xml, label: label
+            )
             ng_xml
           end
 
@@ -139,14 +143,16 @@ module Cocina
 
           def normalize_version
             # Only normalize version when version isn't mapped.
-            match = /MODS version (\d\.\d)/.match(ng_xml.at('//mods:recordInfo/mods:recordOrigin', mods: MODS_NS)&.content)
+            match = /MODS version (\d\.\d)/.match(ng_xml.at('//mods:recordInfo/mods:recordOrigin',
+                                                            mods: MODS_NS)&.content)
 
             if !match
               ng_xml.root['version'] = '3.7'
               ng_xml.root['xsi:schemaLocation'] = 'http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-7.xsd'
             elsif match && match[1] != ng_xml.root['version']
               ng_xml.root['version'] = match[1]
-              ng_xml.root['xsi:schemaLocation'] = "http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-#{match[1].sub('.', '-')}.xsd"
+              ng_xml.root['xsi:schemaLocation'] =
+                "http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-#{match[1].sub('.', '-')}.xsd"
             end
           end
 
@@ -160,7 +166,9 @@ module Cocina
 
           def normalize_purl_location
             normalize_purl_for(ng_xml.root, purl: Cocina::Models::Mapping::Purl.for(druid: druid))
-            ng_xml.xpath('/mods:mods/mods:relatedItem', mods: MODS_NS).each { |related_item_node| normalize_purl_for(related_item_node) }
+            ng_xml.xpath('/mods:mods/mods:relatedItem', mods: MODS_NS).each do |related_item_node|
+              normalize_purl_for(related_item_node)
+            end
           end
 
           def normalize_purl_for(base_node, purl: nil)
@@ -204,8 +212,11 @@ module Cocina
           end
 
           def primary_url_node_for(base_node, purl)
-            primary_purl_nodes, primary_url_nodes = base_node.xpath('mods:location/mods:url[@usage="primary display"]', mods: MODS_NS)
-                                                             .partition { |url_node| ::Cocina::Models::Mapping::Purl.purl?(url_node.text) }
+            primary_purl_nodes, primary_url_nodes = base_node.xpath('mods:location/mods:url[@usage="primary display"]',
+                                                                    mods: MODS_NS)
+                                                             .partition do |url_node|
+              ::Cocina::Models::Mapping::Purl.purl?(url_node.text)
+            end
             all_purl_nodes = base_node.xpath('mods:location/mods:url', mods: MODS_NS)
                                       .select { |url_node| ::Cocina::Models::Mapping::Purl.purl?(url_node.text) }
 
@@ -232,7 +243,9 @@ module Cocina
 
           def normalize_unmatched_altrepgroup
             normalize_unmatched_altrepgroup_for(ng_xml.root)
-            ng_xml.xpath('//mods:relatedItem', mods: MODS_NS).each { |related_item_node| normalize_unmatched_altrepgroup_for(related_item_node) }
+            ng_xml.xpath('//mods:relatedItem', mods: MODS_NS).each do |related_item_node|
+              normalize_unmatched_altrepgroup_for(related_item_node)
+            end
           end
 
           def normalize_unmatched_altrepgroup_for(base_node)
@@ -252,12 +265,15 @@ module Cocina
 
           def normalize_unmatched_nametitlegroup
             normalize_unmatched_nametitlegroup_for(ng_xml.root)
-            ng_xml.xpath('//mods:relatedItem', mods: MODS_NS).each { |related_item_node| normalize_unmatched_nametitlegroup_for(related_item_node) }
+            ng_xml.xpath('//mods:relatedItem', mods: MODS_NS).each do |related_item_node|
+              normalize_unmatched_nametitlegroup_for(related_item_node)
+            end
           end
 
           def normalize_unmatched_nametitlegroup_for(base_node)
             ids = {}
-            base_node.xpath('mods:name[@nameTitleGroup] | mods:titleInfo[@nameTitleGroup]', mods: MODS_NS).each do |node|
+            base_node.xpath('mods:name[@nameTitleGroup] | mods:titleInfo[@nameTitleGroup]',
+                            mods: MODS_NS).each do |node|
               id = node['nameTitleGroup']
               ids[id] ||= []
               ids[id] << node
@@ -338,7 +354,8 @@ module Cocina
                          mods: MODS_NS).each do |number_node|
               number_node.parent.parent.remove
             end
-            ng_xml.xpath('//mods:relatedItem[not(mods:*) and not(@xlink:href)]', mods: MODS_NS, xlink: XLINK_NS).each(&:remove)
+            ng_xml.xpath('//mods:relatedItem[not(mods:*) and not(@xlink:href)]', mods: MODS_NS,
+                                                                                 xlink: XLINK_NS).each(&:remove)
           end
 
           def normalize_notes
@@ -387,7 +404,8 @@ module Cocina
           end
 
           def normalize_related_item_attributes
-            ng_xml.xpath('/mods:mods/mods:relatedItem[@lang or @script]', mods: ModsNormalizer::MODS_NS).each do |related_item_node|
+            ng_xml.xpath('/mods:mods/mods:relatedItem[@lang or @script]',
+                         mods: ModsNormalizer::MODS_NS).each do |related_item_node|
               related_item_node.delete('lang')
               related_item_node.delete('script')
             end

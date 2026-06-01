@@ -24,6 +24,68 @@ RSpec.describe Cocina::Models::Mapping::FromMods::Form do
   end
 
   describe 'typeOfResource' do
+    context 'without authorityURI' do
+      let(:xml) do
+        <<~XML
+          <typeOfResource>text</typeOfResource>
+        XML
+      end
+
+      it 'builds the cocina data structure with default source value' do
+        expect(build).to eq [
+          {
+            value: 'text',
+            type: 'resource type',
+            source: {
+              value: 'MODS resource types'
+            }
+          }
+        ]
+      end
+    end
+
+    context 'with datacite extension resource type' do
+      let(:xml) do
+        <<~XML
+          <extension displayLabel="datacite">
+            <resourceType resourceTypeGeneral="Dataset">Image collection</resourceType>
+          </extension>
+        XML
+      end
+
+      it 'adds a DataCite resource type form' do
+        expect(build).to eq [
+          {
+            value: 'Dataset',
+            type: 'resource type',
+            source: {
+              value: 'DataCite resource types'
+            }
+          }
+        ]
+      end
+    end
+
+    context 'with authorityURI' do
+      let(:xml) do
+        <<~XML
+          <typeOfResource authorityURI="http://id.loc.gov/vocabulary/resourceTypes">text</typeOfResource>
+        XML
+      end
+
+      it 'builds the cocina data structure with source uri' do
+        expect(build).to eq [
+          {
+            value: 'text',
+            type: 'resource type',
+            source: {
+              uri: 'http://id.loc.gov/vocabulary/resourceTypes'
+            }
+          }
+        ]
+      end
+    end
+
     context 'with empty element' do
       let(:xml) do
         <<~XML
@@ -39,6 +101,36 @@ RSpec.describe Cocina::Models::Mapping::FromMods::Form do
   end
 
   describe 'genre' do
+    context 'with structured H2 genres' do
+      let(:xml) do
+        <<~XML
+          <genre type="H2 genre">Thesis</genre>
+          <genre type="H2 sub type">PhD</genre>
+        XML
+      end
+
+      it 'builds a structured resource type form' do
+        expect(build).to eq [
+          {
+            type: 'resource type',
+            source: {
+              value: 'Stanford self-deposit resource types'
+            },
+            structuredValue: [
+              {
+                value: 'Thesis',
+                type: 'genre'
+              },
+              {
+                value: 'PhD',
+                type: 'sub type'
+              }
+            ]
+          }
+        ]
+      end
+    end
+
     context 'with authority missing valueURI' do
       let(:xml) do
         <<~XML

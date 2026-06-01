@@ -48,7 +48,9 @@ module Cocina
         end
 
         def invalid_filenames_with_language_tags
-          invalid_files.map { |invalid_file| "#{invalid_file[:filename] || invalid_file[:label]} (#{invalid_file[:languageTag]})" }
+          invalid_files.map do |invalid_file|
+            "#{invalid_file[:filename] || invalid_file[:label]} (#{invalid_file[:languageTag]})"
+          end
         end
 
         def language_tag_files

@@ -16,6 +16,10 @@ Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
 Layout/SpaceAroundMethodCallOperator:
   Enabled: true
+Layout/LineLength:
+  Exclude:
+    - lib/cocina/models/*
+    - spec/**/*
 
 # This cop throws an error in 1.37.1
 Layout/SpaceInsideHashLiteralBraces:
