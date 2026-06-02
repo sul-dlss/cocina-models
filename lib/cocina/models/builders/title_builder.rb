@@ -227,8 +227,6 @@ module Cocina
         #
         # for punctuaion funky town, thank MARC and catalog cards
         #
-        # rubocop:disable Metrics/AbcSize
-        # rubocop:disable Metrics/CyclomaticComplexity
         # rubocop:disable Metrics/MethodLength
         # rubocop:disable Metrics/PerceivedComplexity
         def rebuild_structured_value(cocina_title)
@@ -283,8 +281,6 @@ module Cocina
 
           result
         end
-        # rubocop:enable Metrics/AbcSize
-        # rubocop:enable Metrics/CyclomaticComplexity
         # rubocop:enable Metrics/MethodLength
         # rubocop:enable Metrics/PerceivedComplexity
 

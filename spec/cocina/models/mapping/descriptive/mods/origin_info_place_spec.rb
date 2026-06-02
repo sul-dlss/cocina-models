@@ -378,66 +378,6 @@ RSpec.describe 'MODS originInfo place <--> cocina mappings' do
 
   # specs added by devs below
 
-  context 'when cocina event location with code missing source, but has URI' do
-    # NOTE: cocina -> MODS
-    it_behaves_like 'cocina MODS mapping' do
-      let(:cocina) do
-        {
-          event: [
-            {
-              location: [
-                {
-                  code: 'cau',
-                  uri: 'http://id.loc.gov/vocabulary/countries/cau'
-                }
-              ]
-            }
-          ]
-        }
-      end
-
-      let(:mods) do
-        <<~XML
-          <originInfo>
-            <place>
-              <placeTerm type="code" valueURI="http://id.loc.gov/vocabulary/countries/cau">cau</placeTerm>
-            </place>
-          </originInfo>
-        XML
-      end
-    end
-  end
-
-  context 'when cocina event location with value missing source, but has URI' do
-    # NOTE: cocina -> MODS
-    it_behaves_like 'cocina MODS mapping' do
-      let(:cocina) do
-        {
-          event: [
-            {
-              location: [
-                {
-                  value: 'California',
-                  uri: 'http://id.loc.gov/vocabulary/countries/cau'
-                }
-              ]
-            }
-          ]
-        }
-      end
-
-      let(:mods) do
-        <<~XML
-          <originInfo>
-            <place>
-              <placeTerm type="text" valueURI="http://id.loc.gov/vocabulary/countries/cau">California</placeTerm>
-            </place>
-          </originInfo>
-        XML
-      end
-    end
-  end
-
   context 'when place, publisher and eventType manufacture' do
     # based on vy980tx4948
     it_behaves_like 'MODS cocina mapping' do

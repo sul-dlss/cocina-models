@@ -6,6 +6,11 @@ module Cocina
       module FromMods
         # Maps notes
         class Note # rubocop:disable Metrics/ClassLength
+          # notes with these types will produce an `abstract` XML node
+          NOTE_TYPE_TO_ABSTRACT_TYPE = ['summary', 'abstract', 'scope and content'].freeze
+          DISPLAY_LABEL_TO_ABSTRACT_TYPE = ['Content advice', 'Subject', 'Abstract', 'Review', 'Summary', 'Scope and content',
+                                            'Scope and Content', 'Content Advice'].freeze
+
           # @param [Nokogiri::XML::Element] resource_element mods or relatedItem element
           # @param [Cocina::Models::Mapping::FromMods::DescriptionBuilder] description_builder (not used, but passed in by DescriptionBuilder)
           # @param [String] purl (not used, but passed in by DescriptionBuilder)
@@ -28,7 +33,8 @@ module Cocina
           attr_reader :resource_element
 
           def abstracts
-            all_abstract_nodes = resource_element.xpath('mods:abstract', mods: Description::DESC_METADATA_NS).select do |node|
+            all_abstract_nodes = resource_element.xpath('mods:abstract',
+                                                        mods: Description::DESC_METADATA_NS).select do |node|
               note_present?(node)
             end
             altrepgroup_abstract_nodes, other_abstract_nodes = AltRepGroup.split(nodes: all_abstract_nodes)
@@ -58,13 +64,13 @@ module Cocina
           end
 
           def note_type(node)
-            return node['type'].downcase if Cocina::Models::Mapping::ToMods::Note.note_type_to_abstract_type.include?(node['type']&.downcase)
+            return node['type'].downcase if NOTE_TYPE_TO_ABSTRACT_TYPE.include?(node['type']&.downcase)
 
             node['type']
           end
 
           def display_label(node)
-            return node[:displayLabel].capitalize if Cocina::Models::Mapping::ToMods::Note.display_label_to_abstract_type.include? node[:displayLabel]
+            return node[:displayLabel].capitalize if DISPLAY_LABEL_TO_ABSTRACT_TYPE.include? node[:displayLabel]
 
             node[:displayLabel].presence
           end
@@ -72,7 +78,7 @@ module Cocina
           def abstract_type(node, parallel: false)
             if node['type'].present?
               { type: node['type'].downcase }
-            elsif Cocina::Models::Mapping::ToMods::Note.display_label_to_abstract_type.exclude?(node['displayLabel']) && !parallel
+            elsif DISPLAY_LABEL_TO_ABSTRACT_TYPE.exclude?(node['displayLabel']) && !parallel
               { type: 'abstract' }
             else
               {}
@@ -111,7 +117,8 @@ module Cocina
           end
 
           def table_of_contents
-            all_toc_nodes = resource_element.xpath('mods:tableOfContents', mods: Description::DESC_METADATA_NS).select do |node|
+            all_toc_nodes = resource_element.xpath('mods:tableOfContents',
+                                                   mods: Description::DESC_METADATA_NS).select do |node|
               note_present?(node)
             end
             altrepgroup_toc_nodes, other_toc_nodes = AltRepGroup.split(nodes: all_toc_nodes)

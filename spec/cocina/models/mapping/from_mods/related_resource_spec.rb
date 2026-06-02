@@ -227,4 +227,29 @@ RSpec.describe Cocina::Models::Mapping::FromMods::RelatedResource do
       expect(notifier).to have_received(:warn).with('Related resource has type and otherType')
     end
   end
+
+  context 'with allowed otherType and no type' do
+    let(:xml) do
+      <<~XML
+        <relatedItem otherType="supplement to">
+          <titleInfo>
+            <title>Supplemental volume</title>
+          </titleInfo>
+        </relatedItem>
+      XML
+    end
+
+    it 'uses the allowed otherType as related resource type' do
+      expect(build).to eq [
+        {
+          title: [
+            {
+              value: 'Supplemental volume'
+            }
+          ],
+          type: 'supplement to'
+        }
+      ]
+    end
+  end
 end

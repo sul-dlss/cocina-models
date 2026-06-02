@@ -163,7 +163,9 @@ RSpec.describe Cocina::Generator::Schema do
       let(:link_hash) { { catalog: 'previous symphony', catalogRecordId: 'a789' } }
 
       it 'cannot be validated' do
-        expect { union_type }.to raise_error(Dry::Struct::Error, /invalid type for :catalogRecordId violates constraints/)
+        expect do
+          union_type
+        end.to raise_error(Dry::Struct::Error, /invalid type for :catalogRecordId violates constraints/)
       end
     end
   end

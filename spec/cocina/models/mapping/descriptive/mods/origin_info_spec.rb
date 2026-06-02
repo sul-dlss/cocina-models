@@ -1346,23 +1346,6 @@ RSpec.describe 'MODS originInfo <--> cocina mappings' do
   # specs added by devs below
 
   context 'when originInfo / event is various flavors of empty/missing' do
-    context 'when cocina event is empty array' do
-      # NOTE: cocina -> MODS
-      it_behaves_like 'cocina MODS mapping' do
-        let(:cocina) do
-          {
-            event: []
-          }
-        end
-
-        let(:roundtrip_cocina) do
-          {}
-        end
-
-        let(:mods) { '' }
-      end
-    end
-
     context 'when MODS has no elements' do
       it_behaves_like 'MODS cocina mapping' do
         let(:mods) { '' }
@@ -1370,23 +1353,6 @@ RSpec.describe 'MODS originInfo <--> cocina mappings' do
         let(:cocina) do
           {}
         end
-      end
-    end
-
-    context 'when cocina event is array with empty hash' do
-      # NOTE: cocina -> MODS
-      it_behaves_like 'cocina MODS mapping' do
-        let(:cocina) do
-          {
-            event: [{}]
-          }
-        end
-
-        let(:roundtrip_cocina) do
-          {}
-        end
-
-        let(:mods) { '' }
       end
     end
 

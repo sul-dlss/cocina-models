@@ -22,7 +22,9 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
   let(:links) { catalog_links.map { |hash| Cocina::Models::FolioCatalogLink.new(hash) } }
 
   context 'with a DRO instead of cocina_titles (deprecated)' do
-    subject(:builder_build) { described_class.build(cocina_object, strategy: strategy, add_punctuation: add_punctuation) }
+    subject(:builder_build) do
+      described_class.build(cocina_object, strategy: strategy, add_punctuation: add_punctuation)
+    end
 
     before do
       allow(Deprecation).to receive(:warn)
@@ -129,7 +131,10 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       end
 
       context 'with a partLabel' do
-        subject(:builder_build) { described_class.build(cocina_titles, catalog_links: links, strategy: strategy, add_punctuation: add_punctuation) }
+        subject(:builder_build) do
+          described_class.build(cocina_titles, catalog_links: links, strategy: strategy,
+                                               add_punctuation: add_punctuation)
+        end
 
         it 'returns the title with partLabel' do
           expect(builder_build).to eq('Simple untyped, Part 1')
@@ -221,7 +226,10 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       end
 
       context 'with a partLabel' do
-        subject(:builder_build) { described_class.build(cocina_titles, catalog_links: links, strategy: strategy, add_punctuation: add_punctuation) }
+        subject(:builder_build) do
+          described_class.build(cocina_titles, catalog_links: links, strategy: strategy,
+                                               add_punctuation: add_punctuation)
+        end
 
         it 'returns the title with partLabel' do
           expect(builder_build).to eq('Trailing, Part 1')
@@ -296,7 +304,10 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       end
 
       context 'with a partLabel' do
-        subject(:builder_build) { described_class.build(cocina_titles, catalog_links: links, strategy: strategy, add_punctuation: add_punctuation) }
+        subject(:builder_build) do
+          described_class.build(cocina_titles, catalog_links: links, strategy: strategy,
+                                               add_punctuation: add_punctuation)
+        end
 
         it 'returns the title with partLabel' do
           expect(builder_build).to eq('Primary Title, Part 1')
@@ -602,7 +613,10 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
       end
 
       context 'with a partLabel and a part name / part number' do
-        subject(:builder_build) { described_class.build(cocina_titles, catalog_links: links, strategy: strategy, add_punctuation: add_punctuation) }
+        subject(:builder_build) do
+          described_class.build(cocina_titles, catalog_links: links, strategy: strategy,
+                                               add_punctuation: add_punctuation)
+        end
 
         it 'returns the title with partLabel' do
           expect(builder_build).to eq('A title : a subtitle. First series, Supplement, Part 1')
@@ -755,7 +769,9 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
   end
 
   context 'with a structuredValue with part name part number and a catalog link' do
-    subject(:builder_build) { described_class.build(cocina_titles, catalog_links: links, strategy: strategy, add_punctuation: add_punctuation) }
+    subject(:builder_build) do
+      described_class.build(cocina_titles, catalog_links: links, strategy: strategy, add_punctuation: add_punctuation)
+    end
 
     let(:titles) do
       [
@@ -893,7 +909,9 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
   end
 
   context 'with structuredValue is subtitle, part name, part number and partLabel' do
-    subject(:builder_build) { described_class.build(cocina_titles, catalog_links: links, strategy: strategy, add_punctuation: add_punctuation) }
+    subject(:builder_build) do
+      described_class.build(cocina_titles, catalog_links: links, strategy: strategy, add_punctuation: add_punctuation)
+    end
 
     let(:full_title) { described_class.full_title(cocina_titles, catalog_links: links) }
     let(:titles) do
@@ -1789,7 +1807,8 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
     end
 
     it '.full_title is entire value from title with status "primary"' do
-      expect(full_title).to eq ['Sefer Bet nadiv sheʼelot u-teshuvot, ḥidushe Torah, derashot', 'hebrew main title hebrew subtitle']
+      expect(full_title).to eq ['Sefer Bet nadiv sheʼelot u-teshuvot, ḥidushe Torah, derashot',
+                                'hebrew main title hebrew subtitle']
     end
 
     it '.additional_titles is all but the full_title' do

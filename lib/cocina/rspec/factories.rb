@@ -143,7 +143,8 @@ module Cocina
       end
 
       # rubocop:disable Metrics/ParameterLists
-      def self.build_request_collection_properties(type:, version:, label:, title:, admin_policy_id:, source_id: nil, catkeys: [], folio_instance_hrids: [])
+      def self.build_request_collection_properties(type:, version:, label:, title:, admin_policy_id:, source_id: nil,
+                                                   catkeys: [], folio_instance_hrids: [])
         {
           type: type,
           version: version,
@@ -228,7 +229,10 @@ module Cocina
           props[:administrative][:accessTemplate][:copyright] = copyright if copyright
           props[:administrative][:accessTemplate][:license] = license if license
           props[:administrative][:registrationWorkflow] = registration_workflow if registration_workflow
-          props[:administrative][:collectionsForRegistration] = collections_for_registration if collections_for_registration
+          if collections_for_registration
+            props[:administrative][:collectionsForRegistration] =
+              collections_for_registration
+          end
           props.delete(:description) if without_description
         end
       end

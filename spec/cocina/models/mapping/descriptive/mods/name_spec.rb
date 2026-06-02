@@ -3140,7 +3140,8 @@ RSpec.describe 'MODS name <--> cocina mappings' do
       end
     end
 
-    context 'when the role code is missing the authority and length is not 3', skip: 'This tries to make invalid cocina' do
+    context 'when the role code is missing the authority and length is not 3',
+            skip: 'This tries to make invalid cocina' do
       it_behaves_like 'MODS cocina mapping' do
         let(:mods) do
           <<~XML
@@ -3235,51 +3236,6 @@ RSpec.describe 'MODS name <--> cocina mappings' do
   end
 
   context 'when name / contributor is various flavors of missing' do
-    context 'when cocina contributor is nil' do
-      # NOTE: cocina -> MODS
-      it_behaves_like 'cocina MODS mapping' do
-        let(:cocina) do
-          {}
-        end
-
-        let(:mods) { '' }
-      end
-    end
-
-    context 'when cocina contributor is empty array' do
-      # NOTE: cocina -> MODS
-      it_behaves_like 'cocina MODS mapping' do
-        let(:cocina) do
-          {
-            contributor: []
-          }
-        end
-
-        let(:roundtrip_cocina) do
-          {}
-        end
-
-        let(:mods) { '' }
-      end
-    end
-
-    context 'when cocina contributor is array with empty hash' do
-      # NOTE: cocina -> MODS
-      it_behaves_like 'cocina MODS mapping' do
-        let(:cocina) do
-          {
-            contributor: [{}]
-          }
-        end
-
-        let(:roundtrip_cocina) do
-          {}
-        end
-
-        let(:mods) { '' }
-      end
-    end
-
     context 'when MODS has no elements' do
       it_behaves_like 'MODS cocina mapping' do
         let(:mods) { '' }
@@ -3309,37 +3265,6 @@ RSpec.describe 'MODS name <--> cocina mappings' do
             Notification.new(msg: 'Missing name/namePart element')
           ]
         end
-      end
-    end
-  end
-
-  context 'with authority code only' do
-    it_behaves_like 'cocina MODS mapping' do
-      let(:cocina) do
-        {
-          contributor: [
-            {
-              name: [
-                {
-                  value: 'Sayers, Dorothy L. (Dorothy Leigh), 1893-1957',
-                  source: {
-                    code: 'naf'
-                  }
-                }
-              ],
-              status: 'primary',
-              type: 'person'
-            }
-          ]
-        }
-      end
-
-      let(:mods) do
-        <<~XML
-          <name type="personal" usage="primary" authority="naf">
-            <namePart>Sayers, Dorothy L. (Dorothy Leigh), 1893-1957</namePart>
-          </name>
-        XML
       end
     end
   end

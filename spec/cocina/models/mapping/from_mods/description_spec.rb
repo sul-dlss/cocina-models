@@ -4,7 +4,8 @@ require 'spec_helper'
 
 RSpec.describe Cocina::Models::Mapping::FromMods::Description do
   subject(:descriptive) do
-    described_class.props(mods: Nokogiri::XML(desc_metadata), druid: 'druid:bb196dd3409', notifier: notifier, label: 'test label')
+    described_class.props(mods: Nokogiri::XML(desc_metadata), druid: 'druid:bb196dd3409', notifier: notifier,
+                          label: 'test label')
   end
 
   let(:notifier) { instance_double(Cocina::Models::Mapping::ErrorNotifier) }

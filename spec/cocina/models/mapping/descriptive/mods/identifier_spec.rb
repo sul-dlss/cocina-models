@@ -175,44 +175,9 @@ RSpec.describe 'MODS identifier <--> cocina mappings' do
     end
 
     # NOTE: cocina -> MODS
-    it_behaves_like 'cocina MODS mapping' do
-      let(:cocina) do
-        {
-          identifier: [
-            {
-              value: '123456789203',
-              type: 'OCLC'
-            }
-          ]
-        }
-      end
-
-      let(:mods) do
-        <<~XML
-          <identifier type="OCLC">123456789203</identifier>
-        XML
-      end
-    end
   end
 
   context 'when identifier is various flavors of missing' do
-    context 'when cocina is empty array' do
-      # NOTE: cocina -> MODS
-      it_behaves_like 'cocina MODS mapping' do
-        let(:cocina) do
-          {
-            identifier: []
-          }
-        end
-
-        let(:roundtrip_cocina) do
-          {}
-        end
-
-        let(:mods) { '' }
-      end
-    end
-
     context 'when MODS has no elements' do
       it_behaves_like 'MODS cocina mapping' do
         let(:mods) { '' }

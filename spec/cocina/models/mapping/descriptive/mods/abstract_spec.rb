@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'MODS abstract <--> cocina mappings' do
+RSpec.describe 'MODS abstract -> cocina mappings' do
   describe 'Single abstract' do
     it_behaves_like 'MODS cocina mapping' do
       let(:mods) do
