@@ -66,7 +66,7 @@ RSpec.describe Cocina::Models do
 
         it 'rejects unknown top-level keys with a helpful message' do
           expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                /When validating .+ property .+ is a disallowed unevaluated property/)
+                                                /When validating .+unexpectedTopLevel.+/)
         end
       end
 
@@ -75,7 +75,7 @@ RSpec.describe Cocina::Models do
 
         it 'rejects unknown top-level keys with a helpful message' do
           expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                /When validating .+ property .+ is a disallowed unevaluated property/)
+                                                /When validating .+unexpectedTopLevel.+/)
         end
       end
 
@@ -84,7 +84,7 @@ RSpec.describe Cocina::Models do
 
         it 'rejects unknown top-level keys with a helpful message' do
           expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                /When validating .+ property .+ is a disallowed unevaluated property/)
+                                                /When validating .+unexpectedTopLevel.+/)
         end
       end
 
@@ -93,7 +93,7 @@ RSpec.describe Cocina::Models do
 
         it 'rejects unknown top-level keys with a helpful message' do
           expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                /When validating .+ property .+ is a disallowed unevaluated property/)
+                                                /When validating .+unexpectedTopLevel.+/)
         end
       end
 
@@ -102,7 +102,7 @@ RSpec.describe Cocina::Models do
 
         it 'rejects unknown top-level keys with a helpful message' do
           expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                /When validating .+ property .+ is a disallowed unevaluated property/)
+                                                /When validating .+unexpectedTopLevel.+/)
         end
       end
 
@@ -111,7 +111,7 @@ RSpec.describe Cocina::Models do
 
         it 'rejects unknown top-level keys with a helpful message' do
           expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                /When validating .+ property .+ is a disallowed unevaluated property/)
+                                                /When validating .+unexpectedTopLevel.+/)
         end
       end
 
@@ -125,7 +125,7 @@ RSpec.describe Cocina::Models do
         it 'rejects unknown nested keys' do
           expect { model_build }.to raise_error(
             Cocina::Models::ValidationError,
-            /When validating .+unexpectedNested.+disallowed unevaluated property/
+            /When validating .+unexpectedNested.+/
           )
         end
       end
@@ -140,7 +140,7 @@ RSpec.describe Cocina::Models do
         it 'rejects unknown nested keys' do
           expect { model_build }.to raise_error(
             Cocina::Models::ValidationError,
-            /When validating .+unexpectedNested.+disallowed unevaluated property/
+            /When validating .+unexpectedNested.+/
           )
         end
       end
@@ -237,7 +237,7 @@ RSpec.describe Cocina::Models do
 
           it 'rejects the relatedResource entry' do
             expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                  /missing required properties: title.+note.+identifier.+valueAt.+purl.+access/)
+                                                  %r{"title" is a required property at /description/relatedResource})
           end
         end
 
@@ -246,7 +246,7 @@ RSpec.describe Cocina::Models do
 
           it 'rejects the relatedResource entry' do
             expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                  %r{array size at `/description/relatedResource/0/title` is less than: 1})
+                                                  %r{has less than 1 item at /description/relatedResource/0/title})
           end
         end
 
@@ -255,7 +255,7 @@ RSpec.describe Cocina::Models do
 
           it 'rejects the relatedResource entry' do
             expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                  %r{array size at `/description/relatedResource/0/contributor` is less than: 1})
+                                                  %r{has less than 1 item at /description/relatedResource/0/contributor})
           end
         end
 
@@ -264,7 +264,7 @@ RSpec.describe Cocina::Models do
 
           it 'rejects the relatedResource entry' do
             expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                  %r{array size at `/description/relatedResource/0/event` is less than: 1})
+                                                  %r{has less than 1 item at /description/relatedResource/0/event})
           end
         end
 
@@ -273,7 +273,7 @@ RSpec.describe Cocina::Models do
 
           it 'rejects the relatedResource entry' do
             expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                  %r{`/description/relatedResource/0/access` is missing required properties: url.+physicalLocation})
+                                                  %r{"url" is a required property at /description/relatedResource/0/access})
           end
         end
 
@@ -282,7 +282,7 @@ RSpec.describe Cocina::Models do
 
           it 'rejects the relatedResource entry' do
             expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                  %r{array size at `/description/relatedResource/0/note` is less than: 1})
+                                                  %r{has less than 1 item at /description/relatedResource/0/note})
           end
         end
 
@@ -291,7 +291,7 @@ RSpec.describe Cocina::Models do
 
           it 'rejects the relatedResource entry' do
             expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                  %r{array size at `/description/relatedResource/0/identifier` is less than: 1})
+                                                  %r{has less than 1 item at /description/relatedResource/0/identifier})
           end
         end
 
@@ -300,7 +300,7 @@ RSpec.describe Cocina::Models do
 
           it 'rejects the relatedResource entry' do
             expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                  %r{string length at `/description/relatedResource/0/valueAt` is less than: 1})
+                                                  %r{is shorter than 1 character at /description/relatedResource/0/valueAt})
           end
         end
 
@@ -309,7 +309,7 @@ RSpec.describe Cocina::Models do
 
           it 'rejects the relatedResource entry' do
             expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                  %r{string at `/description/relatedResource/0/purl` does not match pattern: \^https:\\/})
+                                                  %r{does not match.*\^https.* at /description/relatedResource/0/purl})
           end
         end
 
@@ -318,7 +318,7 @@ RSpec.describe Cocina::Models do
 
           it 'rejects the relatedResource entry' do
             expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                  %r{array size at `/description/relatedResource/0/access/url` is less than: 1})
+                                                  %r{has less than 1 item at /description/relatedResource/0/access/url})
           end
         end
 
@@ -327,7 +327,7 @@ RSpec.describe Cocina::Models do
 
           it 'rejects the relatedResource entry' do
             expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                  %r{array size at `/description/relatedResource/0/access/physicalLocation` is less than: 1})
+                                                  %r{has less than 1 item at /description/relatedResource/0/access/physicalLocation})
           end
         end
       end
@@ -366,7 +366,7 @@ RSpec.describe Cocina::Models do
         it 'rejects unknown nested keys' do
           expect { model_build }.to raise_error(
             Cocina::Models::ValidationError,
-            /When validating .+unexpectedNested.+disallowed unevaluated property/
+            /When validating .+unexpectedNested.+/
           )
         end
       end
@@ -381,7 +381,7 @@ RSpec.describe Cocina::Models do
         it 'rejects unknown nested keys' do
           expect { model_build }.to raise_error(
             Cocina::Models::ValidationError,
-            /When validating .+unexpectedNested.+disallowed unevaluated property/
+            /When validating .+unexpectedNested.+/
           )
         end
       end
@@ -648,7 +648,7 @@ RSpec.describe Cocina::Models do
         expect do
           build
         end.to raise_error(Cocina::Models::ValidationError,
-                           'When validating RequestDRO: value at `/version` is not one of: [1]')
+                           /When validating RequestDRO: 5 is not one of/)
       end
     end
 

@@ -9,7 +9,7 @@ PATH
       edtf
       equivalent-xml
       i18n
-      json_schemer (~> 2.0)
+      jsonschema_rs
       nokogiri
       super_diff
       thor
@@ -73,7 +73,6 @@ GEM
     equivalent-xml (0.6.0)
       nokogiri (>= 1.4.3)
     erb (6.0.4)
-    hana (1.3.7)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
@@ -84,11 +83,10 @@ GEM
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     json (2.19.8)
-    json_schemer (2.5.0)
-      bigdecimal
-      hana (~> 1.3)
-      regexp_parser (~> 2.0)
-      simpleidn (~> 0.2)
+    jsonschema_rs (0.46.5-arm64-darwin)
+      bigdecimal (>= 3.1, < 5)
+    jsonschema_rs (0.46.5-x86_64-linux)
+      bigdecimal (>= 3.1, < 5)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
     logger (1.7.0)
@@ -167,7 +165,6 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.13.2)
     simplecov_json_formatter (0.1.4)
-    simpleidn (0.2.3)
     stringio (3.2.0)
     super_diff (0.19.0)
       attr_extras (>= 6.2.4, < 8)
@@ -224,13 +221,13 @@ CHECKSUMS
   edtf (3.2.0) sha256=a15a0ee274e49c8047a3ebb5d61d793ba44f7f8ffbf0595392c467e3ea8d2447
   equivalent-xml (0.6.0) sha256=8919761efa848ad0846369ff8be1f646b17e5061698c4867b09829000cc3f487
   erb (6.0.4) sha256=38e3803694be357fe2bfe312487c74beaf9fb4e5beb3e22498952fe1645b95d9
-  hana (1.3.7) sha256=5425db42d651fea08859811c29d20446f16af196308162894db208cac5ce9b0d
   i18n (1.14.8) sha256=285778639134865c5e0f6269e0b818256017e8cde89993fdfcbfb64d088824a5
   ice_nine (0.11.2) sha256=5d506a7d2723d5592dc121b9928e4931742730131f22a1a37649df1c1e2e63db
   io-console (0.8.2) sha256=d6e3ae7a7cc7574f4b8893b4fca2162e57a825b223a177b7afa236c5ef9814cc
   irb (1.18.0) sha256=de9454a0703a54704b9811a5ef31a60c86949fbf4013fcf244fabc7c775248e3
   json (2.19.8) sha256=6354310fd76ef69b87d5bd1f38b40d730613baf90b6803d2d0a48f618d32dfaa
-  json_schemer (2.5.0) sha256=2f01fb4cce721a4e08dd068fc2030cffd0702a7f333f1ea2be6e8991f00ae396
+  jsonschema_rs (0.46.5-arm64-darwin) sha256=e80414ed67f0956d3e06474a2fa076fc4a7b722f00e5d7142b70289c016ac6f1
+  jsonschema_rs (0.46.5-x86_64-linux) sha256=345c65ec7a5abf8879b9c9356752f0fdf4c9926f6480458fc32803a871b5cbb3
   language_server-protocol (3.17.0.5) sha256=fd1e39a51a28bf3eec959379985a72e296e9f9acfce46f6a79d31ca8760803cc
   lint_roller (1.1.0) sha256=2c0c845b632a7d172cb849cc90c1bce937a28c5c8ccccb50dfd46a485003cc87
   logger (1.7.0) sha256=196edec7cc44b66cfb40f9755ce11b392f21f7967696af15d274dde7edff0203
@@ -266,7 +263,6 @@ CHECKSUMS
   simplecov (0.22.0) sha256=fe2622c7834ff23b98066bb0a854284b2729a569ac659f82621fc22ef36213a5
   simplecov-html (0.13.2) sha256=bd0b8e54e7c2d7685927e8d6286466359b6f16b18cb0df47b508e8d73c777246
   simplecov_json_formatter (0.1.4) sha256=529418fbe8de1713ac2b2d612aa3daa56d316975d307244399fa4838c601b428
-  simpleidn (0.2.3) sha256=08ce96f03fa1605286be22651ba0fc9c0b2d6272c9b27a260bc88be05b0d2c29
   stringio (3.2.0) sha256=c37cb2e58b4ffbd33fe5cd948c05934af997b36e0b6ca6fdf43afa234cf222e1
   super_diff (0.19.0) sha256=c35fc1c0daa223d67b203fe3fb49a6cfd67850a53920319565c3c654e03ec902
   thor (1.5.0) sha256=e3a9e55fe857e44859ce104a84675ab6e8cd59c650a49106a05f55f136425e73
