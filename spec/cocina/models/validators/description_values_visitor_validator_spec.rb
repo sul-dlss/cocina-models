@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
+RSpec.describe Cocina::Models::Validators::DescriptionValuesVisitorValidator do
   let(:clazz) { Cocina::Models::Description }
   let(:props) { desc_props.with_indifferent_access }
   let(:desc_props) do
@@ -19,7 +19,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
         {
           title: [
             { value: 'A related title' },
-            { structuredValue: [{ value: 'A related title', type: 'main title' }]}
+            { structuredValue: [{ value: 'A related title', type: 'main title' }] }
           ],
           type: 'related to'
         }
@@ -28,7 +28,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
   end
 
   describe '#validate' do
-    let(:validate) { described_class.validate(clazz, props) }
+    let(:validate) { Cocina::Models::Validators::CompositeDescriptionValidator.new(clazz, props, validators: [described_class]).validate }
 
     let(:invalid_desc_props) do
       {
@@ -93,7 +93,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
         relatedResource: [
           {
             title: [
-              { structuredValue: [{ value: 'A related title'}] }
+              { structuredValue: [{ value: 'A related title' }] }
             ],
             type: 'related to'
           }
@@ -124,7 +124,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
                 }
               ]
             }
-          ]}
+          ] }
         ]
       }
     end
@@ -239,36 +239,6 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesValidator do
         expect do
           validate
         end.to raise_error(Cocina::Models::ValidationError, 'Missing type for value in description: title1.parallelValue1.structuredValue2')
-      end
-    end
-  end
-
-  describe '#meets_preconditions?' do
-    let(:validator) { described_class.new(clazz, props) }
-
-    let(:meets_preconditions) { validator.send(:meets_preconditions?) }
-
-    context 'when RequestDescription' do
-      let(:clazz) { Cocina::Models::RequestDescription }
-
-      it 'meets preconditions' do
-        expect(meets_preconditions).to be true
-      end
-    end
-
-    context 'when Description' do
-      let(:clazz) { Cocina::Models::Description }
-
-      it 'meets preconditions' do
-        expect(meets_preconditions).to be true
-      end
-    end
-
-    context 'when DRO' do
-      let(:clazz) { Cocina::Models::DRO }
-
-      it 'does not meet preconditions' do
-        expect(meets_preconditions).to be false
       end
     end
   end

@@ -1866,12 +1866,12 @@ RSpec.describe 'MODS originInfo <--> cocina mappings' do
                 {
                   structuredValue: [
                     {
-                      value: '0',
+                      value: '0000',
                       status: 'primary',
                       type: 'start'
                     },
                     {
-                      value: '200',
+                      value: '0200',
                       type: 'end'
                     }
                   ],
@@ -1920,12 +1920,12 @@ RSpec.describe 'MODS originInfo <--> cocina mappings' do
                 {
                   structuredValue: [
                     {
-                      value: '103',
+                      value: '0103',
                       status: 'primary',
                       type: 'start'
                     },
                     {
-                      value: '111',
+                      value: '0111',
                       type: 'end'
                     }
                   ],

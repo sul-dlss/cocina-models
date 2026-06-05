@@ -435,7 +435,7 @@ module Cocina
               new_node = node.deep_dup
               new_node.remove_attribute('encoding') if common_attribs[:encoding].present? || node[:encoding]&.empty?
               new_node.remove_attribute('qualifier') if common_attribs[:qualifier].present? || node[:qualifier]&.empty?
-              build_date(new_node)
+              build_date(new_node, encoding: common_attribs.dig(:encoding, :code))
             end
             { structuredValue: dates }.merge(common_attribs).compact
           end
@@ -462,9 +462,11 @@ module Cocina
             attribs.compact
           end
 
-          def build_date(date_node)
+          def build_date(date_node, encoding: nil)
+            effective_encoding = date_node['encoding'] || encoding
             {}.tap do |date|
-              date[:value] = clean_date(date_node.text) if date_node.text.present?
+              raw_value = clean_date(date_node.text)
+              date[:value] = effective_encoding == 'edtf' ? pad_edtf_year(raw_value) : raw_value if date_node.text.present?
               date[:encoding] = { code: date_node['encoding'] } if date_node['encoding']
               date[:status] = 'primary' if date_node['keyDate']
               date[:note] = build_date_note(date_node)
@@ -487,6 +489,13 @@ module Cocina
 
           def clean_date(date)
             date.delete_suffix('.')
+          end
+
+          # Pads a 1-3 digit year to 4 digits, handling modifiers like ~,-.
+          def pad_edtf_year(value)
+            value.sub(%r{\A(-?)(\d{1,3})(?=[~?%/-]|\z)}) do
+              "#{::Regexp.last_match(1)}#{::Regexp.last_match(2).rjust(4, '0')}"
+            end
           end
 
           # NOTE: Do any eventType/displayLabel transformations before determining role (i.e. with LEGACY_EVENT_TYPES_2_TYPE)

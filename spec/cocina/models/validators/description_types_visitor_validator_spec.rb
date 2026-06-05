@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
+RSpec.describe Cocina::Models::Validators::DescriptionTypesVisitorValidator do
   let(:clazz) { Cocina::Models::Description }
 
   let(:props) { desc_props }
@@ -62,7 +62,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
   end
 
   describe '#validate' do
-    let(:validate) { described_class.validate(clazz, props) }
+    let(:validate) { Cocina::Models::Validators::CompositeDescriptionValidator.new(clazz, props, validators: [described_class]).validate }
 
     describe 'when a valid Description' do
       it 'does not raise' do
@@ -420,36 +420,6 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesValidator do
 
       it 'does not raise' do
         expect { validate }.not_to raise_error
-      end
-    end
-  end
-
-  describe '#meets_preconditions?' do
-    let(:validator) { described_class.new(clazz, props) }
-
-    let(:meets_preconditions) { validator.send(:meets_preconditions?) }
-
-    context 'when RequestDescription' do
-      let(:clazz) { Cocina::Models::RequestDescription }
-
-      it 'meets preconditions' do
-        expect(meets_preconditions).to be true
-      end
-    end
-
-    context 'when Description' do
-      let(:clazz) { Cocina::Models::Description }
-
-      it 'meets preconditions' do
-        expect(meets_preconditions).to be true
-      end
-    end
-
-    context 'when DRO' do
-      let(:clazz) { Cocina::Models::DRO }
-
-      it 'does not meet preconditions' do
-        expect(meets_preconditions).to be false
       end
     end
   end
