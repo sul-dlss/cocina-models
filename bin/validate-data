@@ -191,6 +191,8 @@ def distribute_work(filename, workers, batch_size, total_lines) # rubocop:disabl
 
       # Update progress bar
       progressbar.increment
+
+      break if line_number >= total_lines
     end
   end
 
