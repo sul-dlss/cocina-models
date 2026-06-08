@@ -5,4 +5,9 @@ require 'bundler/setup'
 require 'cocina/models'
 
 filepath = ARGV[0]
-exit(1) unless JSONSchemer.valid_schema?(Pathname.new(filepath))
+begin
+  JSONSchema.validator_for(JSON.parse(File.read(filepath)))
+rescue StandardError => e
+  warn e.message
+  exit(1)
+end

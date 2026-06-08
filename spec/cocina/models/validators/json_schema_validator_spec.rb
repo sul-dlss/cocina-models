@@ -39,127 +39,91 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
 
     it 'raises ValidationError' do
       expect { validate }.to raise_error(Cocina::Models::ValidationError,
-                                         %r{\AWhen validating AdminPolicy: object property at `/administrative/releaseTags` is a disallowed unevaluated property\z})
+                                         /When validating AdminPolicy: Unevaluated properties are not allowed \('releaseTags' was unexpected\)/)
     end
   end
 
   describe 'unevaluatedProperties error reporting' do
     let(:clazz) { double(name: 'Cocina::Models::AdminPolicy', attribute_names: %i[cocinaVersion externalIdentifier label type version administrative]) }
     let(:props) { {} }
-    let(:schema_double) { instance_double(JSONSchemer::Schema) }
-    let(:ref_double) { instance_double(JSONSchemer::Schema) }
+    let(:validator_double) { double('JSONSchema::Validator') } # rubocop:disable RSpec/VerifiedDoubles
+    let(:evaluation_double) { double('evaluation', valid?: false) } # rubocop:disable RSpec/VerifiedDoubles
+
+    def unevaluated_detail(instance_location:, unexpected:)
+      msg = if unexpected.length == 1
+              "Unevaluated properties are not allowed ('#{unexpected.first}' was unexpected)"
+            else
+              "Unevaluated properties are not allowed (#{unexpected.map { |p| "'#{p}'" }.join(', ')} were unexpected)"
+            end
+      { valid: false, instanceLocation: instance_location,
+        errors: { 'unevaluatedProperties' => msg } }
+    end
+
+    def false_schema_detail(instance_location:)
+      { valid: false, instanceLocation: instance_location,
+        errors: { 'falseSchema' => 'False schema does not allow ...' } }
+    end
 
     before do
-      allow(validator).to receive(:schema).and_return(schema_double)
-      allow(schema_double).to receive(:ref).with('#/$defs/AdminPolicy').and_return(ref_double)
-      allow(ref_double).to receive(:validate).and_return(errors)
+      allow(described_class).to receive(:validator_for).with('AdminPolicy').and_return(validator_double)
+      allow(validator_double).to receive(:evaluate).and_return(evaluation_double)
+      allow(evaluation_double).to receive(:list).and_return({ details: details })
     end
 
     context 'when root-level unevaluatedProperties errors are cascaded noise' do
-      let(:errors) do
+      # Real error: at /administrative (nested object), unexpected = ['releaseTags']
+      # Noise: root "" (all unexpected are known model attributes) + falseSchema cascade entries
+      let(:details) do
         [
-          {
-            'data_pointer' => '/administrative/releaseTags',
-            'error' => 'object property at `/administrative/releaseTags` is a disallowed unevaluated property',
-            'schema_pointer' => '/$defs/AdminPolicyAdministrative/unevaluatedProperties'
-          },
-          {
-            'data_pointer' => '/externalIdentifier',
-            'error' => 'object property at `/externalIdentifier` is a disallowed unevaluated property',
-            'schema_pointer' => '/$defs/AdminPolicy/unevaluatedProperties'
-          },
-          {
-            'data_pointer' => '/label',
-            'error' => 'object property at `/label` is a disallowed unevaluated property',
-            'schema_pointer' => '/$defs/AdminPolicy/unevaluatedProperties'
-          },
-          {
-            'data_pointer' => '/type',
-            'error' => 'object property at `/type` is a disallowed unevaluated property',
-            'schema_pointer' => '/$defs/AdminPolicy/unevaluatedProperties'
-          },
-          {
-            'data_pointer' => '/version',
-            'error' => 'object property at `/version` is a disallowed unevaluated property',
-            'schema_pointer' => '/$defs/AdminPolicy/unevaluatedProperties'
-          },
-          {
-            'data_pointer' => '/administrative',
-            'error' => 'object property at `/administrative` is a disallowed unevaluated property',
-            'schema_pointer' => '/$defs/AdminPolicy/unevaluatedProperties'
-          },
-          {
-            'data_pointer' => '/cocinaVersion',
-            'error' => 'object property at `/cocinaVersion` is a disallowed unevaluated property',
-            'schema_pointer' => '/$defs/AdminPolicy/unevaluatedProperties'
-          }
+          unevaluated_detail(instance_location: '/administrative', unexpected: %w[releaseTags]),
+          unevaluated_detail(instance_location: '', unexpected: %w[externalIdentifier label type version administrative cocinaVersion]),
+          false_schema_detail(instance_location: '/administrative'),
+          false_schema_detail(instance_location: '/externalIdentifier')
         ]
       end
 
-      it 'filters known root properties while keeping nested errors' do
+      it 'filters out cascade noise while keeping the nested error' do
         expect { validate }.to raise_error(
           Cocina::Models::ValidationError,
-          'When validating AdminPolicy: object property at `/administrative/releaseTags` is a disallowed unevaluated property'
+          "When validating AdminPolicy: Unevaluated properties are not allowed ('releaseTags' was unexpected) at /administrative"
         )
       end
     end
 
     context 'when bogus props exist at root and deeply nested positions' do
-      let(:errors) do
+      # Real errors: nested bogus property + root bogus property mixed with cascade props
+      # The root error includes 'bogusRoot' (unknown) so it is kept; known props are cascade
+      # but are bundled with 'bogusRoot' in the same kept error.
+      let(:details) do
         [
-          {
-            'data_pointer' => '/administrative/roles/0/bogusProperty',
-            'error' => 'object property at `/administrative/roles/0/bogusProperty` is a disallowed unevaluated property',
-            'schema_pointer' => '/$defs/AccessRole/unevaluatedProperties'
-          },
-          {
-            'data_pointer' => '/bogusRoot',
-            'error' => 'object property at `/bogusRoot` is a disallowed unevaluated property',
-            'schema_pointer' => '/$defs/AdminPolicy/unevaluatedProperties'
-          },
-          {
-            'data_pointer' => '/label',
-            'error' => 'object property at `/label` is a disallowed unevaluated property',
-            'schema_pointer' => '/$defs/AdminPolicy/unevaluatedProperties'
-          }
+          unevaluated_detail(instance_location: '/administrative/roles/0', unexpected: %w[bogusProperty]),
+          unevaluated_detail(instance_location: '', unexpected: %w[bogusRoot administrative externalIdentifier label type version]),
+          false_schema_detail(instance_location: '/administrative')
         ]
       end
 
       it 'includes both root and deeply nested bogus properties' do
         expect { validate }.to raise_error(Cocina::Models::ValidationError) { |error|
-          expect(error.message).to include('object property at `/bogusRoot` is a disallowed unevaluated property')
-          expect(error.message).to include('object property at `/administrative/roles/0/bogusProperty` is a disallowed unevaluated property')
-          expect(error.message).not_to include('object property at `/label` is a disallowed unevaluated property')
+          expect(error.message).to include("'bogusRoot'")
+          expect(error.message).to include("'bogusProperty'")
         }
       end
     end
 
     context 'when bogus props exist at root and at two nested depths' do
-      let(:errors) do
+      let(:details) do
         [
-          {
-            'data_pointer' => '/administrative/accessTemplate/unknownLeaf',
-            'error' => 'object property at `/administrative/accessTemplate/unknownLeaf` is a disallowed unevaluated property',
-            'schema_pointer' => '/$defs/AdminPolicyAccessTemplate/unevaluatedProperties'
-          },
-          {
-            'data_pointer' => '/administrative/roles/0/members/0/unknownLeaf',
-            'error' => 'object property at `/administrative/roles/0/members/0/unknownLeaf` is a disallowed unevaluated property',
-            'schema_pointer' => '/$defs/AccessRoleMember/unevaluatedProperties'
-          },
-          {
-            'data_pointer' => '/bogusRoot',
-            'error' => 'object property at `/bogusRoot` is a disallowed unevaluated property',
-            'schema_pointer' => '/$defs/AdminPolicy/unevaluatedProperties'
-          }
+          unevaluated_detail(instance_location: '/administrative/accessTemplate', unexpected: %w[unknownLeaf]),
+          unevaluated_detail(instance_location: '/administrative/roles/0/members/0', unexpected: %w[unknownLeaf]),
+          unevaluated_detail(instance_location: '', unexpected: %w[bogusRoot administrative externalIdentifier label type version]),
+          false_schema_detail(instance_location: '/administrative')
         ]
       end
 
       it 'keeps root and both nested bogus properties' do
         expect { validate }.to raise_error(Cocina::Models::ValidationError) { |error|
-          expect(error.message).to include('object property at `/bogusRoot` is a disallowed unevaluated property')
-          expect(error.message).to include('object property at `/administrative/roles/0/members/0/unknownLeaf` is a disallowed unevaluated property')
-          expect(error.message).to include('object property at `/administrative/accessTemplate/unknownLeaf` is a disallowed unevaluated property')
+          expect(error.message).to include("'bogusRoot'")
+          expect(error.message).to include("'unknownLeaf'")
         }
       end
     end
