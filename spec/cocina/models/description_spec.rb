@@ -58,7 +58,7 @@ RSpec.describe Cocina::Models::Description do
 
       expect(item.note.size).to eq(4)
       note = item.note.first
-      expect(note.value).to match(/My dissertation is a combination of three papers/)
+      expect(note.value).to include('My dissertation is a combination of three papers')
       expect(note.type).to eq('summary')
 
       identifier = item.identifier.first
