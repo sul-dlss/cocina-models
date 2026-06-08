@@ -145,6 +145,193 @@ RSpec.describe Cocina::Models do
         end
       end
 
+      context 'when DRO has minimally valid relatedResource content' do
+        let(:data) do
+          build(:dro).to_h.tap do |h|
+            h[:description][:relatedResource] = [related_resource]
+          end
+        end
+
+        context 'with title' do
+          let(:related_resource) { { title: [{ value: 'Related title' }] } }
+
+          it 'accepts a minimal title relatedResource shape' do
+            expect { model_build }.not_to raise_error
+          end
+        end
+
+        context 'with contributor' do
+          let(:related_resource) { { contributor: [{ name: [{ value: 'Pat Contributor' }] }] } }
+
+          it 'accepts a minimal contributor relatedResource shape' do
+            expect { model_build }.not_to raise_error
+          end
+        end
+
+        context 'with event' do
+          let(:related_resource) { { event: [{ note: [{ value: 'Related event' }] }] } }
+
+          it 'accepts a minimal event relatedResource shape' do
+            expect { model_build }.not_to raise_error
+          end
+        end
+
+        context 'with note' do
+          let(:related_resource) { { note: [{ value: 'Related note' }] } }
+
+          it 'accepts a minimal note relatedResource shape' do
+            expect { model_build }.not_to raise_error
+          end
+        end
+
+        context 'with identifier' do
+          let(:related_resource) { { identifier: [{ value: 'Related identifier' }] } }
+
+          it 'accepts a minimal identifier relatedResource shape' do
+            expect { model_build }.not_to raise_error
+          end
+        end
+
+        context 'with valueAt' do
+          let(:related_resource) { { valueAt: 'https://example.com/related' } }
+
+          it 'accepts a minimal valueAt relatedResource shape' do
+            expect { model_build }.not_to raise_error
+          end
+        end
+
+        context 'with purl' do
+          let(:related_resource) { { purl: 'https://purl.stanford.edu/bc123df4568' } }
+
+          it 'accepts a minimal purl relatedResource shape' do
+            expect { model_build }.not_to raise_error
+          end
+        end
+
+        context 'with access.url.value' do
+          let(:related_resource) { { access: { url: [{ value: 'https://example.com/access' }] } } }
+
+          it 'accepts a minimal access relatedResource shape' do
+            expect { model_build }.not_to raise_error
+          end
+        end
+
+        context 'with access.physicalLocation.value' do
+          let(:related_resource) { { access: { physicalLocation: [{ value: 'In a VW Beetle' }] } } }
+
+          it 'accepts a minimal access relatedResource shape' do
+            expect { model_build }.not_to raise_error
+          end
+        end
+      end
+
+      context 'when DRO relatedResource has invalid anyOf variants' do
+        let(:data) do
+          build(:dro).to_h.tap do |h|
+            h[:description][:relatedResource] = [related_resource]
+          end
+        end
+
+        context 'with only a version' do
+          let(:related_resource) { { version: '1' } }
+
+          it 'rejects the relatedResource entry' do
+            expect { model_build }.to raise_error(Cocina::Models::ValidationError,
+                                                  /missing required properties: title.+note.+identifier.+valueAt.+purl.+access/)
+          end
+        end
+
+        context 'with empty title array' do
+          let(:related_resource) { { title: [] } }
+
+          it 'rejects the relatedResource entry' do
+            expect { model_build }.to raise_error(Cocina::Models::ValidationError,
+                                                  %r{array size at `/description/relatedResource/0/title` is less than: 1})
+          end
+        end
+
+        context 'with empty contributor array' do
+          let(:related_resource) { { contributor: [] } }
+
+          it 'rejects the relatedResource entry' do
+            expect { model_build }.to raise_error(Cocina::Models::ValidationError,
+                                                  %r{array size at `/description/relatedResource/0/contributor` is less than: 1})
+          end
+        end
+
+        context 'with empty event array' do
+          let(:related_resource) { { event: [] } }
+
+          it 'rejects the relatedResource entry' do
+            expect { model_build }.to raise_error(Cocina::Models::ValidationError,
+                                                  %r{array size at `/description/relatedResource/0/event` is less than: 1})
+          end
+        end
+
+        context 'with empty access object' do
+          let(:related_resource) { { access: {} } }
+
+          it 'rejects the relatedResource entry' do
+            expect { model_build }.to raise_error(Cocina::Models::ValidationError,
+                                                  %r{`/description/relatedResource/0/access` is missing required properties: url.+physicalLocation})
+          end
+        end
+
+        context 'with empty note array' do
+          let(:related_resource) { { note: [] } }
+
+          it 'rejects the relatedResource entry' do
+            expect { model_build }.to raise_error(Cocina::Models::ValidationError,
+                                                  %r{array size at `/description/relatedResource/0/note` is less than: 1})
+          end
+        end
+
+        context 'with empty identifier array' do
+          let(:related_resource) { { identifier: [] } }
+
+          it 'rejects the relatedResource entry' do
+            expect { model_build }.to raise_error(Cocina::Models::ValidationError,
+                                                  %r{array size at `/description/relatedResource/0/identifier` is less than: 1})
+          end
+        end
+
+        context 'with blank valueAt' do
+          let(:related_resource) { { valueAt: '' } }
+
+          it 'rejects the relatedResource entry' do
+            expect { model_build }.to raise_error(Cocina::Models::ValidationError,
+                                                  %r{string length at `/description/relatedResource/0/valueAt` is less than: 1})
+          end
+        end
+
+        context 'with malformed purl' do
+          let(:related_resource) { { purl: 'http://purl.stanford.edu/bc123df4568' } }
+
+          it 'rejects the relatedResource entry' do
+            expect { model_build }.to raise_error(Cocina::Models::ValidationError,
+                                                  %r{string at `/description/relatedResource/0/purl` does not match pattern: \^https:\\/})
+          end
+        end
+
+        context 'with empty access url array' do
+          let(:related_resource) { { access: { url: [] } } }
+
+          it 'rejects the relatedResource entry' do
+            expect { model_build }.to raise_error(Cocina::Models::ValidationError,
+                                                  %r{array size at `/description/relatedResource/0/access/url` is less than: 1})
+          end
+        end
+
+        context 'with empty access physicalLocation array' do
+          let(:related_resource) { { access: { physicalLocation: [] } } }
+
+          it 'rejects the relatedResource entry' do
+            expect { model_build }.to raise_error(Cocina::Models::ValidationError,
+                                                  %r{array size at `/description/relatedResource/0/access/physicalLocation` is less than: 1})
+          end
+        end
+      end
+
       context 'when AdminPolicy accessTemplate has unexpected nested property' do
         let(:data) do
           build(:admin_policy).to_h.tap do |h|
