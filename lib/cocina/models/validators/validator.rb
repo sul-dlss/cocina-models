@@ -7,15 +7,13 @@ module Cocina
       class Validator
         VALIDATORS = [
           JsonSchemaValidator,
-          DarkValidator,
+          CompositeStructuralValidator,
           PurlValidator,
           CatalogLinksValidator,
           AssociatedNameValidator,
           DescriptionTypesValidator,
           DescriptionValuesValidator,
-          DateTimeValidator,
-          LanguageTagValidator,
-          ReservedFilenameValidator
+          DateTimeValidator
         ].freeze
 
         def self.validate(clazz, attributes)
