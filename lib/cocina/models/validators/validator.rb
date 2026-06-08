@@ -7,21 +7,19 @@ module Cocina
       class Validator
         VALIDATORS = [
           JsonSchemaValidator,
+          CompositeDescriptionValidator,
           CompositeStructuralValidator,
           PurlValidator,
           CatalogLinksValidator,
-          AssociatedNameValidator,
-          DescriptionTypesValidator,
-          DescriptionValuesValidator,
-          DateTimeValidator
+          AssociatedNameValidator
         ].freeze
 
-        def self.validate(clazz, attributes)
+        def self.validate(clazz, attributes, validators: VALIDATORS)
           # This gets rid of nested model objects.
           attributes_hash = attributes.to_h.deep_transform_values do |value|
             value.class.name.starts_with?('Cocina::Models') ? value.to_h : value
           end.with_indifferent_access
-          VALIDATORS.each { |validator| validator.validate(clazz, attributes_hash) }
+          validators.each { |validator| validator.validate(clazz, attributes_hash) }
         end
 
         def self.deep_transform_values(object, ...)

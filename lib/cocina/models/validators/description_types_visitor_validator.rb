@@ -4,54 +4,22 @@ module Cocina
   module Models
     module Validators
       # Validates types for description against description_types.yml.
-      class DescriptionTypesValidator
-        def self.validate(clazz, attributes)
-          new(clazz, attributes).validate
-        end
-
-        def initialize(clazz, attributes)
-          @clazz = clazz
-          @attributes = attributes
-          @error_paths = []
-        end
-
-        def validate
-          return unless meets_preconditions?
-
-          validate_obj(attributes, [])
-
+      class DescriptionTypesVisitorValidator < BaseDescriptionVisitorValidator
+        def validate!
           return if error_paths.empty?
 
           raise ValidationError, "Unrecognized types in description: #{error_paths.join(', ')}"
         end
 
+        def visit_hash(hash:, path:)
+          type = hash[:type]
+          validate_type(type, path) if type
+        end
+
         private
 
-        attr_reader :clazz, :attributes, :error_paths
-
-        def meets_preconditions?
-          [Cocina::Models::Description, Cocina::Models::RequestDescription].include?(clazz)
-        end
-
-        def validate_hash(hash, path)
-          hash.each do |key, obj|
-            if key.to_sym == :type
-              validate_type(obj, path)
-            else
-              validate_obj(obj, path + [key])
-            end
-          end
-        end
-
-        def validate_array(array, path)
-          array.each_with_index do |obj, index|
-            validate_obj(obj, path + [index])
-          end
-        end
-
-        def validate_obj(obj, path)
-          validate_hash(obj, path) if obj.is_a?(Hash)
-          validate_array(obj, path) if obj.is_a?(Array)
+        def error_paths
+          @error_paths ||= []
         end
 
         def validate_type(type, path)
@@ -99,20 +67,6 @@ module Cocina
 
         def types_yaml
           YAML.load_file(::File.expand_path('../../../../description_types.yml', __dir__))
-        end
-
-        def path_to_s(path)
-          # This matches the format used by descriptive spreadsheets
-          path_str = ''
-          path.each_with_index do |part, index|
-            if part.is_a?(Integer)
-              path_str += (part + 1).to_s
-            else
-              path_str += '.' if index.positive?
-              path_str += part.to_s
-            end
-          end
-          path_str
         end
       end
     end

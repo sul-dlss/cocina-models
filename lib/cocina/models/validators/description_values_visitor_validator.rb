@@ -3,25 +3,16 @@
 module Cocina
   module Models
     module Validators
-      # Validates that there is only one of value, groupedValue, structuredValue, or parallelValue.
-      class DescriptionValuesValidator
-        def self.validate(clazz, attributes)
-          new(clazz, attributes).validate
+      # Validates that there is only one of value, groupedValue, structuredValue, or parallelValue,
+      # that values are not blank, and that title structuredValue entries have a type.
+      class DescriptionValuesVisitorValidator < BaseDescriptionVisitorValidator
+        def visit_hash(hash:, path:)
+          validate_values_for_blanks(hash, path)
+          validate_values_for_multiples(hash, path)
+          validate_title_type(hash, path)
         end
 
-        def initialize(clazz, attributes)
-          @clazz = clazz
-          @attributes = attributes
-          @error_paths_multiple = []
-          @error_paths_blank = []
-          @error_paths_missing_title_type = []
-        end
-
-        def validate
-          return unless meets_preconditions?
-
-          validate_obj(attributes, [])
-
+        def validate!
           unless error_paths_multiple.empty?
             raise ValidationError,
                   "Multiple value, groupedValue, structuredValue, and parallelValue in description: #{error_paths_multiple.join(', ')}"
@@ -38,30 +29,16 @@ module Cocina
 
         private
 
-        attr_reader :clazz, :attributes, :error_paths_blank, :error_paths_multiple, :error_paths_missing_title_type
-
-        def meets_preconditions?
-          [Cocina::Models::Description, Cocina::Models::RequestDescription].include?(clazz)
+        def error_paths_multiple
+          @error_paths_multiple ||= []
         end
 
-        def validate_hash(hash, path)
-          validate_values_for_blanks(hash, path)
-          validate_values_for_multiples(hash, path)
-          validate_title_type(hash, path)
-          hash.each do |key, obj|
-            validate_obj(obj, path + [key])
-          end
+        def error_paths_blank
+          @error_paths_blank ||= []
         end
 
-        def validate_array(array, path)
-          array.each_with_index do |obj, index|
-            validate_obj(obj, path + [index])
-          end
-        end
-
-        def validate_obj(obj, path)
-          validate_hash(obj, path) if obj.is_a?(Hash)
-          validate_array(obj, path) if obj.is_a?(Array)
+        def error_paths_missing_title_type
+          @error_paths_missing_title_type ||= []
         end
 
         def validate_values_for_blanks(hash, path)
@@ -97,20 +74,6 @@ module Cocina
           # e.g. ["title", 0, "structuredValue", 0] or ["title", 0, "parallelValue", 0, "structuredValue", 0])
           structured_value_path = path[2] == 'structuredValue' || (path[2] == 'parallelValue' && path[4] == 'structuredValue')
           path.first == 'title' && structured_value_path
-        end
-
-        def path_to_s(path)
-          # This matches the format used by descriptive spreadsheets
-          path_str = ''
-          path.each_with_index do |part, index|
-            if part.is_a?(Integer)
-              path_str += (part + 1).to_s
-            else
-              path_str += '.' if index.positive?
-              path_str += part.to_s
-            end
-          end
-          path_str
         end
       end
     end
