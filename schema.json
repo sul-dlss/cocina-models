@@ -1608,6 +1608,17 @@
         "sdrPreserve",
         "shelve"
       ],
+      "if": {
+        "properties": {
+          "shelve": { "const": true }
+        }
+      },
+      "then": {
+        "anyOf": [
+          { "properties": { "sdrPreserve": { "const": true } } },
+          { "properties": { "publish": { "const": true } } }
+        ]
+      },
       "unevaluatedProperties": false
     },
     "FileSet": {
