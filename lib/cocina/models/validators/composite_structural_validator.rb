@@ -8,7 +8,8 @@ module Cocina
         VALIDATORS = [
           DarkVisitorValidator,
           LanguageTagVisitorValidator,
-          ReservedFilenameVisitorValidator
+          ReservedFilenameVisitorValidator,
+          ShelveOnlyVisitorValidator
         ].freeze
 
         def self.validate(clazz, attributes)
