@@ -158,7 +158,7 @@ This list of services is known to include:
 * [sul-dlss/sdr-api](https://github.com/sul-dlss/sdr-api)
 * [sul-dlss/dor-services-app](https://github.com/sul-dlss/dor-services-app/)
 
-Perform `bundle update --conservative cocina-models dor-services-client` in the services above and make PRs for those repos. You may first need to update how these gems are pinned in the `Gemfile` in order to bump them.
+Perform `bundle update cocina-models dor-services-client --conservative` in the services above and make PRs for those repos. You may first need to update how these gems are pinned in the `Gemfile` in order to bump them.
 
 Get the directly coupled services PRs merged before the deploy in step 5.
 
