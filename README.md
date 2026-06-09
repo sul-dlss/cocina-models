@@ -51,6 +51,9 @@ exe/generator generate_vocab
 exe/generator generate_descriptive_docs
 ```
 
+## Reports / querying
+jq-based queries can be authored against a [local data export](https://github.com/sul-dlss/dor-services-app#export-data) using the `/cocina-jq-query` skill. This will help with constructing and efficiently running the query.
+
 ## Testing
 
 The generator is tested via its output when run against `schema.json`, viz., the Cocina model classes. Thus, `generate` should be run after any changes to `schema.json`.
