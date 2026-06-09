@@ -1,0 +1,90 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'bundler/setup'
+require 'csv'
+require 'optparse'
+require 'rsolr'
+
+# This script reads a CSV from standard input, where the first column is expected to be a druid.
+# It queries Solr for each druid to fetch additional fields, then outputs an enhanced CSV to standard output.
+# Usage: enhance-report-csv [options] < input.csv > output.csv
+# To use locally, tunnel to solr with: ssh -L 8990:sul-solr-prod-a.stanford.edu:80 lyberadmin@argo-prod-02.stanford.edu
+
+FIELD_HEADERS = {
+  'display_title_ss' => 'title',
+  'member_of_collection_ssim' => 'collection_druids',
+  'collection_title_ssimdv' => 'collection_titles',
+  'governed_by_ssim' => 'apo_druid',
+  'apo_title_ssimdv' => 'apo_title',
+  'folio_instance_hrid_ssim' => 'folio_hrid'
+}.freeze
+
+def parse_options # rubocop:disable Metrics/MethodLength
+  options = {
+    solr_url: 'http://localhost:8990/solr/argo_prod',
+    batch_size: 100
+  }
+
+  OptionParser.new do |opts|
+    opts.banner = 'Usage: enhance-report-csv [options] < input.csv > output.csv'
+
+    opts.on('--solr-url URL', 'Solr URL (default: http://localhost:8990/solr/argo_prod)') do |url|
+      options[:solr_url] = url
+    end
+
+    opts.on('--batch-size NUM', Integer, 'Solr batch size (default: 100)') do |n|
+      options[:batch_size] = n
+    end
+
+    opts.on('-h', '--help', 'Display this help message') do
+      puts opts
+      exit
+    end
+  end.parse!
+
+  options
+end
+
+def fetch_solr_docs(solr, druids)
+  druids.map { |d| "id:(#{d})" }.join(' OR ')
+  response = solr.get('select', params: {
+                        q: '*:*',
+                        fq: "{!terms f=id}#{druids.join(',')}",
+                        fl: "id,#{FIELD_HEADERS.keys.join(',')}",
+                        rows: druids.size
+                      })
+  response['response']['docs'].to_h do |doc|
+    [doc['id'], doc]
+  end
+end
+
+def extract_fields(doc)
+  FIELD_HEADERS.keys.map do |field|
+    value = doc&.fetch(field, nil)
+    value.is_a?(Array) ? value.join(';') : value.to_s
+  end
+end
+
+def build_output(solr, rows, batch_size)
+  extra_col_count = (rows.first&.size || 1) - 1
+  extra_headers = extra_col_count.times.map { |i| "col#{i + 2}" }
+
+  CSV.generate do |out|
+    out << (['druid'] + FIELD_HEADERS.values + extra_headers)
+
+    rows.each_slice(batch_size) do |batch|
+      docs = fetch_solr_docs(solr, batch.map { |row| row[0] })
+
+      batch.each do |row|
+        druid = row[0]
+        out << ([druid] + extract_fields(docs[druid]) + row[1..])
+      end
+    end
+  end
+end
+
+options = parse_options
+solr = RSolr.connect(url: options[:solr_url])
+rows = CSV.parse($stdin.read, headers: false)
+print build_output(solr, rows, options[:batch_size])

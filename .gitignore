@@ -9,3 +9,8 @@
 
 # rspec failure tracking
 .rspec_status
+
+*.jq.txt
+*.jsonl.xz
+*.csv
+*-playground.html
