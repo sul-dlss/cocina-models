@@ -22,10 +22,10 @@ Run `pv --version`. If pv is not installed, tell the user:
 
 ### Output format (always apply)
 
-Every jq query produced by this skill **must output a CSV line** using `@csv`. The **first field must always be the external identifier** (`externalIdentifier`). Additional fields follow based on the user's query. Example:
+Every jq query produced by this skill **must output a CSV line** using `@csv`. The **first field must always be the external identifier** (`externalIdentifier`). Additional fields follow based on the user's query. By default, multiple values should be joined by " | ". Example:
 
 ```
-"druid:bc123df4567","some value","another value"
+"druid:bc123df4567","some value | another value"
 ```
 
 Use `[.externalIdentifier, ...] | @csv` as the output expression. Apply this constraint automatically — do not ask the user whether to include the external identifier.
