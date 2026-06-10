@@ -23,9 +23,6 @@ module Cocina
       attribute :note, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # URL or other pointer to the location of the contributor information.
       attribute? :valueAt, Types::Strict::String
-      # For multiple representations of information about the same contributor (e.g. in different
-      # languages).
-      attribute :parallelContributor, Types::Strict::Array.of(DescriptiveParallelContributor).default([].freeze)
     end
   end
 end
