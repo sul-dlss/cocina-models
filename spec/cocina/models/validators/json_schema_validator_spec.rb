@@ -390,4 +390,88 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
       expect { validate }.not_to raise_error
     end
   end
+
+  describe 'FileAdministrative shelve constraint' do
+    let(:clazz) { Cocina::Models::DRO }
+
+    def dro_props(shelve:, sdr_preserve:, publish:) # rubocop:disable Metrics/MethodLength
+      {
+        externalIdentifier: 'druid:bc123df4567',
+        label: 'My item',
+        type: Cocina::Models::ObjectType.object,
+        version: 1,
+        description: {
+          title: [{ value: 'Test DRO' }],
+          purl: 'https://purl.stanford.edu/bc123df4567'
+        },
+        administrative: { hasAdminPolicy: 'druid:bc123df4567' },
+        access: { view: 'world', download: 'world' },
+        identification: { sourceId: 'sul:123' },
+        structural: {
+          contains: [
+            {
+              externalIdentifier: 'bc123df4567_1',
+              label: 'Fileset 1',
+              type: Cocina::Models::FileSetType.file,
+              version: 1,
+              structural: {
+                contains: [
+                  {
+                    externalIdentifier: 'bc123df4567_1',
+                    label: 'Page 1',
+                    type: Cocina::Models::ObjectType.file,
+                    version: 1,
+                    access: { view: 'world', download: 'world' },
+                    administrative: { shelve: shelve, sdrPreserve: sdr_preserve, publish: publish },
+                    hasMessageDigests: [],
+                    filename: 'file.txt'
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    end
+
+    context 'when shelve=true, sdrPreserve=false, publish=false' do
+      let(:props) { dro_props(shelve: true, sdr_preserve: false, publish: false) }
+
+      it 'raises ValidationError' do
+        expect { validate }.to raise_error(Cocina::Models::ValidationError)
+      end
+    end
+
+    context 'when shelve=true, sdrPreserve=true, publish=false' do
+      let(:props) { dro_props(shelve: true, sdr_preserve: true, publish: false) }
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'when shelve=true, sdrPreserve=false, publish=true' do
+      let(:props) { dro_props(shelve: true, sdr_preserve: false, publish: true) }
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'when shelve=true, sdrPreserve=true, publish=true' do
+      let(:props) { dro_props(shelve: true, sdr_preserve: true, publish: true) }
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'when shelve=false, sdrPreserve=false, publish=false' do
+      let(:props) { dro_props(shelve: false, sdr_preserve: false, publish: false) }
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+  end
 end
