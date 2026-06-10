@@ -72,13 +72,18 @@ end
 
 # Get total line count (either from option or by counting)
 def get_total_lines(filename, provided_count)
+  count_filename = filename.sub(/\.xz$/, '.count.txt')
   if provided_count
     puts "Using provided line count: #{provided_count}"
     provided_count
+  elsif File.exist?(count_filename)
+    puts "Reading line count from #{count_filename}..."
+    File.read(count_filename).to_i
   else
     puts 'Counting lines...'
     total = count_lines(filename)
     puts "Total lines to validate: #{total}"
+    File.write(count_filename, total)
     total
   end
 end
