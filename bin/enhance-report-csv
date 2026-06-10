@@ -67,18 +67,16 @@ def extract_fields(doc)
 end
 
 def build_output(solr, rows, batch_size)
-  extra_col_count = (rows.first&.size || 1) - 1
-  extra_headers = extra_col_count.times.map { |i| "col#{i + 2}" }
-
   CSV.generate do |out|
-    out << (['druid'] + FIELD_HEADERS.values + extra_headers)
+    out << (%w[druid value] + FIELD_HEADERS.values)
 
     rows.each_slice(batch_size) do |batch|
       docs = fetch_solr_docs(solr, batch.map { |row| row[0] })
 
       batch.each do |row|
         druid = row[0]
-        out << ([druid] + extract_fields(docs[druid]) + row[1..])
+        value = row[1..].join('|')
+        out << ([druid, value] + extract_fields(docs[druid]))
       end
     end
   end
