@@ -75,7 +75,7 @@ def build_output(solr, rows, batch_size)
 
       batch.each do |row|
         druid = row[0]
-        value = row[1..].join('|')
+        value = row.size > 1 ? row[1..].join('|') : ''
         out << ([druid, value] + extract_fields(docs[druid]))
       end
     end
