@@ -60,7 +60,7 @@ module Cocina
 
           # build non-parallel, single name
           def build_name(name_node)
-            return { type: 'unspecified others' } if name_node.xpath('mods:etal', mods: Description::DESC_METADATA_NS).present?
+            return nil if name_node.xpath('mods:etal', mods: Description::DESC_METADATA_NS).present?
 
             name_parts = build_name_parts(name_node)
             # If there are no name parts, do not map the name
