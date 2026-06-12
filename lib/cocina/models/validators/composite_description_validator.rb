@@ -7,6 +7,7 @@ module Cocina
       class CompositeDescriptionValidator
         VALIDATORS = [
           DescriptionTypesVisitorValidator,
+          DescriptionIdentifierSourceCodeVisitorValidator,
           DescriptionValuesVisitorValidator,
           DescriptionDateTimeVisitorValidator,
           DescriptionEventDateVisitorValidator
