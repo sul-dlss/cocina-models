@@ -8,7 +8,8 @@ module Cocina
         VALIDATORS = [
           DescriptionTypesVisitorValidator,
           DescriptionValuesVisitorValidator,
-          DescriptionDateTimeVisitorValidator
+          DescriptionDateTimeVisitorValidator,
+          DescriptionEventDateVisitorValidator
         ].freeze
 
         def self.validate(clazz, attributes)
