@@ -1145,7 +1145,7 @@
               "required": ["parallelValue"],
               "properties": {
                 "parallelValue": {
-                  "minItems": 1
+                  "minItems": 2
                 }
               }
             },
@@ -1998,7 +1998,7 @@
           "required": ["parallelValue"],
           "properties": {
             "parallelValue": {
-              "minItems": 1
+              "minItems": 2
             }
           }
         },
