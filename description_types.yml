@@ -46,8 +46,6 @@ contributor:
     description: An institution or other corporate or collective body.
   - value: person
     description: An individual identity.
-  - value: unspecified others
-    description: Designator for one or more additional contributors not named individually.
 contributor.identifier:
   - value: ORCID
     description: Identifier from orcid.org.

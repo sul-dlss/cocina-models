@@ -49,8 +49,6 @@ _Path: contributor.type_
     * An institution or other corporate or collective body.
   * person
     * An individual identity.
-  * unspecified others
-    * Designator for one or more additional contributors not named individually.
 ## Contributor identifier types
 _Path: contributor.identifier.type_
   * ORCID
