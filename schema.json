@@ -1153,7 +1153,7 @@
               "required": ["groupedValue"],
               "properties": {
                 "groupedValue": {
-                  "minItems": 1
+                  "minItems": 2
                 }
               }
             }
@@ -2006,7 +2006,7 @@
           "required": ["groupedValue"],
           "properties": {
             "groupedValue": {
-              "minItems": 1
+              "minItems": 2
             }
           }
         }
