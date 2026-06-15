@@ -105,8 +105,6 @@ GEM
     json (2.19.9)
     jsonschema_rs (0.46.5-arm64-darwin)
       bigdecimal (>= 3.1, < 5)
-    jsonschema_rs (0.46.5-x86_64-linux)
-      bigdecimal (>= 3.1, < 5)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
     logger (1.7.0)
@@ -207,7 +205,6 @@ GEM
 
 PLATFORMS
   arm64-darwin
-  x86_64-linux-gnu
 
 DEPENDENCIES
   bundler (>= 2.0, < 5)
@@ -262,7 +259,6 @@ CHECKSUMS
   janeway-jsonpath (1.0.0) sha256=c8293f009f2aea9487ddee3067ca735a1f758eb1c8834ff4fab3ffd06c56d0a3
   json (2.19.9) sha256=9b9025b7cdddafa38d316eca0b2358488e42d417045c1b90d216a9fefe46b79a
   jsonschema_rs (0.46.5-arm64-darwin) sha256=e80414ed67f0956d3e06474a2fa076fc4a7b722f00e5d7142b70289c016ac6f1
-  jsonschema_rs (0.46.5-x86_64-linux) sha256=345c65ec7a5abf8879b9c9356752f0fdf4c9926f6480458fc32803a871b5cbb3
   language_server-protocol (3.17.0.5) sha256=fd1e39a51a28bf3eec959379985a72e296e9f9acfce46f6a79d31ca8760803cc
   lint_roller (1.1.0) sha256=2c0c845b632a7d172cb849cc90c1bce937a28c5c8ccccb50dfd46a485003cc87
   logger (1.7.0) sha256=196edec7cc44b66cfb40f9755ce11b392f21f7967696af15d274dde7edff0203
