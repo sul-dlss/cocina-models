@@ -8,6 +8,7 @@ module Cocina
         VALIDATORS = [
           DescriptionTypesVisitorValidator,
           DescriptionIdentifierSourceCodeVisitorValidator,
+          DescriptionRoleSourceCodeVisitorValidator,
           DescriptionFormResourceTypeVisitorValidator,
           DescriptionValuesVisitorValidator,
           DescriptionDateTimeVisitorValidator,
