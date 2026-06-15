@@ -1,0 +1,30 @@
+MODS resource type:
+  - text
+  - cartographic
+  - notated music
+  - sound recording
+  - sound recording-musical
+  - sound recording-nonmusical
+  - still image
+  - moving image
+  - three dimensional object
+  - software, multimedia
+  - mixed material
+  - collection
+  - manuscript
+LC Resource Type Scheme:
+  - Artifact
+  - Audio
+  - Cartographic
+  - Collection
+  - Dataset
+  - Digital
+  - Manuscript
+  - Mixed material
+  - Moving image
+  - Multimedia
+  - Notated music
+  - Still image
+  - Tactile
+  - Text
+  - Unspecified
