@@ -356,6 +356,53 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
     end
   end
 
+  context 'when a filename has a trailing space' do
+    let(:clazz) { Cocina::Models::DRO }
+
+    let(:props) do
+      {
+        externalIdentifier: 'druid:bc123df4567',
+        label: 'My item',
+        type: Cocina::Models::ObjectType.book,
+        version: 1,
+        description: {
+          title: [{ value: 'Test DRO' }],
+          purl: 'https://purl.stanford.edu/bc123df4567'
+        },
+        administrative: { hasAdminPolicy: 'druid:bc123df4567' },
+        access: { view: 'world', download: 'world' },
+        structural: {
+          contains: [
+            {
+              externalIdentifier: 'bc123df4567_1',
+              label: 'Fileset 1',
+              type: Cocina::Models::FileSetType.file,
+              version: 1,
+              structural: {
+                contains: [
+                  {
+                    externalIdentifier: 'bc123df4567_1',
+                    label: 'Page 1',
+                    type: Cocina::Models::ObjectType.file,
+                    version: 1,
+                    access: { view: 'world', download: 'world' },
+                    administrative: { publish: true, shelve: true, sdrPreserve: true },
+                    hasMessageDigests: [],
+                    filename: 'filename.txt '
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    end
+
+    it 'raises' do
+      expect { validate }.to raise_error(Cocina::Models::ValidationError)
+    end
+  end
+
   context 'when has a DateTime' do
     # This makes sure that something like following does not raise a validation error due to DateTime:
     # dro_hash = dro.to_h
