@@ -260,9 +260,8 @@ def print_summary(total_lines, errors, elapsed_time) # rubocop:disable Metrics/M
   puts "Line numbers with errors: #{sorted_errors.map { |e| e[:line] }.join(', ')}"
 
   CSV.open('validate-data-errors.csv', 'w') do |csv|
-    csv << %w[line druid error]
     sorted_errors.each do |error|
-      csv << [error[:line], error[:druid], error[:error]]
+      csv << [error[:druid], error[:error]]
     end
   end
   puts 'Errors written to validate-data-errors.csv'
