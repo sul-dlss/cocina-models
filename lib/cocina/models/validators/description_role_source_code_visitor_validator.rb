@@ -34,11 +34,10 @@ module Cocina
             path.any? { |part| part.to_s == 'contributor' } # there is a contributor in the path (any? allows for nested roles)
         end
 
-        # rubocop:disable Style/ClassVars
+        # Source codes allowed for contributor.role.source.code
         def valid_codes
-          @@valid_codes ||= YAML.load_file(::File.expand_path('../../../../role_source_codes.yml', __dir__)).to_set(&:downcase)
+          %w[aat lcmpt marcrelator rbmsrel]
         end
-        # rubocop:enable Style/ClassVars
       end
     end
   end
