@@ -62,7 +62,7 @@ Beyond what is necessary to test the generator, the Cocina model classes are not
 
 ## Testing validation changes
 
-If there is a possibility that a model, mapping, or validation change will conflict with some existing objects then `bin/validate-data` should be used for testing.  This operates on a sample of objects from the repository and reports any validation errors. You may get the sample by running the script [bin/export-cocina-head-versions](https://github.com/sul-dlss/dor-services-app?tab=readme-ov-file#export-data) and downloading the data file to your computer. Running a full validation takes about 2 hours.
+If there is a possibility that a model, mapping, or validation change will conflict with some existing objects then `bin/validate-data` should be used for testing.  This operates on an export of objects from the repository and reports any validation errors. You may get the file by running the script [bin/export-cocina-head-versions](https://github.com/sul-dlss/dor-services-app#export-cocina-json-data) and downloading the data file to your computer. See the [DSA README](https://github.com/sul-dlss/dor-services-app#scheduled-cocina-json-data-exports) for more info about the files and locations. Running a full validation takes about 2 hours. 
 
 
 Alternatively, you can use [validate-cocina](https://github.com/sul-dlss/dor-services-app/blob/main/bin/validate-cocina) for testing. This must be run on the `sdr-infra` VM since it requires deploying a branch of cocina-models.  It is slower than using `bin/validate-data`, but all of the data is completely up to date.
