@@ -28,7 +28,7 @@ module Cocina
       # Additional information relevant to a related resource.
       attribute :note, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # Identifiers and URIs associated with the related resource.
-      attribute :identifier, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
+      attribute :identifier, Types::Strict::Array.of(DescriptiveIdentifier).default([].freeze)
       # Property model for indicating the encoding, standard, or syntax to which a value
       # conforms (e.g. RDA).
       attribute? :standard, Standard.optional

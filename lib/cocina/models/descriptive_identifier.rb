@@ -2,8 +2,9 @@
 
 module Cocina
   module Models
-    # Default value model for descriptive elements.
-    class DescriptiveValue < Struct
+    # Value model for descriptive identifiers. Same as DescriptiveValue but omits the identifier
+    # property to prevent infinite recursion.
+    class DescriptiveIdentifier < Struct
       attribute :appliesTo, Types::Strict::Array.of(DescriptiveBasicValue).default([].freeze)
       attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute :parallelValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
@@ -25,8 +26,6 @@ module Cocina
       # Property model for indicating the encoding, standard, or syntax to which a value
       # conforms (e.g. RDA).
       attribute? :encoding, Standard.optional
-      # Identifiers and URIs associated with the descriptive element.
-      attribute :identifier, Types::Strict::Array.of(DescriptiveIdentifier).default([].freeze)
       # Property model for indicating the vocabulary, authority, or other origin for a term,
       # code, or identifier.
       attribute? :source, Source.optional

@@ -16,7 +16,7 @@ module Cocina
       # Locations associated with the event.
       attribute :location, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # Identifiers and URIs associated with the event.
-      attribute :identifier, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
+      attribute :identifier, Types::Strict::Array.of(DescriptiveIdentifier).default([].freeze)
       # Other information about the event.
       attribute :note, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # Language of the descriptive element value

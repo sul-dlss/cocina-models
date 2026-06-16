@@ -21,7 +21,7 @@ module Cocina
       # Additional information relevant to a resource.
       attribute :note, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # Identifiers and URIs associated with the resource.
-      attribute :identifier, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
+      attribute :identifier, Types::Strict::Array.of(DescriptiveIdentifier).default([].freeze)
       # Terms associated with the intellectual content of the resource.
       attribute :subject, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # Information about how to access digital and physical versions of the object.
