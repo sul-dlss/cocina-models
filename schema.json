@@ -1608,7 +1608,7 @@
         "filename": {
           "description": "Filename for a file. Can be same as label.",
           "type": "string",
-          "not": { "pattern": "[\\n\\r]" }
+          "not": { "pattern": "[\\n\\r]| $" }
         },
         "size": {
           "description": "Size of the File (binary) in bytes.",
@@ -2815,7 +2815,7 @@
         },
         "filename": {
           "type": "string",
-          "not": { "pattern": "[\\n\\r]" }
+          "not": { "pattern": "[\\n\\r]| $" }
         },
         "size": {
           "type": "integer"
