@@ -1,0 +1,133 @@
+# frozen_string_literal: true
+
+require 'spec_helper'
+
+RSpec.describe Cocina::Models::Validators::DescriptionScriptSourceCodeVisitorValidator do
+  let(:clazz) { Cocina::Models::Description }
+  let(:validate) { Cocina::Models::Validators::CompositeDescriptionValidator.new(clazz, props, validators: [described_class]).validate }
+
+  let(:base_props) do
+    {
+      title: [{ value: 'Test Title' }],
+      purl: 'https://purl.stanford.edu/bc123df4567'
+    }.with_indifferent_access
+  end
+
+  describe 'language script validation' do
+    context 'when language has no script' do
+      let(:props) { base_props.merge(language: [{ code: 'eng' }]) }
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'when language script has no source' do
+      let(:props) { base_props.merge(language: [{ code: 'eng', script: { code: 'Latn' } }]) }
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'when language script source has no code' do
+      let(:props) { base_props.merge(language: [{ code: 'eng', script: { code: 'Latn', source: { uri: 'https://example.com' } } }]) }
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'when language script has a valid source code (iso15924)' do
+      let(:props) { base_props.merge(language: [{ code: 'eng', script: { code: 'Latn', source: { code: 'iso15924' } } }]) }
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'when language script has a valid source code with different case (ISO15924)' do
+      let(:props) { base_props.merge(language: [{ code: 'eng', script: { code: 'Latn', source: { code: 'ISO15924' } } }]) }
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'when language script has an invalid source code' do
+      let(:props) { base_props.merge(language: [{ code: 'eng', script: { code: 'Latn', source: { code: 'iso' } } }]) }
+
+      it 'raises ValidationError with path and code' do
+        expect { validate }.to raise_error(
+          Cocina::Models::ValidationError,
+          'Unrecognized script source codes in description: language1.script.source.code (iso)'
+        )
+      end
+    end
+  end
+
+  describe 'valueLanguage valueScript validation' do
+    context 'when title has valueLanguage without valueScript' do
+      let(:props) { base_props.merge(title: [{ value: 'Test Title', valueLanguage: { code: 'eng' } }]) }
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'when title valueLanguage valueScript has no source' do
+      let(:props) { base_props.merge(title: [{ value: 'Test Title', valueLanguage: { code: 'eng', valueScript: { code: 'Latn' } } }]) }
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'when title valueLanguage valueScript source has no code' do
+      let(:props) { base_props.merge(title: [{ value: 'Test Title', valueLanguage: { code: 'eng', valueScript: { code: 'Latn', source: { uri: 'https://example.com' } } } }]) }
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'when title valueLanguage valueScript has a valid source code (iso15924)' do
+      let(:props) { base_props.merge(title: [{ value: 'Test Title', valueLanguage: { code: 'eng', valueScript: { code: 'Latn', source: { code: 'iso15924' } } } }]) }
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'when title valueLanguage valueScript has a valid source code with different case (ISO15924)' do
+      let(:props) { base_props.merge(title: [{ value: 'Test Title', valueLanguage: { code: 'eng', valueScript: { code: 'Latn', source: { code: 'ISO15924' } } } }]) }
+
+      it 'is case-insensitive and does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'when title valueLanguage valueScript has an invalid source code' do
+      let(:props) { base_props.merge(title: [{ value: 'Test Title', valueLanguage: { code: 'eng', valueScript: { code: 'Latn', source: { code: 'iso' } } } }]) }
+
+      it 'raises ValidationError with path and code' do
+        expect { validate }.to raise_error(
+          Cocina::Models::ValidationError,
+          'Unrecognized script source codes in description: title1.valueLanguage.valueScript.source.code (iso)'
+        )
+      end
+    end
+  end
+
+  describe 'when using RequestDescription class' do
+    let(:clazz) { Cocina::Models::RequestDescription }
+    let(:props) { base_props.merge(language: [{ code: 'eng', script: { code: 'Latn', source: { code: 'iso' } } }]) }
+
+    it 'raises ValidationError' do
+      expect { validate }.to raise_error(
+        Cocina::Models::ValidationError,
+        'Unrecognized script source codes in description: language1.script.source.code (iso)'
+      )
+    end
+  end
+end
