@@ -2995,6 +2995,17 @@
           "type": "string"
         }
       },
+      "anyOf": [
+        { "required": ["value"] },
+        { "required": ["code"] },
+        { "required": ["uri"] },
+        {
+          "required": ["note"],
+          "properties": {
+            "note": { "minItems": 1 }
+          }
+        }
+      ],
       "unevaluatedProperties": false
     },
     "SourceId": {
@@ -3034,6 +3045,17 @@
           "$ref": "#/$defs/Source"
         }
       },
+      "anyOf": [
+        { "required": ["value"] },
+        { "required": ["code"] },
+        { "required": ["uri"] },
+        {
+          "required": ["note"],
+          "properties": {
+            "note": { "minItems": 1 }
+          }
+        }
+      ],
       "unevaluatedProperties": false
     },
     "StandardBarcode": {
