@@ -521,4 +521,86 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
       end
     end
   end
+
+  describe 'script source code constraints in description schema' do
+    let(:clazz) { Cocina::Models::Description }
+    let(:props) do
+      {
+        title: [{ value: 'Test Title' }],
+        purl: 'https://purl.stanford.edu/bc123df4567'
+      }
+    end
+
+    context 'when language.script.source.code is iso15924' do
+      let(:props) do
+        super().merge(
+          language: [{ code: 'eng', script: { code: 'Latn', source: { code: 'iso15924' } } }]
+        )
+      end
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'when language.script.source.code is ISO15924' do
+      let(:props) do
+        super().merge(
+          language: [{ code: 'eng', script: { code: 'Latn', source: { code: 'ISO15924' } } }]
+        )
+      end
+
+      it 'does not raise (case-insensitive)' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'when language.script.source.code is invalid' do
+      let(:props) do
+        super().merge(
+          language: [{ code: 'eng', script: { code: 'Latn', source: { code: 'iso' } } }]
+        )
+      end
+
+      it 'raises ValidationError' do
+        expect { validate }.to raise_error(Cocina::Models::ValidationError)
+      end
+    end
+
+    context 'when valueLanguage.valueScript.source.code is iso15924' do
+      let(:props) do
+        super().merge(
+          title: [{ value: 'Test Title', valueLanguage: { code: 'eng', valueScript: { code: 'Latn', source: { code: 'iso15924' } } } }]
+        )
+      end
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'when valueLanguage.valueScript.source.code is ISO15924' do
+      let(:props) do
+        super().merge(
+          title: [{ value: 'Test Title', valueLanguage: { code: 'eng', valueScript: { code: 'Latn', source: { code: 'ISO15924' } } } }]
+        )
+      end
+
+      it 'does not raise (case-insensitive)' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'when valueLanguage.valueScript.source.code is invalid' do
+      let(:props) do
+        super().merge(
+          title: [{ value: 'Test Title', valueLanguage: { code: 'eng', valueScript: { code: 'Latn', source: { code: 'iso' } } } }]
+        )
+      end
+
+      it 'raises ValidationError' do
+        expect { validate }.to raise_error(Cocina::Models::ValidationError)
+      end
+    end
+  end
 end

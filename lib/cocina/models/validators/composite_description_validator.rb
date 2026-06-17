@@ -13,8 +13,7 @@ module Cocina
           DescriptionDateTimeVisitorValidator,
           DescriptionEventDateVisitorValidator,
           DescriptionSubjectTemporalEncodingVisitorValidator,
-          DescriptionLocationSourceCodeVisitorValidator,
-          DescriptionScriptSourceCodeVisitorValidator
+          DescriptionLocationSourceCodeVisitorValidator
         ].freeze
 
         def self.validate(clazz, attributes)
