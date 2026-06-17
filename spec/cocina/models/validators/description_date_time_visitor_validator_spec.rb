@@ -237,6 +237,75 @@ RSpec.describe Cocina::Models::Validators::DescriptionDateTimeVisitorValidator d
     end
   end
 
+  context 'with date encoding codes' do
+    context 'when code is valid' do
+      %w[edtf iso8601 marc temper w3cdtf].each do |code|
+        it "does not raise for #{code}" do
+          props = { event: [{ date: [{ value: '2021', encoding: { code: code } }] }] }
+          expect do
+            Cocina::Models::Validators::CompositeDescriptionValidator.new(clazz, props, validators: [described_class]).validate
+          end.not_to raise_error
+        end
+      end
+    end
+
+    context 'when code is invalid' do
+      let(:props) do
+        {
+          event: [
+            {
+              date: [
+                {
+                  value: '2021',
+                  encoding: {
+                    code: 'unknown'
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      end
+
+      it 'raises with an informative message' do
+        expect { validate }.to raise_error(Cocina::Models::ValidationError, /Unrecognized date encoding codes/)
+      end
+    end
+
+    context 'when an invalid code is nested in structuredValue' do
+      let(:props) do
+        {
+          event: [
+            {
+              date: [
+                {
+                  structuredValue: [
+                    { value: '1996', type: 'start', encoding: { code: 'bad' } },
+                    { value: '1998', type: 'end' }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      end
+
+      it 'raises' do
+        expect { validate }.to raise_error(Cocina::Models::ValidationError, /Unrecognized date encoding codes/)
+      end
+    end
+
+    context 'when no encoding is present' do
+      let(:props) do
+        { event: [{ date: [{ value: '2021' }] }] }
+      end
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+  end
+
   # NOTE: the intent of this test is to show that the validator correctly
   #       navigates the structure and picks out the right bits as invalid
   context 'with adminMetadata dates' do

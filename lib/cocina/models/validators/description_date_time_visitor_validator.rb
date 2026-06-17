@@ -8,8 +8,9 @@ module Cocina
       # Validates that dates of known types are type-valid using the visitor pattern.
       class DescriptionDateTimeVisitorValidator < BaseDescriptionVisitorValidator
         VALIDATABLE_TYPES = %w[edtf iso8601 w3cdtf].freeze
+        VALID_ENCODING_CODES = %w[edtf iso8601 marc temper w3cdtf].freeze
 
-        def visit_hash(hash:, path:) # rubocop:disable Metrics/CyclomaticComplexity
+        def visit_hash(hash:, path:) # rubocop:disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
           # Only dates nested under a `date` key are subject to validation.
           # For example, event.date is in scope but event.note is not.
           return unless in_date_path?(path)
@@ -32,7 +33,10 @@ module Cocina
           # recursing into its children, so the encoding is always registered
           # before any child value hashes are visited.
           code = hash.dig(:encoding, :code)
-          encoding_paths[path.dup] = code if code && VALIDATABLE_TYPES.include?(code)
+          if code
+            encoding_paths[path.dup] = code if VALIDATABLE_TYPES.include?(code)
+            invalid_encoding_codes << "#{path_to_s(path)}.encoding.code (#{code})" unless VALID_ENCODING_CODES.include?(code)
+          end
 
           value = hash[:value]
           return unless value.is_a?(String)
@@ -62,23 +66,28 @@ module Cocina
         end
 
         def validate!
-          return if invalid_groups.empty?
+          errors = []
 
-          invalid_dates = invalid_groups.filter_map do |path, values|
-            next if values.empty?
+          errors << "Unrecognized date encoding codes in description: #{invalid_encoding_codes.join(', ')}" if invalid_encoding_codes.any?
 
-            [*values, encoding_paths[path]]
+          unless invalid_groups.empty?
+            invalid_dates = invalid_groups.filter_map do |path, values|
+              [*values, encoding_paths[path]] unless values.empty?
+            end
+            errors << "Invalid date(s) in description: #{invalid_dates}" if invalid_dates.any?
           end
 
-          return if invalid_dates.empty?
-
-          raise ValidationError, "Invalid date(s) in description: #{invalid_dates}"
+          raise ValidationError, errors.join('; ') if errors.any?
         end
 
         private
 
         def encoding_paths
           @encoding_paths ||= {}
+        end
+
+        def invalid_encoding_codes
+          @invalid_encoding_codes ||= []
         end
 
         def invalid_groups
