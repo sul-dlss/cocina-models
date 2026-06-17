@@ -1020,6 +1020,56 @@
           }
         }
       },
+      "anyOf": [
+        {
+          "properties": {
+            "contributor": {
+              "minItems": 1
+            }
+          },
+          "required": ["contributor"]
+        },
+        {
+          "properties": {
+            "event": {
+              "minItems": 1
+            }
+          },
+          "required": ["event"]
+        },
+        {
+          "properties": {
+            "language": {
+              "minItems": 1
+            }
+          },
+          "required": ["language"]
+        },
+        {
+          "properties": {
+            "note": {
+              "minItems": 1
+            }
+          },
+          "required": ["note"]
+        },
+        {
+          "properties": {
+            "metadataStandard": {
+              "minItems": 1
+            }
+          },
+          "required": ["metadataStandard"]
+        },
+        {
+          "properties": {
+            "identifier": {
+              "minItems": 1
+            }
+          },
+          "required": ["identifier"]
+        }
+      ],
       "unevaluatedProperties": false
     },
     "DescriptiveBasicValue": {
