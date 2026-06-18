@@ -1473,7 +1473,25 @@
           "$ref": "#/$defs/Source"
         },
         "valueScript": {
-          "$ref": "#/$defs/Standard"
+          "allOf": [
+            {
+              "$ref": "#/$defs/Standard"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "pattern": "^[iI][sS][oO]15924$"
+                    }
+                  }
+                }
+              }
+            }
+          ]
         }
       },
       "description": "Language of the descriptive element value",
@@ -1968,7 +1986,25 @@
           "description": "present for mapping to additional schemas in the future and for consistency but not otherwise used"
         },
         "script": {
-          "$ref": "#/$defs/DescriptiveValue"
+          "allOf": [
+            {
+              "$ref": "#/$defs/DescriptiveValue"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "pattern": "^[iI][sS][oO]15924$"
+                    }
+                  }
+                }
+              }
+            }
+          ]
         },
         "source": {
           "$ref": "#/$defs/Source"
