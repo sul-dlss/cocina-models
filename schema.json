@@ -230,18 +230,6 @@
       ],
       "unevaluatedProperties": false
     },
-    "AppliesTo": {
-      "description": "Property model for indicating the parts, aspects, or versions of the resource to which a descriptive element is applicable.",
-      "type": "object",
-      "properties": {
-        "appliesTo": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/DescriptiveBasicValue"
-          }
-        }
-      }
-    },
     "Barcode": {
       "description": "A barcode",
       "oneOf": [
@@ -1203,7 +1191,7 @@
               "required": ["groupedValue"],
               "properties": {
                 "groupedValue": {
-                  "minItems": 2
+                  "minItems": 1
                 }
               }
             }
@@ -1352,6 +1340,11 @@
     "DescriptiveValue": {
       "description": "Default value model for descriptive elements.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/DescriptiveBasicValue"
+        }
+      ],
       "properties": {
         "appliesTo": {
           "type": "array",
@@ -1360,174 +1353,6 @@
           }
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/$defs/DescriptiveStructuredValue"
-        },
-        {
-          "$ref": "#/$defs/DescriptiveParallelValue"
-        },
-        {
-          "$ref": "#/$defs/DescriptiveGroupedValue"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "value": {
-              "description": "String or integer value of the descriptive element.",
-              "oneOf": [
-                {
-                  "type": "string"
-                }
-              ]
-            },
-            "type": {
-              "description": "Type of value provided by the descriptive element. See https://github.com/sul-dlss/cocina-models/blob/main/docs/description_types.md for valid types.",
-              "type": "string"
-            },
-            "status": {
-              "description": "Status of the descriptive element value relative to other instances of the element.",
-              "type": "string"
-            },
-            "code": {
-              "description": "Code value of the descriptive element.",
-              "type": "string"
-            },
-            "uri": {
-              "description": "URI value of the descriptive element.",
-              "type": "string"
-            },
-            "standard": {
-              "$ref": "#/$defs/Standard"
-            },
-            "encoding": {
-              "$ref": "#/$defs/Standard"
-            },
-            "identifier": {
-              "description": "Identifiers and URIs associated with the descriptive element.",
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/DescriptiveIdentifier"
-              }
-            },
-            "source": {
-              "$ref": "#/$defs/Source"
-            },
-            "displayLabel": {
-              "description": "The preferred display label to use for the descriptive element in access systems.",
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "qualifier": {
-              "description": "A term providing information about the circumstances of the statement (e.g., approximate dates).",
-              "type": "string"
-            },
-            "note": {
-              "description": "Other information related to the descriptive element.",
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/DescriptiveValue"
-              }
-            },
-            "valueLanguage": {
-              "$ref": "#/$defs/DescriptiveValueLanguage"
-            },
-            "valueAt": {
-              "description": "URL or other pointer to the location of the value of the descriptive element.",
-              "type": "string"
-            }
-          }
-        }
-      ],
-      "unevaluatedProperties": false
-    },
-    "DescriptiveIdentifier": {
-      "description": "Value model for descriptive identifiers. Same as DescriptiveValue but omits the identifier property to prevent infinite recursion.",
-      "type": "object",
-      "properties": {
-        "appliesTo": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/DescriptiveBasicValue"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/$defs/DescriptiveStructuredValue"
-        },
-        {
-          "$ref": "#/$defs/DescriptiveParallelValue"
-        },
-        {
-          "$ref": "#/$defs/DescriptiveGroupedValue"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "value": {
-              "description": "String or integer value of the descriptive element.",
-              "oneOf": [
-                {
-                  "type": "string"
-                }
-              ]
-            },
-            "type": {
-              "description": "Type of value provided by the descriptive element. See https://github.com/sul-dlss/cocina-models/blob/main/docs/description_types.md for valid types.",
-              "type": "string"
-            },
-            "status": {
-              "description": "Status of the descriptive element value relative to other instances of the element.",
-              "type": "string"
-            },
-            "code": {
-              "description": "Code value of the descriptive element.",
-              "type": "string"
-            },
-            "uri": {
-              "description": "URI value of the descriptive element.",
-              "type": "string"
-            },
-            "standard": {
-              "$ref": "#/$defs/Standard"
-            },
-            "encoding": {
-              "$ref": "#/$defs/Standard"
-            },
-            "source": {
-              "$ref": "#/$defs/Source"
-            },
-            "displayLabel": {
-              "description": "The preferred display label to use for the descriptive element in access systems.",
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "qualifier": {
-              "description": "A term providing information about the circumstances of the statement (e.g., approximate dates).",
-              "type": "string"
-            },
-            "note": {
-              "description": "Other information related to the descriptive element.",
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/DescriptiveValue"
-              }
-            },
-            "valueLanguage": {
-              "$ref": "#/$defs/DescriptiveValueLanguage"
-            },
-            "valueAt": {
-              "description": "URL or other pointer to the location of the value of the descriptive element.",
-              "type": "string"
-            }
-          }
-        }
-      ],
       "unevaluatedProperties": false
     },
     "DescriptiveValueLanguage": {

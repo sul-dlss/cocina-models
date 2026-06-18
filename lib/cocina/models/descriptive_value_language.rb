@@ -17,9 +17,7 @@ module Cocina
       # Property model for indicating the vocabulary, authority, or other origin for a term,
       # code, or identifier.
       attribute? :source, Source.optional
-      # Property model for indicating the encoding, standard, or syntax to which a value
-      # conforms (e.g. RDA).
-      attribute? :valueScript, Standard.optional
+      attribute? :valueScript, Types::Nominal::Any
     end
   end
 end
