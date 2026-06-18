@@ -105,7 +105,7 @@ Substitute:
     h2 { color: #9cdcfe; }
     textarea, input { width: 100%; box-sizing: border-box; background: #252526; color: #d4d4d4; border: 1px solid #444; padding: 8px; font-family: monospace; font-size: 13px; border-radius: 3px; }
     textarea { height: 260px; resize: vertical; }
-    input { height: 36px; }
+    #query { height: 120px; }
     button { margin-top: 8px; background: #0e639c; color: white; border: none; padding: 8px 20px; cursor: pointer; font-size: 14px; border-radius: 3px; }
     button:hover { background: #1177bb; }
     label { display: block; margin-top: 16px; margin-bottom: 4px; font-size: 12px; color: #9cdcfe; text-transform: uppercase; letter-spacing: 0.05em; }
@@ -118,7 +118,7 @@ Substitute:
   <label>JSON Input</label>
   <textarea id="json"></textarea>
   <label>jq Filter</label>
-  <input id="query" type="text" />
+  <textarea id="query"></textarea>
   <button onclick="run()">&#9654; Run</button>
   <label>Output</label>
   <pre id="output">(click Run)</pre>
