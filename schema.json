@@ -155,19 +155,22 @@
       "allOf": [
         {
           "$ref": "#/$defs/Access"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "copyright": {
+              "$ref": "#/$defs/Copyright"
+            },
+            "useAndReproductionStatement": {
+              "$ref": "#/$defs/UseAndReproductionStatement"
+            },
+            "license": {
+              "$ref": "#/$defs/License"
+            }
+          }
         }
       ],
-      "properties": {
-        "copyright": {
-          "$ref": "#/$defs/Copyright"
-        },
-        "useAndReproductionStatement": {
-          "$ref": "#/$defs/UseAndReproductionStatement"
-        },
-        "license": {
-          "$ref": "#/$defs/License"
-        }
-      },
       "unevaluatedProperties": false
     },
     "AdminPolicyAdministrative": {
@@ -230,18 +233,6 @@
       ],
       "unevaluatedProperties": false
     },
-    "AppliesTo": {
-      "description": "Property model for indicating the parts, aspects, or versions of the resource to which a descriptive element is applicable.",
-      "type": "object",
-      "properties": {
-        "appliesTo": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/DescriptiveBasicValue"
-          }
-        }
-      }
-    },
     "Barcode": {
       "description": "A barcode",
       "oneOf": [
@@ -261,6 +252,28 @@
           "$ref": "#/$defs/CaliforniaHistoricalSocietyBarcode"
         }
       ]
+    },
+    "AppliesTo": {
+      "description": "Value model for appliesTo property.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/DescriptiveBasicValue"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "identifier": {
+              "description": "Identifiers and URIs associated with the descriptive element.",
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DescriptiveIdentifier"
+              }
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
     },
     "BusinessBarcode": {
       "description": "The barcode associated with a business library DRO, prefixed with 2050",
@@ -672,23 +685,26 @@
     },
     "DROAccess": {
       "type": "object",
-      "properties": {
-        "copyright": {
-          "$ref": "#/$defs/Copyright"
-        },
-        "embargo": {
-          "$ref": "#/$defs/Embargo"
-        },
-        "useAndReproductionStatement": {
-          "$ref": "#/$defs/UseAndReproductionStatement"
-        },
-        "license": {
-          "$ref": "#/$defs/License"
-        }
-      },
       "allOf": [
         {
           "$ref": "#/$defs/Access"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "copyright": {
+              "$ref": "#/$defs/Copyright"
+            },
+            "embargo": {
+              "$ref": "#/$defs/Embargo"
+            },
+            "useAndReproductionStatement": {
+              "$ref": "#/$defs/UseAndReproductionStatement"
+            },
+            "license": {
+              "$ref": "#/$defs/License"
+            }
+          }
         }
       ],
       "unevaluatedProperties": false
@@ -1073,7 +1089,7 @@
       "unevaluatedProperties": false
     },
     "DescriptiveBasicValue": {
-      "description": "Basic value model for descriptive elements. Can only have one of value, parallelValue, groupedValue, or structuredValue.",
+      "description": "Basic value model for descriptive elements. Can only have one of value, parallelValue, groupedValue, or structuredValue. Does not have identifier or appliesTo properties.",
       "type": "object",
       "allOf": [
         {
@@ -1117,13 +1133,6 @@
             },
             "encoding": {
               "$ref": "#/$defs/Standard"
-            },
-            "identifier": {
-              "description": "Identifiers and URIs associated with the descriptive element.",
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/DescriptiveIdentifier"
-              }
             },
             "source": {
               "$ref": "#/$defs/Source"
@@ -1203,7 +1212,7 @@
               "required": ["groupedValue"],
               "properties": {
                 "groupedValue": {
-                  "minItems": 2
+                  "minItems": 1
                 }
               }
             }
@@ -1349,59 +1358,42 @@
         }
       }
     },
-    "DescriptiveValue": {
-      "description": "Default value model for descriptive elements.",
+    "DescriptiveIdentifier": {
+      "description": "Default value model for identifiers.",
       "type": "object",
-      "properties": {
-        "appliesTo": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/DescriptiveBasicValue"
-          }
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/$defs/DescriptiveStructuredValue"
-        },
-        {
-          "$ref": "#/$defs/DescriptiveParallelValue"
-        },
-        {
-          "$ref": "#/$defs/DescriptiveGroupedValue"
+          "$ref": "#/$defs/DescriptiveBasicValue"
         },
         {
           "type": "object",
           "properties": {
-            "value": {
-              "description": "String or integer value of the descriptive element.",
-              "oneOf": [
-                {
-                  "type": "string"
-                }
-              ]
-            },
-            "type": {
-              "description": "Type of value provided by the descriptive element. See https://github.com/sul-dlss/cocina-models/blob/main/docs/description_types.md for valid types.",
-              "type": "string"
-            },
-            "status": {
-              "description": "Status of the descriptive element value relative to other instances of the element.",
-              "type": "string"
-            },
-            "code": {
-              "description": "Code value of the descriptive element.",
-              "type": "string"
-            },
-            "uri": {
-              "description": "URI value of the descriptive element.",
-              "type": "string"
-            },
-            "standard": {
-              "$ref": "#/$defs/Standard"
-            },
-            "encoding": {
-              "$ref": "#/$defs/Standard"
+            "appliesTo": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/AppliesTo"
+              }
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "DescriptiveValue": {
+      "description": "Default value model for descriptive elements.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/DescriptiveBasicValue"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "appliesTo": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/AppliesTo"
+              }
             },
             "identifier": {
               "description": "Identifiers and URIs associated with the descriptive element.",
@@ -1409,121 +1401,6 @@
               "items": {
                 "$ref": "#/$defs/DescriptiveIdentifier"
               }
-            },
-            "source": {
-              "$ref": "#/$defs/Source"
-            },
-            "displayLabel": {
-              "description": "The preferred display label to use for the descriptive element in access systems.",
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "qualifier": {
-              "description": "A term providing information about the circumstances of the statement (e.g., approximate dates).",
-              "type": "string"
-            },
-            "note": {
-              "description": "Other information related to the descriptive element.",
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/DescriptiveValue"
-              }
-            },
-            "valueLanguage": {
-              "$ref": "#/$defs/DescriptiveValueLanguage"
-            },
-            "valueAt": {
-              "description": "URL or other pointer to the location of the value of the descriptive element.",
-              "type": "string"
-            }
-          }
-        }
-      ],
-      "unevaluatedProperties": false
-    },
-    "DescriptiveIdentifier": {
-      "description": "Value model for descriptive identifiers. Same as DescriptiveValue but omits the identifier property to prevent infinite recursion.",
-      "type": "object",
-      "properties": {
-        "appliesTo": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/DescriptiveBasicValue"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/$defs/DescriptiveStructuredValue"
-        },
-        {
-          "$ref": "#/$defs/DescriptiveParallelValue"
-        },
-        {
-          "$ref": "#/$defs/DescriptiveGroupedValue"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "value": {
-              "description": "String or integer value of the descriptive element.",
-              "oneOf": [
-                {
-                  "type": "string"
-                }
-              ]
-            },
-            "type": {
-              "description": "Type of value provided by the descriptive element. See https://github.com/sul-dlss/cocina-models/blob/main/docs/description_types.md for valid types.",
-              "type": "string"
-            },
-            "status": {
-              "description": "Status of the descriptive element value relative to other instances of the element.",
-              "type": "string"
-            },
-            "code": {
-              "description": "Code value of the descriptive element.",
-              "type": "string"
-            },
-            "uri": {
-              "description": "URI value of the descriptive element.",
-              "type": "string"
-            },
-            "standard": {
-              "$ref": "#/$defs/Standard"
-            },
-            "encoding": {
-              "$ref": "#/$defs/Standard"
-            },
-            "source": {
-              "$ref": "#/$defs/Source"
-            },
-            "displayLabel": {
-              "description": "The preferred display label to use for the descriptive element in access systems.",
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "qualifier": {
-              "description": "A term providing information about the circumstances of the statement (e.g., approximate dates).",
-              "type": "string"
-            },
-            "note": {
-              "description": "Other information related to the descriptive element.",
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/DescriptiveValue"
-              }
-            },
-            "valueLanguage": {
-              "$ref": "#/$defs/DescriptiveValueLanguage"
-            },
-            "valueAt": {
-              "description": "URL or other pointer to the location of the value of the descriptive element.",
-              "type": "string"
             }
           }
         }
@@ -2012,7 +1889,7 @@
         "appliesTo": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/DescriptiveBasicValue"
+            "$ref": "#/$defs/AppliesTo"
           }
         },
         "code": {
