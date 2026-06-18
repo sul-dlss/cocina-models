@@ -5,7 +5,6 @@ module Cocina
     # Languages, scripts, symbolic systems, and notations used in all or part of a resource
     # or its descriptive metadata.
     class Language < Struct
-      attribute :appliesTo, Types::Strict::Array.of(DescriptiveBasicValue).default([].freeze)
       # Code value of the descriptive element.
       attribute? :code, Types::Strict::String
       # The preferred display label to use for the descriptive element in access systems.
@@ -47,6 +46,7 @@ module Cocina
       attribute? :valueAt, Types::Strict::String
       # Language of the descriptive element value
       attribute? :valueLanguage, DescriptiveValueLanguage.optional
+      attribute :appliesTo, Types::Strict::Array.of(DescriptiveBasicValue).default([].freeze)
     end
   end
 end

@@ -1352,15 +1352,10 @@
     "DescriptiveValue": {
       "description": "Default value model for descriptive elements.",
       "type": "object",
-      "properties": {
-        "appliesTo": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/DescriptiveBasicValue"
-          }
-        }
-      },
       "allOf": [
+        {
+          "$ref": "#/$defs/AppliesTo"
+        },
         {
           "$ref": "#/$defs/DescriptiveStructuredValue"
         },
@@ -1922,12 +1917,6 @@
       "description": "Languages, scripts, symbolic systems, and notations used in all or part of a resource or its descriptive metadata.",
       "type": "object",
       "properties": {
-        "appliesTo": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/DescriptiveBasicValue"
-          }
-        },
         "code": {
           "description": "Code value of the descriptive element.",
           "type": "string"
@@ -2007,6 +1996,11 @@
         }
       },
       "unevaluatedProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/$defs/AppliesTo"
+        }
+      ],
       "anyOf": [
         {
           "required": ["value"]
