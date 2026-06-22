@@ -155,19 +155,22 @@
       "allOf": [
         {
           "$ref": "#/$defs/Access"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "copyright": {
+              "$ref": "#/$defs/Copyright"
+            },
+            "useAndReproductionStatement": {
+              "$ref": "#/$defs/UseAndReproductionStatement"
+            },
+            "license": {
+              "$ref": "#/$defs/License"
+            }
+          }
         }
       ],
-      "properties": {
-        "copyright": {
-          "$ref": "#/$defs/Copyright"
-        },
-        "useAndReproductionStatement": {
-          "$ref": "#/$defs/UseAndReproductionStatement"
-        },
-        "license": {
-          "$ref": "#/$defs/License"
-        }
-      },
       "unevaluatedProperties": false
     },
     "AdminPolicyAdministrative": {
@@ -660,23 +663,26 @@
     },
     "DROAccess": {
       "type": "object",
-      "properties": {
-        "copyright": {
-          "$ref": "#/$defs/Copyright"
-        },
-        "embargo": {
-          "$ref": "#/$defs/Embargo"
-        },
-        "useAndReproductionStatement": {
-          "$ref": "#/$defs/UseAndReproductionStatement"
-        },
-        "license": {
-          "$ref": "#/$defs/License"
-        }
-      },
       "allOf": [
         {
           "$ref": "#/$defs/Access"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "copyright": {
+              "$ref": "#/$defs/Copyright"
+            },
+            "embargo": {
+              "$ref": "#/$defs/Embargo"
+            },
+            "useAndReproductionStatement": {
+              "$ref": "#/$defs/UseAndReproductionStatement"
+            },
+            "license": {
+              "$ref": "#/$defs/License"
+            }
+          }
         }
       ],
       "unevaluatedProperties": false
@@ -1343,16 +1349,19 @@
       "allOf": [
         {
           "$ref": "#/$defs/DescriptiveBasicValue"
-        }
-      ],
-      "properties": {
-        "appliesTo": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/DescriptiveBasicValue"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "appliesTo": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DescriptiveBasicValue"
+              }
+            }
           }
         }
-      },
+      ],
       "unevaluatedProperties": false
     },
     "DescriptiveValueLanguage": {
@@ -1545,7 +1554,7 @@
               "minItems": 1
             }
           }
-        }        
+        }
       ]
     },
     "File": {
