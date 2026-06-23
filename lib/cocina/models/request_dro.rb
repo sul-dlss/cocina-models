@@ -30,7 +30,6 @@ module Cocina
       # example: 1.2.3
       attribute :cocinaVersion, CocinaVersion.default(VERSION)
       attribute :type, Types::Strict::String.enum(*RequestDRO::TYPES)
-      attribute :label, Types::Strict::String
       attribute :version, Types::Strict::Integer.default(1).enum(1)
       attribute? :access, DROAccess.optional
       attribute(:administrative, RequestAdministrative.default { RequestAdministrative.new })

@@ -10,7 +10,6 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
   let(:props) do
     {
       externalIdentifier: 'druid:bc123df4567',
-      label: 'My admin policy',
       type: Cocina::Models::ObjectType.admin_policy,
       version: 1,
       administrative: {
@@ -25,7 +24,6 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
     let(:props) do
       {
         externalIdentifier: 'druid:bc123df4567',
-        label: 'My admin policy',
         type: Cocina::Models::ObjectType.admin_policy,
         version: 1,
         administrative: {
@@ -44,7 +42,7 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
   end
 
   describe 'unevaluatedProperties error reporting' do
-    let(:clazz) { double(name: 'Cocina::Models::AdminPolicy', attribute_names: %i[cocinaVersion externalIdentifier label type version administrative]) }
+    let(:clazz) { double(name: 'Cocina::Models::AdminPolicy', attribute_names: %i[cocinaVersion externalIdentifier type version administrative]) }
     let(:props) { {} }
     let(:validator_double) { double('JSONSchema::Validator') } # rubocop:disable RSpec/VerifiedDoubles
     let(:evaluation_double) { double('evaluation', valid?: false) } # rubocop:disable RSpec/VerifiedDoubles
@@ -76,7 +74,7 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
       let(:details) do
         [
           unevaluated_detail(instance_location: '/administrative', unexpected: %w[releaseTags]),
-          unevaluated_detail(instance_location: '', unexpected: %w[externalIdentifier label type version administrative cocinaVersion]),
+          unevaluated_detail(instance_location: '', unexpected: %w[externalIdentifier type version administrative cocinaVersion]),
           false_schema_detail(instance_location: '/administrative'),
           false_schema_detail(instance_location: '/externalIdentifier')
         ]
@@ -97,7 +95,7 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
       let(:details) do
         [
           unevaluated_detail(instance_location: '/administrative/roles/0', unexpected: %w[bogusProperty]),
-          unevaluated_detail(instance_location: '', unexpected: %w[bogusRoot administrative externalIdentifier label type version]),
+          unevaluated_detail(instance_location: '', unexpected: %w[bogusRoot administrative externalIdentifier type version]),
           false_schema_detail(instance_location: '/administrative')
         ]
       end
@@ -115,7 +113,7 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
         [
           unevaluated_detail(instance_location: '/administrative/accessTemplate', unexpected: %w[unknownLeaf]),
           unevaluated_detail(instance_location: '/administrative/roles/0/members/0', unexpected: %w[unknownLeaf]),
-          unevaluated_detail(instance_location: '', unexpected: %w[bogusRoot administrative externalIdentifier label type version]),
+          unevaluated_detail(instance_location: '', unexpected: %w[bogusRoot administrative externalIdentifier type version]),
           false_schema_detail(instance_location: '/administrative')
         ]
       end
@@ -140,7 +138,6 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
     let(:policy) do
       Cocina::Models::AdminPolicy.new(
         externalIdentifier: 'druid:bc123df4567',
-        label: 'My admin policy',
         type: Cocina::Models::ObjectType.admin_policy,
         version: 1,
         administrative: {
@@ -161,7 +158,6 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
       Cocina::Models::AdminPolicy.new(
         cocinaVersion: '1.0.0',
         externalIdentifier: 'druid:bc123df4567',
-        label: 'My admin policy',
         type: Cocina::Models::ObjectType.admin_policy,
         version: 1,
         administrative: {
@@ -181,7 +177,6 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
     let(:props) do
       {
         externalIdentifier: 'druid:bc123df4567',
-        label: 'My admin policy',
         type: Cocina::Models::ObjectType.admin_policy,
         version: 1,
         administrative: {
@@ -201,7 +196,6 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
     let(:props) do
       {
         externalIdentifier: 'druid:bc123df4567',
-        label: 'My item',
         type: Cocina::Models::ObjectType.object,
         version: 1,
         description: {
@@ -231,7 +225,6 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
     let(:props) do
       {
         externalIdentifier: 'druid:bc123df4567',
-        label: 'My item',
         type: Cocina::Models::ObjectType.object,
         version: 1,
         description: {
@@ -297,7 +290,6 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
     let(:props) do
       {
         externalIdentifier: 'druid:abc123',
-        label: 'My admin policy',
         type: Cocina::Models::ObjectType.admin_policy,
         version: 1,
         administrative: {}
@@ -315,7 +307,6 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
     let(:props) do
       {
         externalIdentifier: 'druid:bc123df4567',
-        label: 'My item',
         type: Cocina::Models::ObjectType.book,
         version: 1,
         description: {
@@ -362,7 +353,6 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
     let(:props) do
       {
         externalIdentifier: 'druid:bc123df4567',
-        label: 'My item',
         type: Cocina::Models::ObjectType.book,
         version: 1,
         description: {
@@ -412,7 +402,6 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
       {
         type: 'https://cocina.sul.stanford.edu/models/image',
         externalIdentifier: 'druid:bb000kg4251',
-        label: 'Roger Howe Professorship',
         version: 3,
         description: {
           title: [{ value: 'Test DRO' }],
@@ -444,7 +433,6 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
     def dro_props(shelve:, sdr_preserve:, publish:) # rubocop:disable Metrics/MethodLength
       {
         externalIdentifier: 'druid:bc123df4567',
-        label: 'My item',
         type: Cocina::Models::ObjectType.object,
         version: 1,
         description: {

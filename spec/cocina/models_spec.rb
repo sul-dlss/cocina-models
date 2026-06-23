@@ -561,32 +561,6 @@ RSpec.describe Cocina::Models do
         end
       end
     end
-
-    context 'when label is not provided' do
-      context 'with a DRO type' do
-        let(:data) { build(:dro).to_h.except(:label) }
-
-        it 'defaults label to empty string' do
-          expect(model_build.label).to eq('')
-        end
-      end
-
-      context 'with a Collection type' do
-        let(:data) { build(:collection).to_h.except(:label) }
-
-        it 'defaults label to empty string' do
-          expect(model_build.label).to eq('')
-        end
-      end
-
-      context 'with an AdminPolicy type' do
-        let(:data) { build(:admin_policy).to_h.except(:label) }
-
-        it 'defaults label to empty string' do
-          expect(model_build.label).to eq('')
-        end
-      end
-    end
   end
 
   describe '.build_request' do
@@ -596,7 +570,6 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/exhibit',
-          'label' => 'bar',
           'version' => 1,
           'access' => {},
           'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
@@ -610,7 +583,6 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/image',
-          'label' => 'bar',
           'version' => 1,
           'identification' => {
             'sourceId' => 'sul:123'
@@ -626,7 +598,6 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/admin_policy',
-          'label' => 'bar',
           'version' => 1,
           'administrative' => {
             'hasAdminPolicy' => 'druid:bc123df4567',
@@ -643,7 +614,6 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           type: 'https://cocina.sul.stanford.edu/models/image',
-          label: 'bar',
           version: 1,
           identification: {
             sourceId: 'sul:123'
@@ -659,7 +629,6 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/book',
-          'label' => 'bar',
           'version' => 5,
           'identification' => {
             'sourceId' => 'sul:123'
@@ -702,7 +671,6 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/image',
-          'label' => 'bar',
           'version' => 1,
           'identification' => { 'sourceId' => 'sul:123' },
           'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' },
@@ -721,7 +689,6 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/image',
-          'label' => 'bar',
           'version' => 1,
           'identification' => { 'sourceId' => 'sul:123' },
           'administrative' => {
@@ -740,7 +707,6 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/image',
-          'label' => 'bar',
           'version' => 1,
           'identification' => { 'sourceId' => 'sul:123' },
           'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' },
@@ -757,7 +723,6 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/exhibit',
-          'label' => 'bar',
           'version' => 1,
           'access' => { 'view' => 'world', 'unexpectedNested' => 'nope' },
           'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
@@ -773,7 +738,6 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/exhibit',
-          'label' => 'bar',
           'version' => 1,
           'access' => {},
           'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' },
@@ -790,7 +754,6 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/admin_policy',
-          'label' => 'bar',
           'version' => 1,
           'administrative' => {
             'hasAdminPolicy' => 'druid:bc123df4567',
@@ -810,7 +773,6 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/admin_policy',
-          'label' => 'bar',
           'version' => 1,
           'administrative' => {
             'hasAdminPolicy' => 'druid:bc123df4567',

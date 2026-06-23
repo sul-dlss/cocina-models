@@ -9,7 +9,6 @@ RSpec.describe Cocina::Generator::SchemaValue do
     # RequestDRO.version is an integer
     let(:dro) do
       Cocina::Models::RequestDRO.new({
-                                       label: 'The Prince',
                                        type: Cocina::Models::ObjectType.book,
                                        version: 1,
                                        identification: { sourceId: 'sul:123' },
@@ -23,19 +22,20 @@ RSpec.describe Cocina::Generator::SchemaValue do
   end
 
   context 'when property is a string' do
-    # RequestDRO.label is an integer
-    let(:dro) do
-      Cocina::Models::RequestDRO.new({
-                                       label: 'The Blue and Brown Books',
-                                       type: Cocina::Models::ObjectType.book,
-                                       version: 1,
-                                       identification: { sourceId: 'sul:123' },
-                                       administrative: { hasAdminPolicy: 'druid:bc123df4567' }
-                                     }, false, false)
+    # RequestFile.label is a string
+    let(:file) do
+      Cocina::Models::RequestFile.new(
+        label: 'The Blue and Brown Books',
+        filename: 'blue_brown.pdf',
+        type: 'https://cocina.sul.stanford.edu/models/file',
+        version: 1,
+        administrative: { shelve: true, sdrPreserve: true },
+        hasMessageDigests: []
+      )
     end
 
     it 'maps to string' do
-      expect(dro.label).to eq('The Blue and Brown Books')
+      expect(file.label).to eq('The Blue and Brown Books')
     end
   end
 
@@ -187,7 +187,6 @@ RSpec.describe Cocina::Generator::SchemaValue do
   context 'when property is cocinaVersion' do
     let(:dro) do
       Cocina::Models::RequestDRO.new({
-                                       label: 'The Prince',
                                        type: Cocina::Models::ObjectType.book,
                                        version: 1,
                                        identification: { sourceId: 'sul:123' },

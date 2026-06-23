@@ -8,7 +8,6 @@ RSpec.describe Cocina::Models::Validatable do
     {
       type: Cocina::Models::ObjectType.object,
       version: 1,
-      label: 'DRO label',
       externalIdentifier: 'druid:bc123df4567',
       access: {},
       administrative: administrative_props,
@@ -73,7 +72,7 @@ RSpec.describe Cocina::Models::Validatable do
 
   context 'when validating a Validatable created from existing object' do
     it 'performs validation' do
-      Cocina::Models::DRO.new(props).new(label: 'My new DRO')
+      Cocina::Models::DRO.new(props).new(version: 2)
       expect(Cocina::Models::Validators::Validator).to have_received(:validate).with(Cocina::Models::DRO, props)
       expect(Cocina::Models::Validators::Validator).to have_received(:validate).with(Cocina::Models::Description, description_props)
     end
@@ -81,7 +80,7 @@ RSpec.describe Cocina::Models::Validatable do
 
   context 'when not validating a Validatable created from existing object' do
     it 'does not perform validation' do
-      Cocina::Models::DRO.new(props).new(label: 'My new DRO', validate: false)
+      Cocina::Models::DRO.new(props).new(version: 2, validate: false)
       expect(Cocina::Models::Validators::Validator).to have_received(:validate).with(Cocina::Models::DRO, props)
       expect(Cocina::Models::Validators::Validator).to have_received(:validate).with(Cocina::Models::Description, description_props)
     end

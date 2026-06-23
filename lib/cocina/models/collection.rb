@@ -22,8 +22,6 @@ module Cocina
       attribute :type, Types::Strict::String.enum(*Collection::TYPES)
       # example: druid:bc123df4567
       attribute :externalIdentifier, Druid
-      # Primary processing label (can be same as title) for a Collection.
-      attribute? :label, Types::Strict::String.default('')
       # Version for the Collection within SDR.
       attribute :version, Types::Strict::Integer
       # Access metadata for collections

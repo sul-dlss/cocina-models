@@ -18,7 +18,6 @@ module Cocina
       # example: 1.2.3
       attribute :cocinaVersion, CocinaVersion.default(VERSION)
       attribute :type, Types::Strict::String.enum(*RequestCollection::TYPES)
-      attribute :label, Types::Strict::String
       attribute :version, Types::Strict::Integer.default(1).enum(1)
       # Access metadata for collections
       attribute(:access, CollectionAccess.default { CollectionAccess.new })

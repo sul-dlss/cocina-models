@@ -12,7 +12,6 @@ RSpec.describe Cocina::Models::Validators::Validator do
     {
       type: Cocina::Models::ObjectType.object,
       version: 1,
-      label: 'DRO label',
       access: {},
       administrative: {hasAdminPolicy: 'druid:hv992ry2431'},
       description: {title: [{value: 'DRO title'}], purl: 'https://purl.stanford.edu/bc234fg5678'},
@@ -42,7 +41,6 @@ RSpec.describe Cocina::Models::Validators::Validator do
     {
       type: Cocina::Models::ObjectType.object,
       version: 1,
-      label: 'DRO label',
       access: {},
       administrative: {hasAdminPolicy: 'druid:hv992ry2431'},
       description: {title: [Cocina::Models::Title.new(value: 'DRO title')], purl: 'https://purl.stanford.edu/bc234fg5678'},

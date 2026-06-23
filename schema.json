@@ -106,10 +106,6 @@
         "externalIdentifier": {
           "$ref": "#/$defs/Druid"
         },
-        "label": {
-          "type": "string",
-          "default": ""
-        },
         "version": {
           "type": "integer"
         },
@@ -359,11 +355,6 @@
         "externalIdentifier": {
           "$ref": "#/$defs/Druid"
         },
-        "label": {
-          "description": "Primary processing label (can be same as title) for a Collection.",
-          "type": "string",
-          "default": ""
-        },
         "version": {
           "description": "Version for the Collection within SDR.",
           "type": "integer"
@@ -510,10 +501,14 @@
       "unevaluatedProperties": false,
       "anyOf": [
         {
-          "required": ["valueAt"]
+          "required": [
+            "valueAt"
+          ]
         },
         {
-          "required": ["name"],
+          "required": [
+            "name"
+          ],
           "properties": {
             "name": {
               "minItems": 1
@@ -521,7 +516,9 @@
           }
         },
         {
-          "required": ["identifier"],
+          "required": [
+            "identifier"
+          ],
           "properties": {
             "identifier": {
               "minItems": 1
@@ -606,10 +603,12 @@
       "example": "10.18735/0mw1-qq72"
     },
     "DROMixin": {
-      "description": "Domain-defined abstraction of a 'work'. Digital Repository Objects' abstraction is describable for our domain’s purposes, i.e. for management needs within our system.",
+      "description": "Domain-defined abstraction of a 'work'. Digital Repository Objects' abstraction is describable for our domain\u2019s purposes, i.e. for management needs within our system.",
       "type": "object",
       "properties": {
-        "cocinaVersion": { "$ref": "#/$defs/CocinaVersion" },
+        "cocinaVersion": {
+          "$ref": "#/$defs/CocinaVersion"
+        },
         "type": {
           "description": "The content type of the DRO. Selected from an established set of values.",
           "type": "string",
@@ -631,22 +630,31 @@
             "https://cocina.sul.stanford.edu/models/webarchive-seed"
           ]
         },
-        "externalIdentifier": { "$ref": "#/$defs/Druid" },
-        "label": {
-          "description": "Primary processing label (can be same as title) for a DRO.",
-          "type": "string",
-          "default": ""
+        "externalIdentifier": {
+          "$ref": "#/$defs/Druid"
         },
         "version": {
           "description": "Version for the DRO within SDR.",
           "type": "integer"
         },
-        "access": { "$ref": "#/$defs/DROAccess" },
-        "administrative": { "$ref": "#/$defs/Administrative" },
-        "description": { "$ref": "#/$defs/Description" },
-        "identification": { "$ref": "#/$defs/Identification" },
-        "structural": { "$ref": "#/$defs/DROStructural" },
-        "geographic": { "$ref": "#/$defs/Geographic" }
+        "access": {
+          "$ref": "#/$defs/DROAccess"
+        },
+        "administrative": {
+          "$ref": "#/$defs/Administrative"
+        },
+        "description": {
+          "$ref": "#/$defs/Description"
+        },
+        "identification": {
+          "$ref": "#/$defs/Identification"
+        },
+        "structural": {
+          "$ref": "#/$defs/DROStructural"
+        },
+        "geographic": {
+          "$ref": "#/$defs/Geographic"
+        }
       },
       "required": [
         "cocinaVersion",
@@ -661,7 +669,7 @@
       ]
     },
     "DRO": {
-      "description": "Domain-defined abstraction of a 'work'. Digital Repository Objects' abstraction is describable for our domain’s purposes, i.e. for management needs within our system.",
+      "description": "Domain-defined abstraction of a 'work'. Digital Repository Objects' abstraction is describable for our domain\u2019s purposes, i.e. for management needs within our system.",
       "type": "object",
       "allOf": [
         {
@@ -924,7 +932,9 @@
       "unevaluatedProperties": false,
       "anyOf": [
         {
-          "required": ["url"],
+          "required": [
+            "url"
+          ],
           "properties": {
             "url": {
               "minItems": 1
@@ -932,7 +942,9 @@
           }
         },
         {
-          "required": ["physicalLocation"],
+          "required": [
+            "physicalLocation"
+          ],
           "properties": {
             "physicalLocation": {
               "minItems": 1
@@ -940,7 +952,9 @@
           }
         },
         {
-          "required": ["digitalLocation"],
+          "required": [
+            "digitalLocation"
+          ],
           "properties": {
             "digitalLocation": {
               "minItems": 1
@@ -948,7 +962,9 @@
           }
         },
         {
-          "required": ["accessContact"],
+          "required": [
+            "accessContact"
+          ],
           "properties": {
             "accessContact": {
               "minItems": 1
@@ -956,7 +972,9 @@
           }
         },
         {
-          "required": ["digitalRepository"],
+          "required": [
+            "digitalRepository"
+          ],
           "properties": {
             "digitalRepository": {
               "minItems": 1
@@ -964,7 +982,9 @@
           }
         },
         {
-          "required": ["note"],
+          "required": [
+            "note"
+          ],
           "properties": {
             "note": {
               "minItems": 1
@@ -1027,7 +1047,9 @@
               "minItems": 1
             }
           },
-          "required": ["contributor"]
+          "required": [
+            "contributor"
+          ]
         },
         {
           "properties": {
@@ -1035,7 +1057,9 @@
               "minItems": 1
             }
           },
-          "required": ["event"]
+          "required": [
+            "event"
+          ]
         },
         {
           "properties": {
@@ -1043,7 +1067,9 @@
               "minItems": 1
             }
           },
-          "required": ["language"]
+          "required": [
+            "language"
+          ]
         },
         {
           "properties": {
@@ -1051,7 +1077,9 @@
               "minItems": 1
             }
           },
-          "required": ["note"]
+          "required": [
+            "note"
+          ]
         },
         {
           "properties": {
@@ -1059,7 +1087,9 @@
               "minItems": 1
             }
           },
-          "required": ["metadataStandard"]
+          "required": [
+            "metadataStandard"
+          ]
         },
         {
           "properties": {
@@ -1067,7 +1097,9 @@
               "minItems": 1
             }
           },
-          "required": ["identifier"]
+          "required": [
+            "identifier"
+          ]
         }
       ],
       "unevaluatedProperties": false
@@ -1156,16 +1188,24 @@
           },
           "anyOf": [
             {
-              "required": ["value"]
+              "required": [
+                "value"
+              ]
             },
             {
-              "required": ["code"]
+              "required": [
+                "code"
+              ]
             },
             {
-              "required": ["uri"]
+              "required": [
+                "uri"
+              ]
             },
             {
-              "required": ["identifier"],
+              "required": [
+                "identifier"
+              ],
               "properties": {
                 "identifier": {
                   "minItems": 1
@@ -1173,7 +1213,9 @@
               }
             },
             {
-              "required": ["note"],
+              "required": [
+                "note"
+              ],
               "properties": {
                 "note": {
                   "minItems": 1
@@ -1181,10 +1223,14 @@
               }
             },
             {
-              "required": ["valueAt"]
+              "required": [
+                "valueAt"
+              ]
             },
             {
-              "required": ["structuredValue"],
+              "required": [
+                "structuredValue"
+              ],
               "properties": {
                 "structuredValue": {
                   "minItems": 1
@@ -1192,7 +1238,9 @@
               }
             },
             {
-              "required": ["parallelValue"],
+              "required": [
+                "parallelValue"
+              ],
               "properties": {
                 "parallelValue": {
                   "minItems": 2
@@ -1200,7 +1248,9 @@
               }
             },
             {
-              "required": ["groupedValue"],
+              "required": [
+                "groupedValue"
+              ],
               "properties": {
                 "groupedValue": {
                   "minItems": 2
@@ -1232,7 +1282,9 @@
       "unevaluatedProperties": false,
       "anyOf": [
         {
-          "required": ["form"],
+          "required": [
+            "form"
+          ],
           "properties": {
             "form": {
               "minItems": 1
@@ -1240,7 +1292,9 @@
           }
         },
         {
-          "required": ["subject"],
+          "required": [
+            "subject"
+          ],
           "properties": {
             "subject": {
               "minItems": 1
@@ -1666,7 +1720,9 @@
       "unevaluatedProperties": false,
       "anyOf": [
         {
-          "required": ["date"],
+          "required": [
+            "date"
+          ],
           "properties": {
             "date": {
               "minItems": 1
@@ -1674,7 +1730,9 @@
           }
         },
         {
-          "required": ["contributor"],
+          "required": [
+            "contributor"
+          ],
           "properties": {
             "contributor": {
               "minItems": 1
@@ -1682,7 +1740,9 @@
           }
         },
         {
-          "required": ["location"],
+          "required": [
+            "location"
+          ],
           "properties": {
             "location": {
               "minItems": 1
@@ -1690,7 +1750,9 @@
           }
         },
         {
-          "required": ["identifier"],
+          "required": [
+            "identifier"
+          ],
           "properties": {
             "identifier": {
               "minItems": 1
@@ -1698,7 +1760,9 @@
           }
         },
         {
-          "required": ["note"],
+          "required": [
+            "note"
+          ],
           "properties": {
             "note": {
               "minItems": 1
@@ -1706,7 +1770,9 @@
           }
         },
         {
-          "required": ["structuredValue"],
+          "required": [
+            "structuredValue"
+          ],
           "properties": {
             "structuredValue": {
               "minItems": 1
@@ -1714,13 +1780,15 @@
           }
         },
         {
-          "required": ["parallelEvent"],
+          "required": [
+            "parallelEvent"
+          ],
           "properties": {
             "parallelEvent": {
               "minItems": 1
             }
           }
-        }        
+        }
       ]
     },
     "File": {
@@ -1745,7 +1813,9 @@
         "filename": {
           "description": "Filename for a file. Can be same as label.",
           "type": "string",
-          "not": { "pattern": "[\\n\\r]| $" }
+          "not": {
+            "pattern": "[\\n\\r]| $"
+          }
         },
         "size": {
           "description": "Size of the File (binary) in bytes.",
@@ -1836,13 +1906,27 @@
       ],
       "if": {
         "properties": {
-          "shelve": { "const": true }
+          "shelve": {
+            "const": true
+          }
         }
       },
       "then": {
         "anyOf": [
-          { "properties": { "sdrPreserve": { "const": true } } },
-          { "properties": { "publish": { "const": true } } }
+          {
+            "properties": {
+              "sdrPreserve": {
+                "const": true
+              }
+            }
+          },
+          {
+            "properties": {
+              "publish": {
+                "const": true
+              }
+            }
+          }
         ]
       },
       "unevaluatedProperties": false
@@ -2096,16 +2180,24 @@
       "unevaluatedProperties": false,
       "anyOf": [
         {
-          "required": ["value"]
+          "required": [
+            "value"
+          ]
         },
         {
-          "required": ["code"]
+          "required": [
+            "code"
+          ]
         },
         {
-          "required": ["uri"]
+          "required": [
+            "uri"
+          ]
         },
         {
-          "required": ["note"],
+          "required": [
+            "note"
+          ],
           "properties": {
             "note": {
               "minItems": 1
@@ -2113,7 +2205,9 @@
           }
         },
         {
-          "required": ["script"],
+          "required": [
+            "script"
+          ],
           "properties": {
             "script": {
               "minItems": 1
@@ -2121,10 +2215,14 @@
           }
         },
         {
-          "required": ["valueAt"]
+          "required": [
+            "valueAt"
+          ]
         },
         {
-          "required": ["structuredValue"],
+          "required": [
+            "structuredValue"
+          ],
           "properties": {
             "structuredValue": {
               "minItems": 1
@@ -2132,7 +2230,9 @@
           }
         },
         {
-          "required": ["parallelValue"],
+          "required": [
+            "parallelValue"
+          ],
           "properties": {
             "parallelValue": {
               "minItems": 2
@@ -2140,7 +2240,9 @@
           }
         },
         {
-          "required": ["groupedValue"],
+          "required": [
+            "groupedValue"
+          ],
           "properties": {
             "groupedValue": {
               "minItems": 2
@@ -2655,10 +2757,6 @@
             "https://cocina.sul.stanford.edu/models/admin_policy"
           ]
         },
-        "label": {
-          "type": "string",
-          "default": ""
-        },
         "version": {
           "type": "integer",
           "default": 1,
@@ -2676,7 +2774,6 @@
       "required": [
         "cocinaVersion",
         "administrative",
-        "label",
         "type",
         "version"
       ],
@@ -2716,10 +2813,6 @@
             "https://cocina.sul.stanford.edu/models/series"
           ]
         },
-        "label": {
-          "type": "string",
-          "default": ""
-        },
         "version": {
           "type": "integer",
           "default": 1,
@@ -2744,7 +2837,6 @@
         "cocinaVersion",
         "access",
         "administrative",
-        "label",
         "type",
         "version"
       ],
@@ -2777,10 +2869,6 @@
             "https://cocina.sul.stanford.edu/models/webarchive-seed"
           ]
         },
-        "label": {
-          "type": "string",
-          "default": ""
-        },
         "version": {
           "type": "integer",
           "default": 1,
@@ -2811,7 +2899,6 @@
         "cocinaVersion",
         "administrative",
         "identification",
-        "label",
         "type",
         "version"
       ],
@@ -2955,7 +3042,9 @@
         },
         "filename": {
           "type": "string",
-          "not": { "pattern": "[\\n\\r]| $" }
+          "not": {
+            "pattern": "[\\n\\r]| $"
+          }
         },
         "size": {
           "type": "integer"
@@ -3136,13 +3225,29 @@
         }
       },
       "anyOf": [
-        { "required": ["value"] },
-        { "required": ["code"] },
-        { "required": ["uri"] },
         {
-          "required": ["note"],
+          "required": [
+            "value"
+          ]
+        },
+        {
+          "required": [
+            "code"
+          ]
+        },
+        {
+          "required": [
+            "uri"
+          ]
+        },
+        {
+          "required": [
+            "note"
+          ],
           "properties": {
-            "note": { "minItems": 1 }
+            "note": {
+              "minItems": 1
+            }
           }
         }
       ],
@@ -3186,13 +3291,29 @@
         }
       },
       "anyOf": [
-        { "required": ["value"] },
-        { "required": ["code"] },
-        { "required": ["uri"] },
         {
-          "required": ["note"],
+          "required": [
+            "value"
+          ]
+        },
+        {
+          "required": [
+            "code"
+          ]
+        },
+        {
+          "required": [
+            "uri"
+          ]
+        },
+        {
+          "required": [
+            "note"
+          ],
           "properties": {
-            "note": { "minItems": 1 }
+            "note": {
+              "minItems": 1
+            }
           }
         }
       ],

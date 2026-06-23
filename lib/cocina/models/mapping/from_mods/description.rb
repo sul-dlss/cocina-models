@@ -11,20 +11,18 @@ module Cocina
 
           # @param [Nokogiri::XML] mods
           # @param [String] druid
-          # @oaram [String] label
           # @param [TitleBuilder] title_builder - defaults to Title class
           # @param [Cocina::Models::Mapping::ErrorNotifier] notifier
           # @return [Hash] a hash that can be mapped to a cocina descriptive model
-          def self.props(mods:, druid:, label:, title_builder: Title, notifier: nil)
-            new(title_builder: title_builder, mods: mods, druid: druid, label: label, notifier: notifier).props
+          def self.props(mods:, druid:, title_builder: Title, notifier: nil)
+            new(title_builder: title_builder, mods: mods, druid: druid, notifier: notifier).props
           end
 
-          def initialize(title_builder:, mods:, label:, druid:, notifier:)
+          def initialize(title_builder:, mods:, druid:, notifier:)
             @title_builder = title_builder
             @ng_xml = mods
             @notifier = notifier || ErrorNotifier.new(druid: druid)
             @druid = druid
-            @label = label
           end
 
           # @return [Hash] a hash that can be mapped to a cocina descriptive model
@@ -34,17 +32,15 @@ module Cocina
 
             check_altrepgroups
             check_version
-            props = DescriptionBuilder.build(title_builder: title_builder,
-                                             resource_element: ng_xml.root,
-                                             notifier: notifier,
-                                             purl: druid ? Cocina::Models::Mapping::Purl.for(druid: druid) : nil)
-            props[:title] = [{ value: label }] unless props.key?(:title)
-            props
+            DescriptionBuilder.build(title_builder: title_builder,
+                                     resource_element: ng_xml.root,
+                                     notifier: notifier,
+                                     purl: druid ? Cocina::Models::Mapping::Purl.for(druid: druid) : nil)
           end
 
           private
 
-          attr_reader :title_builder, :ng_xml, :notifier, :druid, :label
+          attr_reader :title_builder, :ng_xml, :notifier, :druid
 
           def check_altrepgroups
             ng_xml.xpath('//mods:*[@altRepGroup]', mods: DESC_METADATA_NS)
