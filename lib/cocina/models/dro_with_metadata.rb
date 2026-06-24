@@ -32,7 +32,7 @@ module Cocina
       # example: druid:bc123df4567
       attribute :externalIdentifier, Druid
       # Primary processing label (can be same as title) for a DRO.
-      attribute :label, Types::Strict::String
+      attribute? :label, Types::Strict::String.default('')
       # Version for the DRO within SDR.
       attribute :version, Types::Strict::Integer
       attribute(:access, DROAccess.default { DROAccess.new })
