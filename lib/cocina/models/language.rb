@@ -25,7 +25,7 @@ module Cocina
       # present for mapping to additional schemas in the future and for consistency but not
       # otherwise used
       attribute? :qualifier, Types::Strict::String
-      # Default value model for descriptive elements.
+      # Script in which the language element is written.
       attribute? :script, DescriptiveValue.optional
       # Property model for indicating the vocabulary, authority, or other origin for a term,
       # code, or identifier.

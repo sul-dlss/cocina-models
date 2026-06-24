@@ -173,6 +173,25 @@ RSpec.describe Cocina::Generator::SchemaValue do
     end
   end
 
+  context 'when property is an allOf with a named schema ref' do
+    # Language.script and DescriptiveValueLanguage.valueScript use allOf: [$ref: NamedSchema, constraint]
+    context 'when script is provided' do
+      let(:language) { Cocina::Models::Language.new(code: 'en', script: { code: 'Latn', source: { code: 'iso15924' } }) }
+
+      it 'accepts a DescriptiveValue' do
+        expect(language.script).to be_a(Cocina::Models::DescriptiveValue)
+      end
+    end
+
+    context 'when valueScript is provided' do
+      let(:language) { Cocina::Models::DescriptiveValueLanguage.new(valueScript: { code: 'Latn', source: { code: 'iso15924' } }) }
+
+      it 'accepts a Standard' do
+        expect(language.valueScript).to be_a(Cocina::Models::Standard)
+      end
+    end
+  end
+
   context 'when property is relaxed' do
     # Properties are relaxed when part of oneOf. This leaves the validation to openApi, rather than dry-struct.
     # Access.access and Access.location are constructed from a oneOf.

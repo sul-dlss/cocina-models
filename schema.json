@@ -1473,6 +1473,7 @@
           "$ref": "#/$defs/Source"
         },
         "valueScript": {
+          "description": "Property model for indicating the encoding, standard, or syntax to which a value conforms (e.g. RDA).",
           "allOf": [
             {
               "$ref": "#/$defs/Standard"
@@ -1986,6 +1987,7 @@
           "description": "present for mapping to additional schemas in the future and for consistency but not otherwise used"
         },
         "script": {
+          "description": "Script in which the language element is written.",
           "allOf": [
             {
               "$ref": "#/$defs/DescriptiveValue"

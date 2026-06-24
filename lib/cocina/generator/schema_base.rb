@@ -3,7 +3,7 @@
 module Cocina
   module Generator
     # Base class for generating from a JSON Schema
-    class SchemaBase
+    class SchemaBase # rubocop:disable Metrics/ClassLength
       attr_reader :schema_doc, :key, :required, :nullable, :parent, :relaxed, :schemas, :lite
 
       def initialize(schema_doc, key: nil, required: false, nullable: false, parent: nil, relaxed: false, schemas: [], lite: false)
@@ -86,6 +86,7 @@ module Cocina
         return doc.name if doc.name.present? && schemas.include?(doc.name)
 
         datatype_from_doc_names(doc) ||
+          datatype_from_doc_all_of(doc) ||
           datatype_from_doc_type(doc) ||
           raise("#{doc.type} not supported")
       end
@@ -109,6 +110,12 @@ module Cocina
         return unless defined_datatypes?(doc)
 
         doc.one_of.map(&:name).join(' | ')
+      end
+
+      def datatype_from_doc_all_of(doc)
+        return unless doc.all_of.present?
+
+        doc.all_of.find { |subschema| subschema.name.present? && schemas.include?(subschema.name) }&.name
       end
 
       def defined_datatypes?(doc)
