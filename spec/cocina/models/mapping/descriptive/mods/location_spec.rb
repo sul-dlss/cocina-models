@@ -100,6 +100,16 @@ RSpec.describe 'MODS location <--> cocina mappings' do
       let(:cocina) do
         {
           access: {
+            physicalLocation: [
+              {
+                value: 'Stanford University. Libraries. Department of Special Collections and University Archives',
+                uri: 'http://id.loc.gov/authorities/names/no2014019980',
+                source: {
+                  code: 'naf'
+                },
+                type: 'repository'
+              }
+            ],
             accessContact: [
               {
                 value: 'Stanford University. Libraries. Department of Special Collections and University Archives',
@@ -131,6 +141,27 @@ RSpec.describe 'MODS location <--> cocina mappings' do
       let(:cocina) do
         {
           access: {
+            physicalLocation: [
+              {
+                value: 'Stanford University. Libraries. Department of Special Collections and University Archives',
+                source: {
+                  code: 'naf'
+                },
+                type: 'repository',
+                valueLanguage: {
+                  code: 'eng',
+                  source: {
+                    code: 'iso639-2b'
+                  },
+                  valueScript: {
+                    code: 'Latn',
+                    source: {
+                      code: 'iso15924'
+                    }
+                  }
+                }
+              }
+            ],
             accessContact: [
               {
                 value: 'Stanford University. Libraries. Department of Special Collections and University Archives',
@@ -271,6 +302,16 @@ RSpec.describe 'MODS location <--> cocina mappings' do
         {
           purl: 'https://purl.stanford.edu/hf898mn6942',
           access: {
+            physicalLocation: [
+              {
+                value: 'Stanford University. Libraries',
+                uri: 'http://id.loc.gov/authorities/names/n81070667',
+                source: {
+                  code: 'naf'
+                },
+                type: 'repository'
+              }
+            ],
             accessContact: [
               {
                 value: 'Stanford University. Libraries',
@@ -397,6 +438,28 @@ RSpec.describe 'MODS location <--> cocina mappings' do
       let(:cocina) do
         {
           access: {
+            physicalLocation: [
+              {
+                value: 'Stanford University. Libraries. Department of Special Collections and University Archives',
+                uri: 'http://id.loc.gov/authorities/names/no2014019980',
+                source: {
+                  code: 'naf'
+                },
+                type: 'repository',
+                valueLanguage: {
+                  code: 'eng',
+                  source: {
+                    code: 'iso639-2b'
+                  },
+                  valueScript: {
+                    code: 'Latn',
+                    source: {
+                      code: 'iso15924'
+                    }
+                  }
+                }
+              }
+            ],
             accessContact: [
               {
                 value: 'Stanford University. Libraries. Department of Special Collections and University Archives',
@@ -419,6 +482,7 @@ RSpec.describe 'MODS location <--> cocina mappings' do
                 }
               }
             ]
+
           }
         }
       end
@@ -469,6 +533,16 @@ RSpec.describe 'MODS location <--> cocina mappings' do
                 source: {
                   code: 'naf'
                 }
+              }
+            ],
+            physicalLocation: [
+              {
+                value: 'Stanford University. Libraries. Department of Special Collections and University Archives.',
+                uri: 'http://id.loc.gov/authorities/names/no2014019980',
+                source: {
+                  code: 'naf'
+                },
+                type: 'repository'
               }
             ],
             digitalLocation: [
@@ -527,6 +601,15 @@ RSpec.describe 'MODS location <--> cocina mappings' do
               }
             ],
             physicalLocation: [
+              {
+                value: 'Stanford University. Libraries. Department of Special Collections and University Archives',
+                uri: 'http://id.loc.gov/authorities/names/no2014019980',
+                source: {
+                  uri: 'http://id.loc.gov/authorities/names/'
+                },
+                type: 'repository',
+                displayLabel: 'Repository'
+              },
               {
                 value: 'Call Number: SC0340, Accession 2005-101, Box: 51, Folder: 3'
               }
@@ -663,6 +746,15 @@ RSpec.describe 'MODS location <--> cocina mappings' do
               }
             ],
             physicalLocation: [
+              {
+                value: 'Stanford University. Libraries. Department of Special Collections and University Archives',
+                uri: 'http://id.loc.gov/authorities/names/no2014019980',
+                source: {
+                  code: 'naf',
+                  uri: 'http://id.loc.gov/authorities/names/'
+                },
+                type: 'repository'
+              },
               {
                 value: 'Box: 20, Folder: Engineering laboratories -- exterior -- #1',
                 type: 'location'
