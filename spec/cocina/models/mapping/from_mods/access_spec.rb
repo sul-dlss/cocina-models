@@ -35,6 +35,12 @@ RSpec.describe Cocina::Models::Mapping::FromMods::Access do
     it 'builds the cocina data structure' do
       expect(build).to eq(
         {
+          physicalLocation: [
+            {
+              value: 'Stanford University. Libraries. Department of Special Collections and University Archives',
+              type: 'repository'
+            }
+          ],
           accessContact: [
             {
               value: 'Stanford University. Libraries. Department of Special Collections and University Archives',
@@ -92,6 +98,15 @@ RSpec.describe Cocina::Models::Mapping::FromMods::Access do
           }
         ],
         physicalLocation: [
+          {
+            value: 'Stanford University. Libraries. Department of Special Collections and University Archives',
+            uri: 'http://id.loc.gov/authorities/names/no2014019980',
+            source: {
+              uri: 'http://id.loc.gov/authorities/names/'
+            },
+            type: 'repository',
+            displayLabel: 'Repository'
+          },
           {
             value: 'Call Number: SC0340, Accession 2005-101, Box: 51, Folder: 3'
           }

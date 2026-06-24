@@ -49,13 +49,13 @@ module Cocina
 
           def physical_location
             descriptive_value_for(resource_element.xpath(
-                                    "mods:location/mods:physicalLocation[not(@type='repository')][not(@type='discovery')]", mods: Description::DESC_METADATA_NS
+                                    "mods:location/mods:physicalLocation[not(contains(text(), '/')) and not(contains(text(), '\\'))]", mods: Description::DESC_METADATA_NS
                                   ))
           end
 
           def digital_location
             descriptive_value_for(resource_element.xpath(
-                                    "mods:location/mods:physicalLocation[(@type='discovery')]", mods: Description::DESC_METADATA_NS
+                                    "mods:location/mods:physicalLocation[contains(text(), '/') or contains(text(), '\\')]", mods: Description::DESC_METADATA_NS
                                   ))
           end
 
