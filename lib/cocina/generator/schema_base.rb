@@ -112,6 +112,9 @@ module Cocina
         doc.one_of.map(&:name).join(' | ')
       end
 
+      # When allOf is used at the property level, take the first known named schema (e.g. DescriptiveValue or Standard)
+      # Otherwise, the attribute in the model generated will be Types::Nominal::Any instead of the
+      # more restrictive DescriptiveValue. The other schema's constraint will get applied via schema.json validation.
       def datatype_from_doc_all_of(doc)
         return unless doc.all_of.present?
 

@@ -174,7 +174,7 @@ RSpec.describe Cocina::Generator::SchemaValue do
   end
 
   context 'when property is an allOf with a named schema ref' do
-    # Language.script and DescriptiveValueLanguage.valueScript use allOf: [$ref: NamedSchema, constraint]
+    # Language.script and DescriptiveValueLanguage.valueScript use allOf: with a DescriptiveValue and a constraint
     context 'when script is provided' do
       let(:language) { Cocina::Models::Language.new(code: 'en', script: { code: 'Latn', source: { code: 'iso15924' } }) }
 
