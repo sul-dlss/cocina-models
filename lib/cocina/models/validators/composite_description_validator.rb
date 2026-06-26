@@ -19,7 +19,8 @@ module Cocina
           DescriptionLocationSourceCodeVisitorValidator,
           DescriptionTitleSourceCodeVisitorValidator,
           DescriptionLanguageUriVisitorValidator,
-          DescriptionLanguageSourceCodeVisitorValidator
+          DescriptionLanguageSourceCodeVisitorValidator,
+          DescriptionScriptVisitorValidator
         ].freeze
 
         def self.validate(clazz, attributes)
