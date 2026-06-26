@@ -53,7 +53,7 @@ RSpec.describe Cocina::Models::Description do
       expect(language.value).to eq('English')
       expect(language.code).to eq('eng')
       expect(language.uri).to eq('http://id.loc.gov/vocabulary/iso639-2/eng')
-      expect(language.source.code).to eq('iso239-2b')
+      expect(language.source.code).to eq('iso639-2b')
       expect(language.source.uri).to eq('http://id.loc.gov/vocabulary/iso639-2')
 
       expect(item.note.size).to eq(4)
