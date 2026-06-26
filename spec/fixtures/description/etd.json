@@ -416,7 +416,7 @@
       "code": "eng",
       "uri": "http://id.loc.gov/vocabulary/iso639-2/eng",
       "source": {
-        "code": "iso639-2b",
+        "code": "iso239-2b",
         "uri": "http://id.loc.gov/vocabulary/iso639-2"
       }
     }
@@ -574,7 +574,7 @@
         "code": "eng",
         "uri": "http://id.loc.gov/vocabulary/iso639-2/eng",
         "source": {
-          "code": "iso639-2b",
+          "code": "iso239-2b",
           "uri": "http://id.loc.gov/vocabulary/iso639-2"
         }
       }
