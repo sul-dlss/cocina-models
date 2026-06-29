@@ -4,7 +4,6 @@ module Cocina
   module Models
     # Default value model for descriptive elements.
     class DescriptiveValue < Struct
-      attribute :appliesTo, Types::Strict::Array.of(DescriptiveBasicValue).default([].freeze)
       attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute :parallelValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute :groupedValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
@@ -41,6 +40,7 @@ module Cocina
       attribute? :valueLanguage, DescriptiveValueLanguage.optional
       # URL or other pointer to the location of the value of the descriptive element.
       attribute? :valueAt, Types::Strict::String
+      attribute :appliesTo, Types::Strict::Array.of(DescriptiveBasicValue).default([].freeze)
     end
   end
 end
