@@ -4,12 +4,12 @@ module Cocina
   module Models
     module Validators
       # Validates language.script and valueLanguage.valueScript:
+      #   - source.code, when present, must be 'iso15924' (case-insensitive)
       #   - code must be a recognized ISO 15924 script code (when source.code is 'iso15924')
       class DescriptionScriptVisitorValidator < BaseDescriptionVisitorValidator
         def validate!
-          return if error_paths.empty?
-
-          raise ValidationError, "Unrecognized script codes in description: #{error_paths.join(', ')}"
+          raise ValidationError, "Unrecognized script source codes in description: #{source_error_paths.join(', ')}" if source_error_paths.any?
+          raise ValidationError, "Unrecognized script codes in description: #{error_paths.join(', ')}" if error_paths.any?
         end
 
         def visit_hash(hash:, path:)
@@ -24,6 +24,10 @@ module Cocina
 
         def error_paths
           @error_paths ||= []
+        end
+
+        def source_error_paths
+          @source_error_paths ||= []
         end
 
         # Matches entries in a language array (e.g., [:language, 0] or [:adminMetadata, :language, 0]).
@@ -44,8 +48,13 @@ module Cocina
           script = hash[key]
           return unless script
 
-          source_code = script.dig(:source, :code)&.downcase
-          return unless source_code == 'iso15924'
+          source_code = script.dig(:source, :code)
+          return unless source_code
+
+          unless source_code.downcase == 'iso15924'
+            source_error_paths << "#{path_to_s(path)}.#{key}.source.code (#{source_code})"
+            return
+          end
 
           code = script[:code]
           return unless code
