@@ -56,6 +56,17 @@ RSpec.describe Cocina::Models::Validators::DescriptionScriptVisitorValidator do
         expect { validate }.not_to raise_error
       end
     end
+
+    context 'when language script has an invalid source code' do
+      let(:props) { base_props.merge(language: [{ code: 'eng', script: { code: 'Latn', source: { code: 'iso' } } }]) }
+
+      it 'raises ValidationError with path and source code' do
+        expect { validate }.to raise_error(
+          Cocina::Models::ValidationError,
+          'Unrecognized script source codes in description: language1.script.source.code (iso)'
+        )
+      end
+    end
   end
 
   describe 'valueLanguage valueScript source.code validation' do
@@ -102,8 +113,11 @@ RSpec.describe Cocina::Models::Validators::DescriptionScriptVisitorValidator do
     context 'when title valueLanguage valueScript has a non-iso15924 source code' do
       let(:props) { base_props.merge(title: [{ value: 'Test Title', valueLanguage: { code: 'Aaaa', valueScript: { code: 'Latn', source: { code: 'iso' } } } }]) }
 
-      it 'does not raise' do
-        expect { validate }.not_to raise_error
+      it 'raises ValidationError with path and source code' do
+        expect { validate }.to raise_error(
+          Cocina::Models::ValidationError,
+          'Unrecognized script source codes in description: title1.valueLanguage.valueScript.source.code (iso)'
+        )
       end
     end
   end
