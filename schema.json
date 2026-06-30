@@ -253,6 +253,28 @@
         }
       ]
     },
+    "AppliesTo": {
+      "description": "Value model for appliesTo property.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/DescriptiveBasicValue"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "identifier": {
+              "description": "Identifiers and URIs associated with the descriptive element.",
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DescriptiveIdentifier"
+              }
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
     "BusinessBarcode": {
       "description": "The barcode associated with a business library DRO, prefixed with 2050",
       "type": "string",
@@ -1067,7 +1089,7 @@
       "unevaluatedProperties": false
     },
     "DescriptiveBasicValue": {
-      "description": "Basic value model for descriptive elements. Can only have one of value, parallelValue, groupedValue, or structuredValue.",
+      "description": "Basic value model for descriptive elements. Can only have one of value, parallelValue, groupedValue, or structuredValue. Does not have identifier or appliesTo properties.",
       "type": "object",
       "allOf": [
         {
@@ -1111,13 +1133,6 @@
             },
             "encoding": {
               "$ref": "#/$defs/Standard"
-            },
-            "identifier": {
-              "description": "Identifiers and URIs associated with the descriptive element.",
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/DescriptiveIdentifier"
-              }
             },
             "source": {
               "$ref": "#/$defs/Source"
@@ -1343,6 +1358,27 @@
         }
       }
     },
+    "DescriptiveIdentifier": {
+      "description": "Default value model for identifiers.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/DescriptiveBasicValue"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "appliesTo": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/AppliesTo"
+              }
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
     "DescriptiveValue": {
       "description": "Default value model for descriptive elements.",
       "type": "object",
@@ -1356,7 +1392,14 @@
             "appliesTo": {
               "type": "array",
               "items": {
-                "$ref": "#/$defs/DescriptiveBasicValue"
+                "$ref": "#/$defs/AppliesTo"
+              }
+            },
+            "identifier": {
+              "description": "Identifiers and URIs associated with the descriptive element.",
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/DescriptiveIdentifier"
               }
             }
           }
@@ -1846,7 +1889,7 @@
         "appliesTo": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/DescriptiveBasicValue"
+            "$ref": "#/$defs/AppliesTo"
           }
         },
         "code": {
