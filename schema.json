@@ -107,7 +107,8 @@
           "$ref": "#/$defs/Druid"
         },
         "label": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "version": {
           "type": "integer"
@@ -123,7 +124,6 @@
         "cocinaVersion",
         "administrative",
         "externalIdentifier",
-        "label",
         "type",
         "version"
       ]
@@ -361,7 +361,8 @@
         },
         "label": {
           "description": "Primary processing label (can be same as title) for a Collection.",
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "version": {
           "description": "Version for the Collection within SDR.",
@@ -384,7 +385,6 @@
         "cocinaVersion",
         "description",
         "externalIdentifier",
-        "label",
         "type",
         "version",
         "access",
@@ -634,7 +634,8 @@
         "externalIdentifier": { "$ref": "#/$defs/Druid" },
         "label": {
           "description": "Primary processing label (can be same as title) for a DRO.",
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "version": {
           "description": "Version for the DRO within SDR.",
@@ -653,7 +654,6 @@
         "administrative",
         "description",
         "externalIdentifier",
-        "label",
         "type",
         "version",
         "identification",
@@ -2656,7 +2656,8 @@
           ]
         },
         "label": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "version": {
           "type": "integer",
@@ -2716,7 +2717,8 @@
           ]
         },
         "label": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "version": {
           "type": "integer",
@@ -2776,7 +2778,8 @@
           ]
         },
         "label": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "version": {
           "type": "integer",
