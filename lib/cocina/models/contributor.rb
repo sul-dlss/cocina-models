@@ -16,7 +16,7 @@ module Cocina
       # Relationships of the contributor to the resource or to an event in its history.
       attribute :role, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # Identifiers and URIs associated with the contributor entity.
-      attribute :identifier, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
+      attribute :identifier, Types::Strict::Array.of(DescriptiveIdentifier).default([].freeze)
       # Institutional or other affiliation associated with a contributor.
       attribute :affiliation, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # Other information associated with the contributor.

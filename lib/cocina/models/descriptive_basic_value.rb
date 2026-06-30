@@ -26,7 +26,7 @@ module Cocina
       # conforms (e.g. RDA).
       attribute? :encoding, Standard.optional
       # Identifiers and URIs associated with the descriptive element.
-      attribute :identifier, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
+      attribute :identifier, Types::Strict::Array.of(DescriptiveIdentifier).default([].freeze)
       # Property model for indicating the vocabulary, authority, or other origin for a term,
       # code, or identifier.
       attribute? :source, Source.optional

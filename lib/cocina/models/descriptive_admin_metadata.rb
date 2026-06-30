@@ -15,7 +15,7 @@ module Cocina
       # Descriptive or content standard(s) to which this resource description conforms.
       attribute :metadataStandard, Types::Strict::Array.of(Standard).default([].freeze)
       # Identifiers associated with this resource description.
-      attribute :identifier, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
+      attribute :identifier, Types::Strict::Array.of(DescriptiveIdentifier).default([].freeze)
     end
   end
 end
