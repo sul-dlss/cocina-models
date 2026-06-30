@@ -2656,7 +2656,8 @@
           ]
         },
         "label": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "version": {
           "type": "integer",
@@ -2716,7 +2717,8 @@
           ]
         },
         "label": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "version": {
           "type": "integer",
@@ -2776,7 +2778,8 @@
           ]
         },
         "label": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "version": {
           "type": "integer",
