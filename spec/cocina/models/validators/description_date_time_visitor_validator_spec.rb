@@ -18,7 +18,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionDateTimeVisitorValidator d
     end
   end
 
-  context 'when no dates of validatable type present' do
+  context 'when marc date with valid value present' do
     let(:props) do
       {
         event: [
@@ -72,6 +72,8 @@ RSpec.describe Cocina::Models::Validators::DescriptionDateTimeVisitorValidator d
       ['w3cdtf', '1997-07-16T19:20+01:00', true],
       ['w3cdtf', '1997-07-16T19:20:30+01:00', true],
       ['w3cdtf', '1997-07-16T19:20:30.45+01:00', true],
+      # MARC cases covered by the MarcDateValidator tests
+      ['marc', '1963', true],
       # Type-specific cases
       ['edtf', '-3999', true],
       ['iso8601', '-3999', false],

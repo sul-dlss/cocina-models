@@ -7,7 +7,7 @@ module Cocina
     module Validators
       # Validates that dates of known types are type-valid using the visitor pattern.
       class DescriptionDateTimeVisitorValidator < BaseDescriptionVisitorValidator
-        VALIDATABLE_TYPES = %w[edtf iso8601 w3cdtf].freeze
+        VALIDATABLE_TYPES = %w[edtf iso8601 marc w3cdtf].freeze
         VALID_ENCODING_CODES = %w[edtf iso8601 marc temper w3cdtf].freeze
 
         def visit_hash(hash:, path:) # rubocop:disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
@@ -134,6 +134,10 @@ module Cocina
 
         def valid_w3cdtf?(value)
           W3cdtfValidator.validate(value)
+        end
+
+        def valid_marc?(value)
+          MarcDateValidator.validate(value)
         end
       end
     end
