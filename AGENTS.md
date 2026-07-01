@@ -167,7 +167,7 @@ Generate a short kebab-case slug summarizing the query (e.g., `invalid-encoding`
 
 The comment lines must use `#` so the file remains valid jq syntax. When resuming (Step 2 resume path), parse these comment sections by their labels to reconstruct the inputs.
 
-Find the most recent `.jsonl.xz` file in the project root by listing `*.jsonl.xz` files sorted by name descending and taking the first result.
+Find the most recent `.jsonl.zst` file in the project root by listing `*.jsonl.zst` files sorted by name descending and taking the first result.
 
 ### Step 8 — Output
 
@@ -178,7 +178,7 @@ Present:
 4. A ready-to-run shell snippet:
 
 ```
-xzcat <most-recent .jsonl.xz filename> \
+zstdcat <most-recent .jsonl.zst filename> \
   | pv -l -s 5500000 \
   | parallel -j$(sysctl -n hw.logicalcpu) --pipe --block 50M --recend '\n' \
               jq -rcf <slug>.jq.txt \

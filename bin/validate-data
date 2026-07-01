@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-# Validate JSONL (XZ compressed) files against the schema
+# Validate JSONL (zstd compressed) files against the schema
 
 # Trap Ctrl+C to exit gracefully
 Signal.trap('INT') do
@@ -65,7 +65,7 @@ end
 # Count lines in the file
 def count_lines(filename)
   count = 0
-  IO.popen(['xzcat', filename]) do |io|
+  IO.popen(['zstdcat', filename]) do |io|
     io.each_line { count += 1 }
   end
   count
@@ -73,7 +73,7 @@ end
 
 # Get total line count (either from option or by counting)
 def get_total_lines(filename, provided_count)
-  count_filename = filename.sub(/\.xz$/, '.count.txt')
+  count_filename = filename.sub(/\.zst$/, '.count.txt')
   if provided_count
     puts "Using provided line count: #{provided_count}"
     provided_count
@@ -183,7 +183,7 @@ def distribute_work(filename, workers, batch_size, total_lines) # rubocop:disabl
     throttle_rate: 0.1
   )
 
-  IO.popen(['xzcat', filename]) do |io|
+  IO.popen(['zstdcat', filename]) do |io|
     io.each_line do |line|
       line_number += 1
       batch << [line_number, line]
