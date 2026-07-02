@@ -14,7 +14,7 @@ module Cocina
       # example: 1.2.3
       attribute :cocinaVersion, CocinaVersion.default(VERSION)
       attribute :type, Types::Strict::String.enum(*RequestAdminPolicy::TYPES)
-      attribute :label, Types::Strict::String
+      attribute? :label, Types::Strict::String.default('')
       attribute :version, Types::Strict::Integer.default(1).enum(1)
       # Administrative properties for an AdminPolicy
       attribute(:administrative, AdminPolicyAdministrative.default { AdminPolicyAdministrative.new })
