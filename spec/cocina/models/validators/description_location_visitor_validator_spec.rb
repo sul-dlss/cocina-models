@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Cocina::Models::Validators::DescriptionLocationSourceCodeVisitorValidator do
+RSpec.describe Cocina::Models::Validators::DescriptionLocationVisitorValidator do
   let(:clazz) { Cocina::Models::Description }
   let(:validate) { Cocina::Models::Validators::CompositeDescriptionValidator.new(clazz, props, validators: [described_class]).validate }
 
@@ -101,6 +101,70 @@ RSpec.describe Cocina::Models::Validators::DescriptionLocationSourceCodeVisitorV
       expect { validate }.to raise_error(
         Cocina::Models::ValidationError,
         'Unrecognized location source codes in description: location1.source.code (invalid)'
+      )
+    end
+  end
+
+  describe 'when location has marccountry source with a valid country code' do
+    let(:props) { base_props.merge(location: [{ code: 'cau', source: { code: 'marccountry' } }]) }
+
+    it 'does not raise' do
+      expect { validate }.not_to raise_error
+    end
+  end
+
+  describe 'when location has marccountry source with a valid country code (case-insensitive)' do
+    let(:props) { base_props.merge(location: [{ code: 'CAU', source: { code: 'marccountry' } }]) }
+
+    it 'does not raise' do
+      expect { validate }.not_to raise_error
+    end
+  end
+
+  describe 'when location has marccountry source with no country code' do
+    let(:props) { base_props.merge(location: [{ value: 'California', source: { code: 'marccountry' } }]) }
+
+    it 'does not raise' do
+      expect { validate }.not_to raise_error
+    end
+  end
+
+  describe 'when location has marccountry source with an invalid country code' do
+    let(:props) { base_props.merge(location: [{ code: 'zzz', source: { code: 'marccountry' } }]) }
+
+    it 'raises ValidationError with path and code' do
+      expect { validate }.to raise_error(
+        Cocina::Models::ValidationError,
+        'Invalid MARC country codes in description: location1.code (zzz)'
+      )
+    end
+  end
+
+  describe 'when location has non-marccountry source with a code value' do
+    let(:props) { base_props.merge(location: [{ code: 'anything', source: { code: 'iso3166' } }]) }
+
+    it 'does not validate the code value and does not raise' do
+      expect { validate }.not_to raise_error
+    end
+  end
+
+  describe 'when location nested in relatedResource has marccountry source with an invalid country code' do
+    let(:props) do
+      base_props.merge(
+        relatedResource: [
+          {
+            location: [
+              { code: 'zz', source: { code: 'marccountry' } }
+            ]
+          }
+        ]
+      )
+    end
+
+    it 'raises ValidationError with nested path' do
+      expect { validate }.to raise_error(
+        Cocina::Models::ValidationError,
+        'Invalid MARC country codes in description: relatedResource1.location1.code (zz)'
       )
     end
   end
