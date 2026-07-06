@@ -413,7 +413,7 @@ RSpec.describe 'MODS relatedItem <--> cocina mappings' do
     end
   end
 
-  describe 'Related item with related item' do
+  describe 'Related item with nested related item is dropped' do
     it_behaves_like 'MODS cocina mapping' do
       let(:mods) do
         <<~XML
@@ -438,17 +438,6 @@ RSpec.describe 'MODS relatedItem <--> cocina mappings' do
               title: [
                 {
                   value: '[Unidentified sextet] [incomplete]'
-                }
-              ],
-              relatedResource: [
-                {
-                  type: 'part of',
-                  displayLabel: 'Concert title',
-                  title: [
-                    {
-                      value: 'Silver Saturday Blues'
-                    }
-                  ]
                 }
               ]
             }

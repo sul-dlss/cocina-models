@@ -37,8 +37,10 @@ module Cocina
             @notifier = notifier
           end
 
+          # @param [Boolean] include_related_resource whether to map nested relatedItem elements;
+          #   false when building a relatedItem, since RelatedResource cannot itself nest a relatedResource
           # @return [Hash] a hash that can be mapped to a cocina description model
-          def build(resource_element:, purl: nil, require_title: true)
+          def build(resource_element:, purl: nil, require_title: true, include_related_resource: true)
             cocina_description = {}
             title_result = @title_builder.build(resource_element: resource_element, require_title: require_title,
                                                 notifier: notifier)
@@ -47,7 +49,8 @@ module Cocina
             purl_value = purl || Purl.primary_purl_value(resource_element, purl)
             cocina_description[:purl] = purl_value if purl_value
 
-            BUILDERS.each do |description_property, builder|
+            builders = include_related_resource ? BUILDERS : BUILDERS.except(:relatedResource)
+            builders.each do |description_property, builder|
               result = builder.build(resource_element: resource_element, description_builder: self,
                                      purl: purl_value)
               cocina_description.merge!(description_property => result) if result.present?

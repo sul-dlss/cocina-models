@@ -80,7 +80,8 @@ module Cocina
           end
 
           def build_related_item(related_item)
-            description_builder.build(resource_element: related_item, require_title: false).tap do |item|
+            description_builder.build(resource_element: related_item, require_title: false,
+                                      include_related_resource: false).tap do |item|
               item[:displayLabel] = related_item['displayLabel']
               if related_item['type']
                 item[:type] = normalized_type_for(related_item['type'])

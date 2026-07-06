@@ -2502,13 +2502,6 @@
         "access": {
           "$ref": "#/$defs/DescriptiveAccessMetadata"
         },
-        "relatedResource": {
-          "description": "Other resources associated with the related resource.",
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/RelatedResource"
-          }
-        },
         "adminMetadata": {
           "$ref": "#/$defs/DescriptiveAdminMetadata"
         },

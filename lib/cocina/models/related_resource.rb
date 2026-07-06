@@ -38,8 +38,6 @@ module Cocina
       attribute? :purl, Purl.optional
       # Information about how to access digital and physical versions of the object.
       attribute? :access, DescriptiveAccessMetadata.optional
-      # Other resources associated with the related resource.
-      attribute :relatedResource, Types::Strict::Array.of(RelatedResource).default([].freeze)
       # Information about this resource description.
       attribute? :adminMetadata, DescriptiveAdminMetadata.optional
       # The version of the related resource.
