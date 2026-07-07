@@ -48,7 +48,6 @@ module Cocina
         type: Cocina::Models::ObjectType.object,
         id: 'druid:bc234fg5678',
         version: 1,
-        label: 'factory DRO label',
         title: 'factory DRO title',
         source_id: 'sul:1234',
         admin_policy_id: 'druid:hv992ry2431'
@@ -60,7 +59,6 @@ module Cocina
         type: Cocina::Models::ObjectType.collection,
         id: 'druid:bb222ff5555',
         version: 1,
-        label: 'factory collection label',
         title: 'factory collection title',
         admin_policy_id: 'druid:hv992ry2431',
         source_id: 'sulcollection:1234'
@@ -72,7 +70,6 @@ module Cocina
         type: Cocina::Models::ObjectType.admin_policy,
         id: 'druid:cb432gf8765',
         version: 1,
-        label: 'factory APO label',
         title: 'factory APO title',
         admin_policy_id: 'druid:hv992ry2431',
         agreement_id: 'druid:hp308wm0436'
@@ -97,12 +94,11 @@ module Cocina
       end
 
       # rubocop:disable Metrics/ParameterLists
-      def self.build_request_dro_properties(type:, version:, label:, title:, source_id:, admin_policy_id:,
+      def self.build_request_dro_properties(type:, version:, title:, source_id:, admin_policy_id:,
                                             barcode: nil, catkeys: [], folio_instance_hrids: [], collection_ids: [])
         {
           type: type,
           version: version,
-          label: label,
           access: {},
           administrative: { hasAdminPolicy: admin_policy_id },
           description: {
@@ -143,12 +139,11 @@ module Cocina
       end
 
       # rubocop:disable Metrics/ParameterLists
-      def self.build_request_collection_properties(type:, version:, label:, title:, admin_policy_id:, source_id: nil,
+      def self.build_request_collection_properties(type:, version:, title:, admin_policy_id:, source_id: nil,
                                                    catkeys: [], folio_instance_hrids: [])
         {
           type: type,
           version: version,
-          label: label,
           access: {},
           administrative: { hasAdminPolicy: admin_policy_id },
           description: {
@@ -204,7 +199,7 @@ module Cocina
       end
 
       # rubocop:disable Metrics/ParameterLists
-      def self.build_request_admin_policy_properties(type:, version:, label:, title:,
+      def self.build_request_admin_policy_properties(type:, version:, title:,
                                                      admin_policy_id:, agreement_id:,
                                                      use_statement: nil, copyright: nil, license: nil,
                                                      registration_workflow: nil, collections_for_registration: nil,
@@ -212,7 +207,6 @@ module Cocina
         {
           type: type,
           version: version,
-          label: label,
           administrative: {
             hasAdminPolicy: admin_policy_id,
             hasAgreement: agreement_id,
