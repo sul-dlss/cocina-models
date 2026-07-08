@@ -3,7 +3,7 @@
 module Cocina
   module Models
     # Basic value model for descriptive elements. Can only have one of value, parallelValue,
-    # groupedValue, or structuredValue.
+    # groupedValue, or structuredValue. Does not have identifier or appliesTo properties.
     class DescriptiveBasicValue < Struct
       attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute :parallelValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
@@ -25,8 +25,6 @@ module Cocina
       # Property model for indicating the encoding, standard, or syntax to which a value
       # conforms (e.g. RDA).
       attribute? :encoding, Standard.optional
-      # Identifiers and URIs associated with the descriptive element.
-      attribute :identifier, Types::Strict::Array.of(DescriptiveIdentifier).default([].freeze)
       # Property model for indicating the vocabulary, authority, or other origin for a term,
       # code, or identifier.
       attribute? :source, Source.optional

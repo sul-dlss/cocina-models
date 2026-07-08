@@ -3,7 +3,6 @@
 module Cocina
   module Models
     class Title < Struct
-      attribute :appliesTo, Types::Strict::Array.of(DescriptiveBasicValue).default([].freeze)
       attribute :structuredValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute :parallelValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       attribute :groupedValue, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
@@ -24,8 +23,6 @@ module Cocina
       # Property model for indicating the encoding, standard, or syntax to which a value
       # conforms (e.g. RDA).
       attribute? :encoding, Standard.optional
-      # Identifiers and URIs associated with the descriptive element.
-      attribute :identifier, Types::Strict::Array.of(DescriptiveIdentifier).default([].freeze)
       # Property model for indicating the vocabulary, authority, or other origin for a term,
       # code, or identifier.
       attribute? :source, Source.optional
@@ -40,6 +37,9 @@ module Cocina
       attribute? :valueLanguage, DescriptiveValueLanguage.optional
       # URL or other pointer to the location of the value of the descriptive element.
       attribute? :valueAt, Types::Strict::String
+      attribute :appliesTo, Types::Strict::Array.of(AppliesTo).default([].freeze)
+      # Identifiers and URIs associated with the descriptive element.
+      attribute :identifier, Types::Strict::Array.of(DescriptiveIdentifier).default([].freeze)
     end
   end
 end
