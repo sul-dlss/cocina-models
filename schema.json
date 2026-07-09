@@ -1126,7 +1126,8 @@
             },
             "uri": {
               "description": "URI value of the descriptive element.",
-              "type": "string"
+              "type": "string",
+              "format": "uri"
             },
             "standard": {
               "$ref": "#/$defs/Standard"
@@ -1352,7 +1353,8 @@
         },
         "uri": {
           "description": "URI for the standard or encoding.",
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         },
         "value": {
           "description": "String describing the standard or encoding.",
@@ -1877,7 +1879,8 @@
         },
         "uri": {
           "description": "URI value of the descriptive element.",
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         },
         "value": {
           "description": "Value of the descriptive element.",
@@ -2996,7 +2999,8 @@
         },
         "uri": {
           "description": "URI for the value source.",
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         },
         "value": {
           "description": "String describing the value source.",
@@ -3043,7 +3047,8 @@
         },
         "uri": {
           "description": "URI for the standard or encoding.",
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         },
         "value": {
           "description": "String describing the standard or encoding.",
