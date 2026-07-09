@@ -36,7 +36,8 @@ module Cocina
         # @return [JSONSchema validator] a cached per-definition validator
         def self.validator_for(def_name)
           @validators ||= {}
-          @validators[def_name] ||= JSONSchema.validator_for({ '$ref' => "#/$defs/#{def_name}", '$defs' => document['$defs'] })
+          schema = { '$ref' => "#/$defs/#{def_name}", '$defs' => document['$defs'] }
+          @validators[def_name] ||= JSONSchema.validator_for(schema, validate_formats: true)
         end
 
         # @return [Hash] a hash representation of the schema.json document
