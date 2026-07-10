@@ -237,7 +237,7 @@ RSpec.describe Cocina::Models do
 
           it 'rejects the relatedResource entry' do
             expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                  %r{"title" is a required property at /description/relatedResource})
+                                                  %r{/description/relatedResource/0 needs to include at least one of the following: title, contributor, event, note, identifier, valueAt, purl, access})
           end
         end
 
@@ -246,7 +246,7 @@ RSpec.describe Cocina::Models do
 
           it 'rejects the relatedResource entry' do
             expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                  %r{has less than 1 item at /description/relatedResource/0/title})
+                                                  %r{/description/relatedResource/0/title is empty but should have at least 1 item; /description/relatedResource/0 needs to include at least one of the following: contributor, event, note, identifier, valueAt, purl, access})
           end
         end
 
@@ -255,7 +255,7 @@ RSpec.describe Cocina::Models do
 
           it 'rejects the relatedResource entry' do
             expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                  %r{has less than 1 item at /description/relatedResource/0/contributor})
+                                                  %r{/description/relatedResource/0 needs to include at least one of the following: title, event, note, identifier, valueAt, purl, access; /description/relatedResource/0/contributor is empty but should have at least 1 item})
           end
         end
 
@@ -264,7 +264,7 @@ RSpec.describe Cocina::Models do
 
           it 'rejects the relatedResource entry' do
             expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                  %r{has less than 1 item at /description/relatedResource/0/event})
+                                                  %r{/description/relatedResource/0/event is empty but should have at least 1 item})
           end
         end
 
@@ -273,7 +273,7 @@ RSpec.describe Cocina::Models do
 
           it 'rejects the relatedResource entry' do
             expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                  %r{"url" is a required property at /description/relatedResource/0/access})
+                                                  %r{/description/relatedResource/0/access needs to include at least one of the following: url, physicalLocation, digitalLocation, accessContact, digitalRepository, note; /description/relatedResource/0 needs to include at least one of the following: title, contributor, event, note, identifier, valueAt, purl})
           end
         end
 
@@ -282,7 +282,7 @@ RSpec.describe Cocina::Models do
 
           it 'rejects the relatedResource entry' do
             expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                  %r{has less than 1 item at /description/relatedResource/0/note})
+                                                  %r{/description/relatedResource/0 needs to include at least one of the following: title, contributor, event, identifier, valueAt, purl, access; /description/relatedResource/0/note is empty but should have at least 1 item})
           end
         end
 
@@ -291,7 +291,7 @@ RSpec.describe Cocina::Models do
 
           it 'rejects the relatedResource entry' do
             expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                  %r{has less than 1 item at /description/relatedResource/0/identifier})
+                                                  %r{/description/relatedResource/0 needs to include at least one of the following: title, contributor, event, note, valueAt, purl, access; /description/relatedResource/0/identifier is empty but should have at least 1 item})
           end
         end
 
@@ -318,7 +318,7 @@ RSpec.describe Cocina::Models do
 
           it 'rejects the relatedResource entry' do
             expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                  %r{has less than 1 item at /description/relatedResource/0/access/url})
+                                                  %r{/description/relatedResource/0/access/url is empty but should have at least 1 item})
           end
         end
 
@@ -327,7 +327,7 @@ RSpec.describe Cocina::Models do
 
           it 'rejects the relatedResource entry' do
             expect { model_build }.to raise_error(Cocina::Models::ValidationError,
-                                                  %r{has less than 1 item at /description/relatedResource/0/access/physicalLocation})
+                                                  %r{/description/relatedResource/0/access/physicalLocation is empty but should have at least 1 item})
           end
         end
       end
