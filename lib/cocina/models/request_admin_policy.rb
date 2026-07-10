@@ -20,7 +20,7 @@ module Cocina
       attribute(:administrative, AdminPolicyAdministrative.default { AdminPolicyAdministrative.new })
       # Description that is included in a request to create a DRO. This is the same as a
       # Description, except excludes PURL.
-      attribute? :description, RequestDescription.optional
+      attribute(:description, RequestDescription.default { RequestDescription.new })
     end
   end
 end

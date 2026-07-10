@@ -2546,8 +2546,20 @@
       "required": [
         "cocinaVersion",
         "administrative",
+        "description",
         "type",
         "version"
+      ],
+      "allOf": [
+        {
+          "properties": {
+            "description": {
+              "required": [
+                "title"
+              ]
+            }
+          }
+        }
       ],
       "unevaluatedProperties": false
     },
@@ -2616,6 +2628,47 @@
         "type",
         "version"
       ],
+      "anyOf": [
+        {
+          "required": [
+            "description"
+          ],
+          "properties": {
+            "description": {
+              "required": [
+                "title"
+              ]
+            }
+          }
+        },
+        {
+          "required": [
+            "identification"
+          ],
+          "properties": {
+            "identification": {
+              "required": [
+                "catalogLinks"
+              ],
+              "properties": {
+                "catalogLinks": {
+                  "contains": {
+                    "type": "object",
+                    "required": [
+                      "refresh"
+                    ],
+                    "properties": {
+                      "refresh": {
+                        "const": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
       "unevaluatedProperties": false
     },
     "RequestDRO": {
@@ -2681,6 +2734,44 @@
         "identification",
         "type",
         "version"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "description"
+          ],
+          "properties": {
+            "description": {
+              "required": [
+                "title"
+              ]
+            }
+          }
+        },
+        {
+          "properties": {
+            "identification": {
+              "required": [
+                "catalogLinks"
+              ],
+              "properties": {
+                "catalogLinks": {
+                  "contains": {
+                    "type": "object",
+                    "required": [
+                      "refresh"
+                    ],
+                    "properties": {
+                      "refresh": {
+                        "const": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       ],
       "unevaluatedProperties": false
     },
@@ -2803,9 +2894,6 @@
           "type": "string"
         }
       },
-      "required": [
-        "title"
-      ],
       "unevaluatedProperties": false
     },
     "RequestFile": {
