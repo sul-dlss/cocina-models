@@ -11,6 +11,7 @@ module Cocina
           DescriptionRoleSourceCodeVisitorValidator,
           DescriptionNameSourceCodeVisitorValidator,
           DescriptionFormResourceTypeVisitorValidator,
+          DescriptionFormSourceCodeVisitorValidator,
           DescriptionLanguageCodeVisitorValidator,
           DescriptionSubjectSourceCodeVisitorValidator,
           DescriptionValuesVisitorValidator,

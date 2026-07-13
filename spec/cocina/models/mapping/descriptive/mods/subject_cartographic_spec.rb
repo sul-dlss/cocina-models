@@ -98,7 +98,7 @@ RSpec.describe 'MODS subject cartographic <--> cocina mappings' do
               type: 'map projection',
               uri: 'http://opengis.net/def/crs/EPSG/0/4326',
               source: {
-                code: 'EPSG'
+                value: 'EPSG'
               },
               displayLabel: 'WGS84'
             }

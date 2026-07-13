@@ -88,7 +88,7 @@ module Cocina
                 uri: ValueURI.sniff(subject_node['valueURI'], notifier)
               }.tap do |attrs|
                 source = {
-                  code: subject_node['authority'],
+                  value: subject_node['authority'],
                   uri: subject_node['authorityURI']
                 }.compact
                 attrs[:source] = source if source.present?
