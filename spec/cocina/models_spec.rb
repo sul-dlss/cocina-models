@@ -596,10 +596,10 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/exhibit',
-          'label' => 'bar',
           'version' => 1,
           'access' => {},
-          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
+          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' },
+          'description' => { 'title' => [{ 'value' => 'My collection' }] }
         }
       end
 
@@ -610,12 +610,12 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/image',
-          'label' => 'bar',
           'version' => 1,
           'identification' => {
             'sourceId' => 'sul:123'
           },
-          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
+          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' },
+          'description' => { 'title' => [{ 'value' => 'My DRO' }] }
         }
       end
 
@@ -626,13 +626,13 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/admin_policy',
-          'label' => 'bar',
           'version' => 1,
           'administrative' => {
             'hasAdminPolicy' => 'druid:bc123df4567',
             'hasAgreement' => 'druid:bc123df4567',
             'accessTemplate' => {}
-          }
+          },
+          'description' => { 'title' => [{ 'value' => 'My admin policy' }] }
         }
       end
 
@@ -648,25 +648,199 @@ RSpec.describe Cocina::Models do
           identification: {
             sourceId: 'sul:123'
           },
-          administrative: { 'hasAdminPolicy' => 'druid:bc123df4567' }
+          administrative: { 'hasAdminPolicy' => 'druid:bc123df4567' },
+          description: { title: [{ value: 'My DRO' }] }
         }
       end
 
       it { is_expected.to be_a Cocina::Models::RequestDRO }
     end
 
+    context 'with a DRO that has a refreshable catalog link instead of a title' do
+      let(:data) do
+        {
+          'type' => 'https://cocina.sul.stanford.edu/models/image',
+          'version' => 1,
+          'identification' => {
+            'sourceId' => 'sul:123',
+            'catalogLinks' => [
+              { 'catalog' => 'folio', 'catalogRecordId' => 'a123', 'refresh' => true }
+            ]
+          },
+          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
+        }
+      end
+
+      it { is_expected.to be_a Cocina::Models::RequestDRO }
+    end
+
+    context 'with a Collection that has a refreshable catalog link instead of a title' do
+      let(:data) do
+        {
+          'type' => 'https://cocina.sul.stanford.edu/models/collection',
+          'version' => 1,
+          'access' => {},
+          'identification' => {
+            'catalogLinks' => [
+              { 'catalog' => 'symphony', 'catalogRecordId' => '123', 'refresh' => true }
+            ]
+          },
+          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
+        }
+      end
+
+      it { is_expected.to be_a Cocina::Models::RequestCollection }
+    end
+
+    context 'with both a title and a refreshable catalog link' do
+      let(:data) do
+        {
+          'type' => 'https://cocina.sul.stanford.edu/models/image',
+          'version' => 1,
+          'description' => { 'title' => [{ 'value' => 'My DRO' }] },
+          'identification' => {
+            'sourceId' => 'sul:123',
+            'catalogLinks' => [
+              { 'catalog' => 'folio', 'catalogRecordId' => 'a123', 'refresh' => true }
+            ]
+          },
+          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
+        }
+      end
+
+      it { is_expected.to be_a Cocina::Models::RequestDRO }
+    end
+
+    context 'with a DRO that has neither a title nor catalog links' do
+      let(:data) do
+        {
+          'type' => 'https://cocina.sul.stanford.edu/models/image',
+          'version' => 1,
+          'identification' => { 'sourceId' => 'sul:123' },
+          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
+        }
+      end
+
+      it 'raises an error' do
+        expect { build }.to raise_error(Cocina::Models::ValidationError)
+      end
+    end
+
+    context 'with a Collection that has neither a title nor catalog links' do
+      let(:data) do
+        {
+          'type' => 'https://cocina.sul.stanford.edu/models/collection',
+          'version' => 1,
+          'access' => {},
+          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
+        }
+      end
+
+      it 'raises an error' do
+        expect { build }.to raise_error(Cocina::Models::ValidationError)
+      end
+    end
+
+    context 'with an empty catalog links array instead of a title' do
+      let(:data) do
+        {
+          'type' => 'https://cocina.sul.stanford.edu/models/image',
+          'version' => 1,
+          'identification' => { 'sourceId' => 'sul:123', 'catalogLinks' => [] },
+          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
+        }
+      end
+
+      it 'raises an error' do
+        expect { build }.to raise_error(Cocina::Models::ValidationError)
+      end
+    end
+
+    context 'with only non-refreshable catalog links instead of a title' do
+      let(:data) do
+        {
+          'type' => 'https://cocina.sul.stanford.edu/models/collection',
+          'version' => 1,
+          'access' => {},
+          'identification' => {
+            'catalogLinks' => [
+              { 'catalog' => 'symphony', 'catalogRecordId' => '123', 'refresh' => false }
+            ]
+          },
+          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
+        }
+      end
+
+      it 'raises an error' do
+        expect { build }.to raise_error(Cocina::Models::ValidationError)
+      end
+    end
+
+    context 'with an empty title and no refreshable catalog link' do
+      let(:data) do
+        {
+          'type' => 'https://cocina.sul.stanford.edu/models/image',
+          'version' => 1,
+          'description' => { 'title' => [] },
+          'identification' => { 'sourceId' => 'sul:123' },
+          'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
+        }
+      end
+
+      it 'raises an error' do
+        expect { build }.to raise_error(Cocina::Models::ValidationError)
+      end
+    end
+
+    context 'with an AdminPolicy that has no title' do
+      let(:data) do
+        {
+          'type' => 'https://cocina.sul.stanford.edu/models/admin_policy',
+          'version' => 1,
+          'administrative' => {
+            'hasAdminPolicy' => 'druid:bc123df4567',
+            'hasAgreement' => 'druid:bc123df4567',
+            'accessTemplate' => {}
+          }
+        }
+      end
+
+      it 'raises an error' do
+        expect { build }.to raise_error(Cocina::Models::ValidationError)
+      end
+    end
+
+    context 'with an AdminPolicy that has an empty title' do
+      let(:data) do
+        {
+          'type' => 'https://cocina.sul.stanford.edu/models/admin_policy',
+          'version' => 1,
+          'administrative' => {
+            'hasAdminPolicy' => 'druid:bc123df4567',
+            'hasAgreement' => 'druid:bc123df4567',
+            'accessTemplate' => {}
+          },
+          'description' => { 'title' => [] }
+        }
+      end
+
+      it 'raises an error' do
+        expect { build }.to raise_error(Cocina::Models::ValidationError)
+      end
+    end
+
     context 'with an invalid version' do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/book',
-          'label' => 'bar',
           'version' => 5,
           'identification' => {
             'sourceId' => 'sul:123'
           },
           'administrative' => {
             'hasAdminPolicy' => 'druid:bc123df4567'
-          }
+          },
+          'description' => { 'title' => [{ 'value' => 'My DRO' }] }
         }
       end
 
@@ -702,7 +876,6 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/image',
-          'label' => 'bar',
           'version' => 1,
           'identification' => { 'sourceId' => 'sul:123' },
           'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' },
@@ -721,7 +894,6 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/image',
-          'label' => 'bar',
           'version' => 1,
           'identification' => { 'sourceId' => 'sul:123' },
           'administrative' => {
@@ -740,7 +912,6 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/image',
-          'label' => 'bar',
           'version' => 1,
           'identification' => { 'sourceId' => 'sul:123' },
           'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' },
@@ -757,7 +928,6 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/exhibit',
-          'label' => 'bar',
           'version' => 1,
           'access' => { 'view' => 'world', 'unexpectedNested' => 'nope' },
           'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' }
@@ -773,7 +943,6 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/exhibit',
-          'label' => 'bar',
           'version' => 1,
           'access' => {},
           'administrative' => { 'hasAdminPolicy' => 'druid:bc123df4567' },
@@ -790,7 +959,6 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/admin_policy',
-          'label' => 'bar',
           'version' => 1,
           'administrative' => {
             'hasAdminPolicy' => 'druid:bc123df4567',
@@ -810,7 +978,6 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           'type' => 'https://cocina.sul.stanford.edu/models/admin_policy',
-          'label' => 'bar',
           'version' => 1,
           'administrative' => {
             'hasAdminPolicy' => 'druid:bc123df4567',
