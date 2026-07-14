@@ -12,7 +12,18 @@ module Cocina
           Thread.current[:top_level_validate] = validate unless Thread.current.key?(:top_level_validate)
 
           Validators::Validator.validate(self, attributes) if Thread.current[:top_level_validate]
-          super(attributes, safe, &)
+
+          # Tracks that any Validatable construction triggered by `super` below is nested inside this one, so
+          # JsonSchemaValidator can skip it: this object's own schema check above already covers.
+          # See JsonSchemaValidator#validate.
+          # In practice, this avoids doing schema validation on a DRO / AdminPolicy / Collection and
+          # its nested Description.
+          Thread.current[:cocina_construction_depth] = Thread.current[:cocina_construction_depth].to_i + 1
+          begin
+            super(attributes, safe, &)
+          ensure
+            Thread.current[:cocina_construction_depth] -= 1
+          end
         ensure
           Thread.current[:top_level_validate] = nil
         end
@@ -20,7 +31,14 @@ module Cocina
 
       def new(*args)
         validate = args.first.delete(:validate) if args.present?
-        new_model = super
+
+        Thread.current[:cocina_construction_depth] = Thread.current[:cocina_construction_depth].to_i + 1
+        begin
+          new_model = super
+        ensure
+          Thread.current[:cocina_construction_depth] -= 1
+        end
+
         Validators::Validator.validate(new_model.class, new_model) if validate || validate.nil?
         new_model
       end

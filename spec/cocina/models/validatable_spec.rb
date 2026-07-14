@@ -93,4 +93,19 @@ RSpec.describe Cocina::Models::Validatable do
       expect(Cocina::Models::Validators::Validator).not_to have_received(:validate)
     end
   end
+
+  context 'with a nested Description' do
+    it 'evaluates the JSON schema once, not once per nested Validatable' do
+      allow(Cocina::Models::Validators::JsonSchemaValidator).to receive(:new).and_call_original
+      Cocina::Models::DRO.new(props)
+      expect(Cocina::Models::Validators::JsonSchemaValidator).to have_received(:new).once
+    end
+
+    it 'still evaluates the JSON schema once for the "modify copy" idiom touching description' do
+      dro = Cocina::Models::DRO.new(props)
+      allow(Cocina::Models::Validators::JsonSchemaValidator).to receive(:new).and_call_original
+      dro.new(description: description_props)
+      expect(Cocina::Models::Validators::JsonSchemaValidator).to have_received(:new).once
+    end
+  end
 end
