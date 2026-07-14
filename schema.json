@@ -2749,6 +2749,9 @@
           }
         },
         {
+          "required": [
+            "identification"
+          ],
           "properties": {
             "identification": {
               "required": [
