@@ -18,7 +18,7 @@ module Cocina
         def initialize(clazz, attributes, validators: VALIDATORS)
           @clazz = clazz
           @attributes = attributes
-          @validators = validators.map { |v| v.new(attributes) }
+          @validators = meets_preconditions? ? validators.map { |v| v.new(attributes) } : []
         end
 
         def validate
