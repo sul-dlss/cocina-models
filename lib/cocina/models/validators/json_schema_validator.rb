@@ -67,7 +67,7 @@ module Cocina
           evaluation = self.class.validator_for(method_name).evaluate(attributes.as_json)
           return if evaluation.valid?
 
-          raise ValidationError, "When validating #{method_name}: " + filtered_error_messages(evaluation).join(', ')
+          raise ValidationError, "When validating #{method_name}: " + filtered_error_messages(evaluation).join('; ')
         end
 
         private
@@ -90,7 +90,7 @@ module Cocina
           denoised.flat_map { |d| format_detail(d) }.uniq
         end
 
-        # Removes two categories of cascade noise produced by `unevaluatedProperties: false`:
+        #  Removes three categories of cascade noise from errors:
         #
         #   1. falseSchema errors — every `unevaluatedProperties: false` on a sub-path emits
         #      a "False schema does not allow …" entry for each matched value.  These are
@@ -100,8 +100,28 @@ module Cocina
         #      is a known model attribute — these arise because allOf/$ref composition means
         #      the validator can't prove top-level properties were "evaluated", even though
         #      they are valid model fields.
+        #
+        #   3. anyOf branch noise — when each branch requires a different property, all failing
+        #      branches emit a separate "required" error at the same path. Collapse into one
+        #      "needs to include at least one of: …" message.
         def denoise(details)
-          details.reject { |d| false_schema_noise?(d) || root_unevaluated_noise?(d) }
+          filtered = details.reject { |detail| false_schema_noise?(detail) || root_unevaluated_noise?(detail) }
+          collapse_anyof_required(filtered)
+        end
+
+        def collapse_anyof_required(details)
+          # instanceLocation is the input data that failed. Group errors for each failing data location.
+          details.group_by { |detail| detail[:instanceLocation] }.flat_map do |loc, group|
+            # splits errors into "required" anyOf errors and others (minItems, unevaluatedProperties)
+            required, others = group.partition { |detail| detail[:errors].keys == ['required'] }
+            next group if required.size <= 1
+
+            # Extract property name from "required" messages such as, '"url" is a required property'
+            props = required.filter_map { |detail| detail[:errors]['required'][/"([^"]+)"/, 1] }.uniq
+            # Put the data path at the start of the message; blank instanceLocation so format_detail won't also append it
+            msg = "#{loc} needs to include at least one of the following: #{props.join(', ')}"
+            others + [required.first.merge(instanceLocation: '', errors: { 'required' => msg })]
+          end
         end
 
         def false_schema_noise?(detail)
@@ -120,11 +140,31 @@ module Cocina
           unexpected.all? { |prop| known_root_properties.include?(prop) }
         end
 
+        # Formats error details hash into more user-friendly messages
+        # A detail can carry multiple errors (one per JSON Schema keyword), so this returns an array.
+        # minItems errors get a dedicated formatter; everything else uses the generic one.
         def format_detail(detail)
           loc = detail[:instanceLocation]
-          detail[:errors].map do |_keyword, message|
-            loc.empty? ? message : "#{message} at #{loc}"
+          detail[:errors].map do |keyword, message|
+            keyword == 'minItems' ? format_min_items(message, loc) : format_generic(message, loc)
           end
+        end
+
+        # Rewrites messages regarding minItems validation
+        # "[] has less than 1 item at /event/0/date " is rewritten to "/event/0/date is empty but should have at least 1 item"
+        # Arrays with items but fewer than the minimum will be rewritten to "/event/0/date should have at least 2 items"
+        def format_min_items(message, loc)
+          # extract minimum number of items from message
+          min = message[/less than (\d+)/, 1] || '1'
+          # pluralize "item" when appropriate
+          items = min == '1' ? 'item' : 'items'
+          # determine if the message is about an empty array or an non-empty array without enough items
+          prefix = message.start_with?('[]') ? "#{loc} is empty but" : loc.to_s
+          "#{prefix} should have at least #{min} #{items}"
+        end
+
+        def format_generic(message, loc)
+          loc.empty? ? message : "#{message} at #{loc}"
         end
       end
     end

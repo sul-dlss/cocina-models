@@ -127,6 +127,53 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
         }
       end
     end
+
+    context 'when anyOf branches each require a different property' do
+      context 'when all branches fail with required errors' do
+        # Simulates DescriptiveAccessMetadata: anyOf with 6 branches, each requiring one property.
+        # All branches fail when access: {} or access: { note: [] } is given.
+        let(:details) do
+          %w[url physicalLocation digitalLocation accessContact digitalRepository note].map do |prop|
+            { valid: false, instanceLocation: '/access', errors: { 'required' => "\"#{prop}\" is a required property" } }
+          end
+        end
+
+        it 'collapses to a single "needs to include at least one of" message' do
+          expect { validate }.to raise_error(Cocina::Models::ValidationError) { |error|
+            expect(error.message).to include('/access needs to include at least one of the following: url, physicalLocation, digitalLocation, accessContact, digitalRepository, note')
+            expect(error.message).not_to include('"url" is a required property')
+          }
+        end
+      end
+
+      context 'when one branch fails with minItems instead of required' do
+        let(:required_details) do
+          %w[url physicalLocation digitalLocation accessContact digitalRepository].map do |prop|
+            { valid: false, instanceLocation: '/access', errors: { 'required' => "\"#{prop}\" is a required property" } }
+          end
+        end
+        let(:min_items_detail) { { valid: false, instanceLocation: '/access/note', errors: { 'minItems' => '[] has less than 1 item' } } }
+        let(:details) { required_details + [min_items_detail] }
+
+        it 'collapses required errors and preserves the minItems error' do
+          expect { validate }.to raise_error(Cocina::Models::ValidationError) { |error|
+            expect(error.message).to include('/access needs to include at least one of the following: url, physicalLocation, digitalLocation, accessContact, digitalRepository')
+            expect(error.message).to include('/access/note is empty but should have at least 1 item')
+          }
+        end
+      end
+
+      context 'when only one branch fails with a required error' do
+        let(:details) { [{ valid: false, instanceLocation: '/access', errors: { 'required' => '"url" is a required property' } }] }
+
+        it 'does not collapse a single required error' do
+          expect { validate }.to raise_error(Cocina::Models::ValidationError) { |error|
+            expect(error.message).to include('"url" is a required property at /access')
+            expect(error.message).not_to include('needs to include at least one of the following')
+          }
+        end
+      end
+    end
   end
 
   # AdminPolicy.externalIdentifier must be a valid druid
