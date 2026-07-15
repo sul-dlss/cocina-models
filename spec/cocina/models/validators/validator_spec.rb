@@ -70,4 +70,23 @@ RSpec.describe Cocina::Models::Validators::Validator do
       expect { validate }.not_to raise_error
     end
   end
+
+  context 'with a Cocina model instance' do
+    subject(:validate) { described_class.validate(clazz, dro) }
+
+    let(:dro) { Cocina::Models::DRO.new(props) }
+
+    before do
+      Cocina::Models::Validators::Validator::VALIDATORS.each do |validator_clazz|
+        allow(validator_clazz).to receive(:validate)
+      end
+    end
+
+    it 'invokes validators with the fully-hashified attributes' do
+      validate
+
+      expect(Cocina::Models::Validators::Validator::VALIDATORS).to all(have_received(:validate).with(Cocina::Models::DRO,
+                                                                                                     dro.to_h.with_indifferent_access))
+    end
+  end
 end

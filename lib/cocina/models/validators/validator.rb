@@ -16,12 +16,22 @@ module Cocina
         ].freeze
 
         def self.validate(clazz, attributes, validators: VALIDATORS)
-          # This gets rid of nested model objects.
-          attributes_hash = attributes.to_h.deep_transform_values do |value|
+          hash = attributes_hash(attributes)
+          validators.each { |validator| validator.validate(clazz, hash) }
+        end
+
+        # @return [Hash] attributes with any embedded Cocina model instances flattened to hashes
+        def self.attributes_hash(attributes)
+          # Dry::Struct#to_h is already fully recursive (Dry::Struct::Hashify flattens nested
+          # structs all the way down), so a Cocina model instance's #to_h has no embedded
+          # Cocina model instances left to flatten and the deep walk below would be a no-op.
+          return attributes.to_h.with_indifferent_access if attributes.class.name.starts_with?('Cocina::Models')
+
+          attributes.to_h.deep_transform_values do |value|
             value.class.name.starts_with?('Cocina::Models') ? value.to_h : value
           end.with_indifferent_access
-          validators.each { |validator| validator.validate(clazz, attributes_hash) }
         end
+        private_class_method :attributes_hash
 
         def self.deep_transform_values(object, ...)
           case object

@@ -25,6 +25,11 @@ module Cocina
 
         # @see #validate
         def self.validate(...)
+          # Skip when nested inside another Validatable's construction: the enclosing object's own
+          # schema check already covers this, so re-evaluating it here would be
+          # redundant. See Validatable#new.
+          return if Thread.current[:cocina_construction_depth].to_i.positive?
+
           new(...).validate
         end
 

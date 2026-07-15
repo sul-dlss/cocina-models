@@ -21,6 +21,29 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
     }
   end
 
+  describe '.validate' do
+    subject(:call) { described_class.validate(clazz, invalid_props) }
+
+    # Missing required administrative properties.
+    let(:invalid_props) { props.merge(administrative: {}) }
+
+    it 'raises ValidationError' do
+      expect { call }.to raise_error(Cocina::Models::ValidationError)
+    end
+
+    context 'when nested inside another Validatable construction' do
+      around do |example|
+        Thread.current[:cocina_construction_depth] = 1
+        example.run
+        Thread.current[:cocina_construction_depth] = nil
+      end
+
+      it 'skips validation, since the enclosing object already validated this subtree via $ref' do
+        expect { call }.not_to raise_error
+      end
+    end
+  end
+
   context 'with an unexpected property' do
     let(:props) do
       {
