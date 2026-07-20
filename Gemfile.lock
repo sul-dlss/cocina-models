@@ -45,7 +45,7 @@ GEM
       iso8601 (~> 0.13.0)
       janeway-jsonpath (>= 0.6, < 2)
       zeitwerk (~> 2.7)
-    concurrent-ruby (1.3.7)
+    concurrent-ruby (1.3.8)
     connection_pool (3.0.2)
     csv (3.3.5)
     debug (1.11.1)
@@ -81,7 +81,7 @@ GEM
       activesupport (>= 3.0, < 9.0)
     equivalent-xml (0.6.0)
       nokogiri (>= 1.4.3)
-    erb (6.0.4)
+    erb (6.0.6)
     faraday (2.14.3)
       faraday-net_http (>= 2.0, < 3.5)
       json
@@ -101,9 +101,9 @@ GEM
     iso8601 (0.13.0)
     janeway-jsonpath (1.0.0)
     json (2.21.1)
-    jsonschema_rs (0.47.0-arm64-darwin)
+    jsonschema_rs (0.48.1-arm64-darwin)
       bigdecimal (>= 3.1, < 5)
-    jsonschema_rs (0.47.0-x86_64-linux)
+    jsonschema_rs (0.48.1-x86_64-linux)
       bigdecimal (>= 3.1, < 5)
     language_server-protocol (3.17.0.6)
     lint_roller (1.1.0)
@@ -119,7 +119,7 @@ GEM
       racc (~> 1.4)
     optimist (3.2.1)
     parallel (2.1.0)
-    parser (3.3.11.1)
+    parser (3.3.12.0)
       ast (~> 2.4.1)
       racc
     patience_diff (1.2.0)
@@ -184,7 +184,7 @@ GEM
       rubocop (~> 1.86, >= 1.86.2)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
-    simplecov (1.0.0)
+    simplecov (1.0.2)
     super_diff (0.19.0)
       attr_extras (>= 6.2.4, < 8)
       diff-lcs (~> 1.5)
@@ -228,7 +228,7 @@ CHECKSUMS
   bundler (4.0.16) sha256=d6ca5dd440c24f9abce9844cf44cc8e18c6a553de65a47efb4544137af92c47d
   cocina-models (0.129.0)
   cocina_display (2.9.0) sha256=00e97cf826dafd5c547ca87b58e55f1d3bfa68fa4ddcddbbe25b4d9d9ed05d8f
-  concurrent-ruby (1.3.7) sha256=4412caec3a5ea2e5fdc52076724c071a81f2c0593d83b2ac8cbb8ca63b3151b0
+  concurrent-ruby (1.3.8) sha256=b2f1be836e968ccc78ccfce277ea79c72a88633f22306782c16ff23fb415d1e1
   connection_pool (3.0.2) sha256=33fff5ba71a12d2aa26cb72b1db8bba2a1a01823559fb01d29eb74c286e62e0a
   csv (3.3.5) sha256=6e5134ac3383ef728b7f02725d9872934f523cb40b961479f69cf3afa6c8e73f
   debug (1.11.1) sha256=2e0b0ac6119f2207a6f8ac7d4a73ca8eb4e440f64da0a3136c30343146e952b6
@@ -242,7 +242,7 @@ CHECKSUMS
   dry-types (1.9.1) sha256=baebeecdb9f8395d6c9d227b62011279440943e3ef2468fe8ccc1ba11467f178
   edtf (3.3.0) sha256=0ce2b80f5cf222870e5a3df130701f4d24b75c29e23e5bf3130f574d75073487
   equivalent-xml (0.6.0) sha256=8919761efa848ad0846369ff8be1f646b17e5061698c4867b09829000cc3f487
-  erb (6.0.4) sha256=38e3803694be357fe2bfe312487c74beaf9fb4e5beb3e22498952fe1645b95d9
+  erb (6.0.6) sha256=a9b24986700f5bf127c4f297c5403c3ca41b83b0a316c0cd09a096b56e644ae5
   faraday (2.14.3) sha256=1882247e6766615c8220b4392bf1d27f6ebb63d8e28267587cef1fb0bf37f278
   faraday-net_http (3.4.4) sha256=0e78af151747ed1b00f33e25973b4bc220d7f16c00c39676817c8b12331eb588
   geo_coord (0.2.0) sha256=ae4e2dc5799deafa4db9138f3d7e85cf5e7dbd00b3b8395f1e1dbd34e007d7e8
@@ -253,8 +253,8 @@ CHECKSUMS
   iso8601 (0.13.0) sha256=298c2b15b7be5fa95a1372813d36a2257656cd8e906dfbc1f5cb409851425aa2
   janeway-jsonpath (1.0.0) sha256=c8293f009f2aea9487ddee3067ca735a1f758eb1c8834ff4fab3ffd06c56d0a3
   json (2.21.1) sha256=13a43df75d95641443f5702dff350f237164a9d811ff0f2c2800d4d980220583
-  jsonschema_rs (0.47.0-arm64-darwin) sha256=ab3aae9da5796999d2686dfacaa2b4c9a5510b9194b4e4b73a6aa8767a78ac8a
-  jsonschema_rs (0.47.0-x86_64-linux) sha256=5dfc5c14362cf5efee24242be23feb4342665f489b63e1eba4c256aac8c96047
+  jsonschema_rs (0.48.1-arm64-darwin) sha256=9159986e47c5fe4a169060c46adb0addfc5229bfcb44052d9f0b90071d1ab28b
+  jsonschema_rs (0.48.1-x86_64-linux) sha256=efbc173c13f982ba1a2396ee9c781016837c5797338ac1e0f8e765a23bf8ab58
   language_server-protocol (3.17.0.6) sha256=5ef2c0c138f8267e1bc631d3328347d354f96724b0af22f2c79516120443b7f0
   lint_roller (1.1.0) sha256=2c0c845b632a7d172cb849cc90c1bce937a28c5c8ccccb50dfd46a485003cc87
   logger (1.7.0) sha256=196edec7cc44b66cfb40f9755ce11b392f21f7967696af15d274dde7edff0203
@@ -264,7 +264,7 @@ CHECKSUMS
   nokogiri (1.19.4-x86_64-linux-gnu) sha256=379fae440b28915e3f19d752ce2dcf8465ed2b2fbefd2a7ca0dd497bc981a06a
   optimist (3.2.1) sha256=8cf8a0fd69f3aa24ab48885d3a666717c27bc3d9edd6e976e18b9d771e72e34e
   parallel (2.1.0) sha256=b35258865c2e31134c5ecb708beaaf6772adf9d5efae28e93e99260877b09356
-  parser (3.3.11.1) sha256=d17ace7aabe3e72c3cc94043714be27cc6f852f104d81aa284c2281aecc65d54
+  parser (3.3.12.0) sha256=21a6d7f755d5a24dfbdc6e6b772e4e879a52e7631a88bc5a3a134606052c9828
   patience_diff (1.2.0) sha256=f492094486af02fff4a80070fa6b4d0ebbcf4d42fb38bba29d095eef43f6822c
   pp (0.6.4) sha256=dfcb0fce700c41456265922884f9fe195d7fbb0674a3578e6c0f69588e82b570
   prettyprint (0.2.0) sha256=2bc9e15581a94742064a3cc8b0fb9d45aae3d03a1baa6ef80922627a0766f193
@@ -289,7 +289,7 @@ CHECKSUMS
   rubocop-rspec (3.10.2) sha256=0b3e2ecc592cd10ecbf0095bb58d1e357905276e069643523cc19eb7495f65e2
   ruby-progressbar (1.13.0) sha256=80fc9c47a9b640d6834e0dc7b3c94c9df37f08cb072b7761e4a71e22cff29b33
   securerandom (0.4.1) sha256=cc5193d414a4341b6e225f0cb4446aceca8e50d5e1888743fac16987638ea0b1
-  simplecov (1.0.0) sha256=bdc50b41fa4a8b3c860da4bf5d61ba4704479c51d08a8f53cbd56ae50778dca8
+  simplecov (1.0.2) sha256=c6459434efe4b948b46477cc2df2faa73ab365f83a33c7c17f81262f4f7f1244
   super_diff (0.19.0) sha256=c35fc1c0daa223d67b203fe3fb49a6cfd67850a53920319565c3c654e03ec902
   thor (1.5.0) sha256=e3a9e55fe857e44859ce104a84675ab6e8cd59c650a49106a05f55f136425e73
   tsort (0.2.0) sha256=9650a793f6859a43b6641671278f79cfead60ac714148aabe4e3f0060480089f
