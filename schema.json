@@ -1270,70 +1270,6 @@
         }
       }
     },
-    "DescriptiveParallelEvent": {
-      "description": "Value model for multiple representations of information about the same event (e.g. in different languages).",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/$defs/DescriptiveStructuredValue"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "type": {
-              "description": "Description of the event (creation, publication, etc.).",
-              "type": "string"
-            },
-            "displayLabel": {
-              "description": "The preferred display label to use for the event in access systems.",
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "date": {
-              "description": "Dates associated with the event.",
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/DescriptiveValue"
-              }
-            },
-            "contributor": {
-              "description": "Contributors associated with the event.",
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/Contributor"
-              }
-            },
-            "location": {
-              "description": "Locations associated with the event.",
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/DescriptiveValue"
-              }
-            },
-            "identifier": {
-              "description": "Identifiers and URIs associated with the event.",
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/DescriptiveIdentifier"
-              }
-            },
-            "note": {
-              "description": "Other information about the event.",
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/DescriptiveValue"
-              }
-            },
-            "valueLanguage": {
-              "$ref": "#/$defs/DescriptiveValueLanguage"
-            }
-          }
-        }
-      ],
-      "unevaluatedProperties": false
-    },
     "DescriptiveParallelValue": {
       "description": "Value model for multiple representations of the same information (e.g. in different languages).",
       "type": "object",
@@ -1529,13 +1465,6 @@
             },
             "valueLanguage": {
               "$ref": "#/$defs/DescriptiveValueLanguage"
-            },
-            "parallelEvent": {
-              "description": "For multiple representations of information about the same event (e.g. in different languages)",
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/DescriptiveParallelEvent"
-              }
             }
           }
         }
@@ -1586,14 +1515,6 @@
           "required": ["structuredValue"],
           "properties": {
             "structuredValue": {
-              "minItems": 1
-            }
-          }
-        },
-        {
-          "required": ["parallelEvent"],
-          "properties": {
-            "parallelEvent": {
               "minItems": 1
             }
           }
