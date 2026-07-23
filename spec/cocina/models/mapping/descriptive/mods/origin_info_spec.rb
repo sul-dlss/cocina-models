@@ -778,4 +778,114 @@ RSpec.describe 'MODS originInfo <--> cocina mappings' do
       end
     end
   end
+
+  describe 'Multilingual originInfo' do
+    context 'when altRepGroup with place, publisher and date' do
+      it_behaves_like 'MODS cocina mapping' do
+        let(:mods) do
+          <<~XML
+            <originInfo lang="eng" script="Latn" altRepGroup="1">
+              <place>
+                <placeTerm type="text">Kyōto-shi</placeTerm>
+              </place>
+              <publisher>Rinsen Shoten</publisher>
+              <dateIssued>Heisei 8 [1996]</dateIssued>
+              <issuance>monographic</issuance>
+            </originInfo>
+            <originInfo lang="jpn" script="Hani" altRepGroup="1">
+              <place>
+                <placeTerm type="text">京都市</placeTerm>
+              </place>
+              <publisher>臨川書店</publisher>
+              <dateIssued>平成 8 [1996]</dateIssued>
+            </originInfo>
+          XML
+        end
+
+        let(:cocina) do
+          {
+            event: [
+              {
+                valueLanguage: {
+                  code: 'eng',
+                  source: { code: 'iso639-2b' },
+                  valueScript: {
+                    code: 'Latn',
+                    source: { code: 'iso15924' }
+                  }
+                },
+                location: [
+                  { value: 'Kyōto-shi' }
+                ],
+                contributor: [
+                  {
+                    name: [
+                      { value: 'Rinsen Shoten' }
+                    ],
+                    role: [
+                      {
+                        value: 'publisher',
+                        code: 'pbl',
+                        uri: 'http://id.loc.gov/vocabulary/relators/pbl',
+                        source: {
+                          code: 'marcrelator',
+                          uri: 'http://id.loc.gov/vocabulary/relators/'
+                        }
+                      }
+                    ],
+                    type: 'organization'
+                  }
+                ],
+                date: [
+                  { value: 'Heisei 8 [1996]', type: 'publication' }
+                ],
+                note: [
+                  {
+                    value: 'monographic',
+                    type: 'issuance',
+                    source: { value: 'MODS issuance terms' }
+                  }
+                ]
+              },
+              {
+                valueLanguage: {
+                  code: 'jpn',
+                  source: { code: 'iso639-2b' },
+                  valueScript: {
+                    code: 'Hani',
+                    source: { code: 'iso15924' }
+                  }
+                },
+                location: [
+                  { value: '京都市' }
+                ],
+                contributor: [
+                  {
+                    name: [
+                      { value: '臨川書店' }
+                    ],
+                    role: [
+                      {
+                        value: 'publisher',
+                        code: 'pbl',
+                        uri: 'http://id.loc.gov/vocabulary/relators/pbl',
+                        source: {
+                          code: 'marcrelator',
+                          uri: 'http://id.loc.gov/vocabulary/relators/'
+                        }
+                      }
+                    ],
+                    type: 'organization'
+                  }
+                ],
+                date: [
+                  { value: '平成 8 [1996]', type: 'publication' }
+                ]
+              }
+            ]
+          }
+        end
+      end
+    end
+  end
 end
