@@ -21,9 +21,6 @@ module Cocina
       attribute :note, Types::Strict::Array.of(DescriptiveValue).default([].freeze)
       # Language of the descriptive element value
       attribute? :valueLanguage, DescriptiveValueLanguage.optional
-      # For multiple representations of information about the same event (e.g. in different
-      # languages)
-      attribute :parallelEvent, Types::Strict::Array.of(DescriptiveParallelEvent).default([].freeze)
     end
   end
 end

@@ -104,58 +104,9 @@ module Cocina
           end
 
           def build_grouped_origin_infos(grouped_origin_infos)
-            grouped_origin_infos.map do |origin_info_nodes|
-              common_event_type = event_type_in_common(origin_info_nodes)
-              common_display_label = display_label_in_common(origin_info_nodes)
-
-              parallel_event = {
-                type: common_event_type,
-                displayLabel: common_display_label,
-                parallelEvent: build_parallel_origin_infos(origin_info_nodes, common_event_type,
-                                                           common_display_label)
-              }
-
-              parallel_event.compact
-            end.flatten
-          end
-
-          # For parallelEvent items, the valueLanguage construct is at the same level as the rest
-          #   of the event attributes, rather than inside each event attribute
-          def build_parallel_origin_infos(origin_infos, common_event_type, common_display_label)
-            origin_infos.flat_map do |origin_info|
-              event = build_event_for_parallel_origin_info(origin_info)
-              event[:valueLanguage] = LanguageScript.build(node: origin_info)
-              event[:type] = display_label(origin_info) if common_event_type.blank?
-              event[:displayLabel] = display_label(origin_info) if common_display_label.blank?
-
-              event.compact
-            end.compact
-          end
-
-          def build_event_for_parallel_origin_info(origin_info_node)
-            return build_copyright_notice_event(origin_info_node) if origin_info_node['eventType'] == 'copyright notice'
-
-            event = {}
-            add_info_to_event(event, origin_info_node)
-            event.compact
-          end
-
-          # @return String type for the cocina event if it is the same for all the origin_info_nodes, o.w. nil
-          def event_type_in_common(origin_info_nodes)
-            raw_type = origin_info_nodes.first['eventType']
-            return if raw_type.blank?
-
-            first_event_type = event_type(origin_info_nodes.first)
-            first_event_type if origin_info_nodes.all? { |node| event_type(node) == first_event_type }
-          end
-
-          # @return String displayLabel for the cocina event if it is the same for all the origin_info_nodes, o.w. nil
-          def display_label_in_common(origin_info_nodes)
-            raw_label = origin_info_nodes.first['displayLabel']
-            return if raw_label.blank?
-
-            first_label = display_label(origin_info_nodes.first)
-            first_label if origin_info_nodes.all? { |node| display_label(node) == first_label }
+            grouped_origin_infos.flat_map do |origin_info_nodes|
+              origin_info_nodes.map { |origin_info| build_event_for_origin_info(origin_info) }
+            end
           end
 
           def add_info_to_event(event, origin_info_node)
