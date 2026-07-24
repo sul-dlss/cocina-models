@@ -62,7 +62,7 @@ Beyond what is necessary to test the generator, the Cocina model classes are not
 
 ## Testing validation changes
 
-If there is a possibility that a model, mapping, or validation change will conflict with some existing objects then `bin/validate-data` should be used for testing.  This operates on an export of objects from the repository and reports any validation errors. You may get the file by running the script [bin/export-cocina-head-versions](https://github.com/sul-dlss/dor-services-app#export-cocina-json-data) and downloading the data file to your computer. See the [DSA README](https://github.com/sul-dlss/dor-services-app#scheduled-cocina-json-data-exports) for more info about the files and locations. Running a full validation takes about 2 hours. 
+If there is a possibility that a model, mapping, or validation change will conflict with some existing objects then `bin/validate-data` should be used for testing.  This operates on an export of objects from the repository and reports any validation errors. You may get the file by running the script [bin/export-cocina-head-versions](https://github.com/sul-dlss/dor-services-app#export-cocina-json-data) and downloading the data file to your computer. See the [DSA README](https://github.com/sul-dlss/dor-services-app#scheduled-cocina-json-data-exports) for more info about the files and locations. Running a full validation takes about 2 hours.
 
 
 Alternatively, you can use [validate-cocina](https://github.com/sul-dlss/dor-services-app/blob/main/bin/validate-cocina) for testing. This must be run on the `sdr-infra` VM since it requires deploying a branch of cocina-models.  It is slower than using `bin/validate-data`, but all of the data is completely up to date.
@@ -70,7 +70,8 @@ Alternatively, you can use [validate-cocina](https://github.com/sul-dlss/dor-ser
 For background on object validation, as it relates to migrating versions, see: https://github.com/sul-dlss/dor-services-app/wiki/Migrating-Cocina
 
 1. Create a cocina-models branch containing the proposed change and push to GitHub.
-2. On the `sdr-infra` VM, while logged in as the `deploy` user, check out `main`, update the `Gemfile` so that cocina-models references the branch, and `bundle install`.
+2. On the `sdr-infra` VM, while logged in as the `deploy` user, check out `main`, update the `Gemfile` so that cocina-models references the branch, and `bundle install`, e.g.
+gem 'cocina-models', git: 'https://github.com/sul-dlss/cocina-models', branch: 'my-branch'
 3. Select the appropriate environment vars below - they are set to values in puppet.  (first 2 lines are the same;  last two lines use different variables)
 
 For QA:
@@ -107,6 +108,11 @@ To run against head_version and latest_closed_version (when the object is open) 
 ```
 export RUBYOPT='-W:no-deprecated -W:no-experimental'
 RAILS_ENV=production bin/validate-cocina -p 8 -l
+```
+
+To run against only a specific list of druids, pass in a CSV file with druids in the first column and no header (druids should have the "druid:" prefix).  This matches the format that comes from the `bin/validate-data` script in cocina-models repo, so you can the use the CSV file and re-run against just those objects once they have been remediated.
+```
+RAILS_ENV=production bin/validate-cocina -f validate-data-errors.csv
 ```
 
 5. Check `validate-cocina.csv` for validation errors.
