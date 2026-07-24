@@ -12,7 +12,8 @@ module Cocina
           PurlValidator,
           CatalogLinksValidator,
           AssociatedNameValidator,
-          MarcRelatorRoleValidator
+          MarcRelatorRoleValidator,
+          NonAlternativeTitleValidator
         ].freeze
 
         def self.validate(clazz, attributes, validators: VALIDATORS)
