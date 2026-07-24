@@ -9,7 +9,7 @@ RSpec.describe Cocina::Generator::SchemaValue do
     # RequestDRO.version is an integer
     let(:dro) do
       Cocina::Models::RequestDRO.new({
-                                       label: 'The Prince',
+                                       description: { title: [{ value: 'The Prince' }] },
                                        type: Cocina::Models::ObjectType.book,
                                        version: 1,
                                        identification: { sourceId: 'sul:123' },
@@ -23,10 +23,10 @@ RSpec.describe Cocina::Generator::SchemaValue do
   end
 
   context 'when property is a string' do
-    # RequestDRO.label is an integer
+    # RequestDRO.description.title is a string
     let(:dro) do
       Cocina::Models::RequestDRO.new({
-                                       label: 'The Blue and Brown Books',
+                                       description: { title: [{ value: 'The Blue and Brown Books'}] },
                                        type: Cocina::Models::ObjectType.book,
                                        version: 1,
                                        identification: { sourceId: 'sul:123' },
@@ -35,7 +35,7 @@ RSpec.describe Cocina::Generator::SchemaValue do
     end
 
     it 'maps to string' do
-      expect(dro.label).to eq('The Blue and Brown Books')
+      expect(dro.description.title.first.value).to eq('The Blue and Brown Books')
     end
   end
 
@@ -187,7 +187,7 @@ RSpec.describe Cocina::Generator::SchemaValue do
   context 'when property is cocinaVersion' do
     let(:dro) do
       Cocina::Models::RequestDRO.new({
-                                       label: 'The Prince',
+                                       description: { title: [{ value: 'The Prince' }] },
                                        type: Cocina::Models::ObjectType.book,
                                        version: 1,
                                        identification: { sourceId: 'sul:123' },

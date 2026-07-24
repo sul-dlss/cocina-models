@@ -8,14 +8,14 @@ MODS_ATTRIBUTES = 'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="
 def add_purl_and_title(cocina, druid)
   cocina.merge({
     purl: cocina.fetch(:purl, Cocina::Models::Mapping::Purl.for(druid: druid)),
-    title: cocina.key?(:title) ? nil : [{ value: label }]
+    title: cocina.key?(:title) ? nil : [{ value: 'Placeholder title for specs'}]
   }.compact)
 end
 
 # When starting from MODS.
 RSpec.shared_examples 'MODS cocina mapping' do
   # Required: mods, cocina
-  # Optional: druid, warnings, errors, mods_attributes, skip_normalization, label
+  # Optional: druid, warnings, errors, mods_attributes, skip_normalization
 
   let(:orig_cocina_description) { Cocina::Models::Description.new(add_purl_and_title(cocina, local_druid)) }
 
@@ -31,14 +31,12 @@ RSpec.shared_examples 'MODS cocina mapping' do
 
   let(:skip_normalization) { false }
 
-  let(:label) { 'Test title' }
-
   context 'when mapping from MODS (to cocina)' do
     let(:notifier) { instance_double(Cocina::Models::Mapping::ErrorNotifier) }
 
     let(:actual_cocina_props) do
       Cocina::Models::Mapping::FromMods::Description.props(mods: orig_mods_ng, druid: local_druid, notifier: notifier,
-                                                           label: label)
+                                                           title_builder: TestTitleBuilder)
     end
 
     before do
@@ -61,8 +59,7 @@ RSpec.shared_examples 'MODS cocina mapping' do
 
     it 'notifier receives warning and/or error messages as specified' do
       # TODO: support testing with no title
-      Cocina::Models::Mapping::FromMods::Description.props(mods: orig_mods_ng, druid: local_druid, notifier: notifier, title_builder: TestTitleBuilder,
-                                                           label: label)
+      Cocina::Models::Mapping::FromMods::Description.props(mods: orig_mods_ng, druid: local_druid, notifier: notifier, title_builder: TestTitleBuilder)
       if local_warnings.empty?
         expect(notifier).not_to have_received(:warn)
       else
@@ -109,7 +106,7 @@ class TestTitleBuilder
   # @return [Hash] a hash that can be mapped to a cocina model
   def self.build(resource_element:, notifier:, require_title:)
     titles = resource_element.xpath('mods:titleInfo', mods: Cocina::Models::Mapping::FromMods::Description::DESC_METADATA_NS)
-    if titles.empty?
+    if titles.empty? && require_title
       [{ value: 'Placeholder title for specs' }]
     else
       Cocina::Models::Mapping::FromMods::Title.build(resource_element: resource_element, notifier: notifier,

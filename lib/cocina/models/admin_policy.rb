@@ -15,7 +15,6 @@ module Cocina
       attribute :type, Types::Strict::String.enum(*AdminPolicy::TYPES)
       # example: druid:bc123df4567
       attribute :externalIdentifier, Druid
-      attribute? :label, Types::Strict::String.default('')
       attribute :version, Types::Strict::Integer
       # Administrative properties for an AdminPolicy
       attribute(:administrative, AdminPolicyAdministrative.default { AdminPolicyAdministrative.new })

@@ -10,7 +10,6 @@ RSpec.describe Cocina::Generator::SchemaRef do
       let(:policy) do
         Cocina::Models::AdminPolicy.new({
                                           externalIdentifier: 'druid:bc123df4567',
-                                          label: 'My admin policy',
                                           type: Cocina::Models::ObjectType.admin_policy,
                                           version: 1,
                                           administrative: {
@@ -29,7 +28,6 @@ RSpec.describe Cocina::Generator::SchemaRef do
       let(:policy) do
         Cocina::Models::AdminPolicy.new({
                                           externalIdentifier: 'druid:bc123df4567',
-                                          label: 'My admin policy',
                                           type: Cocina::Models::ObjectType.admin_policy,
                                           version: 1
                                         }, false, false)
@@ -46,7 +44,6 @@ RSpec.describe Cocina::Generator::SchemaRef do
     let(:policy) do
       Cocina::Models::AdminPolicy.new({
                                         externalIdentifier: 'druid:bc123df4567',
-                                        label: 'My admin policy',
                                         type: Cocina::Models::ObjectType.admin_policy,
                                         version: 1,
                                         administrative: {
