@@ -15,6 +15,10 @@ RSpec.describe Cocina::Generator::SchemaRef do
                                           administrative: {
                                             hasAdminPolicy: 'druid:bc123df4567',
                                             hasAgreement: 'druid:bc123df4567'
+                                          },
+                                          description: {
+                                            title: [{ value: 'An APO' }],
+                                            purl: 'https://purl.stanford.edu/bc123df4567'
                                           }
                                         }, false, false)
       end
@@ -36,25 +40,6 @@ RSpec.describe Cocina::Generator::SchemaRef do
       it 'raises an error' do
         expect { policy }.to raise_error(Dry::Struct::Error)
       end
-    end
-  end
-
-  context 'when referenced schema is not required' do
-    # AdminPolicy.description is an optional Description
-    let(:policy) do
-      Cocina::Models::AdminPolicy.new({
-                                        externalIdentifier: 'druid:bc123df4567',
-                                        type: Cocina::Models::ObjectType.admin_policy,
-                                        version: 1,
-                                        administrative: {
-                                          hasAdminPolicy: 'druid:bc123df4567',
-                                          hasAgreement: 'druid:bc123df4567'
-                                        }
-                                      }, false, false)
-    end
-
-    it 'handles omittable' do
-      expect(policy.description).to be_nil
     end
   end
 end

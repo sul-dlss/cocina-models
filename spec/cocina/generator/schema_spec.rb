@@ -72,6 +72,10 @@ RSpec.describe Cocina::Generator::Schema do
           hasAdminPolicy: 'druid:bc123df4567',
           hasAgreement: 'druid:bc123df4567',
           accessTemplate: {}
+        },
+        description: {
+          title: [{ value: 'An APO Title'}],
+          purl: 'https://purl.stanford.edu/bc123df4567'
         }
       )
     end

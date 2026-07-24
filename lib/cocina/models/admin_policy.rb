@@ -18,7 +18,7 @@ module Cocina
       attribute :version, Types::Strict::Integer
       # Administrative properties for an AdminPolicy
       attribute(:administrative, AdminPolicyAdministrative.default { AdminPolicyAdministrative.new })
-      attribute? :description, Description.optional
+      attribute(:description, Description.default { Description.new })
     end
   end
 end

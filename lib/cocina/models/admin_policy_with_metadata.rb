@@ -19,7 +19,7 @@ module Cocina
       attribute :version, Types::Strict::Integer
       # Administrative properties for an AdminPolicy
       attribute(:administrative, AdminPolicyAdministrative.default { AdminPolicyAdministrative.new })
-      attribute? :description, Description.optional
+      attribute(:description, Description.default { Description.new })
       # When the object was created.
       attribute? :created, Types::Params::DateTime
       # When the object was modified.

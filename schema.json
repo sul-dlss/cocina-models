@@ -121,7 +121,8 @@
         "administrative",
         "externalIdentifier",
         "type",
-        "version"
+        "version",
+        "description"
       ]
     },
     "AdminPolicy": {

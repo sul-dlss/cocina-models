@@ -16,6 +16,10 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
         hasAdminPolicy: 'druid:bc123df4567',
         hasAgreement: 'druid:bc123df4567',
         accessTemplate: {}
+      },
+      description: {
+        title: [{ value: 'A Title'}],
+        purl: 'https://purl.stanford.edu/bc123df4567'
       }
     }
   end
@@ -54,6 +58,10 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
           hasAdminPolicy: 'druid:bc123df4567',
           hasAgreement: 'druid:bc123df4567',
           releaseTags: [{to: 'Searchworks', who: 'mjgiarlo', what: 'self', release: true}]
+        },
+        description: {
+          title: [{ value: 'An APO Title'}],
+          purl: 'https://purl.stanford.edu/bc123df4567'
         }
       }
     end
