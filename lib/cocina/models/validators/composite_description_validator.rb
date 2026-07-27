@@ -20,6 +20,7 @@ module Cocina
           DescriptionSubjectTemporalEncodingVisitorValidator,
           DescriptionTitleSourceCodeVisitorValidator,
           DescriptionLanguageUriVisitorValidator,
+          DescriptionLanguageSourceCodeVisitorValidator,
           DescriptionScriptVisitorValidator,
           DescriptionLocationVisitorValidator
         ].freeze
