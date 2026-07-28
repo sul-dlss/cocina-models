@@ -106,10 +106,6 @@
         "externalIdentifier": {
           "$ref": "#/$defs/Druid"
         },
-        "label": {
-          "type": "string",
-          "default": ""
-        },
         "version": {
           "type": "integer"
         },
@@ -125,7 +121,8 @@
         "administrative",
         "externalIdentifier",
         "type",
-        "version"
+        "version",
+        "description"
       ]
     },
     "AdminPolicy": {
@@ -371,11 +368,6 @@
         },
         "externalIdentifier": {
           "$ref": "#/$defs/Druid"
-        },
-        "label": {
-          "description": "Primary processing label (can be same as title) for a Collection.",
-          "type": "string",
-          "default": ""
         },
         "version": {
           "description": "Version for the Collection within SDR.",
@@ -645,11 +637,6 @@
           ]
         },
         "externalIdentifier": { "$ref": "#/$defs/Druid" },
-        "label": {
-          "description": "Primary processing label (can be same as title) for a DRO.",
-          "type": "string",
-          "default": ""
-        },
         "version": {
           "description": "Version for the DRO within SDR.",
           "type": "integer"
@@ -2446,10 +2433,6 @@
             "https://cocina.sul.stanford.edu/models/admin_policy"
           ]
         },
-        "label": {
-          "type": "string",
-          "default": ""
-        },
         "version": {
           "type": "integer",
           "default": 1,
@@ -2517,10 +2500,6 @@
             "https://cocina.sul.stanford.edu/models/exhibit",
             "https://cocina.sul.stanford.edu/models/series"
           ]
-        },
-        "label": {
-          "type": "string",
-          "default": ""
         },
         "version": {
           "type": "integer",
@@ -2618,10 +2597,6 @@
             "https://cocina.sul.stanford.edu/models/webarchive-binary",
             "https://cocina.sul.stanford.edu/models/webarchive-seed"
           ]
-        },
-        "label": {
-          "type": "string",
-          "default": ""
         },
         "version": {
           "type": "integer",

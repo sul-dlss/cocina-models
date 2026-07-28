@@ -16,11 +16,10 @@ module Cocina
       attribute :type, Types::Strict::String.enum(*AdminPolicyWithMetadata::TYPES)
       # example: druid:bc123df4567
       attribute :externalIdentifier, Druid
-      attribute? :label, Types::Strict::String.default('')
       attribute :version, Types::Strict::Integer
       # Administrative properties for an AdminPolicy
       attribute(:administrative, AdminPolicyAdministrative.default { AdminPolicyAdministrative.new })
-      attribute? :description, Description.optional
+      attribute(:description, Description.default { Description.new })
       # When the object was created.
       attribute? :created, Types::Params::DateTime
       # When the object was modified.

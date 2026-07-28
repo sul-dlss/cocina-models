@@ -561,32 +561,6 @@ RSpec.describe Cocina::Models do
         end
       end
     end
-
-    context 'when label is not provided' do
-      context 'with a DRO type' do
-        let(:data) { build(:dro).to_h.except(:label) }
-
-        it 'defaults label to empty string' do
-          expect(model_build.label).to eq('')
-        end
-      end
-
-      context 'with a Collection type' do
-        let(:data) { build(:collection).to_h.except(:label) }
-
-        it 'defaults label to empty string' do
-          expect(model_build.label).to eq('')
-        end
-      end
-
-      context 'with an AdminPolicy type' do
-        let(:data) { build(:admin_policy).to_h.except(:label) }
-
-        it 'defaults label to empty string' do
-          expect(model_build.label).to eq('')
-        end
-      end
-    end
   end
 
   describe '.build_request' do
@@ -643,7 +617,6 @@ RSpec.describe Cocina::Models do
       let(:data) do
         {
           type: 'https://cocina.sul.stanford.edu/models/image',
-          label: 'bar',
           version: 1,
           identification: {
             sourceId: 'sul:123'
