@@ -94,6 +94,18 @@ RSpec.describe Cocina::Models::Description do
     end
   end
 
+  context 'with an invalid uri' do
+    let(:properties) do
+      JSON.parse(File.read('spec/fixtures/description/etd.json')).tap do |props|
+        props['contributor'].first['role'].first['uri'] = 'not a uri'
+      end
+    end
+
+    it 'raises' do
+      expect { item }.to raise_error(Cocina::Models::ValidationError)
+    end
+  end
+
   describe 'introspecting' do
     it 'is possible to get the nodes from the schema' do
       # We use this to determine whether the paths in the descriptive spreadsheet are valid
