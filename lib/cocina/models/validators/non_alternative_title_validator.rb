@@ -3,10 +3,10 @@
 module Cocina
   module Models
     module Validators
-      # Validates that at least one title with no type or a type other than "alternative" is present.
+      # Validates that not all titles have type 'alternative'
       class NonAlternativeTitleValidator
-        def self.validate(clazz, attributes)
-          new(clazz, attributes).validate
+        def self.validate(...)
+          new(...).validate
         end
 
         def initialize(clazz, attributes)
@@ -17,10 +17,9 @@ module Cocina
         def validate
           return unless meets_preconditions?
 
-          return if titles.empty? || titles.any? { |title| title[:type].nil? || title[:type] != 'alternative' }
+          return unless titles.all? { |title| title[:type] == 'alternative' }
 
-          raise ValidationError,
-                "At least one title must have no type or a type other than 'alternative'."
+          raise ValidationError, "At least one title must have no type or a type other than 'alternative'."
         end
 
         private
@@ -28,20 +27,12 @@ module Cocina
         attr_reader :clazz, :attributes
 
         def meets_preconditions?
-          [Cocina::Models::Description, Cocina::Models::RequestDescription].include?(clazz)
+          [Cocina::Models::Description, Cocina::Models::RequestDescription].include?(clazz) &&
+            titles.present?
         end
 
         def titles
-          @titles ||= Array(description_attributes[:title])
-        end
-
-        def description_attributes
-          @description_attributes ||= if [Cocina::Models::Description,
-                                          Cocina::Models::RequestDescription].include?(clazz)
-                                        attributes
-                                      else
-                                        attributes[:description] || {}
-                                      end
+          @titles ||= Array(attributes[:title])
         end
       end
     end
