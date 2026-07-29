@@ -3,8 +3,10 @@
 module Cocina
   module Models
     module Validators
-      # Validates contributor.role.source.code values against role_source_codes.yml.
+      # Validates contributor.role.source.code values.
       class DescriptionRoleSourceCodeVisitorValidator < BaseDescriptionVisitorValidator
+        VALID_CODES = %w[aat lcmpt marcrelator rbmsrel].freeze
+
         def validate!
           return if error_paths.empty?
 
@@ -16,7 +18,7 @@ module Cocina
 
           source_code = hash.dig(:source, :code)
           return unless source_code
-          return if valid_codes.include?(source_code.downcase)
+          return if VALID_CODES.include?(source_code.downcase)
 
           error_paths << "#{path_to_s(path)}.source.code (#{source_code})"
         end
@@ -32,11 +34,6 @@ module Cocina
             path[-1].is_a?(Integer) &&
             path[-2].to_s == 'role' && # we have a nested role in the path
             path.any? { |part| part.to_s == 'contributor' } # there is a contributor in the path (any? allows for nested roles)
-        end
-
-        # Source codes allowed for contributor.role.source.code
-        def valid_codes
-          %w[aat lcmpt marcrelator rbmsrel]
         end
       end
     end
