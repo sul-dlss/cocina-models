@@ -45,7 +45,7 @@ module Cocina
 
         # rubocop:disable Style/ClassVars
         def valid_codes
-          @@valid_codes ||= YAML.load_file(::File.expand_path('../../../../language_source_codes.yml', __dir__)).to_set(&:downcase)
+          @@valid_codes ||= YAML.load_file(::File.expand_path('../../../../config/language_source_codes.yml', __dir__)).to_set(&:downcase)
         end
         # rubocop:enable Style/ClassVars
       end

@@ -46,7 +46,7 @@ module Cocina
 
         # rubocop:disable Style/ClassVars
         def valid_codes
-          @@valid_codes ||= YAML.load_file(::File.expand_path('../../../../location_source_codes.yml', __dir__)).to_set(&:downcase)
+          @@valid_codes ||= YAML.load_file(::File.expand_path('../../../../config/location_source_codes.yml', __dir__)).to_set(&:downcase)
         end
 
         def valid_marc_country_codes

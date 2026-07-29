@@ -65,7 +65,7 @@ module Cocina
 
         # rubocop:disable Style/ClassVars
         def valid_script_codes
-          @@valid_script_codes ||= YAML.load_file(::File.expand_path('../../../../iso15924_codes.yml', __dir__)).to_set
+          @@valid_script_codes ||= YAML.load_file(::File.expand_path('../../../../config/iso15924_codes.yml', __dir__)).to_set
         end
         # rubocop:enable Style/ClassVars
       end

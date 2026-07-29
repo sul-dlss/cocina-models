@@ -66,7 +66,7 @@ module Cocina
         # rubocop:enable Style/ClassVars
 
         def types_yaml
-          YAML.load_file(::File.expand_path('../../../../description_types.yml', __dir__))
+          YAML.load_file(::File.expand_path('../../../../config/description_types.yml', __dir__))
         end
       end
     end
