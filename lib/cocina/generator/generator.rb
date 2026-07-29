@@ -52,7 +52,7 @@ module Cocina
 
       desc 'generate_descriptive_docs', 'generate descriptive documentation'
       def generate_descriptive_docs
-        markdown = YAML.load_file('description_types.yml').map do |field, types|
+        markdown = YAML.load_file('config/description_types.yml').map do |field, types|
           header_markdown = field_markdown_from(field)
           types_markdown = types_markdown_from(types)
 

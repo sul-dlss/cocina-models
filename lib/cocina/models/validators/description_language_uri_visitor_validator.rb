@@ -70,13 +70,13 @@ module Cocina
         # rubocop:disable Style/ClassVars
         def valid_iso639_2_codes
           @@valid_iso639_2_codes ||= YAML.load_file(
-            ::File.expand_path('../../../../language_uri_iso639_2_codes.yml', __dir__)
+            ::File.expand_path('../../../../config/language_uri_iso639_2_codes.yml', __dir__)
           ).to_set(&:downcase)
         end
 
         def valid_languages_codes
           @@valid_languages_codes ||= YAML.load_file(
-            ::File.expand_path('../../../../language_uri_languages_codes.yml', __dir__)
+            ::File.expand_path('../../../../config/language_uri_languages_codes.yml', __dir__)
           ).to_set(&:downcase)
         end
         # rubocop:enable Style/ClassVars

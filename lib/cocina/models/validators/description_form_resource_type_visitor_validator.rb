@@ -37,7 +37,7 @@ module Cocina
 
         # rubocop:disable Style/ClassVars
         def valid_values_by_source
-          @@valid_values_by_source ||= YAML.load_file(::File.expand_path('../../../../resource_type_values.yml', __dir__))
+          @@valid_values_by_source ||= YAML.load_file(::File.expand_path('../../../../config/resource_type_values.yml', __dir__))
         end
         # rubocop:enable Style/ClassVars
       end

@@ -1853,7 +1853,7 @@ RSpec.describe Cocina::Models::Builders::TitleBuilder do
   end
 
   context 'with all valid title types, no primary' do
-    # per https://github.com/sul-dlss/cocina-models/blob/main/description_types.yml
+    # per https://github.com/sul-dlss/cocina-models/blob/main/config/description_types.yml
     let(:titles) do
       [
         {
