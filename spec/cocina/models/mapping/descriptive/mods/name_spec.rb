@@ -243,12 +243,13 @@ RSpec.describe 'MODS name <--> cocina mappings' do
               ],
               note: [
                 {
-                  value: 'Stanford University',
-                  type: 'affiliation'
-                },
-                {
                   value: 'Professor of English',
                   type: 'description'
+                }
+              ],
+              affiliation: [
+                {
+                  value: 'Stanford University'
                 }
               ]
             }
@@ -348,14 +349,12 @@ RSpec.describe 'MODS name <--> cocina mappings' do
                 }
               ],
               type: 'person',
-              note: [
+              affiliation: [
                 {
-                  value: 'University of Zurich',
-                  type: 'affiliation'
+                  value: 'University of Zurich'
                 },
                 {
-                  value: 'Swiss Finance Institute',
-                  type: 'affiliation'
+                  value: 'Swiss Finance Institute'
                 }
               ]
             }
@@ -421,10 +420,9 @@ RSpec.describe 'MODS name <--> cocina mappings' do
                   ]
                 }
               ],
-              note: [
+              affiliation: [
                 {
-                  value: 'Stanford Law School graduate, J.S.D. (2007)',
-                  type: 'affiliation'
+                  value: 'Stanford Law School graduate, J.S.D. (2007)'
                 }
               ],
               type: 'person',
@@ -1653,10 +1651,9 @@ RSpec.describe 'MODS name <--> cocina mappings' do
                   uri: 'https://id.loc.gov/authorities/names/123'
                 }
               ],
-              note: [
+              affiliation: [
                 {
-                  value: 'Stanford',
-                  type: 'affiliation'
+                  value: 'Stanford'
                 }
               ]
             }

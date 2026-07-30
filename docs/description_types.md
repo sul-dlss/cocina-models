@@ -100,8 +100,6 @@ _Path: contributor.name.groupedValue.type_
     * Name used that differs from legal or primary form of name.
 ## Contributor note types
 _Path: contributor.note.type_
-  * affiliation
-    * Institution with which the contributor is associated.
   * citation status
     * Indicator of whether the contributor should be included in the citation.
   * contact email
