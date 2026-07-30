@@ -93,8 +93,6 @@ contributor.name.groupedValue:
   - value: pseudonym
     description: Name used that differs from legal or primary form of name.
 contributor.note:
-  - value: affiliation
-    description: Institution with which the contributor is associated.
   - value: citation status
     description: Indicator of whether the contributor should be included in the citation.
   - value: contact email

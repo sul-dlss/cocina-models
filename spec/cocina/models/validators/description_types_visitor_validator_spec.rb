@@ -159,10 +159,6 @@ RSpec.describe Cocina::Models::Validators::DescriptionTypesVisitorValidator do
               ],
               note: [
                 {
-                  value: 'Stanford University',
-                  type: 'affiliation'
-                },
-                {
                   value: 'Professor of English',
                   type: 'description'
                 }

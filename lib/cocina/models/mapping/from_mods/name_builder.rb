@@ -42,7 +42,7 @@ module Cocina
             }.compact
             { name: [names] }.tap do |attrs|
               attrs[:role] = name_elements.flat_map { |name_node| build_roles(name_node) }.compact.uniq.presence
-              attrs[:note] = name_elements.flat_map { |name_node| build_affiliation_notes(name_node) }.compact.uniq.presence
+              attrs[:affiliation] = name_elements.flat_map { |name_node| build_affiliations(name_node) }.compact.uniq.presence
             end.compact
           end
 
@@ -87,11 +87,12 @@ module Cocina
 
           def common_name(name_node, name, is_parallel: false)
             {
-              note: build_notes(name_node, is_parallel: is_parallel),
+              note: build_notes(name_node),
               identifier: build_identifier(name_node)
             }.tap do |attrs|
               roles = build_roles(name_node)
               attrs[:role] = roles unless name.nil?
+              attrs[:affiliation] = build_affiliations(name_node).presence unless is_parallel
             end.compact
           end
 
@@ -277,7 +278,7 @@ module Cocina
             end.presence
           end
 
-          def build_notes(name_node, is_parallel:)
+          def build_notes(name_node)
             [].tap do |parts|
               description = name_node.xpath('mods:description', mods: Description::DESC_METADATA_NS).first
               if description
@@ -287,13 +288,12 @@ module Cocina
                            { value: description.text, type: 'description' }
                          end
               end
-              parts.concat(build_affiliation_notes(name_node)) unless is_parallel
             end.presence
           end
 
-          def build_affiliation_notes(name_node)
+          def build_affiliations(name_node)
             name_node.xpath('mods:affiliation', mods: Description::DESC_METADATA_NS).map do |affiliation_node|
-              { value: affiliation_node.text, type: 'affiliation' }
+              { value: affiliation_node.text }
             end
           end
 
