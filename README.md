@@ -64,6 +64,15 @@ Beyond what is necessary to test the generator, the Cocina model classes are not
 
 If there is a possibility that a model, mapping, or validation change will conflict with some existing objects then `bin/validate-data` should be used for testing.  This operates on an export of objects from the repository and reports any validation errors. You may get the file by running the script [bin/export-cocina-head-versions](https://github.com/sul-dlss/dor-services-app#export-cocina-json-data) and downloading the data file to your computer. See the [DSA README](https://github.com/sul-dlss/dor-services-app#scheduled-cocina-json-data-exports) for more info about the files and locations. Running a full validation takes about 2 hours.
 
+### How validation errors are reported
+
+`bin/validate-data` reports **only the first error raised for each object**, then moves on to the next druid. The error counts and `validate-data-errors.csv` should therefore be read as a first pass only: an object listed with one error may have several, and an object's error may change (rather than disappear) after remediation. This is a property of how validation short-circuits at the first exception.
+
+The practical consequences for a remediation cycle:
+
+* Fixing every error in the report does not guarantee the next run will be clean. Expect to iterate: remediate, re-run, repeat until no errors are reported.
+* A schema error and a semantic error (e.g. a purl mismatch) will not appear together for the same object. Schema errors are the exception to the "one error" rule — the JSON schema validator aggregates schema violations into a single message, so those are reported in full.
+* `bin/validate-data` has no option to run against a subset of druids, so re-checking remediated objects means another full (~2 hour) run against a fresh export. To re-check just the remediated druids, use `bin/validate-cocina` in DSA with its `-f` option and the `validate-data-errors.csv` produced here (see below).
 
 Alternatively, you can use [validate-cocina](https://github.com/sul-dlss/dor-services-app/blob/main/bin/validate-cocina) for testing. This must be run on the `sdr-infra` VM since it requires deploying a branch of cocina-models.  It is slower than using `bin/validate-data`, but all of the data is completely up to date.
 
