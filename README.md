@@ -66,12 +66,16 @@ If there is a possibility that a model, mapping, or validation change will confl
 
 ### How validation errors are reported
 
-`bin/validate-data` reports **only the first error raised for each object**, then moves on to the next druid. The error counts and `validate-data-errors.csv` should therefore be read as a first pass only: an object listed with one error may have several, and an object's error may change (rather than disappear) after remediation. This is a property of how validation short-circuits at the first exception.
+`bin/validate-data` reports **every validation error it can find for each object**, not just the first one raised. `validate-data-errors.csv` therefore has one row per error, and an object with several problems appears on several rows. The summary counts "Lines with errors" (objects) and "Total errors reported" separately.
 
-The practical consequences for a remediation cycle:
+This takes some work, because `Cocina::Models.build` deliberately stops at the first exception, in three separate places: `Validators::Validator` stops at the first validator that raises; the composite description and structural validators walk the object once to feed all of their sub-validators but then stop at the first sub-validator that raises; and validation happens in two passes (the object, then its nested `Description`), so a top-level failure aborts construction before the description is validated at all.
 
-* Fixing every error in the report does not guarantee the next run will be clean. Expect to iterate: remediate, re-run, repeat until no errors are reported.
-* A schema error and a semantic error (e.g. a purl mismatch) will not appear together for the same object. Schema errors are the exception to the "one error" rule — the JSON schema validator aggregates schema violations into a single message, so those are reported in full.
+`ValidationErrorCollector` (in `bin/`, alongside the script) works around all three from the outside by invoking one validator at a time — with a single validator there is nothing left for a raise to mask. It uses only the public `validators:` keyword the gem already accepts.
+
+Notes on reading the output:
+
+* Objects are validated normally first, and only objects that fail are re-run through the collector. Valid objects cost nothing extra, so this does not meaningfully change how long a full run takes unless there are many invalid objects.
+* If an object fails **JSON schema** validation, that error is reported on its own and the remaining validators are skipped for that object. The schema is authoritative for the shape of the object; once it fails, the other validators are working with data they can't interpret and anything they report is noise or a restatement. Note that the schema validator already aggregates all schema violations into a single message, so nothing is lost. Fixing a schema error may reveal further errors on the next run.
 * `bin/validate-data` has no option to run against a subset of druids, so re-checking remediated objects means another full (~2 hour) run against a fresh export. To re-check just the remediated druids, use `bin/validate-cocina` in DSA with its `-f` option and the `validate-data-errors.csv` produced here (see below).
 
 Alternatively, you can use [validate-cocina](https://github.com/sul-dlss/dor-services-app/blob/main/bin/validate-cocina) for testing. This must be run on the `sdr-infra` VM since it requires deploying a branch of cocina-models.  It is slower than using `bin/validate-data`, but all of the data is completely up to date.
