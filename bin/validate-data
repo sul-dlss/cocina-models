@@ -20,6 +20,7 @@ require 'json'
 require 'ruby-progressbar'
 require 'optparse'
 require 'csv'
+require_relative 'validation_error_collector'
 
 # Parse command line options
 def parse_options # rubocop:disable Metrics/MethodLength
@@ -106,19 +107,33 @@ def worker_process(reader) # rubocop:disable Metrics/MethodLength
     batch.each do |line_num, line_content|
       json = JSON.parse(line_content)
       druid = json['externalIdentifier']
+      # Fast path: validate exactly as a client of the gem would. Valid objects -- the overwhelming
+      # majority -- cost nothing extra. Only objects that fail take the slower collecting path below.
       Cocina::Models.build(json)
     rescue JSON::ParserError => e
       errors << { line: line_num, error: "JSON Parse Error: #{e.message}" }
-    rescue Cocina::Models::ValidationError => e
-      errors << { line: line_num, druid:, error: "Validation Error: #{e.message}" }
     rescue Cocina::Models::UnknownTypeError => e
+      # Without a resolvable type there is no model class to validate against, so this is the one
+      # failure the collector can add nothing to. Report it directly.
       errors << { line: line_num, druid:, error: "Unknown Type Error: #{e.message}" }
     rescue StandardError => e
-      errors << { line: line_num, druid:, error: "Error: #{e.class} - #{e.message}" }
+      all_errors_for(json, e).each do |message|
+        errors << { line: line_num, druid:, error: message }
+      end
     end
   end
 
   errors
+end
+
+# Re-validate an object that has already failed, collecting every error rather than just the first.
+# Falls back to the originally raised error if the collector somehow turns up nothing, so that a
+# disagreement between the two paths can never make an invalid object look valid.
+def all_errors_for(json, error)
+  messages = ValidationErrorCollector.call(json)
+  messages.presence || ["#{error.class}: #{error.message}"]
+rescue StandardError => e
+  ["#{error.class}: #{error.message}", "Error while collecting all errors: #{e.class} - #{e.message}"]
 end
 
 # Spawn worker processes
@@ -235,34 +250,42 @@ def collect_results(workers, result_readers)
 end
 
 # Print validation summary
-def print_summary(total_lines, errors, elapsed_time) # rubocop:disable Metrics/MethodLength
+def print_summary(total_lines, errors, elapsed_time)
   puts '=' * 80
   puts 'VALIDATION SUMMARY'
   puts '=' * 80
+  # An object can now report more than one error, so lines and errors are counted separately.
+  error_lines = errors.map { |error| error[:line] }.uniq
   puts "Total lines processed: #{total_lines}"
-  puts "Lines with errors: #{errors.length}"
-  puts "Success rate: #{((total_lines - errors.length).to_f / total_lines * 100).round(2)}%"
+  puts "Lines with errors: #{error_lines.length}"
+  puts "Total errors reported: #{errors.length}"
+  puts "Success rate: #{((total_lines - error_lines.length).to_f / total_lines * 100).round(2)}%"
   puts "Time elapsed: #{elapsed_time.round(2)} seconds"
   puts "Throughput: #{(total_lines / elapsed_time).round(0)} lines/second"
 
   return unless errors.any?
 
-  sorted_errors = errors.sort_by { |e| e[:line] }
+  print_error_details(errors, error_lines)
+end
+
+# Print each error and write them all to CSV
+def print_error_details(errors, error_lines)
+  # Sort by message as well as line, so that the several errors an object may report are ordered
+  # deterministically (Ruby's sort_by is not stable) and two runs produce comparable output.
+  sorted_errors = errors.sort_by { |error| [error[:line], error[:error]] }
 
   puts "\n"
   puts 'Error details:'
   puts '-' * 80
-  # Sort errors by line number for better readability
   sorted_errors.each do |error|
     puts "Line #{error[:line]}: #{error[:druid]} - #{error[:error]}"
   end
   puts "\n"
-  puts "Line numbers with errors: #{sorted_errors.map { |e| e[:line] }.join(', ')}"
+  puts "Line numbers with errors: #{error_lines.sort.join(', ')}"
 
+  # One row per error, so an object with several problems appears on several rows.
   CSV.open('validate-data-errors.csv', 'w') do |csv|
-    sorted_errors.each do |error|
-      csv << [error[:druid], error[:error]]
-    end
+    sorted_errors.each { |error| csv << [error[:druid], error[:error]] }
   end
   puts 'Errors written to validate-data-errors.csv'
 end
