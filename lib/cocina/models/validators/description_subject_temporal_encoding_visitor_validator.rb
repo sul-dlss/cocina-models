@@ -9,7 +9,7 @@ module Cocina
         def validate!
           return if error_paths.empty?
 
-          raise ValidationError, "Unrecognized subject temporal encoding codes in description: #{error_paths.join(', ')}"
+          raise ValidationError, error_paths.map { |entry| invalid_temporal_encoding_message(entry) }.join(' ')
         end
 
         def visit_hash(hash:, path:)
@@ -19,7 +19,7 @@ module Cocina
           encoding_code = hash.dig(:encoding, :code)
           return unless encoding_code
 
-          error_paths << "#{path_to_s(path)}.encoding.code (#{encoding_code})" unless valid_codes.include?(encoding_code.downcase)
+          error_paths << { path: path_to_s(path), code: encoding_code } unless valid_codes.include?(encoding_code.downcase)
         end
 
         private
@@ -30,6 +30,11 @@ module Cocina
 
         def in_subject_path?(path)
           path.any? { |part| part.to_s == 'subject' }
+        end
+
+        def invalid_temporal_encoding_message(entry)
+          "The temporal subject encoding code \"#{entry[:code]}\" is not recognized at #{entry[:path]}.encoding.code. " \
+            'Use a valid temporal encoding code.'
         end
 
         # rubocop:disable Style/ClassVars
