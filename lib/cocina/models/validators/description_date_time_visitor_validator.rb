@@ -35,7 +35,7 @@ module Cocina
           code = hash.dig(:encoding, :code)
           if code
             encoding_paths[path.dup] = code if VALIDATABLE_TYPES.include?(code)
-            invalid_encoding_codes << "#{path_to_s(path)}.encoding.code (#{code})" unless VALID_ENCODING_CODES.include?(code)
+            invalid_encoding_codes << { path: path_to_s(path), code: code } unless VALID_ENCODING_CODES.include?(code)
           end
 
           value = hash[:value]
@@ -97,7 +97,10 @@ module Cocina
         def invalid_encoding_codes_error
           return if invalid_encoding_codes.empty?
 
-          "Unrecognized date encoding codes in description: #{invalid_encoding_codes.join(', ')}"
+          invalid_encoding_codes.map do |entry|
+            "The date encoding code \"#{entry[:code]}\" is not recognized at #{entry[:path]}.encoding.code. " \
+              "Use one of: #{VALID_ENCODING_CODES.join(', ')}."
+          end.join(' ')
         end
 
         def invalid_dates_error

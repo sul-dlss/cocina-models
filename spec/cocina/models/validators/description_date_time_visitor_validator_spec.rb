@@ -296,7 +296,10 @@ RSpec.describe Cocina::Models::Validators::DescriptionDateTimeVisitorValidator d
       end
 
       it 'raises with an informative message' do
-        expect { validate }.to raise_error(Cocina::Models::ValidationError, /Unrecognized date encoding codes/)
+        expect { validate }.to raise_error(
+          Cocina::Models::ValidationError,
+          /The date encoding code "unknown" is not recognized .* Use one of: edtf, iso8601, marc, temper, w3cdtf\./
+        )
       end
     end
 
@@ -319,7 +322,10 @@ RSpec.describe Cocina::Models::Validators::DescriptionDateTimeVisitorValidator d
       end
 
       it 'raises' do
-        expect { validate }.to raise_error(Cocina::Models::ValidationError, /Unrecognized date encoding codes/)
+        expect { validate }.to raise_error(
+          Cocina::Models::ValidationError,
+          /The date encoding code "bad" is not recognized .* Use one of: edtf, iso8601, marc, temper, w3cdtf\./
+        )
       end
     end
 
