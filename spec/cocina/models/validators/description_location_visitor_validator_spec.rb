@@ -67,7 +67,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionLocationVisitorValidator d
     it 'raises ValidationError with path and code' do
       expect { validate }.to raise_error(
         Cocina::Models::ValidationError,
-        'Unrecognized location source codes in description: location1.source.code (bogussource)'
+        'The location source code "bogussource" is not recognized at location1.source.code.'
       )
     end
   end
@@ -88,7 +88,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionLocationVisitorValidator d
     it 'raises ValidationError with nested path' do
       expect { validate }.to raise_error(
         Cocina::Models::ValidationError,
-        'Unrecognized location source codes in description: relatedResource1.location1.source.code (invalidsource)'
+        'The location source code "invalidsource" is not recognized at relatedResource1.location1.source.code.'
       )
     end
   end
@@ -100,7 +100,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionLocationVisitorValidator d
     it 'raises ValidationError' do
       expect { validate }.to raise_error(
         Cocina::Models::ValidationError,
-        'Unrecognized location source codes in description: location1.source.code (invalid)'
+        'The location source code "invalid" is not recognized at location1.source.code.'
       )
     end
   end
@@ -135,7 +135,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionLocationVisitorValidator d
     it 'raises ValidationError with path and code' do
       expect { validate }.to raise_error(
         Cocina::Models::ValidationError,
-        'Invalid MARC country codes in description: location1.code (zzz)'
+        'The location code "zzz" is invalid at location1.code when source code is marccountry. Use a valid MARC country code.'
       )
     end
   end
@@ -164,7 +164,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionLocationVisitorValidator d
     it 'raises ValidationError with nested path' do
       expect { validate }.to raise_error(
         Cocina::Models::ValidationError,
-        'Invalid MARC country codes in description: relatedResource1.location1.code (zz)'
+        'The location code "zz" is invalid at relatedResource1.location1.code when source code is marccountry. Use a valid MARC country code.'
       )
     end
   end
