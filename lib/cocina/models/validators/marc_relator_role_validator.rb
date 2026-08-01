@@ -25,7 +25,7 @@ module Cocina
           return unless meets_preconditions?
 
           resources.each { |resource| validate_resource(resource) }
-          raise ValidationError, "Invalid MARC relator codes in description: #{@errors.join(', ')}" if @errors.any?
+          raise ValidationError, @errors.join(' ') if @errors.any?
         end
 
         private
@@ -63,7 +63,10 @@ module Cocina
           code = role[:code]
           return if code.nil?
 
-          @errors << "#{path} (#{code})" unless valid_codes.include?(code)
+          return if valid_codes.include?(code)
+
+          @errors << "The MARC relator code \"#{code}\" is invalid for contributor role #{path}. " \
+                     'Use a valid MARC relator code.'
         end
 
         def marc_relator_source?(role)
