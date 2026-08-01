@@ -178,7 +178,10 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesVisitorValidator do
       it 'is not valid' do
         expect do
           validate
-        end.to raise_error(Cocina::Models::ValidationError, 'Multiple value, groupedValue, structuredValue, and parallelValue in description: title1, relatedResource1.title1')
+        end.to raise_error(
+          Cocina::Models::ValidationError,
+          'Only one of value, groupedValue, structuredValue, or parallelValue may be present at title1. Only one of value, groupedValue, structuredValue, or parallelValue may be present at relatedResource1.title1.'
+        )
       end
     end
 
@@ -188,7 +191,10 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesVisitorValidator do
       it 'is not valid' do
         expect do
           validate
-        end.to raise_error(Cocina::Models::ValidationError, 'Blank value in description: title1')
+        end.to raise_error(
+          Cocina::Models::ValidationError,
+          'The value at title1 is blank. Provide non-blank text or remove the value.'
+        )
       end
     end
 
@@ -198,7 +204,10 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesVisitorValidator do
       it 'is not valid' do
         expect do
           validate
-        end.to raise_error(Cocina::Models::ValidationError, 'Missing type for value in description: title1.structuredValue1')
+        end.to raise_error(
+          Cocina::Models::ValidationError,
+          'A title structured value at title1.structuredValue1 has a value but no type. Add a type.'
+        )
       end
     end
 
@@ -208,7 +217,10 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesVisitorValidator do
       it 'is not valid' do
         expect do
           validate
-        end.to raise_error(Cocina::Models::ValidationError, 'Missing type for value in description: title1.structuredValue2')
+        end.to raise_error(
+          Cocina::Models::ValidationError,
+          'A title structured value at title1.structuredValue2 has a value but no type. Add a type.'
+        )
       end
     end
 
@@ -218,7 +230,10 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesVisitorValidator do
       it 'is not valid' do
         expect do
           validate
-        end.to raise_error(Cocina::Models::ValidationError, 'Missing type for value in description: relatedResource1.title1.structuredValue1')
+        end.to raise_error(
+          Cocina::Models::ValidationError,
+          'A title structured value at relatedResource1.title1.structuredValue1 has a value but no type. Add a type.'
+        )
       end
     end
 
@@ -228,7 +243,10 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesVisitorValidator do
       it 'is not valid' do
         expect do
           validate
-        end.to raise_error(Cocina::Models::ValidationError, 'Missing type for value in description: relatedResource1.title1.parallelValue1.structuredValue2')
+        end.to raise_error(
+          Cocina::Models::ValidationError,
+          'A title structured value at relatedResource1.title1.parallelValue1.structuredValue2 has a value but no type. Add a type.'
+        )
       end
     end
 
@@ -238,7 +256,10 @@ RSpec.describe Cocina::Models::Validators::DescriptionValuesVisitorValidator do
       it 'is not valid' do
         expect do
           validate
-        end.to raise_error(Cocina::Models::ValidationError, 'Missing type for value in description: title1.parallelValue1.structuredValue2')
+        end.to raise_error(
+          Cocina::Models::ValidationError,
+          'A title structured value at title1.parallelValue1.structuredValue2 has a value but no type. Add a type.'
+        )
       end
     end
   end
