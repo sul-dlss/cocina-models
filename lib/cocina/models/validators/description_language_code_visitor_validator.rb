@@ -12,7 +12,8 @@ module Cocina
         def validate!
           return if error_paths.empty?
 
-          raise ValidationError, "Unrecognized language codes in description: #{error_paths.join(', ')}"
+          raise ValidationError,
+                error_paths.map { |entry| invalid_language_code_message(entry) }.join(' ')
         end
 
         def visit_hash(hash:, path:)
@@ -21,7 +22,7 @@ module Cocina
           code = hash[:code]
           return unless code
 
-          error_paths << "#{path_to_s(path)}.code (#{code})" unless valid_codes.include?(code)
+          error_paths << { path: path_to_s(path), code: code } unless valid_codes.include?(code)
         end
 
         private
@@ -32,6 +33,11 @@ module Cocina
 
         def language_path?(path)
           path.length >= 2 && path[-1].is_a?(Integer) && path[-2].to_s == 'language'
+        end
+
+        def invalid_language_code_message(entry)
+          "The language code \"#{entry[:code]}\" is not recognized at #{entry[:path]}.code. " \
+            'Use a valid code from searchworks_languages or one of: mul, und, zxx.'
         end
 
         # rubocop:disable Style/ClassVars
