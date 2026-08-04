@@ -35,7 +35,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionLanguageCodeVisitorValidat
     it 'raises ValidationError' do
       expect { validate }.to raise_error(
         Cocina::Models::ValidationError,
-        'Unrecognized language codes in description: language1.code (ENG)'
+        'The language code "ENG" is not recognized at language1.code. Use a valid code from searchworks_languages or one of: mul, und, zxx.'
       )
     end
   end
@@ -70,7 +70,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionLanguageCodeVisitorValidat
     it 'raises ValidationError with path and code' do
       expect { validate }.to raise_error(
         Cocina::Models::ValidationError,
-        'Unrecognized language codes in description: language1.code (bogus)'
+        'The language code "bogus" is not recognized at language1.code. Use a valid code from searchworks_languages or one of: mul, und, zxx.'
       )
     end
   end
@@ -81,7 +81,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionLanguageCodeVisitorValidat
     it 'raises ValidationError listing all invalid codes' do
       expect { validate }.to raise_error(
         Cocina::Models::ValidationError,
-        'Unrecognized language codes in description: language2.code (bogus), language3.code (fake)'
+        'The language code "bogus" is not recognized at language2.code. Use a valid code from searchworks_languages or one of: mul, und, zxx. The language code "fake" is not recognized at language3.code. Use a valid code from searchworks_languages or one of: mul, und, zxx.'
       )
     end
   end

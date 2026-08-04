@@ -120,8 +120,10 @@ RSpec.describe Cocina::Models::Validators::MarcRelatorRoleValidator do
       end
 
       it 'raises a ValidationError' do
-        expect { validate }.to raise_error(Cocina::Models::ValidationError,
-                                           /contributor1\.role1 \(xyz\)/)
+        expect { validate }.to raise_error(
+          Cocina::Models::ValidationError,
+          'The MARC relator code "xyz" is invalid for contributor role contributor1.role1. Use a valid MARC relator code.'
+        )
       end
     end
 
@@ -181,8 +183,10 @@ RSpec.describe Cocina::Models::Validators::MarcRelatorRoleValidator do
       end
 
       it 'raises a ValidationError naming the specific path' do
-        expect { validate }.to raise_error(Cocina::Models::ValidationError,
-                                           /contributor2\.role1 \(xyz\)/)
+        expect { validate }.to raise_error(
+          Cocina::Models::ValidationError,
+          'The MARC relator code "xyz" is invalid for contributor role contributor2.role1. Use a valid MARC relator code.'
+        )
       end
     end
 
@@ -205,8 +209,10 @@ RSpec.describe Cocina::Models::Validators::MarcRelatorRoleValidator do
       end
 
       it 'raises a ValidationError' do
-        expect { validate }.to raise_error(Cocina::Models::ValidationError,
-                                           /contributor1\.role1 \(xyz\)/)
+        expect { validate }.to raise_error(
+          Cocina::Models::ValidationError,
+          'The MARC relator code "xyz" is invalid for contributor role contributor1.role1. Use a valid MARC relator code.'
+        )
       end
     end
 

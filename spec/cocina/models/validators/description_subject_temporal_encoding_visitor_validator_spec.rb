@@ -51,7 +51,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionSubjectTemporalEncodingVis
     it 'raises ValidationError with path and code' do
       expect { validate }.to raise_error(
         Cocina::Models::ValidationError,
-        'Unrecognized subject temporal encoding codes in description: subject1.encoding.code (bogusenc)'
+        'The temporal subject encoding code "bogusenc" is not recognized at subject1.encoding.code. Use a valid temporal encoding code.'
       )
     end
   end
@@ -111,7 +111,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionSubjectTemporalEncodingVis
     it 'raises ValidationError with nested path' do
       expect { validate }.to raise_error(
         Cocina::Models::ValidationError,
-        'Unrecognized subject temporal encoding codes in description: subject1.structuredValue1.encoding.code (bogusenc)'
+        'The temporal subject encoding code "bogusenc" is not recognized at subject1.structuredValue1.encoding.code. Use a valid temporal encoding code.'
       )
     end
   end

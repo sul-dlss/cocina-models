@@ -15,16 +15,16 @@ module Cocina
         def validate!
           unless error_paths_multiple.empty?
             raise ValidationError,
-                  "Multiple value, groupedValue, structuredValue, and parallelValue in description: #{error_paths_multiple.join(', ')}"
+                  error_paths_multiple.map { |path| multiple_values_message(path) }.join(' ')
           end
           unless error_paths_blank.empty?
             raise ValidationError,
-                  "Blank value in description: #{error_paths_blank.join(', ')}"
+                  error_paths_blank.map { |path| blank_value_message(path) }.join(' ')
           end
           return if error_paths_missing_title_type.empty?
 
           raise ValidationError,
-                "Missing type for value in description: #{error_paths_missing_title_type.join(', ')}"
+                error_paths_missing_title_type.map { |path| missing_title_type_message(path) }.join(' ')
         end
 
         private
@@ -67,6 +67,18 @@ module Cocina
           # title is within relatedResource, e.g ["relatedResource", 0, "title", 0, "structuredValue", 0])
           structured_value_path = path[4] == 'structuredValue' || (path[4] == 'parallelValue' && path[6] == 'structuredValue')
           path.first == 'relatedResource' && path[2] == 'title' && structured_value_path
+        end
+
+        def multiple_values_message(path)
+          "Only one of value, groupedValue, structuredValue, or parallelValue may be present at #{path}."
+        end
+
+        def blank_value_message(path)
+          "The value at #{path} is blank. Provide non-blank text or remove the value."
+        end
+
+        def missing_title_type_message(path)
+          "A title structured value at #{path} has a value but no type. Add a type."
         end
 
         def structured_value_title?(path)

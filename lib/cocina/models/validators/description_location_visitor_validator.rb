@@ -9,10 +9,8 @@ module Cocina
       # validates location.code against marc_country_codes.yml when source.code is marccountry.
       class DescriptionLocationVisitorValidator < BaseDescriptionVisitorValidator
         def validate!
-          errors = []
-          errors << "Unrecognized location source codes in description: #{error_paths.join(', ')}" if error_paths.any?
-          errors << "Invalid MARC country codes in description: #{marc_country_error_paths.join(', ')}" if marc_country_error_paths.any?
-          raise ValidationError, errors.join('; ') if errors.any?
+          errors = [invalid_source_codes_error, invalid_marc_country_codes_error].compact
+          raise ValidationError, errors.join(' ') if errors.any?
         end
 
         def visit_hash(hash:, path:)
@@ -21,12 +19,12 @@ module Cocina
           source_code = hash.dig(:source, :code)
           return unless source_code
 
-          error_paths << "#{path_to_s(path)}.source.code (#{source_code})" unless valid_codes.include?(source_code.downcase)
+          error_paths << { path: path_to_s(path), code: source_code } unless valid_codes.include?(source_code.downcase)
 
           return unless source_code.downcase == 'marccountry'
 
           code = hash[:code]
-          marc_country_error_paths << "#{path_to_s(path)}.code (#{code})" if code && !valid_marc_country_codes.include?(code.downcase)
+          marc_country_error_paths << { path: path_to_s(path), code: code } if code && !valid_marc_country_codes.include?(code.downcase)
         end
 
         private
@@ -37,6 +35,23 @@ module Cocina
 
         def marc_country_error_paths
           @marc_country_error_paths ||= []
+        end
+
+        def invalid_source_codes_error
+          return if error_paths.empty?
+
+          error_paths.map do |entry|
+            "The location source code \"#{entry[:code]}\" is not recognized at #{entry[:path]}.source.code."
+          end.join(' ')
+        end
+
+        def invalid_marc_country_codes_error
+          return if marc_country_error_paths.empty?
+
+          marc_country_error_paths.map do |entry|
+            "The location code \"#{entry[:code]}\" is invalid at #{entry[:path]}.code when source code is marccountry. " \
+              'Use a valid MARC country code.'
+          end.join(' ')
         end
 
         def location_path?(path)

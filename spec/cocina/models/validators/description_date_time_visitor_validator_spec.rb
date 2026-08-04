@@ -42,6 +42,32 @@ RSpec.describe Cocina::Models::Validators::DescriptionDateTimeVisitorValidator d
     end
   end
 
+  context 'when date is invalid for stated encoding' do
+    let(:props) do
+      {
+        event: [
+          {
+            date: [
+              {
+                value: 'c1900',
+                encoding: {
+                  code: 'w3cdtf'
+                }
+              }
+            ]
+          }
+        ]
+      }
+    end
+
+    it 'raises with a user-friendly message' do
+      expect { validate }.to raise_error(
+        Cocina::Models::ValidationError,
+        /The date\(s\) "c1900" is invalid for the stated encoding of w3cdtf\./
+      )
+    end
+  end
+
   context 'when dates of validatable type present' do
     [
       # Common cases
@@ -191,7 +217,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionDateTimeVisitorValidator d
     it 'raises' do
       expect { validate }.to raise_error(
         Cocina::Models::ValidationError,
-        /\["1996b", "1998a", "iso8601"\]/
+        /The date\(s\) "1996b", "1998a" are invalid for the stated encoding of iso8601\./
       )
     end
   end
@@ -234,7 +260,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionDateTimeVisitorValidator d
     it 'raises' do
       expect { validate }.to raise_error(
         Cocina::Models::ValidationError,
-        /\["1850z", "iso8601"\], \["1875y", "iso8601"\]/
+        /The date\(s\) "1850z" is invalid for the stated encoding of iso8601\..*The date\(s\) "1875y" is invalid for the stated encoding of iso8601\./
       )
     end
   end
@@ -270,7 +296,10 @@ RSpec.describe Cocina::Models::Validators::DescriptionDateTimeVisitorValidator d
       end
 
       it 'raises with an informative message' do
-        expect { validate }.to raise_error(Cocina::Models::ValidationError, /Unrecognized date encoding codes/)
+        expect { validate }.to raise_error(
+          Cocina::Models::ValidationError,
+          /The date encoding code "unknown" is not recognized .* Use one of: edtf, iso8601, marc, temper, w3cdtf\./
+        )
       end
     end
 
@@ -293,7 +322,10 @@ RSpec.describe Cocina::Models::Validators::DescriptionDateTimeVisitorValidator d
       end
 
       it 'raises' do
-        expect { validate }.to raise_error(Cocina::Models::ValidationError, /Unrecognized date encoding codes/)
+        expect { validate }.to raise_error(
+          Cocina::Models::ValidationError,
+          /The date encoding code "bad" is not recognized .* Use one of: edtf, iso8601, marc, temper, w3cdtf\./
+        )
       end
     end
 
@@ -345,7 +377,7 @@ RSpec.describe Cocina::Models::Validators::DescriptionDateTimeVisitorValidator d
     it 'raises' do
       expect { validate }.to raise_error(
         Cocina::Models::ValidationError,
-        /\["1803-05g", "iso8601"\], \["foo", "iso8601"\]/
+        /The date\(s\) "1803-05g" is invalid for the stated encoding of iso8601\..*The date\(s\) "foo" is invalid for the stated encoding of iso8601\./
       )
     end
   end

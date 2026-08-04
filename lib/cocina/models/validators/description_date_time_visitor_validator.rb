@@ -35,7 +35,7 @@ module Cocina
           code = hash.dig(:encoding, :code)
           if code
             encoding_paths[path.dup] = code if VALIDATABLE_TYPES.include?(code)
-            invalid_encoding_codes << "#{path_to_s(path)}.encoding.code (#{code})" unless VALID_ENCODING_CODES.include?(code)
+            invalid_encoding_codes << { path: path_to_s(path), code: code } unless VALID_ENCODING_CODES.include?(code)
           end
 
           value = hash[:value]
@@ -66,17 +66,7 @@ module Cocina
         end
 
         def validate!
-          errors = []
-
-          errors << "Unrecognized date encoding codes in description: #{invalid_encoding_codes.join(', ')}" if invalid_encoding_codes.any?
-
-          unless invalid_groups.empty?
-            invalid_dates = invalid_groups.filter_map do |path, values|
-              [*values, encoding_paths[path]] unless values.empty?
-            end
-            errors << "Invalid date(s) in description: #{invalid_dates}" if invalid_dates.any?
-          end
-
+          errors = [invalid_encoding_codes_error, invalid_dates_error].compact
           raise ValidationError, errors.join('; ') if errors.any?
         end
 
@@ -102,6 +92,36 @@ module Cocina
           encoding_paths
             .select { |prefix, _| path.first(prefix.length) == prefix }
             .max_by { |prefix, _| prefix.length }
+        end
+
+        def invalid_encoding_codes_error
+          return if invalid_encoding_codes.empty?
+
+          invalid_encoding_codes.map do |entry|
+            "The date encoding code \"#{entry[:code]}\" is not recognized at #{entry[:path]}.encoding.code. " \
+              "Use one of: #{VALID_ENCODING_CODES.join(', ')}."
+          end.join(' ')
+        end
+
+        def invalid_dates_error
+          invalid_messages = invalid_date_messages
+          return if invalid_messages.empty?
+
+          invalid_messages.join(' ')
+        end
+
+        def invalid_date_messages
+          invalid_groups.filter_map do |path, values|
+            invalid_date_message(path, values)
+          end
+        end
+
+        def invalid_date_message(path, values)
+          return if values.empty?
+
+          quoted_values = values.map { |value| %("#{value}") }.join(', ')
+          verb = values.length == 1 ? 'is' : 'are'
+          "The date(s) #{quoted_values} #{verb} invalid for the stated encoding of #{encoding_paths[path]}."
         end
 
         def valid_value?(value, code)
