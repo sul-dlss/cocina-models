@@ -202,6 +202,24 @@ RSpec.describe Cocina::Models::Validators::JsonSchemaValidator do
           }
         end
       end
+
+      context 'when a required error lists multiple missing properties as an array' do
+        # json_schemer bundles multiple missing root properties into a single detail whose
+        # errors['required'] is an Array of messages rather than a single String.
+        let(:details) do
+          [
+            { valid: false, instanceLocation: '',
+              errors: { 'required' => ['"cocinaVersion" is a required property', '"administrative" is a required property'] } },
+            { valid: false, instanceLocation: '', errors: { 'required' => '"description" is a required property' } }
+          ]
+        end
+
+        it 'collapses required errors without raising TypeError' do
+          expect { validate }.to raise_error(Cocina::Models::ValidationError) { |error|
+            expect(error.message).to include('needs to include at least one of the following: cocinaVersion, administrative, description')
+          }
+        end
+      end
     end
   end
 

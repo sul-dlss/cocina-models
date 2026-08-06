@@ -122,8 +122,11 @@ module Cocina
             required, others = group.partition { |detail| detail[:errors].keys == ['required'] }
             next group if required.size <= 1
 
-            # Extract property name from "required" messages such as, '"url" is a required property'
-            props = required.filter_map { |detail| detail[:errors]['required'][/"([^"]+)"/, 1] }.uniq
+            # Extract property name from "required" messages such as, '"url" is a required property'.
+            # A single detail's errors['required'] may itself be an Array when json_schemer bundles
+            # multiple missing properties into one message.
+            props = required.flat_map { |detail| Array(detail[:errors]['required']) }
+                            .filter_map { |msg| msg[/"([^"]+)"/, 1] }.uniq
             # Put the data path at the start of the message; blank instanceLocation so format_detail won't also append it
             msg = "#{loc} needs to include at least one of the following: #{props.join(', ')}"
             others + [required.first.merge(instanceLocation: '', errors: { 'required' => msg })]
