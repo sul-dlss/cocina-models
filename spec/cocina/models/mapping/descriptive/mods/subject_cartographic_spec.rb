@@ -192,7 +192,7 @@ RSpec.describe 'MODS subject cartographic <--> cocina mappings' do
         <<~XML
           <subject>
             <cartographics>
-              <coordinates>W0750700 W0741200 N0443400 N0431200</coordinates>
+              <coordinates>W0750700--W0741200/N0443400--N0431200</coordinates>
             </cartographics>
           </subject>
           <subject>
@@ -200,7 +200,7 @@ RSpec.describe 'MODS subject cartographic <--> cocina mappings' do
               <scale>Scale ca. 1:126,720. 1 in. to 2 miles.</scale>
             </cartographics>
             <cartographics>
-              <coordinates>(W 75⁰07ʹ00ʹ--W 74⁰12ʹ00ʹ/N 44⁰34ʹ00ʹ--N 43⁰12ʹ00ʹ)</coordinates>
+              <coordinates>(W 75°07ʹ00ʺ--W 74°12ʹ00ʺ/N 44°34ʹ00ʺ--N 43°12ʹ00ʺ)</coordinates>
             </cartographics>
           </subject>
         XML
@@ -211,8 +211,8 @@ RSpec.describe 'MODS subject cartographic <--> cocina mappings' do
            <subject>
             <cartographics>
               <scale>Scale ca. 1:126,720. 1 in. to 2 miles.</scale>
-              <coordinates>W0750700 W0741200 N0443400 N0431200</coordinates>
-              <coordinates>W 75⁰07ʹ00ʹ--W 74⁰12ʹ00ʹ/N 44⁰34ʹ00ʹ--N 43⁰12ʹ00ʹ</coordinates>
+              <coordinates>W0750700--W0741200/N0443400--N0431200</coordinates>
+              <coordinates>W 75°07ʹ00ʺ--W 74°12ʹ00ʺ/N 44°34ʹ00ʺ--N 43°12ʹ00ʺ</coordinates>
             </cartographics>
           </subject>
         XML
@@ -223,11 +223,11 @@ RSpec.describe 'MODS subject cartographic <--> cocina mappings' do
           subject: [
             {
               type: 'map coordinates',
-              value: 'W0750700 W0741200 N0443400 N0431200'
+              value: 'W0750700--W0741200/N0443400--N0431200'
             },
             {
               type: 'map coordinates',
-              value: 'W 75⁰07ʹ00ʹ--W 74⁰12ʹ00ʹ/N 44⁰34ʹ00ʹ--N 43⁰12ʹ00ʹ'
+              value: 'W 75°07ʹ00ʺ--W 74°12ʹ00ʺ/N 44°34ʹ00ʺ--N 43°12ʹ00ʺ'
             }
           ],
           form: [
