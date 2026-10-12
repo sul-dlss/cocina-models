@@ -6,7 +6,12 @@ plugins:
   - rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 3.4
+  TargetRubyVersion: 4.0
+
+# Development uses Ruby 4, but the gem still supports Ruby 3.4 consumers.
+Gemspec/RequiredRubyVersion:
+  Exclude:
+    - cocina-models.gemspec
 
 # ----- Layout ------
 
