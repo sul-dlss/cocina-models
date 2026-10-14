@@ -56,6 +56,8 @@ jq-based queries can be authored against a [local data export](https://github.co
 
 ## Testing
 
+Use Ruby 4.0.7 for development and testing.
+
 The generator is tested via its output when run against `schema.json`, viz., the Cocina model classes. Thus, `generate` should be run after any changes to `schema.json`.
 
 Beyond what is necessary to test the generator, the Cocina model classes are not tested, i.e., they are assumed to be as specified in `schema.json`.
